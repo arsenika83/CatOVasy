@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://bp10kb8rxtuhx"]
+
+[ext_resource type="Script" uid="uid://bexbvnke2yt8w" path="res://scripts/stairs.gd" id="1_tpqne"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3klq8"]
+load_path = "res://.godot/imported/tilemap.png-5e61b4f08267e3455a4ee95d454c23fa.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f30dh"]
+atlas = SubResource("CompressedTexture2D_3klq8")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f30dh"]
+size = Vector2(32, 32)
+
+[node name="Stairs" type="Node2D" unique_id=175082881]
+script = ExtResource("1_tpqne")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=376259947]
+texture = SubResource("AtlasTexture_f30dh")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1849586179]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=891029772]
+shape = SubResource("RectangleShape2D_f30dh")
+debug_color = Color(0.7827523, 0.3974081, 0.47944582, 0.41960785)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
