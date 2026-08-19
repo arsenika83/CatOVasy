@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://bsxo600wchpra"]
+
+[ext_resource type="Texture2D" uid="uid://4itbl0ejcd3o" path="res://assets/tilemap.png" id="1_hg3ry"]
+[ext_resource type="Script" uid="uid://dhlbp4vgykv6o" path="res://scripts/pillow.gd" id="1_wxprh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1luaj"]
+atlas = ExtResource("1_hg3ry")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lq0hf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1luaj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wxprh"]
+atlas = ExtResource("1_hg3ry")
+region = Rect2(64, 480, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lq0hf"]
+atlas = ExtResource("1_hg3ry")
+region = Rect2(96, 480, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wwuxs"]
+atlas = ExtResource("1_hg3ry")
+region = Rect2(128, 480, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wwuxs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wxprh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lq0hf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wwuxs")
+}],
+"loop": true,
+"name": &"not_enabled",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wxprh"]
+radius = 1.0
+
+[node name="Pillow" type="Node2D" unique_id=564725004]
+script = ExtResource("1_wxprh")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=763395897]
+sprite_frames = SubResource("SpriteFrames_lq0hf")
+
+[node name="EnabledSprite" type="AnimatedSprite2D" parent="." unique_id=488427851]
+sprite_frames = SubResource("SpriteFrames_wwuxs")
+animation = &"not_enabled"
+autoplay = "default"
+
+[node name="Area2D" type="Area2D" parent="." unique_id=74890038]
+position = Vector2(0, 8)
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1886886966]
+position = Vector2(0, -3)
+shape = SubResource("CircleShape2D_wxprh")
+debug_color = Color(0.9247755, 0.1816105, 0.5190655, 0.41960785)
+
+[node name="Timer" type="Timer" parent="." unique_id=1723025215]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="area_shape_entered" from="Area2D" to="." method="_on_area_2d_area_shape_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

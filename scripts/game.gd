@@ -2,41 +2,170 @@ extends Node2D
 
 var cursor_pos
 var cursor_map_pos
-var player_camera_zoom = 1
+
+var turn_count = 0
 
 @onready var giant = $Giant
 @onready var map = $TileMapLayer
 @onready var player_camera = $Giant/Camera2D
 @onready var cursor = $Cursor
 
+@onready var enemies = $Enemies
+
+@onready var health_bar = $UI/Container/HealthBar
+@onready var life1 = $UI/Container/HealthBar/Life1
+@onready var life2 = $UI/Container/HealthBar/Life2
+@onready var life3 = $UI/Container/HealthBar/Life3
+@onready var life4 = $UI/Container/HealthBar/Life4
+@onready var life5 = $UI/Container/HealthBar/Life5
+
+@onready var foregroundFX = $Effects/ColorRect
+
 func _ready() -> void:
-	pass # Replace with function body.
+	player_camera.zoom.x = gm.camera_zoom
+	player_camera.zoom.y = gm.camera_zoom
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	cursor_pos = get_global_mouse_position()
 	cursor_map_pos = map.local_to_map(cursor_pos)
-	cursor.global_position = map.map_to_local(cursor_map_pos)
 	
-	if Input.is_action_just_pressed("ui_lmb"):
-		move_to_map_pos() 
+	var diff_x = abs(cursor_map_pos.x - map.local_to_map(giant.position).x)
+	var diff_y = abs(cursor_map_pos.y - map.local_to_map(giant.position).y)
+	
+	draw_cursor()
+	check_hp()
+	
+	if gm.state == "idle":
+		if Input.is_action_just_pressed("ui_lmb"):
+			move_to_map_pos() 
+	
+	if Input.is_action_just_pressed("ui_rmb"):
+		if foregroundFX.visible:
+			foregroundFX.visible = false
+		else:
+			foregroundFX.visible = true
 		
-	if Input.is_action_just_pressed("ui_scale_up") and player_camera_zoom <= 3:
-		player_camera_zoom += 1
-		smooth_camera_zoom(":zoom:x", player_camera_zoom)
-		smooth_camera_zoom(":zoom:y", player_camera_zoom)
-	elif Input.is_action_just_pressed("ui_scale_down") and player_camera_zoom >= 3:
-		player_camera_zoom -= 1
-		smooth_camera_zoom(":zoom:x", player_camera_zoom)
-		smooth_camera_zoom(":zoom:y", player_camera_zoom)	
+	if Input.is_action_just_pressed("ui_scale_up") and gm.camera_zoom <= 3:
+		gm.camera_zoom += 1
+		smooth_camera_zoom(":zoom:x", gm.camera_zoom)
+		smooth_camera_zoom(":zoom:y", gm.camera_zoom)
+	elif Input.is_action_just_pressed("ui_scale_down") and gm.camera_zoom >= 3:
+		gm.camera_zoom -= 1
+		smooth_camera_zoom(":zoom:x", gm.camera_zoom)
+		smooth_camera_zoom(":zoom:y", gm.camera_zoom)	
 
 func smooth_camera_zoom(value1, value2) -> void:
 	var tween = create_tween()
 	tween.tween_property(player_camera, str(value1), value2, 0.5)	
 	
 func move_to_map_pos() -> void:
+	enemy_turn()
 	var map_pos = map.local_to_map(cursor_pos)
 	
-	var tween = create_tween()
-	tween.tween_property(giant, "position", map.map_to_local(map_pos), 0.3)
+	var diff_x = map_pos.x - map.local_to_map(giant.position).x
+	var diff_y = map_pos.y - map.local_to_map(giant.position).y
+	
+	if turn_count > 0:
+		gm.prev_pos = giant.position
+	turn_count += 1
+	
+	if abs(diff_x) <= 1 and abs(diff_y) <= 1:
+		var tween = create_tween()
+		tween.tween_property(giant, "position", map.map_to_local(map_pos), 0.2)
+	
+	if (diff_x == 0) and diff_y < 0:
+		var tween = create_tween()
+		tween.tween_property(giant, "position", Vector2(giant.position.x, giant.position.y - 32), 0.2)
+	elif diff_x > 0 and diff_y < 0:
+		var tween = create_tween()
+		tween.tween_property(giant, "position", Vector2(giant.position.x + 32, giant.position.y - 32), 0.2)
+	elif diff_x > 0 and (diff_y == 0):
+		var tween = create_tween()
+		tween.tween_property(giant, "position", Vector2(giant.position.x + 32, giant.position.y), 0.2)
+	elif diff_x > 0 and diff_y > 0:
+		var tween = create_tween()
+		tween.tween_property(giant, "position", Vector2(giant.position.x + 32, giant.position.y + 32), 0.2)
+	elif (diff_x == 0) and diff_y > 0:
+		var tween = create_tween()
+		tween.tween_property(giant, "position", Vector2(giant.position.x, giant.position.y + 32), 0.2)
+	elif diff_x < 0 and diff_y > 0:
+		var tween = create_tween()
+		tween.tween_property(giant, "position", Vector2(giant.position.x - 32, giant.position.y + 32), 0.2)
+	elif diff_x < 0 and (diff_y == 0):
+		var tween = create_tween()
+		tween.tween_property(giant, "position", Vector2(giant.position.x - 32, giant.position.y), 0.2)
+	elif diff_x < 0 and diff_y < 0:
+		var tween = create_tween()
+		tween.tween_property(giant, "position", Vector2(giant.position.x - 32, giant.position.y - 32), 0.2)	
+	
+func draw_cursor() -> void:
+	var map_pos = map.local_to_map(cursor_pos)
+	
+	var diff_x = map_pos.x - map.local_to_map(giant.position).x
+	var diff_y = map_pos.y - map.local_to_map(giant.position).y
+	
+	if abs(diff_x) <= 1 and abs(diff_y) <= 1:
+		cursor.global_position = map.map_to_local(cursor_map_pos)
+	
+	if (diff_x == 0) and diff_y < 0:
+		cursor.global_position = Vector2(giant.position.x, giant.position.y - 32)
+	elif diff_x > 0 and diff_y < 0:
+		cursor.global_position = Vector2(giant.position.x + 32, giant.position.y - 32)
+	elif diff_x > 0 and (diff_y == 0):
+		cursor.global_position = Vector2(giant.position.x + 32, giant.position.y)
+	elif diff_x > 0 and diff_y > 0:
+		cursor.global_position = Vector2(giant.position.x + 32, giant.position.y + 32)
+	elif (diff_x == 0) and diff_y > 0:
+		cursor.global_position = Vector2(giant.position.x, giant.position.y + 32)
+	elif diff_x < 0 and diff_y > 0:
+		cursor.global_position = Vector2(giant.position.x - 32, giant.position.y + 32)
+	elif diff_x < 0 and (diff_y == 0):
+		cursor.global_position = Vector2(giant.position.x - 32, giant.position.y)
+	elif diff_x < 0 and diff_y < 0:
+		cursor.global_position = Vector2(giant.position.x - 32, giant.position.y - 32)
+	
+func check_hp() -> void:
+	if gm.hp == 5:
+		life5.visible = true
+		life4.visible = true
+		life3.visible = true
+		life2.visible = true
+		life1.visible = true
+	elif gm.hp == 4:
+		life5.visible = false
+		life4.visible = true
+		life3.visible = true
+		life2.visible = true
+		life1.visible = true
+	elif gm.hp == 3:
+		life5.visible = false
+		life4.visible = false
+		life3.visible = true
+		life2.visible = true
+		life1.visible = true
+	elif gm.hp == 2:
+		life5.visible = false
+		life4.visible = false
+		life3.visible = false
+		life2.visible = true
+		life1.visible = true
+	elif gm.hp == 1:
+		life5.visible = false
+		life4.visible = false
+		life3.visible = false
+		life2.visible = false
+		life1.visible = true
+	else:
+		life5.visible = false
+		life4.visible = false
+		life3.visible = false
+		life2.visible = false
+		life1.visible = false
+
+func enemy_turn() -> void:
+	for mob in enemies.get_children():
+		var g_pos = map.local_to_map(giant.position)
+		var e_pos = map.local_to_map(mob.position)
+		mob.move(g_pos, e_pos)

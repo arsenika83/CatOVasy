@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://b6uegwyneupbc"]
+
+[ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/icons.png" id="2_jotl1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m6lg1"]
+atlas = ExtResource("2_jotl1")
+region = Rect2(0, 0, 32, 32)
+
+[node name="Life" type="TextureRect" unique_id=1345125488]
+custom_minimum_size = Vector2(64, 64)
+texture = SubResource("AtlasTexture_m6lg1")

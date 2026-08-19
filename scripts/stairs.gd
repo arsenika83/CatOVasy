@@ -1,6 +1,7 @@
 extends Node2D
 
-var room_number = -1
+@export var room_number = 1
+@onready var timer = $Timer
 
 func _ready() -> void:
 	pass # Replace with function body.
@@ -8,6 +9,11 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	print("ENTER ", room_number)
+	get_parent().get_parent().find_child("Giant").go_downstairs()
+	get_parent().get_parent().find_child("Giant").position = self.global_position
+	timer.start()
+
+func _on_timer_timeout() -> void:
+	get_tree().change_scene_to_file(str("res://scenes/levels/level", room_number, ".tscn"))

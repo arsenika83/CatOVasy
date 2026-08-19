@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://b8bfs4u1x4s8"]
+
+[ext_resource type="Script" uid="uid://cxqxgpmkqaaoo" path="res://scripts/grass.gd" id="1_jm5yl"]
+[ext_resource type="Texture2D" uid="uid://4itbl0ejcd3o" path="res://assets/tilemap.png" id="2_8egup"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cvbpf"]
+size = Vector2(32, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jm5yl"]
+atlas = ExtResource("2_8egup")
+region = Rect2(0, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8egup"]
+atlas = ExtResource("2_8egup")
+region = Rect2(32, 160, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u68v2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jm5yl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8egup")
+}],
+"loop": true,
+"name": &"default",
+"speed": 0.5
+}]
+
+[node name="GrassLow" type="Node2D" unique_id=963626142]
+script = ExtResource("1_jm5yl")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1903801654]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1364762886]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_cvbpf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1121289262]
+sprite_frames = SubResource("SpriteFrames_u68v2")
+autoplay = "default"
+frame_progress = 0.0859399
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://dak3nh0u2ipui"]
+
+[ext_resource type="Script" uid="uid://dsgghog0c6ap4" path="res://scripts/edge.gd" id="1_73j6r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nesyw"]
+size = Vector2(32, 128)
+
+[node name="Edge" type="Area2D" unique_id=433375762]
+collision_layer = 64
+script = ExtResource("1_73j6r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=929475318]
+shape = SubResource("RectangleShape2D_nesyw")
+debug_color = Color(0.9411765, 0, 0, 0.19215687)
+
+[connection signal="area_shape_entered" from="." to="." method="_on_area_shape_entered"]
