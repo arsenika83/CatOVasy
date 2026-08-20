@@ -1,6 +1,7 @@
 extends Node2D
 
-@export var charge_count = 3
+@export var charge_count = 1
+@export var heal_power = 5
 
 @onready var timer = $Timer
 @onready var enabled = $StatusFX
@@ -27,5 +28,7 @@ func _on_timer_timeout() -> void:
 	charge_count -= 1
 	enabled.visible = true
 	gm.state = "idle"
-	if gm.hp < 5:
-		gm.hp += 1
+	
+	gm.hp += heal_power
+	if gm.hp > gm.max_hp:
+		gm.hp = gm.max_hp

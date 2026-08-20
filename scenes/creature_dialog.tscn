@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://b7oix76heqs28"]
+
+[ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="1_hh0f6"]
+[ext_resource type="Texture2D" uid="uid://b0rpbj3njbbar" path="res://assets/cards.png" id="1_uuaso"]
+[ext_resource type="FontFile" uid="uid://dub3oi8dxfpfw" path="res://assets/fonts/JeuDePixel-Regular.otf" id="3_qtlqx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qtlqx"]
+shader = ExtResource("1_hh0f6")
+shader_parameter/speed = 2.000000095
+shader_parameter/amplitude = 6.000000285
+shader_parameter/time_offset = 10.0
+shader_parameter/flash_intensity = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qtlqx"]
+atlas = ExtResource("1_uuaso")
+region = Rect2(448, 0, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hh0f6"]
+atlas = ExtResource("1_uuaso")
+region = Rect2(448, 0, 64, 96)
+
+[node name="CreatureDialog" type="Control" unique_id=1641948652]
+material = SubResource("ShaderMaterial_qtlqx")
+layout_mode = 3
+anchor_left = 0.1
+anchor_top = 0.178
+anchor_right = 0.1
+anchor_bottom = 0.178
+offset_left = -128.0
+offset_top = -128.16
+offset_right = 128.0
+offset_bottom = 127.84
+grow_vertical = 2
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=1275944467]
+use_parent_material = true
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 256.0
+texture = SubResource("AtlasTexture_qtlqx")
+expand_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1053014275]
+visible = false
+use_parent_material = true
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 32.0
+texture = SubResource("AtlasTexture_hh0f6")
+expand_mode = 1
+
+[node name="NameLabel" type="Label" parent="." unique_id=1112237095]
+use_parent_material = true
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 32.0
+theme_override_fonts/font = ExtResource("3_qtlqx")
+text = "ИМЯ"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatsLabel" type="Label" parent="." unique_id=1847410104]
+use_parent_material = true
+layout_mode = 0
+offset_left = 8.0
+offset_top = 40.0
+offset_right = 248.0
+offset_bottom = 248.0
+theme_override_fonts/font = ExtResource("3_qtlqx")
+text = "ИМЯ"

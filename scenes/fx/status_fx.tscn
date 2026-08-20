@@ -19,6 +19,10 @@ region = Rect2(96, 480, 32, 32)
 atlas = ExtResource("2_jh1yt")
 region = Rect2(160, 480, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ykc2h"]
+atlas = ExtResource("2_ykc2h")
+region = Rect2(0, 448, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_jh1yt"]
 atlas = ExtResource("2_ykc2h")
 region = Rect2(128, 480, 32, 32)
@@ -43,6 +47,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_ykc2h")
+}],
+"loop": true,
+"name": &"lost_you",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_jh1yt")
 }],
 "loop": true,
@@ -54,3 +66,5 @@ animations = [{
 material = SubResource("ShaderMaterial_pnbib")
 sprite_frames = SubResource("SpriteFrames_8nrq2")
 animation = &"enabled"
+autoplay = "enabled"
+frame_progress = 0.6248751

@@ -90,6 +90,10 @@ region = Rect2(0, 0, 32, 32)
 atlas = ExtResource("1")
 region = Rect2(32, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ycwex"]
+atlas = ExtResource("1")
+region = Rect2(128, 0, 32, 32)
+
 [sub_resource type="SpriteFrames" id="2"]
 animations = [{
 "frames": [{
@@ -233,6 +237,14 @@ animations = [{
 "loop": true,
 "name": &"stop",
 "speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ycwex")
+}],
+"loop": true,
+"name": &"take_damage",
+"speed": 5.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_glfi2"]
@@ -258,7 +270,7 @@ height = 29.0
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1540776930]
 position = Vector2(0, -6)
 sprite_frames = SubResource("2")
-animation = &"battle_ability"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="Area2D" type="Area2D" parent="." unique_id=130196955]
@@ -269,6 +281,12 @@ collision_mask = 255
 position = Vector2(-4, -5)
 shape = SubResource("CircleShape2D_glfi2")
 debug_color = Color(0.9065989, 0.2383379, 0.48185843, 0.41960785)
+
+[node name="IdleAnimationTimer" type="Timer" parent="." unique_id=1031534056]
+one_shot = true
+
+[node name="TakeDamageTimer" type="Timer" parent="." unique_id=117164087]
+one_shot = true
 
 [node name="RespawnTimer" type="Timer" parent="." unique_id=746788121]
 one_shot = true
@@ -281,6 +299,9 @@ one_shot = true
 
 [node name="WalkTimer" type="Timer" parent="." unique_id=1771354652]
 wait_time = 0.2
+one_shot = true
+
+[node name="MissDamageTimer" type="Timer" parent="." unique_id=1214622011]
 one_shot = true
 
 [node name="AudioStreamPlayerMeow" type="AudioStreamPlayer" parent="." unique_id=1429074131]
@@ -303,8 +324,16 @@ stream = ExtResource("6_odb8e")
 [node name="AudioStreamPlayerPickUpXP" type="AudioStreamPlayer" parent="." unique_id=830168320]
 stream = ExtResource("7_0vpcl")
 
+[node name="AudioStreamPlayerMiss" type="AudioStreamPlayer" parent="." unique_id=1521038996]
+stream = ExtResource("7_0vpcl")
+pitch_scale = 0.5
+mix_target = 2
+
 [connection signal="area_shape_entered" from="Area2D" to="." method="_on_area_2d_area_shape_entered"]
+[connection signal="timeout" from="IdleAnimationTimer" to="." method="_on_idle_animation_timer_timeout"]
+[connection signal="timeout" from="TakeDamageTimer" to="." method="_on_take_damage_timer_timeout"]
 [connection signal="timeout" from="RespawnTimer" to="." method="_on_respawn_timer_timeout"]
 [connection signal="timeout" from="FallTimer" to="." method="_on_fall_timer_timeout"]
 [connection signal="timeout" from="RestartTimer" to="." method="_on_restart_timer_timeout"]
 [connection signal="timeout" from="WalkTimer" to="." method="_on_walk_timer_timeout"]
+[connection signal="timeout" from="MissDamageTimer" to="." method="_on_miss_damage_timer_timeout"]

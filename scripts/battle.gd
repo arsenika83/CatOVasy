@@ -3,11 +3,16 @@ extends Node2D
 var cursor_pos
 var cursor_map_pos
 
+var creature_dialog_on_screen = false
+
 @onready var cursor = $Cursor
 @onready var map = $TileMapLayerBlack
 @onready var player_camera = $Giant/Camera2D
 @onready var giant = $Giant
 @onready var claw_fx = $ClawFX
+
+@onready var end_battle_button = $UI/EndBattleButton
+@onready var creature_check_dialog = $UI/CreatureDialog
 
 var turn_count = 0
 
@@ -15,10 +20,15 @@ var won = false
 var defeated = false
 
 var current_selected_card: Control = null
+var current_creature_turn = -1
 
 var enemy_positions : Array[Vector2] = [Vector2(208, 112), Vector2(208, 144), Vector2(208, 80), Vector2(240, 112), Vector2(240, 144), Vector2(240, 80)]
+var current_enemies : Array
 
 func _ready() -> void:
+	creature_check_dialog.visible = false
+	end_battle_button.visible = false
+	
 	player_camera.zoom.x = gm.camera_zoom
 	player_camera.zoom.y = gm.camera_zoom
 	init()
@@ -40,12 +50,20 @@ func _process(delta: float) -> void:
 		smooth_camera_zoom(":zoom:x", gm.camera_zoom)
 		smooth_camera_zoom(":zoom:y", gm.camera_zoom)
 		
-	if Input.is_action_just_pressed("ui_rmb"):
+	if Input.is_action_pressed("ui_rmb"):
+		creature_dialog_on_screen = true
 		check_creature_stats()
-	elif Input.is_action_just_pressed("ui_lmb"):
-		match gm.state:
-			"battle_attack":
-				choose_target("deal_damage")
+	else:
+		if(creature_dialog_on_screen == true):
+			var tween = create_tween()
+			tween.tween_property(creature_check_dialog, "position:x", -300, 0.2)
+		creature_dialog_on_screen = false
+		
+	if Input.is_action_just_pressed("ui_lmb"):
+		if current_creature_turn == -1:
+			match gm.state:
+				"battle_attack":
+					choose_target("deal_damage")
 
 func smooth_camera_zoom(value1, value2) -> void:
 	var tween = create_tween()
@@ -53,6 +71,9 @@ func smooth_camera_zoom(value1, value2) -> void:
 
 func init() -> void:
 	giant.light.enabled = false
+	gm.battle_x = map.local_to_map(giant.position).x
+	gm.battle_y = map.local_to_map(giant.position).y
+	
 	var enemy_count = 0
 	
 	for e in gm.current_enemies:
@@ -62,8 +83,12 @@ func init() -> void:
 		var enemy = enemy_scene.instantiate()
 		enemy.position = enemy_positions.get(enemy_count)
 		enemy.z_index = 32
+		enemy.battle_x = map.local_to_map(enemy.position).x
+		enemy.battle_y = map.local_to_map(enemy.position).y
+		enemy.state = "battle"
 		
 		$Enemies.add_child(enemy)
+		current_enemies.append(enemy)
 		enemy_count += 1
 
 func win() -> void:
@@ -80,18 +105,8 @@ func choose_target(action : String) -> void:
 	
 	for i in range(0, find_child("Enemies").get_child_count()):
 		var target = find_child("Enemies").get_child(i)
-		if target.name.contains("Player"):
-			if target.battle_x == cursor_grid_pos.x and target.battle_y == cursor_grid_pos.y:
-				if not target.dead:
-					if source.healer: #HEAL
-						if target.hp < target.max_hp:
-							source.heal(target, source.min_damage)
-							print("> ", source.name, " HEALED ", target.name)
-							#end_turn()
-			else:	
-				print("> ", source.name, " DIDNT HEAL ", target.name)
 		
-		elif target.battle_x == cursor_grid_pos.x and target.battle_y == cursor_grid_pos.y: #HIT
+		if target.battle_x == cursor_grid_pos.x and target.battle_y == cursor_grid_pos.y: #HIT
 			if not target.state == "dead":
 				match action:
 					"deal_damage":
@@ -99,34 +114,88 @@ func choose_target(action : String) -> void:
 						source.deal_damage(target, attack_duration)
 						claw_fx.position = target_local_pos
 						claw_fx.play("hit")
-				#end_turn()
-		else: #MOVE
-			var source_grid_pos = map.local_to_map(source.global_position)
-			
-			var move_enabled = false
-			#for j in range(0, find_child("BattleCellsPlayer").get_child_count()):
-				#var cell = find_child("BattleCellsPlayer").get_child(j)
-				#if cell.battle_x == cursor_grid_pos.x and cell.battle_y == cursor_grid_pos.y and cell.is_free:
-					#move_enabled = true
-					#break
-			
-			if move_enabled:
-				var diff_x = abs(cursor_grid_pos.x - source_grid_pos.x)
-				var diff_y = abs(cursor_grid_pos.y - source_grid_pos.y)
 				
-				if diff_x <= source.battle_speed_current and diff_y <= source.battle_speed_current:
-					source.global_position = target_local_pos
-					#current_creature_indicator.global_position = target_local_pos
-					#update_creature_position(source)
-					#update_cell_status()
-					source.battle_speed_current -= max(diff_x, diff_y)
-						
-					if source.battle_speed_current == 0:
-						source.battle_speed_current = source.battle_speed #ВОССТАНАВЛИВАЕМ СКОРОСТЬ
-						#end_turn()
-						
+func enemy_turn() -> void:
+	if current_creature_turn == -1:
+		return
+		
+	var source = current_enemies.get(current_creature_turn)
+		
+	if not source.state == "dead":
+		if gm.state == "dead":
+			current_creature_turn = -1
+			return
+			
+		var action = source.move_set.get(0)	
+		match action:
+			"deal_damage":
+				var attack_duration : float = 0.4
+				source.deal_damage(giant, attack_duration)
+				claw_fx.position = giant.position
+				claw_fx.play("hit")
+		return
+	else:
+		end_turn()
 
-func check_enemy_army_dead() -> void:
+func end_turn() -> void:
+	current_creature_turn += 1
+	
+	if current_creature_turn == current_enemies.size():
+		current_creature_turn = -1
+	
+	enemy_turn()
+
+func check_creature_stats() -> void:
+	var cursor_grid_pos = map.local_to_map(get_global_mouse_position())
+	var target_local_pos = map.map_to_local(cursor_grid_pos)
+	
+	if (gm.battle_x == cursor_grid_pos.x and gm.battle_y == cursor_grid_pos.y):
+		creature_check_dialog.position.x = -300
+		var tween = create_tween()
+		tween.tween_property(creature_check_dialog, "position:x", 40, 0.15)
+					
+		creature_check_dialog.visible = true
+						
+		creature_check_dialog.find_child("NameLabel").text = "Гигант"
+					
+		var stats = str("ОЗ: ", gm.hp, "/", gm.max_hp)
+		stats += 	str("\nУРОН: ", gm.damage)
+		stats += 	str("\nЗАЩИТА: ", gm.defence)
+		stats += 	str("\nТОЧНОСТЬ: ", gm.accuracy, "%")
+		stats += 	str("\nУДАЧА: ", gm.luck, "%")
+		stats += 	str("\n")
+		stats += 	str("\nУРОВЕНЬ: ", gm.level)
+		stats += 	str("\nОПЫТ: ", gm.xp, "/", gm.xp_needed)
+		creature_check_dialog.find_child("StatsLabel").text = stats
+					
+		return
+	else:
+		for i in range(0, find_child("Enemies").get_child_count()):
+			var target = find_child("Enemies").get_child(i)
+		
+			if (target.battle_x == cursor_grid_pos.x and target.battle_y == cursor_grid_pos.y):
+					creature_check_dialog.position.x = -300
+					var tween = create_tween()
+					tween.tween_property(creature_check_dialog, "position:x", 40, 0.15)
+					
+					creature_check_dialog.visible = true
+						
+					creature_check_dialog.find_child("NameLabel").text = target.enemy_name_rus
+					
+					var stats = str("ОЗ: ", target.hp, "/", target.max_hp)
+					stats += 	str("\nУРОН: ", target.damage)
+					stats += 	str("\nЗАЩИТА: ", target.defence)
+					stats += 	str("\nТОЧНОСТЬ: ", target.accuracy, "%")
+					stats += 	str("\nУДАЧА: ", target.luck, "%")
+					stats += 	str("\n")
+					creature_check_dialog.find_child("StatsLabel").text = stats
+					
+					return
+			else:
+				creature_check_dialog.visible = false
+				#print("NO TARGET ON THIS TILE: ", cursor_grid_pos.x, "_", cursor_grid_pos.y)
+
+func check_enemy_army() -> void:
 	var dead_count = 0
 	
 	for i in range(0, find_child("Enemies").get_child_count()):
@@ -135,12 +204,18 @@ func check_enemy_army_dead() -> void:
 		if enemy.state == "dead":
 			dead_count += 1
 
-	if dead_count == gm.current_enemies.size():
+	if dead_count >= current_enemies.size():
 		won = true
 
 func check_battle_status() -> void:
-	check_enemy_army_dead()
+	check_enemy_army()
 	
+	if won or defeated:
+		end_battle_button.visible = true
+		end_battle_button.disabled = false
+		
+
+func _on_end_battle_button_pressed() -> void:
 	if won:
 		for enemy in gm.current_enemies:
 			enemy.state = "dead"
@@ -150,37 +225,3 @@ func check_battle_status() -> void:
 		print("ПОБЕДА")
 		get_parent().get_parent().end_battle()
 		queue_free()
-		
-
-func check_creature_stats() -> void:
-	var cursor_grid_pos = map.local_to_map(get_global_mouse_position())
-	var target_local_pos = map.map_to_local(cursor_grid_pos)
-	
-	for i in range(0, find_child("Enemies").get_child_count()):
-		var target = find_child("Enemies").get_child(i)
-	
-		if target.battle_x == cursor_grid_pos.x and target.battle_y == cursor_grid_pos.y:
-			#creature_check_dialog.visible = true
-			if target.name == "Player":
-				pass
-				#creature_check_dialog.find_child("PortraitCreature").texture = load(str("res://assets/creature_portraits/portrait_", target.creature_name.to_lower(), ".png"))
-			else:
-				pass
-				#creature_check_dialog.find_child("PortraitCreature").texture = load(str("res://assets/creature_portraits/portrait_", target.creature_name.to_lower()))
-		
-			if target.state == "dead":
-				pass
-				#creature_check_dialog.find_child("PortraitDead").visible = true
-			else:
-				pass
-				#creature_check_dialog.find_child("PortraitDead").visible = false
-				
-			#creature_check_dialog.find_child("Name").text = target.creature_name_rus
-			
-			var stats = str("ОЗ: ", target.hp, "/", target.max_hp)
-			stats += 	str("\nУРОН: ", target.damage)
-			print(stats)
-			#creature_check_dialog.find_child("Stats").text = stats
-		else:
-			pass
-			print("NO TARGET ON THIS TILE: ", cursor_grid_pos.x, "_", cursor_grid_pos.y)

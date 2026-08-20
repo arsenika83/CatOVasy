@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://tksv3htggrop" path="res://scenes/fx/xp_orb.tscn" id="4_fcftc"]
 [ext_resource type="AudioStream" uid="uid://b78ln2t2dmc8p" path="res://assets/soundFX/meow_die.wav" id="4_nb6gf"]
 [ext_resource type="PackedScene" uid="uid://cr7p23s5f4urx" path="res://scenes/fx/status_fx.tscn" id="5_lu5c6"]
+[ext_resource type="AudioStream" uid="uid://bq0ooer30jskk" path="res://assets/soundFX/xp_pick_up.wav" id="7_jt03m"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_38ino"]
 radius = 3.0
@@ -90,6 +91,14 @@ collision_layer = 2
 shape = SubResource("CircleShape2D_lu5c6")
 debug_color = Color(0.86404556, 0.3111131, 0.46711254, 0.41960785)
 
+[node name="XpOrb" parent="." unique_id=632733372 instance=ExtResource("4_fcftc")]
+visible = false
+
+[node name="StatusFX" parent="." unique_id=1192321709 instance=ExtResource("5_lu5c6")]
+visible = false
+animation = &"default"
+frame_progress = 0.0
+
 [node name="AudioStreamPlayerHit" type="AudioStreamPlayer" parent="." unique_id=1483378938]
 stream = ExtResource("3_38ino")
 volume_db = 3.0
@@ -100,20 +109,22 @@ volume_db = -10.0
 pitch_scale = 0.5
 mix_target = 2
 
+[node name="AudioStreamPlayerMiss" type="AudioStreamPlayer" parent="." unique_id=1497299272]
+stream = ExtResource("7_jt03m")
+pitch_scale = 0.5
+mix_target = 2
+
 [node name="IdleAnimationTimer" type="Timer" parent="." unique_id=1712994445]
 one_shot = true
 
 [node name="TakeDamageTimer" type="Timer" parent="." unique_id=1706057441]
 one_shot = true
 
-[node name="XpOrb" parent="." unique_id=632733372 instance=ExtResource("4_fcftc")]
-visible = false
-
-[node name="StatusFX" parent="." unique_id=1192321709 instance=ExtResource("5_lu5c6")]
-visible = false
-position = Vector2(-5, 0)
+[node name="MissDamageTimer" type="Timer" parent="." unique_id=67340781]
+one_shot = true
 
 [connection signal="area_entered" from="Area2DXP" to="." method="_on_area_2dxp_area_entered"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="timeout" from="IdleAnimationTimer" to="." method="_on_idle_animation_timer_timeout"]
 [connection signal="timeout" from="TakeDamageTimer" to="." method="_on_take_damage_timer_timeout"]
+[connection signal="timeout" from="MissDamageTimer" to="." method="_on_miss_damage_timer_timeout"]

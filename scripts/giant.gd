@@ -9,9 +9,13 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var respawn_timer = $RespawnTimer
 @onready var fall_timer = $FallTimer
 @onready var walk_timer = $WalkTimer
+@onready var take_damage_timer = $TakeDamageTimer
+@onready var miss_damage_timer = $MissDamageTimer
+@onready var idle_animation_timer = $IdleAnimationTimer
 
 @onready var audio_meow = $AudioStreamPlayerMeow
 @onready var audio_fall = $AudioStreamPlayerFall
+@onready var audio_miss = $AudioStreamPlayerMiss
 @onready var audio_resting = $AudioStreamPlayerResting
 
 @onready var light = $PointLight2D
@@ -82,7 +86,21 @@ func go_downstairs() -> void:
 	tween.tween_property(self, "scale", Vector2(0, 0), 0.5)
 
 func deal_damage(target : Enemy, time : float) -> void:
-	target.take_damage(gm.damage, time)
+	var success : bool = randf_range(0.0, 1.0) * 100 <= gm.accuracy
+	
+	if success:
+		target.take_damage(gm.damage, time)
+	else:
+		target.take_damage(0, time)
+		print("GIANT MISS! ")
+		
+func take_damage(damage : int, time : float) -> void:
+	gm.hp -= damage
+	
+	if damage > 0:
+		take_damage_timer.start(time)
+	else:
+		miss_damage_timer.start(time)
 
 func check_fall(delta: float) -> void:
 	if gm.state == "falling":
@@ -119,6 +137,8 @@ func check_xp() -> void:
 		gm.level += 1
 		gm.xp = gm.xp - gm.xp_needed
 		gm.xp_needed += 1
+		
+		gm.damage += 1
 		$AudioStreamPlayerLevelUp.play()
 		
 
@@ -138,3 +158,25 @@ func _on_restart_timer_timeout() -> void:
 func _on_walk_timer_timeout() -> void:
 	if gm.state == "walking":
 		gm.state = "idle"
+
+func _on_take_damage_timer_timeout() -> void:
+	check_hp()
+	
+	if not gm.state == "dead":
+		gm.prev_state = gm.state
+		gm.state = "taking_damage"
+		sprite.play("take_damage")
+		audio_meow.play()
+		idle_animation_timer.start(0.2)
+		get_parent().end_turn()
+	else:
+		audio_fall.play()
+		sprite.play("dead")
+
+func _on_idle_animation_timer_timeout() -> void:
+	gm.state = gm.prev_state
+
+
+func _on_miss_damage_timer_timeout() -> void:
+	audio_miss.play()
+	get_parent().end_turn()

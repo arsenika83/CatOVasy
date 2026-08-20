@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://bjjafdg4et4p0"]
+
+[ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="1_yk4tj"]
+[ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/icons.png" id="2_0qjwb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_boovn"]
+shader = ExtResource("1_yk4tj")
+shader_parameter/speed = 2.000000095
+shader_parameter/amplitude = 4.00000019
+shader_parameter/time_offset = 0.0
+shader_parameter/flash_intensity = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_13lw0"]
+atlas = ExtResource("2_0qjwb")
+region = Rect2(96, 448, 64, 64)
+
+[node name="Paw" type="Control" unique_id=2011487880]
+material = SubResource("ShaderMaterial_boovn")
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=814841473]
+use_parent_material = true
+layout_mode = 0
+offset_right = 384.0
+offset_bottom = 384.0
+texture = SubResource("AtlasTexture_13lw0")

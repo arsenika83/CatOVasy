@@ -1,4 +1,4 @@
-extends HBoxContainer
+extends Control
 
 var current_selected: Control = null
 
@@ -6,7 +6,7 @@ const ATTACK_CARD = preload("res://scenes/cards/attack_card.tscn")
 const DEFEND_CARD = preload("res://scenes/cards/defend_card.tscn")
 
 func _ready() -> void:
-	var time_offset = 1.0
+	var time_offset = 0
 	
 	for card in gm.current_cards:
 		var card_resource = load("res://scenes/cards/" + card.card_path)
@@ -15,6 +15,11 @@ func _ready() -> void:
 		add_child(added_card)
 
 		added_card.material.set_shader_parameter("time_offset", time_offset)
+		added_card.rotation_degrees = 15 * time_offset
+		added_card.position.x += 40 + 150 * time_offset
+		if time_offset == 2:
+			added_card.position.y += 48
+		
 		time_offset += 1.0
 
 	for child in get_children():

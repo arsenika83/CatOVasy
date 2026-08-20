@@ -135,18 +135,22 @@ position = Vector2(528, -16)
 
 [node name="Enemy2" parent="Enemies" unique_id=2106804459 instance=ExtResource("7_jrfo0")]
 position = Vector2(592, 16)
+step_count = 4
 
 [node name="Enemy3" parent="Enemies" unique_id=1725093047 instance=ExtResource("7_jrfo0")]
 position = Vector2(528, 48)
+step_count = 1
 
 [node name="Enemy4" parent="Enemies" unique_id=1413281483 instance=ExtResource("7_jrfo0")]
 position = Vector2(592, 112)
 
 [node name="Enemy5" parent="Enemies" unique_id=279086603 instance=ExtResource("7_jrfo0")]
 position = Vector2(656, 48)
+step_count = 2
 
 [node name="Enemy6" parent="Enemies" unique_id=1392783621 instance=ExtResource("7_jrfo0")]
 position = Vector2(144, 144)
+step_count = 3
 
 [node name="Plants" type="Node2D" parent="." unique_id=1507805972]
 

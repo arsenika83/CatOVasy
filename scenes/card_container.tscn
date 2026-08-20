@@ -2,8 +2,9 @@
 
 [ext_resource type="Script" uid="uid://i7vn76j21ys2" path="res://scripts/card_container.gd" id="1_hqkxu"]
 
-[node name="CardContainer" type="HBoxContainer" unique_id=515924417]
+[node name="CardContainer" type="Control" unique_id=1698416944]
 z_index = 100
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -11,6 +12,4 @@ offset_right = -896.0
 offset_bottom = -504.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 150
-alignment = 1
 script = ExtResource("1_hqkxu")

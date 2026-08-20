@@ -130,6 +130,21 @@ position = Vector2(144, 144)
 [node name="Enemy2" parent="Enemies" unique_id=2106804459 instance=ExtResource("14_m6lg1")]
 position = Vector2(240, 208)
 
+[node name="Enemy3" parent="Enemies" unique_id=956625573 instance=ExtResource("14_m6lg1")]
+position = Vector2(144, 144)
+
+[node name="Enemy4" parent="Enemies" unique_id=903222958 instance=ExtResource("14_m6lg1")]
+position = Vector2(144, 144)
+
+[node name="Enemy5" parent="Enemies" unique_id=664980245 instance=ExtResource("14_m6lg1")]
+position = Vector2(144, 144)
+
+[node name="Enemy6" parent="Enemies" unique_id=785576007 instance=ExtResource("14_m6lg1")]
+position = Vector2(144, 144)
+
+[node name="Enemy7" parent="Enemies" unique_id=1139925437 instance=ExtResource("14_m6lg1")]
+position = Vector2(144, 144)
+
 [node name="Plants" type="Node2D" parent="." unique_id=1507805972]
 
 [node name="GrassLow3" parent="Plants" unique_id=963626142 instance=ExtResource("7_d3ub6")]

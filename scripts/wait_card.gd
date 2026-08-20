@@ -1,12 +1,10 @@
-class_name AttackCard extends Card
+class_name WaitCard extends Card
 
-var damage = 2
-var card_path = "attack_card.tscn"
-
+var card_path = "wait_card.tscn"
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	state_modifier = "_attack"
-	$Label.text = str("Урон: ", gm.damage)
+	pass # Replace with function body.
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
