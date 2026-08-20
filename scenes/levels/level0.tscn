@@ -211,7 +211,8 @@ stream = ExtResource("14_1t5oo")
 autoplay = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1236012575]
-modulate = Color(1, 1, 1, 0.5529412)
+modulate = Color(1, 1, 1, 0.5019608)
+self_modulate = Color(1, 1, 1, 0.9411765)
 color = Color(0, 0, 0, 1)
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=589757551]

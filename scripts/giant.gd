@@ -39,6 +39,15 @@ func _process(delta: float) -> void:
 			sprite.play("falling")
 		"dead":
 			sprite.play("dead")
+		"battle":
+			sprite.play("idle")
+		"battle_attack":
+			sprite.play("battle_attack")
+		"battle_defend":
+			sprite.play("battle_defend")
+		"battle_ability":
+			sprite.play("battle_ability")
+			
 	
 	move_and_slide()
 
@@ -71,6 +80,9 @@ func go_downstairs() -> void:
 	audio_fall.play()
 	var tween = create_tween()
 	tween.tween_property(self, "scale", Vector2(0, 0), 0.5)
+
+func deal_damage(target : Enemy, time : float) -> void:
+	target.take_damage(gm.damage, time)
 
 func check_fall(delta: float) -> void:
 	if gm.state == "falling":

@@ -3,9 +3,16 @@
 [ext_resource type="Texture2D" uid="uid://crsqvlld0supu" path="res://assets/enemy_sprite.png" id="1_6xk8f"]
 [ext_resource type="Script" uid="uid://bv6rnws21fw7r" path="res://scripts/enemy.gd" id="1_8e3ao"]
 [ext_resource type="AudioStream" uid="uid://bwch538phpi87" path="res://assets/soundFX/hit.wav" id="3_38ino"]
+[ext_resource type="PackedScene" uid="uid://tksv3htggrop" path="res://scenes/fx/xp_orb.tscn" id="4_fcftc"]
+[ext_resource type="AudioStream" uid="uid://b78ln2t2dmc8p" path="res://assets/soundFX/meow_die.wav" id="4_nb6gf"]
+[ext_resource type="PackedScene" uid="uid://cr7p23s5f4urx" path="res://scenes/fx/status_fx.tscn" id="5_lu5c6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_38ino"]
 radius = 3.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nb6gf"]
+atlas = ExtResource("1_6xk8f")
+region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fcftc"]
 atlas = ExtResource("1_6xk8f")
@@ -19,15 +26,22 @@ region = Rect2(0, 0, 32, 32)
 atlas = ExtResource("1_6xk8f")
 region = Rect2(32, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_lu5c6"]
+atlas = ExtResource("1_6xk8f")
+region = Rect2(96, 0, 32, 32)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_fcftc"]
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_nb6gf")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_fcftc")
 }],
-"loop": true,
+"loop": false,
 "name": &"dead",
-"speed": 5.0
+"speed": 1.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -37,8 +51,16 @@ animations = [{
 "texture": SubResource("AtlasTexture_38ino")
 }],
 "loop": true,
-"name": &"default",
+"name": &"idle",
 "speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lu5c6")
+}],
+"loop": true,
+"name": &"take_damage",
+"speed": 5.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lu5c6"]
@@ -58,8 +80,8 @@ debug_color = Color(0.24974304, 0.61780167, 0.4339693, 0.41960785)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=34147167]
 position = Vector2(0, -4)
 sprite_frames = SubResource("SpriteFrames_fcftc")
-animation = &"dead"
-autoplay = "default"
+animation = &"idle"
+autoplay = "idle"
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1438211941]
 collision_layer = 2
@@ -72,5 +94,26 @@ debug_color = Color(0.86404556, 0.3111131, 0.46711254, 0.41960785)
 stream = ExtResource("3_38ino")
 volume_db = 3.0
 
+[node name="AudioStreamPlayerFall" type="AudioStreamPlayer" parent="." unique_id=1669003269]
+stream = ExtResource("4_nb6gf")
+volume_db = -10.0
+pitch_scale = 0.5
+mix_target = 2
+
+[node name="IdleAnimationTimer" type="Timer" parent="." unique_id=1712994445]
+one_shot = true
+
+[node name="TakeDamageTimer" type="Timer" parent="." unique_id=1706057441]
+one_shot = true
+
+[node name="XpOrb" parent="." unique_id=632733372 instance=ExtResource("4_fcftc")]
+visible = false
+
+[node name="StatusFX" parent="." unique_id=1192321709 instance=ExtResource("5_lu5c6")]
+visible = false
+position = Vector2(-5, 0)
+
 [connection signal="area_entered" from="Area2DXP" to="." method="_on_area_2dxp_area_entered"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="timeout" from="IdleAnimationTimer" to="." method="_on_idle_animation_timer_timeout"]
+[connection signal="timeout" from="TakeDamageTimer" to="." method="_on_take_damage_timer_timeout"]

@@ -3,17 +3,14 @@ class_name Card extends Control
 signal card_clicked(card_node)
 var is_selected: bool = false
 
-var order = 0
+var state_modifier = ""
 
 const SCALE_NORMAL = Vector2(1.0, 1.0)
 const SCALE_HOVER = Vector2(1.1, 1.1)
 const SCALE_SELECTED = Vector2(1.15, 1.15)
 
 func _ready() -> void:
-	if order == 1:
-		self.rotation_degrees = 15
-	elif order == 2:
-		self.rotation_degrees = 30
+	pass
 
 func _process(delta: float) -> void:
 	pass
@@ -42,9 +39,11 @@ func select_card():
 	is_selected = true
 	self.rotation_degrees += 10
 	animate_to(SCALE_SELECTED, Color(1.191, 0.371, 0.385))
+	gm.state = "battle" + state_modifier
 
 func deselect_card():
 	z_index -= 10
 	is_selected = false
 	self.rotation_degrees -= 10
 	animate_to(SCALE_NORMAL, Color.WHITE)
+	gm.state = "battle"

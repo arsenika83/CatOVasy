@@ -3,7 +3,7 @@ extends Node2D
 @export var charge_count = 3
 
 @onready var timer = $Timer
-@onready var enabled = $EnabledSprite
+@onready var enabled = $StatusFX
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

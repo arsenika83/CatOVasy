@@ -32,11 +32,6 @@ func _on_card_selected(clicked_card: Control) -> void:
 	if current_selected != null:
 		current_selected.deselect_card()
 		
-	# 2. Запоминаем новую карточку как выбранную
 	current_selected = clicked_card
-	
-	# 3. Включаем у неё состояние выбора
 	current_selected.select_card()
 	
-	# Здесь можно выполнить логику игры (например, обновить характеристики выбранного оружия)
-	print("Выбран элемент: ", current_selected.name)

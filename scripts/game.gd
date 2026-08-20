@@ -63,7 +63,6 @@ func smooth_camera_zoom(value1, value2) -> void:
 	tween.tween_property(player_camera, str(value1), value2, 0.5)	
 	
 func move_to_map_pos() -> void:
-	enemy_turn()
 	var map_pos = map.local_to_map(cursor_pos)
 	
 	var diff_x = map_pos.x - map.local_to_map(giant.position).x
@@ -106,7 +105,9 @@ func move_to_map_pos() -> void:
 	elif diff_x < 0 and diff_y < 0:
 		giant.sprite.flip_h = false
 		var tween = create_tween()
-		tween.tween_property(giant, "position", Vector2(giant.position.x - 32, giant.position.y - 32), 0.2)	
+		tween.tween_property(giant, "position", Vector2(giant.position.x - 32, giant.position.y - 32), 0.2)
+		
+	enemy_turn()
 	
 func draw_cursor() -> void:
 	var map_pos = map.local_to_map(cursor_pos)
@@ -173,25 +174,30 @@ func check_hp() -> void:
 		life1.visible = false
 
 func enemy_turn() -> void:
-	for mob in enemies.get_children():
-		var g_pos = map.local_to_map(giant.position)
-		var e_pos = map.local_to_map(mob.position)
-		mob.move(g_pos, e_pos)
+	var g_pos = map.local_to_map(giant.position)
+	
+	for enemy in enemies.get_children():
+		var e_pos = map.local_to_map(enemy.position)
+		enemy.move(g_pos, e_pos)
+	
 
 func start_battle() -> void:
-	if not find_child("BattleNode").find_child("Battle"):
+	if not find_child("BattleNode").find_child("Battle") or gm.state == "battle":
 		battle_start_timer.start()
 	
 func end_battle() -> void:
-	remove_child(find_child("BattleNode").find_child("Battle"))
-	audio.start()
+	gm.state = "idle"
+	#giant.position = gm.prev_pos
+	audio.play()
+	$Effects.visible = true
+	$CanvasModulate.visible = true
 	player_camera.enabled = true
-
 
 func _on_battle_start_timer_timeout() -> void:
 	gm.state = "battle"
 	audio.stop()
 	player_camera.enabled = false
 	var battle = BATTLE_SCENE.instantiate()
+	$CanvasModulate.visible = false
 	$BattleNode.add_child(battle)
 	$Effects.visible = false
