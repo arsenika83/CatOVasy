@@ -1,15 +1,20 @@
-extends CharacterBody2D
+class_name Giant extends CharacterBody2D
 
 var speed = 320
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @onready var area = $Area2D
+@onready var sprite = $Sprite
+
 @onready var respawn_timer = $RespawnTimer
 @onready var fall_timer = $FallTimer
-@onready var sprite = $Sprite
+@onready var walk_timer = $WalkTimer
+
 @onready var audio_meow = $AudioStreamPlayerMeow
 @onready var audio_fall = $AudioStreamPlayerFall
 @onready var audio_resting = $AudioStreamPlayerResting
+
+@onready var light = $PointLight2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -24,9 +29,10 @@ func _process(delta: float) -> void:
 	match gm.state:
 		"idle":
 			sprite.play("idle")
+		"walking":
 			if Input.is_action_just_pressed("ui_lmb"):
 				audio_meow.pitch_scale = randf_range(0.7, 1.3)
-				audio_meow.play()
+				audio_meow.play()		
 		"resting":
 			sprite.play("resting")
 		"falling":
@@ -37,8 +43,14 @@ func _process(delta: float) -> void:
 	move_and_slide()
 
 func spawn() -> void:
-	var tween = create_tween()
-	tween.tween_property(self, "scale", Vector2(1, 1), 0.5)
+	match gm.state:
+		"idle":
+			var tween = create_tween()
+			tween.tween_property(self, "scale", Vector2(1, 1), 0.5)
+		"battle":
+			var tween = create_tween()
+			tween.tween_property(self, "scale", Vector2(1, 1), 0.5)
+			sprite.flip_h = true
 
 func respawn() -> void:
 	gm.state = "idle"
@@ -50,6 +62,10 @@ func fall() -> void:
 		gm.state = "falling"
 		respawn_timer.start()
 		audio_fall.play()
+
+func walk() -> void:
+	gm.state = "walking"
+	walk_timer.start()
 
 func go_downstairs() -> void:
 	audio_fall.play()
@@ -68,7 +84,7 @@ func check_fall(delta: float) -> void:
 		if scale.x <= 0:
 			scale.x = 0
 			scale.y = 0
-	else:
+	elif gm.state == "idle":
 		z_index = 3
 		rotation_degrees = 0
 		#velocity.y = 0
@@ -106,3 +122,7 @@ func _on_fall_timer_timeout() -> void:
 
 func _on_restart_timer_timeout() -> void:
 	pass # Replace with function body.
+
+func _on_walk_timer_timeout() -> void:
+	if gm.state == "walking":
+		gm.state = "idle"

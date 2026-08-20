@@ -211,9 +211,13 @@ one_shot = true
 
 [node name="RestartTimer" type="Timer" parent="." unique_id=1601948389]
 
+[node name="WalkTimer" type="Timer" parent="." unique_id=1771354652]
+wait_time = 0.2
+one_shot = true
+
 [node name="AudioStreamPlayerMeow" type="AudioStreamPlayer" parent="." unique_id=1429074131]
 stream = ExtResource("3_sx7hc")
-volume_db = -7.0
+volume_db = -7.056
 
 [node name="AudioStreamPlayerFall" type="AudioStreamPlayer" parent="." unique_id=1300676923]
 stream = ExtResource("4_ukwaf")
@@ -235,3 +239,4 @@ stream = ExtResource("7_0vpcl")
 [connection signal="timeout" from="RespawnTimer" to="." method="_on_respawn_timer_timeout"]
 [connection signal="timeout" from="FallTimer" to="." method="_on_fall_timer_timeout"]
 [connection signal="timeout" from="RestartTimer" to="." method="_on_restart_timer_timeout"]
+[connection signal="timeout" from="WalkTimer" to="." method="_on_walk_timer_timeout"]

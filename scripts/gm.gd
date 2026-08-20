@@ -11,8 +11,13 @@ var xp = 0
 var xp_needed = 1
 var level = 1
 
+var current_cards: Array[Card]
+var current_enemies : Array
+
 func _ready() -> void:
-	pass # Replace with function body.
+	current_cards.append(AttackCard.new())
+	current_cards.append(DefendCard.new())
+	current_cards.append(AbilityCard.new())
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

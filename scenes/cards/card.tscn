@@ -1,11 +1,16 @@
 [gd_scene format=3 uid="uid://cpic225bvgpyi"]
 
-[ext_resource type="Shader" uid="uid://cvtnex7d7rk6w" path="res://shaders/foregroundFX.gdshader" id="1_0qqw3"]
+[ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="1_0qqw3"]
 [ext_resource type="Texture2D" uid="uid://b0rpbj3njbbar" path="res://assets/cards.png" id="1_45qsb"]
+[ext_resource type="Script" uid="uid://ddjmqi81p7g0" path="res://scripts/card.gd" id="2_jl6rh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jl6rh"]
+resource_local_to_scene = true
 shader = ExtResource("1_0qqw3")
-shader_parameter/shake = 0.1
+shader_parameter/speed = 2.000000095
+shader_parameter/amplitude = 10.000000475
+shader_parameter/time_offset = 0.4390000208525
+shader_parameter/flash_intensity = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0qqw3"]
 atlas = ExtResource("1_45qsb")
@@ -16,31 +21,50 @@ atlas = ExtResource("1_45qsb")
 region = Rect2(0, 0, 32, 32)
 
 [node name="Card" type="Control" unique_id=1531075916]
+z_index = 100
+z_as_relative = false
 material = SubResource("ShaderMaterial_jl6rh")
 layout_mode = 3
 anchors_preset = 0
 offset_right = 64.0
 offset_bottom = 96.0
+pivot_offset = Vector2(32, 48)
+script = ExtResource("2_jl6rh")
+
+[node name="BG2" type="TextureRect" parent="." unique_id=1690685854]
+use_parent_material = true
+layout_mode = 0
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 136.0
+offset_bottom = 200.0
+texture = SubResource("AtlasTexture_0qqw3")
 
 [node name="BG" type="TextureRect" parent="." unique_id=1702750552]
+use_parent_material = true
 layout_mode = 0
-offset_right = 64.0
-offset_bottom = 96.0
+offset_right = 128.0
+offset_bottom = 192.0
 texture = SubResource("AtlasTexture_0qqw3")
 
 [node name="Icon" type="TextureRect" parent="." unique_id=1021453810]
+use_parent_material = true
 layout_mode = 0
-offset_left = 3.0
-offset_top = 3.0
-offset_right = 61.0
-offset_bottom = 51.0
+offset_right = 128.0
+offset_bottom = 128.0
 texture = SubResource("AtlasTexture_jl6rh")
 
 [node name="Label" type="Label" parent="." unique_id=514088983]
+use_parent_material = true
 layout_mode = 0
-offset_left = 2.0
-offset_top = 53.0
-offset_right = 62.0
-offset_bottom = 94.0
-theme_override_font_sizes/font_size = 8
+offset_left = 8.0
+offset_top = 136.0
+offset_right = 120.0
+offset_bottom = 184.0
+theme_override_font_sizes/font_size = 10
 text = "+1 УРОН"
+horizontal_alignment = 1
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

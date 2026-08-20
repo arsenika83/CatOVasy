@@ -6,11 +6,13 @@ var cursor_map_pos
 var turn_count = 0
 
 @onready var giant = $Giant
-@onready var map = $TileMapLayer
+@onready var map = $TileMapLayerBlack
 @onready var player_camera = $Giant/Camera2D
 @onready var cursor = $Cursor
 
 @onready var enemies = $Enemies
+@onready var audio = $AudioStreamPlayer
+@onready var battle_start_timer = $BattleStartTimer
 
 @onready var health_bar = $UI/Container/HealthBar
 @onready var life1 = $UI/Container/HealthBar/Life1
@@ -21,6 +23,8 @@ var turn_count = 0
 
 @onready var foregroundFX = $Effects/ColorRect
 
+const BATTLE_SCENE = preload("res://scenes/levels/battle_level.tscn")
+
 func _ready() -> void:
 	player_camera.zoom.x = gm.camera_zoom
 	player_camera.zoom.y = gm.camera_zoom
@@ -28,6 +32,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if gm.state == "battle":
+		pass
+	
 	cursor_pos = get_global_mouse_position()
 	cursor_map_pos = map.local_to_map(cursor_pos)
 	
@@ -39,13 +46,8 @@ func _process(delta: float) -> void:
 	
 	if gm.state == "idle":
 		if Input.is_action_just_pressed("ui_lmb"):
-			move_to_map_pos() 
-	
-	if Input.is_action_just_pressed("ui_rmb"):
-		if foregroundFX.visible:
-			foregroundFX.visible = false
-		else:
-			foregroundFX.visible = true
+			move_to_map_pos()
+			giant.walk()
 		
 	if Input.is_action_just_pressed("ui_scale_up") and gm.camera_zoom <= 3:
 		gm.camera_zoom += 1
@@ -79,24 +81,30 @@ func move_to_map_pos() -> void:
 		var tween = create_tween()
 		tween.tween_property(giant, "position", Vector2(giant.position.x, giant.position.y - 32), 0.2)
 	elif diff_x > 0 and diff_y < 0:
+		giant.sprite.flip_h = true
 		var tween = create_tween()
 		tween.tween_property(giant, "position", Vector2(giant.position.x + 32, giant.position.y - 32), 0.2)
 	elif diff_x > 0 and (diff_y == 0):
+		giant.sprite.flip_h = true
 		var tween = create_tween()
 		tween.tween_property(giant, "position", Vector2(giant.position.x + 32, giant.position.y), 0.2)
 	elif diff_x > 0 and diff_y > 0:
+		giant.sprite.flip_h = true
 		var tween = create_tween()
 		tween.tween_property(giant, "position", Vector2(giant.position.x + 32, giant.position.y + 32), 0.2)
 	elif (diff_x == 0) and diff_y > 0:
 		var tween = create_tween()
 		tween.tween_property(giant, "position", Vector2(giant.position.x, giant.position.y + 32), 0.2)
 	elif diff_x < 0 and diff_y > 0:
+		giant.sprite.flip_h = false
 		var tween = create_tween()
 		tween.tween_property(giant, "position", Vector2(giant.position.x - 32, giant.position.y + 32), 0.2)
 	elif diff_x < 0 and (diff_y == 0):
+		giant.sprite.flip_h = false
 		var tween = create_tween()
 		tween.tween_property(giant, "position", Vector2(giant.position.x - 32, giant.position.y), 0.2)
 	elif diff_x < 0 and diff_y < 0:
+		giant.sprite.flip_h = false
 		var tween = create_tween()
 		tween.tween_property(giant, "position", Vector2(giant.position.x - 32, giant.position.y - 32), 0.2)	
 	
@@ -169,3 +177,21 @@ func enemy_turn() -> void:
 		var g_pos = map.local_to_map(giant.position)
 		var e_pos = map.local_to_map(mob.position)
 		mob.move(g_pos, e_pos)
+
+func start_battle() -> void:
+	if not find_child("BattleNode").find_child("Battle"):
+		battle_start_timer.start()
+	
+func end_battle() -> void:
+	remove_child(find_child("BattleNode").find_child("Battle"))
+	audio.start()
+	player_camera.enabled = true
+
+
+func _on_battle_start_timer_timeout() -> void:
+	gm.state = "battle"
+	audio.stop()
+	player_camera.enabled = false
+	var battle = BATTLE_SCENE.instantiate()
+	$BattleNode.add_child(battle)
+	$Effects.visible = false

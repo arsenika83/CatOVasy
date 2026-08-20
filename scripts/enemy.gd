@@ -2,7 +2,7 @@ class_name Enemy extends Node2D
 
 @export var damage = 1
 @export var amount = 1
-@export var hp = 1
+@export var hp = 2
 @export var xp_gives = 1
 var gave_xp = false
 var state = "idle"
@@ -64,8 +64,10 @@ func move(g_pos : Vector2, e_pos : Vector2) -> void:
 			tween.tween_property(self, "position", Vector2(self.position.x - 32, self.position.y - 32), 0.2)	
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	gm.hp -= damage
-	hp -= gm.damage
+	gm.current_enemies.append(self)
+	gm.state = "battle"
+	
+	get_parent().get_parent().start_battle()
 	
 	audio_hit.pitch_scale = randf_range(0.8, 1.2)
 	audio_hit.play()
