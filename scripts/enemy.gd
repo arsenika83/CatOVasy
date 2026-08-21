@@ -4,9 +4,19 @@ class_name Enemy extends Node2D
 @export var max_hp = 2
 
 @export var damage = 1
-@export var defence = 0
-@export var accuracy = 50
-@export var luck = 5
+var current_damage = damage
+
+@export var defence = 1
+var current_defence = 0
+@export var max_defence = 3
+var defended = false
+
+@export var accuracy = 100
+var current_accuracy = accuracy
+
+@export var luck = 15
+var current_luck = luck
+
 @export var xp_gives = 1
 
 var gave_xp = false
@@ -29,17 +39,25 @@ var follow_distance = 5
 var battle_x = 0
 var battle_y = 0
 
+var current_target : Giant
+var attack_animation_time = 0.3
+
 @onready var sprite = $AnimatedSprite2D
 @onready var area = $Area2D
 @onready var area_xp = $Area2DXP
 
 @onready var audio_hit = $AudioStreamPlayerHit
+@onready var audio_hit_lucky = $AudioStreamPlayerHitLucky
+@onready var audio_hurt = $AudioStreamPlayerHurt
 @onready var audio_fall = $AudioStreamPlayerFall
 @onready var audio_miss = $AudioStreamPlayerMiss
+@onready var audio_defend = $AudioStreamPlayerDefend
 
 @onready var idle_animation_timer = $IdleAnimationTimer
+@onready var deal_damage_timer = $DealDamageTimer
 @onready var take_damage_timer = $TakeDamageTimer
 @onready var miss_damage_timer = $MissDamageTimer
+@onready var defend_timer = $DefendTimer
 
 @onready var xp_orb = $XpOrb
 @onready var status_fx = $StatusFX
@@ -138,7 +156,8 @@ func check_giant_position(g_pos : Vector2, e_pos : Vector2) -> void:
 		
 		if (abs(diff_x) <= follow_radius) and (abs(diff_y) <= follow_radius):
 			print("CHECK 2")
-			status_fx.visible = true
+			var tween = create_tween()
+			tween.tween_property(status_fx, "modulate:a", 1.0, 0.2)
 			status_fx.play("found_you")
 
 
@@ -164,29 +183,101 @@ func check_hp() -> void:
 		hp = 0
 		state = "dead"
 
-func deal_damage(target : Giant, time : float) -> void:
+func deal_damage(target : Giant) -> void:
 	var success : bool = randf_range(0.0, 1.0) * 100 <= accuracy
+	var luck_success : bool = randf_range(0.0, 1.0) * 100 <= luck
+	current_target = target
 	
 	if success:
-		target.take_damage(damage, time)
+		if luck_success:
+			status_fx.scale = Vector2(0, 0)
+			status_fx.play("lucky")
+			var tween1 = create_tween()
+			tween1.tween_property(status_fx, "modulate:a", 1.0, 0.1)
+			
+			var tween = create_tween()
+			tween.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
+			
+			current_damage = damage * 2
 	else:
-		target.take_damage(0, time)
+		current_damage = 0
 		print("MISS! ")
-
-func take_damage(damage : int, time : float) -> void:
-	hp -= damage
 	
-	if damage > 0:
+	sprite.play("deal_damage")
+	deal_damage_timer.start(attack_animation_time)
+
+func take_damage(dmg : int, time : float) -> void:
+	if current_defence - dmg >= 0:
+		current_defence -= dmg
+		if dmg > 0:
+			defended = true
+		dmg = 0
+		
+	else:
+		dmg -= current_defence
+		current_defence = 0
+		
+	hp -= dmg
+	
+	if dmg > 0:
 		take_damage_timer.start(time)
 	else:
+		if defended:
+			audio_defend.play()
+			status_fx.play("defended")
+			var tween1 = create_tween()
+			tween1.tween_property(status_fx, "modulate:a", 1.0, 0.1)
+			
+			var tween = create_tween()
+			tween.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
+		
+			defended = false
+		else:
+			audio_miss.play()
 		miss_damage_timer.start(time)
+		
+func defend(time : float) -> void:
+	current_defence += defence
+	
+	if current_defence > max_defence:
+		current_defence = max_defence
+	
+	status_fx.scale = Vector2(0, 0)
+	status_fx.play("defend")
+	var tween1 = create_tween()
+	tween1.tween_property(status_fx, "modulate:a", 1.0, 0.1)
+	
+	var tween = create_tween()
+	tween.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
+	
+	if damage > 0:
+		defend_timer.start(time)
+	else:
+		defend_timer.start(time)
+		
+func give_debuff() -> void:
+	current_defence += defence
+	
+	if current_defence > max_defence:
+		current_defence = max_defence
+	
+	status_fx.scale = Vector2(0, 0)
+	status_fx.play("debuff")
+	var tween1 = create_tween()
+	tween1.tween_property(status_fx, "modulate:a", 1.0, 0.1)
+	var tween = create_tween()
+	tween.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
+	
+	gm.current_luck -= 5
+	get_parent().get_parent().end_turn()
 
 func after_battle_update() -> void:
 	match state:
 		"dead":
 			xp_orb.material.set_shader_parameter("time_offset", position.x)
 			xp_orb.visible = true
-			status_fx.visible = false
+			var tween = create_tween()
+			tween.tween_property(status_fx, "modulate:a", 0.0, 0.1)
 			sprite.play("dead")
 
 func _on_idle_animation_timer_timeout() -> void:
@@ -197,7 +288,7 @@ func _on_take_damage_timer_timeout() -> void:
 	
 	if not state == "dead":
 		sprite.play("take_damage")
-		audio_hit.play()
+		audio_hurt.play()
 		idle_animation_timer.start(0.2)
 		get_parent().get_parent().end_turn()
 	else:
@@ -208,5 +299,28 @@ func _on_take_damage_timer_timeout() -> void:
 		get_parent().get_parent().end_turn()
 
 func _on_miss_damage_timer_timeout() -> void:
-	audio_miss.play()
+	var tween = create_tween()
+	tween.tween_property(status_fx, "scale", Vector2(0, 0), 0.2)
 	get_parent().get_parent().end_turn()
+	
+
+func _on_defend_timer_timeout() -> void:
+	audio_defend.play()
+	#idle_animation_timer.start(0.2)
+	var tween = create_tween()
+	tween.tween_property(status_fx, "scale", Vector2(0, 0), 0.2)
+	
+	get_parent().get_parent().end_turn()
+
+func _on_deal_damage_timer_timeout() -> void:
+	if current_damage > damage:
+		audio_hit_lucky.play()
+		var tween = create_tween()
+		tween.tween_property(status_fx, "scale", Vector2(0, 0), 0.2)
+	else:	
+		audio_hit.play()
+	get_parent().get_parent().claw_fx.position = current_target.position
+	get_parent().get_parent().claw_fx.play("hit")
+	
+	current_target.take_damage(current_damage, attack_animation_time)
+	idle_animation_timer.start(0.2)

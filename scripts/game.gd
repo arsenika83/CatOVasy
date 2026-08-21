@@ -187,6 +187,7 @@ func start_battle() -> void:
 	
 func end_battle() -> void:
 	gm.state = "idle"
+	gm.energy = gm.max_energy
 	#giant.position = gm.prev_pos
 	audio.play()
 	$Effects.visible = true
@@ -195,6 +196,7 @@ func end_battle() -> void:
 
 func _on_battle_start_timer_timeout() -> void:
 	gm.state = "battle"
+	gm.prev_state = gm.state
 	audio.stop()
 	player_camera.enabled = false
 	var battle = BATTLE_SCENE.instantiate()

@@ -37,13 +37,16 @@ func _on_gui_input(event: InputEvent) -> void:
 func select_card():
 	z_index += 10
 	is_selected = true
-	self.rotation_degrees += 10
+	var tween = create_tween()
+	tween.tween_property(self, "position:y", position.y-30, 0.1)
 	animate_to(SCALE_SELECTED, Color(1.191, 0.371, 0.385))
 	gm.state = "battle" + state_modifier
+	gm.prev_state = gm.state
 
 func deselect_card():
 	z_index -= 10
 	is_selected = false
-	self.rotation_degrees -= 10
+	var tween = create_tween()
+	tween.tween_property(self, "position:y", position.y+30, 0.1)
 	animate_to(SCALE_NORMAL, Color.WHITE)
 	gm.state = "battle"

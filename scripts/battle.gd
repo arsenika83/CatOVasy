@@ -64,6 +64,10 @@ func _process(delta: float) -> void:
 			match gm.state:
 				"battle_attack":
 					choose_target("deal_damage")
+				"battle_defend":
+					choose_target("defend")
+				"battle_ability":
+					choose_target("ability")
 
 func smooth_camera_zoom(value1, value2) -> void:
 	var tween = create_tween()
@@ -106,14 +110,20 @@ func choose_target(action : String) -> void:
 	for i in range(0, find_child("Enemies").get_child_count()):
 		var target = find_child("Enemies").get_child(i)
 		
-		if target.battle_x == cursor_grid_pos.x and target.battle_y == cursor_grid_pos.y: #HIT
+		if target.battle_x == cursor_grid_pos.x and target.battle_y == cursor_grid_pos.y:
 			if not target.state == "dead":
 				match action:
 					"deal_damage":
-						var attack_duration : float = 0.4
-						source.deal_damage(target, attack_duration)
-						claw_fx.position = target_local_pos
-						claw_fx.play("hit")
+						source.deal_damage(target)
+	
+	
+	#BUFFS
+	if gm.battle_x == cursor_grid_pos.x and gm.battle_y == cursor_grid_pos.y:
+		if not gm.state == "dead":
+			match action:
+				"defend":
+					var defend_duration : float = 0.4
+					source.defend(defend_duration)
 				
 func enemy_turn() -> void:
 	if current_creature_turn == -1:
@@ -126,24 +136,33 @@ func enemy_turn() -> void:
 			current_creature_turn = -1
 			return
 			
-		var action = source.move_set.get(0)	
+		var action_number = randi_range(0, source.move_set.size()-1)
+		var action = source.move_set.get(action_number)
+		
 		match action:
 			"deal_damage":
-				var attack_duration : float = 0.4
-				source.deal_damage(giant, attack_duration)
-				claw_fx.position = giant.position
-				claw_fx.play("hit")
+				source.deal_damage(giant)
+			"defend":
+				var defend_duration : float = 0.4
+				source.defend(defend_duration)
+			"debuff":
+				source.give_debuff()
+
 		return
 	else:
 		end_turn()
 
 func end_turn() -> void:
-	current_creature_turn += 1
-	
-	if current_creature_turn == current_enemies.size():
-		current_creature_turn = -1
-	
-	enemy_turn()
+	gm.energy -= 1
+	if gm.energy <= 0:
+		gm.energy = 0
+		current_creature_turn += 1
+		
+		if current_creature_turn == current_enemies.size():
+			gm.energy = gm.max_energy
+			current_creature_turn = -1
+		
+		enemy_turn()
 
 func check_creature_stats() -> void:
 	var cursor_grid_pos = map.local_to_map(get_global_mouse_position())
@@ -159,10 +178,10 @@ func check_creature_stats() -> void:
 		creature_check_dialog.find_child("NameLabel").text = "Гигант"
 					
 		var stats = str("ОЗ: ", gm.hp, "/", gm.max_hp)
-		stats += 	str("\nУРОН: ", gm.damage)
-		stats += 	str("\nЗАЩИТА: ", gm.defence)
-		stats += 	str("\nТОЧНОСТЬ: ", gm.accuracy, "%")
-		stats += 	str("\nУДАЧА: ", gm.luck, "%")
+		stats += 	str("\nУРОН: ", gm.current_damage)
+		stats += 	str("\nЗАЩИТА: ", gm.current_defence)
+		stats += 	str("\nТОЧНОСТЬ: ", gm.current_accuracy, "%")
+		stats += 	str("\nУДАЧА: ", gm.current_luck, "%")
 		stats += 	str("\n")
 		stats += 	str("\nУРОВЕНЬ: ", gm.level)
 		stats += 	str("\nОПЫТ: ", gm.xp, "/", gm.xp_needed)
@@ -183,10 +202,10 @@ func check_creature_stats() -> void:
 					creature_check_dialog.find_child("NameLabel").text = target.enemy_name_rus
 					
 					var stats = str("ОЗ: ", target.hp, "/", target.max_hp)
-					stats += 	str("\nУРОН: ", target.damage)
-					stats += 	str("\nЗАЩИТА: ", target.defence)
-					stats += 	str("\nТОЧНОСТЬ: ", target.accuracy, "%")
-					stats += 	str("\nУДАЧА: ", target.luck, "%")
+					stats += 	str("\nУРОН: ", target.current_damage)
+					stats += 	str("\nЗАЩИТА: ", target.current_defence)
+					stats += 	str("\nТОЧНОСТЬ: ", target.current_accuracy, "%")
+					stats += 	str("\nУДАЧА: ", target.current_luck, "%")
 					stats += 	str("\n")
 					creature_check_dialog.find_child("StatsLabel").text = stats
 					

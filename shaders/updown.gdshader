@@ -15,5 +15,5 @@ void vertex() {
 void fragment() {
     vec4 color = texture(TEXTURE, UV);
     // Смешиваем обычный цвет текстуры с белым цветом в зависимости от flash_inten
-    COLOR = vec4(mix(color.rgb, vec3(1.0), flash_intensity * 0.4), color.a);
+    COLOR = vec4(mix(color.rgb, vec3(253, 78, 81), flash_intensity * 0.3), color.a);
 }

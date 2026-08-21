@@ -1,24 +1,29 @@
 class_name Giant extends CharacterBody2D
 
-var speed = 320
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-
 @onready var area = $Area2D
 @onready var sprite = $Sprite
+@onready var status_fx = $StatusFX
 
 @onready var respawn_timer = $RespawnTimer
 @onready var fall_timer = $FallTimer
 @onready var walk_timer = $WalkTimer
+@onready var deal_damage_timer = $DealDamageTimer
 @onready var take_damage_timer = $TakeDamageTimer
 @onready var miss_damage_timer = $MissDamageTimer
 @onready var idle_animation_timer = $IdleAnimationTimer
+@onready var defend_timer = $DefendTimer
 
 @onready var audio_meow = $AudioStreamPlayerMeow
 @onready var audio_fall = $AudioStreamPlayerFall
 @onready var audio_miss = $AudioStreamPlayerMiss
 @onready var audio_resting = $AudioStreamPlayerResting
+@onready var audio_defend = $AudioStreamPlayerDefend
+@onready var audio_hit = $AudioStreamPlayerHit
+@onready var audio_hit_lucky = $AudioStreamPlayerHitLucky
 
 @onready var light = $PointLight2D
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -46,13 +51,15 @@ func _process(delta: float) -> void:
 		"battle":
 			sprite.play("idle")
 		"battle_attack":
-			sprite.play("battle_attack")
+			pass
+			#sprite.play("battle_attack")
 		"battle_defend":
-			sprite.play("battle_defend")
+			pass
+			#sprite.play("battle_defend")
 		"battle_ability":
-			sprite.play("battle_ability")
+			pass
+			#sprite.play("battle_ability")
 			
-	
 	move_and_slide()
 
 func spawn() -> void:
@@ -85,22 +92,77 @@ func go_downstairs() -> void:
 	var tween = create_tween()
 	tween.tween_property(self, "scale", Vector2(0, 0), 0.5)
 
-func deal_damage(target : Enemy, time : float) -> void:
-	var success : bool = randf_range(0.0, 1.0) * 100 <= gm.accuracy
+func deal_damage(target : Enemy) -> void:
+	var success : bool = randf_range(0.0, 1.0) * 100 <= gm.current_accuracy
+	var luck_success : bool = randf_range(0.0, 1.0) * 100 <= gm.current_luck
+	gm.current_target = target
 	
 	if success:
-		target.take_damage(gm.damage, time)
+		if luck_success:
+			status_fx.scale = Vector2(0, 0)
+			status_fx.play("lucky")
+			var tween1 = create_tween()
+			tween1.tween_property(status_fx, "modulate:a", 1.0, 0.1)
+			
+			var tween = create_tween()
+			tween.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
+			
+			gm.current_damage = gm.damage * 2
 	else:
-		target.take_damage(0, time)
-		print("GIANT MISS! ")
-		
-func take_damage(damage : int, time : float) -> void:
-	gm.hp -= damage
+		gm.current_damage = 0
+		print("MISS! ")
 	
-	if damage > 0:
+	sprite.play("deal_damage")
+	deal_damage_timer.start(gm.attack_animation_time)
+
+func take_damage(dmg : int, time : float) -> void:
+	if gm.current_defence - dmg >= 0:
+		gm.current_defence -= dmg
+		if dmg > 0:
+			gm.defended = true
+		dmg = 0
+	else:
+		dmg -= gm.current_defence
+		gm.current_defence = 0
+		
+	gm.hp -= dmg
+	
+	if dmg > 0:
 		take_damage_timer.start(time)
 	else:
+		if gm.defended:
+			audio_defend.play()
+			status_fx.play("defended")
+			var tween1 = create_tween()
+			tween1.tween_property(status_fx, "modulate:a", 1.0, 0.1)
+			
+			var tween = create_tween()
+			tween.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
+		
+			gm.defended = false
+		else:
+			audio_miss.play()
+		
 		miss_damage_timer.start(time)
+
+func defend(time : float) -> void:
+	gm.current_defence += gm.defence
+	
+	if gm.current_defence > gm.max_defence:
+		gm.current_defence = gm.max_defence
+	
+	status_fx.scale = Vector2(0, 0)
+	status_fx.play("defend")
+	var tween1 = create_tween()
+	tween1.tween_property(status_fx, "modulate:a", 1.0, 0.1)
+	
+	var tween2 = create_tween()
+	tween2.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
+	
+	if gm.damage > 0:
+		defend_timer.start(time)
+	else:
+		defend_timer.start(time)
 
 func check_fall(delta: float) -> void:
 	if gm.state == "falling":
@@ -174,9 +236,33 @@ func _on_take_damage_timer_timeout() -> void:
 		sprite.play("dead")
 
 func _on_idle_animation_timer_timeout() -> void:
+	print(gm.state, " -> ", gm.prev_state)
 	gm.state = gm.prev_state
-
+	sprite.play(gm.state)
 
 func _on_miss_damage_timer_timeout() -> void:
-	audio_miss.play()
+	var tween = create_tween()
+	tween.tween_property(status_fx, "scale", Vector2(0, 0), 0.2)
+	get_parent().end_turn()
+
+func _on_deal_damage_timer_timeout() -> void:
+	if gm.current_damage > gm.damage:
+		audio_hit_lucky.play()
+		var tween = create_tween()
+		tween.tween_property(status_fx, "scale", Vector2(0, 0), 0.2)
+	else:
+		audio_hit.play()
+	get_parent().claw_fx.position = gm.current_target.position
+	get_parent().claw_fx.play("hit")
+	
+	gm.current_target.take_damage(gm.current_damage, gm.attack_animation_time)
+	gm.current_damage = gm.damage
+	idle_animation_timer.start(0.2)
+
+func _on_defend_timer_timeout() -> void:
+	audio_defend.play()
+	#idle_animation_timer.start(0.2)
+	var tween = create_tween()
+	tween.tween_property(status_fx, "scale", Vector2(0, 0), 0.2)
+	
 	get_parent().end_turn()

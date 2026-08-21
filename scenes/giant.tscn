@@ -2,11 +2,16 @@
 
 [ext_resource type="Texture2D" uid="uid://dhpxrfjobvnw8" path="res://assets/player_sprite.png" id="1"]
 [ext_resource type="Script" uid="uid://rb8g2207v4bl" path="res://scripts/giant.gd" id="1_glfi2"]
+[ext_resource type="PackedScene" uid="uid://cr7p23s5f4urx" path="res://scenes/fx/status_fx.tscn" id="3_0vpcl"]
 [ext_resource type="AudioStream" uid="uid://cg8ponq2r4sg2" path="res://assets/soundFX/short_meow.wav" id="3_sx7hc"]
 [ext_resource type="AudioStream" uid="uid://b78ln2t2dmc8p" path="res://assets/soundFX/meow_die.wav" id="4_ukwaf"]
 [ext_resource type="AudioStream" uid="uid://cfmu610s83sv5" path="res://assets/soundFX/purring.wav" id="5_2xoio"]
 [ext_resource type="AudioStream" uid="uid://dyc143w8u85ck" path="res://assets/soundFX/level_up.wav" id="6_odb8e"]
 [ext_resource type="AudioStream" uid="uid://bq0ooer30jskk" path="res://assets/soundFX/xp_pick_up.wav" id="7_0vpcl"]
+[ext_resource type="AudioStream" uid="uid://bv07t8ic6tpma" path="res://assets/soundFX/miss.wav" id="9_q18av"]
+[ext_resource type="AudioStream" uid="uid://bclkaxhxamdmf" path="res://assets/soundFX/defend.wav" id="10_dt8fj"]
+[ext_resource type="AudioStream" uid="uid://bwch538phpi87" path="res://assets/soundFX/hit.wav" id="11_dku5q"]
+[ext_resource type="AudioStream" uid="uid://btyuivf1mvgot" path="res://assets/soundFX/hit_lucky.wav" id="12_p1oqw"]
 
 [sub_resource type="Gradient" id="Gradient_e53s0"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
@@ -17,6 +22,26 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0)
 metadata/_snap_enabled = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sx7hc"]
+atlas = ExtResource("1")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ukwaf"]
+atlas = ExtResource("1")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e53s0"]
+atlas = ExtResource("1")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2xoio"]
+atlas = ExtResource("1")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_odb8e"]
+atlas = ExtResource("1")
+region = Rect2(128, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wbhg2"]
 atlas = ExtResource("1")
@@ -40,39 +65,35 @@ region = Rect2(64, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hd7tc"]
 atlas = ExtResource("1")
-region = Rect2(0, 64, 32, 32)
+region = Rect2(64, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5tv6e"]
 atlas = ExtResource("1")
-region = Rect2(32, 64, 32, 32)
+region = Rect2(96, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bmrke"]
 atlas = ExtResource("1")
 region = Rect2(96, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_nwqqi"]
+atlas = ExtResource("1")
+region = Rect2(0, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_47i74"]
+atlas = ExtResource("1")
+region = Rect2(32, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqqh0"]
+atlas = ExtResource("1")
+region = Rect2(64, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ywdo"]
+atlas = ExtResource("1")
+region = Rect2(96, 160, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_0vpcl"]
 atlas = ExtResource("1")
 region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sx7hc"]
-atlas = ExtResource("1")
-region = Rect2(0, 32, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ukwaf"]
-atlas = ExtResource("1")
-region = Rect2(32, 32, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_e53s0"]
-atlas = ExtResource("1")
-region = Rect2(64, 32, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2xoio"]
-atlas = ExtResource("1")
-region = Rect2(96, 32, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_odb8e"]
-atlas = ExtResource("1")
-region = Rect2(128, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q18av"]
 atlas = ExtResource("1")
@@ -96,6 +117,71 @@ region = Rect2(128, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="2"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sx7hc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ukwaf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e53s0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2xoio")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sx7hc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ukwaf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e53s0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2xoio")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sx7hc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ukwaf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e53s0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2xoio")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sx7hc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ukwaf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e53s0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2xoio")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_odb8e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ukwaf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e53s0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2xoio")
+}],
+"loop": true,
+"name": &"battle",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wbhg2")
@@ -142,6 +228,23 @@ animations = [{
 "loop": true,
 "name": &"dead",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nwqqi")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_47i74")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dqqh0")
+}, {
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_3ywdo")
+}],
+"loop": false,
+"name": &"deal_damage",
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -270,8 +373,11 @@ height = 29.0
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1540776930]
 position = Vector2(0, -6)
 sprite_frames = SubResource("2")
-animation = &"idle"
+animation = &"battle"
 autoplay = "idle"
+
+[node name="StatusFX" parent="." unique_id=1192321709 instance=ExtResource("3_0vpcl")]
+modulate = Color(1, 1, 1, 0)
 
 [node name="Area2D" type="Area2D" parent="." unique_id=130196955]
 position = Vector2(4, 6)
@@ -283,9 +389,6 @@ shape = SubResource("CircleShape2D_glfi2")
 debug_color = Color(0.9065989, 0.2383379, 0.48185843, 0.41960785)
 
 [node name="IdleAnimationTimer" type="Timer" parent="." unique_id=1031534056]
-one_shot = true
-
-[node name="TakeDamageTimer" type="Timer" parent="." unique_id=117164087]
 one_shot = true
 
 [node name="RespawnTimer" type="Timer" parent="." unique_id=746788121]
@@ -301,7 +404,16 @@ one_shot = true
 wait_time = 0.2
 one_shot = true
 
+[node name="TakeDamageTimer" type="Timer" parent="." unique_id=117164087]
+one_shot = true
+
 [node name="MissDamageTimer" type="Timer" parent="." unique_id=1214622011]
+one_shot = true
+
+[node name="DealDamageTimer" type="Timer" parent="." unique_id=1132695036]
+one_shot = true
+
+[node name="DefendTimer" type="Timer" parent="." unique_id=31257092]
 one_shot = true
 
 [node name="AudioStreamPlayerMeow" type="AudioStreamPlayer" parent="." unique_id=1429074131]
@@ -325,15 +437,29 @@ stream = ExtResource("6_odb8e")
 stream = ExtResource("7_0vpcl")
 
 [node name="AudioStreamPlayerMiss" type="AudioStreamPlayer" parent="." unique_id=1521038996]
-stream = ExtResource("7_0vpcl")
-pitch_scale = 0.5
+stream = ExtResource("9_q18av")
+volume_db = -3.0
 mix_target = 2
+
+[node name="AudioStreamPlayerDefend" type="AudioStreamPlayer" parent="." unique_id=820096520]
+stream = ExtResource("10_dt8fj")
+volume_db = -7.056
+
+[node name="AudioStreamPlayerHit" type="AudioStreamPlayer" parent="." unique_id=1259823576]
+stream = ExtResource("11_dku5q")
+volume_db = 3.0
+
+[node name="AudioStreamPlayerHitLucky" type="AudioStreamPlayer" parent="." unique_id=2055643621]
+stream = ExtResource("12_p1oqw")
+volume_db = -3.0
 
 [connection signal="area_shape_entered" from="Area2D" to="." method="_on_area_2d_area_shape_entered"]
 [connection signal="timeout" from="IdleAnimationTimer" to="." method="_on_idle_animation_timer_timeout"]
-[connection signal="timeout" from="TakeDamageTimer" to="." method="_on_take_damage_timer_timeout"]
 [connection signal="timeout" from="RespawnTimer" to="." method="_on_respawn_timer_timeout"]
 [connection signal="timeout" from="FallTimer" to="." method="_on_fall_timer_timeout"]
 [connection signal="timeout" from="RestartTimer" to="." method="_on_restart_timer_timeout"]
 [connection signal="timeout" from="WalkTimer" to="." method="_on_walk_timer_timeout"]
+[connection signal="timeout" from="TakeDamageTimer" to="." method="_on_take_damage_timer_timeout"]
 [connection signal="timeout" from="MissDamageTimer" to="." method="_on_miss_damage_timer_timeout"]
+[connection signal="timeout" from="DealDamageTimer" to="." method="_on_deal_damage_timer_timeout"]
+[connection signal="timeout" from="DefendTimer" to="." method="_on_defend_timer_timeout"]

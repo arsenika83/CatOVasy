@@ -9,7 +9,14 @@ resource_local_to_scene = true
 shader = ExtResource("1_3qdcb")
 shader_parameter/speed = 2.000000095
 shader_parameter/amplitude = 10.000000475
-shader_parameter/time_offset = 0.4390000208525
+shader_parameter/time_offset = 0.0
+shader_parameter/flash_intensity = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7cc2x"]
+shader = ExtResource("1_3qdcb")
+shader_parameter/speed = 2.0
+shader_parameter/amplitude = 10.000000475
+shader_parameter/time_offset = 0.0
 shader_parameter/flash_intensity = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0qqw3"]
@@ -32,7 +39,7 @@ pivot_offset = Vector2(32, 48)
 script = ExtResource("2_7cc2x")
 
 [node name="BG2" type="TextureRect" parent="." unique_id=1690685854]
-use_parent_material = true
+material = SubResource("ShaderMaterial_7cc2x")
 layout_mode = 0
 offset_left = -8.0
 offset_top = -8.0

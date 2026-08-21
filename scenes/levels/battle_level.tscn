@@ -159,11 +159,11 @@ stream = ExtResource("11_q70wx")
 [node name="UI" type="CanvasLayer" parent="." unique_id=589757551]
 
 [node name="Paw" parent="UI" unique_id=2011487880 instance=ExtResource("13_8ync6")]
-anchors_preset = -1
-offset_left = 8.0
-offset_top = 448.0
-offset_right = -1112.0
-offset_bottom = -160.0
+anchors_preset = 2
+anchor_top = 1.0
+anchor_right = 0.0
+grow_horizontal = 1
+grow_vertical = 0
 
 [node name="CreatureDialog" parent="UI" unique_id=1641948652 instance=ExtResource("13_1o703")]
 visible = false
