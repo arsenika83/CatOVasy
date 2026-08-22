@@ -1,3 +1,6 @@
+CollisionShape2D
+CharacterBody2D
+Node2D
 SubViewportContainer
 Camera2D
 SubViewport
@@ -9,7 +12,3 @@ Button
 AnimatedSprite2D
 PointLight2D
 AudioStreamPlayer
-ColorRect
-HBoxContainer
-HFlowContainer
-PanelContainer

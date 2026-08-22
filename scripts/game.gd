@@ -5,29 +5,32 @@ var cursor_map_pos
 
 var turn_count = 0
 
+var creature_dialog_on_screen = false
+
 @onready var giant = $Giant
 @onready var map = $TileMapLayerBlack
 @onready var player_camera = $Giant/Camera2D
 @onready var cursor = $Cursor
 
 @onready var enemies = $Enemies
-@onready var audio = $AudioStreamPlayer
+@onready var audio = $AudioStreamPlayerMusic
 @onready var battle_start_timer = $BattleStartTimer
 
-@onready var health_bar = $UI/Container/HealthBar
-@onready var life1 = $UI/Container/HealthBar/Life1
-@onready var life2 = $UI/Container/HealthBar/Life2
-@onready var life3 = $UI/Container/HealthBar/Life3
-@onready var life4 = $UI/Container/HealthBar/Life4
-@onready var life5 = $UI/Container/HealthBar/Life5
+@onready var creature_check_dialog = $UI/CreatureAdventureDialog
 
 @onready var foregroundFX = $Effects/ColorRect
 
 const BATTLE_SCENE = preload("res://scenes/levels/battle_level.tscn")
 
 func _ready() -> void:
+	await get_tree().process_frame
+	audio.play(gm.current_music_position)
+	creature_check_dialog.visible = false
 	player_camera.zoom.x = gm.camera_zoom
 	player_camera.zoom.y = gm.camera_zoom
+	
+	for edge in find_child("Edges").get_children():
+		gm.current_level_edge_positions.append(edge.position)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -48,6 +51,16 @@ func _process(delta: float) -> void:
 		if Input.is_action_just_pressed("ui_lmb"):
 			move_to_map_pos()
 			giant.walk()
+			
+		if Input.is_action_pressed("ui_rmb"):
+			creature_dialog_on_screen = true
+			check_creature_stats() 
+		else:
+			if(creature_dialog_on_screen == true):
+				var tween = create_tween()
+				tween.tween_property(creature_check_dialog, "position:x", -500, 0.25)
+				cursor.visible = true
+				creature_dialog_on_screen = false	
 		
 	if Input.is_action_just_pressed("ui_scale_up") and gm.camera_zoom <= 3:
 		gm.camera_zoom += 1
@@ -136,42 +149,7 @@ func draw_cursor() -> void:
 		cursor.global_position = Vector2(giant.position.x - 32, giant.position.y - 32)
 	
 func check_hp() -> void:
-	if gm.hp == 5:
-		life5.visible = true
-		life4.visible = true
-		life3.visible = true
-		life2.visible = true
-		life1.visible = true
-	elif gm.hp == 4:
-		life5.visible = false
-		life4.visible = true
-		life3.visible = true
-		life2.visible = true
-		life1.visible = true
-	elif gm.hp == 3:
-		life5.visible = false
-		life4.visible = false
-		life3.visible = true
-		life2.visible = true
-		life1.visible = true
-	elif gm.hp == 2:
-		life5.visible = false
-		life4.visible = false
-		life3.visible = false
-		life2.visible = true
-		life1.visible = true
-	elif gm.hp == 1:
-		life5.visible = false
-		life4.visible = false
-		life3.visible = false
-		life2.visible = false
-		life1.visible = true
-	else:
-		life5.visible = false
-		life4.visible = false
-		life3.visible = false
-		life2.visible = false
-		life1.visible = false
+	pass
 
 func enemy_turn() -> void:
 	var g_pos = map.local_to_map(giant.position)
@@ -180,6 +158,45 @@ func enemy_turn() -> void:
 		var e_pos = map.local_to_map(enemy.position)
 		enemy.move(g_pos, e_pos)
 	
+func check_creature_stats() -> void:
+	var cursor_grid_pos = map.local_to_map(get_global_mouse_position())
+	var target_local_pos = map.map_to_local(cursor_grid_pos)
+	
+	var enemy_amount = 0
+	var total_xp = 0
+	var last_target : Enemy
+	
+	for i in range(0, find_child("Enemies").get_child_count()):
+		var target = find_child("Enemies").get_child(i)
+		
+		var e_map_pos = map.local_to_map(target.position)
+			
+		if e_map_pos.x == cursor_grid_pos.x and e_map_pos.y == cursor_grid_pos.y:
+				enemy_amount += 1
+				total_xp += target.xp_gives
+				last_target = target
+		else:
+			creature_check_dialog.visible = false
+			
+	if enemy_amount > 0:
+		cursor.visible = false
+		creature_check_dialog.position.x = -500
+		var tween = create_tween()
+		tween.tween_property(creature_check_dialog, "position:x", 40, 0.2)
+		
+		creature_check_dialog.find_child("SubViewportContainer").find_child("SubViewport").find_child("Camera2D").target_position = target_local_pos
+		creature_check_dialog.visible = true
+					
+		if enemy_amount > 1:
+			creature_check_dialog.find_child("NameLabel").text = "Отряд врагов"
+		else:			
+			creature_check_dialog.find_child("NameLabel").text = last_target.enemy_name_rus
+					
+		var stats = ""
+		stats += 	str("ОПЫТ ЗА ПОБЕДУ:     ", total_xp)
+		stats += 	str("\nКОЛИЧЕСТВО ВРАГОВ:  ", enemy_amount)
+		creature_check_dialog.find_child("StatsLabel").text = stats
+
 
 func start_battle() -> void:
 	if not find_child("BattleNode").find_child("Battle") or gm.state == "battle":
@@ -192,15 +209,19 @@ func end_battle() -> void:
 	gm.current_defence = gm.defence
 	gm.current_accuracy = gm.accuracy
 	gm.current_luck = gm.luck
-	#giant.position = gm.prev_pos
-	audio.play()
+
+	audio.play(gm.current_music_position)
 	$Effects.visible = true
 	$CanvasModulate.visible = true
 	player_camera.enabled = true
+	giant.light.enabled = true
 
 func _on_battle_start_timer_timeout() -> void:
 	gm.state = "battle"
 	gm.prev_state = gm.state
+	giant.light.enabled = false
+	gm.current_music_position = audio.get_playback_position()
+	
 	audio.stop()
 	player_camera.enabled = false
 	var battle = BATTLE_SCENE.instantiate()

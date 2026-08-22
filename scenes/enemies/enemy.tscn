@@ -12,6 +12,9 @@
 [ext_resource type="AudioStream" uid="uid://bclkaxhxamdmf" path="res://assets/soundFX/defend.wav" id="9_qch6t"]
 [ext_resource type="AudioStream" uid="uid://ceun5aaxxb0o7" path="res://assets/soundFX/debuff.wav" id="11_tihwb"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tihwb"]
+size = Vector2(32, 32)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_38ino"]
 radius = 3.0
 
@@ -39,15 +42,19 @@ region = Rect2(160, 0, 32, 32)
 atlas = ExtResource("1_6xk8f")
 region = Rect2(192, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_twn6s"]
+atlas = ExtResource("1_6xk8f")
+region = Rect2(0, 0, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_jt03m"]
 atlas = ExtResource("1_6xk8f")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8e3ao"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_p7w77"]
 atlas = ExtResource("1_6xk8f")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_38ino"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_k4gvh"]
 atlas = ExtResource("1_6xk8f")
 region = Rect2(32, 0, 32, 32)
 
@@ -83,6 +90,9 @@ animations = [{
 }, {
 "duration": 2.0,
 "texture": SubResource("AtlasTexture_tihwb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_twn6s")
 }],
 "loop": true,
 "name": &"deal_damage",
@@ -98,10 +108,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_8e3ao")
+"texture": SubResource("AtlasTexture_p7w77")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_38ino")
+"texture": SubResource("AtlasTexture_k4gvh")
 }],
 "loop": true,
 "name": &"idle",
@@ -119,8 +129,14 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_lu5c6"]
 radius = 1.0
 
-[node name="Enemy" type="Node2D" unique_id=772889915]
+[node name="Enemy" type="CharacterBody2D" unique_id=685663284]
+collision_layer = 2
+collision_mask = 128
 script = ExtResource("1_8e3ao")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=947260883]
+shape = SubResource("RectangleShape2D_tihwb")
+debug_color = Color(0.5357, 0.55, 0.3355, 0.08627451)
 
 [node name="Area2DXP" type="Area2D" parent="." unique_id=1374911131]
 collision_layer = 2
@@ -135,10 +151,11 @@ position = Vector2(0, -4)
 sprite_frames = SubResource("SpriteFrames_fcftc")
 animation = &"deal_damage"
 autoplay = "idle"
-frame_progress = 0.4484162
+frame_progress = 0.9329076
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1438211941]
 collision_layer = 2
+collision_mask = 129
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1565969177]
 shape = SubResource("CircleShape2D_lu5c6")
@@ -148,7 +165,7 @@ debug_color = Color(0.86404556, 0.3111131, 0.46711254, 0.41960785)
 visible = false
 
 [node name="StatusFX" parent="." unique_id=1192321709 instance=ExtResource("5_lu5c6")]
-modulate = Color(1, 1, 1, 0)
+visible = false
 
 [node name="AudioStreamPlayerHit" type="AudioStreamPlayer" parent="." unique_id=1483378938]
 stream = ExtResource("3_38ino")

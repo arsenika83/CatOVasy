@@ -36,34 +36,35 @@ use_parent_material = true
 layout_mode = 0
 offset_left = -8.0
 offset_top = -8.0
-offset_right = 136.0
-offset_bottom = 200.0
+offset_right = 120.0
+offset_bottom = 184.0
 texture = SubResource("AtlasTexture_0qqw3")
 
 [node name="BG" type="TextureRect" parent="." unique_id=1702750552]
 use_parent_material = true
 layout_mode = 0
-offset_right = 128.0
-offset_bottom = 192.0
+offset_right = 112.0
+offset_bottom = 176.0
 texture = SubResource("AtlasTexture_0qqw3")
 
 [node name="Icon" type="TextureRect" parent="." unique_id=1021453810]
 use_parent_material = true
 layout_mode = 0
-offset_right = 128.0
-offset_bottom = 128.0
+offset_right = 112.0
+offset_bottom = 112.0
 texture = SubResource("AtlasTexture_jl6rh")
 
 [node name="Label" type="Label" parent="." unique_id=514088983]
 use_parent_material = true
 layout_mode = 0
 offset_left = 8.0
-offset_top = 136.0
-offset_right = 120.0
-offset_bottom = 184.0
+offset_top = 112.0
+offset_right = 104.0
+offset_bottom = 168.0
 theme_override_font_sizes/font_size = 10
 text = "+1 УРОН"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

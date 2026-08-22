@@ -1,4 +1,4 @@
-class_name Enemy extends Node2D
+class_name Enemy extends CharacterBody2D
 
 @export var hp = 2
 @export var max_hp = 2
@@ -17,9 +17,9 @@ var current_accuracy = accuracy
 @export var luck = 15
 var current_luck = luck
 
-var energy = 2
+var energy = 1
 var current_energy = energy
-var max_energy = 2
+var max_energy = 1
 
 @export var xp_gives = 1
 
@@ -51,10 +51,10 @@ var battle_x = 0
 var battle_y = 0
 
 var current_target : Giant
-var attack_animation_time = 0.3
-var defend_animation_time = 0.3
-var debuff_animation_time = 0.3
-var buff_animation_time = 0.3
+var attack_animation_time = 0.8
+var defend_animation_time = 0.8
+var debuff_animation_time = 0.8
+var buff_animation_time =   0.8
 
 @onready var sprite = $AnimatedSprite2D
 @onready var area = $Area2D
@@ -95,6 +95,8 @@ func _process(delta: float) -> void:
 		"dead":
 			area_xp.monitoring = true
 			area.monitoring = false
+			
+	move_and_slide()
 
 func move(g_pos : Vector2, e_pos : Vector2) -> void:
 	if state == "idle":
@@ -107,19 +109,26 @@ func move(g_pos : Vector2, e_pos : Vector2) -> void:
 			status_fx.visible = false
 			
 			var next_step = Vector2(self.position.x + standard_move_path.get(step_count).x, self.position.y + standard_move_path.get(step_count).y)
-			if standard_move_path.get(step_count).x > 0:
-				sprite.flip_h = true
-			elif standard_move_path.get(step_count).x < 0:
-				sprite.flip_h = false
+			var allowed_to_move = true
+			
+			for edge_pos in gm.current_level_edge_positions:
+				if next_step.x == edge_pos.x and next_step.y == edge_pos.y:
+					allowed_to_move = false
+					break
+			
+			if allowed_to_move:
+				if standard_move_path.get(step_count).x > 0:
+					sprite.flip_h = true
+				elif standard_move_path.get(step_count).x < 0:
+					sprite.flip_h = false
+					
+				var tween = create_tween()
+				tween.tween_property(self, "position", next_step, 0.2)
 				
-			
-			var tween = create_tween()
-			tween.tween_property(self, "position", next_step, 0.2)
-			
 			step_count += 1
 			if step_count >= standard_move_path.size():
 				step_count = 0
-			
+				
 			return
 		
 		if (follow_step_count == follow_distance):
@@ -204,8 +213,7 @@ func deal_damage(target : Giant) -> void:
 		if luck_success:
 			status_fx.scale = Vector2(0, 0)
 			status_fx.play("lucky")
-			var tween1 = create_tween()
-			tween1.tween_property(status_fx, "modulate:a", 1.0, 0.1)
+			status_fx.visible = true
 			
 			var tween = create_tween()
 			tween.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
@@ -235,8 +243,7 @@ func take_damage(dmg : int, time : float) -> void:
 		if defended:
 			audio_defend.play()
 			status_fx.play("defended")
-			var tween1 = create_tween()
-			tween1.tween_property(status_fx, "modulate:a", 1.0, 0.1)
+			status_fx.visible = true
 			
 			var tween = create_tween()
 			tween.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
@@ -246,7 +253,7 @@ func take_damage(dmg : int, time : float) -> void:
 			audio_miss.play()
 		miss_damage_timer.start(time)
 		
-func defend(time : float) -> void:
+func defend() -> void:
 	current_defence += defence
 	
 	if current_defence > max_defence:
@@ -254,24 +261,22 @@ func defend(time : float) -> void:
 	
 	status_fx.scale = Vector2(0, 0)
 	status_fx.play("defend")
-	var tween1 = create_tween()
-	tween1.tween_property(status_fx, "modulate:a", 1.0, 0.1)
+	status_fx.visible = true
 	
 	var tween = create_tween()
 	tween.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
 	
 	if damage > 0:
-		defend_timer.start(time)
+		defend_timer.start(defend_animation_time)
 	else:
-		defend_timer.start(time)
+		defend_timer.start(defend_animation_time)
 		
 func give_debuff(target : Giant, type : String, power : int, turns : int) -> void:
 	
 	current_target = target
 	status_fx.scale = Vector2(0, 0)
 	status_fx.play("debuff")
-	var tween1 = create_tween()
-	tween1.tween_property(status_fx, "modulate:a", 1.0, 0.1)
+	status_fx.visible = true
 	var tween = create_tween()
 	tween.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
 	current_target.status_fx.play("debuff_" + type)
@@ -305,11 +310,9 @@ func give_debuff(target : Giant, type : String, power : int, turns : int) -> voi
 			if gm.energy <= 0:
 				gm.energy  = 0
 	
-	var tween2 = create_tween()
-	tween2.tween_property(current_target.status_fx, "modulate:a", 1.0, 0.1)		
+	status_fx.visible = true
 	var tween3 = create_tween()
-	tween3.tween_property(current_target.status_fx, "scale", Vector2(1, 1), 0.2)	
-	debuff_timer.start(gm.debuff_animation_time)	
+	tween3.tween_property(current_target.status_fx, "scale", Vector2(1, 1), 0.2)
 	
 	debuff_timer.start(debuff_animation_time)
 
@@ -318,8 +321,7 @@ func after_battle_update() -> void:
 		"dead":
 			xp_orb.material.set_shader_parameter("time_offset", position.x)
 			xp_orb.visible = true
-			var tween = create_tween()
-			tween.tween_property(status_fx, "modulate:a", 0.0, 0.1)
+			status_fx.visible = false
 			sprite.play("dead")
 
 func _on_idle_animation_timer_timeout() -> void:

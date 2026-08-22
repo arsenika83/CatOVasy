@@ -4,17 +4,17 @@
 [ext_resource type="Script" uid="uid://dws0dtqq3i1mi" path="res://scripts/game.gd" id="1_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://d0d5e8ltlrwqg" path="res://scenes/giant.tscn" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://4itbl0ejcd3o" path="res://assets/tilemap.png" id="1_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://b7p1hqo3g0pln" path="res://scenes/stairs_up.tscn" id="4_3asx1"]
 [ext_resource type="PackedScene" uid="uid://ba7f54d4yq2hp" path="res://scenes/cursor.tscn" id="4_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://bp10kb8rxtuhx" path="res://scenes/stairs.tscn" id="5_iywne"]
 [ext_resource type="PackedScene" uid="uid://1by6pkucltci" path="res://scenes/grass.tscn" id="6_p57ef"]
 [ext_resource type="PackedScene" uid="uid://b8bfs4u1x4s8" path="res://scenes/grass_low.tscn" id="7_d3ub6"]
 [ext_resource type="PackedScene" uid="uid://bsxo600wchpra" path="res://scenes/pillow.tscn" id="9_7s2gi"]
 [ext_resource type="PackedScene" uid="uid://c7f16y8rwf2q" path="res://scenes/edge_one.tscn" id="10_m6lg1"]
-[ext_resource type="PackedScene" uid="uid://dak3nh0u2ipui" path="res://scenes/edge.tscn" id="10_vtaks"]
 [ext_resource type="Shader" uid="uid://dm6djrn7pct8b" path="res://shaders/wobble.gdshader" id="11_fj52k"]
-[ext_resource type="PackedScene" uid="uid://b6uegwyneupbc" path="res://scenes/life.tscn" id="13_fj52k"]
-[ext_resource type="AudioStream" uid="uid://hjme44vtv27a" path="res://assets/music/Main_Theme.mp3" id="14_1t5oo"]
 [ext_resource type="PackedScene" uid="uid://1bvjmpy2pf0k" path="res://scenes/enemies/enemy.tscn" id="14_m6lg1"]
+[ext_resource type="AudioStream" uid="uid://bx1d746w8sbiy" path="res://assets/music/ZONE_1.wav" id="15_3asx1"]
+[ext_resource type="PackedScene" uid="uid://di4k2iivrnhup" path="res://scenes/creature_adventure_dialog.tscn" id="15_m6lg1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fj52k"]
 shader = ExtResource("1_7s2gi")
@@ -105,16 +105,22 @@ tile_set = SubResource("TileSet_a7tdr")
 
 [node name="Exits" type="Node2D" parent="." unique_id=1303112674]
 
-[node name="Stairs" parent="Exits" unique_id=175082881 instance=ExtResource("5_iywne")]
+[node name="Stairs2" parent="Exits" unique_id=175082881 instance=ExtResource("4_3asx1")]
+position = Vector2(176, 16)
+room_number = -1
+
+[node name="Stairs" parent="Exits" unique_id=1448595182 instance=ExtResource("5_iywne")]
 position = Vector2(144, 208)
 
 [node name="Objects" type="Node2D" parent="." unique_id=1714322502]
 position = Vector2(208, 80)
 
 [node name="Pillow" parent="Objects" unique_id=564725004 instance=ExtResource("9_7s2gi")]
+charge_count = 1
+heal_power = 5
 
 [node name="Giant" parent="." unique_id=2060885226 instance=ExtResource("1_uwrxv")]
-position = Vector2(144, 80)
+position = Vector2(176, 48)
 
 [node name="Camera2D" type="Camera2D" parent="Giant" unique_id=1303825275]
 zoom = Vector2(2, 2)
@@ -128,7 +134,7 @@ rotation_smoothing_speed = 3.0
 position = Vector2(144, 144)
 
 [node name="Enemy2" parent="Enemies" unique_id=2106804459 instance=ExtResource("14_m6lg1")]
-position = Vector2(240, 208)
+position = Vector2(80, 16)
 
 [node name="Enemy3" parent="Enemies" unique_id=956625573 instance=ExtResource("14_m6lg1")]
 position = Vector2(144, 144)
@@ -170,41 +176,125 @@ position = Vector2(272, 48)
 [node name="EdgeOne" parent="Edges" unique_id=433375762 instance=ExtResource("10_m6lg1")]
 position = Vector2(272, 176)
 
-[node name="Edge5" parent="Edges" unique_id=1880336353 instance=ExtResource("10_vtaks")]
-position = Vector2(32, -16)
-rotation = 1.5707964
+[node name="EdgeOne2" parent="Edges" unique_id=1430481290 instance=ExtResource("10_m6lg1")]
+position = Vector2(336, 208)
 
-[node name="Edge3" parent="Edges" unique_id=307081349 instance=ExtResource("10_vtaks")]
-position = Vector2(-16, 64)
+[node name="EdgeOne3" parent="Edges" unique_id=1298315878 instance=ExtResource("10_m6lg1")]
+position = Vector2(336, 176)
 
-[node name="Edge2" parent="Edges" unique_id=2101519550 instance=ExtResource("10_vtaks")]
-position = Vector2(336, 192)
+[node name="EdgeOne4" parent="Edges" unique_id=1963093859 instance=ExtResource("10_m6lg1")]
+position = Vector2(336, 144)
 
-[node name="Edge" parent="Edges" unique_id=1467130881 instance=ExtResource("10_vtaks")]
-position = Vector2(336, 64)
+[node name="EdgeOne5" parent="Edges" unique_id=1887831300 instance=ExtResource("10_m6lg1")]
+position = Vector2(336, 112)
 
-[node name="Edge4" parent="Edges" unique_id=1859388898 instance=ExtResource("10_vtaks")]
-position = Vector2(-16, 192)
+[node name="EdgeOne6" parent="Edges" unique_id=312200138 instance=ExtResource("10_m6lg1")]
+position = Vector2(336, 80)
 
-[node name="Edge6" parent="Edges" unique_id=1031910063 instance=ExtResource("10_vtaks")]
-position = Vector2(160, -16)
-rotation = 1.5707964
+[node name="EdgeOne7" parent="Edges" unique_id=221046357 instance=ExtResource("10_m6lg1")]
+position = Vector2(336, 48)
 
-[node name="Edge7" parent="Edges" unique_id=1614814094 instance=ExtResource("10_vtaks")]
-position = Vector2(288, -16)
-rotation = 1.5707964
+[node name="EdgeOne8" parent="Edges" unique_id=614713258 instance=ExtResource("10_m6lg1")]
+position = Vector2(336, 16)
 
-[node name="Edge8" parent="Edges" unique_id=849310481 instance=ExtResource("10_vtaks")]
-position = Vector2(32, 272)
-rotation = 1.5707964
+[node name="EdgeOne9" parent="Edges" unique_id=700030298 instance=ExtResource("10_m6lg1")]
+position = Vector2(336, -16)
 
-[node name="Edge9" parent="Edges" unique_id=871646420 instance=ExtResource("10_vtaks")]
-position = Vector2(160, 272)
-rotation = 1.5707964
+[node name="EdgeOne10" parent="Edges" unique_id=892660015 instance=ExtResource("10_m6lg1")]
+position = Vector2(304, -16)
 
-[node name="Edge10" parent="Edges" unique_id=1943221598 instance=ExtResource("10_vtaks")]
-position = Vector2(288, 272)
-rotation = 1.5707964
+[node name="EdgeOne11" parent="Edges" unique_id=851415900 instance=ExtResource("10_m6lg1")]
+position = Vector2(272, -16)
+
+[node name="EdgeOne12" parent="Edges" unique_id=2017897262 instance=ExtResource("10_m6lg1")]
+position = Vector2(240, -16)
+
+[node name="EdgeOne13" parent="Edges" unique_id=61537299 instance=ExtResource("10_m6lg1")]
+position = Vector2(208, -16)
+
+[node name="EdgeOne14" parent="Edges" unique_id=611330096 instance=ExtResource("10_m6lg1")]
+position = Vector2(176, -16)
+
+[node name="EdgeOne15" parent="Edges" unique_id=906106574 instance=ExtResource("10_m6lg1")]
+position = Vector2(144, -16)
+
+[node name="EdgeOne16" parent="Edges" unique_id=428905170 instance=ExtResource("10_m6lg1")]
+position = Vector2(112, -16)
+
+[node name="EdgeOne17" parent="Edges" unique_id=1723005909 instance=ExtResource("10_m6lg1")]
+position = Vector2(80, -16)
+
+[node name="EdgeOne18" parent="Edges" unique_id=426417526 instance=ExtResource("10_m6lg1")]
+position = Vector2(48, -16)
+
+[node name="EdgeOne19" parent="Edges" unique_id=2113583702 instance=ExtResource("10_m6lg1")]
+position = Vector2(16, -16)
+
+[node name="EdgeOne20" parent="Edges" unique_id=1816631634 instance=ExtResource("10_m6lg1")]
+position = Vector2(-16, -16)
+
+[node name="EdgeOne21" parent="Edges" unique_id=85925192 instance=ExtResource("10_m6lg1")]
+position = Vector2(-16, 16)
+
+[node name="EdgeOne22" parent="Edges" unique_id=556521283 instance=ExtResource("10_m6lg1")]
+position = Vector2(-16, 48)
+
+[node name="EdgeOne23" parent="Edges" unique_id=231793366 instance=ExtResource("10_m6lg1")]
+position = Vector2(-16, 80)
+
+[node name="EdgeOne24" parent="Edges" unique_id=1359169798 instance=ExtResource("10_m6lg1")]
+position = Vector2(-16, 112)
+
+[node name="EdgeOne25" parent="Edges" unique_id=1928521320 instance=ExtResource("10_m6lg1")]
+position = Vector2(-16, 144)
+
+[node name="EdgeOne26" parent="Edges" unique_id=446823847 instance=ExtResource("10_m6lg1")]
+position = Vector2(-16, 176)
+
+[node name="EdgeOne27" parent="Edges" unique_id=590613362 instance=ExtResource("10_m6lg1")]
+position = Vector2(-16, 208)
+
+[node name="EdgeOne28" parent="Edges" unique_id=1462285830 instance=ExtResource("10_m6lg1")]
+position = Vector2(-16, 240)
+
+[node name="EdgeOne29" parent="Edges" unique_id=129723947 instance=ExtResource("10_m6lg1")]
+position = Vector2(-16, 272)
+
+[node name="EdgeOne30" parent="Edges" unique_id=2135245273 instance=ExtResource("10_m6lg1")]
+position = Vector2(16, 272)
+
+[node name="EdgeOne31" parent="Edges" unique_id=891138195 instance=ExtResource("10_m6lg1")]
+position = Vector2(48, 272)
+
+[node name="EdgeOne32" parent="Edges" unique_id=1431559422 instance=ExtResource("10_m6lg1")]
+position = Vector2(80, 272)
+
+[node name="EdgeOne33" parent="Edges" unique_id=1050131666 instance=ExtResource("10_m6lg1")]
+position = Vector2(112, 272)
+
+[node name="EdgeOne34" parent="Edges" unique_id=367813835 instance=ExtResource("10_m6lg1")]
+position = Vector2(144, 272)
+
+[node name="EdgeOne35" parent="Edges" unique_id=1103872624 instance=ExtResource("10_m6lg1")]
+position = Vector2(176, 272)
+
+[node name="EdgeOne36" parent="Edges" unique_id=587972391 instance=ExtResource("10_m6lg1")]
+position = Vector2(208, 272)
+
+[node name="EdgeOne37" parent="Edges" unique_id=58425644 instance=ExtResource("10_m6lg1")]
+position = Vector2(240, 272)
+
+[node name="EdgeOne38" parent="Edges" unique_id=779559744 instance=ExtResource("10_m6lg1")]
+position = Vector2(272, 272)
+
+[node name="EdgeOne39" parent="Edges" unique_id=388074798 instance=ExtResource("10_m6lg1")]
+position = Vector2(304, 272)
+
+[node name="EdgeOne40" parent="Edges" unique_id=2038105317 instance=ExtResource("10_m6lg1")]
+position = Vector2(336, 272)
+
+[node name="EdgeOne41" parent="Edges" unique_id=1617364559 instance=ExtResource("10_m6lg1")]
+position = Vector2(336, 240)
 
 [node name="Cursor" parent="." unique_id=2051460958 instance=ExtResource("4_lbhrr")]
 position = Vector2(608, -16)
@@ -221,9 +311,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=179520262]
-stream = ExtResource("14_1t5oo")
-autoplay = true
+[node name="AudioStreamPlayerMusic" type="AudioStreamPlayer" parent="." unique_id=179520262]
+stream = ExtResource("15_3asx1")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1236012575]
 modulate = Color(1, 1, 1, 0.5019608)
@@ -231,33 +320,12 @@ self_modulate = Color(1, 1, 1, 0.9411765)
 color = Color(0, 0, 0, 1)
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=589757551]
+
+[node name="CreatureAdventureDialog" parent="UI" unique_id=1641948652 instance=ExtResource("15_m6lg1")]
 visible = false
-
-[node name="Container" type="MarginContainer" parent="UI" unique_id=1199761550]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HealthBar" type="HFlowContainer" parent="UI/Container" unique_id=1043038026]
-layout_direction = 2
-layout_mode = 2
-
-[node name="Life1" parent="UI/Container/HealthBar" unique_id=1345125488 instance=ExtResource("13_fj52k")]
-layout_mode = 2
-
-[node name="Life2" parent="UI/Container/HealthBar" unique_id=205922488 instance=ExtResource("13_fj52k")]
-layout_mode = 2
-
-[node name="Life3" parent="UI/Container/HealthBar" unique_id=691881893 instance=ExtResource("13_fj52k")]
-layout_mode = 2
-
-[node name="Life4" parent="UI/Container/HealthBar" unique_id=70920885 instance=ExtResource("13_fj52k")]
-layout_mode = 2
-
-[node name="Life5" parent="UI/Container/HealthBar" unique_id=1113662455 instance=ExtResource("13_fj52k")]
-layout_mode = 2
+z_index = 10
+offset_top = 7.8399963
+offset_bottom = 359.84
 
 [node name="BattleStartTimer" type="Timer" parent="." unique_id=1709292871]
 wait_time = 0.5

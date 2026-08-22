@@ -7,7 +7,7 @@ load_path = "res://.godot/imported/tilemap.png-5e61b4f08267e3455a4ee95d454c23fa.
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f30dh"]
 atlas = SubResource("CompressedTexture2D_3klq8")
-region = Rect2(0, 32, 32, 32)
+region = Rect2(0, 64, 32, 32)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tpqne"]
 radius = 1.0

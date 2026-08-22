@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://b7p1hqo3g0pln"]
+
+[ext_resource type="Script" uid="uid://bexbvnke2yt8w" path="res://scripts/stairs.gd" id="1_cggng"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3klq8"]
+load_path = "res://.godot/imported/tilemap.png-5e61b4f08267e3455a4ee95d454c23fa.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f30dh"]
+atlas = SubResource("CompressedTexture2D_3klq8")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tpqne"]
+radius = 1.0
+
+[node name="Stairs" type="Node2D" unique_id=175082881]
+script = ExtResource("1_cggng")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=376259947]
+texture = SubResource("AtlasTexture_f30dh")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1849586179]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=891029772]
+shape = SubResource("CircleShape2D_tpqne")
+debug_color = Color(0.7827523, 0.3974081, 0.47944582, 0.41960785)
+
+[node name="Timer" type="Timer" parent="." unique_id=98938748]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

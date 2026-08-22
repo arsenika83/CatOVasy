@@ -22,7 +22,9 @@ var defeated = false
 var current_selected_card: Control = null
 var current_creature_turn = -1
 
-var enemy_positions : Array[Vector2] = [Vector2(208, 112), Vector2(208, 144), Vector2(208, 80), Vector2(240, 112), Vector2(240, 144), Vector2(240, 80)]
+var enemy_positions : Array[Vector2] = [Vector2(208, 112), Vector2(208, 144), Vector2(208, 80), \
+Vector2(240, 112), Vector2(240, 144), Vector2(240, 80), \
+Vector2(208, 176), Vector2(208, 48), Vector2(240, 176), Vector2(240, 48)]
 var current_enemies : Array
 
 func _ready() -> void:
@@ -57,6 +59,7 @@ func _process(delta: float) -> void:
 		if(creature_dialog_on_screen == true):
 			var tween = create_tween()
 			tween.tween_property(creature_check_dialog, "position:x", -500, 0.25)
+			cursor.visible = true
 		creature_dialog_on_screen = false
 		
 	if Input.is_action_just_pressed("ui_lmb"):
@@ -148,8 +151,7 @@ func enemy_turn() -> void:
 			"deal_damage":
 				source.deal_damage(giant)
 			"defend":
-				var defend_duration : float = 0.4
-				source.defend(defend_duration)
+				source.defend()
 			"debuff":
 				var type_number = randi_range(0, source.debuff_set.size()-1)
 				var type = source.debuff_set.get(type_number).get(0)
@@ -201,6 +203,8 @@ func check_creature_stats() -> void:
 	creature_check_dialog.debuff_low_energy.visible = false
 	
 	if (gm.battle_x == cursor_grid_pos.x and gm.battle_y == cursor_grid_pos.y):
+		cursor.visible = false
+		
 		creature_check_dialog.position.x = -500
 		creature_check_dialog.find_child("SubViewportContainer").find_child("SubViewport").find_child("Camera2D").target_position = target_local_pos
 		var tween = create_tween()
@@ -237,6 +241,8 @@ func check_creature_stats() -> void:
 			var target = find_child("Enemies").get_child(i)
 			
 			if (target.battle_x == cursor_grid_pos.x and target.battle_y == cursor_grid_pos.y):
+					cursor.visible = false
+				
 					creature_check_dialog.position.x = -500
 					var tween = create_tween()
 					tween.tween_property(creature_check_dialog, "position:x", 40, 0.2)

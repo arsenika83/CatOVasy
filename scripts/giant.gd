@@ -39,8 +39,10 @@ func _process(delta: float) -> void:
 			sprite.play("idle")
 		"walking":
 			if Input.is_action_just_pressed("ui_lmb"):
-				audio_meow.pitch_scale = randf_range(0.7, 1.3)
-				audio_meow.play()		
+				var do_meow = randf_range(0.0, 1.0) <= 0.2
+				if do_meow:
+					audio_meow.pitch_scale = randf_range(0.7, 0.9)
+					audio_meow.play()
 		"resting":
 			sprite.play("resting")
 		"falling":
@@ -101,7 +103,7 @@ func deal_damage(target : Enemy) -> void:
 			status_fx.scale = Vector2(0, 0)
 			status_fx.play("lucky")
 			var tween1 = create_tween()
-			tween1.tween_property(status_fx, "modulate:a", 1.0, 0.1)
+			status_fx.visible = true
 			
 			var tween = create_tween()
 			tween.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
@@ -152,8 +154,7 @@ func defend(time : float) -> void:
 	
 	status_fx.scale = Vector2(0, 0)
 	status_fx.play("defend")
-	var tween1 = create_tween()
-	tween1.tween_property(status_fx, "modulate:a", 1.0, 0.1)
+	status_fx.visible = true
 	
 	var tween2 = create_tween()
 	tween2.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)

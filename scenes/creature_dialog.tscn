@@ -49,11 +49,11 @@ region = Rect2(32, 144, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yatuc"]
 atlas = ExtResource("4_j5lms")
-region = Rect2(0, 160, 16, 16)
+region = Rect2(0, 192, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yhyxs"]
 atlas = ExtResource("4_j5lms")
-region = Rect2(16, 160, 16, 16)
+region = Rect2(16, 192, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0tj0i"]
 atlas = ExtResource("4_j5lms")
@@ -286,6 +286,7 @@ offset_bottom = 80.0
 texture = SubResource("AtlasTexture_qymbb")
 
 [node name="TextureDebuff5" type="TextureRect" parent="Debuffs" unique_id=283308411]
+visible = false
 use_parent_material = true
 layout_mode = 0
 offset_left = 48.0
@@ -390,5 +391,5 @@ script = ExtResource("5_epww1")
 
 [node name="Camera2D" type="Camera2D" parent="SubViewportContainer/SubViewport" unique_id=508200117]
 z_index = 100
-zoom = Vector2(3, 3)
+zoom = Vector2(2.5, 2.5)
 script = ExtResource("5_0tj0i")
