@@ -13,6 +13,7 @@
 [ext_resource type="FontFile" uid="uid://dub3oi8dxfpfw" path="res://assets/fonts/JeuDePixel-Regular.otf" id="12_q70wx"]
 [ext_resource type="PackedScene" uid="uid://b7oix76heqs28" path="res://scenes/creature_dialog.tscn" id="13_1o703"]
 [ext_resource type="PackedScene" uid="uid://bjjafdg4et4p0" path="res://scenes/cards/paw.tscn" id="13_8ync6"]
+[ext_resource type="PackedScene" uid="uid://gxdo1p5x4a6b" path="res://scenes/energy.tscn" id="14_8ync6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fj52k"]
 shader = ExtResource("2_y3fis")
@@ -166,11 +167,9 @@ grow_horizontal = 1
 grow_vertical = 0
 
 [node name="CreatureDialog" parent="UI" unique_id=1641948652 instance=ExtResource("13_1o703")]
-visible = false
 offset_left = -64.0
 offset_top = -64.16
 offset_right = 192.0
-offset_bottom = 191.84
 
 [node name="CardContainer" parent="UI" unique_id=515924417 instance=ExtResource("10_ou0n0")]
 anchors_preset = 2
@@ -196,5 +195,18 @@ grow_vertical = 0
 theme_override_fonts/font = ExtResource("12_q70wx")
 disabled = true
 text = "ЗАВЕРШИТЬ"
+
+[node name="Energy" parent="UI" unique_id=601039846 instance=ExtResource("14_8ync6")]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -232.0
+offset_top = -160.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 0
 
 [connection signal="pressed" from="UI/EndBattleButton" to="." method="_on_end_battle_button_pressed"]

@@ -1,5 +1,5 @@
 res://default_env.tres
-res://scenes/enemies/enemy.tscn
+res://scenes/creature_dialog.tscn
 res://shaders/vhs.gdshader
 res://shaders/updown.gdshader
 res://shaders/wobble.gdshader
@@ -7,15 +7,12 @@ res://shaders/grass.gdshader
 res://shaders/foregroundFX.gdshader
 res://shaders/buckshot.gdshader
 res://scripts/battle.gd
+res://scripts/enemy.gd
+res://scenes/enemies/enemy.tscn
 res://scripts/giant.gd
 res://scripts/gm.gd
 res://scenes/giant.tscn
-res://scripts/enemy.gd
-res://scenes/cards/card.tscn
-res://scripts/card.gd
-res://scripts/card_container.gd
-res://scenes/cards/attack_card.tscn
-res://scenes/cards/paw.tscn
-res://scenes/levels/battle_level.tscn
-res://scripts/game.gd
 res://scenes/fx/status_fx.tscn
+res://scripts/creature_dialog.gd
+res://scenes/energy.tscn
+res://scripts/energy.gd

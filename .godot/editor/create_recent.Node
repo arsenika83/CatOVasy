@@ -1,5 +1,8 @@
-TextureRect
+SubViewportContainer
+Camera2D
+SubViewport
 Control
+TextureRect
 Label
 Timer
 Button
@@ -10,5 +13,3 @@ ColorRect
 HBoxContainer
 HFlowContainer
 PanelContainer
-Node2D
-CenterContainer

@@ -20,12 +20,16 @@ var current_defence = 0
 var max_defence = 5
 var defended = false
 
+var speed = 100
+var current_speed = speed
+
 var accuracy = 80
 var current_accuracy = accuracy
 var luck = 10
 var current_luck = luck
 
 var energy = 2
+var current_energy = energy
 var max_energy = 2
 
 var xp = 0
@@ -36,7 +40,18 @@ var current_target : Enemy
 var current_cards: Array[Card]
 var current_enemies : Array
 
+var debuff_set : Array = [["weakness", 1, 1], ["undefend", 100, 1], ["inaccuracy", 10, 1], ["unluck", 5, 1], ["low_energy", 1, 1]]
+
 var attack_animation_time = 0.3
+var defend_animation_time = 0.3
+var debuff_animation_time = 0.3
+var buff_animation_time = 0.3
+
+var has_debuff_unluck = false
+var has_debuff_inaccuracy = false
+var has_debuff_weakness = false
+var has_debuff_undefend = false
+var has_debuff_low_energy = false
 
 func _ready() -> void:
 	current_cards.append(AttackCard.new())

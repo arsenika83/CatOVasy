@@ -11,11 +11,15 @@ var current_defence = 0
 @export var max_defence = 3
 var defended = false
 
-@export var accuracy = 100
+@export var accuracy = 60
 var current_accuracy = accuracy
 
 @export var luck = 15
 var current_luck = luck
+
+var energy = 2
+var current_energy = energy
+var max_energy = 2
 
 @export var xp_gives = 1
 
@@ -32,6 +36,13 @@ var standard_move_path : Array[Vector2] = [Vector2(-32, 0), Vector2(0, -32), Vec
 @export var step_count = 0
 
 var move_set : Array = ["deal_damage", "defend", "debuff"]
+var debuff_set : Array = [["weakness", 1, 1], ["undefend", 100, 1], ["inaccuracy", 10, 1], ["unluck", 5, 1], ["low_energy", 1, 1]]
+
+var has_debuff_unluck = false
+var has_debuff_inaccuracy = false
+var has_debuff_weakness = false
+var has_debuff_undefend = false
+var has_debuff_low_energy = false
 
 var follow_step_count = 0
 var follow_distance = 5
@@ -41,6 +52,9 @@ var battle_y = 0
 
 var current_target : Giant
 var attack_animation_time = 0.3
+var defend_animation_time = 0.3
+var debuff_animation_time = 0.3
+var buff_animation_time = 0.3
 
 @onready var sprite = $AnimatedSprite2D
 @onready var area = $Area2D
@@ -52,12 +66,14 @@ var attack_animation_time = 0.3
 @onready var audio_fall = $AudioStreamPlayerFall
 @onready var audio_miss = $AudioStreamPlayerMiss
 @onready var audio_defend = $AudioStreamPlayerDefend
+@onready var audio_debuff = $AudioStreamPlayerDebuff
 
 @onready var idle_animation_timer = $IdleAnimationTimer
 @onready var deal_damage_timer = $DealDamageTimer
 @onready var take_damage_timer = $TakeDamageTimer
 @onready var miss_damage_timer = $MissDamageTimer
 @onready var defend_timer = $DefendTimer
+@onready var debuff_timer = $DebuffTimer
 
 @onready var xp_orb = $XpOrb
 @onready var status_fx = $StatusFX
@@ -148,14 +164,10 @@ func move(g_pos : Vector2, e_pos : Vector2) -> void:
 
 func check_giant_position(g_pos : Vector2, e_pos : Vector2) -> void:
 	if state == "idle":
-		print("CHECK 1")
 		var diff_x = g_pos.x - e_pos.x
-		print(str("diff_x ", diff_x))
 		var diff_y = g_pos.y - e_pos.y
-		print(str("diff_y ", diff_y))
 		
 		if (abs(diff_x) <= follow_radius) and (abs(diff_y) <= follow_radius):
-			print("CHECK 2")
 			var tween = create_tween()
 			tween.tween_property(status_fx, "modulate:a", 1.0, 0.2)
 			status_fx.play("found_you")
@@ -212,14 +224,12 @@ func take_damage(dmg : int, time : float) -> void:
 		if dmg > 0:
 			defended = true
 		dmg = 0
-		
 	else:
 		dmg -= current_defence
 		current_defence = 0
-		
-	hp -= dmg
 	
 	if dmg > 0:
+		hp -= dmg
 		take_damage_timer.start(time)
 	else:
 		if defended:
@@ -255,21 +265,53 @@ func defend(time : float) -> void:
 	else:
 		defend_timer.start(time)
 		
-func give_debuff() -> void:
-	current_defence += defence
+func give_debuff(target : Giant, type : String, power : int, turns : int) -> void:
 	
-	if current_defence > max_defence:
-		current_defence = max_defence
-	
+	current_target = target
 	status_fx.scale = Vector2(0, 0)
 	status_fx.play("debuff")
 	var tween1 = create_tween()
 	tween1.tween_property(status_fx, "modulate:a", 1.0, 0.1)
 	var tween = create_tween()
 	tween.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
+	current_target.status_fx.play("debuff_" + type)
 	
-	gm.current_luck -= 5
-	get_parent().get_parent().end_turn()
+	match type:
+		"weakness":
+			gm.has_debuff_weakness = true
+			
+			gm.current_damage -= power
+			if gm.current_damage <= 0:
+				gm.current_damage = 0
+		"undefend":
+			gm.has_debuff_undefend = true
+			
+			gm.current_defence -= power
+			if gm.current_defence <= 0:
+				gm.current_defence = 0
+		"inaccuracy":
+			gm.has_debuff_inaccuracy = true
+			gm.current_accuracy -= power
+			if gm.current_accuracy <= 10:
+				gm.current_accuracy = 10
+		"unluck":
+			gm.has_debuff_unluck = true
+			gm.current_luck -= power
+			if gm.current_luck <= -100:
+				gm.current_luck  = -100
+		"low_energy":
+			gm.has_debuff_low_energy = true
+			gm.energy -= power
+			if gm.energy <= 0:
+				gm.energy  = 0
+	
+	var tween2 = create_tween()
+	tween2.tween_property(current_target.status_fx, "modulate:a", 1.0, 0.1)		
+	var tween3 = create_tween()
+	tween3.tween_property(current_target.status_fx, "scale", Vector2(1, 1), 0.2)	
+	debuff_timer.start(gm.debuff_animation_time)	
+	
+	debuff_timer.start(debuff_animation_time)
 
 func after_battle_update() -> void:
 	match state:
@@ -324,3 +366,11 @@ func _on_deal_damage_timer_timeout() -> void:
 	
 	current_target.take_damage(current_damage, attack_animation_time)
 	idle_animation_timer.start(0.2)
+
+func _on_debuff_timer_timeout() -> void:
+	var tween = create_tween()
+	tween.tween_property(status_fx, "scale", Vector2(0, 0), 0.2)
+	var tween1 = create_tween()
+	tween1.tween_property(current_target.status_fx, "scale", Vector2(0, 0), 0.2)
+	
+	get_parent().get_parent().end_turn()

@@ -12,6 +12,7 @@ class_name Giant extends CharacterBody2D
 @onready var miss_damage_timer = $MissDamageTimer
 @onready var idle_animation_timer = $IdleAnimationTimer
 @onready var defend_timer = $DefendTimer
+@onready var debuff_timer = $DebuffTimer
 
 @onready var audio_meow = $AudioStreamPlayerMeow
 @onready var audio_fall = $AudioStreamPlayerFall
@@ -20,17 +21,15 @@ class_name Giant extends CharacterBody2D
 @onready var audio_defend = $AudioStreamPlayerDefend
 @onready var audio_hit = $AudioStreamPlayerHit
 @onready var audio_hit_lucky = $AudioStreamPlayerHitLucky
+@onready var audio_debuff = $AudioStreamPlayerDebuff
 
 @onready var light = $PointLight2D
 
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	scale = Vector2(0, 0)
 	spawn()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	check_fall(delta)
 	check_hp()
@@ -164,6 +163,52 @@ func defend(time : float) -> void:
 	else:
 		defend_timer.start(time)
 
+func give_debuff(target : Enemy, type : String, power : int, turns : int) -> void:
+	status_fx.scale = Vector2(0, 0)
+	status_fx.play("debuff")
+	var tween1 = create_tween()
+	tween1.tween_property(status_fx, "modulate:a", 1.0, 0.1)
+	var tween = create_tween()
+	tween.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
+	gm.current_target = target
+	
+	gm.current_target.status_fx.play("debuff_" + type)
+	
+	match type:
+		"weakness":
+			gm.current_target.has_debuff_weakness = true
+			
+			gm.current_target.current_damage -= power
+			if gm.current_target.current_damage <= 0:
+				gm.current_target.current_damage = 0
+		"undefend":
+			gm.current_target.has_debuff_undefend = true
+			
+			gm.current_target.current_defence -= power
+			if gm.current_target.current_defence <= 0:
+				gm.current_target.current_defence = 0
+		"inaccuracy":
+			gm.current_target.has_debuff_inaccuracy = true
+			gm.current_target.current_accuracy -= power
+			if gm.current_target.current_accuracy  <= 10:
+				gm.current_target.current_accuracy  = 10
+		"unluck":
+			gm.current_target.has_debuff_unluck = true
+			gm.current_target.current_luck -= power
+			if gm.current_target.current_luck <= -100:
+				gm.current_target.current_luck  = -100
+		"low_energy":
+			gm.current_target.has_debuff_low_energy = true
+			gm.current_target.energy -= power
+			if gm.current_target.energy <= 0:
+				gm.current_target.energy = 0
+		
+	var tween2 = create_tween()
+	tween2.tween_property(gm.current_target.status_fx, "modulate:a", 1.0, 0.1)		
+	var tween3 = create_tween()
+	tween3.tween_property(gm.current_target.status_fx, "scale", Vector2(1, 1), 0.2)	
+	debuff_timer.start(gm.debuff_animation_time)	
+
 func check_fall(delta: float) -> void:
 	if gm.state == "falling":
 		z_index = -1
@@ -265,4 +310,11 @@ func _on_defend_timer_timeout() -> void:
 	var tween = create_tween()
 	tween.tween_property(status_fx, "scale", Vector2(0, 0), 0.2)
 	
+	get_parent().end_turn()
+
+func _on_debuff_timer_timeout() -> void:
+	var tween = create_tween()
+	tween.tween_property(status_fx, "scale", Vector2(0, 0), 0.2)
+	var tween1 = create_tween()
+	tween1.tween_property(gm.current_target.status_fx, "scale", Vector2(0, 0), 0.2)
 	get_parent().end_turn()

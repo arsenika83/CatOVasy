@@ -188,6 +188,10 @@ func start_battle() -> void:
 func end_battle() -> void:
 	gm.state = "idle"
 	gm.energy = gm.max_energy
+	gm.current_damage = gm.damage
+	gm.current_defence = gm.defence
+	gm.current_accuracy = gm.accuracy
+	gm.current_luck = gm.luck
 	#giant.position = gm.prev_pos
 	audio.play()
 	$Effects.visible = true

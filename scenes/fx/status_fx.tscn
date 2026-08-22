@@ -3,6 +3,7 @@
 [ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="1_ll420"]
 [ext_resource type="Texture2D" uid="uid://4itbl0ejcd3o" path="res://assets/tilemap.png" id="2_jh1yt"]
 [ext_resource type="Texture2D" uid="uid://s34pblv0ga2j" path="res://assets/fx.png" id="2_ykc2h"]
+[ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/icons.png" id="3_ykc2h"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pnbib"]
 shader = ExtResource("1_ll420")
@@ -14,6 +15,26 @@ shader_parameter/flash_intensity = 0.0
 [sub_resource type="AtlasTexture" id="AtlasTexture_4a5nr"]
 atlas = ExtResource("2_ykc2h")
 region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ga5s3"]
+atlas = ExtResource("3_ykc2h")
+region = Rect2(0, 112, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2ciw"]
+atlas = ExtResource("3_ykc2h")
+region = Rect2(32, 112, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8g5uu"]
+atlas = ExtResource("3_ykc2h")
+region = Rect2(0, 96, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n1mes"]
+atlas = ExtResource("3_ykc2h")
+region = Rect2(16, 112, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bskll"]
+atlas = ExtResource("3_ykc2h")
+region = Rect2(16, 96, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g7qtv"]
 atlas = ExtResource("2_ykc2h")
@@ -55,6 +76,46 @@ animations = [{
 }],
 "loop": true,
 "name": &"debuff",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ga5s3")
+}],
+"loop": true,
+"name": &"debuff_inaccuracy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g2ciw")
+}],
+"loop": true,
+"name": &"debuff_low_energy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8g5uu")
+}],
+"loop": true,
+"name": &"debuff_undefend",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n1mes")
+}],
+"loop": true,
+"name": &"debuff_unluck",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bskll")
+}],
+"loop": true,
+"name": &"debuff_weakness",
 "speed": 5.0
 }, {
 "frames": [{
@@ -125,5 +186,5 @@ animations = [{
 [node name="StatusFX" type="AnimatedSprite2D" unique_id=1192321709]
 material = SubResource("ShaderMaterial_pnbib")
 sprite_frames = SubResource("SpriteFrames_8nrq2")
-animation = &"debuff"
+animation = &"debuff_low_energy"
 autoplay = "default"

@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://bclkaxhxamdmf" path="res://assets/soundFX/defend.wav" id="10_dt8fj"]
 [ext_resource type="AudioStream" uid="uid://bwch538phpi87" path="res://assets/soundFX/hit.wav" id="11_dku5q"]
 [ext_resource type="AudioStream" uid="uid://btyuivf1mvgot" path="res://assets/soundFX/hit_lucky.wav" id="12_p1oqw"]
+[ext_resource type="AudioStream" uid="uid://ceun5aaxxb0o7" path="res://assets/soundFX/debuff.wav" id="13_p1oqw"]
 
 [sub_resource type="Gradient" id="Gradient_e53s0"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
@@ -416,6 +417,9 @@ one_shot = true
 [node name="DefendTimer" type="Timer" parent="." unique_id=31257092]
 one_shot = true
 
+[node name="DebuffTimer" type="Timer" parent="." unique_id=520573255]
+one_shot = true
+
 [node name="AudioStreamPlayerMeow" type="AudioStreamPlayer" parent="." unique_id=1429074131]
 stream = ExtResource("3_sx7hc")
 volume_db = -7.056
@@ -453,6 +457,11 @@ volume_db = 3.0
 stream = ExtResource("12_p1oqw")
 volume_db = -3.0
 
+[node name="AudioStreamPlayerDebuff" type="AudioStreamPlayer" parent="." unique_id=1109583403]
+stream = ExtResource("13_p1oqw")
+volume_db = -3.0
+mix_target = 2
+
 [connection signal="area_shape_entered" from="Area2D" to="." method="_on_area_2d_area_shape_entered"]
 [connection signal="timeout" from="IdleAnimationTimer" to="." method="_on_idle_animation_timer_timeout"]
 [connection signal="timeout" from="RespawnTimer" to="." method="_on_respawn_timer_timeout"]
@@ -463,3 +472,4 @@ volume_db = -3.0
 [connection signal="timeout" from="MissDamageTimer" to="." method="_on_miss_damage_timer_timeout"]
 [connection signal="timeout" from="DealDamageTimer" to="." method="_on_deal_damage_timer_timeout"]
 [connection signal="timeout" from="DefendTimer" to="." method="_on_defend_timer_timeout"]
+[connection signal="timeout" from="DebuffTimer" to="." method="_on_debuff_timer_timeout"]
