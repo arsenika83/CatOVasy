@@ -1,12 +1,12 @@
+Label
+Node2D
 CollisionShape2D
 CharacterBody2D
-Node2D
 SubViewportContainer
 Camera2D
 SubViewport
 Control
 TextureRect
-Label
 Timer
 Button
 AnimatedSprite2D

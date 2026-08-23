@@ -131,6 +131,12 @@ func choose_target(action : String) -> void:
 				"defend":
 					var defend_duration : float = 0.4
 					source.defend(defend_duration)
+				"buff":
+						var type_number = randi_range(0, gm.buff_set.size()-1)
+						var type = gm.buff_set.get(type_number).get(0)
+						var power = gm.buff_set.get(type_number).get(1)
+						var turns = gm.buff_set.get(type_number).get(2)
+						#source.give_buff(target, type, power, turns)	
 				
 				
 func enemy_turn() -> void:
@@ -158,6 +164,15 @@ func enemy_turn() -> void:
 				var power = source.debuff_set.get(type_number).get(1)
 				var turns = source.debuff_set.get(type_number).get(2)
 				source.give_debuff(giant, type, power, turns)
+			"buff":
+				var target_number = randi_range(0, find_child("Enemies").get_child_count() - 1)
+				var target = find_child("Enemies").get_child(target_number)
+				
+				var type_number = randi_range(0, source.buff_set.size()-1)
+				var type = source.buff_set.get(type_number).get(0)
+				var power = source.buff_set.get(type_number).get(1)
+				var turns = source.buff_set.get(type_number).get(2)
+				source.give_buff(target, type, power, turns)
 
 		return
 	else:
@@ -186,9 +201,11 @@ func end_turn() -> void:
 				gm.current_energy = gm.energy
 				turn_count += 1
 				current_creature_turn = -1
+				giant.turn_tick()
 				
 				for e in current_enemies:
 					e.current_energy = e.energy
+					e.turn_tick()
 			
 		enemy_turn()
 
@@ -201,6 +218,12 @@ func check_creature_stats() -> void:
 	creature_check_dialog.debuff_inaccuracy.visible = false
 	creature_check_dialog.debuff_unluck.visible = false
 	creature_check_dialog.debuff_low_energy.visible = false
+	
+	creature_check_dialog.buff_strength.visible = false
+	creature_check_dialog.buff_defend.visible = false
+	creature_check_dialog.buff_accuracy.visible = false
+	creature_check_dialog.buff_luck.visible = false
+	creature_check_dialog.buff_high_energy.visible = false
 	
 	if (gm.battle_x == cursor_grid_pos.x and gm.battle_y == cursor_grid_pos.y):
 		cursor.visible = false
@@ -224,16 +247,37 @@ func check_creature_stats() -> void:
 		stats += 	str("\nОПЫТ:     ", gm.xp, "/", gm.xp_needed)
 		creature_check_dialog.find_child("StatsLabel").text = stats
 		
-		if gm.has_debuff_weakness:
+		if giant.has_debuff_weakness:
 			creature_check_dialog.debuff_weakness.visible = true
-		if gm.has_debuff_undefend:
+			creature_check_dialog.label_turns_weakness.text = str(giant.turns_debuff_weakness)
+		if giant.has_debuff_undefend:
 			creature_check_dialog.debuff_undefend.visible = true
-		if gm.has_debuff_inaccuracy:
+			creature_check_dialog.label_turns_undefend.text = str(giant.turns_debuff_undefend)
+		if giant.has_debuff_inaccuracy:
 			creature_check_dialog.debuff_inaccuracy.visible = true
-		if gm.has_debuff_unluck:
+			creature_check_dialog.label_turns_inaccuracy.text = str(giant.turns_debuff_inaccuracy)
+		if giant.has_debuff_unluck:
 			creature_check_dialog.debuff_unluck.visible = true
-		if gm.has_debuff_low_energy:
+			creature_check_dialog.label_turns_unluck.text = str(giant.turns_debuff_unluck)
+		if giant.has_debuff_low_energy:
 			creature_check_dialog.debuff_low_energy.visible = true
+			creature_check_dialog.label_turns_low_energy.text = str(giant.turns_debuff_low_energy)
+			
+		if giant.has_buff_strength:
+			creature_check_dialog.buff_strength.visible = true
+			creature_check_dialog.label_turns_strength.text = str(giant.turns_buff_strength)
+		if giant.has_buff_defend:
+			creature_check_dialog.buff_defend.visible = true
+			creature_check_dialog.label_turns_defend.text = str(giant.turns_buff_defend)
+		if giant.has_buff_accuracy:
+			creature_check_dialog.buff_accuracy.visible = true
+			creature_check_dialog.label_turns_accuracy.text = str(giant.turns_buff_accuracy)
+		if giant.has_buff_luck:
+			creature_check_dialog.buff_luck.visible = true
+			creature_check_dialog.label_turns_luck.text = str(giant.turns_buff_luck)
+		if giant.has_buff_high_energy:
+			creature_check_dialog.buff_high_energy.visible = true	
+			creature_check_dialog.label_turns_high_energy.text = str(giant.turns_buff_high_energy)
 					
 		return
 	else:
@@ -252,14 +296,35 @@ func check_creature_stats() -> void:
 					
 					if target.has_debuff_weakness:
 						creature_check_dialog.debuff_weakness.visible = true
+						creature_check_dialog.label_turns_weakness.text = str(target.turns_debuff_weakness)
 					if target.has_debuff_undefend:
 						creature_check_dialog.debuff_undefend.visible = true
+						creature_check_dialog.label_turns_undefend.text = str(target.turns_debuff_undefend)
 					if target.has_debuff_inaccuracy:
 						creature_check_dialog.debuff_inaccuracy.visible = true
+						creature_check_dialog.label_turns_inaccuracy.text = str(target.turns_debuff_inaccuracy)
 					if target.has_debuff_unluck:
 						creature_check_dialog.debuff_unluck.visible = true
+						creature_check_dialog.label_turns_unluck.text = str(target.turns_debuff_unluck)
 					if target.has_debuff_low_energy:
-						creature_check_dialog.debuff_low_energy.visible = true	
+						creature_check_dialog.debuff_low_energy.visible = true
+						creature_check_dialog.label_turns_low_energy.text = str(target.turns_debuff_low_energy)
+						
+					if target.has_buff_strength:
+						creature_check_dialog.buff_strength.visible = true
+						creature_check_dialog.label_turns_strength.text = str(target.turns_buff_strength)
+					if target.has_buff_defend:
+						creature_check_dialog.buff_defend.visible = true
+						creature_check_dialog.label_turns_defend.text = str(target.turns_buff_defend)
+					if target.has_buff_accuracy:
+						creature_check_dialog.buff_accuracy.visible = true
+						creature_check_dialog.label_turns_accuracy.text = str(target.turns_buff_accuracy)
+					if target.has_buff_luck:
+						creature_check_dialog.buff_luck.visible = true
+						creature_check_dialog.label_turns_luck.text = str(target.turns_buff_luck)
+					if target.has_buff_high_energy:
+						creature_check_dialog.buff_high_energy.visible = true
+						creature_check_dialog.label_turns_high_energy.text = str(target.turns_buff_high_energy)
 						
 					creature_check_dialog.find_child("NameLabel").text = target.enemy_name_rus
 					

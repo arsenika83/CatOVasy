@@ -120,6 +120,9 @@ position_smoothing_enabled = true
 rotation_smoothing_enabled = true
 rotation_smoothing_speed = 3.0
 
+[node name="Edges" type="Node2D" parent="." unique_id=1214159832]
+position = Vector2(208, 80)
+
 [node name="Cursor" parent="." unique_id=2051460958 instance=ExtResource("13_8sjvi")]
 position = Vector2(608, -16)
 

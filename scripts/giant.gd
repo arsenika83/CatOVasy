@@ -25,6 +25,29 @@ class_name Giant extends CharacterBody2D
 
 @onready var light = $PointLight2D
 
+var has_debuff_weakness = false
+var has_debuff_undefend = false
+var has_debuff_inaccuracy = false
+var has_debuff_unluck = false
+var has_debuff_low_energy = false
+
+var turns_debuff_weakness = 0
+var turns_debuff_undefend = 0
+var turns_debuff_inaccuracy = 0
+var turns_debuff_unluck = 0
+var turns_debuff_low_energy = 0
+
+var has_buff_strength = false
+var has_buff_defend = false
+var has_buff_accuracy = false
+var has_buff_luck = false
+var has_buff_high_energy = false
+
+var turns_buff_strength = 0
+var turns_buff_defend = 0
+var turns_buff_accuracy = 0
+var turns_buff_luck = 0
+var turns_buff_high_energy = 0
 
 func _ready() -> void:
 	scale = Vector2(0, 0)
@@ -164,11 +187,11 @@ func defend(time : float) -> void:
 	else:
 		defend_timer.start(time)
 
-func give_debuff(target : Enemy, type : String, power : int, turns : int) -> void:
+func give_debuff(target : CharacterBody2D, type : String, power : int, turns : int) -> void:
 	status_fx.scale = Vector2(0, 0)
 	status_fx.play("debuff")
-	var tween1 = create_tween()
-	tween1.tween_property(status_fx, "modulate:a", 1.0, 0.1)
+
+	status_fx.visible = true
 	var tween = create_tween()
 	tween.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
 	gm.current_target = target
@@ -178,37 +201,101 @@ func give_debuff(target : Enemy, type : String, power : int, turns : int) -> voi
 	match type:
 		"weakness":
 			gm.current_target.has_debuff_weakness = true
-			
+			gm.current_target.turns_debuff_weakness += turns
 			gm.current_target.current_damage -= power
 			if gm.current_target.current_damage <= 0:
 				gm.current_target.current_damage = 0
 		"undefend":
 			gm.current_target.has_debuff_undefend = true
-			
+			gm.current_target.turns_debuff_undefend += turns
 			gm.current_target.current_defence -= power
 			if gm.current_target.current_defence <= 0:
 				gm.current_target.current_defence = 0
 		"inaccuracy":
 			gm.current_target.has_debuff_inaccuracy = true
+			gm.current_target.turns_debuff_inaccuracy += turns
 			gm.current_target.current_accuracy -= power
 			if gm.current_target.current_accuracy  <= 10:
 				gm.current_target.current_accuracy  = 10
 		"unluck":
 			gm.current_target.has_debuff_unluck = true
+			gm.current_target.turns_debuff_unluck += turns
 			gm.current_target.current_luck -= power
 			if gm.current_target.current_luck <= -100:
 				gm.current_target.current_luck  = -100
 		"low_energy":
 			gm.current_target.has_debuff_low_energy = true
+			gm.current_target.turns_debuff_low_energy += turns
 			gm.current_target.energy -= power
 			if gm.current_target.energy <= 0:
 				gm.current_target.energy = 0
 		
-	var tween2 = create_tween()
-	tween2.tween_property(gm.current_target.status_fx, "modulate:a", 1.0, 0.1)		
+	gm.current_target.status_fx.visible = true
 	var tween3 = create_tween()
 	tween3.tween_property(gm.current_target.status_fx, "scale", Vector2(1, 1), 0.2)	
-	debuff_timer.start(gm.debuff_animation_time)	
+	debuff_timer.start(gm.debuff_animation_time)
+
+func turn_tick() -> void:
+	if has_debuff_weakness:
+		turns_debuff_weakness -= 1
+		if turns_debuff_weakness == 0:
+			gm.current_damage = gm.damage
+			has_debuff_weakness = false
+			
+	if has_debuff_undefend:
+		turns_debuff_undefend -= 1
+		if turns_debuff_undefend == 0:
+			gm.current_defence = gm.defence
+			has_debuff_undefend = false
+			
+	if has_debuff_inaccuracy:
+		turns_debuff_inaccuracy -= 1
+		if turns_debuff_inaccuracy == 0:
+			gm.current_accuracy = gm.accuracy
+			has_debuff_inaccuracy = false
+			
+	if has_debuff_unluck:
+		turns_debuff_unluck -= 1
+		if turns_debuff_unluck == 0:
+			gm.current_luck = gm.luck
+			has_debuff_unluck = false
+			
+	if has_debuff_low_energy:
+		turns_debuff_low_energy -= 1
+		if turns_debuff_low_energy == 0:
+			gm.energy = gm.max_energy
+			has_debuff_low_energy = false
+
+
+	if has_buff_strength:
+		turns_buff_strength -= 1
+		if turns_buff_strength == 0:
+			gm.current_damage = gm.damage
+			has_buff_strength = false
+			
+	if has_buff_defend:
+		turns_buff_defend -= 1
+		if turns_buff_defend == 0:
+			gm.current_defence = gm.defence
+			has_buff_defend = false
+			
+	if has_buff_accuracy:
+		turns_buff_accuracy -= 1
+		if turns_buff_accuracy == 0:
+			gm.current_accuracy = gm.accuracy
+			has_buff_accuracy = false
+			
+	if has_buff_luck:
+		turns_buff_luck -= 1
+		if turns_buff_luck == 0:
+			gm.current_luck = gm.luck
+			has_buff_luck = false
+			
+	if has_buff_high_energy:
+		turns_buff_high_energy -= 1
+		if turns_buff_high_energy == 0:
+			gm.energy = gm.max_energy
+			has_buff_high_energy = false
 
 func check_fall(delta: float) -> void:
 	if gm.state == "falling":

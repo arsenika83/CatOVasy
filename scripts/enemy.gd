@@ -35,14 +35,37 @@ var follow_radius = 1
 var standard_move_path : Array[Vector2] = [Vector2(-32, 0), Vector2(0, -32), Vector2(32, 0), Vector2(0, 32), Vector2(0, 0)]
 @export var step_count = 0
 
-var move_set : Array = ["deal_damage", "defend", "debuff"]
-var debuff_set : Array = [["weakness", 1, 1], ["undefend", 100, 1], ["inaccuracy", 10, 1], ["unluck", 5, 1], ["low_energy", 1, 1]]
+var move_set : Array = ["deal_damage", "defend", "debuff", "buff"]
 
-var has_debuff_unluck = false
-var has_debuff_inaccuracy = false
+var debuff_set : Array = [["weakness", 1, 1], ["undefend", 100, 1], ["inaccuracy", 10, 1], \
+["unluck", 5, 1], ["low_energy", 1, 1]]
+
+var buff_set : Array = [["strength", 1, 1], ["defend", 1, 1], ["accuracy", 10, 1], \
+["luck", 5, 1], ["high_energy", 1, 1]]
+
 var has_debuff_weakness = false
 var has_debuff_undefend = false
+var has_debuff_inaccuracy = false
+var has_debuff_unluck = false
 var has_debuff_low_energy = false
+
+var turns_debuff_weakness = 0
+var turns_debuff_undefend = 0
+var turns_debuff_inaccuracy = 0
+var turns_debuff_unluck = 0
+var turns_debuff_low_energy = 0
+
+var has_buff_strength = false
+var has_buff_defend = false
+var has_buff_accuracy = false
+var has_buff_luck = false
+var has_buff_high_energy = false
+
+var turns_buff_strength = 0
+var turns_buff_defend = 0
+var turns_buff_accuracy = 0
+var turns_buff_luck = 0
+var turns_buff_high_energy = 0
 
 var follow_step_count = 0
 var follow_distance = 5
@@ -50,7 +73,7 @@ var follow_distance = 5
 var battle_x = 0
 var battle_y = 0
 
-var current_target : Giant
+var current_target : CharacterBody2D
 var attack_animation_time = 0.8
 var defend_animation_time = 0.8
 var debuff_animation_time = 0.8
@@ -283,29 +306,32 @@ func give_debuff(target : Giant, type : String, power : int, turns : int) -> voi
 	
 	match type:
 		"weakness":
-			gm.has_debuff_weakness = true
-			
+			current_target.has_debuff_weakness = true
+			current_target.turns_debuff_weakness += turns
 			gm.current_damage -= power
 			if gm.current_damage <= 0:
 				gm.current_damage = 0
 		"undefend":
-			gm.has_debuff_undefend = true
-			
+			current_target.has_debuff_undefend = true
+			current_target.turns_debuff_undefend += turns
 			gm.current_defence -= power
 			if gm.current_defence <= 0:
 				gm.current_defence = 0
 		"inaccuracy":
-			gm.has_debuff_inaccuracy = true
+			current_target.has_debuff_inaccuracy = true
+			current_target.turns_debuff_inaccuracy += turns
 			gm.current_accuracy -= power
 			if gm.current_accuracy <= 10:
 				gm.current_accuracy = 10
 		"unluck":
-			gm.has_debuff_unluck = true
+			current_target.has_debuff_unluck = true
+			current_target.turns_debuff_unluck += turns
 			gm.current_luck -= power
 			if gm.current_luck <= -100:
 				gm.current_luck  = -100
 		"low_energy":
-			gm.has_debuff_low_energy = true
+			current_target.has_debuff_low_energy = true
+			current_target.turns_debuff_low_energy += turns
 			gm.energy -= power
 			if gm.energy <= 0:
 				gm.energy  = 0
@@ -315,6 +341,112 @@ func give_debuff(target : Giant, type : String, power : int, turns : int) -> voi
 	tween3.tween_property(current_target.status_fx, "scale", Vector2(1, 1), 0.2)
 	
 	debuff_timer.start(debuff_animation_time)
+	
+	
+func give_buff(target : CharacterBody2D, type : String, power : int, turns : int) -> void:
+	current_target = target
+	status_fx.scale = Vector2(0, 0)
+	status_fx.play("buff")
+	status_fx.visible = true
+	var tween = create_tween()
+	tween.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
+	current_target.status_fx.play("buff_" + type)
+	
+	match type:
+		"strength":
+			current_target.has_buff_strength = true
+			current_target.turns_buff_strength += turns
+			current_target.current_damage += power
+		"defend":
+			current_target.has_buff_defend = true
+			current_target.turns_buff_defend += turns
+			current_target.current_defence += power
+			if current_target.current_defence <= 0:
+				current_target.current_defence = 0
+		"accuracy":
+			current_target.has_buff_accuracy = true
+			current_target.turns_buff_accuracy += turns
+			current_target.current_accuracy += power
+			if current_target.current_accuracy > 100:
+				current_target.current_accuracy = 100
+		"luck":
+			current_target.has_buff_luck = true
+			current_target.turns_buff_luck += turns
+			current_target.current_luck += power
+			if current_target.current_luck > 100:
+				current_target.current_luck = 100
+		"high_energy":
+			current_target.has_buff_high_energy = true
+			current_target.turns_buff_high_energy += turns
+			current_target.energy += power
+	
+	status_fx.visible = true
+	var tween3 = create_tween()
+	tween3.tween_property(current_target.status_fx, "scale", Vector2(1, 1), 0.2)
+	
+	debuff_timer.start(debuff_animation_time)
+	
+func turn_tick() -> void:
+	if has_debuff_weakness:
+		turns_debuff_weakness -= 1
+		if turns_debuff_weakness == 0:
+			current_damage = damage
+			has_debuff_weakness = false
+			
+	if has_debuff_undefend:
+		turns_debuff_undefend -= 1
+		if turns_debuff_undefend == 0:
+			current_defence = defence
+			has_debuff_undefend = false
+			
+	if has_debuff_inaccuracy:
+		turns_debuff_inaccuracy -= 1
+		if turns_debuff_inaccuracy == 0:
+			current_accuracy = accuracy
+			has_debuff_inaccuracy = false
+			
+	if has_debuff_unluck:
+		turns_debuff_unluck -= 1
+		if turns_debuff_unluck == 0:
+			current_luck = luck
+			has_debuff_unluck = false
+			
+	if has_debuff_low_energy:
+		turns_debuff_low_energy -= 1
+		if turns_debuff_low_energy == 0:
+			energy = max_energy
+			has_debuff_low_energy = false
+
+
+	if has_buff_strength:
+		turns_buff_strength -= 1
+		if turns_buff_strength == 0:
+			current_damage = damage
+			has_buff_strength = false
+			
+	if has_buff_defend:
+		turns_buff_defend -= 1
+		if turns_buff_defend == 0:
+			current_defence = defence
+			has_buff_defend = false
+			
+	if has_buff_accuracy:
+		turns_buff_accuracy -= 1
+		if turns_buff_accuracy == 0:
+			current_accuracy = accuracy
+			has_buff_accuracy = false
+			
+	if has_buff_luck:
+		turns_buff_luck -= 1
+		if turns_buff_luck == 0:
+			current_luck = luck
+			has_buff_luck = false
+			
+	if has_buff_high_energy:
+		turns_buff_high_energy -= 1
+		if turns_buff_high_energy == 0:
+			energy = max_energy
+			has_buff_high_energy = false
 
 func after_battle_update() -> void:
 	match state:

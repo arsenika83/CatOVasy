@@ -39,22 +39,20 @@ var xp = 0
 var xp_needed = 1
 var level = 1
 
-var current_target : Enemy
+var current_target : CharacterBody2D
 var current_cards: Array[Card]
 var current_enemies : Array
 
-var debuff_set : Array = [["weakness", 1, 1], ["undefend", 100, 1], ["inaccuracy", 10, 1], ["unluck", 5, 1], ["low_energy", 1, 1]]
+var debuff_set : Array = [["weakness", 1, 1], ["undefend", 100, 1], ["inaccuracy", 10, 1],\
+ ["unluck", 5, 1], ["low_energy", 1, 1]]
+
+var buff_set : Array = [["strength", 1, 1], ["defend", 100, 1], ["accuracy", 10, 1],\
+ ["luck", 5, 1], ["high_energy", 1, 1]]
 
 var attack_animation_time = 0.3
 var defend_animation_time = 0.3
 var debuff_animation_time = 0.3
 var buff_animation_time = 0.3
-
-var has_debuff_unluck = false
-var has_debuff_inaccuracy = false
-var has_debuff_weakness = false
-var has_debuff_undefend = false
-var has_debuff_low_energy = false
 
 func _ready() -> void:
 	current_cards.append(AttackCard.new())

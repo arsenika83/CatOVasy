@@ -12,6 +12,30 @@ shader_parameter/amplitude = 1.0000000475
 shader_parameter/time_offset = 0.0
 shader_parameter/flash_intensity = 0.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_7wfgn"]
+atlas = ExtResource("2_ykc2h")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rop8t"]
+atlas = ExtResource("3_ykc2h")
+region = Rect2(0, 176, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_phjmg"]
+atlas = ExtResource("3_ykc2h")
+region = Rect2(0, 160, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8juem"]
+atlas = ExtResource("3_ykc2h")
+region = Rect2(32, 176, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ymnd"]
+atlas = ExtResource("3_ykc2h")
+region = Rect2(16, 176, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dfgpu"]
+atlas = ExtResource("3_ykc2h")
+region = Rect2(16, 160, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_4a5nr"]
 atlas = ExtResource("2_ykc2h")
 region = Rect2(0, 96, 32, 32)
@@ -70,6 +94,54 @@ region = Rect2(128, 480, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8nrq2"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7wfgn")
+}],
+"loop": true,
+"name": &"buff",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rop8t")
+}],
+"loop": true,
+"name": &"buff_accuracy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_phjmg")
+}],
+"loop": true,
+"name": &"buff_defend",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8juem")
+}],
+"loop": true,
+"name": &"buff_high_energy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ymnd")
+}],
+"loop": true,
+"name": &"buff_luck",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dfgpu")
+}],
+"loop": true,
+"name": &"buff_strength",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4a5nr")
@@ -186,5 +258,5 @@ animations = [{
 [node name="StatusFX" type="AnimatedSprite2D" unique_id=1192321709]
 material = SubResource("ShaderMaterial_pnbib")
 sprite_frames = SubResource("SpriteFrames_8nrq2")
-animation = &"debuff_low_energy"
+animation = &"buff_high_energy"
 autoplay = "default"

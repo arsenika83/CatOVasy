@@ -29,6 +29,7 @@ func _ready() -> void:
 	player_camera.zoom.x = gm.camera_zoom
 	player_camera.zoom.y = gm.camera_zoom
 	
+	gm.current_level_edge_positions.clear()
 	for edge in find_child("Edges").get_children():
 		gm.current_level_edge_positions.append(edge.position)
 
