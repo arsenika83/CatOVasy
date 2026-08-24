@@ -116,25 +116,30 @@ func go_downstairs() -> void:
 	var tween = create_tween()
 	tween.tween_property(self, "scale", Vector2(0, 0), 0.5)
 
-func deal_damage(target : Enemy) -> void:
-	var success : bool = randf_range(0.0, 1.0) * 100 <= gm.current_accuracy
-	var luck_success : bool = randf_range(0.0, 1.0) * 100 <= gm.current_luck
-	gm.current_target = target
+func deal_damage(targets : Array[CharacterBody2D]) -> void:
 	
-	if success:
-		if luck_success:
-			status_fx.scale = Vector2(0, 0)
-			status_fx.play("lucky")
-			var tween1 = create_tween()
-			status_fx.visible = true
-			
-			var tween = create_tween()
-			tween.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
-			
-			gm.current_damage = gm.damage * 2
-	else:
-		gm.current_damage = 0
-		print("MISS! ")
+	var tween2 = create_tween()
+	tween2.tween_property(sprite, "position:x", sprite.position.x + 4, 0.1)
+	gm.current_targets = targets
+	
+	for target in targets:
+		var success : bool = randf_range(0.0, 1.0) * 100 <= gm.current_accuracy
+		var luck_success : bool = randf_range(0.0, 1.0) * 100 <= gm.current_luck
+		
+		if success:
+			if luck_success:
+				status_fx.scale = Vector2(0, 0)
+				status_fx.play("lucky")
+				var tween1 = create_tween()
+				status_fx.visible = true
+				
+				var tween = create_tween()
+				tween.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
+				
+				gm.current_damage = gm.damage * 2
+		else:
+			gm.current_damage = 0
+			print("MISS! ")
 	
 	sprite.play("deal_damage")
 	deal_damage_timer.start(gm.attack_animation_time)
@@ -187,52 +192,52 @@ func defend(time : float) -> void:
 	else:
 		defend_timer.start(time)
 
-func give_debuff(target : CharacterBody2D, type : String, power : int, turns : int) -> void:
+func give_debuff(targets : Array[CharacterBody2D], type : String, power : int, turns : int) -> void:
 	status_fx.scale = Vector2(0, 0)
 	status_fx.play("debuff")
 
 	status_fx.visible = true
 	var tween = create_tween()
 	tween.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
-	gm.current_target = target
+	gm.current_targets = targets
 	
-	gm.current_target.status_fx.play("debuff_" + type)
+	gm.current_targets[0].status_fx.play("debuff_" + type)
 	
 	match type:
 		"weakness":
-			gm.current_target.has_debuff_weakness = true
-			gm.current_target.turns_debuff_weakness += turns
-			gm.current_target.current_damage -= power
-			if gm.current_target.current_damage <= 0:
-				gm.current_target.current_damage = 0
+			gm.current_targets[0].has_debuff_weakness = true
+			gm.current_targets[0].turns_debuff_weakness += turns
+			gm.current_targets[0].current_damage -= power
+			if gm.current_targets[0].current_damage <= 0:
+				gm.current_targets[0].current_damage = 0
 		"undefend":
-			gm.current_target.has_debuff_undefend = true
-			gm.current_target.turns_debuff_undefend += turns
-			gm.current_target.current_defence -= power
-			if gm.current_target.current_defence <= 0:
-				gm.current_target.current_defence = 0
+			gm.current_targets[0].has_debuff_undefend = true
+			gm.current_targets[0].turns_debuff_undefend += turns
+			gm.current_targets[0].current_defence -= power
+			if gm.current_targets[0].current_defence <= 0:
+				gm.current_targets[0].current_defence = 0
 		"inaccuracy":
-			gm.current_target.has_debuff_inaccuracy = true
-			gm.current_target.turns_debuff_inaccuracy += turns
-			gm.current_target.current_accuracy -= power
-			if gm.current_target.current_accuracy  <= 10:
-				gm.current_target.current_accuracy  = 10
+			gm.current_targets[0].has_debuff_inaccuracy = true
+			gm.current_targets[0].turns_debuff_inaccuracy += turns
+			gm.current_targets[0].current_accuracy -= power
+			if gm.current_targets[0].current_accuracy  <= 10:
+				gm.current_targets[0].current_accuracy  = 10
 		"unluck":
-			gm.current_target.has_debuff_unluck = true
-			gm.current_target.turns_debuff_unluck += turns
-			gm.current_target.current_luck -= power
-			if gm.current_target.current_luck <= -100:
-				gm.current_target.current_luck  = -100
+			gm.current_targets[0].has_debuff_unluck = true
+			gm.current_targets[0].turns_debuff_unluck += turns
+			gm.current_targets[0].current_luck -= power
+			if gm.current_targets[0].current_luck <= -100:
+				gm.current_targets[0].current_luck  = -100
 		"low_energy":
-			gm.current_target.has_debuff_low_energy = true
-			gm.current_target.turns_debuff_low_energy += turns
-			gm.current_target.energy -= power
-			if gm.current_target.energy <= 0:
-				gm.current_target.energy = 0
+			gm.current_targets[0].has_debuff_low_energy = true
+			gm.current_targets[0].turns_debuff_low_energy += turns
+			gm.current_targets[0].energy -= power
+			if gm.current_targets[0].energy <= 0:
+				gm.current_targets[0].energy = 0
 		
-	gm.current_target.status_fx.visible = true
+	gm.current_targets[0].status_fx.visible = true
 	var tween3 = create_tween()
-	tween3.tween_property(gm.current_target.status_fx, "scale", Vector2(1, 1), 0.2)	
+	tween3.tween_property(gm.current_targets[0].status_fx, "scale", Vector2(1, 1), 0.2)	
 	debuff_timer.start(gm.debuff_animation_time)
 
 func turn_tick() -> void:
@@ -332,6 +337,7 @@ func check_xp() -> void:
 		gm.level += 1
 		gm.xp = gm.xp - gm.xp_needed
 		gm.xp_needed += 1
+		check_xp()
 		
 		gm.damage += 1
 		$AudioStreamPlayerLevelUp.play()
@@ -379,16 +385,21 @@ func _on_miss_damage_timer_timeout() -> void:
 	get_parent().end_turn()
 
 func _on_deal_damage_timer_timeout() -> void:
+	var tween1 = create_tween()
+	tween1.tween_property(sprite, "position:x", sprite.position.x - 4, 0.1)
+	
 	if gm.current_damage > gm.damage:
 		audio_hit_lucky.play()
 		var tween = create_tween()
 		tween.tween_property(status_fx, "scale", Vector2(0, 0), 0.2)
 	else:
 		audio_hit.play()
-	get_parent().claw_fx.position = gm.current_target.position
-	get_parent().claw_fx.play("hit")
 	
-	gm.current_target.take_damage(gm.current_damage, gm.attack_animation_time)
+	for target in gm.current_targets:
+		get_parent().claw_fx.position = target.position
+		get_parent().claw_fx.play("hit")
+		
+		target.take_damage(gm.current_damage, gm.attack_animation_time)
 	gm.current_damage = gm.damage
 	idle_animation_timer.start(0.2)
 
@@ -404,5 +415,5 @@ func _on_debuff_timer_timeout() -> void:
 	var tween = create_tween()
 	tween.tween_property(status_fx, "scale", Vector2(0, 0), 0.2)
 	var tween1 = create_tween()
-	tween1.tween_property(gm.current_target.status_fx, "scale", Vector2(0, 0), 0.2)
+	tween1.tween_property(gm.current_targets[0].status_fx, "scale", Vector2(0, 0), 0.2)
 	get_parent().end_turn()

@@ -13,6 +13,10 @@ var creature_dialog_on_screen = false
 
 @onready var end_battle_button = $UI/EndBattleButton
 @onready var creature_check_dialog = $UI/CreatureDialog
+@onready var current_creature_stats : CharacterBody2D
+
+@onready var check_dialog_timer = $CheckStatsDialogHoldTimer
+var is_check_dialog_holding = false
 
 var turn_count = 1
 
@@ -52,15 +56,12 @@ func _process(delta: float) -> void:
 		smooth_camera_zoom(":zoom:x", gm.camera_zoom)
 		smooth_camera_zoom(":zoom:y", gm.camera_zoom)
 		
-	if Input.is_action_pressed("ui_rmb"):
-		creature_dialog_on_screen = true
+	if Input.is_action_just_pressed("ui_rmb"):
 		check_creature_stats()
-	else:
-		if(creature_dialog_on_screen == true):
-			var tween = create_tween()
-			tween.tween_property(creature_check_dialog, "position:x", -500, 0.25)
-			cursor.visible = true
-		creature_dialog_on_screen = false
+		check_dialog_timer.start()
+	if Input.is_action_just_released("ui_rmb"):
+		if is_check_dialog_holding:
+			check_creature_stats()
 		
 	if Input.is_action_just_pressed("ui_lmb"):
 		if current_creature_turn == -1:
@@ -107,22 +108,26 @@ func choose_target(action : String) -> void:
 	var target_local_pos = map.map_to_local(cursor_grid_pos)
 	
 	var source = find_child("Giant", true, false)
+	var multiple_targets = false
 	
 	for i in range(0, find_child("Enemies").get_child_count()):
-		var target = find_child("Enemies").get_child(i)
+		var targets : Array[CharacterBody2D] = [find_child("Enemies").get_child(i)]
 		
-		if target.battle_x == cursor_grid_pos.x and target.battle_y == cursor_grid_pos.y:
-			if not target.state == "dead":
+		if targets.get(0).battle_x == cursor_grid_pos.x and targets.get(0).battle_y == cursor_grid_pos.y:
+			if not targets.get(0).state == "dead":
+				
+				if multiple_targets:
+					targets.append(find_child("Enemies").get_child(3))
+				
 				match action:
 					"deal_damage":
-						source.deal_damage(target)
+						source.deal_damage(targets)
 					"debuff":
 						var type_number = randi_range(0, gm.debuff_set.size()-1)
 						var type = gm.debuff_set.get(type_number).get(0)
 						var power = gm.debuff_set.get(type_number).get(1)
 						var turns = gm.debuff_set.get(type_number).get(2)
-						source.give_debuff(target, type, power, turns)	
-	
+						source.give_debuff(targets, type, power, turns)	
 	
 	#BUFFS
 	if gm.battle_x == cursor_grid_pos.x and gm.battle_y == cursor_grid_pos.y:
@@ -179,7 +184,6 @@ func enemy_turn() -> void:
 		end_turn()
 
 func end_turn() -> void:
-	
 	if current_creature_turn == -1:
 		gm.current_energy -= 1
 		
@@ -212,6 +216,7 @@ func end_turn() -> void:
 func check_creature_stats() -> void:
 	var cursor_grid_pos = map.local_to_map(get_global_mouse_position())
 	var target_local_pos = map.map_to_local(cursor_grid_pos)
+	var has_target = false
 	
 	creature_check_dialog.debuff_weakness.visible = false
 	creature_check_dialog.debuff_undefend.visible = false
@@ -225,15 +230,35 @@ func check_creature_stats() -> void:
 	creature_check_dialog.buff_luck.visible = false
 	creature_check_dialog.buff_high_energy.visible = false
 	
-	if (gm.battle_x == cursor_grid_pos.x and gm.battle_y == cursor_grid_pos.y):
-		cursor.visible = false
-		
-		creature_check_dialog.position.x = -500
-		creature_check_dialog.find_child("SubViewportContainer").find_child("SubViewport").find_child("Camera2D").target_position = target_local_pos
+	if is_check_dialog_holding:
+		current_creature_stats = null
 		var tween = create_tween()
-		tween.tween_property(creature_check_dialog, "position:x", 40, 0.2)
+		tween.tween_property(creature_check_dialog, "position:x", -500, 0.25)
+		creature_dialog_on_screen = false
+		is_check_dialog_holding = false
+		return
+	
+	if (gm.battle_x == cursor_grid_pos.x and gm.battle_y == cursor_grid_pos.y):
+		if current_creature_stats == giant:
+			current_creature_stats = null
+			var tween = create_tween()
+			tween.tween_property(creature_check_dialog, "position:x", -500, 0.25)
+			creature_dialog_on_screen = false
+			return
+		
+		has_target = true
+		current_creature_stats = giant
+		
+		if not creature_dialog_on_screen:
+			creature_check_dialog.position.x = -500
+			var tween = create_tween()
+			tween.tween_property(creature_check_dialog, "position:x", 40, 0.2)
 					
-		creature_check_dialog.visible = true
+			creature_check_dialog.visible = true
+			
+		creature_check_dialog.find_child("SubViewportContainer").find_child("SubViewport").find_child("Camera2D").target_position = target_local_pos	
+			
+		creature_dialog_on_screen = true
 		creature_check_dialog.find_child("NameLabel").text = "Гигант"
 					
 		var stats =   str("ОЗ:       ", gm.hp, "/", gm.max_hp)
@@ -283,16 +308,27 @@ func check_creature_stats() -> void:
 	else:
 		for i in range(0, find_child("Enemies").get_child_count()):
 			var target = find_child("Enemies").get_child(i)
-			
+						
 			if (target.battle_x == cursor_grid_pos.x and target.battle_y == cursor_grid_pos.y):
-					cursor.visible = false
-				
-					creature_check_dialog.position.x = -500
-					var tween = create_tween()
-					tween.tween_property(creature_check_dialog, "position:x", 40, 0.2)
+					if current_creature_stats == target:
+						current_creature_stats = null
+						var tween = create_tween()
+						tween.tween_property(creature_check_dialog, "position:x", -500, 0.25)
+						creature_dialog_on_screen = false
+						return
+						
+					has_target = true
+					current_creature_stats = target
 					
+					if not creature_dialog_on_screen:
+						creature_check_dialog.position.x = -500
+						var tween = create_tween()
+						tween.tween_property(creature_check_dialog, "position:x", 40, 0.2)
+						
 					creature_check_dialog.find_child("SubViewportContainer").find_child("SubViewport").find_child("Camera2D").target_position = target_local_pos
 					creature_check_dialog.visible = true
+						
+					creature_dialog_on_screen = true
 					
 					if target.has_debuff_weakness:
 						creature_check_dialog.debuff_weakness.visible = true
@@ -340,9 +376,11 @@ func check_creature_stats() -> void:
 					creature_check_dialog.find_child("StatsLabel").text = stats
 					
 					return
-			else:
-				creature_check_dialog.visible = false
-				#print("NO TARGET ON THIS TILE: ", cursor_grid_pos.x, "_", cursor_grid_pos.y)
+				
+	if not has_target:
+		var tween = create_tween()
+		tween.tween_property(creature_check_dialog, "position:x", -500, 0.25)
+		creature_dialog_on_screen = false
 
 func check_enemy_army() -> void:
 	var dead_count = 0
@@ -374,3 +412,10 @@ func _on_end_battle_button_pressed() -> void:
 		print("ПОБЕДА")
 		get_parent().get_parent().end_battle()
 		queue_free()
+
+
+func _on_check_stats_dialog_hold_timer_timeout() -> void:
+	if Input.is_action_pressed("ui_rmb"):
+		is_check_dialog_holding = true
+	else:
+		is_check_dialog_holding = false

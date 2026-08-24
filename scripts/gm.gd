@@ -15,7 +15,7 @@ var battle_y : int
 var hp = 30
 var max_hp = 30
 
-var damage = 1
+var damage = 5
 var current_damage = damage
 
 var defence = 3
@@ -39,7 +39,7 @@ var xp = 0
 var xp_needed = 1
 var level = 1
 
-var current_target : CharacterBody2D
+var current_targets : Array[CharacterBody2D]
 var current_cards: Array[Card]
 var current_enemies : Array
 
@@ -51,8 +51,8 @@ var buff_set : Array = [["strength", 1, 1], ["defend", 100, 1], ["accuracy", 10,
 
 var attack_animation_time = 0.3
 var defend_animation_time = 0.3
-var debuff_animation_time = 0.3
-var buff_animation_time = 0.3
+var debuff_animation_time = 0.6
+var buff_animation_time = 0.6
 
 func _ready() -> void:
 	current_cards.append(AttackCard.new())

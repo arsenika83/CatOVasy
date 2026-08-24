@@ -1,0 +1,181 @@
+[gd_scene format=3 uid="uid://qgx2la7r3w7a"]
+
+[ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="1_s887n"]
+[ext_resource type="Texture2D" uid="uid://de2c8pnqtrt77" path="res://assets/images/inventory_ui.png" id="2_ty45s"]
+[ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="4_p7iul"]
+[ext_resource type="FontFile" uid="uid://dub3oi8dxfpfw" path="res://assets/fonts/JeuDePixel-Regular.otf" id="5_td2ew"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qtlqx"]
+shader = ExtResource("1_s887n")
+shader_parameter/speed = 1.0000000475
+shader_parameter/amplitude = 4.00000019
+shader_parameter/time_offset = 10.0
+shader_parameter/flash_intensity = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_53g1v"]
+atlas = ExtResource("2_ty45s")
+region = Rect2(832, 0, 448, 720)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yyk2a"]
+atlas = ExtResource("2_ty45s")
+region = Rect2(0, 0, 448, 720)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uae8j"]
+atlas = ExtResource("4_p7iul")
+region = Rect2(32, 128, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s887n"]
+atlas = ExtResource("4_p7iul")
+region = Rect2(16, 128, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g71ie"]
+atlas = ExtResource("4_p7iul")
+region = Rect2(0, 128, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sr8g6"]
+atlas = ExtResource("4_p7iul")
+region = Rect2(0, 144, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p7iul"]
+atlas = ExtResource("4_p7iul")
+region = Rect2(16, 144, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_td2ew"]
+atlas = ExtResource("4_p7iul")
+region = Rect2(32, 144, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ylenm"]
+atlas = ExtResource("4_p7iul")
+region = Rect2(0, 192, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0df5h"]
+atlas = ExtResource("4_p7iul")
+region = Rect2(16, 192, 16, 16)
+
+[node name="Inventory" type="Control" unique_id=1641948652]
+material = SubResource("ShaderMaterial_qtlqx")
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -832.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRectDown" type="TextureRect" parent="." unique_id=1275944467]
+use_parent_material = true
+layout_mode = 0
+offset_left = 32.0
+offset_top = 272.0
+offset_right = 416.0
+offset_bottom = 688.0
+texture = SubResource("AtlasTexture_53g1v")
+expand_mode = 1
+
+[node name="TextureRectTop" type="TextureRect" parent="." unique_id=922272682]
+use_parent_material = true
+layout_mode = 0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 416.0
+offset_bottom = 256.0
+texture = SubResource("AtlasTexture_yyk2a")
+expand_mode = 1
+
+[node name="StatsLabel" type="Label" parent="." unique_id=1847410104]
+use_parent_material = true
+layout_mode = 0
+offset_left = 64.0
+offset_top = 48.0
+offset_right = 400.0
+offset_bottom = 305.0
+theme_override_fonts/font = ExtResource("5_td2ew")
+text = "ОЗ: 12/30
+УРОН: 2
+ЗАЩИТА: 4
+ТОЧНОСТЬ: 70%
+УДАЧА: 10%
+ЭНЕРГИЯ: 2
+
+УРОВЕНЬ: 1
+ОПЫТ: 1/10"
+
+[node name="Stats" type="Control" parent="." unique_id=91989639]
+use_parent_material = true
+anchors_preset = 0
+offset_left = 37.0
+offset_top = 55.0
+offset_right = 53.0
+offset_bottom = 199.0
+
+[node name="TextureStat1" type="TextureRect" parent="Stats" unique_id=1222458283]
+use_parent_material = true
+layout_mode = 0
+offset_left = 8.0
+offset_top = -9.0
+offset_right = 24.0
+offset_bottom = 7.0
+texture = SubResource("AtlasTexture_uae8j")
+
+[node name="TextureStat2" type="TextureRect" parent="Stats" unique_id=2075109257]
+use_parent_material = true
+layout_mode = 0
+offset_left = 8.0
+offset_top = 7.0
+offset_right = 24.0
+offset_bottom = 23.0
+texture = SubResource("AtlasTexture_s887n")
+
+[node name="TextureStat3" type="TextureRect" parent="Stats" unique_id=2111045483]
+use_parent_material = true
+layout_mode = 0
+offset_left = 8.0
+offset_top = 23.0
+offset_right = 24.0
+offset_bottom = 39.0
+texture = SubResource("AtlasTexture_g71ie")
+
+[node name="TextureStat4" type="TextureRect" parent="Stats" unique_id=78064379]
+use_parent_material = true
+layout_mode = 0
+offset_left = 8.0
+offset_top = 39.0
+offset_right = 24.0
+offset_bottom = 55.0
+texture = SubResource("AtlasTexture_sr8g6")
+
+[node name="TextureStat5" type="TextureRect" parent="Stats" unique_id=792947940]
+use_parent_material = true
+layout_mode = 0
+offset_left = 8.0
+offset_top = 55.0
+offset_right = 24.0
+offset_bottom = 71.0
+texture = SubResource("AtlasTexture_p7iul")
+
+[node name="TextureStat6" type="TextureRect" parent="Stats" unique_id=25564265]
+use_parent_material = true
+layout_mode = 0
+offset_left = 8.0
+offset_top = 72.0
+offset_right = 24.0
+offset_bottom = 88.0
+texture = SubResource("AtlasTexture_td2ew")
+
+[node name="TextureStat7" type="TextureRect" parent="Stats" unique_id=1239342163]
+use_parent_material = true
+layout_mode = 0
+offset_left = 8.0
+offset_top = 102.0
+offset_right = 24.0
+offset_bottom = 118.0
+texture = SubResource("AtlasTexture_ylenm")
+
+[node name="TextureStat8" type="TextureRect" parent="Stats" unique_id=1952817662]
+use_parent_material = true
+layout_mode = 0
+offset_left = 8.0
+offset_top = 117.0
+offset_right = 24.0
+offset_bottom = 133.0
+texture = SubResource("AtlasTexture_0df5h")

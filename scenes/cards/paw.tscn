@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bjjafdg4et4p0"]
 
 [ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="1_yk4tj"]
-[ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/icons.png" id="2_0qjwb"]
+[ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="2_0qjwb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_boovn"]
 shader = ExtResource("1_yk4tj")

@@ -2,14 +2,14 @@
 
 [ext_resource type="Script" uid="uid://dws0dtqq3i1mi" path="res://scripts/game.gd" id="1_oh1hm"]
 [ext_resource type="Shader" uid="uid://dw8y0528dhqqe" path="res://shaders/vhs.gdshader" id="2_h3m2t"]
-[ext_resource type="Texture2D" uid="uid://4itbl0ejcd3o" path="res://assets/tilemap.png" id="3_plvqx"]
-[ext_resource type="PackedScene" uid="uid://bp10kb8rxtuhx" path="res://scenes/stairs.tscn" id="5_ql35f"]
-[ext_resource type="PackedScene" uid="uid://bsxo600wchpra" path="res://scenes/pillow.tscn" id="6_qnkqi"]
+[ext_resource type="Texture2D" uid="uid://4itbl0ejcd3o" path="res://assets/images/tilemap.png" id="3_plvqx"]
+[ext_resource type="PackedScene" uid="uid://bp10kb8rxtuhx" path="res://scenes/objects/stairs.tscn" id="5_ql35f"]
+[ext_resource type="PackedScene" uid="uid://bsxo600wchpra" path="res://scenes/objects/pillow.tscn" id="6_qnkqi"]
 [ext_resource type="PackedScene" uid="uid://d0d5e8ltlrwqg" path="res://scenes/giant.tscn" id="7_80f1b"]
 [ext_resource type="AudioStream" uid="uid://hjme44vtv27a" path="res://assets/music/Main_Theme.mp3" id="10_0ev7p"]
-[ext_resource type="PackedScene" uid="uid://ba7f54d4yq2hp" path="res://scenes/cursor.tscn" id="13_8sjvi"]
+[ext_resource type="PackedScene" uid="uid://ba7f54d4yq2hp" path="res://scenes/ui/cursor.tscn" id="13_8sjvi"]
 [ext_resource type="Shader" uid="uid://dm6djrn7pct8b" path="res://shaders/wobble.gdshader" id="14_bg5pv"]
-[ext_resource type="PackedScene" uid="uid://di4k2iivrnhup" path="res://scenes/creature_adventure_dialog.tscn" id="16_ho425"]
+[ext_resource type="PackedScene" uid="uid://di4k2iivrnhup" path="res://scenes/ui/creature_adventure_dialog.tscn" id="16_ho425"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fj52k"]
 shader = ExtResource("2_h3m2t")

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d0d5e8ltlrwqg"]
 
-[ext_resource type="Texture2D" uid="uid://dhpxrfjobvnw8" path="res://assets/player_sprite.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://dhpxrfjobvnw8" path="res://assets/images/player_sprite.png" id="1"]
 [ext_resource type="Script" uid="uid://rb8g2207v4bl" path="res://scripts/giant.gd" id="1_glfi2"]
 [ext_resource type="PackedScene" uid="uid://cr7p23s5f4urx" path="res://scenes/fx/status_fx.tscn" id="3_0vpcl"]
 [ext_resource type="AudioStream" uid="uid://cg8ponq2r4sg2" path="res://assets/soundFX/short_meow.wav" id="3_sx7hc"]

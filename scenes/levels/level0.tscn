@@ -3,18 +3,20 @@
 [ext_resource type="Shader" uid="uid://dw8y0528dhqqe" path="res://shaders/vhs.gdshader" id="1_7s2gi"]
 [ext_resource type="Script" uid="uid://dws0dtqq3i1mi" path="res://scripts/game.gd" id="1_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://d0d5e8ltlrwqg" path="res://scenes/giant.tscn" id="1_uwrxv"]
-[ext_resource type="Texture2D" uid="uid://4itbl0ejcd3o" path="res://assets/tilemap.png" id="1_yqjtg"]
-[ext_resource type="PackedScene" uid="uid://b7p1hqo3g0pln" path="res://scenes/stairs_up.tscn" id="4_3asx1"]
-[ext_resource type="PackedScene" uid="uid://ba7f54d4yq2hp" path="res://scenes/cursor.tscn" id="4_lbhrr"]
-[ext_resource type="PackedScene" uid="uid://bp10kb8rxtuhx" path="res://scenes/stairs.tscn" id="5_iywne"]
-[ext_resource type="PackedScene" uid="uid://1by6pkucltci" path="res://scenes/grass.tscn" id="6_p57ef"]
-[ext_resource type="PackedScene" uid="uid://b8bfs4u1x4s8" path="res://scenes/grass_low.tscn" id="7_d3ub6"]
-[ext_resource type="PackedScene" uid="uid://bsxo600wchpra" path="res://scenes/pillow.tscn" id="9_7s2gi"]
-[ext_resource type="PackedScene" uid="uid://c7f16y8rwf2q" path="res://scenes/edge_one.tscn" id="10_m6lg1"]
+[ext_resource type="Texture2D" uid="uid://4itbl0ejcd3o" path="res://assets/images/tilemap.png" id="1_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://b7p1hqo3g0pln" path="res://scenes/objects/stairs_up.tscn" id="4_3asx1"]
+[ext_resource type="PackedScene" uid="uid://ba7f54d4yq2hp" path="res://scenes/ui/cursor.tscn" id="4_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://bp10kb8rxtuhx" path="res://scenes/objects/stairs.tscn" id="5_iywne"]
+[ext_resource type="PackedScene" uid="uid://1by6pkucltci" path="res://scenes/objects/grass.tscn" id="6_p57ef"]
+[ext_resource type="PackedScene" uid="uid://b8bfs4u1x4s8" path="res://scenes/objects/grass_low.tscn" id="7_d3ub6"]
+[ext_resource type="PackedScene" uid="uid://bsxo600wchpra" path="res://scenes/objects/pillow.tscn" id="9_7s2gi"]
+[ext_resource type="PackedScene" uid="uid://cgbiblheppx0x" path="res://scenes/enemies/fox.tscn" id="9_ng1gw"]
+[ext_resource type="PackedScene" uid="uid://c7f16y8rwf2q" path="res://scenes/objects/edge_one.tscn" id="10_m6lg1"]
 [ext_resource type="Shader" uid="uid://dm6djrn7pct8b" path="res://shaders/wobble.gdshader" id="11_fj52k"]
 [ext_resource type="PackedScene" uid="uid://1bvjmpy2pf0k" path="res://scenes/enemies/enemy.tscn" id="14_m6lg1"]
 [ext_resource type="AudioStream" uid="uid://bx1d746w8sbiy" path="res://assets/music/ZONE_1.wav" id="15_3asx1"]
-[ext_resource type="PackedScene" uid="uid://di4k2iivrnhup" path="res://scenes/creature_adventure_dialog.tscn" id="15_m6lg1"]
+[ext_resource type="PackedScene" uid="uid://di4k2iivrnhup" path="res://scenes/ui/creature_adventure_dialog.tscn" id="15_m6lg1"]
+[ext_resource type="PackedScene" uid="uid://qgx2la7r3w7a" path="res://scenes/ui/inventory.tscn" id="16_3asx1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fj52k"]
 shader = ExtResource("1_7s2gi")
@@ -150,6 +152,9 @@ position = Vector2(144, 144)
 
 [node name="Enemy7" parent="Enemies" unique_id=1139925437 instance=ExtResource("14_m6lg1")]
 position = Vector2(144, 144)
+
+[node name="EnemyFox" parent="Enemies" unique_id=685663284 instance=ExtResource("9_ng1gw")]
+position = Vector2(272, 112)
 
 [node name="Plants" type="Node2D" parent="." unique_id=1507805972]
 
@@ -311,9 +316,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="AudioStreamPlayerMusic" type="AudioStreamPlayer" parent="." unique_id=179520262]
-stream = ExtResource("15_3asx1")
-
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1236012575]
 modulate = Color(1, 1, 1, 0.5019608)
 self_modulate = Color(1, 1, 1, 0.9411765)
@@ -322,13 +324,15 @@ color = Color(0, 0, 0, 1)
 [node name="UI" type="CanvasLayer" parent="." unique_id=589757551]
 
 [node name="CreatureAdventureDialog" parent="UI" unique_id=1641948652 instance=ExtResource("15_m6lg1")]
-visible = false
 z_index = 10
-offset_top = 7.8399963
-offset_bottom = 359.84
+
+[node name="Inventory" parent="UI" unique_id=579277200 instance=ExtResource("16_3asx1")]
+anchors_preset = -1
 
 [node name="BattleStartTimer" type="Timer" parent="." unique_id=1709292871]
-wait_time = 0.5
 one_shot = true
+
+[node name="AudioStreamPlayerMusic" type="AudioStreamPlayer" parent="." unique_id=179520262]
+stream = ExtResource("15_3asx1")
 
 [connection signal="timeout" from="BattleStartTimer" to="." method="_on_battle_start_timer_timeout"]

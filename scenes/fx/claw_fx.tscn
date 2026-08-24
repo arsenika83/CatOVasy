@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://btcx8q72tnkf5"]
 
-[ext_resource type="Texture2D" uid="uid://s34pblv0ga2j" path="res://assets/fx.png" id="1_7vy4c"]
+[ext_resource type="Texture2D" uid="uid://s34pblv0ga2j" path="res://assets/images/fx.png" id="1_7vy4c"]
 [ext_resource type="AudioStream" uid="uid://bwch538phpi87" path="res://assets/soundFX/hit.wav" id="2_mx04e"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mx04e"]

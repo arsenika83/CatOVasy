@@ -6,6 +6,7 @@ var cursor_map_pos
 var turn_count = 0
 
 var creature_dialog_on_screen = false
+var inventory_on_screen = false
 
 @onready var giant = $Giant
 @onready var map = $TileMapLayerBlack
@@ -17,24 +18,27 @@ var creature_dialog_on_screen = false
 @onready var battle_start_timer = $BattleStartTimer
 
 @onready var creature_check_dialog = $UI/CreatureAdventureDialog
+@onready var inventory = $UI/Inventory
 
 @onready var foregroundFX = $Effects/ColorRect
 
 const BATTLE_SCENE = preload("res://scenes/levels/battle_level.tscn")
 
 func _ready() -> void:
-	await get_tree().process_frame
+	scene_transitioner.change_scene_back()
+	
 	audio.play(gm.current_music_position)
 	creature_check_dialog.visible = false
-	player_camera.zoom.x = gm.camera_zoom
-	player_camera.zoom.y = gm.camera_zoom
+	player_camera.zoom = Vector2(gm.camera_zoom, gm.camera_zoom)
+	
+	inventory.position.x = 1500
+	inventory.visible = true
 	
 	gm.current_level_edge_positions.clear()
 	for edge in find_child("Edges").get_children():
 		gm.current_level_edge_positions.append(edge.position)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if gm.state == "battle":
 		pass
@@ -48,10 +52,16 @@ func _process(delta: float) -> void:
 	draw_cursor()
 	check_hp()
 	
+	if inventory_on_screen:
+		update_inventory()
+	
 	if gm.state == "idle":
 		if Input.is_action_just_pressed("ui_lmb"):
 			move_to_map_pos()
 			giant.walk()
+			
+		if Input.is_action_just_pressed("ui_rmb"):
+			draw_inventory()
 			
 		if Input.is_action_pressed("ui_rmb"):
 			creature_dialog_on_screen = true
@@ -166,6 +176,7 @@ func check_creature_stats() -> void:
 	var enemy_amount = 0
 	var total_xp = 0
 	var last_target : Enemy
+	var is_dead = false
 	
 	for i in range(0, find_child("Enemies").get_child_count()):
 		var target = find_child("Enemies").get_child(i)
@@ -173,9 +184,12 @@ func check_creature_stats() -> void:
 		var e_map_pos = map.local_to_map(target.position)
 			
 		if e_map_pos.x == cursor_grid_pos.x and e_map_pos.y == cursor_grid_pos.y:
-				enemy_amount += 1
-				total_xp += target.xp_gives
-				last_target = target
+			if target.state == "dead":
+				continue
+				
+			enemy_amount += 1
+			total_xp += target.xp_gives
+			last_target = target
 		else:
 			creature_check_dialog.visible = false
 			
@@ -183,7 +197,7 @@ func check_creature_stats() -> void:
 		cursor.visible = false
 		creature_check_dialog.position.x = -500
 		var tween = create_tween()
-		tween.tween_property(creature_check_dialog, "position:x", 40, 0.2)
+		tween.tween_property(creature_check_dialog, "position:x", 20, 0.2)
 		
 		creature_check_dialog.find_child("SubViewportContainer").find_child("SubViewport").find_child("Camera2D").target_position = target_local_pos
 		creature_check_dialog.visible = true
@@ -198,9 +212,46 @@ func check_creature_stats() -> void:
 		stats += 	str("\nКОЛИЧЕСТВО ВРАГОВ:  ", enemy_amount)
 		creature_check_dialog.find_child("StatsLabel").text = stats
 
+func draw_inventory() -> void:
+	if map.local_to_map(giant.position) == cursor_map_pos:
+		if inventory_on_screen:
+			var tween = create_tween()
+			tween.tween_property(inventory, "position:x", 1500, 0.3)
+			
+			inventory_on_screen = false
+		else:
+			var stats =   str("ОЗ:       ", gm.hp, "/", gm.max_hp)
+			stats += 	str("\nУРОН:     ", gm.damage)
+			stats += 	str("\nЗАЩИТА:   ", gm.max_defence)
+			stats += 	str("\nТОЧНОСТЬ: ", gm.accuracy, "%")
+			stats += 	str("\nУДАЧА:    ", gm.luck, "%")
+			stats += 	str("\nЭНЕРГИЯ:  ", gm.max_energy)
+			stats += 	str("\n")
+			stats += 	str("\nУРОВЕНЬ:  ", gm.level)
+			stats += 	str("\nОПЫТ:     ", gm.xp, "/", gm.xp_needed)
+			inventory.find_child("StatsLabel").text = stats
+			
+			var tween = create_tween()
+			tween.tween_property(inventory, "position:x", 840, 0.3)
+				
+			inventory_on_screen = true
+
+func update_inventory() -> void:
+	var stats =   str("ОЗ:       ", gm.hp, "/", gm.max_hp)
+	stats += 	str("\nУРОН:     ", gm.damage)
+	stats += 	str("\nЗАЩИТА:   ", gm.max_defence)
+	stats += 	str("\nТОЧНОСТЬ: ", gm.accuracy, "%")
+	stats += 	str("\nУДАЧА:    ", gm.luck, "%")
+	stats += 	str("\nЭНЕРГИЯ:  ", gm.max_energy)
+	stats += 	str("\n")
+	stats += 	str("\nУРОВЕНЬ:  ", gm.level)
+	stats += 	str("\nОПЫТ:     ", gm.xp, "/", gm.xp_needed)
+	inventory.find_child("StatsLabel").text = stats
 
 func start_battle() -> void:
 	if not find_child("BattleNode").find_child("Battle") or gm.state == "battle":
+
+		scene_transitioner.change_scene_to()
 		battle_start_timer.start()
 	
 func end_battle() -> void:
@@ -218,10 +269,13 @@ func end_battle() -> void:
 	giant.light.enabled = true
 
 func _on_battle_start_timer_timeout() -> void:
+	scene_transitioner.change_scene_back()
+	
 	gm.state = "battle"
 	gm.prev_state = gm.state
 	giant.light.enabled = false
 	gm.current_music_position = audio.get_playback_position()
+	inventory.position.x = 1500
 	
 	audio.stop()
 	player_camera.enabled = false

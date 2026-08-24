@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://1bvjmpy2pf0k"]
 
-[ext_resource type="Texture2D" uid="uid://crsqvlld0supu" path="res://assets/enemy_sprite.png" id="1_6xk8f"]
-[ext_resource type="Script" uid="uid://bv6rnws21fw7r" path="res://scripts/enemy.gd" id="1_8e3ao"]
+[ext_resource type="Texture2D" uid="uid://crsqvlld0supu" path="res://assets/images/enemy_sprite.png" id="1_6xk8f"]
+[ext_resource type="Script" uid="uid://bv6rnws21fw7r" path="res://scripts/enemies/enemy.gd" id="1_8e3ao"]
 [ext_resource type="AudioStream" uid="uid://bwch538phpi87" path="res://assets/soundFX/hit.wav" id="3_38ino"]
 [ext_resource type="PackedScene" uid="uid://tksv3htggrop" path="res://scenes/fx/xp_orb.tscn" id="4_fcftc"]
 [ext_resource type="AudioStream" uid="uid://b78ln2t2dmc8p" path="res://assets/soundFX/meow_die.wav" id="4_nb6gf"]
@@ -151,7 +151,6 @@ position = Vector2(0, -4)
 sprite_frames = SubResource("SpriteFrames_fcftc")
 animation = &"deal_damage"
 autoplay = "idle"
-frame_progress = 0.9329076
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1438211941]
 collision_layer = 2
