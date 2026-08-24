@@ -2,7 +2,7 @@
 
 [ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="1_0qqw3"]
 [ext_resource type="Texture2D" uid="uid://b0rpbj3njbbar" path="res://assets/images/cards.png" id="1_45qsb"]
-[ext_resource type="Script" uid="uid://ddjmqi81p7g0" path="res://scripts/card.gd" id="2_jl6rh"]
+[ext_resource type="Script" uid="uid://ddjmqi81p7g0" path="res://scripts/cards/card.gd" id="2_jl6rh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jl6rh"]
 resource_local_to_scene = true
@@ -25,42 +25,47 @@ z_index = 100
 z_as_relative = false
 material = SubResource("ShaderMaterial_jl6rh")
 layout_mode = 3
-anchors_preset = 0
-offset_right = 64.0
-offset_bottom = 96.0
+anchor_top = 0.13900001
+anchor_bottom = 0.13900001
+offset_top = -100.08001
+offset_right = 128.0
+offset_bottom = 99.91999
+scale = Vector2(0.5, 0.5)
 pivot_offset = Vector2(32, 48)
 script = ExtResource("2_jl6rh")
 
 [node name="BG2" type="TextureRect" parent="." unique_id=1690685854]
 use_parent_material = true
 layout_mode = 0
-offset_left = -8.0
-offset_top = -8.0
-offset_right = 120.0
-offset_bottom = 184.0
+offset_right = 128.0
+offset_bottom = 192.0
 texture = SubResource("AtlasTexture_0qqw3")
 
 [node name="BG" type="TextureRect" parent="." unique_id=1702750552]
 use_parent_material = true
 layout_mode = 0
-offset_right = 112.0
-offset_bottom = 176.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 120.0
+offset_bottom = 184.0
 texture = SubResource("AtlasTexture_0qqw3")
 
 [node name="Icon" type="TextureRect" parent="." unique_id=1021453810]
 use_parent_material = true
 layout_mode = 0
-offset_right = 112.0
-offset_bottom = 112.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 120.0
+offset_bottom = 120.0
 texture = SubResource("AtlasTexture_jl6rh")
 
 [node name="Label" type="Label" parent="." unique_id=514088983]
 use_parent_material = true
 layout_mode = 0
-offset_left = 8.0
-offset_top = 112.0
-offset_right = 104.0
-offset_bottom = 168.0
+offset_left = 16.0
+offset_top = 120.0
+offset_right = 112.0
+offset_bottom = 176.0
 theme_override_font_sizes/font_size = 10
 text = "+1 УРОН"
 horizontal_alignment = 1

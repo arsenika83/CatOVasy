@@ -1,3 +1,10 @@
+TextureButton
+GridContainer
+TextureRect
+PanelContainer
+HBoxContainer
+ScrollContainer
+Control
 Timer
 AnimationPlayer
 ColorRect
@@ -6,9 +13,3 @@ Label
 Node2D
 CollisionShape2D
 CharacterBody2D
-SubViewportContainer
-Camera2D
-SubViewport
-Control
-TextureRect
-Button

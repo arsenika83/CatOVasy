@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://qh6i2ftagbyi"]
 
 [ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="1_jn02f"]
-[ext_resource type="Script" uid="uid://cq03nl5wrbyvx" path="res://scripts/ability_card.gd" id="2_jn02f"]
+[ext_resource type="Script" uid="uid://cq03nl5wrbyvx" path="res://scripts/cards/ability_card.gd" id="2_jn02f"]
 [ext_resource type="Texture2D" uid="uid://b0rpbj3njbbar" path="res://assets/images/cards.png" id="3_w711m"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jl6rh"]

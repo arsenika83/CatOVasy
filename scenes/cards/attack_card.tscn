@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bmpkg88pplgyw"]
 
 [ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="1_3qdcb"]
-[ext_resource type="Script" uid="uid://g8lrp5w333as" path="res://scripts/attack_card.gd" id="2_7cc2x"]
+[ext_resource type="Script" uid="uid://g8lrp5w333as" path="res://scripts/cards/attack_card.gd" id="2_7cc2x"]
 [ext_resource type="Texture2D" uid="uid://b0rpbj3njbbar" path="res://assets/images/cards.png" id="3_qm7e5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jl6rh"]

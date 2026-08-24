@@ -41,6 +41,10 @@ var level = 1
 
 var current_targets : Array[CharacterBody2D]
 var current_cards: Array[Card]
+
+var current_attack_cards: Array[Card]
+var current_ability_cards: Array[Card]
+
 var current_enemies : Array
 
 var debuff_set : Array = [["weakness", 1, 1], ["undefend", 100, 1], ["inaccuracy", 10, 1],\
@@ -58,6 +62,9 @@ func _ready() -> void:
 	current_cards.append(AttackCard.new())
 	current_cards.append(DefendCard.new())
 	current_cards.append(AbilityCard.new())
+	
+	current_attack_cards.append(AttackCard.new())
+	current_ability_cards.append(AbilityCard.new())
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

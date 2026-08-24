@@ -48,39 +48,44 @@ func _process(delta: float) -> void:
 	
 	var diff_x = abs(cursor_map_pos.x - map.local_to_map(giant.position).x)
 	var diff_y = abs(cursor_map_pos.y - map.local_to_map(giant.position).y)
-	
-	draw_cursor()
+		
 	check_hp()
 	
 	if inventory_on_screen:
 		update_inventory()
 	
-	if gm.state == "idle":
-		if Input.is_action_just_pressed("ui_lmb"):
-			move_to_map_pos()
-			giant.walk()
-			
-		if Input.is_action_just_pressed("ui_rmb"):
-			draw_inventory()
-			
-		if Input.is_action_pressed("ui_rmb"):
-			creature_dialog_on_screen = true
-			check_creature_stats() 
-		else:
-			if(creature_dialog_on_screen == true):
-				var tween = create_tween()
-				tween.tween_property(creature_check_dialog, "position:x", -500, 0.25)
-				cursor.visible = true
-				creature_dialog_on_screen = false	
+	match gm.state:
+		"idle":
+			draw_cursor()
+			if Input.is_action_just_pressed("ui_lmb"):
+				move_to_map_pos()
+				giant.walk()
+				
+			if Input.is_action_just_pressed("ui_rmb"):
+				draw_inventory()
+				
+			if Input.is_action_pressed("ui_rmb"):
+				creature_dialog_on_screen = true
+				check_creature_stats() 
+			else:
+				if(creature_dialog_on_screen == true):
+					var tween = create_tween()
+					tween.tween_property(creature_check_dialog, "position:x", -500, 0.25)
+					cursor.visible = true
+					creature_dialog_on_screen = false	
+					
+				if Input.is_action_just_pressed("ui_scale_up") and gm.camera_zoom <= 3:
+					gm.camera_zoom += 1
+					smooth_camera_zoom(":zoom:x", gm.camera_zoom)
+					smooth_camera_zoom(":zoom:y", gm.camera_zoom)
+				elif Input.is_action_just_pressed("ui_scale_down") and gm.camera_zoom >= 3:
+					gm.camera_zoom -= 1
+					smooth_camera_zoom(":zoom:x", gm.camera_zoom)
+					smooth_camera_zoom(":zoom:y", gm.camera_zoom)
+		"checking_inventory":
+			cursor.visible = false
 		
-	if Input.is_action_just_pressed("ui_scale_up") and gm.camera_zoom <= 3:
-		gm.camera_zoom += 1
-		smooth_camera_zoom(":zoom:x", gm.camera_zoom)
-		smooth_camera_zoom(":zoom:y", gm.camera_zoom)
-	elif Input.is_action_just_pressed("ui_scale_down") and gm.camera_zoom >= 3:
-		gm.camera_zoom -= 1
-		smooth_camera_zoom(":zoom:x", gm.camera_zoom)
-		smooth_camera_zoom(":zoom:y", gm.camera_zoom)	
+
 
 func smooth_camera_zoom(value1, value2) -> void:
 	var tween = create_tween()
@@ -134,6 +139,7 @@ func move_to_map_pos() -> void:
 	enemy_turn()
 	
 func draw_cursor() -> void:
+	cursor.visible = true
 	var map_pos = map.local_to_map(cursor_pos)
 	
 	var diff_x = map_pos.x - map.local_to_map(giant.position).x
@@ -232,7 +238,7 @@ func draw_inventory() -> void:
 			inventory.find_child("StatsLabel").text = stats
 			
 			var tween = create_tween()
-			tween.tween_property(inventory, "position:x", 840, 0.3)
+			tween.tween_property(inventory, "position:x", 870, 0.3)
 				
 			inventory_on_screen = true
 
