@@ -1,8 +1,15 @@
 [gd_scene format=3 uid="uid://dsiha16n5p53v"]
 
+[ext_resource type="FontFile" uid="uid://dub3oi8dxfpfw" path="res://assets/fonts/JeuDePixel-Regular.otf" id="1_r3xpn"]
 [ext_resource type="Script" uid="uid://dscspkx5s0xw1" path="res://scripts/card_slot.gd" id="1_r5mde"]
 [ext_resource type="Texture2D" uid="uid://b0rpbj3njbbar" path="res://assets/images/cards.png" id="1_y2car"]
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="3_1u5tj"]
+
+[sub_resource type="Theme" id="Theme_urfd8"]
+TooltipLabel/colors/font_outline_color = Color(0, 0, 0, 1)
+TooltipLabel/colors/font_shadow_color = Color(0, 0, 0, 1)
+TooltipLabel/fonts/font = ExtResource("1_r3xpn")
+TooltipPanel/styles/new_style = null
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r5mde"]
 atlas = ExtResource("1_y2car")
@@ -29,6 +36,9 @@ use_parent_material = true
 custom_minimum_size = Vector2(64, 64)
 offset_right = 32.0
 offset_bottom = 32.0
+tooltip_text = "Пустой слот для карты"
+mouse_filter = 1
+theme = SubResource("Theme_urfd8")
 script = ExtResource("1_r5mde")
 
 [node name="Icon" type="TextureRect" parent="." unique_id=404527779]
@@ -42,6 +52,7 @@ stretch_mode = 5
 z_index = 30
 use_parent_material = true
 layout_mode = 2
+mouse_filter = 1
 texture_normal = SubResource("AtlasTexture_r3xpn")
 texture_pressed = SubResource("AtlasTexture_urfd8")
 texture_hover = SubResource("AtlasTexture_v7mql")

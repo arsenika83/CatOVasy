@@ -9,18 +9,22 @@ extends PanelContainer
 var icon_loaded = false
 
 func _ready() -> void:
-	if type == 1:
-		icon.texture = load("res://assets/images/card_icons/attack_card_default.png")
-	else:
-		icon.texture = load("res://assets/images/card_icons/ability_card_default.png")
-	update()
+	if current_card == null:
+		fire_button.disabled = true
+		if type == 1:
+			icon.texture = load("res://assets/images/card_icons/attack_card_default.png")
+		else:
+			icon.texture = load("res://assets/images/card_icons/ability_card_default.png")
+		update()
 	
 func _process(delta: float) -> void:
 	update()
 			
 func update() -> void:
 	if current_card != null and not icon_loaded:
+		fire_button.disabled = false
 		icon.texture = load("res://assets/images/card_icons/" + current_card.icon_path)
+		tooltip_text = current_card.tool_tip_text
 		icon_loaded = true
 
 func _on_fire_button_pressed() -> void:
@@ -31,4 +35,5 @@ func _on_fire_button_pressed() -> void:
 		gm.current_ability_cards[gm.current_ability_cards.find(current_card)] = null
 		icon.texture = load("res://assets/images/card_icons/ability_card_default.png")
 	current_card = null
+	fire_button.disabled = true
 	icon_loaded = false

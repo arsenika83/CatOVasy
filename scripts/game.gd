@@ -272,6 +272,7 @@ func end_battle() -> void:
 	$Effects.visible = true
 	$CanvasModulate.visible = true
 	player_camera.enabled = true
+	player_camera.zoom = Vector2(gm.camera_zoom, gm.camera_zoom)
 	giant.light.enabled = true
 
 func _on_battle_start_timer_timeout() -> void:

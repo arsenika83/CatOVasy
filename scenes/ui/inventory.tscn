@@ -180,6 +180,17 @@ offset_right = 24.0
 offset_bottom = 133.0
 texture = SubResource("AtlasTexture_0df5h")
 
+[node name="StatsLabel2" type="Label" parent="." unique_id=775349505]
+use_parent_material = true
+layout_mode = 0
+offset_left = 16.0
+offset_top = 488.0
+offset_right = 384.0
+offset_bottom = 513.0
+theme_override_fonts/font = ExtResource("5_td2ew")
+text = "КАРТЫ"
+horizontal_alignment = 1
+
 [node name="Cards" type="GridContainer" parent="." unique_id=1690070523]
 use_parent_material = true
 layout_mode = 0
