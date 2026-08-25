@@ -12,8 +12,10 @@ func _ready() -> void:
 	if current_card == null:
 		fire_button.disabled = true
 		if type == 1:
+			tooltip_text = "Пустой слот \nдля карты \nатаки"
 			icon.texture = load("res://assets/images/card_icons/attack_card_default.png")
 		else:
+			tooltip_text = "Пустой слот \nдля карты \nспособности"
 			icon.texture = load("res://assets/images/card_icons/ability_card_default.png")
 		update()
 	
@@ -29,10 +31,14 @@ func update() -> void:
 
 func _on_fire_button_pressed() -> void:
 	if type == 1:
-		gm.current_attack_cards[gm.current_attack_cards.find(current_card)] = null
+		gm.current_attack_cards.remove_at(gm.current_attack_cards.find(current_card))
+		
+		tooltip_text = "Пустой слот \nдля карты \nатаки"
 		icon.texture = load("res://assets/images/card_icons/attack_card_default.png")
 	else:
-		gm.current_ability_cards[gm.current_ability_cards.find(current_card)] = null
+		gm.current_ability_cards.remove_at(gm.current_ability_cards.find(current_card))
+		
+		tooltip_text = "Пустой слот \nдля карты \nспособности"
 		icon.texture = load("res://assets/images/card_icons/ability_card_default.png")
 	current_card = null
 	fire_button.disabled = true

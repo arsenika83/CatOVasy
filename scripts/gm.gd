@@ -15,7 +15,7 @@ var battle_y : int
 var hp = 30
 var max_hp = 30
 
-var damage = 5
+var damage = 1
 var current_damage = damage
 
 var defence = 3
@@ -43,6 +43,7 @@ var current_targets : Array[CharacterBody2D]
 var current_cards: Array[Card]
 
 var current_attack_cards: Array[Card]
+var current_defend_cards: Array[Card]
 var current_ability_cards: Array[Card]
 
 var current_enemies : Array
@@ -64,6 +65,12 @@ func _ready() -> void:
 	current_cards.append(AbilityCard.new())
 	
 	current_attack_cards.append(AttackCard.new())
+	current_attack_cards.append(AttackCard.new())
+	current_attack_cards.append(AttackDoubleClaw.new())
+	
+	current_defend_cards.append(DefendCard.new())
+	
+	current_ability_cards.append(AbilityCard.new())
 	current_ability_cards.append(AbilityCard.new())
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

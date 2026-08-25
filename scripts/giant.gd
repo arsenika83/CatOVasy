@@ -117,6 +117,10 @@ func go_downstairs() -> void:
 	tween.tween_property(self, "scale", Vector2(0, 0), 0.5)
 
 func deal_damage(targets : Array[CharacterBody2D]) -> void:
+	var energy_cost = get_parent().find_child("UI").find_child("CardContainer").current_selected.energy_cost
+	if gm.current_energy - energy_cost < 0:
+		return
+	gm.current_energy -= energy_cost
 	
 	var tween2 = create_tween()
 	tween2.tween_property(sprite, "position:x", sprite.position.x + 4, 0.1)
@@ -127,6 +131,7 @@ func deal_damage(targets : Array[CharacterBody2D]) -> void:
 		var luck_success : bool = randf_range(0.0, 1.0) * 100 <= gm.current_luck
 		
 		if success:
+			gm.current_damage = get_parent().find_child("UI").find_child("CardContainer").current_selected.damage
 			if luck_success:
 				status_fx.scale = Vector2(0, 0)
 				status_fx.play("lucky")
@@ -141,7 +146,9 @@ func deal_damage(targets : Array[CharacterBody2D]) -> void:
 			gm.current_damage = 0
 			print("MISS! ")
 	
+	get_parent().find_child("UI").find_child("CardContainer").replace_current_card("attack")
 	sprite.play("deal_damage")
+	
 	deal_damage_timer.start(gm.attack_animation_time)
 
 func take_damage(dmg : int, time : float) -> void:
@@ -175,6 +182,12 @@ func take_damage(dmg : int, time : float) -> void:
 		miss_damage_timer.start(time)
 
 func defend(time : float) -> void:
+	var energy_cost = get_parent().find_child("UI").find_child("CardContainer").current_selected.energy_cost
+	if gm.current_energy - energy_cost < 0:
+		return
+	
+	gm.current_energy -= energy_cost
+	
 	gm.current_defence += gm.defence
 	
 	if gm.current_defence > gm.max_defence:
@@ -193,6 +206,12 @@ func defend(time : float) -> void:
 		defend_timer.start(time)
 
 func give_debuff(targets : Array[CharacterBody2D], type : String, power : int, turns : int) -> void:
+	var energy_cost = get_parent().find_child("UI").find_child("CardContainer").current_selected.energy_cost
+	if gm.current_energy - energy_cost < 0:
+		return
+	
+	gm.current_energy -= energy_cost
+	
 	status_fx.scale = Vector2(0, 0)
 	status_fx.play("debuff")
 
@@ -236,6 +255,7 @@ func give_debuff(targets : Array[CharacterBody2D], type : String, power : int, t
 				gm.current_targets[0].energy = 0
 		
 	gm.current_targets[0].status_fx.visible = true
+	get_parent().find_child("UI").find_child("CardContainer").replace_current_card("ability")
 	var tween3 = create_tween()
 	tween3.tween_property(gm.current_targets[0].status_fx, "scale", Vector2(1, 1), 0.2)	
 	debuff_timer.start(gm.debuff_animation_time)
@@ -402,6 +422,7 @@ func _on_deal_damage_timer_timeout() -> void:
 		target.take_damage(gm.current_damage, gm.attack_animation_time)
 	gm.current_damage = gm.damage
 	idle_animation_timer.start(0.2)
+
 
 func _on_defend_timer_timeout() -> void:
 	audio_defend.play()

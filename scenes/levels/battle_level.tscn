@@ -163,6 +163,8 @@ stream = ExtResource("11_q70wx")
 anchors_preset = 2
 anchor_top = 1.0
 anchor_right = 0.0
+offset_top = -32.0
+offset_bottom = -32.0
 grow_horizontal = 1
 grow_vertical = 0
 
@@ -171,25 +173,16 @@ offset_left = -64.0
 offset_top = -64.16
 offset_right = 192.0
 
-[node name="CardContainer" parent="UI" unique_id=515924417 instance=ExtResource("10_ou0n0")]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_right = 0.0
-offset_top = -240.0
-offset_right = 376.0
-offset_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 0
-
 [node name="EndBattleButton" type="Button" parent="UI" unique_id=235546835]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -50.0
-offset_top = -64.0
-offset_right = 50.0
+offset_left = -64.0
+offset_top = -144.0
+offset_right = 64.0
+offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("12_q70wx")
@@ -208,6 +201,12 @@ offset_right = 0.0
 offset_bottom = 0.0
 grow_horizontal = 0
 grow_vertical = 0
+
+[node name="CardContainer" parent="UI" unique_id=1698416944 instance=ExtResource("10_ou0n0")]
+offset_left = 24.0
+offset_top = 456.0
+offset_right = -808.0
+offset_bottom = -56.0
 
 [node name="CheckStatsDialogHoldTimer" type="Timer" parent="." unique_id=56407654]
 wait_time = 0.1

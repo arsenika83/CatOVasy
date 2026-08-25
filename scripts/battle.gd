@@ -185,8 +185,6 @@ func enemy_turn() -> void:
 
 func end_turn() -> void:
 	if current_creature_turn == -1:
-		gm.current_energy -= 1
-		
 		if gm.current_energy <= 0:
 			gm.current_energy = 0
 			

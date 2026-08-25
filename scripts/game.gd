@@ -263,6 +263,7 @@ func start_battle() -> void:
 func end_battle() -> void:
 	gm.state = "idle"
 	gm.energy = gm.max_energy
+	gm.current_energy = gm.max_energy
 	gm.current_damage = gm.damage
 	gm.current_defence = gm.defence
 	gm.current_accuracy = gm.accuracy
@@ -283,6 +284,7 @@ func _on_battle_start_timer_timeout() -> void:
 	giant.light.enabled = false
 	gm.current_music_position = audio.get_playback_position()
 	inventory.position.x = 1500
+	inventory_on_screen = false
 	
 	audio.stop()
 	player_camera.enabled = false

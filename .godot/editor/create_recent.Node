@@ -1,10 +1,10 @@
 TextureButton
-GridContainer
 TextureRect
+Control
+GridContainer
 PanelContainer
 HBoxContainer
 ScrollContainer
-Control
 Timer
 AnimationPlayer
 ColorRect
@@ -12,4 +12,3 @@ CanvasLayer
 Label
 Node2D
 CollisionShape2D
-CharacterBody2D

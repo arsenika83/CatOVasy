@@ -1,6 +1,19 @@
 [gd_scene format=3 uid="uid://bq46oyngg435a"]
 
 [ext_resource type="Script" uid="uid://i7vn76j21ys2" path="res://scripts/card_container.gd" id="1_hqkxu"]
+[ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="2_wau5o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3aiiy"]
+atlas = ExtResource("2_wau5o")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wau5o"]
+atlas = ExtResource("2_wau5o")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eov42"]
+atlas = ExtResource("2_wau5o")
+region = Rect2(96, 32, 32, 32)
 
 [node name="CardContainer" type="Control" unique_id=1698416944]
 z_index = 100
@@ -9,7 +22,65 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = -896.0
-offset_bottom = -504.0
+offset_bottom = -464.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_hqkxu")
+
+[node name="AttackCards" type="Control" parent="." unique_id=314133911]
+anchors_preset = 0
+offset_right = 128.0
+offset_bottom = 208.0
+mouse_filter = 2
+
+[node name="AttackChangeButton" type="TextureButton" parent="." unique_id=1891433270]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 208.0
+offset_right = 88.0
+offset_bottom = 256.0
+texture_normal = SubResource("AtlasTexture_3aiiy")
+texture_pressed = SubResource("AtlasTexture_wau5o")
+texture_hover = SubResource("AtlasTexture_eov42")
+stretch_mode = 0
+
+[node name="DefendCards" type="Control" parent="." unique_id=1304630926]
+anchors_preset = 0
+offset_left = 128.0
+offset_right = 256.0
+offset_bottom = 208.0
+mouse_filter = 2
+
+[node name="DefendChangeButton" type="TextureButton" parent="." unique_id=10585709]
+layout_mode = 0
+offset_left = 168.0
+offset_top = 208.0
+offset_right = 216.0
+offset_bottom = 256.0
+texture_normal = SubResource("AtlasTexture_3aiiy")
+texture_pressed = SubResource("AtlasTexture_wau5o")
+texture_hover = SubResource("AtlasTexture_eov42")
+stretch_mode = 0
+
+[node name="AbilityCards" type="Control" parent="." unique_id=1311630566]
+anchors_preset = 0
+offset_left = 256.0
+offset_right = 384.0
+offset_bottom = 208.0
+mouse_filter = 2
+
+[node name="AbilityChangeButton" type="TextureButton" parent="." unique_id=1346697942]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 208.0
+offset_right = 344.0
+offset_bottom = 256.0
+texture_normal = SubResource("AtlasTexture_3aiiy")
+texture_pressed = SubResource("AtlasTexture_wau5o")
+texture_hover = SubResource("AtlasTexture_eov42")
+stretch_mode = 0
+
+[connection signal="pressed" from="AttackChangeButton" to="." method="_on_attack_change_button_pressed"]
+[connection signal="pressed" from="DefendChangeButton" to="." method="_on_defend_change_button_pressed"]
+[connection signal="pressed" from="AbilityChangeButton" to="." method="_on_ability_change_button_pressed"]
