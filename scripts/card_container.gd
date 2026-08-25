@@ -24,7 +24,7 @@ func _ready() -> void:
 	var time_offset = 0
 	var y_offset = 0
 	
-	for card in gm.current_attack_cards:
+	for card in gm.current_attack_cards.values():
 		var card_resource = load("res://scenes/cards/" + card.card_path)
 		var added_card = card_resource.instantiate()
 		
@@ -42,7 +42,7 @@ func _ready() -> void:
 			
 	time_offset += 1.0
 	y_offset = 0
-	for card in gm.current_defend_cards:
+	for card in gm.current_defend_cards.values():
 		var card_resource = load("res://scenes/cards/" + card.card_path)
 		var added_card = card_resource.instantiate()
 		
@@ -60,7 +60,7 @@ func _ready() -> void:
 	time_offset += 1.0
 	y_offset = 0
 	
-	for card in gm.current_ability_cards:
+	for card in gm.current_ability_cards.values():
 		var card_resource = load("res://scenes/cards/" + card.card_path)
 		var added_card = card_resource.instantiate()
 		

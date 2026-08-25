@@ -18,21 +18,21 @@ card_slot_ability_3, card_slot_ability_4, card_slot_ability_5]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	for i in range(0, gm.current_attack_cards.size()-1):
-		attack_card_slots[i].current_card = gm.current_attack_cards[i+1]
-		
-	for i in range(0, gm.current_ability_cards.size()):
-		ability_card_slots[i].current_card = gm.current_ability_cards[i]
-
+	update_cards()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
+func update_cards() -> void:
+	for i in range(0, gm.current_attack_cards.size()-1):
+		attack_card_slots[i].current_card = gm.current_attack_cards.get(i+1)
+		
+	for i in range(0, gm.current_ability_cards.size()+1):
+		ability_card_slots[i].current_card = gm.current_ability_cards.get(i+1)
 
 func _on_mouse_entered() -> void:
 	gm.state = "checking_inventory"
-
 
 func _on_mouse_exited() -> void:
 	gm.state = "idle"

@@ -8,6 +8,7 @@ var tool_tip_text = "Наносит урон, \nравный вашему \nба
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	state_modifier = "_attack"
+	type = "attack"
 	$Label.text = str("Урон: ", damage)
 	$Energy/Label.text = str(energy_cost)
 

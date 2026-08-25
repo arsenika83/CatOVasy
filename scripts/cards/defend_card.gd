@@ -6,6 +6,7 @@ var card_path = "defend_card.tscn"
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	state_modifier = "_defend"
+	type = "defend"
 	$Label.text = str("+", gm.defence, " брони")
 	$Energy/Label.text = str(energy_cost)
 

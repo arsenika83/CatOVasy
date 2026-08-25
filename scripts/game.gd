@@ -19,6 +19,7 @@ var inventory_on_screen = false
 
 @onready var creature_check_dialog = $UI/CreatureAdventureDialog
 @onready var inventory = $UI/Inventory
+@onready var level_up_dialog = $UI/LevelUpDialog
 
 @onready var foregroundFX = $Effects/ColorRect
 
@@ -33,6 +34,9 @@ func _ready() -> void:
 	
 	inventory.position.x = 1500
 	inventory.visible = true
+	
+	level_up_dialog.visible = true
+	level_up_dialog.position.x = -1500
 	
 	gm.current_level_edge_positions.clear()
 	for edge in find_child("Edges").get_children():
@@ -253,6 +257,17 @@ func update_inventory() -> void:
 	stats += 	str("\nУРОВЕНЬ:  ", gm.level)
 	stats += 	str("\nОПЫТ:     ", gm.xp, "/", gm.xp_needed)
 	inventory.find_child("StatsLabel").text = stats
+	inventory.update_cards()
+
+func draw_level_up() -> void:
+	level_up_dialog.visible = true
+	level_up_dialog.position.x = 352
+	level_up_dialog.scale = Vector2(0, 0)
+	level_up_dialog.update_cards()
+	gm.state = "leveling_up"
+	
+	var tween = create_tween()
+	tween.tween_property(level_up_dialog, "scale", Vector2(1, 1), 0.5)	
 
 func start_battle() -> void:
 	if not find_child("BattleNode").find_child("Battle") or gm.state == "battle":

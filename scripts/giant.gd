@@ -357,7 +357,8 @@ func check_xp() -> void:
 		gm.level += 1
 		gm.xp = gm.xp - gm.xp_needed
 		gm.xp_needed += 1
-		check_xp()
+		#check_xp()
+		get_parent().draw_level_up()
 		
 		gm.damage += 1
 		$AudioStreamPlayerLevelUp.play()

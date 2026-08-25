@@ -1,0 +1,233 @@
+[gd_scene format=3 uid="uid://dpydh1bnymoa8"]
+
+[ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="1_vtgeg"]
+[ext_resource type="Script" uid="uid://74lchd7cw1fp" path="res://scripts/level_up_dialog.gd" id="2_6dcm8"]
+[ext_resource type="Texture2D" uid="uid://de2c8pnqtrt77" path="res://assets/images/inventory_ui.png" id="3_i3v37"]
+[ext_resource type="FontFile" uid="uid://dub3oi8dxfpfw" path="res://assets/fonts/JeuDePixel-Regular.otf" id="4_qph1y"]
+[ext_resource type="PackedScene" uid="uid://hoerixcuuuk3" path="res://scenes/cards/attack_double_claw_card.tscn" id="5_6dcm8"]
+[ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="5_jekd8"]
+[ext_resource type="PackedScene" uid="uid://dddxgmk4rbmyu" path="res://scenes/cards/defend_card.tscn" id="6_i3v37"]
+[ext_resource type="PackedScene" uid="uid://qh6i2ftagbyi" path="res://scenes/cards/ability_card.tscn" id="7_qph1y"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qtlqx"]
+shader = ExtResource("1_vtgeg")
+shader_parameter/speed = 0.0
+shader_parameter/amplitude = 4.00000019
+shader_parameter/time_offset = 10.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_53g1v"]
+atlas = ExtResource("3_i3v37")
+region = Rect2(832, 0, 448, 720)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mj3lq"]
+atlas = ExtResource("5_jekd8")
+region = Rect2(0, 192, 16, 16)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qph1y"]
+resource_local_to_scene = true
+shader = ExtResource("1_vtgeg")
+shader_parameter/speed = 2.000000095
+shader_parameter/amplitude = 10.000000475
+shader_parameter/time_offset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jekd8"]
+resource_local_to_scene = true
+shader = ExtResource("1_vtgeg")
+shader_parameter/speed = 2.000000095
+shader_parameter/amplitude = 10.000000475
+shader_parameter/time_offset = 0.4390000208525
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n6hbc"]
+resource_local_to_scene = true
+shader = ExtResource("1_vtgeg")
+shader_parameter/speed = 2.000000095
+shader_parameter/amplitude = 10.000000475
+shader_parameter/time_offset = 0.4390000208525
+
+[sub_resource type="Theme" id="Theme_i3v37"]
+default_font = ExtResource("4_qph1y")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i3v37"]
+atlas = ExtResource("5_jekd8")
+region = Rect2(0, 240, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qph1y"]
+atlas = ExtResource("5_jekd8")
+region = Rect2(16, 224, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jekd8"]
+atlas = ExtResource("5_jekd8")
+region = Rect2(0, 224, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n6hbc"]
+atlas = ExtResource("5_jekd8")
+region = Rect2(16, 240, 16, 16)
+
+[sub_resource type="Theme" id="Theme_qph1y"]
+default_font = ExtResource("4_qph1y")
+
+[sub_resource type="Theme" id="Theme_jekd8"]
+default_font = ExtResource("4_qph1y")
+
+[node name="LevelUpDialog" type="Control" unique_id=1641948652]
+material = SubResource("ShaderMaterial_qtlqx")
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -288.0
+offset_top = -192.0
+offset_right = -992.0
+offset_bottom = -528.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(288, 192)
+script = ExtResource("2_6dcm8")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1275944467]
+use_parent_material = true
+layout_mode = 0
+offset_right = 576.0
+offset_bottom = 392.0
+texture = SubResource("AtlasTexture_53g1v")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=1621686300]
+use_parent_material = true
+layout_mode = 0
+offset_left = 16.0
+offset_top = 80.0
+offset_right = 560.0
+offset_bottom = 376.0
+texture = SubResource("AtlasTexture_53g1v")
+expand_mode = 1
+
+[node name="TextureRect3" type="TextureRect" parent="." unique_id=764859019]
+use_parent_material = true
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("AtlasTexture_mj3lq")
+expand_mode = 1
+
+[node name="TextureRect4" type="TextureRect" parent="." unique_id=895001076]
+use_parent_material = true
+layout_mode = 0
+offset_left = 536.0
+offset_top = 8.0
+offset_right = 568.0
+offset_bottom = 40.0
+texture = SubResource("AtlasTexture_mj3lq")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="." unique_id=775349505]
+use_parent_material = true
+layout_mode = 0
+offset_left = 16.0
+offset_top = 8.0
+offset_right = 560.0
+offset_bottom = 33.0
+theme_override_fonts/font = ExtResource("4_qph1y")
+text = "ПОВЫШЕНИЕ УРОВНЯ!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="." unique_id=910599828]
+use_parent_material = true
+layout_mode = 0
+offset_left = 16.0
+offset_top = 48.0
+offset_right = 560.0
+offset_bottom = 73.0
+theme_override_fonts/font = ExtResource("4_qph1y")
+text = "Выберите награду:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cards" type="GridContainer" parent="." unique_id=1690070523]
+use_parent_material = true
+layout_mode = 0
+offset_left = 32.0
+offset_top = 96.0
+offset_right = 544.0
+offset_bottom = 288.0
+size_flags_vertical = 3
+theme_override_constants/h_separation = 192
+theme_override_constants/v_separation = 12
+columns = 3
+
+[node name="AttackDoubleClawCard" parent="Cards" unique_id=1531075916 instance=ExtResource("5_6dcm8")]
+material = SubResource("ShaderMaterial_qph1y")
+layout_mode = 2
+
+[node name="DefendCard" parent="Cards" unique_id=1699761303 instance=ExtResource("6_i3v37")]
+material = SubResource("ShaderMaterial_jekd8")
+layout_mode = 2
+
+[node name="AbilityCard" parent="Cards" unique_id=1572409371 instance=ExtResource("7_qph1y")]
+material = SubResource("ShaderMaterial_n6hbc")
+layout_mode = 2
+
+[node name="FireButton1" type="TextureButton" parent="." unique_id=1162815828]
+z_index = 30
+use_parent_material = true
+layout_mode = 0
+offset_left = 72.0
+offset_top = 312.0
+offset_right = 120.0
+offset_bottom = 360.0
+tooltip_text = "Сжечь карту
+ради повышения
+характеристик"
+mouse_filter = 1
+theme = SubResource("Theme_i3v37")
+texture_normal = SubResource("AtlasTexture_i3v37")
+texture_pressed = SubResource("AtlasTexture_qph1y")
+texture_hover = SubResource("AtlasTexture_jekd8")
+texture_disabled = SubResource("AtlasTexture_n6hbc")
+stretch_mode = 0
+
+[node name="FireButton2" type="TextureButton" parent="." unique_id=1899458398]
+z_index = 30
+use_parent_material = true
+layout_mode = 0
+offset_left = 264.0
+offset_top = 312.0
+offset_right = 312.0
+offset_bottom = 360.0
+tooltip_text = "Сжечь карту
+ради повышения
+характеристик"
+mouse_filter = 1
+theme = SubResource("Theme_qph1y")
+texture_normal = SubResource("AtlasTexture_i3v37")
+texture_pressed = SubResource("AtlasTexture_qph1y")
+texture_hover = SubResource("AtlasTexture_jekd8")
+texture_disabled = SubResource("AtlasTexture_n6hbc")
+stretch_mode = 0
+
+[node name="FireButton3" type="TextureButton" parent="." unique_id=1525506068]
+z_index = 30
+use_parent_material = true
+layout_mode = 0
+offset_left = 456.0
+offset_top = 312.0
+offset_right = 504.0
+offset_bottom = 360.0
+tooltip_text = "Сжечь карту
+ради повышения
+характеристик"
+mouse_filter = 1
+theme = SubResource("Theme_jekd8")
+texture_normal = SubResource("AtlasTexture_i3v37")
+texture_pressed = SubResource("AtlasTexture_qph1y")
+texture_hover = SubResource("AtlasTexture_jekd8")
+texture_disabled = SubResource("AtlasTexture_n6hbc")
+stretch_mode = 0
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="pressed" from="FireButton1" to="." method="_on_fire_button_1_pressed"]
+[connection signal="pressed" from="FireButton2" to="." method="_on_fire_button_2_pressed"]
+[connection signal="pressed" from="FireButton3" to="." method="_on_fire_button_3_pressed"]

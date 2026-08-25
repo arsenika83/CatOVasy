@@ -5,6 +5,7 @@ extends PanelContainer
 @onready var fire_button = $FireButton
 
 @export var type = 1
+@export var id = 0
 
 var icon_loaded = false
 
@@ -31,12 +32,12 @@ func update() -> void:
 
 func _on_fire_button_pressed() -> void:
 	if type == 1:
-		gm.current_attack_cards.remove_at(gm.current_attack_cards.find(current_card))
+		gm.current_attack_cards.erase(id)
 		
 		tooltip_text = "Пустой слот \nдля карты \nатаки"
 		icon.texture = load("res://assets/images/card_icons/attack_card_default.png")
 	else:
-		gm.current_ability_cards.remove_at(gm.current_ability_cards.find(current_card))
+		gm.current_ability_cards.erase(id)
 		
 		tooltip_text = "Пустой слот \nдля карты \nспособности"
 		icon.texture = load("res://assets/images/card_icons/ability_card_default.png")

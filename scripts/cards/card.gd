@@ -1,12 +1,14 @@
 class_name Card extends Control
 
 signal card_clicked(card_node)
+signal card_picked_up(card_node)
 signal card_played(card_node)
 var is_selected: bool = false
 
 var state_modifier = ""
 var enabled = true
 var energy_cost = 1
+var type = ""
 var rarity = "common"
 
 const SCALE_NORMAL = Vector2(1.0, 1.0)
@@ -41,7 +43,10 @@ func animate_to(target_scale: Vector2, target_color: Color, duration: float = 0.
 func _on_gui_input(event: InputEvent) -> void:
 	if enabled:
 		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
-			card_clicked.emit(self)
+			if gm.state == "leveling_up":
+				card_picked_up.emit(self)
+			else:	
+				card_clicked.emit(self)
 
 func select_card():
 	if enabled:
