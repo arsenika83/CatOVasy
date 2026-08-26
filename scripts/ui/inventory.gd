@@ -25,14 +25,18 @@ func _process(delta: float) -> void:
 	pass
 
 func update_cards() -> void:
-	for i in range(0, gm.current_attack_cards.size()-1):
-		attack_card_slots[i].current_card = gm.current_attack_cards.get(i+1)
+	for i in range(0, 5):
+		if gm.current_attack_cards.has(i+1) and is_instance_valid(gm.current_attack_cards.get(i+1)):
+			attack_card_slots[i].current_card = gm.current_attack_cards.get(i+1)
 		
-	for i in range(0, gm.current_ability_cards.size()+1):
-		ability_card_slots[i].current_card = gm.current_ability_cards.get(i+1)
+	for i in range(0, 5):
+		if gm.current_ability_cards.has(i+1) and is_instance_valid(gm.current_ability_cards.get(i+1)):
+			ability_card_slots[i].current_card = gm.current_ability_cards.get(i+1)
 
 func _on_mouse_entered() -> void:
-	gm.state = "checking_inventory"
+	if gm.state == "idle":
+		gm.state = "checking_inventory"
 
 func _on_mouse_exited() -> void:
-	gm.state = "idle"
+	if gm.state == "checking_inventory":
+		gm.state = "idle"

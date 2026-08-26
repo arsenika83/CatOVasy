@@ -2,7 +2,7 @@
 
 [ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="1_s887n"]
 [ext_resource type="Texture2D" uid="uid://de2c8pnqtrt77" path="res://assets/images/inventory_ui.png" id="2_ty45s"]
-[ext_resource type="Script" uid="uid://c66ospnn4g23r" path="res://scripts/inventory.gd" id="2_ulvp7"]
+[ext_resource type="Script" uid="uid://c66ospnn4g23r" path="res://scripts/ui/inventory.gd" id="2_ulvp7"]
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="4_p7iul"]
 [ext_resource type="FontFile" uid="uid://dub3oi8dxfpfw" path="res://assets/fonts/JeuDePixel-Regular.otf" id="5_td2ew"]
 [ext_resource type="PackedScene" uid="uid://dsiha16n5p53v" path="res://scenes/ui/card_slot.tscn" id="6_weae1"]

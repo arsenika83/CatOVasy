@@ -20,6 +20,7 @@ var inventory_on_screen = false
 @onready var creature_check_dialog = $UI/CreatureAdventureDialog
 @onready var inventory = $UI/Inventory
 @onready var level_up_dialog = $UI/LevelUpDialog
+@onready var upgrade_stats_dialog = $UI/UpgradeStatsDialog
 
 @onready var foregroundFX = $Effects/ColorRect
 
@@ -34,9 +35,13 @@ func _ready() -> void:
 	
 	inventory.position.x = 1500
 	inventory.visible = true
+	inventory.update_cards()
 	
 	level_up_dialog.visible = true
 	level_up_dialog.position.x = -1500
+	
+	upgrade_stats_dialog.visible = true
+	upgrade_stats_dialog.position.x = -1500
 	
 	gm.current_level_edge_positions.clear()
 	for edge in find_child("Edges").get_children():
@@ -88,7 +93,7 @@ func _process(delta: float) -> void:
 					smooth_camera_zoom(":zoom:y", gm.camera_zoom)
 		"checking_inventory":
 			cursor.visible = false
-		
+			update_inventory()
 
 
 func smooth_camera_zoom(value1, value2) -> void:
@@ -264,10 +269,21 @@ func draw_level_up() -> void:
 	level_up_dialog.position.x = 352
 	level_up_dialog.scale = Vector2(0, 0)
 	level_up_dialog.update_cards()
+	level_up_dialog.level_label.text = str(gm.level-1, " → ", gm.level)
 	gm.state = "leveling_up"
 	
 	var tween = create_tween()
 	tween.tween_property(level_up_dialog, "scale", Vector2(1, 1), 0.5)	
+	
+func draw_upgrade_stats(rarity : String) -> void:
+	upgrade_stats_dialog.visible = true
+	upgrade_stats_dialog.position.x = 320
+	upgrade_stats_dialog.scale = Vector2(0, 0)
+	
+	gm.state = "leveling_up"
+	
+	var tween = create_tween()
+	tween.tween_property(upgrade_stats_dialog, "scale", Vector2(1, 1), 0.5)		
 
 func start_battle() -> void:
 	if not find_child("BattleNode").find_child("Battle") or gm.state == "battle":
@@ -293,6 +309,14 @@ func end_battle() -> void:
 
 func _on_battle_start_timer_timeout() -> void:
 	scene_transitioner.change_scene_back()
+	
+	gm.state = "idle"
+	gm.energy = gm.max_energy
+	gm.current_energy = gm.max_energy
+	gm.current_damage = gm.damage
+	gm.current_defence = gm.defence
+	gm.current_accuracy = gm.accuracy
+	gm.current_luck = gm.luck
 	
 	gm.state = "battle"
 	gm.prev_state = gm.state

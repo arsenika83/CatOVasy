@@ -92,8 +92,7 @@ func spawn() -> void:
 			var tween = create_tween()
 			tween.tween_property(self, "scale", Vector2(1, 1), 0.5)
 		"battle":
-			var tween = create_tween()
-			tween.tween_property(self, "scale", Vector2(1, 1), 0.5)
+			scale = Vector2(1, 1)
 			sprite.flip_h = true
 
 func respawn() -> void:
@@ -347,9 +346,10 @@ func check_fall(delta: float) -> void:
 
 func check_hp() -> void:
 	if gm.hp <= 0:
+		gm.hp = 0
 		gm.state = "dead"
 
-func check_xp() -> void:
+func check_xp() -> bool:
 	$AudioStreamPlayerPickUpXP.pitch_scale = randf_range(0.8, 1.2)
 	$AudioStreamPlayerPickUpXP.play()
 	
@@ -357,11 +357,12 @@ func check_xp() -> void:
 		gm.level += 1
 		gm.xp = gm.xp - gm.xp_needed
 		gm.xp_needed += 1
-		#check_xp()
 		get_parent().draw_level_up()
 		
-		gm.damage += 1
 		$AudioStreamPlayerLevelUp.play()
+		return true
+		
+	return false
 		
 
 func _on_area_2d_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:

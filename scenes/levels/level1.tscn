@@ -1,23 +1,24 @@
 [gd_scene format=4 uid="uid://bbfsubxmiotbl"]
 
-[ext_resource type="Script" uid="uid://dws0dtqq3i1mi" path="res://scripts/game.gd" id="1_sbmf2"]
-[ext_resource type="Shader" uid="uid://dw8y0528dhqqe" path="res://shaders/vhs.gdshader" id="2_1xax6"]
-[ext_resource type="Texture2D" uid="uid://4itbl0ejcd3o" path="res://assets/images/tilemap.png" id="3_g7tkf"]
-[ext_resource type="PackedScene" uid="uid://b7p1hqo3g0pln" path="res://scenes/objects/stairs_up.tscn" id="4_4fww7"]
-[ext_resource type="PackedScene" uid="uid://bsxo600wchpra" path="res://scenes/objects/pillow.tscn" id="6_jrfo0"]
-[ext_resource type="PackedScene" uid="uid://d0d5e8ltlrwqg" path="res://scenes/giant.tscn" id="7_db1r7"]
-[ext_resource type="PackedScene" uid="uid://1bvjmpy2pf0k" path="res://scenes/enemies/enemy.tscn" id="8_6gwlt"]
-[ext_resource type="PackedScene" uid="uid://b8bfs4u1x4s8" path="res://scenes/objects/grass_low.tscn" id="9_c2nc4"]
-[ext_resource type="PackedScene" uid="uid://1by6pkucltci" path="res://scenes/objects/grass.tscn" id="10_vhxpm"]
-[ext_resource type="PackedScene" uid="uid://c7f16y8rwf2q" path="res://scenes/objects/edge_one.tscn" id="11_arkx4"]
-[ext_resource type="PackedScene" uid="uid://dak3nh0u2ipui" path="res://scenes/objects/edge.tscn" id="12_jqv5m"]
-[ext_resource type="PackedScene" uid="uid://ba7f54d4yq2hp" path="res://scenes/ui/cursor.tscn" id="13_noix2"]
-[ext_resource type="Shader" uid="uid://dm6djrn7pct8b" path="res://shaders/wobble.gdshader" id="14_025c5"]
-[ext_resource type="AudioStream" uid="uid://bx1d746w8sbiy" path="res://assets/music/ZONE_1.wav" id="15_bw3ef"]
-[ext_resource type="PackedScene" uid="uid://di4k2iivrnhup" path="res://scenes/ui/creature_adventure_dialog.tscn" id="16_07dy8"]
+[ext_resource type="Script" uid="uid://dws0dtqq3i1mi" path="res://scripts/game.gd" id="1_g7tkf"]
+[ext_resource type="Shader" uid="uid://dw8y0528dhqqe" path="res://shaders/vhs.gdshader" id="2_4fww7"]
+[ext_resource type="Texture2D" uid="uid://4itbl0ejcd3o" path="res://assets/images/tilemap.png" id="3_gvm5i"]
+[ext_resource type="PackedScene" uid="uid://b7p1hqo3g0pln" path="res://scenes/objects/stairs_up.tscn" id="4_jrfo0"]
+[ext_resource type="PackedScene" uid="uid://bp10kb8rxtuhx" path="res://scenes/objects/stairs.tscn" id="5_db1r7"]
+[ext_resource type="PackedScene" uid="uid://d0d5e8ltlrwqg" path="res://scenes/giant.tscn" id="7_c2nc4"]
+[ext_resource type="PackedScene" uid="uid://cgbiblheppx0x" path="res://scenes/enemies/fox.tscn" id="9_arkx4"]
+[ext_resource type="PackedScene" uid="uid://b8bfs4u1x4s8" path="res://scenes/objects/grass_low.tscn" id="10_jqv5m"]
+[ext_resource type="PackedScene" uid="uid://1by6pkucltci" path="res://scenes/objects/grass.tscn" id="11_noix2"]
+[ext_resource type="PackedScene" uid="uid://c7f16y8rwf2q" path="res://scenes/objects/edge_one.tscn" id="12_025c5"]
+[ext_resource type="PackedScene" uid="uid://ba7f54d4yq2hp" path="res://scenes/ui/cursor.tscn" id="13_bw3ef"]
+[ext_resource type="Shader" uid="uid://dm6djrn7pct8b" path="res://shaders/wobble.gdshader" id="14_07dy8"]
+[ext_resource type="PackedScene" uid="uid://di4k2iivrnhup" path="res://scenes/ui/creature_adventure_dialog.tscn" id="15_3gp1u"]
+[ext_resource type="PackedScene" uid="uid://qgx2la7r3w7a" path="res://scenes/ui/inventory.tscn" id="16_igeo0"]
+[ext_resource type="PackedScene" uid="uid://dpydh1bnymoa8" path="res://scenes/ui/level_up_dialog.tscn" id="17_y71nm"]
+[ext_resource type="AudioStream" uid="uid://bx1d746w8sbiy" path="res://assets/music/ZONE_1.wav" id="18_6d4iq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fj52k"]
-shader = ExtResource("2_1xax6")
+shader = ExtResource("2_4fww7")
 shader_parameter/horizontalMovement = 2.9802400103307036e-08
 shader_parameter/verticalMovement = 2.9802400103307036e-08
 shader_parameter/frequencyStar = 0.0
@@ -34,11 +35,11 @@ shader_parameter/transparencyBackground = 0.0
 shader_parameter/seed = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1t5oo"]
-atlas = ExtResource("3_g7tkf")
+atlas = ExtResource("3_gvm5i")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p57ef"]
-texture = ExtResource("3_g7tkf")
+texture = ExtResource("3_gvm5i")
 texture_region_size = Vector2i(32, 32)
 1:0/0 = 0
 
@@ -47,7 +48,7 @@ tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_p57ef")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbhrr"]
-texture = ExtResource("3_g7tkf")
+texture = ExtResource("3_gvm5i")
 texture_region_size = Vector2i(32, 32)
 1:0/0 = 0
 2:0/0 = 0
@@ -67,7 +68,7 @@ tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_lbhrr")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7s2gi"]
-shader = ExtResource("14_025c5")
+shader = ExtResource("14_07dy8")
 shader_parameter/color_levels = 62.9230028938425
 shader_parameter/chromatic_aberration = 0.0010000000475
 shader_parameter/blur_amount = 3.2530001545175
@@ -78,7 +79,7 @@ shader_parameter/black_offset_multiplier = 0.0
 shader_parameter/color_offset = 3.259879990946679e-09
 
 [node name="Game" type="Node2D" unique_id=2132287685]
-script = ExtResource("1_sbmf2")
+script = ExtResource("1_g7tkf")
 
 [node name="BG" type="TextureRect" parent="." unique_id=1753798166]
 z_index = -10
@@ -105,18 +106,18 @@ tile_set = SubResource("TileSet_a7tdr")
 
 [node name="Exits" type="Node2D" parent="." unique_id=1303112674]
 
-[node name="Stairs2" parent="Exits" unique_id=175082881 instance=ExtResource("4_4fww7")]
+[node name="Stairs2" parent="Exits" unique_id=175082881 instance=ExtResource("4_jrfo0")]
 position = Vector2(176, 16)
+room_number = 0
+
+[node name="Stairs" parent="Exits" unique_id=1448595182 instance=ExtResource("5_db1r7")]
+position = Vector2(144, 208)
 room_number = 0
 
 [node name="Objects" type="Node2D" parent="." unique_id=1714322502]
 position = Vector2(208, 80)
 
-[node name="Pillow" parent="Objects" unique_id=564725004 instance=ExtResource("6_jrfo0")]
-charge_count = 1
-heal_power = 5
-
-[node name="Giant" parent="." unique_id=2060885226 instance=ExtResource("7_db1r7")]
+[node name="Giant" parent="." unique_id=2060885226 instance=ExtResource("7_c2nc4")]
 position = Vector2(176, 48)
 
 [node name="Camera2D" type="Camera2D" parent="Giant" unique_id=1303825275]
@@ -127,80 +128,176 @@ rotation_smoothing_speed = 3.0
 
 [node name="Enemies" type="Node2D" parent="." unique_id=946491156]
 
-[node name="Enemy" parent="Enemies" unique_id=772889915 instance=ExtResource("8_6gwlt")]
-position = Vector2(144, 144)
+[node name="EnemyFox" parent="Enemies" unique_id=685663284 instance=ExtResource("9_arkx4")]
+position = Vector2(272, 112)
 
-[node name="Enemy2" parent="Enemies" unique_id=2106804459 instance=ExtResource("8_6gwlt")]
-position = Vector2(240, 208)
+[node name="EnemyFox2" parent="Enemies" unique_id=1054669890 instance=ExtResource("9_arkx4")]
+position = Vector2(272, 112)
 
-[node name="Enemy3" parent="Enemies" unique_id=956625573 instance=ExtResource("8_6gwlt")]
-position = Vector2(144, 144)
+[node name="EnemyFox3" parent="Enemies" unique_id=590829417 instance=ExtResource("9_arkx4")]
+position = Vector2(272, 112)
 
-[node name="Enemy4" parent="Enemies" unique_id=903222958 instance=ExtResource("8_6gwlt")]
-position = Vector2(144, 144)
+[node name="EnemyFox4" parent="Enemies" unique_id=522888954 instance=ExtResource("9_arkx4")]
+position = Vector2(272, 112)
 
-[node name="Enemy6" parent="Enemies" unique_id=785576007 instance=ExtResource("8_6gwlt")]
-position = Vector2(144, 144)
+[node name="EnemyFox5" parent="Enemies" unique_id=1221701875 instance=ExtResource("9_arkx4")]
+position = Vector2(272, 112)
+
+[node name="EnemyFox6" parent="Enemies" unique_id=625390720 instance=ExtResource("9_arkx4")]
+position = Vector2(272, 112)
+
+[node name="EnemyFox7" parent="Enemies" unique_id=2080691791 instance=ExtResource("9_arkx4")]
+position = Vector2(112, 144)
+
+[node name="EnemyFox8" parent="Enemies" unique_id=1935806686 instance=ExtResource("9_arkx4")]
+position = Vector2(272, 112)
 
 [node name="Plants" type="Node2D" parent="." unique_id=1507805972]
 
-[node name="GrassLow3" parent="Plants" unique_id=963626142 instance=ExtResource("9_c2nc4")]
-position = Vector2(80, 112)
+[node name="GrassLow3" parent="Plants" unique_id=963626142 instance=ExtResource("10_jqv5m")]
+position = Vector2(80, 144)
 
-[node name="GrassLow" parent="Plants" unique_id=1576059805 instance=ExtResource("9_c2nc4")]
-position = Vector2(208, 208)
+[node name="GrassLow" parent="Plants" unique_id=1576059805 instance=ExtResource("10_jqv5m")]
+position = Vector2(240, 208)
 
-[node name="Grass" parent="Plants" unique_id=1301032520 instance=ExtResource("10_vhxpm")]
-position = Vector2(48, 48)
+[node name="Grass" parent="Plants" unique_id=1301032520 instance=ExtResource("11_noix2")]
+position = Vector2(48, 80)
 
-[node name="Grass3" parent="Plants" unique_id=88116230 instance=ExtResource("10_vhxpm")]
-position = Vector2(48, 208)
+[node name="Grass2" parent="Plants" unique_id=701532192 instance=ExtResource("11_noix2")]
+position = Vector2(176, 80)
 
-[node name="GrassLow2" parent="Plants" unique_id=503904768 instance=ExtResource("9_c2nc4")]
-position = Vector2(272, 48)
+[node name="Grass3" parent="Plants" unique_id=88116230 instance=ExtResource("11_noix2")]
+position = Vector2(80, 208)
+
+[node name="GrassLow2" parent="Plants" unique_id=503904768 instance=ExtResource("10_jqv5m")]
+position = Vector2(272, 16)
 
 [node name="Edges" type="Node2D" parent="." unique_id=1566389989]
 
-[node name="EdgeOne" parent="Edges" unique_id=433375762 instance=ExtResource("11_arkx4")]
+[node name="EdgeOne" parent="Edges" unique_id=433375762 instance=ExtResource("12_025c5")]
 position = Vector2(272, 176)
 
-[node name="Edge5" parent="Edges" unique_id=1880336353 instance=ExtResource("12_jqv5m")]
-position = Vector2(32, -16)
-rotation = 1.5707964
+[node name="EdgeOne2" parent="Edges" unique_id=1430481290 instance=ExtResource("12_025c5")]
+position = Vector2(336, 208)
 
-[node name="Edge3" parent="Edges" unique_id=307081349 instance=ExtResource("12_jqv5m")]
-position = Vector2(-16, 64)
+[node name="EdgeOne3" parent="Edges" unique_id=1298315878 instance=ExtResource("12_025c5")]
+position = Vector2(336, 176)
 
-[node name="Edge2" parent="Edges" unique_id=2101519550 instance=ExtResource("12_jqv5m")]
-position = Vector2(336, 192)
+[node name="EdgeOne4" parent="Edges" unique_id=1963093859 instance=ExtResource("12_025c5")]
+position = Vector2(336, 144)
 
-[node name="Edge" parent="Edges" unique_id=1467130881 instance=ExtResource("12_jqv5m")]
-position = Vector2(336, 64)
+[node name="EdgeOne5" parent="Edges" unique_id=1887831300 instance=ExtResource("12_025c5")]
+position = Vector2(336, 112)
 
-[node name="Edge4" parent="Edges" unique_id=1859388898 instance=ExtResource("12_jqv5m")]
-position = Vector2(-16, 192)
+[node name="EdgeOne6" parent="Edges" unique_id=312200138 instance=ExtResource("12_025c5")]
+position = Vector2(336, 80)
 
-[node name="Edge6" parent="Edges" unique_id=1031910063 instance=ExtResource("12_jqv5m")]
-position = Vector2(160, -16)
-rotation = 1.5707964
+[node name="EdgeOne7" parent="Edges" unique_id=221046357 instance=ExtResource("12_025c5")]
+position = Vector2(336, 48)
 
-[node name="Edge7" parent="Edges" unique_id=1614814094 instance=ExtResource("12_jqv5m")]
-position = Vector2(288, -16)
-rotation = 1.5707964
+[node name="EdgeOne8" parent="Edges" unique_id=614713258 instance=ExtResource("12_025c5")]
+position = Vector2(336, 16)
 
-[node name="Edge8" parent="Edges" unique_id=849310481 instance=ExtResource("12_jqv5m")]
-position = Vector2(32, 272)
-rotation = 1.5707964
+[node name="EdgeOne9" parent="Edges" unique_id=700030298 instance=ExtResource("12_025c5")]
+position = Vector2(336, -16)
 
-[node name="Edge9" parent="Edges" unique_id=871646420 instance=ExtResource("12_jqv5m")]
-position = Vector2(160, 272)
-rotation = 1.5707964
+[node name="EdgeOne10" parent="Edges" unique_id=892660015 instance=ExtResource("12_025c5")]
+position = Vector2(304, -16)
 
-[node name="Edge10" parent="Edges" unique_id=1943221598 instance=ExtResource("12_jqv5m")]
-position = Vector2(288, 272)
-rotation = 1.5707964
+[node name="EdgeOne11" parent="Edges" unique_id=851415900 instance=ExtResource("12_025c5")]
+position = Vector2(272, -16)
 
-[node name="Cursor" parent="." unique_id=2051460958 instance=ExtResource("13_noix2")]
+[node name="EdgeOne12" parent="Edges" unique_id=2017897262 instance=ExtResource("12_025c5")]
+position = Vector2(240, -16)
+
+[node name="EdgeOne13" parent="Edges" unique_id=61537299 instance=ExtResource("12_025c5")]
+position = Vector2(208, -16)
+
+[node name="EdgeOne14" parent="Edges" unique_id=611330096 instance=ExtResource("12_025c5")]
+position = Vector2(176, -16)
+
+[node name="EdgeOne15" parent="Edges" unique_id=906106574 instance=ExtResource("12_025c5")]
+position = Vector2(144, -16)
+
+[node name="EdgeOne16" parent="Edges" unique_id=428905170 instance=ExtResource("12_025c5")]
+position = Vector2(112, -16)
+
+[node name="EdgeOne17" parent="Edges" unique_id=1723005909 instance=ExtResource("12_025c5")]
+position = Vector2(80, -16)
+
+[node name="EdgeOne18" parent="Edges" unique_id=426417526 instance=ExtResource("12_025c5")]
+position = Vector2(48, -16)
+
+[node name="EdgeOne19" parent="Edges" unique_id=2113583702 instance=ExtResource("12_025c5")]
+position = Vector2(16, -16)
+
+[node name="EdgeOne20" parent="Edges" unique_id=1816631634 instance=ExtResource("12_025c5")]
+position = Vector2(-16, -16)
+
+[node name="EdgeOne21" parent="Edges" unique_id=85925192 instance=ExtResource("12_025c5")]
+position = Vector2(-16, 16)
+
+[node name="EdgeOne22" parent="Edges" unique_id=556521283 instance=ExtResource("12_025c5")]
+position = Vector2(-16, 48)
+
+[node name="EdgeOne23" parent="Edges" unique_id=231793366 instance=ExtResource("12_025c5")]
+position = Vector2(-16, 80)
+
+[node name="EdgeOne24" parent="Edges" unique_id=1359169798 instance=ExtResource("12_025c5")]
+position = Vector2(-16, 112)
+
+[node name="EdgeOne25" parent="Edges" unique_id=1928521320 instance=ExtResource("12_025c5")]
+position = Vector2(-16, 144)
+
+[node name="EdgeOne26" parent="Edges" unique_id=446823847 instance=ExtResource("12_025c5")]
+position = Vector2(-16, 176)
+
+[node name="EdgeOne27" parent="Edges" unique_id=590613362 instance=ExtResource("12_025c5")]
+position = Vector2(-16, 208)
+
+[node name="EdgeOne28" parent="Edges" unique_id=1462285830 instance=ExtResource("12_025c5")]
+position = Vector2(-16, 240)
+
+[node name="EdgeOne29" parent="Edges" unique_id=129723947 instance=ExtResource("12_025c5")]
+position = Vector2(-16, 272)
+
+[node name="EdgeOne30" parent="Edges" unique_id=2135245273 instance=ExtResource("12_025c5")]
+position = Vector2(16, 272)
+
+[node name="EdgeOne31" parent="Edges" unique_id=891138195 instance=ExtResource("12_025c5")]
+position = Vector2(48, 272)
+
+[node name="EdgeOne32" parent="Edges" unique_id=1431559422 instance=ExtResource("12_025c5")]
+position = Vector2(80, 272)
+
+[node name="EdgeOne33" parent="Edges" unique_id=1050131666 instance=ExtResource("12_025c5")]
+position = Vector2(112, 272)
+
+[node name="EdgeOne34" parent="Edges" unique_id=367813835 instance=ExtResource("12_025c5")]
+position = Vector2(144, 272)
+
+[node name="EdgeOne35" parent="Edges" unique_id=1103872624 instance=ExtResource("12_025c5")]
+position = Vector2(176, 272)
+
+[node name="EdgeOne36" parent="Edges" unique_id=587972391 instance=ExtResource("12_025c5")]
+position = Vector2(208, 272)
+
+[node name="EdgeOne37" parent="Edges" unique_id=58425644 instance=ExtResource("12_025c5")]
+position = Vector2(240, 272)
+
+[node name="EdgeOne38" parent="Edges" unique_id=779559744 instance=ExtResource("12_025c5")]
+position = Vector2(272, 272)
+
+[node name="EdgeOne39" parent="Edges" unique_id=388074798 instance=ExtResource("12_025c5")]
+position = Vector2(304, 272)
+
+[node name="EdgeOne40" parent="Edges" unique_id=2038105317 instance=ExtResource("12_025c5")]
+position = Vector2(336, 272)
+
+[node name="EdgeOne41" parent="Edges" unique_id=1617364559 instance=ExtResource("12_025c5")]
+position = Vector2(336, 240)
+
+[node name="Cursor" parent="." unique_id=2051460958 instance=ExtResource("13_bw3ef")]
 position = Vector2(608, -16)
 
 [node name="BattleNode" type="Node2D" parent="." unique_id=797394893]
@@ -215,9 +312,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="AudioStreamPlayerMusic" type="AudioStreamPlayer" parent="." unique_id=179520262]
-stream = ExtResource("15_bw3ef")
-
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1236012575]
 modulate = Color(1, 1, 1, 0.5019608)
 self_modulate = Color(1, 1, 1, 0.9411765)
@@ -225,14 +319,25 @@ color = Color(0, 0, 0, 1)
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=589757551]
 
-[node name="CreatureAdventureDialog" parent="UI" unique_id=1641948652 instance=ExtResource("16_07dy8")]
+[node name="CreatureAdventureDialog" parent="UI" unique_id=1641948652 instance=ExtResource("15_3gp1u")]
 visible = false
 z_index = 10
-offset_top = 7.8399963
-offset_bottom = 359.84
+
+[node name="Inventory" parent="UI" unique_id=579277200 instance=ExtResource("16_igeo0")]
+visible = false
+anchors_preset = -1
+
+[node name="LevelUpDialog" parent="UI" unique_id=76690541 instance=ExtResource("17_y71nm")]
+visible = false
+offset_left = 352.0
+offset_top = 160.0
+offset_right = -352.0
+offset_bottom = -176.0
 
 [node name="BattleStartTimer" type="Timer" parent="." unique_id=1709292871]
-wait_time = 0.5
 one_shot = true
+
+[node name="AudioStreamPlayerMusic" type="AudioStreamPlayer" parent="." unique_id=179520262]
+stream = ExtResource("18_6d4iq")
 
 [connection signal="timeout" from="BattleStartTimer" to="." method="_on_battle_start_timer_timeout"]

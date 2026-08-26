@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://de2c8pnqtrt77" path="res://assets/images/inventory_ui.png" id="2_s1uy6"]
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="4_eouxu"]
 [ext_resource type="FontFile" uid="uid://dub3oi8dxfpfw" path="res://assets/fonts/JeuDePixel-Regular.otf" id="5_lhlba"]
-[ext_resource type="Script" uid="uid://dyuhxmo8ve3q1" path="res://scripts/sub_viewport.gd" id="6_wxym4"]
-[ext_resource type="Script" uid="uid://dc16ko7ka7cxo" path="res://scripts/camera_subview_port.gd" id="7_nj6t4"]
+[ext_resource type="Script" uid="uid://dyuhxmo8ve3q1" path="res://scripts/ui/sub_viewport.gd" id="6_wxym4"]
+[ext_resource type="Script" uid="uid://dc16ko7ka7cxo" path="res://scripts/ui/camera_subview_port.gd" id="7_nj6t4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qtlqx"]
 shader = ExtResource("1_hfdhd")

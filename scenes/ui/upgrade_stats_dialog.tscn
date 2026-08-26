@@ -1,0 +1,125 @@
+[gd_scene format=3 uid="uid://dqyxtu1uebx5v"]
+
+[ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="1_rwwem"]
+[ext_resource type="Script" uid="uid://ucj4y66sq30o" path="res://scripts/ui/upgrade_stats_dialog.gd" id="2_rwwem"]
+[ext_resource type="Texture2D" uid="uid://de2c8pnqtrt77" path="res://assets/images/inventory_ui.png" id="3_f48dg"]
+[ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="4_sf6tv"]
+[ext_resource type="FontFile" uid="uid://dub3oi8dxfpfw" path="res://assets/fonts/JeuDePixel-Regular.otf" id="5_a1foq"]
+[ext_resource type="PackedScene" uid="uid://cecnwwow2nhd8" path="res://scenes/ui/stat_upgrade.tscn" id="6_qbrlf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qtlqx"]
+shader = ExtResource("1_rwwem")
+shader_parameter/speed = 1.0000000475
+shader_parameter/amplitude = 4.00000019
+shader_parameter/time_offset = 10.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_53g1v"]
+atlas = ExtResource("3_f48dg")
+region = Rect2(832, 0, 448, 720)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mj3lq"]
+atlas = ExtResource("4_sf6tv")
+region = Rect2(0, 192, 16, 16)
+
+[node name="UpgradeStatsDialog" type="Control" unique_id=1641948652]
+material = SubResource("ShaderMaterial_qtlqx")
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -192.0
+offset_right = -980.0
+offset_bottom = -578.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(300, 192)
+script = ExtResource("2_rwwem")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1275944467]
+use_parent_material = true
+layout_mode = 0
+offset_right = 600.0
+offset_bottom = 336.0
+texture = SubResource("AtlasTexture_53g1v")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=1621686300]
+use_parent_material = true
+layout_mode = 0
+offset_left = 16.0
+offset_top = 80.0
+offset_right = 584.0
+offset_bottom = 312.0
+texture = SubResource("AtlasTexture_53g1v")
+expand_mode = 1
+
+[node name="TextureRect3" type="TextureRect" parent="." unique_id=764859019]
+use_parent_material = true
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("AtlasTexture_mj3lq")
+expand_mode = 1
+
+[node name="TextureRect4" type="TextureRect" parent="." unique_id=895001076]
+use_parent_material = true
+layout_mode = 0
+offset_left = 559.0
+offset_top = 8.0
+offset_right = 591.0
+offset_bottom = 40.0
+texture = SubResource("AtlasTexture_mj3lq")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="." unique_id=775349505]
+use_parent_material = true
+layout_mode = 0
+offset_left = 16.0
+offset_top = 8.0
+offset_right = 592.0
+offset_bottom = 33.0
+theme_override_fonts/font = ExtResource("5_a1foq")
+text = "ПОВЫШЕНИЕ ХАРАКТЕРИСТИК!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="." unique_id=1530541452]
+use_parent_material = true
+layout_mode = 0
+offset_left = 16.0
+offset_top = 48.0
+offset_right = 560.0
+offset_bottom = 73.0
+theme_override_fonts/font = ExtResource("5_a1foq")
+text = "Выберите награду:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Stats" type="GridContainer" parent="." unique_id=1690070523]
+use_parent_material = true
+layout_mode = 0
+offset_left = 32.0
+offset_top = 96.0
+offset_right = 544.0
+offset_bottom = 360.0
+size_flags_vertical = 3
+theme_override_constants/h_separation = 136
+theme_override_constants/v_separation = 12
+columns = 4
+
+[node name="StatUpgrade" parent="Stats" unique_id=1802809301 instance=ExtResource("6_qbrlf")]
+layout_mode = 2
+
+[node name="StatUpgrade2" parent="Stats" unique_id=245928957 instance=ExtResource("6_qbrlf")]
+layout_mode = 2
+
+[node name="StatUpgrade3" parent="Stats" unique_id=668030502 instance=ExtResource("6_qbrlf")]
+layout_mode = 2
+
+[node name="StatUpgrade4" parent="Stats" unique_id=1912181873 instance=ExtResource("6_qbrlf")]
+layout_mode = 2
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

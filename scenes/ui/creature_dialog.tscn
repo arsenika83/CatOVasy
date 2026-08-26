@@ -2,11 +2,11 @@
 
 [ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="1_hh0f6"]
 [ext_resource type="Texture2D" uid="uid://b0rpbj3njbbar" path="res://assets/images/cards.png" id="1_uuaso"]
-[ext_resource type="Script" uid="uid://dli8hinl5yqyr" path="res://scripts/creature_dialog.gd" id="2_f0otj"]
+[ext_resource type="Script" uid="uid://dli8hinl5yqyr" path="res://scripts/ui/creature_dialog.gd" id="2_f0otj"]
 [ext_resource type="FontFile" uid="uid://dub3oi8dxfpfw" path="res://assets/fonts/JeuDePixel-Regular.otf" id="3_qtlqx"]
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="4_j5lms"]
-[ext_resource type="Script" uid="uid://dc16ko7ka7cxo" path="res://scripts/camera_subview_port.gd" id="5_0tj0i"]
-[ext_resource type="Script" uid="uid://dyuhxmo8ve3q1" path="res://scripts/sub_viewport.gd" id="5_epww1"]
+[ext_resource type="Script" uid="uid://dc16ko7ka7cxo" path="res://scripts/ui/camera_subview_port.gd" id="5_0tj0i"]
+[ext_resource type="Script" uid="uid://dyuhxmo8ve3q1" path="res://scripts/ui/sub_viewport.gd" id="5_epww1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qtlqx"]
 shader = ExtResource("1_hh0f6")

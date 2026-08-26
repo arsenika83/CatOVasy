@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://ba7f54d4yq2hp" path="res://scenes/ui/cursor.tscn" id="12_7ld2t"]
 [ext_resource type="FontFile" uid="uid://dub3oi8dxfpfw" path="res://assets/fonts/JeuDePixel-Regular.otf" id="12_q70wx"]
 [ext_resource type="PackedScene" uid="uid://b7oix76heqs28" path="res://scenes/ui/creature_dialog.tscn" id="13_1o703"]
-[ext_resource type="PackedScene" uid="uid://bjjafdg4et4p0" path="res://scenes/cards/paw.tscn" id="13_8ync6"]
+[ext_resource type="PackedScene" uid="uid://bjjafdg4et4p0" path="res://scenes/ui/paw.tscn" id="13_8ync6"]
 [ext_resource type="PackedScene" uid="uid://gxdo1p5x4a6b" path="res://scenes/ui/energy.tscn" id="14_8ync6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fj52k"]

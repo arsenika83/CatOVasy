@@ -77,10 +77,10 @@ var battle_x = 0
 var battle_y = 0
 
 var current_target : CharacterBody2D
-var attack_animation_time = 0.8
-var defend_animation_time = 0.8
-var debuff_animation_time = 0.8
-var buff_animation_time =   0.8
+var attack_animation_time = 0.3
+var defend_animation_time = 0.3
+var debuff_animation_time = 0.3
+var buff_animation_time =   0.3
 
 @onready var sprite = $AnimatedSprite2D
 @onready var area = $Area2D
@@ -218,7 +218,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		audio_hit.play()
 
 func _on_area_2dxp_area_entered(area: Area2D) -> void:
-	if not gave_xp:
+	if not gave_xp and not gm.state == "battle":
 		xp_orb.visible = false
 		gave_xp = true
 		gm.xp += xp_gives

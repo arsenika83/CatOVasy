@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://cecnwwow2nhd8"]
+
+[ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="1_d8h06"]
+[ext_resource type="Script" uid="uid://d1vplfb4ryjqe" path="res://scripts/ui/stat_upgrade.gd" id="1_uujw7"]
+[ext_resource type="Texture2D" uid="uid://b0rpbj3njbbar" path="res://assets/images/cards.png" id="2_1n7eo"]
+[ext_resource type="FontFile" uid="uid://dub3oi8dxfpfw" path="res://assets/fonts/JeuDePixel-Regular.otf" id="3_1jwdo"]
+[ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="3_j4e6a"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ix7ah"]
+shader = ExtResource("1_d8h06")
+shader_parameter/speed = 2.000000095
+shader_parameter/amplitude = 4.00000019
+shader_parameter/time_offset = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1jwdo"]
+atlas = ExtResource("2_1n7eo")
+region = Rect2(448, 0, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d8h06"]
+atlas = ExtResource("3_j4e6a")
+region = Rect2(16, 160, 16, 16)
+
+[node name="StatUpgrade" type="Control" unique_id=1802809301]
+material = SubResource("ShaderMaterial_ix7ah")
+layout_mode = 3
+anchor_right = 0.1
+anchor_bottom = 0.26700002
+offset_bottom = -0.24002075
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(64, 96)
+script = ExtResource("1_uujw7")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=2038822240]
+use_parent_material = true
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 192.0
+texture = SubResource("AtlasTexture_1jwdo")
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=1352683205]
+use_parent_material = true
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 120.0
+offset_bottom = 120.0
+texture = SubResource("AtlasTexture_1jwdo")
+
+[node name="Icon" type="TextureRect" parent="TextureRect2" unique_id=1921025329]
+use_parent_material = true
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 96.0
+offset_bottom = 96.0
+texture = SubResource("AtlasTexture_d8h06")
+
+[node name="Label" type="Label" parent="." unique_id=38776490]
+use_parent_material = true
+layout_mode = 0
+offset_left = 8.0
+offset_top = 120.0
+offset_right = 120.0
+offset_bottom = 185.0
+theme_override_fonts/font = ExtResource("3_1jwdo")
+theme_override_font_sizes/font_size = 10
+text = "+1 к базовому
+урону"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

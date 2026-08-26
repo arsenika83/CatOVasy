@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c5gpfg7xp2c1c"]
 
-[ext_resource type="Script" uid="uid://ik1vtph0ykb7" path="res://scripts/scene_transitioner.gd" id="1_74ydd"]
+[ext_resource type="Script" uid="uid://ik1vtph0ykb7" path="res://scripts/global/scene_transitioner.gd" id="1_74ydd"]
 
 [sub_resource type="Animation" id="Animation_tirpj"]
 length = 0.001

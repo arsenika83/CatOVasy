@@ -31,16 +31,24 @@ func update() -> void:
 		icon_loaded = true
 
 func _on_fire_button_pressed() -> void:
+	if gm.state != "checking_inventory":
+		return
 	if type == 1:
-		gm.current_attack_cards.erase(id)
+		if gm.current_attack_cards.erase(id):
+			print(id)
 		
 		tooltip_text = "Пустой слот \nдля карты \nатаки"
 		icon.texture = load("res://assets/images/card_icons/attack_card_default.png")
 	else:
-		gm.current_ability_cards.erase(id)
+		if gm.current_ability_cards.erase(id):
+			print(id)
 		
 		tooltip_text = "Пустой слот \nдля карты \nспособности"
 		icon.texture = load("res://assets/images/card_icons/ability_card_default.png")
+	get_parent().get_parent().get_parent().get_parent().draw_upgrade_stats(current_card.rarity)
+		
 	current_card = null
 	fire_button.disabled = true
 	icon_loaded = false
+	
+	

@@ -19,6 +19,7 @@ config/icon="res://icon.png"
 
 gm="*uid://l0febx8ncuyv"
 scene_transitioner="*uid://c5gpfg7xp2c1c"
+catalog="*uid://djdfvj81ae716"
 
 [display]
 
