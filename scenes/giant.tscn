@@ -13,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://bwch538phpi87" path="res://assets/soundFX/hit.wav" id="11_dku5q"]
 [ext_resource type="AudioStream" uid="uid://btyuivf1mvgot" path="res://assets/soundFX/hit_lucky.wav" id="12_p1oqw"]
 [ext_resource type="AudioStream" uid="uid://ceun5aaxxb0o7" path="res://assets/soundFX/debuff.wav" id="13_p1oqw"]
+[ext_resource type="AudioStream" uid="uid://b5kgcekrp1yv2" path="res://assets/soundFX/walk.wav" id="14_q8t3y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p1oqw"]
 size = Vector2(32, 32)
@@ -469,6 +470,11 @@ volume_db = -3.0
 [node name="AudioStreamPlayerDebuff" type="AudioStreamPlayer" parent="." unique_id=1109583403]
 stream = ExtResource("13_p1oqw")
 volume_db = -3.0
+mix_target = 2
+
+[node name="AudioStreamPlayerWalk" type="AudioStreamPlayer" parent="." unique_id=2071061521]
+stream = ExtResource("14_q8t3y")
+volume_db = 6.0
 mix_target = 2
 
 [connection signal="area_shape_entered" from="Area2D" to="." method="_on_area_2d_area_shape_entered"]

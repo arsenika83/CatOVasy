@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://4itbl0ejcd3o" path="res://assets/images/tilemap.png" id="3_gxvom"]
 [ext_resource type="PackedScene" uid="uid://d0d5e8ltlrwqg" path="res://scenes/giant.tscn" id="6_3cs84"]
 [ext_resource type="Shader" uid="uid://dm6djrn7pct8b" path="res://shaders/wobble.gdshader" id="8_ou0n0"]
+[ext_resource type="AudioStream" uid="uid://bxhii1a001e1v" path="res://assets/music/BATTLE_WIN.mp3" id="9_mrg47"]
 [ext_resource type="PackedScene" uid="uid://bq46oyngg435a" path="res://scenes/ui/card_container.tscn" id="10_ou0n0"]
 [ext_resource type="AudioStream" uid="uid://b11ss30e1i1v3" path="res://assets/music/Battle_Theme_1.mp3" id="10_q70wx"]
 [ext_resource type="PackedScene" uid="uid://btcx8q72tnkf5" path="res://scenes/fx/claw_fx.tscn" id="11_nueng"]
@@ -154,6 +155,10 @@ grow_vertical = 2
 stream = ExtResource("10_q70wx")
 autoplay = true
 
+[node name="AudioStreamPlayerWin" type="AudioStreamPlayer" parent="." unique_id=446606509]
+stream = ExtResource("9_mrg47")
+volume_db = -6.0
+
 [node name="AudioStreamPlayerHit" type="AudioStreamPlayer" parent="." unique_id=559939619]
 stream = ExtResource("11_q70wx")
 
@@ -212,5 +217,10 @@ offset_bottom = -56.0
 wait_time = 0.1
 one_shot = true
 
+[node name="WinTimer" type="Timer" parent="." unique_id=1769985938]
+wait_time = 0.7
+one_shot = true
+
 [connection signal="pressed" from="UI/EndBattleButton" to="." method="_on_end_battle_button_pressed"]
 [connection signal="timeout" from="CheckStatsDialogHoldTimer" to="." method="_on_check_stats_dialog_hold_timer_timeout"]
+[connection signal="timeout" from="WinTimer" to="." method="_on_win_timer_timeout"]

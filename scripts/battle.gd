@@ -4,6 +4,7 @@ var cursor_pos
 var cursor_map_pos
 
 var creature_dialog_on_screen = false
+var battle_ended = false
 
 @onready var cursor = $Cursor
 @onready var map = $TileMapLayerBlack
@@ -41,7 +42,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	check_battle_status()
+	if not battle_ended:
+		check_battle_status()
 	
 	cursor_pos = map.get_global_mouse_position()
 	cursor_map_pos = map.local_to_map(cursor_pos)
@@ -395,9 +397,9 @@ func check_enemy_army() -> void:
 func check_battle_status() -> void:
 	check_enemy_army()
 	
-	if won or defeated:
-		end_battle_button.visible = true
-		end_battle_button.disabled = false
+	if won:
+		battle_ended = true
+		$WinTimer.start()
 		
 
 func _on_end_battle_button_pressed() -> void:
@@ -417,3 +419,12 @@ func _on_check_stats_dialog_hold_timer_timeout() -> void:
 		is_check_dialog_holding = true
 	else:
 		is_check_dialog_holding = false
+
+
+func _on_win_timer_timeout() -> void:
+		var tween = create_tween()
+		tween.tween_property($AudioStreamPlayerMusic, "volume_db", -15, 0.3)
+		
+		$AudioStreamPlayerWin.play()
+		end_battle_button.visible = true
+		end_battle_button.disabled = false

@@ -20,6 +20,8 @@ var defend_card_index = 0
 var ability_cards : Array[Card]
 var ability_card_index = 0
 
+@onready var audio = $AudioStreamPlayer
+
 func _ready() -> void:
 	var time_offset = 0
 	var y_offset = 0
@@ -79,6 +81,8 @@ func _ready() -> void:
 func replace_current_card(type : String):
 	match type:
 		"attack":
+			if attack_cards.size() == 1:
+				return
 			current_selected.deselect_card()
 			current_selected = null
 	
@@ -92,6 +96,9 @@ func replace_current_card(type : String):
 			current_selected.move_front(-30)
 			
 		"ability":
+			if ability_cards.size() == 1:
+				return
+				
 			current_selected.deselect_card()
 			current_selected = null
 			
@@ -126,6 +133,7 @@ func replace_card(type : String):
 
 func _on_card_selected(clicked_card: Control) -> void:
 	# Если кликнули по уже выбранной карточке — ничего не делаем
+	audio.play()
 	if current_selected == clicked_card:
 		current_selected.deselect_card()
 		current_selected = null
@@ -150,6 +158,7 @@ func _on_card_played(played_card: Control) -> void:
 
 func _on_attack_change_button_pressed() -> void:
 	if gm.current_energy - 1 >= 0:
+		audio.play()
 		gm.current_energy -= 1
 		replace_card("attack")
 		
@@ -158,6 +167,7 @@ func _on_attack_change_button_pressed() -> void:
 
 func _on_defend_change_button_pressed() -> void:
 	if gm.current_energy - 1 >= 0:
+		audio.play()
 		#gm.current_energy -= 1
 		replace_card("defend")
 		
@@ -166,6 +176,7 @@ func _on_defend_change_button_pressed() -> void:
 
 func _on_ability_change_button_pressed() -> void:
 	if gm.current_energy - 1 >= 0:
+		audio.play()
 		gm.current_energy -= 1
 		replace_card("ability")
 		

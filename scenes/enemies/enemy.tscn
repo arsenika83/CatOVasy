@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://bv07t8ic6tpma" path="res://assets/soundFX/miss.wav" id="8_n7575"]
 [ext_resource type="AudioStream" uid="uid://bclkaxhxamdmf" path="res://assets/soundFX/defend.wav" id="9_qch6t"]
 [ext_resource type="AudioStream" uid="uid://ceun5aaxxb0o7" path="res://assets/soundFX/debuff.wav" id="11_tihwb"]
+[ext_resource type="AudioStream" uid="uid://vid6rjo3jggy" path="res://assets/soundFX/follow.wav" id="12_p7w77"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tihwb"]
 size = Vector2(32, 32)
@@ -196,6 +197,10 @@ mix_target = 2
 [node name="AudioStreamPlayerDebuff" type="AudioStreamPlayer" parent="." unique_id=238661560]
 stream = ExtResource("11_tihwb")
 volume_db = -3.0
+mix_target = 2
+
+[node name="AudioStreamPlayerFollow" type="AudioStreamPlayer" parent="." unique_id=1981382083]
+stream = ExtResource("12_p7w77")
 mix_target = 2
 
 [node name="IdleAnimationTimer" type="Timer" parent="." unique_id=1712994445]

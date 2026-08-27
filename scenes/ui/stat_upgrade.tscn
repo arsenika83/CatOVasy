@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://d1vplfb4ryjqe" path="res://scripts/ui/stat_upgrade.gd" id="1_uujw7"]
 [ext_resource type="Texture2D" uid="uid://b0rpbj3njbbar" path="res://assets/images/cards.png" id="2_1n7eo"]
 [ext_resource type="FontFile" uid="uid://dub3oi8dxfpfw" path="res://assets/fonts/JeuDePixel-Regular.otf" id="3_1jwdo"]
-[ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="3_j4e6a"]
+[ext_resource type="Texture2D" uid="uid://buio7fs77u7qv" path="res://assets/images/stat_upgrades/base_damage_1.png" id="4_d8h06"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ix7ah"]
 shader = ExtResource("1_d8h06")
@@ -15,10 +15,6 @@ shader_parameter/time_offset = 0.0
 [sub_resource type="AtlasTexture" id="AtlasTexture_1jwdo"]
 atlas = ExtResource("2_1n7eo")
 region = Rect2(448, 0, 64, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_d8h06"]
-atlas = ExtResource("3_j4e6a")
-region = Rect2(16, 160, 16, 16)
 
 [node name="StatUpgrade" type="Control" unique_id=1802809301]
 material = SubResource("ShaderMaterial_ix7ah")
@@ -50,11 +46,11 @@ texture = SubResource("AtlasTexture_1jwdo")
 [node name="Icon" type="TextureRect" parent="TextureRect2" unique_id=1921025329]
 use_parent_material = true
 layout_mode = 0
-offset_left = 16.0
-offset_top = 16.0
-offset_right = 96.0
-offset_bottom = 96.0
-texture = SubResource("AtlasTexture_d8h06")
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 104.0
+offset_bottom = 104.0
+texture = ExtResource("4_d8h06")
 
 [node name="Label" type="Label" parent="." unique_id=38776490]
 use_parent_material = true

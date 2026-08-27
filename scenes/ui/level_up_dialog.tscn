@@ -5,6 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://de2c8pnqtrt77" path="res://assets/images/inventory_ui.png" id="3_i3v37"]
 [ext_resource type="FontFile" uid="uid://dub3oi8dxfpfw" path="res://assets/fonts/JeuDePixel-Regular.otf" id="4_qph1y"]
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="5_jekd8"]
+[ext_resource type="AudioStream" uid="uid://bngxs878f1apy" path="res://assets/soundFX/card_pick.wav" id="6_vtgeg"]
+[ext_resource type="AudioStream" uid="uid://c8uwkxk272amx" path="res://assets/soundFX/burn.wav" id="7_6dcm8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qtlqx"]
 shader = ExtResource("1_vtgeg")
@@ -202,6 +204,14 @@ texture_pressed = SubResource("AtlasTexture_qph1y")
 texture_hover = SubResource("AtlasTexture_jekd8")
 texture_disabled = SubResource("AtlasTexture_n6hbc")
 stretch_mode = 0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=344300564]
+stream = ExtResource("6_vtgeg")
+volume_db = 2.0
+
+[node name="AudioStreamPlayerBurn" type="AudioStreamPlayer" parent="." unique_id=803297642]
+stream = ExtResource("7_6dcm8")
+volume_db = 2.0
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="pressed" from="FireButton1" to="." method="_on_fire_button_1_pressed"]

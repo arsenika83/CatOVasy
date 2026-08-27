@@ -3,6 +3,9 @@ extends Control
 @onready var cards = $Cards
 @onready var level_label = $LevelLabel
 
+@onready var audio = $AudioStreamPlayer
+@onready var audio_burn = $AudioStreamPlayerBurn
+
 func _ready() -> void:
 	pass
 
@@ -28,6 +31,8 @@ func update_cards() -> void:
 			child.card_picked_up.connect(_on_card_picked_up)
 
 func _on_card_picked_up(picked_card : Card) -> void:
+	audio.pitch_scale = randf_range(0.8, 1.1)
+	audio.play()
 	if picked_card.type == "attack":
 		if gm.current_attack_cards.size() <= 5:
 			for i in range(1, 6):
@@ -58,16 +63,22 @@ func _on_card_picked_up(picked_card : Card) -> void:
 	
 
 func _on_fire_button_1_pressed() -> void:
+	audio_burn.pitch_scale = randf_range(0.8, 1.1)
+	audio_burn.play()
 	visible = false
 	position.x = -1500
 	get_parent().get_parent().draw_upgrade_stats(cards.get_child(0).rarity)
 
 func _on_fire_button_2_pressed() -> void:
+	audio_burn.pitch_scale = randf_range(0.8, 1.1)
+	audio_burn.play()
 	visible = false
 	position.x = -1500
 	get_parent().get_parent().draw_upgrade_stats(cards.get_child(1).rarity)
 
 func _on_fire_button_3_pressed() -> void:
+	audio_burn.pitch_scale = randf_range(0.8, 1.1)
+	audio_burn.play()
 	visible = false
 	position.x = -1500
 	get_parent().get_parent().draw_upgrade_stats(cards.get_child(2).rarity)

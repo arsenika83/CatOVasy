@@ -14,11 +14,12 @@
 [ext_resource type="PackedScene" uid="uid://c7f16y8rwf2q" path="res://scenes/objects/edge_one.tscn" id="10_m6lg1"]
 [ext_resource type="Shader" uid="uid://dm6djrn7pct8b" path="res://shaders/wobble.gdshader" id="11_fj52k"]
 [ext_resource type="PackedScene" uid="uid://1bvjmpy2pf0k" path="res://scenes/enemies/enemy.tscn" id="14_m6lg1"]
-[ext_resource type="AudioStream" uid="uid://bx1d746w8sbiy" path="res://assets/music/ZONE_1.wav" id="15_3asx1"]
 [ext_resource type="PackedScene" uid="uid://di4k2iivrnhup" path="res://scenes/ui/creature_adventure_dialog.tscn" id="15_m6lg1"]
 [ext_resource type="PackedScene" uid="uid://qgx2la7r3w7a" path="res://scenes/ui/inventory.tscn" id="16_3asx1"]
 [ext_resource type="PackedScene" uid="uid://dpydh1bnymoa8" path="res://scenes/ui/level_up_dialog.tscn" id="17_yxkm4"]
 [ext_resource type="PackedScene" uid="uid://dqyxtu1uebx5v" path="res://scenes/ui/upgrade_stats_dialog.tscn" id="18_3ebcg"]
+[ext_resource type="AudioStream" uid="uid://ryw6yninysd1" path="res://assets/music/ZONE_1.mp3" id="19_3ebcg"]
+[ext_resource type="AudioStream" uid="uid://k300apigjs30" path="res://assets/music/BATTLE_START.mp3" id="19_luu1i"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fj52k"]
 shader = ExtResource("1_7s2gi")
@@ -347,7 +348,11 @@ offset_bottom = -226.0
 [node name="BattleStartTimer" type="Timer" parent="." unique_id=1709292871]
 one_shot = true
 
+[node name="AudioStreamPlayerBattleStart" type="AudioStreamPlayer" parent="." unique_id=1295234369]
+stream = ExtResource("19_luu1i")
+volume_db = -6.0
+
 [node name="AudioStreamPlayerMusic" type="AudioStreamPlayer" parent="." unique_id=179520262]
-stream = ExtResource("15_3asx1")
+stream = ExtResource("19_3ebcg")
 
 [connection signal="timeout" from="BattleStartTimer" to="." method="_on_battle_start_timer_timeout"]

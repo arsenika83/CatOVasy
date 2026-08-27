@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="4_sf6tv"]
 [ext_resource type="FontFile" uid="uid://dub3oi8dxfpfw" path="res://assets/fonts/JeuDePixel-Regular.otf" id="5_a1foq"]
 [ext_resource type="PackedScene" uid="uid://cecnwwow2nhd8" path="res://scenes/ui/stat_upgrade.tscn" id="6_qbrlf"]
+[ext_resource type="AudioStream" uid="uid://bngxs878f1apy" path="res://assets/soundFX/card_pick.wav" id="7_f48dg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qtlqx"]
 shader = ExtResource("1_rwwem")
@@ -121,5 +122,9 @@ layout_mode = 2
 
 [node name="StatUpgrade4" parent="Stats" unique_id=1912181873 instance=ExtResource("6_qbrlf")]
 layout_mode = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=173849228]
+stream = ExtResource("7_f48dg")
+volume_db = 2.0
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

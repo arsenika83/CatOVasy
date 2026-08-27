@@ -43,6 +43,8 @@ func _ready() -> void:
 	upgrade_stats_dialog.visible = true
 	upgrade_stats_dialog.position.x = -1500
 	
+	gm.enemies_following = 0
+	
 	gm.current_level_edge_positions.clear()
 	for edge in find_child("Edges").get_children():
 		gm.current_level_edge_positions.append(edge.position)
@@ -273,21 +275,25 @@ func draw_level_up() -> void:
 	gm.state = "leveling_up"
 	
 	var tween = create_tween()
-	tween.tween_property(level_up_dialog, "scale", Vector2(1, 1), 0.5)	
+	tween.tween_property(level_up_dialog, "scale", Vector2(1, 1), 0.5)
 	
 func draw_upgrade_stats(rarity : String) -> void:
 	upgrade_stats_dialog.visible = true
 	upgrade_stats_dialog.position.x = 320
 	upgrade_stats_dialog.scale = Vector2(0, 0)
+	upgrade_stats_dialog.update_stats(rarity)
 	
 	gm.state = "leveling_up"
 	
 	var tween = create_tween()
-	tween.tween_property(upgrade_stats_dialog, "scale", Vector2(1, 1), 0.5)		
+	tween.tween_property(upgrade_stats_dialog, "scale", Vector2(1, 1), 0.3)
 
 func start_battle() -> void:
 	if not find_child("BattleNode").find_child("Battle") or gm.state == "battle":
-
+		gm.current_music_position = audio.get_playback_position()
+		audio.stop()
+		
+		$AudioStreamPlayerBattleStart.play()
 		scene_transitioner.change_scene_to()
 		battle_start_timer.start()
 	
@@ -314,18 +320,17 @@ func _on_battle_start_timer_timeout() -> void:
 	gm.energy = gm.max_energy
 	gm.current_energy = gm.max_energy
 	gm.current_damage = gm.damage
-	gm.current_defence = gm.defence
+	gm.current_defence = 0
 	gm.current_accuracy = gm.accuracy
 	gm.current_luck = gm.luck
 	
 	gm.state = "battle"
 	gm.prev_state = gm.state
 	giant.light.enabled = false
-	gm.current_music_position = audio.get_playback_position()
+
 	inventory.position.x = 1500
 	inventory_on_screen = false
-	
-	audio.stop()
+
 	player_camera.enabled = false
 	var battle = BATTLE_SCENE.instantiate()
 	$CanvasModulate.visible = false

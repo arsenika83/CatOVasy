@@ -3,6 +3,7 @@ extends PanelContainer
 @onready var current_card : Card
 @onready var icon = $Icon
 @onready var fire_button = $FireButton
+@onready var audio = $AudioStreamPlayer
 
 @export var type = 1
 @export var id = 0
@@ -33,6 +34,9 @@ func update() -> void:
 func _on_fire_button_pressed() -> void:
 	if gm.state != "checking_inventory":
 		return
+		
+	audio.pitch_scale = randf_range(0.8, 1.1)	
+	audio.play()
 	if type == 1:
 		if gm.current_attack_cards.erase(id):
 			print(id)

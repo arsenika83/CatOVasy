@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://dscspkx5s0xw1" path="res://scripts/card_slot.gd" id="1_r5mde"]
 [ext_resource type="Texture2D" uid="uid://b0rpbj3njbbar" path="res://assets/images/cards.png" id="1_y2car"]
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="3_1u5tj"]
+[ext_resource type="AudioStream" uid="uid://c8uwkxk272amx" path="res://assets/soundFX/burn.wav" id="5_urfd8"]
 
 [sub_resource type="Theme" id="Theme_urfd8"]
 TooltipLabel/colors/font_outline_color = Color(0, 0, 0, 1)
@@ -57,5 +58,8 @@ texture_normal = SubResource("AtlasTexture_r3xpn")
 texture_pressed = SubResource("AtlasTexture_urfd8")
 texture_hover = SubResource("AtlasTexture_v7mql")
 texture_disabled = SubResource("AtlasTexture_8seao")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=286171554]
+stream = ExtResource("5_urfd8")
 
 [connection signal="pressed" from="FireButton" to="." method="_on_fire_button_pressed"]

@@ -33,6 +33,8 @@ var enemy_scene_path = "enemy.tscn"
 var enemy_name_rus = "Враг"
 
 var follow_radius = 1
+var is_following = false
+
 var standard_move_path : Array[Vector2] = [Vector2(-32, 0), Vector2(0, -32), Vector2(32, 0), Vector2(0, 32), Vector2(0, 0)]
 @export var step_count = 0
 
@@ -86,6 +88,7 @@ var buff_animation_time =   0.3
 @onready var area = $Area2D
 @onready var area_xp = $Area2DXP
 
+@onready var audio_follow = $AudioStreamPlayerFollow
 @onready var audio_hit = $AudioStreamPlayerHit
 @onready var audio_hit_lucky = $AudioStreamPlayerHitLucky
 @onready var audio_hurt = $AudioStreamPlayerHurt
@@ -159,10 +162,17 @@ func move(g_pos : Vector2, e_pos : Vector2) -> void:
 		if (follow_step_count == follow_distance):
 			follow_step_count = 0
 			status_fx.visible = true
+			is_following = false
 			status_fx.play("lost_you")
-			
+			gm.enemies_following -= 1
 			return
 		
+		if not is_following:
+			gm.enemies_following += 1
+			is_following = true
+		
+		audio_follow.volume_db = 0 - (gm.enemies_following * 4)
+		audio_follow.play()
 		if (diff_x == 0) and diff_y < 0:
 			var tween = create_tween()
 			tween.tween_property(self, "position", Vector2(self.position.x, self.position.y - 32), 0.2)
@@ -228,6 +238,10 @@ func check_hp() -> void:
 	if hp <= 0:
 		hp = 0
 		state = "dead"
+		
+		if is_following:
+			is_following = false
+			gm.enemies_following -= 1
 
 func deal_damage(target : Giant) -> void:
 	var success : bool = randf_range(0.0, 1.0) * 100 <= accuracy

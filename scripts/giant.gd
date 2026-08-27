@@ -14,6 +14,7 @@ class_name Giant extends CharacterBody2D
 @onready var defend_timer = $DefendTimer
 @onready var debuff_timer = $DebuffTimer
 
+@onready var audio_walk = $AudioStreamPlayerWalk
 @onready var audio_meow = $AudioStreamPlayerMeow
 @onready var audio_fall = $AudioStreamPlayerFall
 @onready var audio_miss = $AudioStreamPlayerMiss
@@ -66,6 +67,8 @@ func _process(delta: float) -> void:
 				if do_meow:
 					audio_meow.pitch_scale = randf_range(0.7, 0.9)
 					audio_meow.play()
+				audio_meow.pitch_scale = randf_range(0.8, 1.2)
+				audio_walk.play()	
 		"resting":
 			sprite.play("resting")
 		"falling":
