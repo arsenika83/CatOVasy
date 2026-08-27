@@ -35,7 +35,7 @@ anchor_bottom = 0.13900001
 offset_top = -100.08001
 offset_right = 128.0
 offset_bottom = 99.91999
-pivot_offset = Vector2(32, 48)
+pivot_offset = Vector2(64, 96)
 script = ExtResource("2_jl6rh")
 
 [node name="BG2" type="TextureRect" parent="." unique_id=1690685854]

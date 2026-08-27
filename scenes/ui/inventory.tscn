@@ -4,8 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://de2c8pnqtrt77" path="res://assets/images/inventory_ui.png" id="2_ty45s"]
 [ext_resource type="Script" uid="uid://c66ospnn4g23r" path="res://scripts/ui/inventory.gd" id="2_ulvp7"]
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="4_p7iul"]
-[ext_resource type="FontFile" uid="uid://dub3oi8dxfpfw" path="res://assets/fonts/JeuDePixel-Regular.otf" id="5_td2ew"]
+[ext_resource type="PackedScene" uid="uid://b4w3k5dgucs8c" path="res://scenes/ui/artifact_slot.tscn" id="6_bfvro"]
 [ext_resource type="PackedScene" uid="uid://dsiha16n5p53v" path="res://scenes/ui/card_slot.tscn" id="6_weae1"]
+[ext_resource type="Texture2D" uid="uid://dei7d86i7igv7" path="res://assets/images/hp_circle.png" id="8_i8fht"]
+[ext_resource type="Shader" uid="uid://dcoiis0rcw7lq" path="res://shaders/hp_bar.gdshader" id="8_vj5ws"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qtlqx"]
 shader = ExtResource("1_s887n")
@@ -20,10 +22,6 @@ region = Rect2(832, 0, 448, 720)
 [sub_resource type="AtlasTexture" id="AtlasTexture_yyk2a"]
 atlas = ExtResource("2_ty45s")
 region = Rect2(0, 0, 448, 720)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_uae8j"]
-atlas = ExtResource("4_p7iul")
-region = Rect2(32, 128, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s887n"]
 atlas = ExtResource("4_p7iul")
@@ -52,6 +50,19 @@ region = Rect2(0, 192, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_0df5h"]
 atlas = ExtResource("4_p7iul")
 region = Rect2(16, 192, 16, 16)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i8fht"]
+shader = ExtResource("8_vj5ws")
+shader_parameter/speed = 2.0
+shader_parameter/amplitude = 4.00000019
+shader_parameter/time_offset = 10.0
+shader_parameter/width = 1.0
+shader_parameter/gradient_ease = 10.0
+shader_parameter/fill_ratio = 1.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vj5ws"]
+atlas = ExtResource("4_p7iul")
+region = Rect2(32, 128, 16, 16)
 
 [node name="Inventory" type="Control" unique_id=1641948652]
 material = SubResource("ShaderMaterial_qtlqx")
@@ -82,23 +93,43 @@ offset_bottom = 256.0
 texture = SubResource("AtlasTexture_yyk2a")
 expand_mode = 1
 
-[node name="StatsLabel" type="Label" parent="." unique_id=1847410104]
+[node name="HPLabel" type="Label" parent="." unique_id=1723022073]
+use_parent_material = true
+layout_mode = 0
+offset_left = 256.0
+offset_top = 176.0
+offset_right = 384.0
+offset_bottom = 200.0
+theme_override_font_sizes/font_size = 22
+text = "100 / 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatNamesLabel" type="Label" parent="." unique_id=1847410104]
 use_parent_material = true
 layout_mode = 0
 offset_left = 32.0
-offset_top = 48.0
-offset_right = 368.0
-offset_bottom = 305.0
-theme_override_fonts/font = ExtResource("5_td2ew")
-text = "ОЗ: 12/30
-УРОН: 2
-ЗАЩИТА: 4
-ТОЧНОСТЬ: 70%
-УДАЧА: 10%
-ЭНЕРГИЯ: 2
+offset_top = 40.0
+offset_right = 128.0
+offset_bottom = 248.0
+theme_override_font_sizes/font_size = 22
+text = "УРОН: 
+ЗАЩИТА: 
+ТОЧНОСТЬ: 
+УДАЧА:   
+ЭНЕРГИЯ: 
 
-УРОВЕНЬ: 1
-ОПЫТ: 1/10"
+УРОВЕНЬ: 
+ОПЫТ: "
+
+[node name="StatsLabel" type="Label" parent="." unique_id=902474315]
+use_parent_material = true
+layout_mode = 0
+offset_left = 128.0
+offset_top = 40.0
+offset_right = 248.0
+offset_bottom = 248.0
+theme_override_font_sizes/font_size = 22
 
 [node name="Stats" type="Control" parent="." unique_id=91989639]
 use_parent_material = true
@@ -108,86 +139,140 @@ offset_top = 55.0
 offset_right = 21.0
 offset_bottom = 199.0
 
-[node name="TextureStat1" type="TextureRect" parent="Stats" unique_id=1222458283]
-use_parent_material = true
-layout_mode = 0
-offset_left = 8.0
-offset_top = -9.0
-offset_right = 24.0
-offset_bottom = 7.0
-texture = SubResource("AtlasTexture_uae8j")
-
 [node name="TextureStat2" type="TextureRect" parent="Stats" unique_id=2075109257]
 use_parent_material = true
 layout_mode = 0
 offset_left = 8.0
-offset_top = 7.0
+offset_top = -12.0
 offset_right = 24.0
-offset_bottom = 23.0
+offset_bottom = 4.0
 texture = SubResource("AtlasTexture_s887n")
 
 [node name="TextureStat3" type="TextureRect" parent="Stats" unique_id=2111045483]
 use_parent_material = true
 layout_mode = 0
 offset_left = 8.0
-offset_top = 23.0
+offset_top = 15.0
 offset_right = 24.0
-offset_bottom = 39.0
+offset_bottom = 31.0
 texture = SubResource("AtlasTexture_g71ie")
 
 [node name="TextureStat4" type="TextureRect" parent="Stats" unique_id=78064379]
 use_parent_material = true
 layout_mode = 0
 offset_left = 8.0
-offset_top = 39.0
+offset_top = 41.0
 offset_right = 24.0
-offset_bottom = 55.0
+offset_bottom = 57.0
 texture = SubResource("AtlasTexture_sr8g6")
 
 [node name="TextureStat5" type="TextureRect" parent="Stats" unique_id=792947940]
 use_parent_material = true
 layout_mode = 0
 offset_left = 8.0
-offset_top = 55.0
+offset_top = 67.0
 offset_right = 24.0
-offset_bottom = 71.0
+offset_bottom = 83.0
 texture = SubResource("AtlasTexture_p7iul")
 
 [node name="TextureStat6" type="TextureRect" parent="Stats" unique_id=25564265]
 use_parent_material = true
 layout_mode = 0
 offset_left = 8.0
-offset_top = 72.0
+offset_top = 93.0
 offset_right = 24.0
-offset_bottom = 88.0
+offset_bottom = 109.0
 texture = SubResource("AtlasTexture_td2ew")
 
 [node name="TextureStat7" type="TextureRect" parent="Stats" unique_id=1239342163]
 use_parent_material = true
 layout_mode = 0
 offset_left = 8.0
-offset_top = 102.0
+offset_top = 144.0
 offset_right = 24.0
-offset_bottom = 118.0
+offset_bottom = 160.0
 texture = SubResource("AtlasTexture_ylenm")
 
 [node name="TextureStat8" type="TextureRect" parent="Stats" unique_id=1952817662]
 use_parent_material = true
 layout_mode = 0
 offset_left = 8.0
-offset_top = 117.0
+offset_top = 171.0
 offset_right = 24.0
-offset_bottom = 133.0
+offset_bottom = 187.0
 texture = SubResource("AtlasTexture_0df5h")
 
-[node name="StatsLabel2" type="Label" parent="." unique_id=775349505]
+[node name="ArtifactsLabel" type="Label" parent="." unique_id=438200751]
+use_parent_material = true
+layout_mode = 0
+offset_left = 16.0
+offset_top = 288.0
+offset_right = 384.0
+offset_bottom = 312.0
+theme_override_font_sizes/font_size = 24
+text = "АРТЕФАКТЫ"
+horizontal_alignment = 1
+
+[node name="Artifacts" type="GridContainer" parent="." unique_id=1227779545]
+use_parent_material = true
+layout_mode = 0
+offset_left = 16.0
+offset_top = 320.0
+offset_right = 384.0
+offset_bottom = 472.0
+size_flags_vertical = 3
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+columns = 5
+
+[node name="ArtifactSlot1" parent="Artifacts" unique_id=2125635525 instance=ExtResource("6_bfvro")]
+layout_mode = 2
+id = 1
+
+[node name="ArtifactSlot2" parent="Artifacts" unique_id=1114776699 instance=ExtResource("6_bfvro")]
+layout_mode = 2
+id = 2
+
+[node name="ArtifactSlot3" parent="Artifacts" unique_id=1813762009 instance=ExtResource("6_bfvro")]
+layout_mode = 2
+id = 3
+
+[node name="ArtifactSlot4" parent="Artifacts" unique_id=2085394743 instance=ExtResource("6_bfvro")]
+layout_mode = 2
+id = 4
+
+[node name="ArtifactSlot5" parent="Artifacts" unique_id=52968135 instance=ExtResource("6_bfvro")]
+layout_mode = 2
+id = 5
+
+[node name="ArtifactSlot6" parent="Artifacts" unique_id=233330181 instance=ExtResource("6_bfvro")]
+layout_mode = 2
+id = 6
+
+[node name="ArtifactSlot7" parent="Artifacts" unique_id=1309864202 instance=ExtResource("6_bfvro")]
+layout_mode = 2
+id = 7
+
+[node name="ArtifactSlot8" parent="Artifacts" unique_id=290760577 instance=ExtResource("6_bfvro")]
+layout_mode = 2
+id = 8
+
+[node name="ArtifactSlot9" parent="Artifacts" unique_id=1477724784 instance=ExtResource("6_bfvro")]
+layout_mode = 2
+id = 9
+
+[node name="ArtifactSlot10" parent="Artifacts" unique_id=734710426 instance=ExtResource("6_bfvro")]
+layout_mode = 2
+id = 10
+
+[node name="CardsLabel" type="Label" parent="." unique_id=775349505]
 use_parent_material = true
 layout_mode = 0
 offset_left = 16.0
 offset_top = 488.0
 offset_right = 384.0
 offset_bottom = 513.0
-theme_override_fonts/font = ExtResource("5_td2ew")
+theme_override_font_sizes/font_size = 24
 text = "КАРТЫ"
 horizontal_alignment = 1
 
@@ -203,7 +288,7 @@ theme_override_constants/h_separation = 12
 theme_override_constants/v_separation = 12
 columns = 5
 
-[node name="CardSlotAttack1" parent="Cards" unique_id=2125635525 instance=ExtResource("6_weae1")]
+[node name="CardSlotAttack1" parent="Cards" unique_id=327957411 instance=ExtResource("6_weae1")]
 layout_mode = 2
 id = 1
 
@@ -247,6 +332,32 @@ id = 4
 layout_mode = 2
 type = 2
 id = 5
+
+[node name="HP" type="ColorRect" parent="." unique_id=1297074347]
+material = SubResource("ShaderMaterial_i8fht")
+layout_mode = 0
+offset_left = 256.0
+offset_top = 48.0
+offset_right = 384.0
+offset_bottom = 176.0
+
+[node name="HPTexture" type="TextureRect" parent="." unique_id=2110792378]
+use_parent_material = true
+layout_mode = 0
+offset_left = 256.0
+offset_top = 48.0
+offset_right = 384.0
+offset_bottom = 176.0
+texture = ExtResource("8_i8fht")
+
+[node name="HPTextureCenter" type="TextureRect" parent="." unique_id=1504821197]
+use_parent_material = true
+layout_mode = 0
+offset_left = 304.0
+offset_top = 96.0
+offset_right = 336.0
+offset_bottom = 128.0
+texture = SubResource("AtlasTexture_vj5ws")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

@@ -61,8 +61,7 @@ offset_right = 120.0
 offset_bottom = 185.0
 theme_override_fonts/font = ExtResource("3_1jwdo")
 theme_override_font_sizes/font_size = 10
-text = "+1 к базовому
-урону"
+text = "-"
 horizontal_alignment = 1
 vertical_alignment = 1
 

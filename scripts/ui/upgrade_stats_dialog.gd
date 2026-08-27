@@ -16,25 +16,25 @@ func update_stats(rarity : String) -> void:
 	for child in stats.get_children():
 		match rarity:
 			"common":
-				var rare_chance = randi_range(1, 100) <= 5
+				var rare_chance = randi_range(1, 100) < 5
 				if rare_chance:
 					rarity = "rare"
-					break
+					
 			"rare":
-				var epic_chance = randi_range(1, 100) <= 3
+				var epic_chance = randi_range(1, 100) < 2
 				if epic_chance:
 					rarity = "epic"
-					break
+					
 			"epic":
-				var unbelievable_chance = randi_range(1, 100) <= 3
+				var unbelievable_chance = randi_range(1, 100) < 2
 				if unbelievable_chance:
 					rarity = "unbelievable"
-					break
+					
 			"unbelievable":
-				var unimaginable_chance = randi_range(1, 100) <= 1
-				if unimaginable_chance:
-					rarity = "epic"
-					break
+				var legendary_chance = randi_range(1, 100) < 3
+				if legendary_chance:
+					rarity = "legendary"
+					
 				
 		match rarity:
 			"common":
@@ -53,6 +53,10 @@ func update_stats(rarity : String) -> void:
 				var stat_index = randi_range(0, catalog.all_stat_names_unbelievable.size()-1)
 				child.action = catalog.all_stat_names_unbelievable[stat_index]
 				child.loaded = false
+			"legendary":
+				var stat_index = randi_range(0, catalog.all_stat_names_legendary.size()-1)
+				child.action = catalog.all_stat_names_legendary[stat_index]
+				child.loaded = false	
 
 func _on_stat_selected(stat : Control) -> void:
 	audio.pitch_scale = randf_range(0.8, 1.1)
@@ -88,6 +92,9 @@ func _on_stat_selected(stat : Control) -> void:
 			gm.luck += 4
 		"luck_7":
 			gm.luck += 7
+		"hp_2":
+			gm.max_hp += 2
+			gm.hp += 2	
 		"hp_5":
 			gm.max_hp += 5
 			gm.hp += 5
@@ -97,9 +104,18 @@ func _on_stat_selected(stat : Control) -> void:
 		"hp_20":
 			gm.max_hp += 20
 			gm.hp += 20
+		"hp_50":
+			gm.max_hp += 50
+			gm.hp += 50
 		"energy_1":
 			gm.max_energy += 1
 			gm.energy += 1
+		"energy_2":
+			gm.max_energy += 2
+			gm.energy += 2
+	
+	if get_parent().get_parent().giant.check_xp():
+		get_parent().get_parent().draw_level_up()
 	
 	visible = false
 	position.x = -1500		

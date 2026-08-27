@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://bfe3bopltmbf8"]
+
+[ext_resource type="Script" uid="uid://dkieo6l2uw3qu" path="res://scripts/artifacts/artifact.gd" id="1_b5w24"]
+[ext_resource type="Texture2D" uid="uid://c4vuxt64k2xkl" path="res://assets/images/artifacts/ball.png" id="1_php5q"]
+
+[node name="Artifact" type="Control" unique_id=827444321]
+use_parent_material = true
+layout_mode = 3
+anchor_right = 0.1
+anchor_bottom = 0.178
+offset_bottom = -0.16000366
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(64, 64)
+script = ExtResource("1_b5w24")
+
+[node name="Icon" type="TextureRect" parent="." unique_id=1837820008]
+use_parent_material = true
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 120.0
+offset_bottom = 120.0
+texture = ExtResource("1_php5q")

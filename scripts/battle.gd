@@ -210,6 +210,9 @@ func end_turn() -> void:
 				for e in current_enemies:
 					e.current_energy = e.energy
 					e.turn_tick()
+				
+				if gm.energy == 0:
+					end_turn()
 			
 		enemy_turn()
 

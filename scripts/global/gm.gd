@@ -47,6 +47,9 @@ var current_attack_cards: Dictionary[int, Card]
 var current_defend_cards: Dictionary[int, Card]
 var current_ability_cards: Dictionary[int, Card]
 
+var current_artifacts: Dictionary[int, Artifact]
+var has_artifacts: Array[int]
+
 var current_enemies : Array
 
 var debuff_set : Array = [["weakness", 1, 1], ["undefend", 100, 1], ["inaccuracy", 10, 1],\
@@ -74,7 +77,6 @@ func _ready() -> void:
 	current_ability_cards.set(1, AbilityCard.new())
 	current_ability_cards.set(2, AbilityCard.new())
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
@@ -86,4 +88,9 @@ func add_attack_card(index : int, card : Card) -> void:
 func add_ability_card(index : int, card : Card) -> void:
 	var card_resource = load("res://scenes/cards/" + card.card_path)
 	var added_card = card_resource.instantiate()
-	current_ability_cards.set(index, added_card)	
+	current_ability_cards.set(index, added_card)
+	
+func add_artifact(index : int, artifact : Artifact) -> void:
+	var artifact_resource = load("res://scenes/artifacts/" + artifact.scene_path)
+	var added_artifact = artifact_resource.instantiate()
+	current_artifacts.set(index, added_artifact)	

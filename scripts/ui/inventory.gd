@@ -1,5 +1,19 @@
 extends Control
 
+@onready var artifact_slot_1 = $Artifacts/ArtifactSlot1
+@onready var artifact_slot_2 = $Artifacts/ArtifactSlot2
+@onready var artifact_slot_3 = $Artifacts/ArtifactSlot3
+@onready var artifact_slot_4 = $Artifacts/ArtifactSlot4
+@onready var artifact_slot_5 = $Artifacts/ArtifactSlot5
+@onready var artifact_slot_6 = $Artifacts/ArtifactSlot6
+@onready var artifact_slot_7 = $Artifacts/ArtifactSlot7
+@onready var artifact_slot_8 = $Artifacts/ArtifactSlot8
+@onready var artifact_slot_9 = $Artifacts/ArtifactSlot9
+@onready var artifact_slot_10 = $Artifacts/ArtifactSlot10
+
+@onready var artifact_slots : Array = [artifact_slot_1, artifact_slot_2, artifact_slot_3,
+artifact_slot_4, artifact_slot_5, artifact_slot_6, artifact_slot_7, artifact_slot_8, artifact_slot_9, artifact_slot_10]
+
 @onready var card_slot_attack_1 = $Cards/CardSlotAttack1
 @onready var card_slot_attack_2 = $Cards/CardSlotAttack2
 @onready var card_slot_attack_3 = $Cards/CardSlotAttack3
@@ -15,6 +29,9 @@ card_slot_attack_3, card_slot_attack_4, card_slot_attack_5]
 @onready var card_slot_ability_5 = $Cards/CardSlotAbility5
 @onready var ability_card_slots : Array = [card_slot_ability_1, card_slot_ability_2,
 card_slot_ability_3, card_slot_ability_4, card_slot_ability_5]
+
+@onready var hp_bar = $HP
+@onready var hp_label = $HPLabel
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -32,6 +49,14 @@ func update_cards() -> void:
 	for i in range(0, 5):
 		if gm.current_ability_cards.has(i+1) and is_instance_valid(gm.current_ability_cards.get(i+1)):
 			ability_card_slots[i].current_card = gm.current_ability_cards.get(i+1)
+			
+func update_artefacts() -> void:
+	for i in range(0, 10):
+		if gm.current_artifacts.has(i+1) and is_instance_valid(gm.current_artifacts.get(i+1)):
+			artifact_slots[i].current_artifact = gm.current_artifacts.get(i+1)
+			
+func set_hp_bar(value : float) -> void:
+	hp_bar.material.set_shader_parameter("fill_ratio", value)
 
 func _on_mouse_entered() -> void:
 	if gm.state == "idle":

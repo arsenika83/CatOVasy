@@ -21,6 +21,7 @@ var inventory_on_screen = false
 @onready var inventory = $UI/Inventory
 @onready var level_up_dialog = $UI/LevelUpDialog
 @onready var upgrade_stats_dialog = $UI/UpgradeStatsDialog
+@onready var artifact_dialog = $UI/ArtifactDialog
 
 @onready var foregroundFX = $Effects/ColorRect
 
@@ -42,6 +43,9 @@ func _ready() -> void:
 	
 	upgrade_stats_dialog.visible = true
 	upgrade_stats_dialog.position.x = -1500
+	
+	artifact_dialog.visible = true
+	artifact_dialog.position.x = -1500
 	
 	gm.enemies_following = 0
 	
@@ -237,15 +241,16 @@ func draw_inventory() -> void:
 			
 			inventory_on_screen = false
 		else:
-			var stats =   str("ОЗ:       ", gm.hp, "/", gm.max_hp)
-			stats += 	str("\nУРОН:     ", gm.damage)
-			stats += 	str("\nЗАЩИТА:   ", gm.max_defence)
-			stats += 	str("\nТОЧНОСТЬ: ", gm.accuracy, "%")
-			stats += 	str("\nУДАЧА:    ", gm.luck, "%")
-			stats += 	str("\nЭНЕРГИЯ:  ", gm.max_energy)
+			inventory.hp_label.text = str(gm.hp, " / ", gm.max_hp)
+			
+			var stats = str(gm.damage)
+			stats += 	str("\n", gm.defence, " (", gm.max_defence, ")")
+			stats += 	str("\n", gm.accuracy, "%")
+			stats += 	str("\n", gm.luck, "%")
+			stats += 	str("\n", gm.max_energy)
 			stats += 	str("\n")
-			stats += 	str("\nУРОВЕНЬ:  ", gm.level)
-			stats += 	str("\nОПЫТ:     ", gm.xp, "/", gm.xp_needed)
+			stats += 	str("\n", gm.level)
+			stats += 	str("\n", gm.xp, "/", gm.xp_needed)
 			inventory.find_child("StatsLabel").text = stats
 			
 			var tween = create_tween()
@@ -254,17 +259,20 @@ func draw_inventory() -> void:
 			inventory_on_screen = true
 
 func update_inventory() -> void:
-	var stats =   str("ОЗ:       ", gm.hp, "/", gm.max_hp)
-	stats += 	str("\nУРОН:     ", gm.damage)
-	stats += 	str("\nЗАЩИТА:   ", gm.max_defence)
-	stats += 	str("\nТОЧНОСТЬ: ", gm.accuracy, "%")
-	stats += 	str("\nУДАЧА:    ", gm.luck, "%")
-	stats += 	str("\nЭНЕРГИЯ:  ", gm.max_energy)
+	inventory.hp_label.text = str(gm.hp, " / ", gm.max_hp)
+	
+	var stats = str(gm.damage)
+	stats += 	str("\n", gm.defence, " (", gm.max_defence, ")")
+	stats += 	str("\n", gm.accuracy, "%")
+	stats += 	str("\n", gm.luck, "%")
+	stats += 	str("\n", gm.max_energy)
 	stats += 	str("\n")
-	stats += 	str("\nУРОВЕНЬ:  ", gm.level)
-	stats += 	str("\nОПЫТ:     ", gm.xp, "/", gm.xp_needed)
+	stats += 	str("\n", gm.level)
+	stats += 	str("\n", gm.xp, "/", gm.xp_needed)
 	inventory.find_child("StatsLabel").text = stats
 	inventory.update_cards()
+	inventory.update_artefacts()
+	inventory.set_hp_bar(float(gm.hp) / float(gm.max_hp))
 
 func draw_level_up() -> void:
 	level_up_dialog.visible = true
@@ -287,6 +295,17 @@ func draw_upgrade_stats(rarity : String) -> void:
 	
 	var tween = create_tween()
 	tween.tween_property(upgrade_stats_dialog, "scale", Vector2(1, 1), 0.3)
+	
+func draw_artifact_dialog() -> void:
+	artifact_dialog.visible = true
+	artifact_dialog.position.x = 512
+	artifact_dialog.scale = Vector2(0, 0)
+	artifact_dialog.update_artifact()
+
+	gm.state = "leveling_up"
+	
+	var tween = create_tween()
+	tween.tween_property(artifact_dialog, "scale", Vector2(1, 1), 0.5)	
 
 func start_battle() -> void:
 	if not find_child("BattleNode").find_child("Battle") or gm.state == "battle":

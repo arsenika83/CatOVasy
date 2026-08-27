@@ -30,37 +30,43 @@ func _process(delta: float) -> void:
 			"base_damage_5":
 				description = "+5 к базовому \nурону"
 			"defence_2":
-				description = "+1 к броне"
+				description = "+2 брони"
 			"defence_4":
-				description = "+4 к броне"
+				description = "+4 брони"
 			"defence_7":
-				description = "+7 к броне"
+				description = "+7 брони"
 			"max_defence_3":
-				description = "+3 к \nмаксимальной \nброне"
+				description = "+3 максимальной \nброни"
 			"max_defence_6":
-				description = "+6 к \nмаксимальной \nброне"
+				description = "+6 максимальной \nброни"
 			"max_defence_12":
-				description = "+12 к \nмаксимальной \nброне"
+				description = "+12 максимальной \nброни"
 			"accuracy_1":
-				description = "+1% к точности"
+				description = "+1% точности"
 			"accuracy_3":
-				description = "+3% к точности"
+				description = "+3% точности"
 			"accuracy_5":
-				description = "+5% к точности"
+				description = "+5% точности"
 			"luck_2":
 				description = "+2% к удаче"
 			"luck_4":
 				description = "+4% к удаче"
 			"luck_7":
 				description = "+7% к удаче"
+			"hp_2":
+				description = "+2 ОЗ"	
 			"hp_5":
-				description = "+5 к ОЗ"
+				description = "+5 ОЗ"
 			"hp_10":
-				description = "+10 к ОЗ"
+				description = "+10 ОЗ"
 			"hp_20":
-				description = "+20 к ОЗ"
+				description = "+20 ОЗ"
+			"hp_50":
+				description = "+50 ОЗ"	
 			"energy_1":
-				description = "+1 к энергии"
+				description = "+1 заряд \nэнергии"
+			"energy_2":
+				description = "+2 заряда \nэнергии"
 		
 		label.text = description
 

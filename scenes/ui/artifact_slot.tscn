@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://b4w3k5dgucs8c"]
+
+[ext_resource type="Script" uid="uid://cw5fehwuir687" path="res://scripts/ui/artifact_slot.gd" id="2_63ukf"]
+[ext_resource type="Texture2D" uid="uid://b0rpbj3njbbar" path="res://assets/images/cards.png" id="3_q8tqv"]
+[ext_resource type="AudioStream" uid="uid://c8uwkxk272amx" path="res://assets/soundFX/burn.wav" id="4_83qsy"]
+
+[sub_resource type="Theme" id="Theme_urfd8"]
+TooltipLabel/colors/font_outline_color = Color(0, 0, 0, 1)
+TooltipLabel/colors/font_shadow_color = Color(0, 0, 0, 1)
+TooltipPanel/styles/new_style = null
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r5mde"]
+atlas = ExtResource("3_q8tqv")
+region = Rect2(64, 32, 32, 32)
+
+[node name="ArtifactSlot" type="PanelContainer" unique_id=2125635525]
+use_parent_material = true
+custom_minimum_size = Vector2(64, 64)
+offset_right = 32.0
+offset_bottom = 32.0
+tooltip_text = "Пустой слот для карты"
+mouse_filter = 1
+theme = SubResource("Theme_urfd8")
+script = ExtResource("2_63ukf")
+
+[node name="Back" type="TextureRect" parent="." unique_id=149876587]
+use_parent_material = true
+layout_mode = 2
+texture = SubResource("AtlasTexture_r5mde")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Icon" type="TextureRect" parent="." unique_id=436070595]
+use_parent_material = true
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=286171554]
+stream = ExtResource("4_83qsy")

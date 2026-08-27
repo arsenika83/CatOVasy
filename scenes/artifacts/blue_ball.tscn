@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://n13xsbxqg7xa"]
+
+[ext_resource type="Script" uid="uid://bqgqx43qjbiq7" path="res://scripts/artifacts/blue_ball_artifact.gd" id="1_5poo4"]
+[ext_resource type="Texture2D" uid="uid://bm18sku12jnrv" path="res://assets/images/artifacts/blue_ball.png" id="2_5poo4"]
+
+[node name="BlueBallArtifact" type="Control" unique_id=827444321]
+use_parent_material = true
+layout_mode = 3
+anchor_right = 0.1
+anchor_bottom = 0.178
+offset_bottom = -0.16000366
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(64, 64)
+script = ExtResource("1_5poo4")
+
+[node name="Icon" type="TextureRect" parent="." unique_id=1837820008]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 120.0
+offset_bottom = 120.0
+texture = ExtResource("2_5poo4")

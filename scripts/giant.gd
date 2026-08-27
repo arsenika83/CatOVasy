@@ -101,7 +101,7 @@ func spawn() -> void:
 func respawn() -> void:
 	gm.state = "idle"
 	global_position = gm.prev_pos
-	gm.hp -= 1
+	gm.hp -= 10
 
 func fall() -> void:
 	if not gm.state == "falling":
@@ -263,6 +263,7 @@ func give_debuff(targets : Array[CharacterBody2D], type : String, power : int, t
 	debuff_timer.start(gm.debuff_animation_time)
 
 func turn_tick() -> void:
+	#gm.current_defence /= 2
 	if has_debuff_weakness:
 		turns_debuff_weakness -= 1
 		if turns_debuff_weakness == 0:

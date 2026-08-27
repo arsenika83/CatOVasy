@@ -1,0 +1,136 @@
+[gd_scene format=3 uid="uid://djqdt7tiwad4"]
+
+[ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="1_68a23"]
+[ext_resource type="Script" uid="uid://benua7ksjotoq" path="res://scripts/ui/artifact_dialog.gd" id="2_snn0j"]
+[ext_resource type="Texture2D" uid="uid://de2c8pnqtrt77" path="res://assets/images/inventory_ui.png" id="3_gcjjy"]
+[ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="4_fxcbs"]
+[ext_resource type="FontFile" uid="uid://dub3oi8dxfpfw" path="res://assets/fonts/JeuDePixel-Regular.otf" id="5_nwwwt"]
+[ext_resource type="AudioStream" uid="uid://bq0ooer30jskk" path="res://assets/soundFX/xp_pick_up.wav" id="6_snn0j"]
+[ext_resource type="AudioStream" uid="uid://bwch538phpi87" path="res://assets/soundFX/hit.wav" id="7_gcjjy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_snn0j"]
+shader = ExtResource("1_68a23")
+shader_parameter/speed = 2.0
+shader_parameter/amplitude = 4.00000019
+shader_parameter/time_offset = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_53g1v"]
+atlas = ExtResource("3_gcjjy")
+region = Rect2(832, 0, 448, 720)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_snn0j"]
+atlas = ExtResource("4_fxcbs")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gcjjy"]
+atlas = ExtResource("4_fxcbs")
+region = Rect2(192, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fxcbs"]
+atlas = ExtResource("4_fxcbs")
+region = Rect2(160, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nwwwt"]
+atlas = ExtResource("4_fxcbs")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3lovd"]
+atlas = ExtResource("4_fxcbs")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wk181"]
+atlas = ExtResource("4_fxcbs")
+region = Rect2(160, 0, 32, 32)
+
+[node name="ArtifactDialog" type="Control" unique_id=1641948652]
+material = SubResource("ShaderMaterial_snn0j")
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -128.0
+offset_top = -192.0
+offset_right = -1152.0
+offset_bottom = -592.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(128, 192)
+script = ExtResource("2_snn0j")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1275944467]
+use_parent_material = true
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 320.0
+texture = SubResource("AtlasTexture_53g1v")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=1621686300]
+use_parent_material = true
+layout_mode = 0
+offset_left = 16.0
+offset_top = 80.0
+offset_right = 240.0
+offset_bottom = 296.0
+texture = SubResource("AtlasTexture_53g1v")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="." unique_id=775349505]
+use_parent_material = true
+layout_mode = 0
+offset_left = 16.0
+offset_top = 8.0
+offset_right = 240.0
+offset_bottom = 33.0
+theme_override_fonts/font = ExtResource("5_nwwwt")
+text = "НАЙДЕН АРТЕФАКТ!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Artifacts" type="GridContainer" parent="." unique_id=1690070523]
+use_parent_material = true
+layout_mode = 0
+offset_left = 64.0
+offset_top = 80.0
+offset_right = 192.0
+offset_bottom = 216.0
+pivot_offset = Vector2(64, 0)
+size_flags_vertical = 3
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 2
+
+[node name="AudioStreamPlayerOK" type="AudioStreamPlayer" parent="." unique_id=344300564]
+stream = ExtResource("6_snn0j")
+volume_db = 2.0
+
+[node name="AudioStreamPlayerCancel" type="AudioStreamPlayer" parent="." unique_id=803297642]
+stream = ExtResource("7_gcjjy")
+volume_db = 2.0
+
+[node name="OKButton" type="TextureButton" parent="." unique_id=546315634]
+use_parent_material = true
+layout_mode = 0
+offset_left = 64.0
+offset_top = 232.0
+offset_right = 112.0
+offset_bottom = 280.0
+texture_normal = SubResource("AtlasTexture_snn0j")
+texture_pressed = SubResource("AtlasTexture_gcjjy")
+texture_hover = SubResource("AtlasTexture_fxcbs")
+stretch_mode = 0
+
+[node name="CancelButton" type="TextureButton" parent="." unique_id=474235933]
+use_parent_material = true
+layout_mode = 0
+offset_left = 144.0
+offset_top = 232.0
+offset_right = 192.0
+offset_bottom = 280.0
+texture_normal = SubResource("AtlasTexture_nwwwt")
+texture_pressed = SubResource("AtlasTexture_3lovd")
+texture_hover = SubResource("AtlasTexture_wk181")
+stretch_mode = 0
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="pressed" from="OKButton" to="." method="_on_ok_button_pressed"]
+[connection signal="pressed" from="CancelButton" to="." method="_on_cancel_button_pressed"]

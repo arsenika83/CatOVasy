@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://c0fd45oqpmhla"]
+
+[ext_resource type="Texture2D" uid="uid://xyqt3v2gvqv5" path="res://assets/images/objects.png" id="1_bas4e"]
+[ext_resource type="Script" uid="uid://dkywasdwfgh5x" path="res://scripts/objects/chest.gd" id="1_opa1x"]
+[ext_resource type="AudioStream" uid="uid://bwch538phpi87" path="res://assets/soundFX/hit.wav" id="3_acra8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_opa1x"]
+atlas = ExtResource("1_bas4e")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_acra8"]
+atlas = ExtResource("1_bas4e")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pev8c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_opa1x")
+}],
+"loop": false,
+"name": &"closed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_acra8")
+}],
+"loop": false,
+"name": &"open",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bas4e"]
+radius = 2.0
+
+[node name="Chest" type="Node2D" unique_id=1807108612]
+script = ExtResource("1_opa1x")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1628923774]
+sprite_frames = SubResource("SpriteFrames_pev8c")
+animation = &"closed"
+autoplay = "closed"
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1280983759]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=764539906]
+shape = SubResource("CircleShape2D_bas4e")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2032911874]
+stream = ExtResource("3_acra8")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

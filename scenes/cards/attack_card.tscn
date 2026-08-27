@@ -33,7 +33,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 128.0
 offset_bottom = 192.0
-pivot_offset = Vector2(32, 48)
+pivot_offset = Vector2(64, 96)
 script = ExtResource("2_7cc2x")
 
 [node name="BG2" type="TextureRect" parent="." unique_id=1690685854]

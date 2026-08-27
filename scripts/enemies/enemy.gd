@@ -407,6 +407,7 @@ func give_buff(target : CharacterBody2D, type : String, power : int, turns : int
 	debuff_timer.start(debuff_animation_time)
 	
 func turn_tick() -> void:
+	#current_defence /= 2
 	if has_debuff_weakness:
 		turns_debuff_weakness -= 1
 		if turns_debuff_weakness == 0:

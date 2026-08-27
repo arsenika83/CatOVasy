@@ -32,8 +32,20 @@ window/stretch/mode="canvas_items"
 
 project/assembly_name="GiantCrawl"
 
+[file_customization]
+
+folder_colors={
+"res://assets/fonts/": "gray",
+"res://assets/images/": "purple",
+"res://assets/music/": "orange",
+"res://assets/soundFX/": "yellow",
+"res://scenes/": "green",
+"res://scripts/": "blue"
+}
+
 [gui]
 
+theme/custom_font="uid://c01ismt76d301"
 common/drop_mouse_on_gui_input_disabled=true
 
 [input]
