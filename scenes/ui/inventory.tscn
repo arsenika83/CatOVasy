@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dsiha16n5p53v" path="res://scenes/ui/card_slot.tscn" id="6_weae1"]
 [ext_resource type="Texture2D" uid="uid://dei7d86i7igv7" path="res://assets/images/hp_circle.png" id="8_i8fht"]
 [ext_resource type="Shader" uid="uid://dcoiis0rcw7lq" path="res://shaders/hp_bar.gdshader" id="8_vj5ws"]
+[ext_resource type="PackedScene" uid="uid://55268lbppycn" path="res://scenes/ui/artifact_check_dialog.tscn" id="9_i8fht"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qtlqx"]
 shader = ExtResource("1_s887n")
@@ -354,10 +355,18 @@ texture = ExtResource("8_i8fht")
 use_parent_material = true
 layout_mode = 0
 offset_left = 304.0
-offset_top = 96.0
+offset_top = 98.0
 offset_right = 336.0
-offset_bottom = 128.0
+offset_bottom = 130.0
 texture = SubResource("AtlasTexture_vj5ws")
+
+[node name="ArtifactCheckDialog" parent="." unique_id=1959694701 instance=ExtResource("9_i8fht")]
+visible = false
+layout_mode = 1
+offset_left = -440.0
+offset_top = -96.16
+offset_right = -56.0
+offset_bottom = 255.84
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

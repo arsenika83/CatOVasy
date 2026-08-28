@@ -10,7 +10,7 @@ func _ready() -> void:
 	type = "attack"
 	state_modifier = "_attack"
 	rarity = "rare"
-	$Label.text = str("Урон: ", gm.damage, " x 2")
+	$Label.text = str("Урон: \n", gm.damage, " x 2")
 	$Energy/Label.text = str(energy_cost)
 
 func _process(delta: float) -> void:

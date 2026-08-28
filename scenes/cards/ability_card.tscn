@@ -68,8 +68,7 @@ offset_left = 16.0
 offset_top = 120.0
 offset_right = 112.0
 offset_bottom = 176.0
-theme_override_fonts/font = ExtResource("5_efu68")
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 16
 text = "АКТИВНАЯ
 СПОСОБНОСТЬ"
 horizontal_alignment = 1

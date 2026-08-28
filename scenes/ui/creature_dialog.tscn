@@ -13,7 +13,6 @@ shader = ExtResource("1_hh0f6")
 shader_parameter/speed = 2.000000095
 shader_parameter/amplitude = 2.000000095
 shader_parameter/time_offset = 10.0
-shader_parameter/flash_intensity = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qtlqx"]
 atlas = ExtResource("1_uuaso")
@@ -154,7 +153,7 @@ layout_mode = 0
 offset_left = 8.0
 offset_right = 248.0
 offset_bottom = 32.0
-theme_override_fonts/font = ExtResource("3_qtlqx")
+theme_override_font_sizes/font_size = 22
 text = "ИМЯ"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -164,9 +163,9 @@ use_parent_material = true
 layout_mode = 0
 offset_left = 36.0
 offset_top = 39.0
-offset_right = 248.0
+offset_right = 232.0
 offset_bottom = 296.0
-theme_override_fonts/font = ExtResource("3_qtlqx")
+theme_override_font_sizes/font_size = 22
 text = "ОЗ: 12/30
 УРОН: 2
 ЗАЩИТА: 4
@@ -189,72 +188,72 @@ offset_bottom = 296.0
 use_parent_material = true
 layout_mode = 0
 offset_left = 8.0
-offset_top = -9.0
+offset_top = -3.0
 offset_right = 24.0
-offset_bottom = 7.0
+offset_bottom = 13.0
 texture = SubResource("AtlasTexture_j5lms")
 
 [node name="TextureStat2" type="TextureRect" parent="Stats" unique_id=1134040944]
 use_parent_material = true
 layout_mode = 0
 offset_left = 8.0
-offset_top = 7.0
+offset_top = 23.0
 offset_right = 24.0
-offset_bottom = 23.0
+offset_bottom = 39.0
 texture = SubResource("AtlasTexture_m26fn")
 
 [node name="TextureStat3" type="TextureRect" parent="Stats" unique_id=1497937868]
 use_parent_material = true
 layout_mode = 0
 offset_left = 8.0
-offset_top = 23.0
+offset_top = 50.0
 offset_right = 24.0
-offset_bottom = 39.0
+offset_bottom = 66.0
 texture = SubResource("AtlasTexture_rg54v")
 
 [node name="TextureStat4" type="TextureRect" parent="Stats" unique_id=103937299]
 use_parent_material = true
 layout_mode = 0
 offset_left = 8.0
-offset_top = 39.0
+offset_top = 76.0
 offset_right = 24.0
-offset_bottom = 55.0
+offset_bottom = 92.0
 texture = SubResource("AtlasTexture_hy6s6")
 
 [node name="TextureStat5" type="TextureRect" parent="Stats" unique_id=1203236857]
 use_parent_material = true
 layout_mode = 0
 offset_left = 8.0
-offset_top = 55.0
+offset_top = 101.0
 offset_right = 24.0
-offset_bottom = 71.0
+offset_bottom = 117.0
 texture = SubResource("AtlasTexture_b4xcv")
 
 [node name="TextureStat6" type="TextureRect" parent="Stats" unique_id=1623209512]
 use_parent_material = true
 layout_mode = 0
 offset_left = 8.0
-offset_top = 72.0
+offset_top = 127.0
 offset_right = 24.0
-offset_bottom = 88.0
+offset_bottom = 143.0
 texture = SubResource("AtlasTexture_loxxi")
 
 [node name="TextureStat7" type="TextureRect" parent="Stats" unique_id=1123635346]
 use_parent_material = true
 layout_mode = 0
 offset_left = 8.0
-offset_top = 102.0
+offset_top = 179.0
 offset_right = 24.0
-offset_bottom = 118.0
+offset_bottom = 195.0
 texture = SubResource("AtlasTexture_yatuc")
 
 [node name="TextureStat8" type="TextureRect" parent="Stats" unique_id=1988012867]
 use_parent_material = true
 layout_mode = 0
 offset_left = 8.0
-offset_top = 117.0
+offset_top = 204.0
 offset_right = 24.0
-offset_bottom = 133.0
+offset_bottom = 220.0
 texture = SubResource("AtlasTexture_yhyxs")
 
 [node name="Debuffs" type="Control" parent="." unique_id=1814506075]

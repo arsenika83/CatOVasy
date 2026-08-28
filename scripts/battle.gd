@@ -14,6 +14,7 @@ var battle_ended = false
 
 @onready var end_battle_button = $UI/EndBattleButton
 @onready var creature_check_dialog = $UI/CreatureDialog
+@onready var card_container = $UI/CardContainer
 @onready var current_creature_stats : CharacterBody2D
 
 @onready var check_dialog_timer = $CheckStatsDialogHoldTimer
@@ -48,6 +49,8 @@ func _process(delta: float) -> void:
 	cursor_pos = map.get_global_mouse_position()
 	cursor_map_pos = map.local_to_map(cursor_pos)
 	cursor.global_position = map.map_to_local(cursor_map_pos)
+	
+	display_cursor_label() 
 	
 	if Input.is_action_just_pressed("ui_scale_up") and gm.camera_zoom <= 3:
 		gm.camera_zoom += 1
@@ -104,6 +107,27 @@ func win() -> void:
 
 func lose() -> void:
 	pass	
+
+func display_cursor_label() -> void:
+	var cursor_grid_pos = map.local_to_map(get_global_mouse_position())
+	var target_local_pos = map.map_to_local(cursor_grid_pos)
+	var cursor_label = cursor.find_child("Label")
+	cursor_label.visible = false
+	var cursor_icon = cursor.find_child("Icon")
+	cursor_icon.visible = false
+	
+	for i in range(0, find_child("Enemies").get_child_count()):
+		var targets : Array[CharacterBody2D] = [find_child("Enemies").get_child(i)]
+		
+		match gm.state:
+			"battle_attack":
+				if targets.get(0).battle_x == cursor_grid_pos.x and targets.get(0).battle_y == cursor_grid_pos.y:
+					if not targets.get(0).state == "dead":
+						
+						cursor_label.visible = true
+						cursor_icon.visible = true
+						cursor_label.text = str(card_container.current_selected.damage - targets.get(0).current_defence)
+				
 
 func choose_target(action : String) -> void:
 	var cursor_grid_pos = map.local_to_map(get_global_mouse_position())

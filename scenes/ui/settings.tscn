@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://dfnttrflcajvv"]
+
+[ext_resource type="Texture2D" uid="uid://de2c8pnqtrt77" path="res://assets/images/inventory_ui.png" id="1_8wfqe"]
+[ext_resource type="Script" uid="uid://cqp1d8m644mtr" path="res://scripts/ui/settings_menu.gd" id="1_ob3hf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7pacj"]
+atlas = ExtResource("1_8wfqe")
+region = Rect2(0, 0, 448, 720)
+
+[node name="Settings" type="Control" unique_id=1558518248]
+layout_mode = 3
+anchors_preset = 0
+pivot_offset = Vector2(256, 192)
+script = ExtResource("1_ob3hf")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=681546958]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 384.0
+offset_top = 128.0
+offset_right = -640.0
+offset_bottom = -208.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1856797750]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -8.0
+offset_right = 256.0
+offset_bottom = 376.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_7pacj")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="." unique_id=143895341]
+layout_mode = 0
+offset_left = 8.0
+offset_right = 248.0
+offset_bottom = 24.0
+theme_override_font_sizes/font_size = 20
+text = "НАСТРОЙКИ"
+horizontal_alignment = 1

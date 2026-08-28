@@ -5,6 +5,8 @@ var complect = ""
 var icon_path = "ball.png"
 var scene_path = "ball.tscn"
 var tool_tip_text = "КЛУБОК\n\nУвеличивает точность \nна 10%"
+var artifact_name = "КЛУБОК"
+var artifact_description = "Увеличивает точность на 10%"
 
 func _ready() -> void:
 	artifact_global_id = 1

@@ -6,6 +6,7 @@ extends Control
 
 @onready var audio_ok = $AudioStreamPlayerOK
 @onready var audio_cancel = $AudioStreamPlayerCancel
+@onready var audio_appear = $AudioStreamPlayerAppear
 
 func _ready() -> void:
 	pass

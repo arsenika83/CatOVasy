@@ -1,10 +1,12 @@
 class_name HeartShapedPillowArtifact extends Artifact
 
-var rarity = "common"
+var rarity = "epic"
 var complect = ""
 var icon_path = "heart_shaped_pillow.png"
 var scene_path = "heart_shaped_pillow.tscn"
-var tool_tip_text = "ПОДУШКА-СЕРДЕЧКО\n\nУвеличивает максимальные ОЗ \nна 15 \n(Не восстанавливает ОЗ)"
+var tool_tip_text = "ПОДУШКА В ВИДЕ СЕРДЦА\n\nУвеличивает максимальные ОЗ \nна 15 \n(Не восстанавливает ОЗ)"
+var artifact_name = "ПОДУШКА В ВИДЕ СЕРДЦА"
+var artifact_description = "Увеличивает максимальные ОЗ на 15 (Не восстанавливает ОЗ)"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

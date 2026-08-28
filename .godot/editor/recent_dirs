@@ -1,12 +1,13 @@
+res://scripts/ui/
+res://scenes/ui/
+res://scripts/global/
+res://styles/
 res://shaders/
 res://assets/fonts/
 res://scripts/artifacts/
 res://scripts/objects/
 res://scenes/objects/
 res://assets/images/
-res://scripts/ui/
-res://scenes/ui/
-res://scripts/global/
 res://scripts/
 res://scripts/cards/
 res://scripts/enemies/

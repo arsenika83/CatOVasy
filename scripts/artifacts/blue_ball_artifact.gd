@@ -1,10 +1,12 @@
 class_name BlueBallArtifact extends Artifact
 
-var rarity = "common"
+var rarity = "rare"
 var complect = ""
 var icon_path = "blue_ball.png"
 var scene_path = "blue_ball.tscn"
 var tool_tip_text = "СИНИЙ КЛУБОК\n\nУвеличивает удачу \nна 10%"
+var artifact_name = "СИНИЙ КЛУБОК"
+var artifact_description = "Увеличивает удачу на 10%"
 
 func _ready() -> void:
 	artifact_global_id = 2

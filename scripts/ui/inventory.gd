@@ -33,6 +33,8 @@ card_slot_ability_3, card_slot_ability_4, card_slot_ability_5]
 @onready var hp_bar = $HP
 @onready var hp_label = $HPLabel
 
+@onready var artifact_check_dialog = $ArtifactCheckDialog
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	update_cards()
@@ -50,13 +52,36 @@ func update_cards() -> void:
 		if gm.current_ability_cards.has(i+1) and is_instance_valid(gm.current_ability_cards.get(i+1)):
 			ability_card_slots[i].current_card = gm.current_ability_cards.get(i+1)
 			
-func update_artefacts() -> void:
+func update_artifacts() -> void:
 	for i in range(0, 10):
 		if gm.current_artifacts.has(i+1) and is_instance_valid(gm.current_artifacts.get(i+1)):
 			artifact_slots[i].current_artifact = gm.current_artifacts.get(i+1)
 			
 func set_hp_bar(value : float) -> void:
 	hp_bar.material.set_shader_parameter("fill_ratio", value)
+	
+func draw_artifact_check_dialog(artifact : Artifact) -> void:
+	if artifact == null:
+		artifact_check_dialog.visible = false
+		return
+	artifact_check_dialog.visible = true
+	artifact_check_dialog.artifact_name.text = artifact.artifact_name
+	artifact_check_dialog.artifact_description.text = artifact.artifact_description
+	artifact_check_dialog.icon.texture = load("res://assets/images/artifacts/" + artifact.icon_path)
+	
+	match artifact.rarity:
+		"common":
+			artifact_check_dialog.artifact_rarity.text = "ОБЫЧНЫЙ"
+			artifact_check_dialog.artifact_rarity.add_theme_color_override("font_color", Color(1,1,1))
+		"rare":
+			artifact_check_dialog.artifact_rarity.text = "РЕДКИЙ"
+			artifact_check_dialog.artifact_rarity.add_theme_color_override("font_color", Color(0,1,1))
+		"epic":
+			artifact_check_dialog.artifact_rarity.text = "ЭПИЧЕСКИЙ"
+			artifact_check_dialog.artifact_rarity.add_theme_color_override("font_color", Color(1,0,1))
+		"unbelievable":
+			artifact_check_dialog.artifact_rarity.text = "НЕВЕРОЯТНЫЙ"
+			artifact_check_dialog.artifact_rarity.add_theme_color_override("font_color", Color(1,0,0))
 
 func _on_mouse_entered() -> void:
 	if gm.state == "idle":

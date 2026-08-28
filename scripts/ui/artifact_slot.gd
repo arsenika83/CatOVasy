@@ -22,3 +22,12 @@ func update() -> void:
 		tooltip_text = current_artifact.tool_tip_text
 		rarity = current_artifact.rarity
 		loaded = true
+
+
+func _on_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+		if get_parent().get_parent().artifact_check_dialog.visible == false:
+			get_parent().get_parent().draw_artifact_check_dialog(current_artifact)
+		else:
+			get_parent().get_parent().artifact_check_dialog.visible = false
+	

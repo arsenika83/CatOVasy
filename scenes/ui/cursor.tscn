@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ba7f54d4yq2hp"]
 
 [ext_resource type="Texture2D" uid="uid://4itbl0ejcd3o" path="res://assets/images/tilemap.png" id="1_1eco6"]
+[ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="2_qi3ym"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s0nli"]
 atlas = ExtResource("1_1eco6")
@@ -24,9 +25,40 @@ animations = [{
 "speed": 1.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_gbfun"]
+atlas = ExtResource("2_qi3ym")
+region = Rect2(16, 128, 16, 16)
+
 [node name="Cursor" type="Node2D" unique_id=2051460958]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1881866203]
 sprite_frames = SubResource("SpriteFrames_f30dh")
 autoplay = "default"
 frame_progress = 0.23370326
+
+[node name="Icon" type="TextureRect" parent="." unique_id=420227113]
+visible = false
+z_index = 90
+offset_left = -25.0
+offset_top = -4.0
+offset_right = -18.0
+offset_bottom = 4.0
+texture = SubResource("AtlasTexture_gbfun")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="." unique_id=1482008603]
+visible = false
+z_index = 90
+offset_left = -74.0
+offset_top = -8.0
+offset_right = -26.0
+offset_bottom = 8.0
+theme_override_colors/font_outline_color = Color(0.6509804, 0.3019608, 0.30588236, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 1
+theme_override_constants/shadow_outline_size = 1
+theme_override_font_sizes/font_size = 10
+text = "2"
+horizontal_alignment = 2
+vertical_alignment = 1

@@ -22,6 +22,7 @@ var inventory_on_screen = false
 @onready var level_up_dialog = $UI/LevelUpDialog
 @onready var upgrade_stats_dialog = $UI/UpgradeStatsDialog
 @onready var artifact_dialog = $UI/ArtifactDialog
+@onready var menu = $UI/Menu
 
 @onready var foregroundFX = $Effects/ColorRect
 
@@ -60,11 +61,15 @@ func _process(delta: float) -> void:
 	
 	cursor_pos = get_global_mouse_position()
 	cursor_map_pos = map.local_to_map(cursor_pos)
-	
-	var diff_x = abs(cursor_map_pos.x - map.local_to_map(giant.position).x)
-	var diff_y = abs(cursor_map_pos.y - map.local_to_map(giant.position).y)
 		
 	check_hp()
+	
+	if Input.is_action_just_pressed("ui_menu"):
+		if menu.menu_on_screen:
+			gm.state = gm.prev_state
+			menu.hide_menu()
+		else:	
+			menu.show_menu()
 	
 	if inventory_on_screen:
 		update_inventory()
@@ -100,7 +105,8 @@ func _process(delta: float) -> void:
 		"checking_inventory":
 			cursor.visible = false
 			update_inventory()
-
+		"checking_menu":
+			cursor.visible = false
 
 func smooth_camera_zoom(value1, value2) -> void:
 	var tween = create_tween()
@@ -271,7 +277,7 @@ func update_inventory() -> void:
 	stats += 	str("\n", gm.xp, "/", gm.xp_needed)
 	inventory.find_child("StatsLabel").text = stats
 	inventory.update_cards()
-	inventory.update_artefacts()
+	inventory.update_artifacts()
 	inventory.set_hp_bar(float(gm.hp) / float(gm.max_hp))
 
 func draw_level_up() -> void:
@@ -301,6 +307,7 @@ func draw_artifact_dialog() -> void:
 	artifact_dialog.position.x = 512
 	artifact_dialog.scale = Vector2(0, 0)
 	artifact_dialog.update_artifact()
+	artifact_dialog.audio_appear.play()
 
 	gm.state = "leveling_up"
 	

@@ -7,6 +7,7 @@
 [ext_resource type="FontFile" uid="uid://dub3oi8dxfpfw" path="res://assets/fonts/JeuDePixel-Regular.otf" id="5_nwwwt"]
 [ext_resource type="AudioStream" uid="uid://bq0ooer30jskk" path="res://assets/soundFX/xp_pick_up.wav" id="6_snn0j"]
 [ext_resource type="AudioStream" uid="uid://bwch538phpi87" path="res://assets/soundFX/hit.wav" id="7_gcjjy"]
+[ext_resource type="AudioStream" uid="uid://bxhii1a001e1v" path="res://assets/music/BATTLE_WIN.mp3" id="8_snn0j"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_snn0j"]
 shader = ExtResource("1_68a23")
@@ -99,14 +100,6 @@ size_flags_vertical = 3
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 2
 
-[node name="AudioStreamPlayerOK" type="AudioStreamPlayer" parent="." unique_id=344300564]
-stream = ExtResource("6_snn0j")
-volume_db = 2.0
-
-[node name="AudioStreamPlayerCancel" type="AudioStreamPlayer" parent="." unique_id=803297642]
-stream = ExtResource("7_gcjjy")
-volume_db = 2.0
-
 [node name="OKButton" type="TextureButton" parent="." unique_id=546315634]
 use_parent_material = true
 layout_mode = 0
@@ -130,6 +123,18 @@ texture_normal = SubResource("AtlasTexture_nwwwt")
 texture_pressed = SubResource("AtlasTexture_3lovd")
 texture_hover = SubResource("AtlasTexture_wk181")
 stretch_mode = 0
+
+[node name="AudioStreamPlayerAppear" type="AudioStreamPlayer" parent="." unique_id=1315270137]
+stream = ExtResource("8_snn0j")
+volume_db = -8.0
+
+[node name="AudioStreamPlayerOK" type="AudioStreamPlayer" parent="." unique_id=344300564]
+stream = ExtResource("6_snn0j")
+volume_db = 2.0
+
+[node name="AudioStreamPlayerCancel" type="AudioStreamPlayer" parent="." unique_id=803297642]
+stream = ExtResource("7_gcjjy")
+volume_db = 2.0
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="pressed" from="OKButton" to="." method="_on_ok_button_pressed"]

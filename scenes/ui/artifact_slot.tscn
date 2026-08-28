@@ -38,3 +38,5 @@ stretch_mode = 5
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=286171554]
 stream = ExtResource("4_83qsy")
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
