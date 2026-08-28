@@ -148,38 +148,46 @@ visible = false
 [node name="AudioStreamPlayerHit" type="AudioStreamPlayer" parent="." unique_id=1483378938]
 stream = ExtResource("5_521xt")
 volume_db = 3.0
+bus = &"SoundFX"
 
 [node name="AudioStreamPlayerHitLucky" type="AudioStreamPlayer" parent="." unique_id=1904462849]
 stream = ExtResource("6_bb1qk")
 volume_db = -3.0
+bus = &"SoundFX"
 
 [node name="AudioStreamPlayerHurt" type="AudioStreamPlayer" parent="." unique_id=1647679942]
 stream = ExtResource("7_yyc8d")
 volume_db = -3.0
+bus = &"SoundFX"
 
 [node name="AudioStreamPlayerFall" type="AudioStreamPlayer" parent="." unique_id=1669003269]
 stream = ExtResource("8_2sef5")
 volume_db = -10.0
 pitch_scale = 0.5
 mix_target = 2
+bus = &"SoundFX"
 
 [node name="AudioStreamPlayerMiss" type="AudioStreamPlayer" parent="." unique_id=1497299272]
 stream = ExtResource("9_6hju4")
 volume_db = -5.0
 mix_target = 2
+bus = &"SoundFX"
 
 [node name="AudioStreamPlayerDefend" type="AudioStreamPlayer" parent="." unique_id=1289354088]
 stream = ExtResource("10_pdutp")
 mix_target = 2
+bus = &"SoundFX"
 
 [node name="AudioStreamPlayerDebuff" type="AudioStreamPlayer" parent="." unique_id=238661560]
 stream = ExtResource("11_rhgp0")
 volume_db = -3.0
 mix_target = 2
+bus = &"SoundFX"
 
 [node name="AudioStreamPlayerFollow" type="AudioStreamPlayer" parent="." unique_id=1711812219]
 stream = ExtResource("12_5ba63")
 mix_target = 2
+bus = &"SoundFX"
 
 [node name="IdleAnimationTimer" type="Timer" parent="." unique_id=1712994445]
 one_shot = true

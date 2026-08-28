@@ -61,5 +61,6 @@ texture_disabled = SubResource("AtlasTexture_8seao")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=286171554]
 stream = ExtResource("5_urfd8")
+bus = &"SoundFX"
 
 [connection signal="pressed" from="FireButton" to="." method="_on_fire_button_pressed"]

@@ -85,6 +85,7 @@ stretch_mode = 0
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=381409849]
 stream = ExtResource("3_3aiiy")
 volume_db = 2.0
+bus = &"SoundFX"
 
 [connection signal="pressed" from="AttackChangeButton" to="." method="_on_attack_change_button_pressed"]
 [connection signal="pressed" from="DefendChangeButton" to="." method="_on_defend_change_button_pressed"]

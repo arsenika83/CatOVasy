@@ -2,10 +2,30 @@
 
 [ext_resource type="Texture2D" uid="uid://de2c8pnqtrt77" path="res://assets/images/inventory_ui.png" id="1_8wfqe"]
 [ext_resource type="Script" uid="uid://cqp1d8m644mtr" path="res://scripts/ui/settings_menu.gd" id="1_ob3hf"]
+[ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="3_h175o"]
+[ext_resource type="StyleBox" uid="uid://c8ga5v05dn8be" path="res://styles/slider.tres" id="4_ncfhn"]
+[ext_resource type="StyleBox" uid="uid://odkki2srv7k8" path="res://styles/slider_behind.tres" id="5_ob3hf"]
+[ext_resource type="StyleBox" uid="uid://c32ybwbapbdey" path="res://styles/slider_behind_focused.tres" id="6_ob3hf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7pacj"]
 atlas = ExtResource("1_8wfqe")
 region = Rect2(0, 0, 448, 720)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ptynm"]
+atlas = ExtResource("3_h175o")
+region = Rect2(128, 0, 8, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h175o"]
+atlas = ExtResource("3_h175o")
+region = Rect2(256, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ncfhn"]
+atlas = ExtResource("3_h175o")
+region = Rect2(272, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ob3hf"]
+atlas = ExtResource("3_h175o")
+region = Rect2(256, 48, 16, 16)
 
 [node name="Settings" type="Control" unique_id=1558518248]
 layout_mode = 3
@@ -41,6 +61,38 @@ grow_vertical = 2
 texture = SubResource("AtlasTexture_7pacj")
 expand_mode = 1
 
+[node name="TextureRect" type="TextureRect" parent="TextureRect" unique_id=1325564480]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 128.0
+offset_top = -168.0
+offset_right = 144.0
+offset_bottom = -160.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_ptynm")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="TextureRect" unique_id=1220860081]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 128.0
+offset_top = 160.0
+offset_right = 144.0
+offset_bottom = 168.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_ptynm")
+expand_mode = 1
+
 [node name="Label" type="Label" parent="." unique_id=143895341]
 layout_mode = 0
 offset_left = 8.0
@@ -49,3 +101,192 @@ offset_bottom = 24.0
 theme_override_font_sizes/font_size = 20
 text = "НАСТРОЙКИ"
 horizontal_alignment = 1
+
+[node name="AUDIO" type="Control" parent="." unique_id=1666507579]
+anchors_preset = 0
+offset_top = -8.0
+offset_right = 40.0
+offset_bottom = 32.0
+
+[node name="TextureRect" type="TextureRect" parent="AUDIO" unique_id=1288005362]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = 20.0
+offset_right = 228.0
+offset_bottom = 148.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_7pacj")
+expand_mode = 1
+
+[node name="AudioLabel" type="Label" parent="AUDIO" unique_id=1792459865]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 40.0
+offset_right = 160.0
+offset_bottom = 64.0
+theme_override_font_sizes/font_size = 18
+text = "АУДИО"
+horizontal_alignment = 1
+
+[node name="MusicSlider" type="HSlider" parent="AUDIO" unique_id=1665422425]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 112.0
+offset_right = 240.0
+offset_bottom = 128.0
+theme_override_icons/grabber = SubResource("AtlasTexture_h175o")
+theme_override_icons/grabber_highlight = SubResource("AtlasTexture_ncfhn")
+theme_override_icons/grabber_disabled = SubResource("AtlasTexture_ob3hf")
+theme_override_styles/slider = ExtResource("4_ncfhn")
+theme_override_styles/grabber_area = ExtResource("5_ob3hf")
+theme_override_styles/grabber_area_highlight = ExtResource("6_ob3hf")
+min_value = 0.001
+max_value = 1.0
+step = 0.05
+value = 0.501
+
+[node name="MusicLabel" type="Label" parent="AUDIO" unique_id=1914358245]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 96.0
+offset_right = 72.0
+offset_bottom = 115.0
+theme_override_font_sizes/font_size = 16
+text = "МУЗЫКА:"
+
+[node name="FXLabel" type="Label" parent="AUDIO" unique_id=16998632]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 128.0
+offset_right = 72.0
+offset_bottom = 147.0
+theme_override_font_sizes/font_size = 16
+text = "ЗВУКИ:"
+
+[node name="FXSlider" type="HSlider" parent="AUDIO" unique_id=401222547]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 144.0
+offset_right = 240.0
+offset_bottom = 160.0
+theme_override_icons/grabber = SubResource("AtlasTexture_h175o")
+theme_override_icons/grabber_highlight = SubResource("AtlasTexture_ncfhn")
+theme_override_icons/grabber_disabled = SubResource("AtlasTexture_ob3hf")
+theme_override_styles/slider = ExtResource("4_ncfhn")
+theme_override_styles/grabber_area = ExtResource("5_ob3hf")
+theme_override_styles/grabber_area_highlight = ExtResource("6_ob3hf")
+min_value = 0.001
+max_value = 1.0
+step = 0.05
+value = 0.501
+
+[node name="VolumeLabel" type="Label" parent="AUDIO" unique_id=1981773796]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 64.0
+offset_right = 72.0
+offset_bottom = 83.0
+theme_override_font_sizes/font_size = 16
+text = "ОБЩАЯ ГРОМКОСТЬ:"
+
+[node name="VolumeSlider" type="HSlider" parent="AUDIO" unique_id=1970835316]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 80.0
+offset_right = 240.0
+offset_bottom = 96.0
+theme_override_icons/grabber = SubResource("AtlasTexture_h175o")
+theme_override_icons/grabber_highlight = SubResource("AtlasTexture_ncfhn")
+theme_override_icons/grabber_disabled = SubResource("AtlasTexture_ob3hf")
+theme_override_styles/slider = ExtResource("4_ncfhn")
+theme_override_styles/grabber_area = ExtResource("5_ob3hf")
+theme_override_styles/grabber_area_highlight = ExtResource("6_ob3hf")
+min_value = 0.001
+max_value = 1.0
+step = 0.05
+value = 0.501
+
+[node name="GAMEPLAY" type="Control" parent="." unique_id=1524183718]
+anchors_preset = 0
+offset_top = 136.0
+offset_right = 40.0
+offset_bottom = 176.0
+
+[node name="TextureRect" type="TextureRect" parent="GAMEPLAY" unique_id=1548987532]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = 20.0
+offset_right = 228.0
+offset_bottom = 204.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_7pacj")
+expand_mode = 1
+
+[node name="GameplayLabel" type="Label" parent="GAMEPLAY" unique_id=915015109]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 40.0
+offset_right = 211.0
+offset_bottom = 64.0
+theme_override_font_sizes/font_size = 18
+text = "ИГРОВОЙ ПРОЦЕСС"
+horizontal_alignment = 1
+
+[node name="SpeedSlider" type="HSlider" parent="GAMEPLAY" unique_id=242895981]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 96.0
+offset_right = 240.0
+offset_bottom = 112.0
+theme_override_icons/grabber = SubResource("AtlasTexture_h175o")
+theme_override_icons/grabber_highlight = SubResource("AtlasTexture_ncfhn")
+theme_override_icons/grabber_disabled = SubResource("AtlasTexture_ob3hf")
+theme_override_styles/slider = ExtResource("4_ncfhn")
+theme_override_styles/grabber_area = ExtResource("5_ob3hf")
+theme_override_styles/grabber_area_highlight = ExtResource("6_ob3hf")
+min_value = 1.0
+max_value = 3.0
+value = 1.0
+
+[node name="SpeedLabel" type="Label" parent="GAMEPLAY" unique_id=1868422256]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 64.0
+offset_right = 136.0
+offset_bottom = 83.0
+theme_override_font_sizes/font_size = 16
+text = "СКОРОСТЬ АНИМАЦИЙ:"
+
+[node name="1x" type="Label" parent="GAMEPLAY" unique_id=1963324868]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 80.0
+offset_right = 32.0
+offset_bottom = 96.0
+theme_override_font_sizes/font_size = 16
+text = "1x"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="3x" type="Label" parent="GAMEPLAY" unique_id=1300148051]
+layout_mode = 0
+offset_left = 224.0
+offset_top = 80.0
+offset_right = 240.0
+offset_bottom = 96.0
+theme_override_font_sizes/font_size = 16
+text = "3x"
+horizontal_alignment = 1
+vertical_alignment = 1

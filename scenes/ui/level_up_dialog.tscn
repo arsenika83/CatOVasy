@@ -208,10 +208,12 @@ stretch_mode = 0
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=344300564]
 stream = ExtResource("6_vtgeg")
 volume_db = 2.0
+bus = &"SoundFX"
 
 [node name="AudioStreamPlayerBurn" type="AudioStreamPlayer" parent="." unique_id=803297642]
 stream = ExtResource("7_6dcm8")
 volume_db = 2.0
+bus = &"SoundFX"
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="pressed" from="FireButton1" to="." method="_on_fire_button_1_pressed"]

@@ -40,6 +40,7 @@ folder_colors={
 "res://assets/images/": "purple",
 "res://assets/music/": "orange",
 "res://assets/soundFX/": "yellow",
+"res://saves/": "yellow",
 "res://scenes/": "green",
 "res://scripts/": "red",
 "res://styles/": "pink"

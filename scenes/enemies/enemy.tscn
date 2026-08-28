@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://crsqvlld0supu" path="res://assets/images/enemy_sprite.png" id="1_6xk8f"]
 [ext_resource type="Script" uid="uid://bv6rnws21fw7r" path="res://scripts/enemies/enemy.gd" id="1_8e3ao"]
+[ext_resource type="PackedScene" uid="uid://bc1x5xpcygnvy" path="res://scenes/fx/damage_indicator.tscn" id="2_k4gvh"]
 [ext_resource type="AudioStream" uid="uid://bwch538phpi87" path="res://assets/soundFX/hit.wav" id="3_38ino"]
 [ext_resource type="PackedScene" uid="uid://tksv3htggrop" path="res://scenes/fx/xp_orb.tscn" id="4_fcftc"]
 [ext_resource type="AudioStream" uid="uid://b78ln2t2dmc8p" path="res://assets/soundFX/meow_die.wav" id="4_nb6gf"]
@@ -134,6 +135,7 @@ radius = 1.0
 collision_layer = 2
 collision_mask = 128
 script = ExtResource("1_8e3ao")
+damage_indicator_scene = ExtResource("2_k4gvh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=947260883]
 shape = SubResource("RectangleShape2D_tihwb")
@@ -170,38 +172,46 @@ visible = false
 [node name="AudioStreamPlayerHit" type="AudioStreamPlayer" parent="." unique_id=1483378938]
 stream = ExtResource("3_38ino")
 volume_db = 3.0
+bus = &"SoundFX"
 
 [node name="AudioStreamPlayerHitLucky" type="AudioStreamPlayer" parent="." unique_id=1904462849]
 stream = ExtResource("6_qch6t")
 volume_db = -3.0
+bus = &"SoundFX"
 
 [node name="AudioStreamPlayerHurt" type="AudioStreamPlayer" parent="." unique_id=1647679942]
 stream = ExtResource("7_y5th1")
 volume_db = -3.0
+bus = &"SoundFX"
 
 [node name="AudioStreamPlayerFall" type="AudioStreamPlayer" parent="." unique_id=1669003269]
 stream = ExtResource("4_nb6gf")
 volume_db = -10.0
 pitch_scale = 0.5
 mix_target = 2
+bus = &"SoundFX"
 
 [node name="AudioStreamPlayerMiss" type="AudioStreamPlayer" parent="." unique_id=1497299272]
 stream = ExtResource("8_n7575")
 volume_db = -5.0
 mix_target = 2
+bus = &"SoundFX"
 
 [node name="AudioStreamPlayerDefend" type="AudioStreamPlayer" parent="." unique_id=1289354088]
 stream = ExtResource("9_qch6t")
 mix_target = 2
+bus = &"SoundFX"
 
 [node name="AudioStreamPlayerDebuff" type="AudioStreamPlayer" parent="." unique_id=238661560]
 stream = ExtResource("11_tihwb")
 volume_db = -3.0
 mix_target = 2
+bus = &"SoundFX"
 
 [node name="AudioStreamPlayerFollow" type="AudioStreamPlayer" parent="." unique_id=1981382083]
 stream = ExtResource("12_p7w77")
 mix_target = 2
+bus = &"SoundFX"
 
 [node name="IdleAnimationTimer" type="Timer" parent="." unique_id=1712994445]
 one_shot = true

@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://bc1x5xpcygnvy"]
+
+[ext_resource type="Script" uid="uid://b5r500k2wlvrp" path="res://scripts/damage_indicator.gd" id="1_ni1fv"]
+
+[node name="DamageIndicator" type="Label" unique_id=348309478]
+offset_right = 24.0
+offset_bottom = 25.0
+theme_override_font_sizes/font_size = 24
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("1_ni1fv")

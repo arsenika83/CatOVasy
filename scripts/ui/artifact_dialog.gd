@@ -4,6 +4,9 @@ extends Control
 @onready var ok_button = $OKButton
 @onready var cancel_button = $CancelButton
 
+@onready var artifact_name_label = $TextureRect3/NameLabel
+@onready var artifact_description_label = $TextureRect3/DescriptionLabel
+
 @onready var audio_ok = $AudioStreamPlayerOK
 @onready var audio_cancel = $AudioStreamPlayerCancel
 @onready var audio_appear = $AudioStreamPlayerAppear
@@ -25,7 +28,10 @@ func update_artifact() -> void:
 	var artifact_scene = load("res://scenes/artifacts/" + artifact_name + ".tscn")
 	var artifact = artifact_scene.instantiate()
 
+	artifact_name_label.text = artifact.artifact_name
+	artifact_description_label.text = artifact.artifact_description
 	artifact.use_parent_material = true
+	
 	artifacts.add_child(artifact)
 	
 

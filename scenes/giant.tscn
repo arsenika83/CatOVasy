@@ -433,49 +433,60 @@ one_shot = true
 [node name="AudioStreamPlayerMeow" type="AudioStreamPlayer" parent="." unique_id=1429074131]
 stream = ExtResource("3_sx7hc")
 volume_db = -10.0
+bus = &"SoundFX"
 
 [node name="AudioStreamPlayerFall" type="AudioStreamPlayer" parent="." unique_id=1300676923]
 stream = ExtResource("4_ukwaf")
 volume_db = -10.0
 pitch_scale = 0.5
 mix_target = 2
+bus = &"SoundFX"
 
 [node name="AudioStreamPlayerResting" type="AudioStreamPlayer" parent="." unique_id=1025934137]
 stream = ExtResource("5_2xoio")
 mix_target = 2
+bus = &"SoundFX"
 
 [node name="AudioStreamPlayerLevelUp" type="AudioStreamPlayer" parent="." unique_id=1219501230]
 stream = ExtResource("6_odb8e")
+bus = &"SoundFX"
 
 [node name="AudioStreamPlayerPickUpXP" type="AudioStreamPlayer" parent="." unique_id=830168320]
 stream = ExtResource("7_0vpcl")
+bus = &"SoundFX"
 
 [node name="AudioStreamPlayerMiss" type="AudioStreamPlayer" parent="." unique_id=1521038996]
 stream = ExtResource("9_q18av")
 volume_db = -3.0
 mix_target = 2
+bus = &"SoundFX"
 
 [node name="AudioStreamPlayerDefend" type="AudioStreamPlayer" parent="." unique_id=820096520]
 stream = ExtResource("10_dt8fj")
 volume_db = -7.056
+bus = &"SoundFX"
 
 [node name="AudioStreamPlayerHit" type="AudioStreamPlayer" parent="." unique_id=1259823576]
 stream = ExtResource("11_dku5q")
 volume_db = 3.0
+bus = &"SoundFX"
 
 [node name="AudioStreamPlayerHitLucky" type="AudioStreamPlayer" parent="." unique_id=2055643621]
 stream = ExtResource("12_p1oqw")
 volume_db = -3.0
+bus = &"SoundFX"
 
 [node name="AudioStreamPlayerDebuff" type="AudioStreamPlayer" parent="." unique_id=1109583403]
 stream = ExtResource("13_p1oqw")
 volume_db = -3.0
 mix_target = 2
+bus = &"SoundFX"
 
 [node name="AudioStreamPlayerWalk" type="AudioStreamPlayer" parent="." unique_id=2071061521]
 stream = ExtResource("14_q8t3y")
-volume_db = 6.0
+volume_db = 10.0
 mix_target = 2
+bus = &"SoundFX"
 
 [connection signal="area_shape_entered" from="Area2D" to="." method="_on_area_2d_area_shape_entered"]
 [connection signal="timeout" from="IdleAnimationTimer" to="." method="_on_idle_animation_timer_timeout"]

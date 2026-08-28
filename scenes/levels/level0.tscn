@@ -319,8 +319,6 @@ position = Vector2(336, 240)
 [node name="Cursor" parent="." unique_id=2051460958 instance=ExtResource("4_lbhrr")]
 position = Vector2(608, -16)
 
-[node name="BattleNode" type="Node2D" parent="." unique_id=797394893]
-
 [node name="Effects" type="CanvasLayer" parent="." unique_id=1391118850]
 
 [node name="ColorRect" type="ColorRect" parent="Effects" unique_id=982896523]
@@ -369,14 +367,18 @@ offset_top = 192.0
 offset_right = -512.0
 offset_bottom = -208.0
 
+[node name="BattleNode" type="Node2D" parent="." unique_id=797394893]
+
 [node name="BattleStartTimer" type="Timer" parent="." unique_id=1709292871]
 one_shot = true
 
 [node name="AudioStreamPlayerBattleStart" type="AudioStreamPlayer" parent="." unique_id=1295234369]
 stream = ExtResource("19_luu1i")
 volume_db = -6.0
+bus = &"Music"
 
 [node name="AudioStreamPlayerMusic" type="AudioStreamPlayer" parent="." unique_id=179520262]
 stream = ExtResource("19_3ebcg")
+bus = &"Music"
 
 [connection signal="timeout" from="BattleStartTimer" to="." method="_on_battle_start_timer_timeout"]

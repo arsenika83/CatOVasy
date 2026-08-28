@@ -1,8 +1,11 @@
 class_name Enemy extends CharacterBody2D
 
+@export var damage_indicator_scene: PackedScene
+
 @export var hp = 2
 @export var max_hp = 2
 
+var taken_damage = 0
 @export var damage = 1
 var current_damage = damage
 var max_damage = damage
@@ -276,8 +279,9 @@ func take_damage(dmg : int, time : float) -> void:
 		dmg = 0
 	else:
 		dmg -= current_defence
-		current_defence = 0
+		current_defence = 0	
 	
+	taken_damage = dmg
 	if dmg > 0:
 		hp -= dmg
 		take_damage_timer.start(time)
@@ -483,13 +487,19 @@ func _on_idle_animation_timer_timeout() -> void:
 func _on_take_damage_timer_timeout() -> void:
 	check_hp()
 	
+	if damage_indicator_scene:
+		var indicator = damage_indicator_scene.instantiate()
+		var spawn_pos = global_position + Vector2(0, -2)
+		
+		add_child(indicator)
+		indicator.display_damage(taken_damage, spawn_pos)
+	
 	if not state == "dead":
 		sprite.play("take_damage")
 		audio_hurt.play()
 		idle_animation_timer.start(0.2)
 		get_parent().get_parent().end_turn()
 	else:
-		print("DEAD CHECK")
 		audio_fall.play()
 		sprite.play("dead")
 		
@@ -498,6 +508,13 @@ func _on_take_damage_timer_timeout() -> void:
 func _on_miss_damage_timer_timeout() -> void:
 	var tween = create_tween()
 	tween.tween_property(status_fx, "scale", Vector2(0, 0), 0.2)
+	if damage_indicator_scene:
+		var indicator = damage_indicator_scene.instantiate()
+		var spawn_pos = global_position + Vector2(0, -2)
+		
+		add_child(indicator)
+		indicator.display_damage(0, spawn_pos)
+	
 	get_parent().get_parent().end_turn()
 	
 

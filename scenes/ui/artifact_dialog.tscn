@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://benua7ksjotoq" path="res://scripts/ui/artifact_dialog.gd" id="2_snn0j"]
 [ext_resource type="Texture2D" uid="uid://de2c8pnqtrt77" path="res://assets/images/inventory_ui.png" id="3_gcjjy"]
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="4_fxcbs"]
-[ext_resource type="FontFile" uid="uid://dub3oi8dxfpfw" path="res://assets/fonts/JeuDePixel-Regular.otf" id="5_nwwwt"]
 [ext_resource type="AudioStream" uid="uid://bq0ooer30jskk" path="res://assets/soundFX/xp_pick_up.wav" id="6_snn0j"]
 [ext_resource type="AudioStream" uid="uid://bwch538phpi87" path="res://assets/soundFX/hit.wav" id="7_gcjjy"]
 [ext_resource type="AudioStream" uid="uid://bxhii1a001e1v" path="res://assets/music/BATTLE_WIN.mp3" id="8_snn0j"]
@@ -50,9 +49,9 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -128.0
-offset_top = -192.0
+offset_top = -96.0
 offset_right = -1152.0
-offset_bottom = -592.0
+offset_bottom = -496.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(128, 192)
@@ -66,13 +65,45 @@ offset_bottom = 320.0
 texture = SubResource("AtlasTexture_53g1v")
 expand_mode = 1
 
+[node name="TextureRect3" type="TextureRect" parent="." unique_id=901294263]
+use_parent_material = true
+layout_mode = 0
+offset_left = -264.0
+offset_right = -8.0
+offset_bottom = 176.0
+texture = SubResource("AtlasTexture_53g1v")
+expand_mode = 1
+
+[node name="NameLabel" type="Label" parent="TextureRect3" unique_id=813957948]
+use_parent_material = true
+layout_mode = 0
+offset_left = 16.0
+offset_top = 8.0
+offset_right = 240.0
+offset_bottom = 33.0
+theme_override_font_sizes/font_size = 22
+text = "НАЗВАНИЕ"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DescriptionLabel" type="Label" parent="TextureRect3" unique_id=442762286]
+use_parent_material = true
+layout_mode = 0
+offset_left = 8.0
+offset_top = 40.0
+offset_right = 248.0
+offset_bottom = 168.0
+theme_override_font_sizes/font_size = 18
+text = "ОПИСАНИЕ ОПИСАНИЕ ОПИСАНИЕ ОПИСАНИЕ ОПИСАНИЕ ОПИСАНИЕ ОПИСАНИЕ"
+autowrap_mode = 2
+
 [node name="TextureRect2" type="TextureRect" parent="." unique_id=1621686300]
 use_parent_material = true
 layout_mode = 0
 offset_left = 16.0
-offset_top = 80.0
+offset_top = 48.0
 offset_right = 240.0
-offset_bottom = 296.0
+offset_bottom = 304.0
 texture = SubResource("AtlasTexture_53g1v")
 expand_mode = 1
 
@@ -83,7 +114,7 @@ offset_left = 16.0
 offset_top = 8.0
 offset_right = 240.0
 offset_bottom = 33.0
-theme_override_fonts/font = ExtResource("5_nwwwt")
+theme_override_font_sizes/font_size = 22
 text = "НАЙДЕН АРТЕФАКТ!"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -104,9 +135,9 @@ theme_override_constants/v_separation = 2
 use_parent_material = true
 layout_mode = 0
 offset_left = 64.0
-offset_top = 232.0
+offset_top = 240.0
 offset_right = 112.0
-offset_bottom = 280.0
+offset_bottom = 288.0
 texture_normal = SubResource("AtlasTexture_snn0j")
 texture_pressed = SubResource("AtlasTexture_gcjjy")
 texture_hover = SubResource("AtlasTexture_fxcbs")
@@ -116,9 +147,9 @@ stretch_mode = 0
 use_parent_material = true
 layout_mode = 0
 offset_left = 144.0
-offset_top = 232.0
+offset_top = 240.0
 offset_right = 192.0
-offset_bottom = 280.0
+offset_bottom = 288.0
 texture_normal = SubResource("AtlasTexture_nwwwt")
 texture_pressed = SubResource("AtlasTexture_3lovd")
 texture_hover = SubResource("AtlasTexture_wk181")
@@ -127,14 +158,17 @@ stretch_mode = 0
 [node name="AudioStreamPlayerAppear" type="AudioStreamPlayer" parent="." unique_id=1315270137]
 stream = ExtResource("8_snn0j")
 volume_db = -8.0
+bus = &"SoundFX"
 
 [node name="AudioStreamPlayerOK" type="AudioStreamPlayer" parent="." unique_id=344300564]
 stream = ExtResource("6_snn0j")
 volume_db = 2.0
+bus = &"SoundFX"
 
 [node name="AudioStreamPlayerCancel" type="AudioStreamPlayer" parent="." unique_id=803297642]
 stream = ExtResource("7_gcjjy")
 volume_db = 2.0
+bus = &"SoundFX"
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="pressed" from="OKButton" to="." method="_on_ok_button_pressed"]

@@ -63,7 +63,7 @@ func _process(delta: float) -> void:
 			sprite.play("idle")
 		"walking":
 			if Input.is_action_just_pressed("ui_lmb"):
-				var do_meow = randf_range(0.0, 1.0) <= 0.2
+				var do_meow = randf_range(0.0, 1.0) <= 0.05
 				if do_meow:
 					audio_meow.pitch_scale = randf_range(0.7, 0.9)
 					audio_meow.play()
