@@ -13,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://bclkaxhxamdmf" path="res://assets/soundFX/defend.wav" id="9_qch6t"]
 [ext_resource type="AudioStream" uid="uid://ceun5aaxxb0o7" path="res://assets/soundFX/debuff.wav" id="11_tihwb"]
 [ext_resource type="AudioStream" uid="uid://vid6rjo3jggy" path="res://assets/soundFX/follow.wav" id="12_p7w77"]
+[ext_resource type="PackedScene" uid="uid://ba7f54d4yq2hp" path="res://scenes/ui/cursor.tscn" id="14_twn6s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tihwb"]
 size = Vector2(32, 32)
@@ -230,6 +231,9 @@ one_shot = true
 
 [node name="DebuffTimer" type="Timer" parent="." unique_id=573649907]
 one_shot = true
+
+[node name="Cursor" parent="." unique_id=2051460958 instance=ExtResource("14_twn6s")]
+visible = false
 
 [connection signal="area_entered" from="Area2DXP" to="." method="_on_area_2dxp_area_entered"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

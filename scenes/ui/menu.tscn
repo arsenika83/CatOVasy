@@ -41,6 +41,7 @@ grow_vertical = 2
 script = ExtResource("1_cx0sj")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1937895443]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -50,6 +51,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.7921569)
 
 [node name="MenuRect" type="TextureRect" parent="." unique_id=48724040]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

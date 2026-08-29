@@ -5,6 +5,14 @@ signal card_picked_up(card_node)
 signal card_played(card_node)
 var is_selected: bool = false
 
+var behind_attack = false
+var cross_attack = false
+var row_attack_3 = false
+var row_attack_5 = false
+var square_attack_2x2 = false
+var square_attack_3x3 = false
+var everybody_attack = true
+
 var state_modifier = ""
 var enabled = true
 var energy_cost = 1

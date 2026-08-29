@@ -2,6 +2,10 @@ class_name Enemy extends CharacterBody2D
 
 @export var damage_indicator_scene: PackedScene
 
+var is_big = false
+
+var positions : Array[Vector2]
+
 @export var hp = 2
 @export var max_hp = 2
 
@@ -91,6 +95,8 @@ var buff_animation_time =   0.3
 @onready var area = $Area2D
 @onready var area_xp = $Area2DXP
 
+@onready var cursor = $Cursor
+
 @onready var audio_follow = $AudioStreamPlayerFollow
 @onready var audio_hit = $AudioStreamPlayerHit
 @onready var audio_hit_lucky = $AudioStreamPlayerHitLucky
@@ -115,8 +121,13 @@ func _ready() -> void:
 	status_fx.play("found_you")
 	battle_x = get_parent().get_parent().find_child("TileMapLayerBlack").local_to_map(position).x
 	battle_y = get_parent().get_parent().find_child("TileMapLayerBlack").local_to_map(position).y
+	
+	if is_big:
+		positions.append(Vector2(battle_x, battle_y))
+		positions.append(Vector2(battle_x+1, battle_y))
+	else:
+		positions.append(Vector2(battle_x, battle_y))
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	check_hp()
 	

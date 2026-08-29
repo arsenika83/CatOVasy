@@ -42,6 +42,7 @@ var level = 1
 
 var current_targets : Array[CharacterBody2D]
 var current_cards: Array[Card]
+var current_card: Card
 
 var current_attack_cards: Dictionary[int, Card]
 var current_defend_cards: Dictionary[int, Card]

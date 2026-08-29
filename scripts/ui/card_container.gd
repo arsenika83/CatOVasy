@@ -145,6 +145,7 @@ func _on_card_selected(clicked_card: Control) -> void:
 		
 	current_selected = clicked_card
 	current_selected.select_card()
+	gm.current_card = current_selected
 	
 func _on_card_played(played_card: Control) -> void:
 

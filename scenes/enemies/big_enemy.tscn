@@ -1,0 +1,206 @@
+[gd_scene format=3 uid="uid://chg4bur2rdrp2"]
+
+[ext_resource type="Script" uid="uid://b2c8e7t53mo5k" path="res://scripts/enemies/big_enemy.gd" id="1_okeax"]
+[ext_resource type="PackedScene" uid="uid://bc1x5xpcygnvy" path="res://scenes/fx/damage_indicator.tscn" id="2_2jb21"]
+[ext_resource type="Texture2D" uid="uid://crsqvlld0supu" path="res://assets/images/enemy_sprite.png" id="3_fxwg8"]
+[ext_resource type="PackedScene" uid="uid://tksv3htggrop" path="res://scenes/fx/xp_orb.tscn" id="4_6j7ba"]
+[ext_resource type="PackedScene" uid="uid://cr7p23s5f4urx" path="res://scenes/fx/status_fx.tscn" id="5_hqr3f"]
+[ext_resource type="AudioStream" uid="uid://bwch538phpi87" path="res://assets/soundFX/hit.wav" id="6_4u73i"]
+[ext_resource type="AudioStream" uid="uid://btyuivf1mvgot" path="res://assets/soundFX/hit_lucky.wav" id="7_wdoxb"]
+[ext_resource type="AudioStream" uid="uid://dnpo0un37rpje" path="res://assets/soundFX/enemies/mouse_hurt.wav" id="8_3ykna"]
+[ext_resource type="AudioStream" uid="uid://b78ln2t2dmc8p" path="res://assets/soundFX/meow_die.wav" id="9_3n5ic"]
+[ext_resource type="AudioStream" uid="uid://bv07t8ic6tpma" path="res://assets/soundFX/miss.wav" id="10_swy8x"]
+[ext_resource type="AudioStream" uid="uid://bclkaxhxamdmf" path="res://assets/soundFX/defend.wav" id="11_3ie6y"]
+[ext_resource type="AudioStream" uid="uid://ceun5aaxxb0o7" path="res://assets/soundFX/debuff.wav" id="12_pnws3"]
+[ext_resource type="AudioStream" uid="uid://vid6rjo3jggy" path="res://assets/soundFX/follow.wav" id="13_0ljg1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tihwb"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cjphv"]
+size = Vector2(51, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cjphv"]
+atlas = ExtResource("3_fxwg8")
+region = Rect2(128, 96, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2jb21"]
+atlas = ExtResource("3_fxwg8")
+region = Rect2(0, 96, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6j7ba"]
+atlas = ExtResource("3_fxwg8")
+region = Rect2(0, 96, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_okeax"]
+atlas = ExtResource("3_fxwg8")
+region = Rect2(0, 96, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fxwg8"]
+atlas = ExtResource("3_fxwg8")
+region = Rect2(64, 96, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hqr3f"]
+atlas = ExtResource("3_fxwg8")
+region = Rect2(192, 96, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fcftc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cjphv")
+}],
+"loop": false,
+"name": &"dead",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2jb21")
+}],
+"loop": true,
+"name": &"deal_damage",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6j7ba")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_okeax")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fxwg8")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hqr3f")
+}],
+"loop": true,
+"name": &"take_damage",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4u73i"]
+size = Vector2(51, 5)
+
+[node name="BigEnemy" type="CharacterBody2D" unique_id=685663284]
+collision_layer = 2
+collision_mask = 128
+script = ExtResource("1_okeax")
+damage_indicator_scene = ExtResource("2_2jb21")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=947260883]
+shape = SubResource("RectangleShape2D_tihwb")
+debug_color = Color(0.5357, 0.55, 0.3355, 0.08627451)
+
+[node name="Area2DXP" type="Area2D" parent="." unique_id=1374911131]
+collision_layer = 2
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2DXP" unique_id=215588090]
+position = Vector2(15.5, 0)
+shape = SubResource("RectangleShape2D_cjphv")
+debug_color = Color(0.24974304, 0.61780167, 0.4339693, 0.41960785)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=34147167]
+position = Vector2(16, -18)
+sprite_frames = SubResource("SpriteFrames_fcftc")
+animation = &"dead"
+autoplay = "idle"
+frame_progress = 1.0
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1438211941]
+collision_layer = 2
+collision_mask = 129
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1565969177]
+position = Vector2(15, 7)
+shape = SubResource("RectangleShape2D_4u73i")
+debug_color = Color(0.86404556, 0.3111131, 0.46711254, 0.41960785)
+
+[node name="XpOrb" parent="." unique_id=632733372 instance=ExtResource("4_6j7ba")]
+visible = false
+
+[node name="StatusFX" parent="." unique_id=1192321709 instance=ExtResource("5_hqr3f")]
+visible = false
+
+[node name="AudioStreamPlayerHit" type="AudioStreamPlayer" parent="." unique_id=1483378938]
+stream = ExtResource("6_4u73i")
+volume_db = 3.0
+bus = &"SoundFX"
+
+[node name="AudioStreamPlayerHitLucky" type="AudioStreamPlayer" parent="." unique_id=1904462849]
+stream = ExtResource("7_wdoxb")
+volume_db = -3.0
+bus = &"SoundFX"
+
+[node name="AudioStreamPlayerHurt" type="AudioStreamPlayer" parent="." unique_id=1647679942]
+stream = ExtResource("8_3ykna")
+volume_db = -3.0
+bus = &"SoundFX"
+
+[node name="AudioStreamPlayerFall" type="AudioStreamPlayer" parent="." unique_id=1669003269]
+stream = ExtResource("9_3n5ic")
+volume_db = -10.0
+pitch_scale = 0.5
+mix_target = 2
+bus = &"SoundFX"
+
+[node name="AudioStreamPlayerMiss" type="AudioStreamPlayer" parent="." unique_id=1497299272]
+stream = ExtResource("10_swy8x")
+volume_db = -5.0
+mix_target = 2
+bus = &"SoundFX"
+
+[node name="AudioStreamPlayerDefend" type="AudioStreamPlayer" parent="." unique_id=1289354088]
+stream = ExtResource("11_3ie6y")
+mix_target = 2
+bus = &"SoundFX"
+
+[node name="AudioStreamPlayerDebuff" type="AudioStreamPlayer" parent="." unique_id=238661560]
+stream = ExtResource("12_pnws3")
+volume_db = -3.0
+mix_target = 2
+bus = &"SoundFX"
+
+[node name="AudioStreamPlayerFollow" type="AudioStreamPlayer" parent="." unique_id=1981382083]
+stream = ExtResource("13_0ljg1")
+mix_target = 2
+bus = &"SoundFX"
+
+[node name="IdleAnimationTimer" type="Timer" parent="." unique_id=1712994445]
+one_shot = true
+
+[node name="DealDamageTimer" type="Timer" parent="." unique_id=1742509858]
+one_shot = true
+
+[node name="TakeDamageTimer" type="Timer" parent="." unique_id=1706057441]
+one_shot = true
+
+[node name="MissDamageTimer" type="Timer" parent="." unique_id=67340781]
+one_shot = true
+
+[node name="DefendTimer" type="Timer" parent="." unique_id=38733242]
+one_shot = true
+
+[node name="DebuffTimer" type="Timer" parent="." unique_id=573649907]
+one_shot = true
+
+[connection signal="area_entered" from="Area2DXP" to="." method="_on_area_2dxp_area_entered"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="timeout" from="IdleAnimationTimer" to="." method="_on_idle_animation_timer_timeout"]
+[connection signal="timeout" from="DealDamageTimer" to="." method="_on_deal_damage_timer_timeout"]
+[connection signal="timeout" from="TakeDamageTimer" to="." method="_on_take_damage_timer_timeout"]
+[connection signal="timeout" from="MissDamageTimer" to="." method="_on_miss_damage_timer_timeout"]
+[connection signal="timeout" from="DefendTimer" to="." method="_on_defend_timer_timeout"]
+[connection signal="timeout" from="DebuffTimer" to="." method="_on_debuff_timer_timeout"]
