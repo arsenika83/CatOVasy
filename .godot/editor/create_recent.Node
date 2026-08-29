@@ -1,8 +1,9 @@
-Label
+GridContainer
+Control
 TextureRect
+Label
 HSlider
 SpinBox
-Control
 AudioStreamPlayer
 Button
 TextureButton
@@ -10,5 +11,4 @@ ColorRect
 CollisionShape2D
 Area2D
 AnimatedSprite2D
-GridContainer
 PanelContainer

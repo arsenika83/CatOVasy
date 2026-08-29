@@ -1,26 +1,28 @@
-[gd_scene format=3 uid="uid://55268lbppycn"]
+[gd_scene format=3 uid="uid://bhwyxtkmsfidf"]
 
-[ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="1_0wa16"]
-[ext_resource type="Script" uid="uid://dc6digk37p2gn" path="res://scripts/ui/artifact_check_dialog.gd" id="2_t24nx"]
-[ext_resource type="Texture2D" uid="uid://de2c8pnqtrt77" path="res://assets/images/inventory_ui.png" id="3_t24nx"]
-[ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="4_6fal4"]
-[ext_resource type="Texture2D" uid="uid://c4vuxt64k2xkl" path="res://assets/images/artifacts/ball.png" id="5_t24nx"]
+[ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="1_qjp1o"]
+[ext_resource type="Script" uid="uid://b6bfyqjmol052" path="res://scripts/ui/card_check_dialog.gd" id="2_hxdfs"]
+[ext_resource type="Texture2D" uid="uid://de2c8pnqtrt77" path="res://assets/images/inventory_ui.png" id="3_jngtl"]
+[ext_resource type="PackedScene" uid="uid://hoerixcuuuk3" path="res://scenes/cards/attack_double_claw_card.tscn" id="4_hxdfs"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qtlqx"]
-shader = ExtResource("1_0wa16")
+shader = ExtResource("1_qjp1o")
 shader_parameter/speed = 2.000000095
 shader_parameter/amplitude = 2.000000095
 shader_parameter/time_offset = 10.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qtlqx"]
-atlas = ExtResource("3_t24nx")
+atlas = ExtResource("3_jngtl")
 region = Rect2(0, 0, 448, 720)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hh0f6"]
-atlas = ExtResource("4_6fal4")
-region = Rect2(384, 0, 128, 128)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qjp1o"]
+resource_local_to_scene = true
+shader = ExtResource("1_qjp1o")
+shader_parameter/speed = 2.000000095
+shader_parameter/amplitude = 10.000000475
+shader_parameter/time_offset = 0.0
 
-[node name="ArtifactCheckDialog" type="Control" unique_id=1641948652]
+[node name="CardCheckDialog" type="Control" unique_id=1641948652]
 material = SubResource("ShaderMaterial_qtlqx")
 layout_mode = 3
 anchor_left = 0.1
@@ -30,35 +32,17 @@ anchor_bottom = 0.178
 offset_left = -128.0
 offset_top = -128.16
 offset_right = 256.0
-offset_bottom = 135.84
+offset_bottom = 151.84
 grow_vertical = 2
-script = ExtResource("2_t24nx")
+script = ExtResource("2_hxdfs")
 
 [node name="TextureRect2" type="TextureRect" parent="." unique_id=1275944467]
 use_parent_material = true
 layout_mode = 0
 offset_right = 384.0
-offset_bottom = 264.0
+offset_bottom = 280.0
 texture = SubResource("AtlasTexture_qtlqx")
 expand_mode = 1
-
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1053014275]
-use_parent_material = true
-custom_minimum_size = Vector2(128, 128)
-layout_mode = 0
-offset_left = 240.0
-offset_top = 12.0
-offset_right = 368.0
-offset_bottom = 140.0
-texture = SubResource("AtlasTexture_hh0f6")
-expand_mode = 1
-
-[node name="Icon" type="TextureRect" parent="TextureRect" unique_id=480109091]
-use_parent_material = true
-layout_mode = 0
-offset_right = 128.0
-offset_bottom = 128.0
-texture = ExtResource("5_t24nx")
 
 [node name="NameLabel" type="Label" parent="." unique_id=1112237095]
 use_parent_material = true
@@ -87,10 +71,23 @@ autowrap_mode = 2
 use_parent_material = true
 layout_mode = 0
 offset_left = 240.0
-offset_top = 144.0
+offset_top = 232.0
 offset_right = 368.0
-offset_bottom = 176.0
+offset_bottom = 264.0
 theme_override_font_sizes/font_size = 18
 text = "РЕДКИЙ"
 horizontal_alignment = 1
 autowrap_mode = 2
+
+[node name="Card" type="GridContainer" parent="." unique_id=536868917]
+use_parent_material = true
+layout_mode = 0
+offset_left = 240.0
+offset_top = 16.0
+offset_right = 368.0
+offset_bottom = 208.0
+
+[node name="AttackDoubleClawCard" parent="Card" unique_id=1531075916 instance=ExtResource("4_hxdfs")]
+material = SubResource("ShaderMaterial_qjp1o")
+use_parent_material = true
+layout_mode = 2

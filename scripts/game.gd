@@ -224,7 +224,7 @@ func check_creature_stats() -> void:
 		cursor.visible = false
 		creature_check_dialog.position.x = -500
 		var tween = create_tween()
-		tween.tween_property(creature_check_dialog, "position:x", 20, 0.2)
+		tween.tween_property(creature_check_dialog, "position:x", 20, 0.1)
 		
 		creature_check_dialog.find_child("SubViewportContainer").find_child("SubViewport").find_child("Camera2D").target_position = target_local_pos
 		creature_check_dialog.visible = true
@@ -244,6 +244,8 @@ func draw_inventory() -> void:
 		if inventory_on_screen:
 			var tween = create_tween()
 			tween.tween_property(inventory, "position:x", 1500, 0.3)
+			inventory.artifact_check_dialog.visible = false
+			inventory.card_check_dialog.visible = false
 			
 			inventory_on_screen = false
 		else:

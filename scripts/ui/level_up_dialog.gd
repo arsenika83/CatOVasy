@@ -14,7 +14,6 @@ func _process(delta: float) -> void:
 
 func update_cards() -> void:
 	for card in cards.get_children():
-		pass
 		cards.remove_child(card)
 		card.queue_free()
 	

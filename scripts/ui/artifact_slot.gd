@@ -19,15 +19,30 @@ func _process(delta: float) -> void:
 func update() -> void:
 	if current_artifact != null and not loaded:
 		icon.texture = load("res://assets/images/artifacts/" + current_artifact.icon_path)
-		tooltip_text = current_artifact.tool_tip_text
+		tooltip_text = ""
 		rarity = current_artifact.rarity
 		loaded = true
 
 
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
-		if get_parent().get_parent().artifact_check_dialog.visible == false:
-			get_parent().get_parent().draw_artifact_check_dialog(current_artifact)
-		else:
-			get_parent().get_parent().artifact_check_dialog.visible = false
+		pass
 	
+
+func _on_icon_mouse_entered() -> void:
+	var tween = create_tween()
+	tween.tween_property(icon, "scale", Vector2(1.1, 1.1), 0.2)
+	
+	if get_parent().get_parent().artifact_check_dialog.visible == false:
+			get_parent().get_parent().draw_artifact_check_dialog(current_artifact)
+	else:
+		get_parent().get_parent().artifact_check_dialog.visible = false
+
+func _on_icon_mouse_exited() -> void:
+	var tween = create_tween()
+	tween.tween_property(icon, "scale", Vector2(1, 1), 0.2)
+	
+	if get_parent().get_parent().artifact_check_dialog.visible == false:
+			get_parent().get_parent().draw_artifact_check_dialog(current_artifact)
+	else:
+		get_parent().get_parent().artifact_check_dialog.visible = false	

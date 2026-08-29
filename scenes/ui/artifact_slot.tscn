@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b4w3k5dgucs8c"]
 
 [ext_resource type="Script" uid="uid://cw5fehwuir687" path="res://scripts/ui/artifact_slot.gd" id="2_63ukf"]
+[ext_resource type="PackedScene" uid="uid://cwweylicgnvss" path="res://scenes/ui/artifact_icon.tscn" id="3_o7h2u"]
 [ext_resource type="Texture2D" uid="uid://b0rpbj3njbbar" path="res://assets/images/cards.png" id="3_q8tqv"]
 [ext_resource type="AudioStream" uid="uid://c8uwkxk272amx" path="res://assets/soundFX/burn.wav" id="4_83qsy"]
 
@@ -18,6 +19,7 @@ use_parent_material = true
 custom_minimum_size = Vector2(64, 64)
 offset_right = 32.0
 offset_bottom = 32.0
+pivot_offset = Vector2(32, 32)
 tooltip_text = "Пустой слот для карты"
 mouse_filter = 1
 theme = SubResource("Theme_urfd8")
@@ -30,14 +32,14 @@ texture = SubResource("AtlasTexture_r5mde")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Icon" type="TextureRect" parent="." unique_id=436070595]
+[node name="Icon" parent="." unique_id=2140108611 instance=ExtResource("3_o7h2u")]
 use_parent_material = true
 layout_mode = 2
-expand_mode = 1
-stretch_mode = 5
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=286171554]
 stream = ExtResource("4_83qsy")
 bus = &"SoundFX"
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="Icon" to="." method="_on_icon_mouse_entered"]
+[connection signal="mouse_exited" from="Icon" to="." method="_on_icon_mouse_exited"]

@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dei7d86i7igv7" path="res://assets/images/hp_circle.png" id="8_i8fht"]
 [ext_resource type="Shader" uid="uid://dcoiis0rcw7lq" path="res://shaders/hp_bar.gdshader" id="8_vj5ws"]
 [ext_resource type="PackedScene" uid="uid://55268lbppycn" path="res://scenes/ui/artifact_check_dialog.tscn" id="9_i8fht"]
+[ext_resource type="PackedScene" uid="uid://bhwyxtkmsfidf" path="res://scenes/ui/card_check_dialog.tscn" id="10_5suo7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qtlqx"]
 shader = ExtResource("1_s887n")
@@ -98,9 +99,9 @@ expand_mode = 1
 use_parent_material = true
 layout_mode = 0
 offset_left = 256.0
-offset_top = 176.0
+offset_top = 168.0
 offset_right = 384.0
-offset_bottom = 200.0
+offset_bottom = 192.0
 theme_override_font_sizes/font_size = 22
 text = "100 / 100"
 horizontal_alignment = 1
@@ -338,26 +339,26 @@ id = 5
 material = SubResource("ShaderMaterial_i8fht")
 layout_mode = 0
 offset_left = 256.0
-offset_top = 48.0
+offset_top = 40.0
 offset_right = 384.0
-offset_bottom = 176.0
+offset_bottom = 168.0
 
 [node name="HPTexture" type="TextureRect" parent="." unique_id=2110792378]
 use_parent_material = true
 layout_mode = 0
 offset_left = 256.0
-offset_top = 48.0
+offset_top = 40.0
 offset_right = 384.0
-offset_bottom = 176.0
+offset_bottom = 168.0
 texture = ExtResource("8_i8fht")
 
 [node name="HPTextureCenter" type="TextureRect" parent="." unique_id=1504821197]
 use_parent_material = true
 layout_mode = 0
 offset_left = 304.0
-offset_top = 98.0
+offset_top = 90.0
 offset_right = 336.0
-offset_bottom = 130.0
+offset_bottom = 122.0
 texture = SubResource("AtlasTexture_vj5ws")
 
 [node name="ArtifactCheckDialog" parent="." unique_id=1959694701 instance=ExtResource("9_i8fht")]
@@ -367,6 +368,14 @@ offset_left = -440.0
 offset_top = -96.16
 offset_right = -56.0
 offset_bottom = 255.84
+
+[node name="CardCheckDialog" parent="." unique_id=1787720696 instance=ExtResource("10_5suo7")]
+visible = false
+layout_mode = 1
+offset_left = -440.0
+offset_top = 279.84
+offset_right = -56.0
+offset_bottom = 559.83997
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

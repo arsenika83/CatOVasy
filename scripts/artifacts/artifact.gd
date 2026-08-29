@@ -10,4 +10,12 @@ func _process(delta: float) -> void:
 	pass
 	
 func upon_pickup() -> void:
-	print("PICK UP")	
+	print("PICK UP")
+	
+
+func _on_mouse_entered() -> void:
+	scale = Vector2(1.2, 1.2)
+
+
+func _on_mouse_exited() -> void:
+	scale = Vector2(1, 1)

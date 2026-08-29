@@ -34,6 +34,7 @@ card_slot_ability_3, card_slot_ability_4, card_slot_ability_5]
 @onready var hp_label = $HPLabel
 
 @onready var artifact_check_dialog = $ArtifactCheckDialog
+@onready var card_check_dialog = $CardCheckDialog
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -75,13 +76,46 @@ func draw_artifact_check_dialog(artifact : Artifact) -> void:
 			artifact_check_dialog.artifact_rarity.add_theme_color_override("font_color", Color(1,1,1))
 		"rare":
 			artifact_check_dialog.artifact_rarity.text = "РЕДКИЙ"
-			artifact_check_dialog.artifact_rarity.add_theme_color_override("font_color", Color(0,1,1))
+			artifact_check_dialog.artifact_rarity.add_theme_color_override("font_color", Color(0.944, 0.522, 0.29, 1.0))
 		"epic":
 			artifact_check_dialog.artifact_rarity.text = "ЭПИЧЕСКИЙ"
 			artifact_check_dialog.artifact_rarity.add_theme_color_override("font_color", Color(1,0,1))
 		"unbelievable":
 			artifact_check_dialog.artifact_rarity.text = "НЕВЕРОЯТНЫЙ"
-			artifact_check_dialog.artifact_rarity.add_theme_color_override("font_color", Color(1,0,0))
+			artifact_check_dialog.artifact_rarity.add_theme_color_override("font_color", Color(0.52, 0.0, 0.0, 1.0))
+
+func draw_card_check_dialog(card : Card) -> void:
+	if card == null:
+		card_check_dialog.visible = false
+		return
+		
+	for c in card_check_dialog.card_container.get_children():
+		card_check_dialog.card_container.remove_child(c)
+		c.queue_free()
+		
+	var card_scene = load("res://scenes/cards/" + card.card_path)
+	var added_card = card_scene.instantiate()
+	added_card.use_parent_material = true
+		
+	card_check_dialog.card_container.add_child(added_card)	
+		
+	card_check_dialog.visible = true
+	card_check_dialog.card_name.text = card.card_name
+	card_check_dialog.card_description.text = card.card_description
+	
+	match card.rarity:
+		"common":
+			card_check_dialog.card_rarity.text = "ОБЫЧНАЯ"
+			card_check_dialog.card_rarity.add_theme_color_override("font_color", Color(1,1,1))
+		"rare":
+			card_check_dialog.card_rarity.text = "РЕДКАЯ"
+			card_check_dialog.card_rarity.add_theme_color_override("font_color", Color(0.944, 0.522, 0.29, 1.0))
+		"epic":
+			card_check_dialog.card_rarity.text = "ЭПИЧЕСКАЯ"
+			card_check_dialog.card_rarity.add_theme_color_override("font_color", Color(1,0,1))
+		"unbelievable":
+			card_check_dialog.card_rarity.text = "НЕВЕРОЯТНАЯ"
+			card_check_dialog.card_rarity.add_theme_color_override("font_color", Color(0.52, 0.0, 0.0, 1.0))
 
 func _on_mouse_entered() -> void:
 	if gm.state == "idle":

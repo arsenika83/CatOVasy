@@ -101,7 +101,7 @@ autowrap_mode = 2
 use_parent_material = true
 layout_mode = 0
 offset_left = 16.0
-offset_top = 48.0
+offset_top = 64.0
 offset_right = 240.0
 offset_bottom = 304.0
 texture = SubResource("AtlasTexture_53g1v")
@@ -116,6 +116,18 @@ offset_right = 240.0
 offset_bottom = 33.0
 theme_override_font_sizes/font_size = 22
 text = "НАЙДЕН АРТЕФАКТ!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RarityLabel" type="Label" parent="." unique_id=914760085]
+use_parent_material = true
+layout_mode = 0
+offset_left = 16.0
+offset_top = 32.0
+offset_right = 240.0
+offset_bottom = 57.0
+theme_override_font_sizes/font_size = 20
+text = "РЕДКИЙ"
 horizontal_alignment = 1
 vertical_alignment = 1
 

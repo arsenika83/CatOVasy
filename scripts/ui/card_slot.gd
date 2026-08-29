@@ -29,7 +29,7 @@ func update() -> void:
 	if current_card != null and not icon_loaded:
 		fire_button.disabled = false
 		icon.texture = load("res://assets/images/card_icons/" + current_card.icon_path)
-		tooltip_text = current_card.tool_tip_text
+		tooltip_text = ""
 		rarity = current_card.rarity
 		icon_loaded = true
 
@@ -37,6 +37,7 @@ func _on_fire_button_pressed() -> void:
 	if gm.state != "checking_inventory":
 		return
 		
+	get_parent().get_parent().card_check_dialog.visible = false
 	audio.pitch_scale = randf_range(0.8, 1.1)	
 	audio.play()
 	if type == 1:
@@ -57,4 +58,21 @@ func _on_fire_button_pressed() -> void:
 	fire_button.disabled = true
 	icon_loaded = false
 	
+
+func _on_fire_button_mouse_entered() -> void:
+	var tween = create_tween()
+	tween.tween_property(self, "scale", Vector2(1.1, 1.1), 0.2)
 	
+	if get_parent().get_parent().card_check_dialog.visible == false:
+		get_parent().get_parent().draw_card_check_dialog(current_card)
+	else:
+		get_parent().get_parent().card_check_dialog.visible = false
+
+func _on_fire_button_mouse_exited() -> void:
+	var tween = create_tween()
+	tween.tween_property(self, "scale", Vector2(1, 1), 0.2)
+	
+	if get_parent().get_parent().card_check_dialog.visible == false:
+		get_parent().get_parent().draw_card_check_dialog(current_card)
+	else:
+		get_parent().get_parent().card_check_dialog.visible = false	
