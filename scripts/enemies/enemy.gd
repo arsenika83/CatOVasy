@@ -502,6 +502,10 @@ func _on_idle_animation_timer_timeout() -> void:
 func _on_take_damage_timer_timeout() -> void:
 	check_hp()
 	
+	if gm.has_portrait_of_the_unknown:
+		luck -= 3
+		current_luck -= 3
+	
 	if damage_indicator_scene:
 		var indicator = damage_indicator_scene.instantiate()
 		var spawn_pos = global_position + Vector2(0, -2)

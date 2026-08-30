@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://ucj4y66sq30o" path="res://scripts/ui/upgrade_stats_dialog.gd" id="2_rwwem"]
 [ext_resource type="Texture2D" uid="uid://de2c8pnqtrt77" path="res://assets/images/inventory_ui.png" id="3_f48dg"]
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="4_sf6tv"]
-[ext_resource type="FontFile" uid="uid://dub3oi8dxfpfw" path="res://assets/fonts/JeuDePixel-Regular.otf" id="5_a1foq"]
 [ext_resource type="PackedScene" uid="uid://cecnwwow2nhd8" path="res://scenes/ui/stat_upgrade.tscn" id="6_qbrlf"]
 [ext_resource type="AudioStream" uid="uid://bngxs878f1apy" path="res://assets/soundFX/card_pick.wav" id="7_f48dg"]
 
@@ -82,7 +81,7 @@ offset_left = 16.0
 offset_top = 8.0
 offset_right = 592.0
 offset_bottom = 33.0
-theme_override_fonts/font = ExtResource("5_a1foq")
+theme_override_font_sizes/font_size = 24
 text = "ПОВЫШЕНИЕ ХАРАКТЕРИСТИК!"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -94,7 +93,7 @@ offset_left = 16.0
 offset_top = 48.0
 offset_right = 560.0
 offset_bottom = 73.0
-theme_override_fonts/font = ExtResource("5_a1foq")
+theme_override_font_sizes/font_size = 20
 text = "Выберите награду:"
 horizontal_alignment = 1
 vertical_alignment = 1

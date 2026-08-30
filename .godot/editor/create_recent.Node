@@ -1,7 +1,9 @@
+TextureRect
+AnimatedSprite2D
+Sprite2D
 Button
 GridContainer
 Control
-TextureRect
 Label
 HSlider
 SpinBox
@@ -10,5 +12,3 @@ TextureButton
 ColorRect
 CollisionShape2D
 Area2D
-AnimatedSprite2D
-PanelContainer

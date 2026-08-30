@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cdll7yvc84q18"]
 
 [ext_resource type="Texture2D" uid="uid://de2c8pnqtrt77" path="res://assets/images/inventory_ui.png" id="1_7w7rl"]
-[ext_resource type="Script" uid="uid://dffl2lhuw75sq" path="res://scripts/global/menu.gd" id="1_cx0sj"]
+[ext_resource type="Script" uid="uid://dffl2lhuw75sq" path="res://scripts/ui/menu.gd" id="1_cx0sj"]
 [ext_resource type="StyleBox" uid="uid://b8wibcbgivilm" path="res://styles/button_normal.tres" id="2_w6y0u"]
 [ext_resource type="StyleBox" uid="uid://2iw7p3yvicvr" path="res://styles/button_pressed.tres" id="3_cx0sj"]
 [ext_resource type="StyleBox" uid="uid://c66nispyhk2t0" path="res://styles/button_hover.tres" id="4_ntye7"]

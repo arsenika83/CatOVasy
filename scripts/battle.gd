@@ -148,7 +148,7 @@ func draw_cursor() -> void:
 		var targets : Array[CharacterBody2D] = [find_child("Enemies").get_child(i)]
 			
 		if gm.current_card != null: #ВЫБОР ЦЕЛЕЙ
-			if gm.current_card.behind_attack:
+			if gm.current_card.behind_attack or gm.has_fork:
 				var target_2 = find_enemy_by_position(targets[0].battle_x + 1, targets[0].battle_y)
 				if target_2 != null:
 					if target_2.state != "dead":
@@ -219,7 +219,7 @@ func choose_target(action : String) -> void:
 		var targets : Array[CharacterBody2D] = [find_child("Enemies").get_child(i)]
 		
 		if gm.current_card != null: #ВЫБОР ЦЕЛЕЙ
-			if gm.current_card.behind_attack:
+			if gm.current_card.behind_attack or gm.has_fork:
 				var target_2 = find_enemy_by_position(targets[0].battle_x + 1, targets[0].battle_y)
 				if target_2 != null:
 					if target_2.state != "dead":

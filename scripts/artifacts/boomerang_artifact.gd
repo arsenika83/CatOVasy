@@ -1,10 +1,10 @@
 class_name BoomerangArtifact extends Artifact
 
-var rarity = "common"
+var rarity = "rare"
 var complect = ""
 var path = "boomerang"
 var artifact_name = "БУМЕРАНГ"
-var artifact_description = "Каждый промах по врагу наносит ему 1 единицу урона"
+var artifact_description = "Каждый промах по врагу наносит ему 1 единицу урона (считается успешным ударом)"
 var artifact_commentary = "\"Чтобы не расслаблялись >:(\""
 
 func _ready() -> void:

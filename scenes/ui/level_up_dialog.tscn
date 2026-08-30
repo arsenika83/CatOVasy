@@ -22,9 +22,6 @@ region = Rect2(832, 0, 448, 720)
 atlas = ExtResource("5_jekd8")
 region = Rect2(0, 192, 16, 16)
 
-[sub_resource type="Theme" id="Theme_i3v37"]
-default_font = ExtResource("4_qph1y")
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_i3v37"]
 atlas = ExtResource("5_jekd8")
 region = Rect2(0, 240, 16, 16)
@@ -40,12 +37,6 @@ region = Rect2(0, 224, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_n6hbc"]
 atlas = ExtResource("5_jekd8")
 region = Rect2(16, 240, 16, 16)
-
-[sub_resource type="Theme" id="Theme_qph1y"]
-default_font = ExtResource("4_qph1y")
-
-[sub_resource type="Theme" id="Theme_jekd8"]
-default_font = ExtResource("4_qph1y")
 
 [node name="LevelUpDialog" type="Control" unique_id=1641948652]
 material = SubResource("ShaderMaterial_qtlqx")
@@ -107,7 +98,7 @@ offset_left = 16.0
 offset_top = 8.0
 offset_right = 560.0
 offset_bottom = 33.0
-theme_override_fonts/font = ExtResource("4_qph1y")
+theme_override_font_sizes/font_size = 24
 text = "ПОВЫШЕНИЕ УРОВНЯ!"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -131,7 +122,7 @@ offset_left = 16.0
 offset_top = 48.0
 offset_right = 560.0
 offset_bottom = 73.0
-theme_override_fonts/font = ExtResource("4_qph1y")
+theme_override_font_sizes/font_size = 20
 text = "Выберите награду:"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -160,7 +151,6 @@ tooltip_text = "Сжечь карту
 ради повышения
 характеристик"
 mouse_filter = 1
-theme = SubResource("Theme_i3v37")
 texture_normal = SubResource("AtlasTexture_i3v37")
 texture_pressed = SubResource("AtlasTexture_qph1y")
 texture_hover = SubResource("AtlasTexture_jekd8")
@@ -179,7 +169,6 @@ tooltip_text = "Сжечь карту
 ради повышения
 характеристик"
 mouse_filter = 1
-theme = SubResource("Theme_qph1y")
 texture_normal = SubResource("AtlasTexture_i3v37")
 texture_pressed = SubResource("AtlasTexture_qph1y")
 texture_hover = SubResource("AtlasTexture_jekd8")
@@ -198,7 +187,6 @@ tooltip_text = "Сжечь карту
 ради повышения
 характеристик"
 mouse_filter = 1
-theme = SubResource("Theme_jekd8")
 texture_normal = SubResource("AtlasTexture_i3v37")
 texture_pressed = SubResource("AtlasTexture_qph1y")
 texture_hover = SubResource("AtlasTexture_jekd8")

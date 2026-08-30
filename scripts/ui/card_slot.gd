@@ -60,8 +60,10 @@ func _on_fire_button_pressed() -> void:
 	
 
 func _on_fire_button_mouse_entered() -> void:
-	var tween = create_tween()
-	tween.tween_property(self, "scale", Vector2(1.1, 1.1), 0.2)
+	if current_card != null:
+		var tween = create_tween()
+		tween.tween_property(self, "scale", Vector2(1.1, 1.1), 0.2)
+		$AudioStreamPlayerHover.play()
 	
 	if get_parent().get_parent().card_check_dialog.visible == false:
 		get_parent().get_parent().draw_card_check_dialog(current_card)

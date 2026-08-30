@@ -7,7 +7,7 @@ var all_card_names_epic : Array[String]
 var all_card_names_unbelievable : Array[String]
 
 var all_artifact_names : Array[String] = ["red_ball", "blue_ball", "heart_shaped_pillow", "cat_food",
-"old_bandage", "spinner", "boomerang", "regen_ring"]
+"old_bandage", "spinner", "boomerang", "regen_ring", "candy", "portrait_of_the_unknown", "fork"]
 
 var all_artifact_names_common : Array[String]
 var all_artifact_names_rare : Array[String]

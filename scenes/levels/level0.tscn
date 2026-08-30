@@ -150,6 +150,12 @@ position = Vector2(-64, -32)
 [node name="Chest5" parent="Objects" unique_id=641101638 instance=ExtResource("7_po5je")]
 position = Vector2(-64, 0)
 
+[node name="Chest6" parent="Objects" unique_id=1403884160 instance=ExtResource("7_po5je")]
+position = Vector2(32, -64)
+
+[node name="Chest7" parent="Objects" unique_id=844894603 instance=ExtResource("7_po5je")]
+position = Vector2(64, 0)
+
 [node name="Giant" parent="." unique_id=2060885226 instance=ExtResource("1_uwrxv")]
 position = Vector2(176, 48)
 

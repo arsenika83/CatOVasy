@@ -1,0 +1,25 @@
+class_name CandyArtifact extends Artifact
+
+var rarity = "common"
+var complect = ""
+var path = "candy"
+var artifact_name = "КОНФЕТКА"
+var artifact_description = "При использовании восстанавливает 20 ОЗ и понижает ваши максимальные ОЗ на 5"
+var artifact_commentary = "\"Прощайте, зубы...\""
+
+func _ready() -> void:
+	artifact_global_id = 8
+	
+func _process(delta: float) -> void:
+	pass
+
+func upon_pickup() -> void:
+	gm.has_artifacts.append(artifact_global_id)
+	catalog.all_artifact_names.erase(path)
+	
+func upon_use() -> void:
+	gm.max_hp -= 5
+	gm.hp += 20
+	
+	if gm.hp > gm.max_hp:
+		gm.hp = gm.max_hp

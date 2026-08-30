@@ -79,7 +79,6 @@ func _ready() -> void:
 	current_defend_cards.set(1, DefendCard.new())
 	
 	current_ability_cards.set(1, AbilityCard.new())
-	current_ability_cards.set(2, PoisonCard.new())
 
 func _process(delta: float) -> void:
 	pass
@@ -104,3 +103,5 @@ var has_old_bandage = false
 var has_spinner = false
 var has_boomerang = false
 var has_regen_ring = false
+var has_portrait_of_the_unknown = false
+var has_fork = false

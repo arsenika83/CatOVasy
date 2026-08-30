@@ -11,7 +11,7 @@ var row_attack_3 = false
 var row_attack_5 = false
 var square_attack_2x2 = false
 var square_attack_3x3 = false
-var everybody_attack = true
+var everybody_attack = false
 
 var state_modifier = ""
 var enabled = true

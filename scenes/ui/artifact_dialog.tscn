@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://de2c8pnqtrt77" path="res://assets/images/inventory_ui.png" id="3_gcjjy"]
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="4_fxcbs"]
 [ext_resource type="AudioStream" uid="uid://bq0ooer30jskk" path="res://assets/soundFX/xp_pick_up.wav" id="6_snn0j"]
-[ext_resource type="AudioStream" uid="uid://bwch538phpi87" path="res://assets/soundFX/hit.wav" id="7_gcjjy"]
+[ext_resource type="AudioStream" uid="uid://dnyi4oi4yn2sl" path="res://assets/soundFX/cancel.wav" id="7_68a23"]
 [ext_resource type="AudioStream" uid="uid://bxhii1a001e1v" path="res://assets/music/BATTLE_WIN.mp3" id="8_snn0j"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_snn0j"]
@@ -104,7 +104,7 @@ offset_left = 16.0
 offset_top = 168.0
 offset_right = 248.0
 offset_bottom = 216.0
-theme_override_colors/font_color = Color(0.82606, 0.82606006, 0.82606, 1)
+theme_override_colors/font_color = Color(0.6501286, 0.6501282, 0.65012825, 1)
 theme_override_font_sizes/font_size = 18
 text = "\"Комментарий\""
 horizontal_alignment = 1
@@ -191,8 +191,8 @@ volume_db = 2.0
 bus = &"SoundFX"
 
 [node name="AudioStreamPlayerCancel" type="AudioStreamPlayer" parent="." unique_id=803297642]
-stream = ExtResource("7_gcjjy")
-volume_db = 2.0
+stream = ExtResource("7_68a23")
+volume_db = -2.0
 bus = &"SoundFX"
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

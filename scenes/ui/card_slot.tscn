@@ -1,16 +1,10 @@
 [gd_scene format=3 uid="uid://dsiha16n5p53v"]
 
-[ext_resource type="FontFile" uid="uid://dub3oi8dxfpfw" path="res://assets/fonts/JeuDePixel-Regular.otf" id="1_r3xpn"]
 [ext_resource type="Script" uid="uid://dscspkx5s0xw1" path="res://scripts/ui/card_slot.gd" id="1_r5mde"]
 [ext_resource type="Texture2D" uid="uid://b0rpbj3njbbar" path="res://assets/images/cards.png" id="1_y2car"]
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="3_1u5tj"]
 [ext_resource type="AudioStream" uid="uid://c8uwkxk272amx" path="res://assets/soundFX/burn.wav" id="5_urfd8"]
-
-[sub_resource type="Theme" id="Theme_urfd8"]
-TooltipLabel/colors/font_outline_color = Color(0, 0, 0, 1)
-TooltipLabel/colors/font_shadow_color = Color(0, 0, 0, 1)
-TooltipLabel/fonts/font = ExtResource("1_r3xpn")
-TooltipPanel/styles/new_style = null
+[ext_resource type="AudioStream" uid="uid://bq0ooer30jskk" path="res://assets/soundFX/xp_pick_up.wav" id="5_v7mql"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r5mde"]
 atlas = ExtResource("1_y2car")
@@ -40,7 +34,6 @@ offset_bottom = 32.0
 pivot_offset = Vector2(32, 32)
 tooltip_text = "Пустой слот для карты"
 mouse_filter = 1
-theme = SubResource("Theme_urfd8")
 script = ExtResource("1_r5mde")
 
 [node name="Icon" type="TextureRect" parent="." unique_id=404527779]
@@ -62,6 +55,12 @@ texture_disabled = SubResource("AtlasTexture_8seao")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=286171554]
 stream = ExtResource("5_urfd8")
+bus = &"SoundFX"
+
+[node name="AudioStreamPlayerHover" type="AudioStreamPlayer" parent="." unique_id=68448649]
+stream = ExtResource("5_v7mql")
+volume_db = -7.0
+pitch_scale = 0.6
 bus = &"SoundFX"
 
 [connection signal="mouse_entered" from="FireButton" to="." method="_on_fire_button_mouse_entered"]

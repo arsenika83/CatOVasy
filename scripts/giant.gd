@@ -3,6 +3,7 @@ class_name Giant extends CharacterBody2D
 @onready var area = $Area2D
 @onready var sprite = $Sprite
 @onready var status_fx = $StatusFX
+@onready var artifact_sprite = $ArtifactSprite
 
 @onready var respawn_timer = $RespawnTimer
 @onready var fall_timer = $FallTimer
@@ -27,6 +28,7 @@ class_name Giant extends CharacterBody2D
 @onready var light = $PointLight2D
 
 var current_heal = 0
+var is_hit_lucky = false
 
 var has_debuff_weakness = false
 var has_debuff_undefend = false
@@ -59,7 +61,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	check_fall(delta)
 	check_hp()
-	
+
 	match gm.state:
 		"idle":
 			sprite.play("idle")
@@ -129,6 +131,7 @@ func go_downstairs() -> void:
 	tween.tween_property(self, "scale", Vector2(0, 0), 0.5)
 
 func deal_damage(targets : Array[CharacterBody2D]) -> void:
+	is_hit_lucky = false
 	var energy_cost = get_parent().find_child("UI").find_child("CardContainer").current_selected.energy_cost
 	if gm.current_energy - energy_cost < 0:
 		return
@@ -145,6 +148,7 @@ func deal_damage(targets : Array[CharacterBody2D]) -> void:
 		if success:
 			gm.current_damage = get_parent().find_child("UI").find_child("CardContainer").current_selected.damage
 			if luck_success:
+				is_hit_lucky = true
 				status_fx.scale = Vector2(0, 0)
 				status_fx.play("lucky")
 				var tween1 = create_tween()
@@ -411,7 +415,6 @@ func _on_take_damage_timer_timeout() -> void:
 		sprite.play("dead")
 
 func _on_idle_animation_timer_timeout() -> void:
-	print(gm.state, " -> ", gm.prev_state)
 	gm.state = gm.prev_state
 	sprite.play(gm.state)
 
@@ -424,17 +427,17 @@ func _on_deal_damage_timer_timeout() -> void:
 	var tween1 = create_tween()
 	tween1.tween_property(sprite, "position:x", sprite.position.x - 4, 0.1)
 	
-	if gm.current_damage > gm.damage:
+	var tween = create_tween()
+	tween.tween_property(status_fx, "scale", Vector2(0, 0), 0.2)
+	
+	if is_hit_lucky:
 		audio_hit_lucky.play()
-		var tween = create_tween()
-		tween.tween_property(status_fx, "scale", Vector2(0, 0), 0.2)
 	else:
 		audio_hit.play()
 	
 	for target in gm.current_targets:
 		get_parent().claw_fx.position = target.position
 		get_parent().claw_fx.play("hit")
-		
 		target.take_damage(gm.current_damage, gm.attack_animation_time)
 	gm.current_damage = gm.damage
 	idle_animation_timer.start(0.2)

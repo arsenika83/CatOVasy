@@ -3,7 +3,6 @@
 [ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="1_d8h06"]
 [ext_resource type="Script" uid="uid://d1vplfb4ryjqe" path="res://scripts/ui/stat_upgrade.gd" id="1_uujw7"]
 [ext_resource type="Texture2D" uid="uid://b0rpbj3njbbar" path="res://assets/images/cards.png" id="2_1n7eo"]
-[ext_resource type="FontFile" uid="uid://dub3oi8dxfpfw" path="res://assets/fonts/JeuDePixel-Regular.otf" id="3_1jwdo"]
 [ext_resource type="Texture2D" uid="uid://buio7fs77u7qv" path="res://assets/images/stat_upgrades/base_damage_1.png" id="4_d8h06"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ix7ah"]
@@ -59,9 +58,8 @@ offset_left = 8.0
 offset_top = 120.0
 offset_right = 120.0
 offset_bottom = 185.0
-theme_override_fonts/font = ExtResource("3_1jwdo")
-theme_override_font_sizes/font_size = 10
-text = "-"
+theme_override_font_sizes/font_size = 14
+text = "ЩАУАЛЩВАЩ"
 horizontal_alignment = 1
 vertical_alignment = 1
 
