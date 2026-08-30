@@ -2,21 +2,20 @@ class_name HeartShapedPillowArtifact extends Artifact
 
 var rarity = "epic"
 var complect = ""
-var icon_path = "heart_shaped_pillow.png"
-var scene_path = "heart_shaped_pillow.tscn"
+var path = "heart_shaped_pillow"
 var tool_tip_text = "ПОДУШКА В ВИДЕ СЕРДЦА\n\nУвеличивает максимальные ОЗ \nна 15 \n(Не восстанавливает ОЗ)"
 var artifact_name = "ПОДУШКА В ВИДЕ СЕРДЦА"
-var artifact_description = "Увеличивает максимальные ОЗ на 15 (Не восстанавливает ОЗ)"
+var artifact_description = "Увеличивает ваши максимальные ОЗ на 30 \n(Не восстанавливает ОЗ)"
+var artifact_commentary = "\"Мягко и удобно\""
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	artifact_global_id = 2
-	tooltip_text = tool_tip_text
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 	
 func upon_pickup() -> void:
-	gm.max_hp += 15
+	gm.max_hp += 30
 	gm.has_artifacts.append(artifact_global_id)	
+
+	catalog.all_artifact_names.erase(path)

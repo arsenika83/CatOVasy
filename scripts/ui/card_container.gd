@@ -5,8 +5,11 @@ var current_selected: Control = null
 const ATTACK_CARD = preload("res://scenes/cards/attack_card.tscn")
 const DEFEND_CARD = preload("res://scenes/cards/defend_card.tscn")
 
+var card_change_energy_cost = 1
+
 @onready var attack_cards_ui = $AttackCards
 @onready var attack_change_button = $AttackChangeButton
+@onready var attack_change_cost = $AttackChangeButton/Label
 var attack_cards : Array[Card]
 var attack_card_index = 0
 
@@ -17,8 +20,11 @@ var defend_card_index = 0
 
 @onready var ability_cards_ui = $AbilityCards
 @onready var ability_change_button = $AbilityChangeButton
+@onready var ability_change_cost = $AbilityChangeButton/Label
 var ability_cards : Array[Card]
 var ability_card_index = 0
+
+var card_change_amount = 0
 
 @onready var audio = $AudioStreamPlayer
 
@@ -77,6 +83,14 @@ func _ready() -> void:
 		if child.has_signal("card_clicked"):
 			child.card_clicked.connect(_on_card_selected)
 			child.card_played.connect(_on_card_played)
+	
+	if gm.has_spinner:
+		if card_change_amount < 2:
+			card_change_energy_cost = 0
+		else:
+			card_change_energy_cost = 1
+	attack_change_cost.text = str(card_change_energy_cost)
+	ability_change_cost.text = str(card_change_energy_cost)
 
 func replace_current_card(type : String):
 	match type:
@@ -158,13 +172,24 @@ func _on_card_played(played_card: Control) -> void:
 	
 
 func _on_attack_change_button_pressed() -> void:
-	if gm.current_energy - 1 >= 0:
+	if gm.has_spinner:
+		if card_change_amount < 2:
+			card_change_energy_cost = 0
+			
+	if gm.current_energy - card_change_energy_cost >= 0:
 		audio.play()
-		gm.current_energy -= 1
+		gm.current_energy -= card_change_energy_cost
 		replace_card("attack")
 		
 		if gm.current_energy == 0:
 			get_parent().get_parent().end_turn()
+	
+	card_change_amount += 1
+	if card_change_amount >= 2:
+		card_change_energy_cost = 1
+		
+	attack_change_cost.text = str(card_change_energy_cost)
+	ability_change_cost.text = str(card_change_energy_cost)
 
 func _on_defend_change_button_pressed() -> void:
 	if gm.current_energy - 1 >= 0:
@@ -176,10 +201,23 @@ func _on_defend_change_button_pressed() -> void:
 			get_parent().get_parent().end_turn()
 
 func _on_ability_change_button_pressed() -> void:
-	if gm.current_energy - 1 >= 0:
+	if gm.has_spinner:
+		if card_change_amount < 2:
+			card_change_energy_cost = 0
+		else:
+			card_change_energy_cost = 1
+			
+	if gm.current_energy - card_change_energy_cost >= 0:
 		audio.play()
-		gm.current_energy -= 1
+		gm.current_energy -= card_change_energy_cost
 		replace_card("ability")
 		
 		if gm.current_energy == 0:
 			get_parent().get_parent().end_turn()
+			
+	card_change_amount += 1
+	if card_change_amount >= 2:
+		card_change_energy_cost = 1
+	
+	attack_change_cost.text = str(card_change_energy_cost)
+	ability_change_cost.text = str(card_change_energy_cost)

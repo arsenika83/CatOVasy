@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dqxwv8hfc27qf"]
 
-[ext_resource type="Script" uid="uid://ywyt3qllsxbg" path="res://scripts/artifacts/ball_artifact.gd" id="1_6byrn"]
-[ext_resource type="Texture2D" uid="uid://c4vuxt64k2xkl" path="res://assets/images/artifacts/ball.png" id="2_o4i46"]
+[ext_resource type="Script" uid="uid://ywyt3qllsxbg" path="res://scripts/artifacts/red_ball_artifact.gd" id="1_6byrn"]
+[ext_resource type="Texture2D" uid="uid://c4vuxt64k2xkl" path="res://assets/images/artifacts/red_ball.png" id="2_o4i46"]
 
 [node name="BallArtifact" type="Control" unique_id=827444321]
 use_parent_material = true

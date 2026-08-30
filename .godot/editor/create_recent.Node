@@ -1,3 +1,4 @@
+Button
 GridContainer
 Control
 TextureRect
@@ -5,7 +6,6 @@ Label
 HSlider
 SpinBox
 AudioStreamPlayer
-Button
 TextureButton
 ColorRect
 CollisionShape2D

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4vuxt64k2xkl"
-path="res://.godot/imported/ball.png-7259dcdac3b04e1d5f95884bfa1b3231.ctex"
+uid="uid://dywaocy8dmpgq"
+path="res://.godot/imported/boomerang.png-0ed152372cfadc1fba21539509b08a69.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/artifacts/ball.png"
-dest_files=["res://.godot/imported/ball.png-7259dcdac3b04e1d5f95884bfa1b3231.ctex"]
+source_file="res://assets/images/artifacts/boomerang.png"
+dest_files=["res://.godot/imported/boomerang.png-0ed152372cfadc1fba21539509b08a69.ctex"]
 
 [params]
 

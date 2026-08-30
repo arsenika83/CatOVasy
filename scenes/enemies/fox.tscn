@@ -2,9 +2,11 @@
 
 [ext_resource type="Script" uid="uid://crwe3itor73kc" path="res://scripts/enemies/fox.gd" id="1_1co2e"]
 [ext_resource type="Texture2D" uid="uid://crsqvlld0supu" path="res://assets/images/enemy_sprite.png" id="2_5ba63"]
+[ext_resource type="PackedScene" uid="uid://bc1x5xpcygnvy" path="res://scenes/fx/damage_indicator.tscn" id="2_wyag3"]
 [ext_resource type="PackedScene" uid="uid://tksv3htggrop" path="res://scenes/fx/xp_orb.tscn" id="3_b3y50"]
 [ext_resource type="PackedScene" uid="uid://cr7p23s5f4urx" path="res://scenes/fx/status_fx.tscn" id="4_wyag3"]
 [ext_resource type="AudioStream" uid="uid://bwch538phpi87" path="res://assets/soundFX/hit.wav" id="5_521xt"]
+[ext_resource type="PackedScene" uid="uid://ba7f54d4yq2hp" path="res://scenes/ui/cursor.tscn" id="5_b3y50"]
 [ext_resource type="AudioStream" uid="uid://btyuivf1mvgot" path="res://assets/soundFX/hit_lucky.wav" id="6_bb1qk"]
 [ext_resource type="AudioStream" uid="uid://dnpo0un37rpje" path="res://assets/soundFX/enemies/mouse_hurt.wav" id="7_yyc8d"]
 [ext_resource type="AudioStream" uid="uid://b78ln2t2dmc8p" path="res://assets/soundFX/meow_die.wav" id="8_2sef5"]
@@ -111,6 +113,7 @@ radius = 1.0
 collision_layer = 2
 collision_mask = 128
 script = ExtResource("1_1co2e")
+damage_indicator_scene = ExtResource("2_wyag3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=947260883]
 shape = SubResource("RectangleShape2D_tihwb")
@@ -143,6 +146,9 @@ debug_color = Color(0.86404556, 0.3111131, 0.46711254, 0.41960785)
 visible = false
 
 [node name="StatusFX" parent="." unique_id=1192321709 instance=ExtResource("4_wyag3")]
+visible = false
+
+[node name="Cursor" parent="." unique_id=2051460958 instance=ExtResource("5_b3y50")]
 visible = false
 
 [node name="AudioStreamPlayerHit" type="AudioStreamPlayer" parent="." unique_id=1483378938]

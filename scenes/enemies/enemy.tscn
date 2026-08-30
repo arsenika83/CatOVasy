@@ -170,6 +170,9 @@ visible = false
 [node name="StatusFX" parent="." unique_id=1192321709 instance=ExtResource("5_lu5c6")]
 visible = false
 
+[node name="Cursor" parent="." unique_id=2051460958 instance=ExtResource("14_twn6s")]
+visible = false
+
 [node name="AudioStreamPlayerHit" type="AudioStreamPlayer" parent="." unique_id=1483378938]
 stream = ExtResource("3_38ino")
 volume_db = 3.0
@@ -231,9 +234,6 @@ one_shot = true
 
 [node name="DebuffTimer" type="Timer" parent="." unique_id=573649907]
 one_shot = true
-
-[node name="Cursor" parent="." unique_id=2051460958 instance=ExtResource("14_twn6s")]
-visible = false
 
 [connection signal="area_entered" from="Area2DXP" to="." method="_on_area_2dxp_area_entered"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

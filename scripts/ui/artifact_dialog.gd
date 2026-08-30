@@ -7,6 +7,7 @@ extends Control
 @onready var artifact_name_label = $TextureRect3/NameLabel
 @onready var artifact_description_label = $TextureRect3/DescriptionLabel
 @onready var artifact_rarity_label = $RarityLabel
+@onready var artifact_commentary_label = $TextureRect3/CommentaryLabel
 
 @onready var audio_ok = $AudioStreamPlayerOK
 @onready var audio_cancel = $AudioStreamPlayerCancel
@@ -31,6 +32,7 @@ func update_artifact() -> void:
 	
 	artifact_name_label.text = artifact.artifact_name
 	artifact_description_label.text = artifact.artifact_description
+	artifact_commentary_label.text = artifact.artifact_commentary
 	
 	match artifact.rarity:
 		"common":

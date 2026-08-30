@@ -2,6 +2,7 @@ extends Control
 
 @onready var artifact_name = $NameLabel
 @onready var artifact_description = $DescriptionLabel
+@onready var artifact_commentary = $CommentaryLabel
 @onready var artifact_rarity = $RarityLabel
 @onready var icon = $TextureRect/Icon
 

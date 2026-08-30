@@ -364,6 +364,9 @@ func end_turn() -> void:
 				current_creature_turn = -1
 				giant.turn_tick()
 				
+				if gm.has_regen_ring: #КОЛЬЦО РЕГЕНЕРАЦИИ
+					giant.heal(2)
+				
 				for e in current_enemies:
 					e.current_energy = e.energy
 					e.turn_tick()

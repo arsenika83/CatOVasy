@@ -100,6 +100,26 @@ region = Rect2(96, 160, 32, 32)
 atlas = ExtResource("1")
 region = Rect2(64, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_6wucx"]
+atlas = ExtResource("1")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u4m4i"]
+atlas = ExtResource("1")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kn0ek"]
+atlas = ExtResource("1")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i0wex"]
+atlas = ExtResource("1")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ayw8s"]
+atlas = ExtResource("1")
+region = Rect2(288, 0, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_q18av"]
 atlas = ExtResource("1")
 region = Rect2(0, 64, 32, 32)
@@ -261,6 +281,56 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_6wucx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u4m4i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kn0ek")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i0wex")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ayw8s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6wucx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u4m4i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kn0ek")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i0wex")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ayw8s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6wucx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u4m4i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kn0ek")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i0wex")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ayw8s")
+}],
+"loop": false,
+"name": &"heal",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_sx7hc")
 }, {
 "duration": 1.0,
@@ -415,6 +485,10 @@ one_shot = true
 wait_time = 0.2
 one_shot = true
 
+[node name="HealTimer" type="Timer" parent="." unique_id=92239092]
+wait_time = 1.5
+one_shot = true
+
 [node name="TakeDamageTimer" type="Timer" parent="." unique_id=117164087]
 one_shot = true
 
@@ -494,6 +568,7 @@ bus = &"SoundFX"
 [connection signal="timeout" from="FallTimer" to="." method="_on_fall_timer_timeout"]
 [connection signal="timeout" from="RestartTimer" to="." method="_on_restart_timer_timeout"]
 [connection signal="timeout" from="WalkTimer" to="." method="_on_walk_timer_timeout"]
+[connection signal="timeout" from="HealTimer" to="." method="_on_heal_timer_timeout"]
 [connection signal="timeout" from="TakeDamageTimer" to="." method="_on_take_damage_timer_timeout"]
 [connection signal="timeout" from="MissDamageTimer" to="." method="_on_miss_damage_timer_timeout"]
 [connection signal="timeout" from="DealDamageTimer" to="." method="_on_deal_damage_timer_timeout"]

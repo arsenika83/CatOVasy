@@ -6,6 +6,7 @@ var icon_path = "double_claw_card.png"
 var tool_tip_text = "Наносит урон, \nравный вашему \nбазовому x2"
 var card_name = "Двойной удар"
 var card_description = "Наносит урон, равный вашему базовому x2"
+var rarity = "rare"
 
 func _ready() -> void:
 	energy_cost = 1

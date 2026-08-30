@@ -17,7 +17,7 @@ var state_modifier = ""
 var enabled = true
 var energy_cost = 1
 var type = ""
-var rarity = "common"
+#var rarity = "common"
 
 const SCALE_NORMAL = Vector2(1.0, 1.0)
 const SCALE_HOVER = Vector2(1.1, 1.1)

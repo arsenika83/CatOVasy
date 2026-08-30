@@ -68,7 +68,8 @@ func draw_artifact_check_dialog(artifact : Artifact) -> void:
 	artifact_check_dialog.visible = true
 	artifact_check_dialog.artifact_name.text = artifact.artifact_name
 	artifact_check_dialog.artifact_description.text = artifact.artifact_description
-	artifact_check_dialog.icon.texture = load("res://assets/images/artifacts/" + artifact.icon_path)
+	artifact_check_dialog.artifact_commentary.text = artifact.artifact_commentary
+	artifact_check_dialog.icon.texture = load("res://assets/images/artifacts/" + artifact.path + ".png")
 	
 	match artifact.rarity:
 		"common":

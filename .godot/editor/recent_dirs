@@ -1,4 +1,6 @@
+res://scripts/artifacts/
 res://assets/images/
+res://scripts/cards/
 res://scripts/enemies/
 res://scripts/ui/
 res://scenes/ui/
@@ -10,10 +12,8 @@ res://styles/
 res://scripts/global/
 res://shaders/
 res://assets/fonts/
-res://scripts/artifacts/
 res://scripts/objects/
 res://scenes/objects/
-res://scripts/cards/
 res://assets/
 res://scenes/
 res://scenes/cards/

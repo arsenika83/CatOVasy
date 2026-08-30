@@ -18,7 +18,7 @@ func _process(delta: float) -> void:
 
 func update() -> void:
 	if current_artifact != null and not loaded:
-		icon.texture = load("res://assets/images/artifacts/" + current_artifact.icon_path)
+		icon.texture = load("res://assets/images/artifacts/" + current_artifact.path + ".png")
 		tooltip_text = ""
 		rarity = current_artifact.rarity
 		loaded = true

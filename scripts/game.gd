@@ -23,6 +23,7 @@ var inventory_on_screen = false
 @onready var upgrade_stats_dialog = $UI/UpgradeStatsDialog
 @onready var artifact_dialog = $UI/ArtifactDialog
 @onready var menu = $UI/Menu
+@onready var inventory_button = $UI/InventoryButton
 
 @onready var foregroundFX = $Effects/ColorRect
 
@@ -81,8 +82,9 @@ func _process(delta: float) -> void:
 				move_to_map_pos()
 				giant.walk()
 				
-			if Input.is_action_just_pressed("ui_rmb"):
-				draw_inventory()
+			if map.local_to_map(giant.position) == cursor_map_pos:
+				if Input.is_action_just_pressed("ui_rmb"):
+					draw_inventory()
 				
 			if Input.is_action_pressed("ui_rmb"):
 				creature_dialog_on_screen = true
@@ -240,31 +242,30 @@ func check_creature_stats() -> void:
 		creature_check_dialog.find_child("StatsLabel").text = stats
 
 func draw_inventory() -> void:
-	if map.local_to_map(giant.position) == cursor_map_pos:
-		if inventory_on_screen:
-			var tween = create_tween()
-			tween.tween_property(inventory, "position:x", 1500, 0.3)
-			inventory.artifact_check_dialog.visible = false
-			inventory.card_check_dialog.visible = false
+	if inventory_on_screen:
+		var tween = create_tween()
+		tween.tween_property(inventory, "position:x", 1500, 0.3)
+		inventory.artifact_check_dialog.visible = false
+		inventory.card_check_dialog.visible = false
 			
-			inventory_on_screen = false
-		else:
-			inventory.hp_label.text = str(gm.hp, " / ", gm.max_hp)
+		inventory_on_screen = false
+	else:
+		inventory.hp_label.text = str(gm.hp, " / ", gm.max_hp)
 			
-			var stats = str(gm.damage)
-			stats += 	str("\n", gm.defence, " (", gm.max_defence, ")")
-			stats += 	str("\n", gm.accuracy, "%")
-			stats += 	str("\n", gm.luck, "%")
-			stats += 	str("\n", gm.max_energy)
-			stats += 	str("\n")
-			stats += 	str("\n", gm.level)
-			stats += 	str("\n", gm.xp, "/", gm.xp_needed)
-			inventory.find_child("StatsLabel").text = stats
+		var stats = str(gm.damage)
+		stats += 	str("\n", gm.defence, " (", gm.max_defence, ")")
+		stats += 	str("\n", gm.accuracy, "%")
+		stats += 	str("\n", gm.luck, "%")
+		stats += 	str("\n", gm.max_energy)
+		stats += 	str("\n")
+		stats += 	str("\n", gm.level)
+		stats += 	str("\n", gm.xp, "/", gm.xp_needed)
+		inventory.find_child("StatsLabel").text = stats
 			
-			var tween = create_tween()
-			tween.tween_property(inventory, "position:x", 870, 0.3)
+		var tween = create_tween()
+		tween.tween_property(inventory, "position:x", 870, 0.3)
 				
-			inventory_on_screen = true
+		inventory_on_screen = true
 
 func update_inventory() -> void:
 	inventory.hp_label.text = str(gm.hp, " / ", gm.max_hp)
@@ -340,6 +341,9 @@ func end_battle() -> void:
 	player_camera.enabled = true
 	player_camera.zoom = Vector2(gm.camera_zoom, gm.camera_zoom)
 	giant.light.enabled = true
+	
+	if gm.has_cat_food:
+		giant.heal(2)
 
 func _on_battle_start_timer_timeout() -> void:
 	scene_transitioner.change_scene_back()
@@ -354,8 +358,11 @@ func _on_battle_start_timer_timeout() -> void:
 	
 	gm.state = "battle"
 	gm.prev_state = gm.state
+	
+	if gm.has_old_bandage:
+		gm.current_defence = 5
+	
 	giant.light.enabled = false
-
 	inventory.position.x = 1500
 	inventory_on_screen = false
 
@@ -364,3 +371,6 @@ func _on_battle_start_timer_timeout() -> void:
 	$CanvasModulate.visible = false
 	$BattleNode.add_child(battle)
 	$Effects.visible = false
+
+func _on_inventory_button_mouse_entered() -> void:
+	draw_inventory()

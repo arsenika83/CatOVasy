@@ -147,7 +147,7 @@ theme_override_styles/slider = ExtResource("4_ncfhn")
 theme_override_styles/grabber_area = ExtResource("5_ob3hf")
 theme_override_styles/grabber_area_highlight = ExtResource("6_ob3hf")
 min_value = 0.001
-max_value = 1.0
+max_value = 2.0
 step = 0.05
 value = 0.501
 
@@ -182,7 +182,7 @@ theme_override_styles/slider = ExtResource("4_ncfhn")
 theme_override_styles/grabber_area = ExtResource("5_ob3hf")
 theme_override_styles/grabber_area_highlight = ExtResource("6_ob3hf")
 min_value = 0.001
-max_value = 1.0
+max_value = 2.0
 step = 0.05
 value = 0.501
 
@@ -208,7 +208,7 @@ theme_override_styles/slider = ExtResource("4_ncfhn")
 theme_override_styles/grabber_area = ExtResource("5_ob3hf")
 theme_override_styles/grabber_area_highlight = ExtResource("6_ob3hf")
 min_value = 0.001
-max_value = 1.0
+max_value = 2.0
 step = 0.05
 value = 0.501
 

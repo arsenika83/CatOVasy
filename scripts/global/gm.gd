@@ -27,9 +27,12 @@ var defended = false
 var speed = 100
 var current_speed = speed
 
-var accuracy = 80
+var accuracy = 70
+var min_accuracy = 0
 var current_accuracy = accuracy
+
 var luck = 10
+var min_luck = -100
 var current_luck = luck
 
 var energy = 2
@@ -76,7 +79,7 @@ func _ready() -> void:
 	current_defend_cards.set(1, DefendCard.new())
 	
 	current_ability_cards.set(1, AbilityCard.new())
-	current_ability_cards.set(2, AbilityCard.new())
+	current_ability_cards.set(2, PoisonCard.new())
 
 func _process(delta: float) -> void:
 	pass
@@ -92,6 +95,12 @@ func add_ability_card(index : int, card : Card) -> void:
 	current_ability_cards.set(index, added_card)
 	
 func add_artifact(index : int, artifact : Artifact) -> void:
-	var artifact_resource = load("res://scenes/artifacts/" + artifact.scene_path)
+	var artifact_resource = load("res://scenes/artifacts/" + artifact.path + ".tscn")
 	var added_artifact = artifact_resource.instantiate()
 	current_artifacts.set(index, added_artifact)	
+
+var has_cat_food = false
+var has_old_bandage = false
+var has_spinner = false
+var has_boomerang = false
+var has_regen_ring = false

@@ -32,6 +32,8 @@ func _ready() -> void:
 	status_fx.play("found_you")
 	battle_x = get_parent().get_parent().find_child("TileMapLayerBlack").local_to_map(position).x
 	battle_y = get_parent().get_parent().find_child("TileMapLayerBlack").local_to_map(position).y
+	
+	positions.append(Vector2(battle_x, battle_y))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

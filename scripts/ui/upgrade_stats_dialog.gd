@@ -120,3 +120,7 @@ func _on_stat_selected(stat : Control) -> void:
 	visible = false
 	position.x = -1500		
 	gm.state = "idle"
+
+
+func _on_mouse_entered() -> void:
+	gm.state = "leveling_up"

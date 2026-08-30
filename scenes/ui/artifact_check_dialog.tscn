@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://dc6digk37p2gn" path="res://scripts/ui/artifact_check_dialog.gd" id="2_t24nx"]
 [ext_resource type="Texture2D" uid="uid://de2c8pnqtrt77" path="res://assets/images/inventory_ui.png" id="3_t24nx"]
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="4_6fal4"]
-[ext_resource type="Texture2D" uid="uid://c4vuxt64k2xkl" path="res://assets/images/artifacts/ball.png" id="5_t24nx"]
+[ext_resource type="Texture2D" uid="uid://c4vuxt64k2xkl" path="res://assets/images/artifacts/red_ball.png" id="5_t24nx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qtlqx"]
 shader = ExtResource("1_0wa16")
@@ -66,7 +66,7 @@ layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 240.0
-offset_bottom = 64.0
+offset_bottom = 56.0
 theme_override_font_sizes/font_size = 22
 text = "ИМЯ"
 horizontal_alignment = 1
@@ -76,9 +76,9 @@ autowrap_mode = 2
 use_parent_material = true
 layout_mode = 0
 offset_left = 16.0
-offset_top = 64.0
+offset_top = 56.0
 offset_right = 232.0
-offset_bottom = 256.0
+offset_bottom = 208.0
 theme_override_font_sizes/font_size = 18
 text = "Дает 15 защиты если у вас нет защиты по умолчанию дададада"
 autowrap_mode = 2
@@ -92,5 +92,18 @@ offset_right = 368.0
 offset_bottom = 176.0
 theme_override_font_sizes/font_size = 18
 text = "РЕДКИЙ"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="CommentaryLabel" type="Label" parent="." unique_id=979267045]
+use_parent_material = true
+layout_mode = 0
+offset_left = 16.0
+offset_top = 208.0
+offset_right = 232.0
+offset_bottom = 256.0
+theme_override_colors/font_color = Color(0.70796657, 0.7079665, 0.7079665, 1)
+theme_override_font_sizes/font_size = 16
+text = "\"Комментарий\""
 horizontal_alignment = 1
 autowrap_mode = 2

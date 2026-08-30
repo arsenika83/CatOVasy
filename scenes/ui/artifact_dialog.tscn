@@ -68,9 +68,9 @@ expand_mode = 1
 [node name="TextureRect3" type="TextureRect" parent="." unique_id=901294263]
 use_parent_material = true
 layout_mode = 0
-offset_left = -264.0
+offset_left = -272.0
 offset_right = -8.0
-offset_bottom = 176.0
+offset_bottom = 224.0
 texture = SubResource("AtlasTexture_53g1v")
 expand_mode = 1
 
@@ -89,12 +89,25 @@ vertical_alignment = 1
 [node name="DescriptionLabel" type="Label" parent="TextureRect3" unique_id=442762286]
 use_parent_material = true
 layout_mode = 0
-offset_left = 8.0
+offset_left = 16.0
 offset_top = 40.0
-offset_right = 248.0
-offset_bottom = 168.0
+offset_right = 256.0
+offset_bottom = 160.0
 theme_override_font_sizes/font_size = 18
 text = "ОПИСАНИЕ ОПИСАНИЕ ОПИСАНИЕ ОПИСАНИЕ ОПИСАНИЕ ОПИСАНИЕ ОПИСАНИЕ"
+autowrap_mode = 2
+
+[node name="CommentaryLabel" type="Label" parent="TextureRect3" unique_id=1622974282]
+use_parent_material = true
+layout_mode = 0
+offset_left = 16.0
+offset_top = 168.0
+offset_right = 248.0
+offset_bottom = 216.0
+theme_override_colors/font_color = Color(0.82606, 0.82606006, 0.82606, 1)
+theme_override_font_sizes/font_size = 18
+text = "\"Комментарий\""
+horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="TextureRect2" type="TextureRect" parent="." unique_id=1621686300]

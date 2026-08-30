@@ -26,6 +26,8 @@ class_name Giant extends CharacterBody2D
 
 @onready var light = $PointLight2D
 
+var current_heal = 0
+
 var has_debuff_weakness = false
 var has_debuff_undefend = false
 var has_debuff_inaccuracy = false
@@ -112,6 +114,14 @@ func fall() -> void:
 func walk() -> void:
 	gm.state = "walking"
 	walk_timer.start()
+
+func heal(hp : int) -> void:
+	gm.prev_state = gm.state
+	gm.state = "healing"
+	current_heal = hp
+	sprite.play("heal")
+	audio_resting.play()
+	$HealTimer.start()
 
 func go_downstairs() -> void:
 	audio_fall.play()
@@ -444,3 +454,14 @@ func _on_debuff_timer_timeout() -> void:
 	var tween1 = create_tween()
 	tween1.tween_property(gm.current_targets[0].status_fx, "scale", Vector2(0, 0), 0.2)
 	get_parent().end_turn()
+
+
+func _on_heal_timer_timeout() -> void:
+	gm.hp += current_heal
+	if gm.hp > gm.max_hp:
+		gm.hp = gm.max_hp
+	
+	gm.state = gm.prev_state
+	sprite.play(gm.state)
+		
+		

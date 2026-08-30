@@ -232,6 +232,9 @@ func check_giant_position(g_pos : Vector2, e_pos : Vector2) -> void:
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
+	if gm.state == "leveling_up":
+		return
+		
 	gm.current_enemies.append(self)
 	if not gm.state == "battle":
 		gm.state = "battle"
@@ -293,6 +296,7 @@ func take_damage(dmg : int, time : float) -> void:
 		current_defence = 0	
 	
 	taken_damage = dmg
+	
 	if dmg > 0:
 		hp -= dmg
 		take_damage_timer.start(time)
@@ -355,14 +359,14 @@ func give_debuff(target : Giant, type : String, power : int, turns : int) -> voi
 			current_target.has_debuff_inaccuracy = true
 			current_target.turns_debuff_inaccuracy += turns
 			gm.current_accuracy -= power
-			if gm.current_accuracy <= 10:
-				gm.current_accuracy = 10
+			if gm.current_accuracy < gm.min_accuracy:
+				gm.current_accuracy = gm.min_accuracy
 		"unluck":
 			current_target.has_debuff_unluck = true
 			current_target.turns_debuff_unluck += turns
 			gm.current_luck -= power
-			if gm.current_luck <= -100:
-				gm.current_luck  = -100
+			if gm.current_luck < gm.min_luck:
+				gm.current_luck = gm.min_luck
 		"low_energy":
 			current_target.has_debuff_low_energy = true
 			current_target.turns_debuff_low_energy += turns
@@ -525,6 +529,10 @@ func _on_miss_damage_timer_timeout() -> void:
 		
 		add_child(indicator)
 		indicator.display_damage(0, spawn_pos)
+	
+	if gm.has_boomerang:
+		take_damage(1, attack_animation_time)
+		return
 	
 	get_parent().get_parent().end_turn()
 	

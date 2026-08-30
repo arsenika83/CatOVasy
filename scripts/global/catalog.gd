@@ -6,7 +6,13 @@ var all_card_names_rare : Array[String]
 var all_card_names_epic : Array[String]
 var all_card_names_unbelievable : Array[String]
 
-var all_artifact_names : Array[String] = ["ball", "blue_ball", "heart_shaped_pillow"]
+var all_artifact_names : Array[String] = ["red_ball", "blue_ball", "heart_shaped_pillow", "cat_food",
+"old_bandage", "spinner", "boomerang", "regen_ring"]
+
+var all_artifact_names_common : Array[String]
+var all_artifact_names_rare : Array[String]
+var all_artifact_names_epic : Array[String]
+var all_artifact_names_unbelievable : Array[String]
 
 var all_stat_names : Array[String] = ["base_damage_1", "base_damage_3", "base_damage_5",
 "defence_2", "defence_4", "defence_7", "max_defence_3", "max_defence_6", "max_defence_12",
