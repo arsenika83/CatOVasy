@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://y31kppiyvoj"]
+
+[ext_resource type="Texture2D" uid="uid://s34pblv0ga2j" path="res://assets/images/fx.png" id="1_vmrgq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jn4v3"]
+atlas = ExtResource("1_vmrgq")
+region = Rect2(0, 128, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jglf4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jn4v3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Rocky" type="AnimatedSprite2D" unique_id=1518503504]
+sprite_frames = SubResource("SpriteFrames_jglf4")

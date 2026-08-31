@@ -245,11 +245,13 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		audio_hit.play()
 
 func _on_area_2dxp_area_entered(area: Area2D) -> void:
-	if not gave_xp and not gm.state == "battle":
-		xp_orb.visible = false
-		gave_xp = true
-		gm.xp += xp_gives
-		get_parent().get_parent().find_child("Giant").check_xp()
+	print(str("NOW: ", gm.state))
+	if gm.state == "idle" or gm.state ==  "walking":
+		if not gave_xp:
+			xp_orb.visible = false
+			gave_xp = true
+			gm.xp += xp_gives
+			get_parent().get_parent().find_child("Giant").check_xp()
 
 func check_hp() -> void:
 	if hp <= 0:
@@ -347,13 +349,13 @@ func give_debuff(target : Giant, type : String, power : int, turns : int) -> voi
 			current_target.has_debuff_weakness = true
 			current_target.turns_debuff_weakness += turns
 			gm.current_damage -= power
-			if gm.current_damage <= 0:
-				gm.current_damage = 0
+			if gm.current_damage < gm.min_damage:
+				gm.current_damage = gm.min_damage
 		"undefend":
 			current_target.has_debuff_undefend = true
 			current_target.turns_debuff_undefend += turns
 			gm.current_defence -= power
-			if gm.current_defence <= 0:
+			if gm.current_defence < 0:
 				gm.current_defence = 0
 		"inaccuracy":
 			current_target.has_debuff_inaccuracy = true
@@ -371,8 +373,8 @@ func give_debuff(target : Giant, type : String, power : int, turns : int) -> voi
 			current_target.has_debuff_low_energy = true
 			current_target.turns_debuff_low_energy += turns
 			gm.energy -= power
-			if gm.energy <= 0:
-				gm.energy  = 0
+			if gm.energy < 0:
+				gm.energy = 0
 	
 	status_fx.visible = true
 	var tween3 = create_tween()

@@ -1,5 +1,7 @@
+res://scenes/fx/
 res://assets/images/
 res://scripts/artifacts/
+res://scenes/
 res://scripts/cards/
 res://scripts/enemies/
 res://scripts/ui/
@@ -7,7 +9,6 @@ res://scenes/ui/
 res://
 F:/GODOTProjects/GiantCrawler/saves/
 res://scripts/
-res://scenes/fx/
 res://styles/
 res://scripts/global/
 res://shaders/
@@ -15,6 +16,5 @@ res://assets/fonts/
 res://scripts/objects/
 res://scenes/objects/
 res://assets/
-res://scenes/
 res://scenes/cards/
 res://scenes/enemies/

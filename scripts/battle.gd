@@ -90,6 +90,20 @@ func init() -> void:
 	
 	var enemy_count = 0
 	
+	if gm.has_rocky:
+		var rocky_scene = load("res://scenes/fx/rocky.tscn")
+		var rocky = rocky_scene.instantiate()
+		rocky.position.x = -1000
+		rocky.z_index = 50
+		$FX.add_child(rocky)
+	
+	if gm.has_tomato_cross:
+		var tomato_scene = load("res://scenes/fx/tomato_cross_projectile.tscn")
+		var tomato = tomato_scene.instantiate()
+		tomato.position.x = -1000
+		tomato.z_index = 50
+		$FX.add_child(tomato)
+	
 	for e in gm.current_enemies:
 		var enemy_scene = load("res://scenes/enemies/" + e.enemy_scene_path)
 		var enemy = enemy_scene.instantiate()
@@ -120,15 +134,12 @@ func display_cursor_label() -> void:
 	for i in range(0, find_child("Enemies").get_child_count()):
 		var targets : Array[CharacterBody2D] = [find_child("Enemies").get_child(i)]
 		
-		match gm.state:
-			"battle_attack":
-				for e_pos in targets.get(0).positions:
-					if e_pos.x == cursor_grid_pos.x and e_pos.y == cursor_grid_pos.y:
-						if not targets.get(0).state == "dead":
+		if targets[0].battle_x == cursor_grid_pos.x and targets[0].battle_y == cursor_grid_pos.y:
+			if not targets.get(0).state == "dead":
 							
-							cursor_label.visible = true
-							cursor_icon.visible = true
-							cursor_label.text = str(card_container.current_selected.damage - targets.get(0).current_defence)
+				cursor_label.visible = true
+				cursor_icon.visible = true
+				cursor_label.text = str(card_container.current_selected.damage - targets.get(0).current_defence)
 				
 
 func find_enemy_by_position(battle_x : int, battle_y : int) -> Enemy:
@@ -137,7 +148,7 @@ func find_enemy_by_position(battle_x : int, battle_y : int) -> Enemy:
 			return enemy
 	return null
 
-func draw_cursor() -> void:	
+func draw_cursor() -> void:
 	for enemy in find_child("Enemies").get_children():
 		enemy.cursor.visible = false
 	
@@ -180,9 +191,9 @@ func draw_cursor() -> void:
 				var target_5 = find_enemy_by_position(targets[0].battle_x, targets[0].battle_y - 2)
 				if target_5 != null:
 					if target_5.state != "dead":
-						targets.append(target_5)			
+						targets.append(target_5)
 							
-			elif gm.current_card.cross_attack:
+			elif gm.current_card.cross_attack or gm.has_tomato_cross:
 				var target_2 = find_enemy_by_position(targets[0].battle_x + 1, targets[0].battle_y)
 				if target_2 != null:
 					if target_2.state != "dead":
@@ -251,9 +262,9 @@ func choose_target(action : String) -> void:
 				var target_5 = find_enemy_by_position(targets[0].battle_x, targets[0].battle_y - 2)
 				if target_5 != null:
 					if target_5.state != "dead":
-						targets.append(target_5)			
+						targets.append(target_5)
 						
-			elif gm.current_card.cross_attack:
+			elif gm.current_card.cross_attack or gm.has_tomato_cross:
 				var target_2 = find_enemy_by_position(targets[0].battle_x + 1, targets[0].battle_y)
 				if target_2 != null:
 					if target_2.state != "dead":
@@ -281,6 +292,17 @@ func choose_target(action : String) -> void:
 					match action:
 						"deal_damage":
 							source.deal_damage(targets)
+							
+							if gm.has_tomato_cross:
+								$FX/TomatoCrossProjectile.scale = Vector2(1, 1)
+								$FX/TomatoCrossProjectile.position = Vector2(targets.get(0).position.x, targets.get(0).position.y - 700)
+								
+								var tween = create_tween()
+								tween.tween_property($FX/TomatoCrossProjectile, "position", targets.get(0).position, gm.attack_animation_time + 0.3)
+								
+								var tween2 = create_tween()
+								tween2.tween_property($FX/TomatoCrossProjectile, "scale", Vector2(0, 0), 1.5)
+								
 						"debuff":
 							var type_number = randi_range(0, gm.debuff_set.size()-1)
 							var type = gm.debuff_set.get(type_number).get(0)
@@ -346,10 +368,39 @@ func end_turn() -> void:
 	if current_creature_turn == -1:
 		if gm.current_energy <= 0:
 			gm.current_energy = 0
-			
 			current_creature_turn += 1
-		
-		enemy_turn()
+			
+			if gm.has_rocky and not battle_ended:
+				var targets: Array[CharacterBody2D]
+				var rocky_scale = 1
+				if gm.has_mrs_rocky:
+					rocky_scale = 3
+					for enemy in find_child("Enemies").get_children():
+						if enemy.state != "dead":
+							targets.append(enemy)
+					for t in targets:
+						t.take_damage(2, 0.5)
+				else:
+					var i = randi_range(0, find_child("Enemies").get_child_count()-1)
+					
+					targets = [find_child("Enemies").get_child(i)]
+					var j = 0
+					
+					while targets.get(0).state == "dead":
+						targets.set(0, find_child("Enemies").get_child(j))
+						j += 1
+					targets.get(0).take_damage(2, 0.5)
+					
+				$FX/Rocky.scale = Vector2(rocky_scale, rocky_scale)
+				$FX/Rocky.position = Vector2(targets.get(0).position.x, targets.get(0).position.y - 700)
+				
+				var tween = create_tween()
+				tween.tween_property($FX/Rocky, "position", targets.get(0).position, 0.5)
+				
+				var tween2 = create_tween()
+				tween2.tween_property($FX/Rocky, "scale", Vector2(0, 0), 2)
+			
+			$EndTurnTimer.start()
 	else:
 		current_enemies.get(current_creature_turn).current_energy -= 1
 	
@@ -602,3 +653,7 @@ func _on_win_timer_timeout() -> void:
 		$AudioStreamPlayerWin.play()
 		end_battle_button.visible = true
 		end_battle_button.disabled = false
+
+
+func _on_end_turn_timer_timeout() -> void:
+	enemy_turn()

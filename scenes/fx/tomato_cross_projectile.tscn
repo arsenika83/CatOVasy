@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://c4dbn4lwpre7g"]
+
+[ext_resource type="Texture2D" uid="uid://5d41becbcqgn" path="res://assets/images/tomato_cross_projectile.png" id="1_c7mgb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ls1ud"]
+atlas = ExtResource("1_c7mgb")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gyjo5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ls1ud")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="TomatoCrossProjectile" type="AnimatedSprite2D" unique_id=403429562]
+sprite_frames = SubResource("SpriteFrames_gyjo5")

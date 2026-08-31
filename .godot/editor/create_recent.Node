@@ -1,5 +1,6 @@
-TextureRect
+Node2D
 AnimatedSprite2D
+TextureRect
 Sprite2D
 Button
 GridContainer

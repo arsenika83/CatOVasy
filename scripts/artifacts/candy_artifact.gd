@@ -24,7 +24,11 @@ func upon_pickup() -> void:
 	
 func upon_use() -> void:
 	gm.max_hp -= 5
-	gm.hp += 15
+	
+	if gm.has_heart_shaped_pillow:
+		gm.hp += 16
+	else:	
+		gm.hp += 15
 	
 	if gm.hp > gm.max_hp:
 		gm.hp = gm.max_hp

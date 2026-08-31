@@ -127,7 +127,7 @@ tile_set = SubResource("TileSet_a7tdr")
 
 [node name="Stairs2" parent="Exits" unique_id=175082881 instance=ExtResource("4_3asx1")]
 position = Vector2(176, 16)
-room_number = -1
+room_number = 0
 
 [node name="Stairs" parent="Exits" unique_id=1448595182 instance=ExtResource("5_iywne")]
 position = Vector2(144, 208)
@@ -155,13 +155,34 @@ position = Vector2(64, 0)
 position = Vector2(64, -64)
 
 [node name="ChestEpic" parent="Objects" unique_id=1256877516 instance=ExtResource("9_nqtv8")]
-position = Vector2(-128, 0)
+position = Vector2(-192, 0)
 
 [node name="ChestUnbelievable" parent="Objects" unique_id=805585204 instance=ExtResource("10_e1tke")]
-position = Vector2(-96, -32)
+position = Vector2(-192, -32)
 
 [node name="Chest2" parent="Objects" unique_id=530264351 instance=ExtResource("11_nqtv8")]
 position = Vector2(32, -32)
+
+[node name="ChestRare2" parent="Objects" unique_id=1473647094 instance=ExtResource("8_d7a8j")]
+position = Vector2(32, -64)
+
+[node name="ChestRare3" parent="Objects" unique_id=1879983419 instance=ExtResource("8_d7a8j")]
+position = Vector2(96, -64)
+
+[node name="ChestRare4" parent="Objects" unique_id=413824566 instance=ExtResource("8_d7a8j")]
+position = Vector2(-96, -32)
+
+[node name="ChestRare5" parent="Objects" unique_id=1757250525 instance=ExtResource("8_d7a8j")]
+position = Vector2(-96, 0)
+
+[node name="Chest8" parent="Objects" unique_id=828478503 instance=ExtResource("7_po5je")]
+position = Vector2(32, 0)
+
+[node name="Chest9" parent="Objects" unique_id=646015650 instance=ExtResource("7_po5je")]
+position = Vector2(0, -32)
+
+[node name="ChestEpic2" parent="Objects" unique_id=1622579856 instance=ExtResource("9_nqtv8")]
+position = Vector2(0, -64)
 
 [node name="Giant" parent="." unique_id=2060885226 instance=ExtResource("1_uwrxv")]
 position = Vector2(176, 48)
@@ -196,6 +217,24 @@ position = Vector2(144, 144)
 position = Vector2(144, 144)
 
 [node name="EnemyFox" parent="Enemies" unique_id=685663284 instance=ExtResource("9_ng1gw")]
+position = Vector2(272, 112)
+
+[node name="EnemyFox2" parent="Enemies" unique_id=1113755696 instance=ExtResource("9_ng1gw")]
+position = Vector2(272, 112)
+
+[node name="EnemyFox3" parent="Enemies" unique_id=1971720123 instance=ExtResource("9_ng1gw")]
+position = Vector2(272, 112)
+
+[node name="EnemyFox4" parent="Enemies" unique_id=314592152 instance=ExtResource("9_ng1gw")]
+position = Vector2(272, 112)
+
+[node name="EnemyFox5" parent="Enemies" unique_id=1974251582 instance=ExtResource("9_ng1gw")]
+position = Vector2(272, 112)
+
+[node name="EnemyFox6" parent="Enemies" unique_id=1966389239 instance=ExtResource("9_ng1gw")]
+position = Vector2(272, 112)
+
+[node name="EnemyFox7" parent="Enemies" unique_id=1475903293 instance=ExtResource("9_ng1gw")]
 position = Vector2(272, 112)
 
 [node name="Plants" type="Node2D" parent="." unique_id=1507805972]

@@ -28,6 +28,7 @@ class_name Giant extends CharacterBody2D
 @onready var light = $PointLight2D
 
 var current_heal = 0
+var attack_count = 0
 var is_hit_lucky = false
 
 var has_debuff_weakness = false
@@ -120,8 +121,12 @@ func walk() -> void:
 func heal(hp : int) -> void:
 	gm.prev_state = gm.state
 	gm.state = "healing"
+	
+	if gm.has_heart_shaped_pillow:
+		hp += 1
+	
 	current_heal = hp
-	sprite.play("heal")
+	sprite.play("healing")
 	audio_resting.play()
 	$HealTimer.start()
 
@@ -147,6 +152,11 @@ func deal_damage(targets : Array[CharacterBody2D]) -> void:
 		
 		if success:
 			gm.current_damage = get_parent().find_child("UI").find_child("CardContainer").current_selected.damage
+			
+			if gm.has_toy_cat and attack_count < 2:
+				gm.current_damage *= 2
+				print("TOY CAAAAAAT")
+				
 			if luck_success:
 				is_hit_lucky = true
 				status_fx.scale = Vector2(0, 0)
@@ -157,13 +167,15 @@ func deal_damage(targets : Array[CharacterBody2D]) -> void:
 				var tween = create_tween()
 				tween.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
 				
-				gm.current_damage = gm.damage * 2
+				gm.current_damage += 2
 		else:
 			gm.current_damage = 0
 			print("MISS! ")
 	
 	get_parent().find_child("UI").find_child("CardContainer").replace_current_card("attack")
 	sprite.play("deal_damage")
+	
+	attack_count += 1
 	
 	deal_damage_timer.start(gm.attack_animation_time)
 
@@ -406,7 +418,7 @@ func _on_take_damage_timer_timeout() -> void:
 	if not gm.state == "dead":
 		gm.prev_state = gm.state
 		gm.state = "taking_damage"
-		sprite.play("take_damage")
+		sprite.play("taking_damage")
 		audio_meow.play()
 		idle_animation_timer.start(0.2)
 		get_parent().end_turn()

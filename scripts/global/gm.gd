@@ -19,6 +19,7 @@ var hp = 30
 var max_hp = 30
 
 var damage = 2
+var min_damage = -3
 var current_damage = damage
 
 var defence = 3
@@ -107,3 +108,8 @@ var has_boomerang = false
 var has_regen_ring = false
 var has_portrait_of_the_unknown = false
 var has_fork = false
+var has_heart_shaped_pillow = false
+var has_toy_cat = false
+var has_rocky = false
+var has_mrs_rocky = false
+var has_tomato_cross = false

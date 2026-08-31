@@ -7,12 +7,13 @@ var all_card_names_epic : Array[String]
 var all_card_names_unbelievable : Array[String]
 
 var all_artifact_names : Array[String] = ["red_ball", "blue_ball", "heart_shaped_pillow", "cat_food",
-"old_bandage", "spinner", "boomerang", "regen_ring", "candy", "portrait_of_the_unknown", "fork"]
+"old_bandage", "spinner", "boomerang", "regen_ring", "candy", "portrait_of_the_unknown", "fork",
+"lucky_collar", "toy_cat", "rocky", "tomato_cross"]
 
-var all_artifact_names_common : Array[String] = ["red_ball", "old_bandage", "candy"]
+var all_artifact_names_common : Array[String] = ["red_ball", "old_bandage", "candy", "lucky_collar", "rocky"]
 var all_artifact_names_rare : Array[String] = ["blue_ball", "cat_food", "spinner", "boomerang", 
 "portrait_of_the_unknown", "fork"]
-var all_artifact_names_epic : Array[String] = ["heart_shaped_pillow"]
+var all_artifact_names_epic : Array[String] = ["heart_shaped_pillow", "toy_cat", "tomato_cross"]
 var all_artifact_names_unbelievable : Array[String] = ["regen_ring"]
 
 var all_stat_names : Array[String] = ["base_damage_1", "base_damage_3", "base_damage_5",

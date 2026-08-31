@@ -327,7 +327,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_ayw8s")
 }],
 "loop": false,
-"name": &"heal",
+"name": &"healing",
 "speed": 10.0
 }, {
 "frames": [{
@@ -422,7 +422,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_ycwex")
 }],
 "loop": true,
-"name": &"take_damage",
+"name": &"taking_damage",
 "speed": 5.0
 }]
 
@@ -631,7 +631,7 @@ height = 29.0
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1540776930]
 position = Vector2(0, -6)
 sprite_frames = SubResource("2")
-animation = &"battle"
+animation = &"healing"
 autoplay = "idle"
 
 [node name="ArtifactSprite" type="AnimatedSprite2D" parent="." unique_id=893058165]

@@ -24,5 +24,8 @@ func upon_pickup() -> void:
 	catalog.all_artifact_names_epic.erase(path)
 	catalog.all_artifact_names_unbelievable.erase(path)	
 func upon_use() -> void:
-	gm.hp += 4
+	if gm.has_heart_shaped_pillow:
+		gm.hp += 5
+	else:
+		gm.hp += 4
 	gm.has_old_bandage = false
