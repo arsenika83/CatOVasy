@@ -21,4 +21,9 @@ func upon_pickup() -> void:
 	gm.defence += 2
 	gm.damage += 2
 	gm.has_artifacts.append(artifact_global_id)
+	
 	catalog.all_artifact_names.erase(path)
+	catalog.all_artifact_names_common.erase(path)
+	catalog.all_artifact_names_rare.erase(path)
+	catalog.all_artifact_names_epic.erase(path)
+	catalog.all_artifact_names_unbelievable.erase(path)

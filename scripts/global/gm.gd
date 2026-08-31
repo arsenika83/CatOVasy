@@ -6,6 +6,8 @@ var camera_zoom = 2
 var start_pos = Vector2i(64+16, 32+16)
 var prev_pos = Vector2i(64+16, 32+16)
 
+var current_chest_rarity = ""
+
 var enemies_following = 0
 var current_level_edge_positions : Array[Vector2]
 var current_music_position : float = 0.0

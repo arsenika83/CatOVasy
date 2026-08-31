@@ -19,7 +19,10 @@ func upon_pickup() -> void:
 	gm.has_old_bandage = true
 	
 	catalog.all_artifact_names.erase(path)
-	
+	catalog.all_artifact_names_common.erase(path)
+	catalog.all_artifact_names_rare.erase(path)
+	catalog.all_artifact_names_epic.erase(path)
+	catalog.all_artifact_names_unbelievable.erase(path)	
 func upon_use() -> void:
 	gm.hp += 4
 	gm.has_old_bandage = false

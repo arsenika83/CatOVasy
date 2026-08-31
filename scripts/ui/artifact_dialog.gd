@@ -24,8 +24,50 @@ func update_artifact() -> void:
 		artifacts.remove_child(artifact)
 		artifact.queue_free()
 	
-	var artifact_index = randi_range(0, catalog.all_artifact_names.size()-1)
-	var artifact_name = catalog.all_artifact_names.get(artifact_index)
+	var artifact_index
+	var artifact_name
+	
+	var rarity = gm.current_chest_rarity
+	match rarity:
+		"all":
+			pass
+		"common":
+			var rare_chance = randi_range(1, 100) < 20
+			if rare_chance or catalog.all_artifact_names_common.size() == 0:
+				rarity = "rare"
+					
+		"rare":
+			var epic_chance = randi_range(1, 100) < 5
+			if epic_chance or catalog.all_artifact_names_rare.size() == 0:
+				rarity = "epic"
+					
+		"epic":
+			var unbelievable_chance = randi_range(1, 100) < 2
+			if unbelievable_chance or catalog.all_artifact_names_epic.size() == 0:
+				rarity = "unbelievable"
+					
+		"unbelievable":
+			var legendary_chance = randi_range(1, 100) < 3
+			if legendary_chance:
+				rarity = "legendary"
+								
+	match rarity:
+		"all":
+			artifact_index = randi_range(0, catalog.all_artifact_names.size()-1)
+			artifact_name = catalog.all_artifact_names.get(artifact_index)
+		"common":
+			artifact_index = randi_range(0, catalog.all_artifact_names_common.size()-1)
+			artifact_name = catalog.all_artifact_names_common.get(artifact_index)
+		"rare":
+			artifact_index = randi_range(0, catalog.all_artifact_names_rare.size()-1)
+			artifact_name = catalog.all_artifact_names_rare.get(artifact_index)
+		"epic":
+			artifact_index = randi_range(0, catalog.all_artifact_names_epic.size()-1)
+			artifact_name = catalog.all_artifact_names_epic.get(artifact_index)
+		"unbelievable":
+			artifact_index = randi_range(0, catalog.all_artifact_names_unbelievable.size()-1)
+			artifact_name = catalog.all_artifact_names_unbelievable.get(artifact_index)
+	
 	print(artifact_name)
 	var artifact_scene = load("res://scenes/artifacts/" + artifact_name + ".tscn")
 	var artifact = artifact_scene.instantiate()

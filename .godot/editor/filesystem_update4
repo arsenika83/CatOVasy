@@ -1,5 +1,5 @@
 res://default_env.tres
-res://scenes/artifacts/fork.tscn
+res://scenes/levels/level0.tscn
 res://shaders/updown.gdshader
 res://shaders/vhs.gdshader
 res://shaders/wobble.gdshader
@@ -7,9 +7,6 @@ res://shaders/hp_bar.gdshader
 res://shaders/grass.gdshader
 res://shaders/foregroundFX.gdshader
 res://shaders/buckshot.gdshader
-res://scripts/artifacts/fork_artifact.gd
-res://scripts/global/gm.gd
-res://scripts/battle.gd
-res://scenes/cards/card.tscn
-res://scripts/cards/card.gd
-res://scripts/global/catalog.gd
+res://scripts/artifacts/candy_artifact.gd
+res://scenes/objects/chest_all.tscn
+res://scripts/ui/artifact_dialog.gd

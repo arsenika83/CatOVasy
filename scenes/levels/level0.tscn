@@ -10,16 +10,19 @@
 [ext_resource type="PackedScene" uid="uid://1by6pkucltci" path="res://scenes/objects/grass.tscn" id="6_p57ef"]
 [ext_resource type="PackedScene" uid="uid://b8bfs4u1x4s8" path="res://scenes/objects/grass_low.tscn" id="7_d3ub6"]
 [ext_resource type="PackedScene" uid="uid://c0fd45oqpmhla" path="res://scenes/objects/chest.tscn" id="7_po5je"]
+[ext_resource type="PackedScene" uid="uid://dsxoooufu2fui" path="res://scenes/objects/chest_rare.tscn" id="8_d7a8j"]
 [ext_resource type="PackedScene" uid="uid://bsxo600wchpra" path="res://scenes/objects/pillow.tscn" id="9_7s2gi"]
 [ext_resource type="PackedScene" uid="uid://cgbiblheppx0x" path="res://scenes/enemies/fox.tscn" id="9_ng1gw"]
+[ext_resource type="PackedScene" uid="uid://wwe2tb03ml0o" path="res://scenes/objects/chest_epic.tscn" id="9_nqtv8"]
+[ext_resource type="PackedScene" uid="uid://cq41x1n4fgtl6" path="res://scenes/objects/chest_unbelievable.tscn" id="10_e1tke"]
 [ext_resource type="PackedScene" uid="uid://c7f16y8rwf2q" path="res://scenes/objects/edge_one.tscn" id="10_m6lg1"]
 [ext_resource type="Shader" uid="uid://dm6djrn7pct8b" path="res://shaders/wobble.gdshader" id="11_fj52k"]
+[ext_resource type="PackedScene" uid="uid://ccwnqehv5gkrc" path="res://scenes/objects/chest_all.tscn" id="11_nqtv8"]
 [ext_resource type="PackedScene" uid="uid://1bvjmpy2pf0k" path="res://scenes/enemies/enemy.tscn" id="14_m6lg1"]
 [ext_resource type="PackedScene" uid="uid://di4k2iivrnhup" path="res://scenes/ui/creature_adventure_dialog.tscn" id="15_m6lg1"]
 [ext_resource type="PackedScene" uid="uid://qgx2la7r3w7a" path="res://scenes/ui/inventory.tscn" id="16_3asx1"]
 [ext_resource type="PackedScene" uid="uid://dpydh1bnymoa8" path="res://scenes/ui/level_up_dialog.tscn" id="17_yxkm4"]
 [ext_resource type="PackedScene" uid="uid://dqyxtu1uebx5v" path="res://scenes/ui/upgrade_stats_dialog.tscn" id="18_3ebcg"]
-[ext_resource type="AudioStream" uid="uid://ryw6yninysd1" path="res://assets/music/ZONE_1.mp3" id="19_3ebcg"]
 [ext_resource type="StyleBox" uid="uid://b8wibcbgivilm" path="res://styles/button_normal.tres" id="19_56goh"]
 [ext_resource type="PackedScene" uid="uid://djqdt7tiwad4" path="res://scenes/ui/artifact_dialog.tscn" id="19_db1u1"]
 [ext_resource type="AudioStream" uid="uid://k300apigjs30" path="res://assets/music/BATTLE_START.mp3" id="19_luu1i"]
@@ -27,6 +30,7 @@
 [ext_resource type="PackedScene" uid="uid://cdll7yvc84q18" path="res://scenes/ui/menu.tscn" id="21_mtrs4"]
 [ext_resource type="StyleBox" uid="uid://c66nispyhk2t0" path="res://styles/button_hover.tres" id="21_wcmim"]
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="22_d7a8j"]
+[ext_resource type="AudioStream" uid="uid://danwjx5w4kls1" path="res://assets/music/ZONE_1.ogg" id="30_d7a8j"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fj52k"]
 shader = ExtResource("1_7s2gi")
@@ -138,23 +142,26 @@ heal_power = 5
 [node name="Chest" parent="Objects" unique_id=1807108612 instance=ExtResource("7_po5je")]
 position = Vector2(-160, 96)
 
-[node name="Chest2" parent="Objects" unique_id=463513342 instance=ExtResource("7_po5je")]
-position = Vector2(0, -32)
-
-[node name="Chest3" parent="Objects" unique_id=1402126191 instance=ExtResource("7_po5je")]
-position = Vector2(64, -64)
-
 [node name="Chest4" parent="Objects" unique_id=977096426 instance=ExtResource("7_po5je")]
 position = Vector2(-64, -32)
 
 [node name="Chest5" parent="Objects" unique_id=641101638 instance=ExtResource("7_po5je")]
 position = Vector2(-64, 0)
 
-[node name="Chest6" parent="Objects" unique_id=1403884160 instance=ExtResource("7_po5je")]
-position = Vector2(32, -64)
-
 [node name="Chest7" parent="Objects" unique_id=844894603 instance=ExtResource("7_po5je")]
 position = Vector2(64, 0)
+
+[node name="ChestRare" parent="Objects" unique_id=505126585 instance=ExtResource("8_d7a8j")]
+position = Vector2(64, -64)
+
+[node name="ChestEpic" parent="Objects" unique_id=1256877516 instance=ExtResource("9_nqtv8")]
+position = Vector2(-128, 0)
+
+[node name="ChestUnbelievable" parent="Objects" unique_id=805585204 instance=ExtResource("10_e1tke")]
+position = Vector2(-96, -32)
+
+[node name="Chest2" parent="Objects" unique_id=530264351 instance=ExtResource("11_nqtv8")]
+position = Vector2(32, -32)
 
 [node name="Giant" parent="." unique_id=2060885226 instance=ExtResource("1_uwrxv")]
 position = Vector2(176, 48)
@@ -412,7 +419,7 @@ volume_db = -6.0
 bus = &"Music"
 
 [node name="AudioStreamPlayerMusic" type="AudioStreamPlayer" parent="." unique_id=179520262]
-stream = ExtResource("19_3ebcg")
+stream = ExtResource("30_d7a8j")
 bus = &"Music"
 
 [connection signal="mouse_entered" from="UI/InventoryButton" to="." method="_on_inventory_button_mouse_entered"]

@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://cq41x1n4fgtl6"]
+
+[ext_resource type="Script" uid="uid://dkywasdwfgh5x" path="res://scripts/objects/chest.gd" id="1_eh1wq"]
+[ext_resource type="Texture2D" uid="uid://xyqt3v2gvqv5" path="res://assets/images/objects.png" id="2_iq8nn"]
+[ext_resource type="AudioStream" uid="uid://bwch538phpi87" path="res://assets/soundFX/hit.wav" id="3_2my4o"]
+[ext_resource type="PackedScene" uid="uid://cr7p23s5f4urx" path="res://scenes/fx/status_fx.tscn" id="4_iq8nn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eh1wq"]
+atlas = ExtResource("2_iq8nn")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iq8nn"]
+atlas = ExtResource("2_iq8nn")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pev8c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eh1wq")
+}],
+"loop": false,
+"name": &"closed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iq8nn")
+}],
+"loop": false,
+"name": &"open",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bas4e"]
+radius = 2.0
+
+[node name="ChestUnbelievable" type="Node2D" unique_id=1807108612]
+script = ExtResource("1_eh1wq")
+rarity = "unbelievable"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1628923774]
+position = Vector2(0, -3)
+sprite_frames = SubResource("SpriteFrames_pev8c")
+animation = &"open"
+autoplay = "closed"
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1280983759]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=764539906]
+shape = SubResource("CircleShape2D_bas4e")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2032911874]
+stream = ExtResource("3_2my4o")
+bus = &"SoundFX"
+
+[node name="StatusFX" parent="." unique_id=1192321709 instance=ExtResource("4_iq8nn")]
+position = Vector2(0, -8)
+animation = &"enabled"
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

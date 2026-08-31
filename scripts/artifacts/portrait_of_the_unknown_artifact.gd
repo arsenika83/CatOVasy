@@ -18,3 +18,7 @@ func upon_pickup() -> void:
 	gm.has_portrait_of_the_unknown = true
 	
 	catalog.all_artifact_names.erase(path)
+	catalog.all_artifact_names_common.erase(path)
+	catalog.all_artifact_names_rare.erase(path)
+	catalog.all_artifact_names_epic.erase(path)
+	catalog.all_artifact_names_unbelievable.erase(path)
