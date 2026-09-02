@@ -15,10 +15,11 @@ func _process(delta: float) -> void:
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	if not opened:
-		gm.current_chest_rarity = rarity
-		opened = true
-		sprite.play("open")
-		$StatusFX.visible = false
-		audio.play()
-		get_parent().get_parent().draw_artifact_dialog()
+	if gm.state == "idle" or gm.state == "walking":
+		if not opened:
+			gm.current_chest_rarity = rarity
+			opened = true
+			sprite.play("open")
+			$StatusFX.visible = false
+			audio.play()
+			get_parent().get_parent().draw_artifact_dialog()

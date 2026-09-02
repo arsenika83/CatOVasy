@@ -1,11 +1,11 @@
 class_name AttackCard extends Card
 
-var damage = gm.damage
+var damage = 3 + gm.damage
 var card_path = "attack_card.tscn"
 var icon_path = "claw_card.png"
-var tool_tip_text = "Наносит урон, \nравный вашему \nбазовому"
+var tool_tip_text = ""
 var card_name = "Удар"
-var card_description = "Наносит урон, равный вашему базовому"
+var card_description = "Наносит урон, равный 3 + базовый"
 var rarity = "common"
 
 # Called when the node enters the scene tree for the first time.

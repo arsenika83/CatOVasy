@@ -1,0 +1,102 @@
+[gd_scene format=3 uid="uid://c8nyhbj3tjr6h"]
+
+[ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="1_bqg8d"]
+[ext_resource type="Script" uid="uid://bpjvnegxreoi7" path="res://scripts/cards/sharp_claw_card.gd" id="2_ssl6e"]
+[ext_resource type="Texture2D" uid="uid://b0rpbj3njbbar" path="res://assets/images/cards.png" id="3_5pu8x"]
+[ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="4_g0vcy"]
+[ext_resource type="Texture2D" uid="uid://b6jvc4pwl1rgt" path="res://assets/images/card_icons/sharp_claw_card.png" id="4_ssl6e"]
+[ext_resource type="FontFile" uid="uid://dub3oi8dxfpfw" path="res://assets/fonts/JeuDePixel-Regular.otf" id="5_paoyw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jl6rh"]
+resource_local_to_scene = true
+shader = ExtResource("1_bqg8d")
+shader_parameter/speed = 2.000000095
+shader_parameter/amplitude = 10.000000475
+shader_parameter/time_offset = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0qqw3"]
+atlas = ExtResource("3_5pu8x")
+region = Rect2(448, 0, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ee5py"]
+atlas = ExtResource("4_g0vcy")
+region = Rect2(0, 32, 32, 32)
+
+[node name="SharpClawCard" type="Control" unique_id=1531075916]
+z_index = 100
+z_as_relative = false
+material = SubResource("ShaderMaterial_jl6rh")
+layout_mode = 3
+anchors_preset = 0
+offset_right = 128.0
+offset_bottom = 192.0
+pivot_offset = Vector2(64, 96)
+script = ExtResource("2_ssl6e")
+
+[node name="BG2" type="TextureRect" parent="." unique_id=1690685854]
+use_parent_material = true
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 192.0
+texture = SubResource("AtlasTexture_0qqw3")
+
+[node name="BG" type="TextureRect" parent="." unique_id=1702750552]
+use_parent_material = true
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 120.0
+offset_bottom = 184.0
+texture = SubResource("AtlasTexture_0qqw3")
+
+[node name="Icon" type="TextureRect" parent="." unique_id=1021453810]
+use_parent_material = true
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 120.0
+offset_bottom = 120.0
+texture = ExtResource("4_ssl6e")
+
+[node name="Label" type="Label" parent="." unique_id=514088983]
+use_parent_material = true
+layout_mode = 0
+offset_left = 16.0
+offset_top = 120.0
+offset_right = 112.0
+offset_bottom = 176.0
+mouse_filter = 1
+theme_override_font_sizes/font_size = 16
+text = "1 УРОН"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Energy" type="TextureRect" parent="." unique_id=1518980124]
+use_parent_material = true
+layout_mode = 0
+offset_left = 88.0
+offset_top = -8.0
+offset_right = 136.0
+offset_bottom = 40.0
+texture = SubResource("AtlasTexture_ee5py")
+
+[node name="Label" type="Label" parent="Energy" unique_id=567625281]
+use_parent_material = true
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 1
+theme_override_colors/font_color = Color(18.892157, 18.892157, 18.892157, 1)
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 1
+theme_override_fonts/font = ExtResource("5_paoyw")
+theme_override_font_sizes/font_size = 18
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

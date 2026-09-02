@@ -158,23 +158,41 @@ text = "ИМЯ"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="StatsLabel" type="Label" parent="." unique_id=1847410104]
+[node name="StatNamesLabel" type="Label" parent="." unique_id=1847410104]
 use_parent_material = true
 layout_mode = 0
 offset_left = 36.0
 offset_top = 39.0
-offset_right = 232.0
+offset_right = 128.0
 offset_bottom = 296.0
 theme_override_font_sizes/font_size = 22
-text = "ОЗ: 12/30
-УРОН: 2
-ЗАЩИТА: 4
-ТОЧНОСТЬ: 70%
-УДАЧА: 10%
-ЭНЕРГИЯ: 2
+text = "ОЗ: 
+УРОН: 
+ЗАЩИТА: 
+ТОЧНОСТЬ: 
+УДАЧА: 
+ЭНЕРГИЯ: 
 
-УРОВЕНЬ: 1
-ОПЫТ: 1/10"
+УРОВЕНЬ: 
+ОПЫТ: "
+
+[node name="StatsLabel" type="Label" parent="." unique_id=1704144968]
+use_parent_material = true
+layout_mode = 0
+offset_left = 128.0
+offset_top = 40.0
+offset_right = 220.0
+offset_bottom = 297.0
+theme_override_font_sizes/font_size = 22
+text = "1
+2
+3
+4
+5
+6
+
+7
+8"
 
 [node name="Stats" type="Control" parent="." unique_id=1702192420]
 use_parent_material = true

@@ -1,9 +1,11 @@
+Timer
+GridContainer
+HBoxContainer
+Button
 Node2D
 AnimatedSprite2D
 TextureRect
 Sprite2D
-Button
-GridContainer
 Control
 Label
 HSlider
@@ -11,5 +13,3 @@ SpinBox
 AudioStreamPlayer
 TextureButton
 ColorRect
-CollisionShape2D
-Area2D

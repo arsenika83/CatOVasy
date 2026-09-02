@@ -1,6 +1,7 @@
 extends Node
 
-var all_card_names : Array[String] = ["ability", "attack", "attack_double_claw"]
+var all_card_names : Array[String] = ["ability", "attack", "attack_double_claw", "sharp_claw", "got_you",
+"cooked_meat"]
 var all_card_names_common : Array[String]
 var all_card_names_rare : Array[String]
 var all_card_names_epic : Array[String]

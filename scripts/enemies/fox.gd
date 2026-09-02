@@ -6,7 +6,7 @@ func _ready() -> void:
 	enemy_name = "Fox"
 	enemy_name_rus = "Лиса"
 	
-	attack_animation_time = 0.2
+	attack_animation_time = 0.4
 	
 	max_hp = 10
 	hp = 10

@@ -47,7 +47,7 @@ var xp_needed = 1
 var level = 1
 
 var current_targets : Array[CharacterBody2D]
-var current_cards: Array[Card]
+var current_cards: Dictionary[int, Card]
 var current_card: Card
 
 var current_attack_cards: Dictionary[int, Card]
@@ -71,17 +71,15 @@ var debuff_animation_time = 0.6
 var buff_animation_time = 0.6
 
 func _ready() -> void:
-	current_cards.append(AttackCard.new())
-	current_cards.append(DefendCard.new())
-	current_cards.append(AbilityCard.new())
+	current_cards.set(0, AttackCard.new())
+	current_cards.set(1, DefendCard.new())
+	current_cards.set(2, AbilityCard.new())
+	current_cards.set(3, LunchCard.new())
+	current_cards.set(4, CookedMeatCard.new())
+	current_cards.set(5, CookedMeatCard.new())
+	current_cards.set(6, CookedMeatCard.new())
+	current_cards.set(7, CookedMeatCard.new())
 	
-	current_attack_cards.set(0, AttackCard.new())
-	current_attack_cards.set(1, AttackCard.new())
-	current_attack_cards.set(2, AttackDoubleClaw.new())
-	
-	current_defend_cards.set(1, DefendCard.new())
-	
-	current_ability_cards.set(1, AbilityCard.new())
 
 func _process(delta: float) -> void:
 	pass

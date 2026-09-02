@@ -1,5 +1,6 @@
 class_name Giant extends CharacterBody2D
 
+@export var damage_indicator_scene: PackedScene
 @onready var area = $Area2D
 @onready var sprite = $Sprite
 @onready var status_fx = $StatusFX
@@ -29,6 +30,7 @@ class_name Giant extends CharacterBody2D
 
 var current_heal = 0
 var attack_count = 0
+var taken_damage = 0
 var is_hit_lucky = false
 
 var has_debuff_weakness = false
@@ -172,7 +174,7 @@ func deal_damage(targets : Array[CharacterBody2D]) -> void:
 			gm.current_damage = 0
 			print("MISS! ")
 	
-	get_parent().find_child("UI").find_child("CardContainer").replace_current_card("attack")
+	#get_parent().find_child("UI").find_child("CardContainer").replace_current_card("attack")
 	sprite.play("deal_damage")
 	
 	attack_count += 1
@@ -188,8 +190,8 @@ func take_damage(dmg : int, time : float) -> void:
 	else:
 		dmg -= gm.current_defence
 		gm.current_defence = 0
-		
-	gm.hp -= dmg
+	
+	taken_damage = dmg
 	
 	if dmg > 0:
 		take_damage_timer.start(time)
@@ -415,9 +417,17 @@ func _on_walk_timer_timeout() -> void:
 func _on_take_damage_timer_timeout() -> void:
 	check_hp()
 	
+	if damage_indicator_scene:
+		var indicator = damage_indicator_scene.instantiate()
+		var spawn_pos = global_position + Vector2(0, -2)
+		
+		add_child(indicator)
+		indicator.display_damage(taken_damage, spawn_pos)
+	
 	if not gm.state == "dead":
 		gm.prev_state = gm.state
 		gm.state = "taking_damage"
+		gm.hp -= taken_damage
 		sprite.play("taking_damage")
 		audio_meow.play()
 		idle_animation_timer.start(0.2)

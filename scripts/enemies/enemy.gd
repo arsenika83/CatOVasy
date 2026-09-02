@@ -268,7 +268,7 @@ func deal_damage(target : Giant) -> void:
 	current_target = target
 	
 	var tween1 = create_tween()
-	tween1.tween_property(self, "position:x", position.x - 4, 0.1)
+	tween1.tween_property(sprite, "position:x", sprite.position.x - 4, 0.1)
 	
 	if success:
 		if luck_success:
@@ -553,7 +553,7 @@ func _on_defend_timer_timeout() -> void:
 
 func _on_deal_damage_timer_timeout() -> void:
 	var tween1 = create_tween()
-	tween1.tween_property(self, "position:x", position.x + 4, 0.1)
+	tween1.tween_property(sprite, "position:x", sprite.position.x + 4, 0.1)
 	
 	if current_damage > damage:
 		audio_hit_lucky.play()

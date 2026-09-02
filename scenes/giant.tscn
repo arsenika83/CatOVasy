@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dhpxrfjobvnw8" path="res://assets/images/player_sprite.png" id="1"]
 [ext_resource type="Script" uid="uid://rb8g2207v4bl" path="res://scripts/giant.gd" id="1_glfi2"]
+[ext_resource type="PackedScene" uid="uid://bc1x5xpcygnvy" path="res://scenes/fx/damage_indicator.tscn" id="2_5tv6e"]
 [ext_resource type="PackedScene" uid="uid://cr7p23s5f4urx" path="res://scenes/fx/status_fx.tscn" id="3_0vpcl"]
 [ext_resource type="AudioStream" uid="uid://cg8ponq2r4sg2" path="res://assets/soundFX/short_meow.wav" id="3_sx7hc"]
 [ext_resource type="Texture2D" uid="uid://4ianpjc1gein" path="res://assets/images/artifact_sprite.png" id="4_hd7tc"]
@@ -614,6 +615,7 @@ motion_mode = 1
 slide_on_ceiling = false
 floor_block_on_wall = false
 script = ExtResource("1_glfi2")
+damage_indicator_scene = ExtResource("2_5tv6e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=192466068]
 shape = SubResource("RectangleShape2D_p1oqw")

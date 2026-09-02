@@ -7,171 +7,108 @@ const DEFEND_CARD = preload("res://scenes/cards/defend_card.tscn")
 
 var card_change_energy_cost = 1
 
-@onready var attack_cards_ui = $AttackCards
-@onready var attack_change_button = $AttackChangeButton
-@onready var attack_change_cost = $AttackChangeButton/Label
-var attack_cards : Array[Card]
-var attack_card_index = 0
+@onready var cards_ui = $Cards
+@onready var change_button = $ChangeButton
+@onready var change_cost = $ChangeButton/Label
+var cards : Array[Card]
 
-@onready var defend_cards_ui = $DefendCards
-@onready var defend_change_button = $DefendChangeButton
-var defend_cards : Array[Card]
-var defend_card_index = 0
+var played_cards : Array[Card]
+var unplayed_cards : Array[Card]
+var hand : Array[Card]
 
-@onready var ability_cards_ui = $AbilityCards
-@onready var ability_change_button = $AbilityChangeButton
-@onready var ability_change_cost = $AbilityChangeButton/Label
-var ability_cards : Array[Card]
-var ability_card_index = 0
+var card_index = 0
 
 var card_change_amount = 0
+var card_to_free : Control
 
 @onready var audio = $AudioStreamPlayer
 
 func _ready() -> void:
 	var time_offset = 0
-	var y_offset = 0
+	var y_offset = 300
+	var card_count = 0
 	
-	for card in gm.current_attack_cards.values():
+	var all_cards = gm.current_cards.values().duplicate()
+	all_cards.shuffle()
+	
+	for card in all_cards:
 		var card_resource = load("res://scenes/cards/" + card.card_path)
 		var added_card = card_resource.instantiate()
 		
-		attack_cards_ui.add_child(added_card)
-		attack_cards.append(added_card)
+		unplayed_cards.append(added_card)
+		print(unplayed_cards)
 		
 		added_card.material.set_shader_parameter("time_offset", time_offset)
-		added_card.position.y += y_offset
-		y_offset = 300
+		#cards_ui.add_child(added_card)
+		time_offset += 0.3
 	
-	for child in attack_cards_ui.get_children():
+	for child in cards_ui.get_children():
 		if child.has_signal("card_clicked"):
 			child.card_clicked.connect(_on_card_selected)
 			child.card_played.connect(_on_card_played)
 			
-	time_offset += 1.0
-	y_offset = 0
-	for card in gm.current_defend_cards.values():
-		var card_resource = load("res://scenes/cards/" + card.card_path)
-		var added_card = card_resource.instantiate()
-		
-		defend_cards_ui.add_child(added_card)
-		defend_cards.append(added_card)
-
-		added_card.material.set_shader_parameter("time_offset", time_offset)
-		added_card.position.y += y_offset
-		y_offset = 300
-			
-	for child in defend_cards_ui.get_children():
-		if child.has_signal("card_clicked"):
-			child.card_clicked.connect(_on_card_selected)	
-			child.card_played.connect(_on_card_played)	
-	time_offset += 1.0
-	y_offset = 0
-	
-	for card in gm.current_ability_cards.values():
-		var card_resource = load("res://scenes/cards/" + card.card_path)
-		var added_card = card_resource.instantiate()
-		
-		ability_cards_ui.add_child(added_card)
-		ability_cards.append(added_card)
-
-		added_card.material.set_shader_parameter("time_offset", time_offset)
-		added_card.position.y += y_offset
-		y_offset = 300
-
-	for child in ability_cards_ui.get_children():
-		if child.has_signal("card_clicked"):
-			child.card_clicked.connect(_on_card_selected)
-			child.card_played.connect(_on_card_played)
-	
 	if gm.has_spinner:
 		if card_change_amount < 2:
 			card_change_energy_cost = 0
 		else:
 			card_change_energy_cost = 1
-	attack_change_cost.text = str(card_change_energy_cost)
-	ability_change_cost.text = str(card_change_energy_cost)
-
-func replace_current_card(type : String):
-	match type:
-		"attack":
-			if attack_cards.size() == 1:
-				return
-			current_selected.deselect_card()
-			current_selected = null
+	change_cost.text = str(card_change_energy_cost)
+	create_hand()
 	
-			attack_cards[attack_card_index].move_back()
-			attack_card_index += 1
-			
-			if attack_card_index == attack_cards.size():
-				attack_card_index = 0
-				
-			current_selected = attack_cards[attack_card_index]
-			current_selected.move_front(-30)
-			
-		"ability":
-			if ability_cards.size() == 1:
-				return
-				
-			current_selected.deselect_card()
-			current_selected = null
-			
-			ability_cards[ability_card_index].move_back()
-			ability_card_index += 1
-			
-			if ability_card_index == ability_cards.size():
-				ability_card_index = 0
-				
-			current_selected = ability_cards[ability_card_index]	
-			current_selected.move_front(-30)
+func offset_card(node_a: Control, offset : int) -> void:
 
-func replace_card(type : String):
-	match type:
-		"attack":
-			attack_cards[attack_card_index].move_back()
-			attack_card_index += 1
-			
-			if attack_card_index == attack_cards.size():
-				attack_card_index = 0
-				
-			attack_cards[attack_card_index].move_front()
-			
-		"ability":
-			ability_cards[ability_card_index].move_back()
-			ability_card_index += 1
-			
-			if ability_card_index == ability_cards.size():
-				ability_card_index = 0
-				
-			ability_cards[ability_card_index].move_front()	
+	var index_a = node_a.get_index()
+	cards_ui.move_child(node_a, index_a + offset)
 
 func _on_card_selected(clicked_card: Control) -> void:
-	# Если кликнули по уже выбранной карточке — ничего не делаем
 	audio.play()
+	
 	if current_selected == clicked_card:
 		current_selected.deselect_card()
 		current_selected = null
 		return
 		
-	# 1. Если до этого была выбрана другая карточка — сбрасываем её
 	if current_selected != null:
 		current_selected.deselect_card()
 		
 	current_selected = clicked_card
 	current_selected.select_card()
 	gm.current_card = current_selected
+
+func fill_unplayed_pile():
+	for card in played_cards:
+		unplayed_cards.append(card)
+		played_cards.erase(card)
+	unplayed_cards.shuffle()
+
+func create_hand():
+	for i in range(5):
+		if unplayed_cards.size() > 0:
+			hand.append(unplayed_cards.pop_at(i))
+		else:
+			pass
+	
+	for card in hand:
+		var card_resource = load("res://scenes/cards/" + card.card_path)
+		var added_card = card_resource.instantiate()
+		
+		cards_ui.add_child(added_card)
+	
+	for child in cards_ui.get_children():
+		if child.has_signal("card_clicked"):
+			child.card_clicked.connect(_on_card_selected)
+			child.card_played.connect(_on_card_played)
+		
 	
 func _on_card_played(played_card: Control) -> void:
+	card_to_free = played_card
 
 	current_selected.deselect_card()
 	current_selected = null
-		
-	print("SIGNAL TEST")
-	var tween = create_tween()
-	tween.tween_property(played_card, "position:y", played_card.position.y + 300, 0.5)
 	
+	$DeleteCardTimer.start()
 
-func _on_attack_change_button_pressed() -> void:
+func _on_change_button_pressed() -> void:
 	if gm.has_spinner:
 		if card_change_amount < 2:
 			card_change_energy_cost = 0
@@ -179,7 +116,7 @@ func _on_attack_change_button_pressed() -> void:
 	if gm.current_energy - card_change_energy_cost >= 0:
 		audio.play()
 		gm.current_energy -= card_change_energy_cost
-		replace_card("attack")
+		#replace_card()
 		
 		if gm.current_energy == 0:
 			get_parent().get_parent().end_turn()
@@ -188,36 +125,13 @@ func _on_attack_change_button_pressed() -> void:
 	if card_change_amount >= 2:
 		card_change_energy_cost = 1
 		
-	attack_change_cost.text = str(card_change_energy_cost)
-	ability_change_cost.text = str(card_change_energy_cost)
+	change_cost.text = str(card_change_energy_cost)
 
-func _on_defend_change_button_pressed() -> void:
-	if gm.current_energy - 1 >= 0:
-		audio.play()
-		#gm.current_energy -= 1
-		replace_card("defend")
-		
-		if gm.current_energy == 0:
-			get_parent().get_parent().end_turn()
 
-func _on_ability_change_button_pressed() -> void:
-	if gm.has_spinner:
-		if card_change_amount < 2:
-			card_change_energy_cost = 0
-		else:
-			card_change_energy_cost = 1
-			
-	if gm.current_energy - card_change_energy_cost >= 0:
-		audio.play()
-		gm.current_energy -= card_change_energy_cost
-		replace_card("ability")
-		
-		if gm.current_energy == 0:
-			get_parent().get_parent().end_turn()
-			
-	card_change_amount += 1
-	if card_change_amount >= 2:
-		card_change_energy_cost = 1
-	
-	attack_change_cost.text = str(card_change_energy_cost)
-	ability_change_cost.text = str(card_change_energy_cost)
+func _on_end_button_pressed() -> void:
+	print("REPLACE")
+	#replace_all_cards()
+
+
+func _on_delete_card_timer_timeout() -> void:
+	cards_ui.get_child(card_to_free.get_index()).queue_free()
