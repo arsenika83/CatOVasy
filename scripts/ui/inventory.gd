@@ -14,21 +14,7 @@ extends Control
 @onready var artifact_slots : Array = [artifact_slot_1, artifact_slot_2, artifact_slot_3,
 artifact_slot_4, artifact_slot_5, artifact_slot_6, artifact_slot_7, artifact_slot_8, artifact_slot_9, artifact_slot_10]
 
-@onready var card_slot_attack_1 = $Cards/CardSlotAttack1
-@onready var card_slot_attack_2 = $Cards/CardSlotAttack2
-@onready var card_slot_attack_3 = $Cards/CardSlotAttack3
-@onready var card_slot_attack_4 = $Cards/CardSlotAttack4
-@onready var card_slot_attack_5 = $Cards/CardSlotAttack5
-@onready var attack_card_slots : Array = [card_slot_attack_1, card_slot_attack_2,
-card_slot_attack_3, card_slot_attack_4, card_slot_attack_5]
-
-@onready var card_slot_ability_1 = $Cards/CardSlotAbility1
-@onready var card_slot_ability_2 = $Cards/CardSlotAbility2
-@onready var card_slot_ability_3 = $Cards/CardSlotAbility3
-@onready var card_slot_ability_4 = $Cards/CardSlotAbility4
-@onready var card_slot_ability_5 = $Cards/CardSlotAbility5
-@onready var ability_card_slots : Array = [card_slot_ability_1, card_slot_ability_2,
-card_slot_ability_3, card_slot_ability_4, card_slot_ability_5]
+@onready var card_slots : Array = []
 
 @onready var hp_bar = $HP
 @onready var hp_label = $HPLabel
@@ -38,6 +24,8 @@ card_slot_ability_3, card_slot_ability_4, card_slot_ability_5]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	for card_slot in $ScrollContainer/Cards.get_children():
+		card_slots.append(card_slot)
 	update_cards()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -45,13 +33,10 @@ func _process(delta: float) -> void:
 	pass
 
 func update_cards() -> void:
-	for i in range(0, 5):
-		if gm.current_attack_cards.has(i+1) and is_instance_valid(gm.current_attack_cards.get(i+1)):
-			attack_card_slots[i].current_card = gm.current_attack_cards.get(i+1)
+	for i in range(0, 51):
+		if gm.current_cards.has(i+1) and is_instance_valid(gm.current_cards.get(i+1)):
+			card_slots[i].current_card = gm.current_cards.get(i+1)
 		
-	for i in range(0, 5):
-		if gm.current_ability_cards.has(i+1) and is_instance_valid(gm.current_ability_cards.get(i+1)):
-			ability_card_slots[i].current_card = gm.current_ability_cards.get(i+1)
 			
 func update_artifacts() -> void:
 	for i in range(0, 10):

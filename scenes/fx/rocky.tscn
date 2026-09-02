@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://y31kppiyvoj"]
 
 [ext_resource type="Texture2D" uid="uid://s34pblv0ga2j" path="res://assets/images/fx.png" id="1_vmrgq"]
+[ext_resource type="AudioStream" uid="uid://jtrh2g0a80it" path="res://assets/soundFX/rocky_fall.wav" id="2_fvarj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jn4v3"]
 atlas = ExtResource("1_vmrgq")
@@ -19,3 +20,7 @@ animations = [{
 
 [node name="Rocky" type="AnimatedSprite2D" unique_id=1518503504]
 sprite_frames = SubResource("SpriteFrames_jglf4")
+
+[node name="SoundFX" type="AudioStreamPlayer" parent="." unique_id=1556643143]
+stream = ExtResource("2_fvarj")
+bus = &"SoundFX"

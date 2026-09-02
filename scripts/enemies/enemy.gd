@@ -519,12 +519,12 @@ func _on_take_damage_timer_timeout() -> void:
 		sprite.play("take_damage")
 		audio_hurt.play()
 		idle_animation_timer.start(0.2)
-		get_parent().get_parent().end_turn()
+		#get_parent().get_parent().end_turn()
 	else:
 		audio_fall.play()
 		sprite.play("dead")
 		
-		get_parent().get_parent().end_turn()
+		#get_parent().get_parent().end_turn()
 
 func _on_miss_damage_timer_timeout() -> void:
 	var tween = create_tween()
@@ -540,7 +540,7 @@ func _on_miss_damage_timer_timeout() -> void:
 		take_damage(1, attack_animation_time)
 		return
 	
-	get_parent().get_parent().end_turn()
+	#get_parent().get_parent().end_turn()
 	
 
 func _on_defend_timer_timeout() -> void:

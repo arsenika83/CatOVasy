@@ -139,7 +139,7 @@ func go_downstairs() -> void:
 
 func deal_damage(targets : Array[CharacterBody2D]) -> void:
 	is_hit_lucky = false
-	var energy_cost = get_parent().find_child("UI").find_child("CardContainer").current_selected.energy_cost
+	var energy_cost = gm.current_card.energy_cost
 	if gm.current_energy - energy_cost < 0:
 		return
 	gm.current_energy -= energy_cost
@@ -169,10 +169,10 @@ func deal_damage(targets : Array[CharacterBody2D]) -> void:
 				var tween = create_tween()
 				tween.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
 				
-				gm.current_damage += 2
+				gm.current_damage *= 2
 		else:
 			gm.current_damage = 0
-			print("MISS! ")
+			print("GIANT MISS! ")
 	
 	#get_parent().find_child("UI").find_child("CardContainer").replace_current_card("attack")
 	sprite.play("deal_damage")
@@ -212,7 +212,7 @@ func take_damage(dmg : int, time : float) -> void:
 		miss_damage_timer.start(time)
 
 func defend(time : float) -> void:
-	var energy_cost = get_parent().find_child("UI").find_child("CardContainer").current_selected.energy_cost
+	var energy_cost = gm.current_card.energy_cost
 	if gm.current_energy - energy_cost < 0:
 		return
 	
@@ -236,7 +236,7 @@ func defend(time : float) -> void:
 		defend_timer.start(time)
 
 func give_debuff(targets : Array[CharacterBody2D], type : String, power : int, turns : int) -> void:
-	var energy_cost = get_parent().find_child("UI").find_child("CardContainer").current_selected.energy_cost
+	var energy_cost = gm.current_card.energy_cost
 	if gm.current_energy - energy_cost < 0:
 		return
 	
@@ -285,7 +285,7 @@ func give_debuff(targets : Array[CharacterBody2D], type : String, power : int, t
 				gm.current_targets[0].energy = 0
 		
 	gm.current_targets[0].status_fx.visible = true
-	get_parent().find_child("UI").find_child("CardContainer").replace_current_card("ability")
+	#get_parent().find_child("UI").find_child("CardContainer").replace_current_card("ability")
 	var tween3 = create_tween()
 	tween3.tween_property(gm.current_targets[0].status_fx, "scale", Vector2(1, 1), 0.2)	
 	debuff_timer.start(gm.debuff_animation_time)
@@ -471,14 +471,14 @@ func _on_defend_timer_timeout() -> void:
 	var tween = create_tween()
 	tween.tween_property(status_fx, "scale", Vector2(0, 0), 0.2)
 	
-	get_parent().end_turn()
+	#get_parent().end_turn()
 
 func _on_debuff_timer_timeout() -> void:
 	var tween = create_tween()
 	tween.tween_property(status_fx, "scale", Vector2(0, 0), 0.2)
 	var tween1 = create_tween()
 	tween1.tween_property(gm.current_targets[0].status_fx, "scale", Vector2(0, 0), 0.2)
-	get_parent().end_turn()
+	#get_parent().end_turn()
 
 
 func _on_heal_timer_timeout() -> void:

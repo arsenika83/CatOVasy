@@ -321,6 +321,7 @@ func start_battle() -> void:
 	if not find_child("BattleNode").find_child("Battle") or gm.state == "battle":
 		gm.current_music_position = audio.get_playback_position()
 		audio.stop()
+		$UI.visible = false
 		
 		$AudioStreamPlayerBattleStart.play()
 		scene_transitioner.change_scene_to()
@@ -338,6 +339,7 @@ func end_battle() -> void:
 	audio.play(gm.current_music_position)
 	$Effects.visible = true
 	$CanvasModulate.visible = true
+	$UI.visible = true
 	player_camera.enabled = true
 	player_camera.zoom = Vector2(gm.camera_zoom, gm.camera_zoom)
 	giant.light.enabled = true

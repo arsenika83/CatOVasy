@@ -6,6 +6,7 @@
 [ext_resource type="StyleBox" uid="uid://b8wibcbgivilm" path="res://styles/button_normal.tres" id="4_1xv1g"]
 [ext_resource type="StyleBox" uid="uid://2iw7p3yvicvr" path="res://styles/button_pressed.tres" id="5_ni4uy"]
 [ext_resource type="StyleBox" uid="uid://c66nispyhk2t0" path="res://styles/button_hover.tres" id="6_kdc2i"]
+[ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="7_ni4uy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3aiiy"]
 atlas = ExtResource("2_wau5o")
@@ -18,6 +19,40 @@ region = Rect2(64, 32, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_eov42"]
 atlas = ExtResource("2_wau5o")
 region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ni4uy"]
+atlas = ExtResource("2_wau5o")
+region = Rect2(128, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kdc2i"]
+atlas = ExtResource("2_wau5o")
+region = Rect2(192, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cd1kh"]
+atlas = ExtResource("2_wau5o")
+region = Rect2(160, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fu62l"]
+atlas = ExtResource("2_wau5o")
+region = Rect2(128, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lsa6a"]
+atlas = ExtResource("2_wau5o")
+region = Rect2(192, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ogknx"]
+atlas = ExtResource("2_wau5o")
+region = Rect2(160, 128, 32, 32)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kdc2i"]
+shader = ExtResource("7_ni4uy")
+shader_parameter/speed = 8.00000038
+shader_parameter/amplitude = 10.000000475
+shader_parameter/time_offset = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tf85v"]
+atlas = ExtResource("2_wau5o")
+region = Rect2(224, 32, 32, 32)
 
 [node name="CardContainer" type="Control" unique_id=1698416944]
 z_index = 100
@@ -34,10 +69,10 @@ script = ExtResource("1_hqkxu")
 
 [node name="ChangeButton" type="TextureButton" parent="." unique_id=1891433270]
 layout_mode = 0
-offset_left = 592.0
-offset_top = 72.0
-offset_right = 640.0
-offset_bottom = 120.0
+offset_left = -8.0
+offset_top = 8.0
+offset_right = 40.0
+offset_bottom = 56.0
 texture_normal = SubResource("AtlasTexture_3aiiy")
 texture_pressed = SubResource("AtlasTexture_wau5o")
 texture_hover = SubResource("AtlasTexture_eov42")
@@ -59,6 +94,58 @@ text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="UnplayedButton" type="TextureButton" parent="." unique_id=1196569886]
+layout_mode = 0
+offset_left = -8.0
+offset_top = 72.0
+offset_right = 40.0
+offset_bottom = 120.0
+texture_normal = SubResource("AtlasTexture_ni4uy")
+texture_pressed = SubResource("AtlasTexture_kdc2i")
+texture_hover = SubResource("AtlasTexture_cd1kh")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="UnplayedButton" unique_id=702471738]
+use_parent_material = true
+layout_mode = 0
+offset_left = 8.0
+offset_right = 40.0
+offset_bottom = 32.0
+mouse_filter = 1
+theme_override_colors/font_color = Color(18.892157, 18.892157, 18.892157, 1)
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 1
+theme_override_font_sizes/font_size = 18
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayedButton" type="TextureButton" parent="." unique_id=1025913164]
+layout_mode = 0
+offset_left = -8.0
+offset_top = 136.0
+offset_right = 40.0
+offset_bottom = 184.0
+texture_normal = SubResource("AtlasTexture_fu62l")
+texture_pressed = SubResource("AtlasTexture_lsa6a")
+texture_hover = SubResource("AtlasTexture_ogknx")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="PlayedButton" unique_id=216758274]
+use_parent_material = true
+layout_mode = 0
+offset_left = 8.0
+offset_right = 40.0
+offset_bottom = 32.0
+mouse_filter = 1
+theme_override_colors/font_color = Color(18.892157, 18.892157, 18.892157, 1)
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 1
+theme_override_font_sizes/font_size = 18
+text = "12"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=381409849]
 stream = ExtResource("3_3aiiy")
 volume_db = 2.0
@@ -66,7 +153,8 @@ bus = &"SoundFX"
 
 [node name="Cards" type="GridContainer" parent="." unique_id=25445287]
 layout_mode = 0
-offset_right = 512.0
+offset_left = 48.0
+offset_right = 560.0
 offset_bottom = 208.0
 theme_override_constants/h_separation = 100
 theme_override_constants/v_separation = 300
@@ -74,19 +162,36 @@ columns = 5
 
 [node name="EndButton" type="Button" parent="." unique_id=947534557]
 layout_mode = 0
-offset_left = 768.0
-offset_top = 64.0
-offset_right = 880.0
-offset_bottom = 128.0
+offset_left = 1088.0
+offset_top = -24.0
+offset_right = 1232.0
+offset_bottom = 40.0
+theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = ExtResource("4_1xv1g")
 theme_override_styles/pressed = ExtResource("5_ni4uy")
 theme_override_styles/hover = ExtResource("6_kdc2i")
 text = "ЗАВЕРШИТЬ ХОД"
 
+[node name="StatusFX" type="TextureRect" parent="EndButton" unique_id=1750069468]
+visible = false
+material = SubResource("ShaderMaterial_kdc2i")
+layout_mode = 0
+offset_left = 48.0
+offset_top = -64.0
+offset_right = 96.0
+offset_bottom = -16.0
+texture = SubResource("AtlasTexture_tf85v")
+flip_v = true
+
 [node name="DeleteCardTimer" type="Timer" parent="." unique_id=1513251445]
 wait_time = 0.5
+one_shot = true
+
+[node name="UpdateHandTimer" type="Timer" parent="." unique_id=574169540]
+wait_time = 0.3
 one_shot = true
 
 [connection signal="pressed" from="ChangeButton" to="." method="_on_change_button_pressed"]
 [connection signal="pressed" from="EndButton" to="." method="_on_end_button_pressed"]
 [connection signal="timeout" from="DeleteCardTimer" to="." method="_on_delete_card_timer_timeout"]
+[connection signal="timeout" from="UpdateHandTimer" to="." method="_on_hand_clear_timer_timeout"]

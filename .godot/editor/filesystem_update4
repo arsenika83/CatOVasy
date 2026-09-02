@@ -1,5 +1,5 @@
 res://default_env.tres
-res://scenes/levels/level0.tscn
+res://scenes/ui/card_container.tscn
 res://shaders/updown.gdshader
 res://shaders/vhs.gdshader
 res://shaders/wobble.gdshader
@@ -7,7 +7,13 @@ res://shaders/hp_bar.gdshader
 res://shaders/grass.gdshader
 res://shaders/foregroundFX.gdshader
 res://shaders/buckshot.gdshader
-res://scripts/battle.gd
+res://scripts/global/gm.gd
 res://scripts/ui/card_container.gd
-res://scripts/cards/card.gd
-res://scenes/ui/card_container.tscn
+res://scripts/battle.gd
+res://scenes/ui/level_up_dialog.tscn
+res://scripts/ui/level_up_dialog.gd
+res://scenes/ui/inventory.tscn
+res://scripts/ui/inventory.gd
+res://scripts/ui/card_slot.gd
+res://scripts/cards/defend_card.gd
+res://scenes/cards/attack_card.tscn

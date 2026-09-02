@@ -74,23 +74,23 @@ func deselect_card():
 		tween.tween_property(self, "position:y", position.y+30, 0.1)
 		animate_to(SCALE_NORMAL, Color.WHITE)
 		gm.state = "battle"
+
+func create() -> void:
+	scale = Vector2(2, 2)
+	
+	var tween = create_tween()
+	
+	tween.tween_property(self, "scale", Vector2(1.15, 1.15), 0.15)\
+		.set_trans(Tween.TRANS_QUAD)\
+		.set_ease(Tween.EASE_OUT)
 		
-func move_back() -> void:
+	tween.tween_property(self, "scale", Vector2(1.0, 1.0), 0.2)\
+		.set_trans(Tween.TRANS_QUAD)\
+		.set_ease(Tween.EASE_IN)
+		
+func destroy() -> void:
 	var tween = create_tween()
-	tween.tween_property(self, "position:y", position.y+400, 0.5)
+	tween.tween_property(self, "position:y", 300, 0.2)
 	
 	var tween1 = create_tween()
-	tween1.tween_property(self, "scale:y", 0.1, 0.1)
-	
-	var tween2 = create_tween()
-	tween2.tween_property(self, "rotation_degrees", 90, 0.1)
-	
-func move_front(offset : int = 0) -> void:
-	var tween = create_tween()
-	tween.tween_property(self, "position:y", 0 + offset, 0.3)
-	
-	var tween1 = create_tween()
-	tween1.tween_property(self, "scale", Vector2(1, 1), 0.1)
-	
-	var tween2 = create_tween()
-	tween2.tween_property(self, "rotation_degrees", 0, 0.3)
+	tween1.tween_property(self, "rotation_degrees", 90, 0.2)

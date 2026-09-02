@@ -32,26 +32,17 @@ func update_cards() -> void:
 func _on_card_picked_up(picked_card : Card) -> void:
 	audio.pitch_scale = randf_range(0.8, 1.1)
 	audio.play()
-	if picked_card.type == "attack":
-		if gm.current_attack_cards.size() <= 5:
-			for i in range(1, 6):
-				if gm.current_attack_cards.has(i):
-					continue
-					
-				gm.add_attack_card(i, picked_card)
-				break
-		else:
-			return
-	elif picked_card.type == "ability":
-		if gm.current_ability_cards.size() < 5:
-			for i in range(1, 6):
-				if gm.current_ability_cards.has(i):
-					continue
-					
-				gm.add_ability_card(i, picked_card)
-				break
-		else:
-			return
+	
+	if gm.current_cards.size() < 50:
+		for i in range(1, 51):
+			if gm.current_cards.has(i):
+				continue
+						
+			gm.add_card(i, picked_card)
+			break
+	else:
+		return
+	
 	
 	if get_parent().get_parent().giant.check_xp():
 		get_parent().get_parent().draw_level_up()

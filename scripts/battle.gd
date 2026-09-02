@@ -34,6 +34,7 @@ Vector2(208, 176), Vector2(208, 48), Vector2(240, 176), Vector2(240, 48)]
 var current_enemies : Array
 
 func _ready() -> void:
+	
 	creature_check_dialog.visible = false
 	end_battle_button.visible = false
 	
@@ -140,7 +141,7 @@ func display_cursor_label() -> void:
 				if gm.state == "battle_attack":
 					cursor_label.visible = true
 					cursor_icon.visible = true
-					cursor_label.text = str(card_container.current_selected.damage - targets.get(0).current_defence)
+					#cursor_label.text = str(card_container.current_selected.damage - targets.get(0).current_defence)
 				
 
 func find_enemy_by_position(battle_x : int, battle_y : int) -> Enemy:
@@ -222,104 +223,110 @@ func draw_cursor() -> void:
 						t.cursor.visible = true
 					
 func choose_target(action : String) -> void:
-	var cursor_grid_pos = map.local_to_map(get_global_mouse_position())
-	var target_local_pos = map.map_to_local(cursor_grid_pos)
-	
-	var source = find_child("Giant", true, false)
-	
-	for i in range(0, find_child("Enemies").get_child_count()):
-		var targets : Array[CharacterBody2D] = [find_child("Enemies").get_child(i)]
+	if gm.current_card != null and gm.current_card.energy_cost <= gm.current_energy:
+		var cursor_grid_pos = map.local_to_map(get_global_mouse_position())
+		var target_local_pos = map.map_to_local(cursor_grid_pos)
 		
-		if gm.current_card != null: #ВЫБОР ЦЕЛЕЙ
-			if gm.current_card.behind_attack or gm.has_fork:
-				var target_2 = find_enemy_by_position(targets[0].battle_x + 1, targets[0].battle_y)
-				if target_2 != null:
-					if target_2.state != "dead":
-						targets.append(target_2)
-						
-			elif gm.current_card.row_attack_3:
-				var target_2 = find_enemy_by_position(targets[0].battle_x, targets[0].battle_y + 1)
-				if target_2 != null:
-					if target_2.state != "dead":
-						targets.append(target_2)
-				var target_3 = find_enemy_by_position(targets[0].battle_x, targets[0].battle_y - 1)
-				if target_3 != null:
-					if target_3.state != "dead":
-						targets.append(target_3)
-						
-			elif gm.current_card.row_attack_5:
-				var target_2 = find_enemy_by_position(targets[0].battle_x, targets[0].battle_y + 1)
-				if target_2 != null:
-					if target_2.state != "dead":
-						targets.append(target_2)
-				var target_3 = find_enemy_by_position(targets[0].battle_x, targets[0].battle_y - 1)
-				if target_3 != null:
-					if target_3.state != "dead":
-						targets.append(target_3)
-				var target_4 = find_enemy_by_position(targets[0].battle_x, targets[0].battle_y + 2)
-				if target_4 != null:
-					if target_4.state != "dead":
-						targets.append(target_4)
-				var target_5 = find_enemy_by_position(targets[0].battle_x, targets[0].battle_y - 2)
-				if target_5 != null:
-					if target_5.state != "dead":
-						targets.append(target_5)
-						
-			elif gm.current_card.cross_attack or gm.has_tomato_cross:
-				var target_2 = find_enemy_by_position(targets[0].battle_x + 1, targets[0].battle_y)
-				if target_2 != null:
-					if target_2.state != "dead":
-						targets.append(target_2)
-				var target_3 = find_enemy_by_position(targets[0].battle_x - 1, targets[0].battle_y)
-				if target_3 != null:
-					if target_3.state != "dead":
-						targets.append(target_3)
-				var target_4 = find_enemy_by_position(targets[0].battle_x, targets[0].battle_y + 1)
-				if target_4 != null:
-					if target_4.state != "dead":
-						targets.append(target_4)
-				var target_5 = find_enemy_by_position(targets[0].battle_x, targets[0].battle_y - 1)
-				if target_5 != null:
-					if target_5.state != "dead":
-						targets.append(target_5)
+		var source = find_child("Giant", true, false)
+		
+		for i in range(0, find_child("Enemies").get_child_count()):
+			var targets : Array[CharacterBody2D] = [find_child("Enemies").get_child(i)]
 			
-			elif gm.current_card.everybody_attack:
-				for enemy in find_child("Enemies").get_children():
-					targets.append(enemy)
-					
-		for e_pos in targets.get(0).positions:
-			if e_pos.x == cursor_grid_pos.x and e_pos.y == cursor_grid_pos.y:
-				if not targets.get(0).state == "dead":
-					match action:
-						"deal_damage":
-							source.deal_damage(targets)
-							gm.current_card.card_played.emit(gm.current_card)
+			if gm.current_card != null: #ВЫБОР ЦЕЛЕЙ
+				if gm.current_card.behind_attack or gm.has_fork:
+					var target_2 = find_enemy_by_position(targets[0].battle_x + 1, targets[0].battle_y)
+					if target_2 != null:
+						if target_2.state != "dead":
+							targets.append(target_2)
 							
-							if gm.has_tomato_cross:
-								$FX/TomatoCrossProjectile.scale = Vector2(1, 1)
-								$FX/TomatoCrossProjectile.position = Vector2(targets.get(0).position.x, targets.get(0).position.y - 700)
+				elif gm.current_card.row_attack_3:
+					var target_2 = find_enemy_by_position(targets[0].battle_x, targets[0].battle_y + 1)
+					if target_2 != null:
+						if target_2.state != "dead":
+							targets.append(target_2)
+					var target_3 = find_enemy_by_position(targets[0].battle_x, targets[0].battle_y - 1)
+					if target_3 != null:
+						if target_3.state != "dead":
+							targets.append(target_3)
+							
+				elif gm.current_card.row_attack_5:
+					var target_2 = find_enemy_by_position(targets[0].battle_x, targets[0].battle_y + 1)
+					if target_2 != null:
+						if target_2.state != "dead":
+							targets.append(target_2)
+					var target_3 = find_enemy_by_position(targets[0].battle_x, targets[0].battle_y - 1)
+					if target_3 != null:
+						if target_3.state != "dead":
+							targets.append(target_3)
+					var target_4 = find_enemy_by_position(targets[0].battle_x, targets[0].battle_y + 2)
+					if target_4 != null:
+						if target_4.state != "dead":
+							targets.append(target_4)
+					var target_5 = find_enemy_by_position(targets[0].battle_x, targets[0].battle_y - 2)
+					if target_5 != null:
+						if target_5.state != "dead":
+							targets.append(target_5)
+							
+				elif gm.current_card.cross_attack or gm.has_tomato_cross:
+					var target_2 = find_enemy_by_position(targets[0].battle_x + 1, targets[0].battle_y)
+					if target_2 != null:
+						if target_2.state != "dead":
+							targets.append(target_2)
+					var target_3 = find_enemy_by_position(targets[0].battle_x - 1, targets[0].battle_y)
+					if target_3 != null:
+						if target_3.state != "dead":
+							targets.append(target_3)
+					var target_4 = find_enemy_by_position(targets[0].battle_x, targets[0].battle_y + 1)
+					if target_4 != null:
+						if target_4.state != "dead":
+							targets.append(target_4)
+					var target_5 = find_enemy_by_position(targets[0].battle_x, targets[0].battle_y - 1)
+					if target_5 != null:
+						if target_5.state != "dead":
+							targets.append(target_5)
+				
+				elif gm.current_card.everybody_attack:
+					for enemy in find_child("Enemies").get_children():
+						if enemy == targets.get(0):
+							continue
+						targets.append(enemy)
+						
+			for e_pos in targets.get(0).positions:
+				if e_pos.x == cursor_grid_pos.x and e_pos.y == cursor_grid_pos.y:
+					if not targets.get(0).state == "dead":
+						match action:
+							"deal_damage":
+								source.deal_damage(targets)
+								gm.current_card.card_played.emit(gm.current_card)
 								
-								var tween = create_tween()
-								tween.tween_property($FX/TomatoCrossProjectile, "position", targets.get(0).position, gm.attack_animation_time + 0.3)
-								
-								var tween2 = create_tween()
-								tween2.tween_property($FX/TomatoCrossProjectile, "scale", Vector2(0, 0), 1.5)
-								
-						"debuff":
-							var type_number = randi_range(0, gm.debuff_set.size()-1)
-							var type = gm.debuff_set.get(type_number).get(0)
-							var power = gm.debuff_set.get(type_number).get(1)
-							var turns = gm.debuff_set.get(type_number).get(2)
-							source.give_debuff(targets, type, power, turns)	
-	
-	#BUFFS
-	if gm.battle_x == cursor_grid_pos.x and gm.battle_y == cursor_grid_pos.y:
-		if not gm.state == "dead":
-			match action:
-				"defend":
-					var defend_duration : float = 0.4
-					source.defend(defend_duration)
-				"buff":
+								if gm.has_tomato_cross:
+									$FX/TomatoCrossProjectile.scale = Vector2(1, 1)
+									$FX/TomatoCrossProjectile.position = Vector2(targets.get(0).position.x, targets.get(0).position.y - 700)
+									
+									var tween = create_tween()
+									tween.tween_property($FX/TomatoCrossProjectile, "position", targets.get(0).position, gm.attack_animation_time + 0.3)
+									
+									var tween2 = create_tween()
+									tween2.tween_property($FX/TomatoCrossProjectile, "scale", Vector2(0, 0), 1.5)
+									
+							"debuff":
+								gm.current_card.card_played.emit(gm.current_card)
+								var type_number = randi_range(0, gm.debuff_set.size()-1)
+								var type = gm.debuff_set.get(type_number).get(0)
+								var power = gm.debuff_set.get(type_number).get(1)
+								var turns = gm.debuff_set.get(type_number).get(2)
+								source.give_debuff(targets, type, power, turns)	
+		
+		#BUFFS
+		if gm.battle_x == cursor_grid_pos.x and gm.battle_y == cursor_grid_pos.y:
+			if not gm.state == "dead":
+				match action:
+					"defend":
+						gm.current_card.card_played.emit(gm.current_card)
+						var defend_duration : float = 0.4
+						source.defend(defend_duration)
+					"buff":
+						gm.current_card.card_played.emit(gm.current_card)
 						var type_number = randi_range(0, gm.buff_set.size()-1)
 						var type = gm.buff_set.get(type_number).get(0)
 						var power = gm.buff_set.get(type_number).get(1)
@@ -395,6 +402,7 @@ func end_turn() -> void:
 					
 				$FX/Rocky.scale = Vector2(rocky_scale, rocky_scale)
 				$FX/Rocky.position = Vector2(targets.get(0).position.x, targets.get(0).position.y - 700)
+				$FX/Rocky.find_child("SoundFX").play()
 				
 				var tween = create_tween()
 				tween.tween_property($FX/Rocky, "position", targets.get(0).position, 0.5)

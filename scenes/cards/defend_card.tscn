@@ -3,6 +3,7 @@
 [ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="1_d07yq"]
 [ext_resource type="Script" uid="uid://pccwhv7ybm43" path="res://scripts/cards/defend_card.gd" id="2_d07yq"]
 [ext_resource type="Texture2D" uid="uid://b0rpbj3njbbar" path="res://assets/images/cards.png" id="3_hiwdu"]
+[ext_resource type="Texture2D" uid="uid://brrrysl1ypknl" path="res://assets/images/card_icons/defend_card.png" id="4_7r7lu"]
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="4_hiwdu"]
 [ext_resource type="FontFile" uid="uid://dub3oi8dxfpfw" path="res://assets/fonts/JeuDePixel-Regular.otf" id="5_7r7lu"]
 
@@ -16,10 +17,6 @@ shader_parameter/time_offset = 0.4390000208525
 [sub_resource type="AtlasTexture" id="AtlasTexture_0qqw3"]
 atlas = ExtResource("3_hiwdu")
 region = Rect2(448, 0, 64, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_d07yq"]
-atlas = ExtResource("3_hiwdu")
-region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u6te0"]
 atlas = ExtResource("4_hiwdu")
@@ -59,7 +56,7 @@ offset_left = 8.0
 offset_top = 8.0
 offset_right = 120.0
 offset_bottom = 120.0
-texture = SubResource("AtlasTexture_d07yq")
+texture = ExtResource("4_7r7lu")
 
 [node name="Label" type="Label" parent="." unique_id=514088983]
 use_parent_material = true

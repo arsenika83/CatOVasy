@@ -271,69 +271,228 @@ id = 10
 use_parent_material = true
 layout_mode = 0
 offset_left = 16.0
-offset_top = 488.0
+offset_top = 480.0
 offset_right = 384.0
-offset_bottom = 513.0
+offset_bottom = 505.0
 theme_override_font_sizes/font_size = 24
 text = "КАРТЫ"
 horizontal_alignment = 1
 
-[node name="Cards" type="GridContainer" parent="." unique_id=1690070523]
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=521447713]
 use_parent_material = true
 layout_mode = 0
 offset_left = 16.0
-offset_top = 520.0
+offset_top = 512.0
 offset_right = 384.0
 offset_bottom = 672.0
+
+[node name="Cards" type="GridContainer" parent="ScrollContainer" unique_id=1690070523]
+use_parent_material = true
+layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/h_separation = 12
 theme_override_constants/v_separation = 12
 columns = 5
 
-[node name="CardSlotAttack1" parent="Cards" unique_id=327957411 instance=ExtResource("6_weae1")]
+[node name="CardSlot1" parent="ScrollContainer/Cards" unique_id=327957411 instance=ExtResource("6_weae1")]
 layout_mode = 2
 id = 1
 
-[node name="CardSlotAttack2" parent="Cards" unique_id=1763396835 instance=ExtResource("6_weae1")]
+[node name="CardSlot2" parent="ScrollContainer/Cards" unique_id=1707069507 instance=ExtResource("6_weae1")]
 layout_mode = 2
-id = 2
-
-[node name="CardSlotAttack3" parent="Cards" unique_id=1955240729 instance=ExtResource("6_weae1")]
-layout_mode = 2
-id = 3
-
-[node name="CardSlotAttack4" parent="Cards" unique_id=1515229021 instance=ExtResource("6_weae1")]
-layout_mode = 2
-id = 4
-
-[node name="CardSlotAttack5" parent="Cards" unique_id=2132504304 instance=ExtResource("6_weae1")]
-layout_mode = 2
-id = 5
-
-[node name="CardSlotAbility1" parent="Cards" unique_id=1048572151 instance=ExtResource("6_weae1")]
-layout_mode = 2
-type = 2
 id = 1
 
-[node name="CardSlotAbility2" parent="Cards" unique_id=975339118 instance=ExtResource("6_weae1")]
+[node name="CardSlot3" parent="ScrollContainer/Cards" unique_id=1247218855 instance=ExtResource("6_weae1")]
 layout_mode = 2
-type = 2
-id = 2
+id = 1
 
-[node name="CardSlotAbility3" parent="Cards" unique_id=2096421817 instance=ExtResource("6_weae1")]
+[node name="CardSlot4" parent="ScrollContainer/Cards" unique_id=1481796894 instance=ExtResource("6_weae1")]
 layout_mode = 2
-type = 2
-id = 3
+id = 1
 
-[node name="CardSlotAbility4" parent="Cards" unique_id=450602394 instance=ExtResource("6_weae1")]
+[node name="CardSlot5" parent="ScrollContainer/Cards" unique_id=1731477864 instance=ExtResource("6_weae1")]
 layout_mode = 2
-type = 2
-id = 4
+id = 1
 
-[node name="CardSlotAbility5" parent="Cards" unique_id=314457457 instance=ExtResource("6_weae1")]
+[node name="CardSlot6" parent="ScrollContainer/Cards" unique_id=1074572793 instance=ExtResource("6_weae1")]
 layout_mode = 2
-type = 2
-id = 5
+id = 1
+
+[node name="CardSlot7" parent="ScrollContainer/Cards" unique_id=261333276 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
+
+[node name="CardSlot8" parent="ScrollContainer/Cards" unique_id=1786068259 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
+
+[node name="CardSlot9" parent="ScrollContainer/Cards" unique_id=793742464 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
+
+[node name="CardSlot10" parent="ScrollContainer/Cards" unique_id=1925765116 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
+
+[node name="CardSlot11" parent="ScrollContainer/Cards" unique_id=578143010 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
+
+[node name="CardSlot12" parent="ScrollContainer/Cards" unique_id=1481376546 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
+
+[node name="CardSlot13" parent="ScrollContainer/Cards" unique_id=1225753015 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
+
+[node name="CardSlot14" parent="ScrollContainer/Cards" unique_id=1556139479 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
+
+[node name="CardSlot15" parent="ScrollContainer/Cards" unique_id=285791772 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
+
+[node name="CardSlot16" parent="ScrollContainer/Cards" unique_id=1932756727 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
+
+[node name="CardSlot17" parent="ScrollContainer/Cards" unique_id=1427676457 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
+
+[node name="CardSlot18" parent="ScrollContainer/Cards" unique_id=43973745 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
+
+[node name="CardSlot19" parent="ScrollContainer/Cards" unique_id=691795150 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
+
+[node name="CardSlot20" parent="ScrollContainer/Cards" unique_id=409189430 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
+
+[node name="CardSlot21" parent="ScrollContainer/Cards" unique_id=1299044240 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
+
+[node name="CardSlot22" parent="ScrollContainer/Cards" unique_id=328310506 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
+
+[node name="CardSlot23" parent="ScrollContainer/Cards" unique_id=172192524 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
+
+[node name="CardSlot24" parent="ScrollContainer/Cards" unique_id=1414978192 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
+
+[node name="CardSlot25" parent="ScrollContainer/Cards" unique_id=1055285546 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
+
+[node name="CardSlot26" parent="ScrollContainer/Cards" unique_id=1377289663 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
+
+[node name="CardSlot27" parent="ScrollContainer/Cards" unique_id=937263993 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
+
+[node name="CardSlot28" parent="ScrollContainer/Cards" unique_id=482699131 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
+
+[node name="CardSlot29" parent="ScrollContainer/Cards" unique_id=1435572695 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
+
+[node name="CardSlot30" parent="ScrollContainer/Cards" unique_id=727785982 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
+
+[node name="CardSlot31" parent="ScrollContainer/Cards" unique_id=89237562 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
+
+[node name="CardSlot32" parent="ScrollContainer/Cards" unique_id=1197018959 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
+
+[node name="CardSlot33" parent="ScrollContainer/Cards" unique_id=1945780076 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
+
+[node name="CardSlot34" parent="ScrollContainer/Cards" unique_id=842895952 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
+
+[node name="CardSlot35" parent="ScrollContainer/Cards" unique_id=2058071472 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
+
+[node name="CardSlot36" parent="ScrollContainer/Cards" unique_id=395822915 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
+
+[node name="CardSlot37" parent="ScrollContainer/Cards" unique_id=951202889 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
+
+[node name="CardSlot38" parent="ScrollContainer/Cards" unique_id=1451353871 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
+
+[node name="CardSlot39" parent="ScrollContainer/Cards" unique_id=64092582 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
+
+[node name="CardSlot40" parent="ScrollContainer/Cards" unique_id=722991325 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
+
+[node name="CardSlot41" parent="ScrollContainer/Cards" unique_id=1318202816 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
+
+[node name="CardSlot42" parent="ScrollContainer/Cards" unique_id=1358626526 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
+
+[node name="CardSlot43" parent="ScrollContainer/Cards" unique_id=1897564008 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
+
+[node name="CardSlot44" parent="ScrollContainer/Cards" unique_id=77978404 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
+
+[node name="CardSlot45" parent="ScrollContainer/Cards" unique_id=158315329 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
+
+[node name="CardSlot46" parent="ScrollContainer/Cards" unique_id=1115544339 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
+
+[node name="CardSlot47" parent="ScrollContainer/Cards" unique_id=281155710 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
+
+[node name="CardSlot48" parent="ScrollContainer/Cards" unique_id=2016108675 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
+
+[node name="CardSlot49" parent="ScrollContainer/Cards" unique_id=2105872833 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
+
+[node name="CardSlot50" parent="ScrollContainer/Cards" unique_id=1348409444 instance=ExtResource("6_weae1")]
+layout_mode = 2
+id = 1
 
 [node name="HP" type="ColorRect" parent="." unique_id=1297074347]
 material = SubResource("ShaderMaterial_i8fht")
