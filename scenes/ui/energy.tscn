@@ -11,7 +11,6 @@ shader = ExtResource("1_2gxwd")
 shader_parameter/speed = 3.0000001425
 shader_parameter/amplitude = 2.000000095
 shader_parameter/time_offset = 4.00000019
-shader_parameter/flash_intensity = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_krwcv"]
 atlas = ExtResource("2_l6ty3")
@@ -22,7 +21,6 @@ shader = ExtResource("1_2gxwd")
 shader_parameter/speed = 3.0000001425
 shader_parameter/amplitude = 3.0000001425
 shader_parameter/time_offset = 1.0000000475
-shader_parameter/flash_intensity = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1g784"]
 atlas = ExtResource("2_l6ty3")
@@ -33,7 +31,6 @@ shader = ExtResource("1_2gxwd")
 shader_parameter/speed = 2.0
 shader_parameter/amplitude = 2.000000095
 shader_parameter/time_offset = 0.0
-shader_parameter/flash_intensity = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v3shj"]
 atlas = ExtResource("2_l6ty3")
@@ -59,7 +56,6 @@ shader = ExtResource("1_2gxwd")
 shader_parameter/speed = 1.0000000475
 shader_parameter/amplitude = 2.000000095
 shader_parameter/time_offset = 3.0000001425
-shader_parameter/flash_intensity = 0.0
 
 [node name="Energy" type="Control" unique_id=601039846]
 layout_mode = 3

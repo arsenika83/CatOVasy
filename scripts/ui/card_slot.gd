@@ -33,6 +33,13 @@ func update() -> void:
 		rarity = current_card.rarity
 		icon_loaded = true
 
+func clear() -> void:
+	current_card = null
+	icon_loaded = false
+	fire_button.disabled = true
+	tooltip_text = "Пустой слот \nдля карты"
+	icon.texture = load("res://assets/images/card_icons/attack_card_default.png")
+
 func _on_fire_button_pressed() -> void:
 	if gm.state != "checking_inventory":
 		return
@@ -40,8 +47,13 @@ func _on_fire_button_pressed() -> void:
 	get_parent().get_parent().get_parent().card_check_dialog.visible = false
 	audio.pitch_scale = randf_range(0.8, 1.1)
 	audio.play()
-	if gm.current_cards.erase(id):
-		print(id)
+	
+	if get_parent().get_parent().get_parent().state == "cat":
+		if gm.current_cards_cat.erase(id):
+			print(id)
+	else:
+		if gm.current_cards_human.erase(id):
+			print(id)		
 		
 	tooltip_text = "Пустой слот \nдля карты"
 	icon.texture = load("res://assets/images/card_icons/attack_card_default.png")

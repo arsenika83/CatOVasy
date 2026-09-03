@@ -1,6 +1,7 @@
+AnimatedSprite2D
+TextureButton
 Timer
 Node2D
-AnimatedSprite2D
 CharacterBody2D
 ScrollContainer
 TextureRect
@@ -11,4 +12,3 @@ Button
 Sprite2D
 Control
 Label
-HSlider

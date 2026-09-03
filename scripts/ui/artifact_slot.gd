@@ -42,7 +42,7 @@ func _on_gui_input(event: InputEvent) -> void:
 			
 			if current_artifact.has_method("upon_use"):
 				current_artifact.upon_use()
-				gm.current_artifacts.erase(id)
+				gm.current_artifacts_cat.erase(id)
 				current_artifact = null
 				$Use.visible = false
 				$AudioStreamPlayerClick.play()

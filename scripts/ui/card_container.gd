@@ -37,7 +37,7 @@ var card_to_free : Control
 func _ready() -> void:
 	var card_count = 0
 	
-	var all_cards = gm.current_cards.values().duplicate()
+	var all_cards = gm.current_cards_cat.values().duplicate()
 	all_cards.shuffle()
 	
 	for card in all_cards:
@@ -161,7 +161,7 @@ func remind_no_energy_for_current_card() -> void:
 	audio_no_energy.play()
 
 func _on_end_button_pressed() -> void:
-	gm.current_energy = 0
+	gm.current_energy = -1000
 	get_parent().get_parent().end_turn()
 	$EndButton.disabled = true
 	$EndButton/StatusFX.visible = false
@@ -213,7 +213,6 @@ func _on_hand_clear_timer_timeout() -> void:
 			child.card_played.connect(_on_card_played)
 			child.create()
 		
-
 
 func _on_unplayed_button_pressed() -> void:
 	$UnplayedContainer.visible = true

@@ -38,7 +38,7 @@ func _ready() -> void:
 	
 	inventory.position.x = 1500
 	inventory.visible = true
-	inventory.update_cards()
+	inventory.update_cards(inventory.state)
 	
 	level_up_dialog.visible = true
 	level_up_dialog.position.x = -1500
@@ -160,7 +160,6 @@ func move_to_map_pos() -> void:
 		tween.tween_property(giant, "position", Vector2(giant.position.x - 32, giant.position.y - 32), 0.2)
 		
 	enemy_turn()
-	npc_turn()
 	
 func draw_cursor() -> void:
 	cursor.visible = true
@@ -198,13 +197,7 @@ func enemy_turn() -> void:
 	for enemy in enemies.get_children():
 		var e_pos = map.local_to_map(enemy.position)
 		enemy.move(g_pos, e_pos)
-		
-func npc_turn() -> void:
-	var g_pos = map.local_to_map(giant.position)
-	
-	for npc in $Characters.get_children():
-		var npc_pos = map.local_to_map(npc.position)
-		npc.move(g_pos, npc_pos)		
+			
 	
 func check_creature_stats() -> void:
 	var cursor_grid_pos = map.local_to_map(get_global_mouse_position())
@@ -264,14 +257,14 @@ func draw_inventory() -> void:
 		stats += 	str("\n", gm.defence, " (", gm.max_defence, ")")
 		stats += 	str("\n", gm.accuracy, "%")
 		stats += 	str("\n", gm.luck, "%")
-		stats += 	str("\n", gm.max_energy)
+		stats += 	str("\n", gm.max_energy_cat)
 		stats += 	str("\n")
 		stats += 	str("\n", gm.level)
 		stats += 	str("\n", gm.xp, "/", gm.xp_needed)
 		inventory.find_child("StatsLabel").text = stats
 			
 		var tween = create_tween()
-		tween.tween_property(inventory, "position:x", 870, 0.3)
+		tween.tween_property(inventory, "position:x", 828, 0.3)
 				
 		inventory_on_screen = true
 
@@ -282,13 +275,14 @@ func update_inventory() -> void:
 	stats += 	str("\n", gm.defence, " (", gm.max_defence, ")")
 	stats += 	str("\n", gm.accuracy, "%")
 	stats += 	str("\n", gm.luck, "%")
-	stats += 	str("\n", gm.max_energy)
+	stats += 	str("\n", gm.max_energy_cat)
 	stats += 	str("\n")
 	stats += 	str("\n", gm.level)
 	stats += 	str("\n", gm.xp, "/", gm.xp_needed)
 	inventory.find_child("StatsLabel").text = stats
-	inventory.update_cards()
-	inventory.update_artifacts()
+	
+	inventory.update_cards(inventory.state)
+	inventory.update_artifacts(inventory.state)
 	inventory.set_hp_bar(float(gm.hp) / float(gm.max_hp))
 
 func draw_level_up() -> void:
@@ -337,8 +331,9 @@ func start_battle() -> void:
 	
 func end_battle() -> void:
 	gm.state = "idle"
-	gm.energy = gm.max_energy
-	gm.current_energy = gm.max_energy
+	gm.energy_cat = gm.max_energy_cat
+	gm.energy_human = gm.max_energy_human
+	gm.current_energy = gm.max_energy_human
 	gm.current_damage = gm.damage
 	gm.current_defence = gm.defence
 	gm.current_accuracy = gm.accuracy
@@ -359,8 +354,9 @@ func _on_battle_start_timer_timeout() -> void:
 	scene_transitioner.change_scene_back()
 	
 	gm.state = "idle"
-	gm.energy = gm.max_energy
-	gm.current_energy = gm.max_energy
+	gm.energy_cat = gm.max_energy_cat
+	gm.energy_human = gm.max_energy_human
+	gm.current_energy = gm.max_energy_human
 	gm.current_damage = gm.damage
 	gm.current_defence = 0
 	gm.current_accuracy = gm.accuracy

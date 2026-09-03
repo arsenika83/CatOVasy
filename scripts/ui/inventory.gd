@@ -22,30 +22,45 @@ artifact_slot_4, artifact_slot_5, artifact_slot_6, artifact_slot_7, artifact_slo
 @onready var artifact_check_dialog = $ArtifactCheckDialog
 @onready var card_check_dialog = $CardCheckDialog
 
+@onready var cat_button = $CatButton
+@onready var human_button = $HumanButton
+
+var state = "cat"
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	cat_button.button_pressed = true
 	var id = 1
 	for card_slot in $ScrollContainer/Cards.get_children():
 		card_slots.append(card_slot)
 		card_slot.id = id
 		id += 1
-	update_cards()
+	update_cards("cat")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
-func update_cards() -> void:
-	for i in range(0, 51):
-		if gm.current_cards.has(i+1) and is_instance_valid(gm.current_cards.get(i+1)):
-			card_slots[i].current_card = gm.current_cards.get(i+1)
-		
+func update_cards(type : String) -> void:
+	if type == "cat":
+		for i in range(0, 31):
+			if gm.current_cards_cat.has(i+1) and is_instance_valid(gm.current_cards_cat.get(i+1)):
+				card_slots[i].current_card = gm.current_cards_cat.get(i+1)
+	else:
+		for i in range(0, 31):
+			if gm.current_cards_human.has(i+1) and is_instance_valid(gm.current_cards_human.get(i+1)):
+				card_slots[i].current_card = gm.current_cards_human.get(i+1)
 			
-func update_artifacts() -> void:
-	for i in range(0, 10):
-		if gm.current_artifacts.has(i+1) and is_instance_valid(gm.current_artifacts.get(i+1)):
-			artifact_slots[i].current_artifact = gm.current_artifacts.get(i+1)
-			
+func update_artifacts(type : String) -> void:
+	if type == "cat":
+		for i in range(0, 10):
+			if gm.current_artifacts_cat.has(i+1) and is_instance_valid(gm.current_artifacts_cat.get(i+1)):
+				artifact_slots[i].current_artifact = gm.current_artifacts_cat.get(i+1)
+	else:			
+		for i in range(0, 10):
+			if gm.current_artifacts_human.has(i+1) and is_instance_valid(gm.current_artifacts_human.get(i+1)):
+				artifact_slots[i].current_artifact = gm.current_artifacts_human.get(i+1)
+				
 func set_hp_bar(value : float) -> void:
 	hp_bar.material.set_shader_parameter("fill_ratio", value)
 	
@@ -113,3 +128,22 @@ func _on_mouse_entered() -> void:
 func _on_mouse_exited() -> void:
 	if gm.state == "checking_inventory":
 		gm.state = "idle"
+
+func clear_slots() -> void:
+	for card_slot in card_slots:
+		card_slot.clear()
+
+func _on_cat_button_pressed() -> void:
+	state = "cat"
+	clear_slots()
+	human_button.button_pressed = false
+	update_cards("cat")
+	update_artifacts("cat")
+
+
+func _on_human_button_pressed() -> void:
+	state = "human"
+	clear_slots()
+	cat_button.button_pressed = false
+	update_cards("human")
+	update_artifacts("human")

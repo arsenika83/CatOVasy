@@ -10,13 +10,15 @@ var battle_ended = false
 @onready var map = $TileMapLayerBlack
 @onready var player_camera = $Giant/Camera2D
 @onready var giant = $Giant
+@onready var human = $CharacterSolya
 @onready var claw_fx = $ClawFX
 
 @onready var audio_no_energy = $AudioStreamPlayerNoEnergy
 
 @onready var end_battle_button = $UI/EndBattleButton
 @onready var creature_check_dialog = $UI/CreatureDialog
-@onready var card_container = $UI/CardContainer
+@onready var card_container_cat = $UI/CardContainerCat
+@onready var card_container_human = $UI/CardContainerHuman
 @onready var current_creature_stats : CharacterBody2D
 
 @onready var check_dialog_timer = $CheckStatsDialogHoldTimer
@@ -28,7 +30,7 @@ var won = false
 var defeated = false
 
 var current_selected_card: Control = null
-var current_creature_turn = -1
+var current_creature_turn = -2
 
 var enemy_positions : Array[Vector2] = [Vector2(208, 112), Vector2(208, 144), Vector2(208, 80), \
 Vector2(240, 112), Vector2(240, 144), Vector2(240, 80), \
@@ -42,7 +44,9 @@ func _ready() -> void:
 	
 	player_camera.zoom.x = gm.camera_zoom
 	player_camera.zoom.y = gm.camera_zoom
+	human.sprite.flip_h = false
 	init()
+	end_turn()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -74,7 +78,7 @@ func _process(delta: float) -> void:
 			check_creature_stats()
 		
 	if Input.is_action_just_pressed("ui_lmb"):
-		if current_creature_turn == -1:
+		if current_creature_turn == -1 or current_creature_turn == -2:
 			match gm.state:
 				"battle_attack":
 					choose_target("deal_damage")
@@ -232,7 +236,11 @@ func choose_target(action : String) -> void:
 		var cursor_grid_pos = map.local_to_map(get_global_mouse_position())
 		var target_local_pos = map.map_to_local(cursor_grid_pos)
 		
-		var source = find_child("Giant", true, false)
+		var source
+		if current_creature_turn == -2:
+			source = human
+		else:	
+			source = giant
 		
 		for i in range(0, find_child("Enemies").get_child_count()):
 			var targets : Array[CharacterBody2D] = [find_child("Enemies").get_child(i)]
@@ -338,10 +346,10 @@ func choose_target(action : String) -> void:
 						var turns = gm.buff_set.get(type_number).get(2)
 						#source.give_buff(target, type, power, turns)	
 	elif gm.current_card != null and gm.current_card.energy_cost > gm.current_energy:
-		card_container.remind_no_energy_for_current_card()
+		card_container_cat.remind_no_energy_for_current_card()
 				
 func enemy_turn() -> void:
-	if current_creature_turn == -1:
+	if current_creature_turn == -1 or current_creature_turn == -2:
 		return
 		
 	var source = current_enemies.get(current_creature_turn)
@@ -380,8 +388,28 @@ func enemy_turn() -> void:
 		end_turn()
 
 func end_turn() -> void:
-	if current_creature_turn == -1:
-		if gm.current_energy <= 0:
+	if current_creature_turn == -2: #СОЛЯ
+		giant.my_turn.visible = false
+		human.my_turn.visible = true
+		card_container_cat.visible = false
+		$UI/EnergyCat.visible = false
+		card_container_human.visible = true
+		$UI/EnergyHuman.visible = true
+		
+		if gm.current_energy == -1000:
+			gm.current_energy = gm.energy_cat
+			current_creature_turn = -1
+			end_turn()
+			
+	elif current_creature_turn == -1: #КОТ
+		human.my_turn.visible = false
+		giant.my_turn.visible = true
+		card_container_cat.visible = true
+		$UI/EnergyCat.visible = true
+		card_container_human.visible = false
+		$UI/EnergyHuman.visible = false
+		
+		if gm.current_energy == -1000:
 			gm.current_energy = 0
 			current_creature_turn += 1
 			
@@ -426,9 +454,9 @@ func end_turn() -> void:
 			current_creature_turn += 1
 			
 			if current_creature_turn == current_enemies.size():
-				gm.current_energy = gm.energy
+				gm.current_energy = gm.energy_human
 				turn_count += 1
-				current_creature_turn = -1
+				current_creature_turn = -2
 				giant.turn_tick()
 				
 				if gm.has_regen_ring: #КОЛЬЦО РЕГЕНЕРАЦИИ
@@ -437,10 +465,10 @@ func end_turn() -> void:
 				for e in current_enemies:
 					e.current_energy = e.energy
 					e.turn_tick()
+					
+				end_turn()	
+				return
 				
-				if gm.energy == 0:
-					end_turn()
-			
 		enemy_turn()
 
 func check_creature_stats() -> void:
@@ -496,7 +524,7 @@ func check_creature_stats() -> void:
 		stats += 	str("\n", gm.current_defence, "/", gm.max_defence)
 		stats += 	str("\n", gm.current_accuracy, "%")
 		stats += 	str("\n", gm.current_luck, "%")
-		stats += 	str("\n", gm.current_energy, "/", gm.max_energy)
+		stats += 	str("\n", gm.current_energy, "/", gm.max_energy_cat)
 		stats += 	str("\n")
 		stats += 	str("\n", gm.level)
 		stats += 	str("\n", gm.xp, "/", gm.xp_needed)
@@ -637,7 +665,7 @@ func update_creature_dialog() -> void:
 			stats += 	str("\n", gm.current_defence, "/", gm.max_defence)
 			stats += 	str("\n", gm.current_accuracy, "%")
 			stats += 	str("\n", gm.current_luck, "%")
-			stats += 	str("\n", gm.current_energy, "/", gm.max_energy)
+			stats += 	str("\n", gm.current_energy, "/", gm.max_energy_cat)
 			stats += 	str("\n")
 			stats += 	str("\n", gm.level)
 			stats += 	str("\n", gm.xp, "/", gm.xp_needed)

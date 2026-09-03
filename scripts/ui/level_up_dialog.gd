@@ -33,12 +33,12 @@ func _on_card_picked_up(picked_card : Card) -> void:
 	audio.pitch_scale = randf_range(0.8, 1.1)
 	audio.play()
 	
-	if gm.current_cards.size() < 50:
+	if gm.current_cards_cat.size() < 30:
 		for i in range(1, 51):
-			if gm.current_cards.has(i):
+			if gm.current_cards_cat.has(i):
 				continue
 						
-			gm.add_card(i, picked_card)
+			gm.add_card_cat(i, picked_card)
 			break
 	else:
 		return

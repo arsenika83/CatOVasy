@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://4ianpjc1gein" path="res://assets/images/artifact_sprite.png" id="4_hd7tc"]
 [ext_resource type="AudioStream" uid="uid://b78ln2t2dmc8p" path="res://assets/soundFX/meow_die.wav" id="4_ukwaf"]
 [ext_resource type="AudioStream" uid="uid://cfmu610s83sv5" path="res://assets/soundFX/purring.wav" id="5_2xoio"]
+[ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="5_wbhg2"]
 [ext_resource type="AudioStream" uid="uid://dyc143w8u85ck" path="res://assets/soundFX/level_up.wav" id="6_odb8e"]
 [ext_resource type="AudioStream" uid="uid://bq0ooer30jskk" path="res://assets/soundFX/xp_pick_up.wav" id="7_0vpcl"]
 [ext_resource type="AudioStream" uid="uid://bv07t8ic6tpma" path="res://assets/soundFX/miss.wav" id="9_q18av"]
@@ -20,15 +21,50 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p1oqw"]
 size = Vector2(32, 32)
 
-[sub_resource type="Gradient" id="Gradient_e53s0"]
+[sub_resource type="Gradient" id="Gradient_6y6hv"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_2xoio"]
-gradient = SubResource("Gradient_e53s0")
+gradient = SubResource("Gradient_6y6hv")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0)
 metadata/_snap_enabled = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5lxgs"]
+atlas = ExtResource("5_wbhg2")
+region = Rect2(256, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wd4ag"]
+atlas = ExtResource("5_wbhg2")
+region = Rect2(288, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y4fnd"]
+atlas = ExtResource("5_wbhg2")
+region = Rect2(320, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wd4ag"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5lxgs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wd4ag")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y4fnd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wd4ag")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5lxgs")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sx7hc"]
 atlas = ExtResource("1")
@@ -629,6 +665,12 @@ shadow_color = Color(0.81960785, 0, 0, 0.8392157)
 shadow_filter_smooth = 7.0
 texture = SubResource("GradientTexture2D_2xoio")
 height = 29.0
+
+[node name="MyTurn" type="AnimatedSprite2D" parent="." unique_id=2124515153]
+visible = false
+sprite_frames = SubResource("SpriteFrames_wd4ag")
+animation = &"healing"
+autoplay = "default"
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1540776930]
 position = Vector2(0, -6)

@@ -4,6 +4,7 @@ class_name Giant extends CharacterBody2D
 @onready var area = $Area2D
 @onready var sprite = $Sprite
 @onready var status_fx = $StatusFX
+@onready var my_turn = $MyTurn
 @onready var artifact_sprite = $ArtifactSprite
 
 @onready var respawn_timer = $RespawnTimer
@@ -153,7 +154,7 @@ func deal_damage(targets : Array[CharacterBody2D]) -> void:
 		var luck_success : bool = randf_range(0.0, 1.0) * 100 <= gm.current_luck
 		
 		if success:
-			gm.current_damage = get_parent().find_child("UI").find_child("CardContainer").current_selected.damage
+			gm.current_damage = gm.current_card.damage
 			
 			if gm.has_toy_cat and attack_count < 2:
 				gm.current_damage *= 2

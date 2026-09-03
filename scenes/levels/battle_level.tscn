@@ -3,11 +3,12 @@
 [ext_resource type="Script" uid="uid://bhvxxsght7bla" path="res://scripts/battle.gd" id="1_ou0n0"]
 [ext_resource type="Shader" uid="uid://dw8y0528dhqqe" path="res://shaders/vhs.gdshader" id="2_y3fis"]
 [ext_resource type="Texture2D" uid="uid://4itbl0ejcd3o" path="res://assets/images/tilemap.png" id="3_gxvom"]
+[ext_resource type="PackedScene" uid="uid://dmq76y6cfygk7" path="res://scenes/characters/character_solya.tscn" id="5_3cs84"]
 [ext_resource type="PackedScene" uid="uid://d0d5e8ltlrwqg" path="res://scenes/giant.tscn" id="6_3cs84"]
 [ext_resource type="Shader" uid="uid://dm6djrn7pct8b" path="res://shaders/wobble.gdshader" id="8_ou0n0"]
 [ext_resource type="AudioStream" uid="uid://ck8shm08honae" path="res://assets/music/BATTLE_THEME_2.ogg" id="8_ymw5c"]
 [ext_resource type="AudioStream" uid="uid://bxhii1a001e1v" path="res://assets/music/BATTLE_WIN.mp3" id="9_mrg47"]
-[ext_resource type="PackedScene" uid="uid://bq46oyngg435a" path="res://scenes/ui/card_container.tscn" id="10_ou0n0"]
+[ext_resource type="PackedScene" uid="uid://bq46oyngg435a" path="res://scenes/ui/card_container_cat.tscn" id="10_ou0n0"]
 [ext_resource type="PackedScene" uid="uid://btcx8q72tnkf5" path="res://scenes/fx/claw_fx.tscn" id="11_nueng"]
 [ext_resource type="AudioStream" uid="uid://dnyi4oi4yn2sl" path="res://assets/soundFX/cancel.wav" id="11_obxu6"]
 [ext_resource type="AudioStream" uid="uid://bwch538phpi87" path="res://assets/soundFX/hit.wav" id="11_q70wx"]
@@ -19,6 +20,8 @@
 [ext_resource type="StyleBox" uid="uid://b8wibcbgivilm" path="res://styles/button_normal.tres" id="14_ymw5c"]
 [ext_resource type="StyleBox" uid="uid://2iw7p3yvicvr" path="res://styles/button_pressed.tres" id="15_obxu6"]
 [ext_resource type="StyleBox" uid="uid://c66nispyhk2t0" path="res://styles/button_hover.tres" id="16_3cs84"]
+[ext_resource type="PackedScene" uid="uid://cuybslgtoc70m" path="res://scenes/ui/energy_human.tscn" id="20_xxxag"]
+[ext_resource type="PackedScene" uid="uid://c7lkcfyxh5uff" path="res://scenes/ui/card_container_human.tscn" id="21_5qqwm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fj52k"]
 shader = ExtResource("2_y3fis")
@@ -131,6 +134,10 @@ zoom = Vector2(2, 2)
 rotation_smoothing_enabled = true
 rotation_smoothing_speed = 3.0
 
+[node name="CharacterSolya" parent="." unique_id=52898326 instance=ExtResource("5_3cs84")]
+z_index = 32
+position = Vector2(80, 96)
+
 [node name="Enemies" type="Node2D" parent="." unique_id=946491156]
 z_index = 32
 
@@ -216,7 +223,8 @@ disabled = true
 text = "ЗАВЕРШИТЬ
 БОЙ"
 
-[node name="Energy" parent="UI" unique_id=601039846 instance=ExtResource("14_8ync6")]
+[node name="EnergyCat" parent="UI" unique_id=601039846 instance=ExtResource("14_8ync6")]
+visible = false
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -229,7 +237,24 @@ offset_bottom = 0.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="CardContainer" parent="UI" unique_id=1698416944 instance=ExtResource("10_ou0n0")]
+[node name="EnergyHuman" parent="UI" unique_id=1994060991 instance=ExtResource("20_xxxag")]
+visible = false
+offset_left = 1048.0
+offset_top = 560.0
+offset_right = 1304.0
+offset_bottom = 752.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="CardContainerCat" parent="UI" unique_id=1698416944 instance=ExtResource("10_ou0n0")]
+visible = false
+offset_left = 16.0
+offset_top = 504.0
+offset_right = -880.0
+offset_bottom = 40.0
+
+[node name="CardContainerHuman" parent="UI" unique_id=704997313 instance=ExtResource("21_5qqwm")]
+visible = false
 offset_left = 16.0
 offset_top = 504.0
 offset_right = -880.0

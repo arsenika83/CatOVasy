@@ -98,15 +98,15 @@ func update_artifact() -> void:
 func _on_ok_button_pressed() -> void:
 	audio_ok.play()
 	
-	if gm.current_artifacts.size() < 10:
+	if gm.current_artifacts_cat.size() < 10:
 		visible = false
 		gm.state = "idle"
 		
 		for i in range(1, 11):
-			if gm.current_artifacts.has(i):
+			if gm.current_artifacts_cat.has(i):
 				continue
 					
-			gm.add_artifact(i, artifacts.get_child(0))
+			gm.add_artifact_cat(i, artifacts.get_child(0))
 			break
 		
 		artifacts.get_child(0).upon_pickup()	
