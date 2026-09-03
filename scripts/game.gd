@@ -160,6 +160,7 @@ func move_to_map_pos() -> void:
 		tween.tween_property(giant, "position", Vector2(giant.position.x - 32, giant.position.y - 32), 0.2)
 		
 	enemy_turn()
+	npc_turn()
 	
 func draw_cursor() -> void:
 	cursor.visible = true
@@ -197,6 +198,13 @@ func enemy_turn() -> void:
 	for enemy in enemies.get_children():
 		var e_pos = map.local_to_map(enemy.position)
 		enemy.move(g_pos, e_pos)
+		
+func npc_turn() -> void:
+	var g_pos = map.local_to_map(giant.position)
+	
+	for npc in $Characters.get_children():
+		var npc_pos = map.local_to_map(npc.position)
+		npc.move(g_pos, npc_pos)		
 	
 func check_creature_stats() -> void:
 	var cursor_grid_pos = map.local_to_map(get_global_mouse_position())

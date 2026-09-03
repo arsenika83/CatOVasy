@@ -12,6 +12,8 @@ var battle_ended = false
 @onready var giant = $Giant
 @onready var claw_fx = $ClawFX
 
+@onready var audio_no_energy = $AudioStreamPlayerNoEnergy
+
 @onready var end_battle_button = $UI/EndBattleButton
 @onready var creature_check_dialog = $UI/CreatureDialog
 @onready var card_container = $UI/CardContainer
@@ -142,7 +144,7 @@ func display_cursor_label() -> void:
 					cursor_label.visible = true
 					cursor_icon.visible = true
 					#cursor_label.text = str(card_container.current_selected.damage - targets.get(0).current_defence)
-				
+
 
 func find_enemy_by_position(battle_x : int, battle_y : int) -> Enemy:
 	for enemy in find_child("Enemies").get_children():
@@ -215,7 +217,10 @@ func draw_cursor() -> void:
 				
 			elif gm.current_card.everybody_attack:
 				for enemy in find_child("Enemies").get_children():
-						targets.append(enemy)
+					if enemy.state == "dead":
+						continue
+					targets.append(enemy)
+					
 		for e_pos in targets.get(0).positions:
 			if e_pos.x == cursor_grid_pos.x and e_pos.y == cursor_grid_pos.y:
 				if not targets.get(0).state == "dead":
@@ -287,7 +292,7 @@ func choose_target(action : String) -> void:
 				
 				elif gm.current_card.everybody_attack:
 					for enemy in find_child("Enemies").get_children():
-						if enemy == targets.get(0):
+						if enemy == targets.get(0) or enemy.state == "dead":
 							continue
 						targets.append(enemy)
 						
@@ -332,7 +337,8 @@ func choose_target(action : String) -> void:
 						var power = gm.buff_set.get(type_number).get(1)
 						var turns = gm.buff_set.get(type_number).get(2)
 						#source.give_buff(target, type, power, turns)	
-				
+	elif gm.current_card != null and gm.current_card.energy_cost > gm.current_energy:
+		card_container.remind_no_energy_for_current_card()
 				
 func enemy_turn() -> void:
 	if current_creature_turn == -1:

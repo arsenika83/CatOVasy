@@ -24,8 +24,11 @@ artifact_slot_4, artifact_slot_5, artifact_slot_6, artifact_slot_7, artifact_slo
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	var id = 1
 	for card_slot in $ScrollContainer/Cards.get_children():
 		card_slots.append(card_slot)
+		card_slot.id = id
+		id += 1
 	update_cards()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

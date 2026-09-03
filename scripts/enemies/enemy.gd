@@ -122,11 +122,7 @@ func _ready() -> void:
 	battle_x = get_parent().get_parent().find_child("TileMapLayerBlack").local_to_map(position).x
 	battle_y = get_parent().get_parent().find_child("TileMapLayerBlack").local_to_map(position).y
 	
-	if is_big:
-		positions.append(Vector2(battle_x, battle_y))
-		positions.append(Vector2(battle_x+1, battle_y))
-	else:
-		positions.append(Vector2(battle_x, battle_y))
+	positions.append(Vector2(battle_x, battle_y))
 
 func _process(delta: float) -> void:
 	check_hp()

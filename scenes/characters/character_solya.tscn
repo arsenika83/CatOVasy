@@ -1,0 +1,155 @@
+[gd_scene format=3 uid="uid://dmq76y6cfygk7"]
+
+[ext_resource type="Script" uid="uid://cgvgwdylce4qi" path="res://scripts/character/character.gd" id="1_5tjqq"]
+[ext_resource type="Texture2D" uid="uid://cd6y2ykrp63it" path="res://assets/images/characters/solya_sprite.png" id="1_eb1o4"]
+[ext_resource type="PackedScene" uid="uid://cr7p23s5f4urx" path="res://scenes/fx/status_fx.tscn" id="3_70pgb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5tjqq"]
+atlas = ExtResource("1_eb1o4")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_70pgb"]
+atlas = ExtResource("1_eb1o4")
+region = Rect2(32, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4puix"]
+atlas = ExtResource("1_eb1o4")
+region = Rect2(64, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rtnb3"]
+atlas = ExtResource("1_eb1o4")
+region = Rect2(96, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ae6u"]
+atlas = ExtResource("1_eb1o4")
+region = Rect2(128, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eb1o4"]
+atlas = ExtResource("1_eb1o4")
+region = Rect2(0, 64, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ihqkh"]
+atlas = ExtResource("1_eb1o4")
+region = Rect2(32, 64, 32, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a16jr"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5tjqq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_70pgb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5tjqq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_70pgb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5tjqq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_70pgb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5tjqq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_70pgb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5tjqq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_70pgb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5tjqq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4puix")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5tjqq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_70pgb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5tjqq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_70pgb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5tjqq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_70pgb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5tjqq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_70pgb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5tjqq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_70pgb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5tjqq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rtnb3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5tjqq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ae6u")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eb1o4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ihqkh")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 10.0
+}]
+
+[node name="CharacterSolya" type="CharacterBody2D" unique_id=52898326]
+script = ExtResource("1_5tjqq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1453614389]
+position = Vector2(0, -6)
+sprite_frames = SubResource("SpriteFrames_a16jr")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.70206463
+
+[node name="StatusFX" parent="." unique_id=1192321709 instance=ExtResource("3_70pgb")]
+visible = false
+position = Vector2(0, -38)
+
+[node name="WalkingTimer" type="Timer" parent="." unique_id=1188788455]
+wait_time = 0.2
+one_shot = true
+
+[connection signal="timeout" from="WalkingTimer" to="." method="_on_walking_timer_timeout"]

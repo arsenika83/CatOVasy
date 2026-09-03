@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://bxhii1a001e1v" path="res://assets/music/BATTLE_WIN.mp3" id="9_mrg47"]
 [ext_resource type="PackedScene" uid="uid://bq46oyngg435a" path="res://scenes/ui/card_container.tscn" id="10_ou0n0"]
 [ext_resource type="PackedScene" uid="uid://btcx8q72tnkf5" path="res://scenes/fx/claw_fx.tscn" id="11_nueng"]
+[ext_resource type="AudioStream" uid="uid://dnyi4oi4yn2sl" path="res://assets/soundFX/cancel.wav" id="11_obxu6"]
 [ext_resource type="AudioStream" uid="uid://bwch538phpi87" path="res://assets/soundFX/hit.wav" id="11_q70wx"]
 [ext_resource type="PackedScene" uid="uid://cdll7yvc84q18" path="res://scenes/ui/menu.tscn" id="11_y3fis"]
 [ext_resource type="PackedScene" uid="uid://ba7f54d4yq2hp" path="res://scenes/ui/cursor.tscn" id="12_7ld2t"]
@@ -169,6 +170,11 @@ bus = &"Music"
 
 [node name="AudioStreamPlayerHit" type="AudioStreamPlayer" parent="." unique_id=559939619]
 stream = ExtResource("11_q70wx")
+bus = &"SoundFX"
+
+[node name="AudioStreamPlayerNoEnergy" type="AudioStreamPlayer" parent="." unique_id=1081212541]
+stream = ExtResource("11_obxu6")
+pitch_scale = 1.5
 bus = &"SoundFX"
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=589757551]

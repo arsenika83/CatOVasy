@@ -1,3 +1,7 @@
+res://scripts/character/
+res://assets/images/characters/
+res://scenes/characters/
+res://styles/
 res://scripts/cards/
 res://scenes/fx/
 res://assets/images/
@@ -9,7 +13,6 @@ res://scenes/ui/
 res://
 F:/GODOTProjects/GiantCrawler/saves/
 res://scripts/
-res://styles/
 res://scripts/global/
 res://shaders/
 res://assets/fonts/

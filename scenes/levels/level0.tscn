@@ -30,6 +30,7 @@
 [ext_resource type="StyleBox" uid="uid://c66nispyhk2t0" path="res://styles/button_hover.tres" id="21_wcmim"]
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="22_d7a8j"]
 [ext_resource type="AudioStream" uid="uid://danwjx5w4kls1" path="res://assets/music/ZONE_1.ogg" id="30_d7a8j"]
+[ext_resource type="PackedScene" uid="uid://dmq76y6cfygk7" path="res://scenes/characters/character_solya.tscn" id="31_nqtv8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fj52k"]
 shader = ExtResource("1_7s2gi")
@@ -159,6 +160,26 @@ position_smoothing_enabled = true
 rotation_smoothing_enabled = true
 rotation_smoothing_speed = 3.0
 
+[node name="Plants" type="Node2D" parent="." unique_id=1507805972]
+
+[node name="GrassLow3" parent="Plants" unique_id=963626142 instance=ExtResource("7_d3ub6")]
+position = Vector2(80, 112)
+
+[node name="GrassLow" parent="Plants" unique_id=1576059805 instance=ExtResource("7_d3ub6")]
+position = Vector2(208, 208)
+
+[node name="Grass" parent="Plants" unique_id=1301032520 instance=ExtResource("6_p57ef")]
+position = Vector2(48, 48)
+
+[node name="Grass2" parent="Plants" unique_id=701532192 instance=ExtResource("6_p57ef")]
+position = Vector2(240, 112)
+
+[node name="Grass3" parent="Plants" unique_id=88116230 instance=ExtResource("6_p57ef")]
+position = Vector2(48, 208)
+
+[node name="GrassLow2" parent="Plants" unique_id=503904768 instance=ExtResource("7_d3ub6")]
+position = Vector2(272, 48)
+
 [node name="Enemies" type="Node2D" parent="." unique_id=946491156]
 
 [node name="Enemy" parent="Enemies" unique_id=772889915 instance=ExtResource("14_m6lg1")]
@@ -203,25 +224,10 @@ position = Vector2(272, 112)
 [node name="EnemyFox7" parent="Enemies" unique_id=1475903293 instance=ExtResource("9_ng1gw")]
 position = Vector2(272, 112)
 
-[node name="Plants" type="Node2D" parent="." unique_id=1507805972]
+[node name="Characters" type="Node2D" parent="." unique_id=248065707]
 
-[node name="GrassLow3" parent="Plants" unique_id=963626142 instance=ExtResource("7_d3ub6")]
-position = Vector2(80, 112)
-
-[node name="GrassLow" parent="Plants" unique_id=1576059805 instance=ExtResource("7_d3ub6")]
-position = Vector2(208, 208)
-
-[node name="Grass" parent="Plants" unique_id=1301032520 instance=ExtResource("6_p57ef")]
-position = Vector2(48, 48)
-
-[node name="Grass2" parent="Plants" unique_id=701532192 instance=ExtResource("6_p57ef")]
-position = Vector2(240, 112)
-
-[node name="Grass3" parent="Plants" unique_id=88116230 instance=ExtResource("6_p57ef")]
-position = Vector2(48, 208)
-
-[node name="GrassLow2" parent="Plants" unique_id=503904768 instance=ExtResource("7_d3ub6")]
-position = Vector2(272, 48)
+[node name="CharacterSolya" parent="Characters" unique_id=52898326 instance=ExtResource("31_nqtv8")]
+position = Vector2(112, 160)
 
 [node name="Edges" type="Node2D" parent="." unique_id=1566389989]
 

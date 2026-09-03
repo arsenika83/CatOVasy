@@ -7,6 +7,7 @@
 [ext_resource type="StyleBox" uid="uid://2iw7p3yvicvr" path="res://styles/button_pressed.tres" id="5_ni4uy"]
 [ext_resource type="StyleBox" uid="uid://c66nispyhk2t0" path="res://styles/button_hover.tres" id="6_kdc2i"]
 [ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="7_ni4uy"]
+[ext_resource type="AudioStream" uid="uid://dnyi4oi4yn2sl" path="res://assets/soundFX/cancel.wav" id="8_kdc2i"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3aiiy"]
 atlas = ExtResource("2_wau5o")
@@ -64,6 +65,7 @@ offset_right = -896.0
 offset_bottom = -464.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(120, 32)
 mouse_filter = 2
 script = ExtResource("1_hqkxu")
 
@@ -163,9 +165,10 @@ columns = 5
 [node name="EndButton" type="Button" parent="." unique_id=947534557]
 layout_mode = 0
 offset_left = 1088.0
-offset_top = -24.0
+offset_top = -8.0
 offset_right = 1232.0
-offset_bottom = 40.0
+offset_bottom = 56.0
+pivot_offset = Vector2(144, 64)
 theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = ExtResource("4_1xv1g")
 theme_override_styles/pressed = ExtResource("5_ni4uy")
@@ -173,7 +176,6 @@ theme_override_styles/hover = ExtResource("6_kdc2i")
 text = "ЗАВЕРШИТЬ ХОД"
 
 [node name="StatusFX" type="TextureRect" parent="EndButton" unique_id=1750069468]
-visible = false
 material = SubResource("ShaderMaterial_kdc2i")
 layout_mode = 0
 offset_left = 48.0
@@ -191,7 +193,30 @@ one_shot = true
 wait_time = 0.3
 one_shot = true
 
+[node name="UnplayedContainer" type="ScrollContainer" parent="." unique_id=1644440329]
+visible = false
+use_parent_material = true
+layout_mode = 0
+offset_left = 56.0
+offset_top = -472.0
+offset_right = 640.0
+offset_bottom = -152.0
+
+[node name="Cards" type="GridContainer" parent="UnplayedContainer" unique_id=125064955]
+use_parent_material = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/h_separation = 110
+theme_override_constants/v_separation = 210
+columns = 5
+
+[node name="AudioStreamPlayerNoEnergy" type="AudioStreamPlayer" parent="." unique_id=804758123]
+stream = ExtResource("8_kdc2i")
+pitch_scale = 1.1
+bus = &"SoundFX"
+
 [connection signal="pressed" from="ChangeButton" to="." method="_on_change_button_pressed"]
+[connection signal="pressed" from="UnplayedButton" to="." method="_on_unplayed_button_pressed"]
 [connection signal="pressed" from="EndButton" to="." method="_on_end_button_pressed"]
 [connection signal="timeout" from="DeleteCardTimer" to="." method="_on_delete_card_timer_timeout"]
 [connection signal="timeout" from="UpdateHandTimer" to="." method="_on_hand_clear_timer_timeout"]
