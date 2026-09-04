@@ -142,16 +142,12 @@ func deal_damage(targets : Array[CharacterBody2D]) -> void:
 	gm.current_targets = targets
 	
 	for target in targets:
-		var success : bool = randf_range(0.0, 1.0) * 100 <= gm.current_accuracy
-		var luck_success : bool = randf_range(0.0, 1.0) * 100 <= gm.current_luck
+		var success : bool = randf_range(0.0, 1.0) * 100 <= gm.current_accuracy_human
+		var luck_success : bool = randf_range(0.0, 1.0) * 100 <= gm.current_luck_human
 		
 		if success:
-			gm.current_damage = gm.current_card.damage
-			
-			if gm.has_toy_cat and attack_count < 2:
-				gm.current_damage *= 2
-				print("TOY CAAAAAAT")
-				
+			gm.current_damage_human = gm.current_card.damage
+		
 			if luck_success:
 				is_hit_lucky = true
 				status_fx.scale = Vector2(0, 0)
@@ -162,9 +158,9 @@ func deal_damage(targets : Array[CharacterBody2D]) -> void:
 				var tween = create_tween()
 				tween.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
 				
-				gm.current_damage *= 2
+				gm.current_damage_human *= 2
 		else:
-			gm.current_damage = 0
+			gm.current_damage_human = 0
 			print("GIANT MISS! ")
 	
 	#get_parent().find_child("UI").find_child("CardContainer").replace_current_card("attack")
@@ -172,17 +168,17 @@ func deal_damage(targets : Array[CharacterBody2D]) -> void:
 	
 	attack_count += 1
 	
-	deal_damage_timer.start(gm.attack_animation_time)
+	deal_damage_timer.start(gm.attack_animation_time_human)
 
 func take_damage(dmg : int, time : float) -> void:
-	if gm.current_defence - dmg >= 0:
-		gm.current_defence -= dmg
+	if gm.current_defence_human - dmg >= 0:
+		gm.current_defence_human -= dmg
 		if dmg > 0:
 			gm.defended = true
 		dmg = 0
 	else:
-		dmg -= gm.current_defence
-		gm.current_defence = 0
+		dmg -= gm.current_defence_human
+		gm.current_defence_human = 0
 	
 	taken_damage = dmg
 	
@@ -211,10 +207,10 @@ func defend(time : float) -> void:
 	
 	gm.current_energy -= energy_cost
 	
-	gm.current_defence += gm.defence
+	gm.current_defence_human += gm.defence_human
 	
-	if gm.current_defence > gm.max_defence:
-		gm.current_defence = gm.max_defence
+	if gm.current_defence_human > gm.max_defence_human:
+		gm.current_defence_human = gm.max_defence_human
 	
 	status_fx.scale = Vector2(0, 0)
 	status_fx.play("defend")
@@ -223,7 +219,7 @@ func defend(time : float) -> void:
 	var tween2 = create_tween()
 	tween2.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
 	
-	if gm.damage > 0:
+	if gm.damage_human > 0:
 		defend_timer.start(time)
 	else:
 		defend_timer.start(time)
@@ -282,6 +278,45 @@ func give_debuff(targets : Array[CharacterBody2D], type : String, power : int, t
 	var tween3 = create_tween()
 	tween3.tween_property(gm.current_targets[0].status_fx, "scale", Vector2(1, 1), 0.2)	
 	debuff_timer.start(gm.debuff_animation_time)
+
+func give_buff(target : CharacterBody2D, type : String, power : int, turns : int) -> void:
+	#current_target = target
+	status_fx.scale = Vector2(0, 0)
+	status_fx.play("buff")
+	status_fx.visible = true
+	var tween = create_tween()
+	tween.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
+	target.status_fx.play("buff_" + type)
+	gm.current_energy -= gm.current_card.energy_cost
+	
+	match type:
+		"strength":
+			target.has_buff_strength = true
+			target.turns_buff_strength += turns
+			gm.current_damage_cat += power
+			gm.damage_cat += power
+		"defend":
+			target.has_buff_defend = true
+			target.turns_buff_defend += turns
+			target.current_defence += power
+			if target.current_defence <= 0:
+				target.current_defence = 0
+		"accuracy":
+			target.has_buff_accuracy = true
+			target.turns_buff_accuracy += turns
+			target.current_accuracy += power
+			if target.current_accuracy > 100:
+				target.current_accuracy = 100
+		"luck":
+			target.has_buff_luck = true
+			target.turns_buff_luck += turns
+			target.current_luck += power
+			if target.current_luck > 100:
+				target.current_luck = 100
+		"high_energy":
+			target.has_buff_high_energy = true
+			target.turns_buff_high_energy += turns
+			target.energy += power
 
 func turn_tick() -> void:
 	#gm.current_defence /= 2
@@ -370,8 +405,8 @@ func check_fall(delta: float) -> void:
 			scale.y = 1
 
 func check_hp() -> void:
-	if gm.hp <= 0:
-		gm.hp = 0
+	if gm.hp_human <= 0:
+		gm.hp_human = 0
 		gm.state = "dead"
 
 func check_xp() -> bool:
@@ -431,7 +466,7 @@ func _on_take_damage_timer_timeout() -> void:
 
 func _on_idle_animation_timer_timeout() -> void:
 	gm.state = gm.prev_state
-	sprite.play(gm.state)
+	sprite.play("battle")
 
 func _on_miss_damage_timer_timeout() -> void:
 	var tween = create_tween()
@@ -453,8 +488,8 @@ func _on_deal_damage_timer_timeout() -> void:
 	for target in gm.current_targets:
 		get_parent().claw_fx.position = target.position
 		get_parent().claw_fx.play("hit")
-		target.take_damage(gm.current_damage, gm.attack_animation_time)
-	gm.current_damage = gm.damage
+		target.take_damage(gm.current_damage_human, gm.attack_animation_time_human)
+	gm.current_damage_human = gm.damage_human
 	idle_animation_timer.start(0.2)
 
 

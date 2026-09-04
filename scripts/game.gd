@@ -23,7 +23,8 @@ var inventory_on_screen = false
 @onready var upgrade_stats_dialog = $UI/UpgradeStatsDialog
 @onready var artifact_dialog = $UI/ArtifactDialog
 @onready var menu = $UI/Menu
-@onready var inventory_button = $UI/InventoryButton
+@onready var inventory_button_cat = $UI/InventoryButton
+@onready var inventory_button_human = $UI/InventoryButtonHuman
 
 @onready var foregroundFX = $Effects/ColorRect
 
@@ -251,17 +252,30 @@ func draw_inventory() -> void:
 			
 		inventory_on_screen = false
 	else:
-		inventory.hp_label.text = str(gm.hp, " / ", gm.max_hp)
-			
-		var stats = str(gm.damage)
-		stats += 	str("\n", gm.defence, " (", gm.max_defence, ")")
-		stats += 	str("\n", gm.accuracy, "%")
-		stats += 	str("\n", gm.luck, "%")
-		stats += 	str("\n", gm.max_energy_cat)
-		stats += 	str("\n")
-		stats += 	str("\n", gm.level)
-		stats += 	str("\n", gm.xp, "/", gm.xp_needed)
-		inventory.find_child("StatsLabel").text = stats
+		if inventory.state == "cat":
+			inventory.hp_label.text = str(gm.hp_cat, " / ", gm.max_hp_cat)
+				
+			var stats = str(gm.damage_cat)
+			stats += 	str("\n", gm.defence_cat, " (", gm.max_defence_cat, ")")
+			stats += 	str("\n", gm.accuracy_cat, "%")
+			stats += 	str("\n", gm.luck_cat, "%")
+			stats += 	str("\n", gm.max_energy_cat)
+			stats += 	str("\n")
+			stats += 	str("\n", gm.level)
+			stats += 	str("\n", gm.xp, "/", gm.xp_needed)
+			inventory.find_child("StatsLabel").text = stats
+		else:
+			inventory.hp_label.text = str(gm.hp_human, " / ", gm.max_hp_human)
+				
+			var stats = str(gm.damage_human)
+			stats += 	str("\n", gm.defence_human, " (", gm.max_defence_human, ")")
+			stats += 	str("\n", gm.accuracy_human, "%")
+			stats += 	str("\n", gm.luck_human, "%")
+			stats += 	str("\n", gm.max_energy_human)
+			stats += 	str("\n")
+			stats += 	str("\n", gm.level)
+			stats += 	str("\n", gm.xp, "/", gm.xp_needed)
+			inventory.find_child("StatsLabel").text = stats
 			
 		var tween = create_tween()
 		tween.tween_property(inventory, "position:x", 828, 0.3)
@@ -269,21 +283,36 @@ func draw_inventory() -> void:
 		inventory_on_screen = true
 
 func update_inventory() -> void:
-	inventory.hp_label.text = str(gm.hp, " / ", gm.max_hp)
-	
-	var stats = str(gm.damage)
-	stats += 	str("\n", gm.defence, " (", gm.max_defence, ")")
-	stats += 	str("\n", gm.accuracy, "%")
-	stats += 	str("\n", gm.luck, "%")
-	stats += 	str("\n", gm.max_energy_cat)
-	stats += 	str("\n")
-	stats += 	str("\n", gm.level)
-	stats += 	str("\n", gm.xp, "/", gm.xp_needed)
-	inventory.find_child("StatsLabel").text = stats
+	if inventory.state == "cat":
+		inventory.hp_label.text = str(gm.hp_cat, " / ", gm.max_hp_cat)
+				
+		var stats = str(gm.damage_cat)
+		stats += 	str("\n", gm.defence_cat, " (", gm.max_defence_cat, ")")
+		stats += 	str("\n", gm.accuracy_cat, "%")
+		stats += 	str("\n", gm.luck_cat, "%")
+		stats += 	str("\n", gm.max_energy_cat)
+		stats += 	str("\n")
+		stats += 	str("\n", gm.level)
+		stats += 	str("\n", gm.xp, "/", gm.xp_needed)
+		inventory.find_child("StatsLabel").text = stats
+		inventory.set_hp_bar(float(gm.hp_cat) / float(gm.max_hp_cat))
+	else:
+		inventory.hp_label.text = str(gm.hp_human, " / ", gm.max_hp_human)
+				
+		var stats = str(gm.damage_human)
+		stats += 	str("\n", gm.defence_human, " (", gm.max_defence_human, ")")
+		stats += 	str("\n", gm.accuracy_human, "%")
+		stats += 	str("\n", gm.luck_human, "%")
+		stats += 	str("\n", gm.max_energy_human)
+		stats += 	str("\n")
+		stats += 	str("\n", gm.level)
+		stats += 	str("\n", gm.xp, "/", gm.xp_needed)
+		inventory.find_child("StatsLabel").text = stats
+		inventory.set_hp_bar(float(gm.hp_human) / float(gm.max_hp_human))
 	
 	inventory.update_cards(inventory.state)
 	inventory.update_artifacts(inventory.state)
-	inventory.set_hp_bar(float(gm.hp) / float(gm.max_hp))
+	
 
 func draw_level_up() -> void:
 	level_up_dialog.visible = true
@@ -332,12 +361,18 @@ func start_battle() -> void:
 func end_battle() -> void:
 	gm.state = "idle"
 	gm.energy_cat = gm.max_energy_cat
-	gm.energy_human = gm.max_energy_human
 	gm.current_energy = gm.max_energy_human
-	gm.current_damage = gm.damage
-	gm.current_defence = gm.defence
-	gm.current_accuracy = gm.accuracy
-	gm.current_luck = gm.luck
+	gm.current_damage_cat = gm.damage_cat
+	gm.current_defence_cat = gm.defence_cat
+	gm.current_accuracy_cat = gm.accuracy_cat
+	gm.current_luck_cat = gm.luck_cat
+	
+	gm.energy_human = gm.max_energy_human
+	gm.current_damage_human = gm.damage_human
+	gm.current_defence_human = gm.defence_human
+	gm.current_accuracy_human = gm.accuracy_human
+	gm.current_luck_human = gm.luck_human
+	gm.energy_human = gm.max_energy_human
 
 	audio.play(gm.current_music_position)
 	$Effects.visible = true
@@ -353,14 +388,20 @@ func end_battle() -> void:
 func _on_battle_start_timer_timeout() -> void:
 	scene_transitioner.change_scene_back()
 	
-	gm.state = "idle"
 	gm.energy_cat = gm.max_energy_cat
 	gm.energy_human = gm.max_energy_human
+	
 	gm.current_energy = gm.max_energy_human
-	gm.current_damage = gm.damage
-	gm.current_defence = 0
-	gm.current_accuracy = gm.accuracy
-	gm.current_luck = gm.luck
+	
+	gm.current_damage_cat = gm.damage_cat
+	gm.current_defence_cat = 0
+	gm.current_accuracy_cat = gm.accuracy_cat
+	gm.current_luck_cat = gm.luck_cat
+	
+	gm.current_damage_human = gm.damage_human
+	gm.current_defence_human = 0
+	gm.current_accuracy_human = gm.accuracy_human
+	gm.current_luck_human = gm.luck_human
 	
 	gm.state = "battle"
 	gm.prev_state = gm.state
@@ -379,4 +420,23 @@ func _on_battle_start_timer_timeout() -> void:
 	$Effects.visible = false
 
 func _on_inventory_button_mouse_entered() -> void:
-	draw_inventory()
+	if inventory.cat_button.button_pressed:
+		draw_inventory()
+	else:
+		inventory_on_screen = false
+		inventory._on_cat_button_pressed()
+		inventory.cat_button.button_pressed = true
+		inventory.human_button.button_pressed = false
+
+		draw_inventory()
+		update_inventory()
+
+func _on_inventory_button_human_mouse_entered() -> void:
+	if inventory.human_button.button_pressed:
+		draw_inventory()
+	else:
+		inventory_on_screen = false
+		inventory._on_human_button_pressed()
+		inventory.human_button.button_pressed = true
+		inventory.cat_button.button_pressed = false
+		draw_inventory()

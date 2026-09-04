@@ -13,6 +13,9 @@ extends Control
 @onready var audio_cancel = $AudioStreamPlayerCancel
 @onready var audio_appear = $AudioStreamPlayerAppear
 
+@onready var cat_texture = $TextureRectCat
+@onready var human_texture = $TextureRectHuman
+
 func _ready() -> void:
 	pass
 
@@ -72,6 +75,13 @@ func update_artifact() -> void:
 	var artifact_scene = load("res://scenes/artifacts/" + artifact_name + ".tscn")
 	var artifact = artifact_scene.instantiate()
 	
+	if artifact.character_type == "cat":
+		cat_texture.visible = true
+		human_texture.visible = false
+	else:
+		cat_texture.visible = false
+		human_texture.visible = true
+		
 	artifact_name_label.text = artifact.artifact_name
 	artifact_description_label.text = artifact.artifact_description
 	artifact_commentary_label.text = artifact.artifact_commentary
@@ -98,20 +108,36 @@ func update_artifact() -> void:
 func _on_ok_button_pressed() -> void:
 	audio_ok.play()
 	
-	if gm.current_artifacts_cat.size() < 10:
-		visible = false
-		gm.state = "idle"
-		
-		for i in range(1, 11):
-			if gm.current_artifacts_cat.has(i):
-				continue
-					
-			gm.add_artifact_cat(i, artifacts.get_child(0))
-			break
-		
-		artifacts.get_child(0).upon_pickup()	
+	if artifacts.get_child(0).character_type == "cat":
+		if gm.current_artifacts_cat.size() < 10:
+			visible = false
+			gm.state = "idle"
+			
+			for i in range(1, 11):
+				if gm.current_artifacts_cat.has(i):
+					continue
+						
+				gm.add_artifact_cat(i, artifacts.get_child(0))
+				break
+			
+			artifacts.get_child(0).upon_pickup()
+		else:
+			return
 	else:
-		return
+		if gm.current_artifacts_human.size() < 10:
+			visible = false
+			gm.state = "idle"
+			
+			for i in range(1, 11):
+				if gm.current_artifacts_human.has(i):
+					continue
+						
+				gm.add_artifact_human(i, artifacts.get_child(0))
+				break
+			
+			artifacts.get_child(0).upon_pickup()
+		else:
+			return
 
 func _on_cancel_button_pressed() -> void:
 	audio_cancel.play()

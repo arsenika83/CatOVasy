@@ -1,6 +1,6 @@
 class_name AttackCard extends Card
 
-var damage = 3 + gm.damage
+var damage = 3 + gm.damage_cat
 var card_path = "attack_card.tscn"
 var icon_path = "claw_card.png"
 var tool_tip_text = ""

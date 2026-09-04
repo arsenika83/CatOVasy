@@ -109,7 +109,7 @@ func spawn() -> void:
 func respawn() -> void:
 	gm.state = "idle"
 	global_position = gm.prev_pos
-	gm.hp -= 10
+	gm.hp_cat -= 10
 
 func fall() -> void:
 	if not gm.state == "falling":
@@ -150,14 +150,14 @@ func deal_damage(targets : Array[CharacterBody2D]) -> void:
 	gm.current_targets = targets
 	
 	for target in targets:
-		var success : bool = randf_range(0.0, 1.0) * 100 <= gm.current_accuracy
-		var luck_success : bool = randf_range(0.0, 1.0) * 100 <= gm.current_luck
+		var success : bool = randf_range(0.0, 1.0) * 100 <= gm.current_accuracy_cat
+		var luck_success : bool = randf_range(0.0, 1.0) * 100 <= gm.current_luck_cat
 		
 		if success:
-			gm.current_damage = gm.current_card.damage
+			gm.current_damage_cat = gm.current_card.damage
 			
 			if gm.has_toy_cat and attack_count < 2:
-				gm.current_damage *= 2
+				gm.current_damage_cat *= 2
 				print("TOY CAAAAAAT")
 				
 			if luck_success:
@@ -170,9 +170,9 @@ func deal_damage(targets : Array[CharacterBody2D]) -> void:
 				var tween = create_tween()
 				tween.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
 				
-				gm.current_damage *= 2
+				gm.current_damage_cat *= 2
 		else:
-			gm.current_damage = 0
+			gm.current_damage_cat = 0
 			print("GIANT MISS! ")
 	
 	#get_parent().find_child("UI").find_child("CardContainer").replace_current_card("attack")
@@ -180,7 +180,7 @@ func deal_damage(targets : Array[CharacterBody2D]) -> void:
 	
 	attack_count += 1
 	
-	deal_damage_timer.start(gm.attack_animation_time)
+	deal_damage_timer.start(gm.attack_animation_time_cat)
 
 func take_damage(dmg : int, time : float) -> void:
 	if gm.current_defence - dmg >= 0:
@@ -219,10 +219,10 @@ func defend(time : float) -> void:
 	
 	gm.current_energy -= energy_cost
 	
-	gm.current_defence += gm.defence
+	gm.current_defence_cat += gm.defence_cat
 	
-	if gm.current_defence > gm.max_defence:
-		gm.current_defence = gm.max_defence
+	if gm.current_defence_cat > gm.max_defence_cat:
+		gm.current_defence_cat = gm.max_defence_cat
 	
 	status_fx.scale = Vector2(0, 0)
 	status_fx.play("defend")
@@ -231,7 +231,7 @@ func defend(time : float) -> void:
 	var tween2 = create_tween()
 	tween2.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
 	
-	if gm.damage > 0:
+	if gm.damage_cat > 0:
 		defend_timer.start(time)
 	else:
 		defend_timer.start(time)
@@ -327,7 +327,7 @@ func turn_tick() -> void:
 	if has_buff_strength:
 		turns_buff_strength -= 1
 		if turns_buff_strength == 0:
-			gm.current_damage = gm.damage
+			gm.current_damage_cat = gm.damage_cat
 			has_buff_strength = false
 			
 	if has_buff_defend:
@@ -378,9 +378,9 @@ func check_fall(delta: float) -> void:
 			scale.y = 1
 
 func check_hp() -> void:
-	if gm.hp <= 0:
-		gm.hp = 0
-		gm.state = "dead"
+	if gm.hp_cat <= 0:
+		gm.hp_cat = 0
+		gm.state_cat = "dead"
 
 func check_xp() -> bool:
 	$AudioStreamPlayerPickUpXP.pitch_scale = randf_range(0.8, 1.2)
@@ -428,7 +428,7 @@ func _on_take_damage_timer_timeout() -> void:
 	if not gm.state == "dead":
 		gm.prev_state = gm.state
 		gm.state = "taking_damage"
-		gm.hp -= taken_damage
+		gm.hp_cat -= taken_damage
 		sprite.play("taking_damage")
 		audio_meow.play()
 		idle_animation_timer.start(0.2)
@@ -461,8 +461,8 @@ func _on_deal_damage_timer_timeout() -> void:
 	for target in gm.current_targets:
 		get_parent().claw_fx.position = target.position
 		get_parent().claw_fx.play("hit")
-		target.take_damage(gm.current_damage, gm.attack_animation_time)
-	gm.current_damage = gm.damage
+		target.take_damage(gm.current_damage_cat, gm.attack_animation_time_cat)
+	gm.current_damage_cat = gm.damage_cat
 	idle_animation_timer.start(0.2)
 
 
@@ -483,9 +483,9 @@ func _on_debuff_timer_timeout() -> void:
 
 
 func _on_heal_timer_timeout() -> void:
-	gm.hp += current_heal
-	if gm.hp > gm.max_hp:
-		gm.hp = gm.max_hp
+	gm.hp_cat += current_heal
+	if gm.hp_cat > gm.max_hp_cat:
+		gm.hp_cat = gm.max_hp_cat
 	
 	gm.state = gm.prev_state
 	sprite.play(gm.state)

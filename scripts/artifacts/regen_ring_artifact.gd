@@ -1,5 +1,6 @@
 class_name RegenRingArtifact extends Artifact
 
+var character_type = "cat"
 var rarity = "unbelievable"
 var complect = ""
 var path = "regen_ring"

@@ -10,12 +10,10 @@
 [ext_resource type="PackedScene" uid="uid://1by6pkucltci" path="res://scenes/objects/grass.tscn" id="6_p57ef"]
 [ext_resource type="PackedScene" uid="uid://b8bfs4u1x4s8" path="res://scenes/objects/grass_low.tscn" id="7_d3ub6"]
 [ext_resource type="PackedScene" uid="uid://c0fd45oqpmhla" path="res://scenes/objects/chest.tscn" id="7_po5je"]
-[ext_resource type="PackedScene" uid="uid://dsxoooufu2fui" path="res://scenes/objects/chest_rare.tscn" id="8_d7a8j"]
 [ext_resource type="PackedScene" uid="uid://bsxo600wchpra" path="res://scenes/objects/pillow.tscn" id="9_7s2gi"]
 [ext_resource type="PackedScene" uid="uid://cgbiblheppx0x" path="res://scenes/enemies/fox.tscn" id="9_ng1gw"]
-[ext_resource type="PackedScene" uid="uid://wwe2tb03ml0o" path="res://scenes/objects/chest_epic.tscn" id="9_nqtv8"]
-[ext_resource type="PackedScene" uid="uid://cq41x1n4fgtl6" path="res://scenes/objects/chest_unbelievable.tscn" id="10_e1tke"]
 [ext_resource type="PackedScene" uid="uid://c7f16y8rwf2q" path="res://scenes/objects/edge_one.tscn" id="10_m6lg1"]
+[ext_resource type="PackedScene" uid="uid://c85j0cjbsfflo" path="res://scenes/objects/tree_1.tscn" id="11_d7a8j"]
 [ext_resource type="Shader" uid="uid://dm6djrn7pct8b" path="res://shaders/wobble.gdshader" id="11_fj52k"]
 [ext_resource type="PackedScene" uid="uid://1bvjmpy2pf0k" path="res://scenes/enemies/enemy.tscn" id="14_m6lg1"]
 [ext_resource type="PackedScene" uid="uid://di4k2iivrnhup" path="res://scenes/ui/creature_adventure_dialog.tscn" id="15_m6lg1"]
@@ -29,6 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://cdll7yvc84q18" path="res://scenes/ui/menu.tscn" id="21_mtrs4"]
 [ext_resource type="StyleBox" uid="uid://c66nispyhk2t0" path="res://styles/button_hover.tres" id="21_wcmim"]
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="22_d7a8j"]
+[ext_resource type="Texture2D" uid="uid://djggfi67w50cu" path="res://assets/images/card_icons/girl.png" id="27_e1tke"]
 [ext_resource type="AudioStream" uid="uid://danwjx5w4kls1" path="res://assets/music/ZONE_1.ogg" id="30_d7a8j"]
 [ext_resource type="PackedScene" uid="uid://dmq76y6cfygk7" path="res://scenes/characters/character_solya.tscn" id="31_nqtv8"]
 
@@ -139,17 +138,16 @@ position = Vector2(208, 80)
 charge_count = 1
 heal_power = 5
 
-[node name="Chest4" parent="Objects" unique_id=977096426 instance=ExtResource("7_po5je")]
+[node name="Chest" parent="Objects" unique_id=977096426 instance=ExtResource("7_po5je")]
 position = Vector2(-64, -32)
 
-[node name="ChestUnbelievable" parent="Objects" unique_id=805585204 instance=ExtResource("10_e1tke")]
-position = Vector2(0, -32)
-
-[node name="ChestRare5" parent="Objects" unique_id=1757250525 instance=ExtResource("8_d7a8j")]
-position = Vector2(-64, -64)
-
-[node name="ChestEpic2" parent="Objects" unique_id=1622579856 instance=ExtResource("9_nqtv8")]
+[node name="Chest2" parent="Objects" unique_id=1807108612 instance=ExtResource("7_po5je")]
 position = Vector2(0, -64)
+rarity = "rare"
+
+[node name="Chest3" parent="Objects" unique_id=1718915447 instance=ExtResource("7_po5je")]
+position = Vector2(-64, -64)
+rarity = "epic"
 
 [node name="Giant" parent="." unique_id=2060885226 instance=ExtResource("1_uwrxv")]
 position = Vector2(176, 48)
@@ -179,6 +177,12 @@ position = Vector2(48, 208)
 
 [node name="GrassLow2" parent="Plants" unique_id=503904768 instance=ExtResource("7_d3ub6")]
 position = Vector2(272, 48)
+
+[node name="Tree(1)" parent="Plants" unique_id=1945600265 instance=ExtResource("11_d7a8j")]
+position = Vector2(112, 176)
+
+[node name="Tree(1)_2" parent="Plants" unique_id=678667183 instance=ExtResource("11_d7a8j")]
+position = Vector2(208, 144)
 
 [node name="Enemies" type="Node2D" parent="." unique_id=946491156]
 
@@ -227,6 +231,7 @@ position = Vector2(272, 112)
 [node name="Characters" type="Node2D" parent="." unique_id=248065707]
 
 [node name="CharacterSolya" parent="Characters" unique_id=52898326 instance=ExtResource("31_nqtv8")]
+visible = false
 position = Vector2(208, 32)
 
 [node name="Edges" type="Node2D" parent="." unique_id=1566389989]
@@ -401,6 +406,22 @@ icon = SubResource("AtlasTexture_nqtv8")
 icon_alignment = 1
 expand_icon = true
 
+[node name="InventoryButtonHuman" type="Button" parent="UI" unique_id=956475560]
+z_index = -1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 96.0
+offset_top = -80.0
+offset_right = 176.0
+grow_vertical = 0
+theme_override_styles/normal = ExtResource("19_56goh")
+theme_override_styles/pressed = ExtResource("20_j4kqp")
+theme_override_styles/hover = ExtResource("21_wcmim")
+icon = ExtResource("27_e1tke")
+icon_alignment = 1
+expand_icon = true
+
 [node name="LevelUpDialog" parent="UI" unique_id=76690541 instance=ExtResource("17_yxkm4")]
 visible = false
 offset_left = 352.0
@@ -437,4 +458,5 @@ stream = ExtResource("30_d7a8j")
 bus = &"Music"
 
 [connection signal="mouse_entered" from="UI/InventoryButton" to="." method="_on_inventory_button_mouse_entered"]
+[connection signal="mouse_entered" from="UI/InventoryButtonHuman" to="." method="_on_inventory_button_human_mouse_entered"]
 [connection signal="timeout" from="BattleStartTimer" to="." method="_on_battle_start_timer_timeout"]

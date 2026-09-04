@@ -1,6 +1,6 @@
 class_name AttackDoubleClaw extends Card
 
-var damage = (2 + gm.damage) * 2
+var damage = (2 + gm.damage_cat) * 2
 var card_path = "attack_double_claw_card.tscn"
 var icon_path = "double_claw_card.png"
 var tool_tip_text = ""

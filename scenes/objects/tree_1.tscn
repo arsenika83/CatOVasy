@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://c85j0cjbsfflo"]
+
+[ext_resource type="Script" uid="uid://ecfyyhblf878" path="res://scripts/objects/tree.gd" id="1_odkpy"]
+[ext_resource type="Texture2D" uid="uid://xyqt3v2gvqv5" path="res://assets/images/objects.png" id="2_odkpy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cvbpf"]
+size = Vector2(32, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oq1q1"]
+atlas = ExtResource("2_odkpy")
+region = Rect2(512, 64, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6j1wh"]
+atlas = ExtResource("2_odkpy")
+region = Rect2(544, 64, 32, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u68v2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oq1q1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6j1wh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[node name="Tree(1)" type="Node2D" unique_id=963626142]
+script = ExtResource("1_odkpy")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1903801654]
+collision_layer = 4
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1364762886]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_cvbpf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1121289262]
+position = Vector2(0, -24)
+sprite_frames = SubResource("SpriteFrames_u68v2")
+autoplay = "default"
+frame_progress = 0.5857028
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

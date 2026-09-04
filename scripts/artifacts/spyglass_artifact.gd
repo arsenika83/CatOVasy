@@ -1,5 +1,6 @@
 class_name SpyglassArtifact extends Artifact
 
+var character_type = "cat"
 var rarity = "common"
 var complect = ""
 var path = "spyglass"
@@ -15,7 +16,7 @@ func _process(delta: float) -> void:
 	pass
 
 func upon_pickup() -> void:
-	gm.min_accuracy = 30
+	gm.min_accuracy_cat = 30
 	gm.has_artifacts.append(artifact_global_id)
 
 	catalog.all_artifact_names.erase(path)

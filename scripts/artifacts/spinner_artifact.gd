@@ -1,5 +1,6 @@
 class_name SpinnerArtifact extends Artifact
 
+var character_type = "cat"
 var rarity = "rare"
 var complect = ""
 var path = "spinner"

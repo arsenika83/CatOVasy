@@ -1,5 +1,6 @@
 class_name RockyArtifact extends Artifact
 
+var character_type = "cat"
 var rarity = "common"
 var complect = ""
 var path = "rocky"

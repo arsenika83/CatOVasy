@@ -1,6 +1,6 @@
 class_name DefendCard extends Card
 
-var defence = 3 + gm.defence
+var defence = 3 + gm.defence_cat
 var card_path = "defend_card.tscn"
 var icon_path = "defend_card.png"
 var tool_tip_text = ""
@@ -12,7 +12,7 @@ var rarity = "common"
 func _ready() -> void:
 	state_modifier = "_defend"
 	type = "defend"
-	$Label.text = str("+", gm.defence, " брони")
+	$Label.text = str("+", gm.defence_cat, " брони")
 	$Energy/Label.text = str(energy_cost)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

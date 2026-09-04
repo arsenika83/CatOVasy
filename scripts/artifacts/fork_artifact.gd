@@ -1,5 +1,6 @@
 class_name ForkArtifact extends Artifact
 
+var character_type = "cat"
 var rarity = "rare"
 var complect = ""
 var path = "fork"

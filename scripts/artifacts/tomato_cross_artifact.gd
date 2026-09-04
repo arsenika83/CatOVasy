@@ -1,5 +1,6 @@
 class_name TomatoCrossArtifact extends Artifact
 
+var character_type = "cat"
 var rarity = "epic"
 var complect = ""
 var path = "tomato_cross"

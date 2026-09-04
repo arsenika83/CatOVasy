@@ -33,6 +33,10 @@ func update() -> void:
 		loaded = false
 		$Usable.visible = false
 
+func clear() -> void:
+	current_artifact = null
+	loaded = true
+	tooltip_text = "Пустой слот \nдля артефакта"
 
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
@@ -46,7 +50,7 @@ func _on_gui_input(event: InputEvent) -> void:
 				current_artifact = null
 				$Use.visible = false
 				$AudioStreamPlayerClick.play()
-	
+
 
 func _on_icon_mouse_entered() -> void:
 	var tween = create_tween()

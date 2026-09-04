@@ -63,56 +63,56 @@ func _on_stat_selected(stat : Control) -> void:
 	audio.play()
 	match stat.action:
 		"base_damage_1":
-			gm.damage += 1
+			gm.damage_cat += 1
 		"base_damage_3":
-			gm.damage += 3
+			gm.damage_cat += 3
 		"base_damage_5":
-			gm.damage += 5
+			gm.damage_cat += 5
 		"defence_2":
-			gm.defence += 2
+			gm.defence_cat += 2
 		"defence_4":
-			gm.defence += 4
+			gm.defence_cat += 4
 		"defence_7":
-			gm.defence += 7
+			gm.defence_cat += 7
 		"max_defence_3":
-			gm.max_defence += 3
+			gm.max_defence_cat += 3
 		"max_defence_6":
-			gm.max_defence += 6
+			gm.max_defence_cat += 6
 		"max_defence_12":
-			gm.max_defence += 12
+			gm.max_defence_cat+= 12
 		"accuracy_1":
-			gm.accuracy += 1
+			gm.accuracy_cat += 1
 		"accuracy_3":
-			gm.accuracy += 3
+			gm.accuracy_cat += 3
 		"accuracy_5":
-			gm.accuracy += 5
+			gm.accuracy_cat += 5
 		"luck_2":
-			gm.luck += 2
+			gm.luck_cat += 2
 		"luck_4":
-			gm.luck += 4
+			gm.luck_cat += 4
 		"luck_7":
-			gm.luck += 7
+			gm.luck_cat += 7
 		"hp_2":
-			gm.max_hp += 2
-			gm.hp += 2	
+			gm.max_hp_cat += 2
+			gm.hp_cat += 2	
 		"hp_5":
-			gm.max_hp += 5
-			gm.hp += 5
+			gm.max_hp_cat += 5
+			gm.hp_cat += 5
 		"hp_10":
-			gm.max_hp += 10
-			gm.hp += 10
+			gm.max_hp_cat += 10
+			gm.hp_cat += 10
 		"hp_20":
-			gm.max_hp += 20
-			gm.hp += 20
+			gm.max_hp_cat += 20
+			gm.hp_cat += 20
 		"hp_50":
-			gm.max_hp += 50
-			gm.hp += 50
+			gm.max_hp_cat += 50
+			gm.hp_cat += 50
 		"energy_1":
-			gm.max_energy += 1
-			gm.energy += 1
+			gm.max_energy_cat += 1
+			gm.energy_cat += 1
 		"energy_2":
-			gm.max_energy += 2
-			gm.energy += 2
+			gm.max_energy_cat += 2
+			gm.energy_cat += 2
 	
 	if get_parent().get_parent().giant.check_xp():
 		get_parent().get_parent().draw_level_up()

@@ -85,7 +85,7 @@ func _process(delta: float) -> void:
 				"battle_defend":
 					choose_target("defend")
 				"battle_ability":
-					choose_target("debuff")
+					choose_target("buff")
 
 func smooth_camera_zoom(value1, value2) -> void:
 	var tween = create_tween()
@@ -93,8 +93,11 @@ func smooth_camera_zoom(value1, value2) -> void:
 
 func init() -> void:
 	giant.light.enabled = false
-	gm.battle_x = map.local_to_map(giant.position).x
-	gm.battle_y = map.local_to_map(giant.position).y
+	gm.battle_x_cat = map.local_to_map(giant.position).x
+	gm.battle_y_cat = map.local_to_map(giant.position).y
+	
+	gm.battle_x_human = map.local_to_map(human.position).x
+	gm.battle_y_human = map.local_to_map(human.position).y
 	
 	var enemy_count = 0
 	
@@ -239,7 +242,7 @@ func choose_target(action : String) -> void:
 		var source
 		if current_creature_turn == -2:
 			source = human
-		else:	
+		else:
 			source = giant
 		
 		for i in range(0, find_child("Enemies").get_child_count()):
@@ -317,7 +320,7 @@ func choose_target(action : String) -> void:
 									$FX/TomatoCrossProjectile.position = Vector2(targets.get(0).position.x, targets.get(0).position.y - 700)
 									
 									var tween = create_tween()
-									tween.tween_property($FX/TomatoCrossProjectile, "position", targets.get(0).position, gm.attack_animation_time + 0.3)
+									tween.tween_property($FX/TomatoCrossProjectile, "position", targets.get(0).position, gm.attack_animation_time_cat + 0.3)
 									
 									var tween2 = create_tween()
 									tween2.tween_property($FX/TomatoCrossProjectile, "scale", Vector2(0, 0), 1.5)
@@ -331,7 +334,7 @@ func choose_target(action : String) -> void:
 								source.give_debuff(targets, type, power, turns)	
 		
 		#BUFFS
-		if gm.battle_x == cursor_grid_pos.x and gm.battle_y == cursor_grid_pos.y:
+		if gm.battle_x_cat == cursor_grid_pos.x and gm.battle_y_cat == cursor_grid_pos.y:
 			if not gm.state == "dead":
 				match action:
 					"defend":
@@ -340,11 +343,13 @@ func choose_target(action : String) -> void:
 						source.defend(defend_duration)
 					"buff":
 						gm.current_card.card_played.emit(gm.current_card)
-						var type_number = randi_range(0, gm.buff_set.size()-1)
-						var type = gm.buff_set.get(type_number).get(0)
-						var power = gm.buff_set.get(type_number).get(1)
-						var turns = gm.buff_set.get(type_number).get(2)
-						#source.give_buff(target, type, power, turns)	
+						var type = gm.current_card.type
+						
+						match type:
+							"strength":
+								var power = gm.current_card.strength
+								var turns = gm.current_card.turns
+								source.give_buff(giant, type, power, turns)
 	elif gm.current_card != null and gm.current_card.energy_cost > gm.current_energy:
 		card_container_cat.remind_no_energy_for_current_card()
 				
@@ -496,7 +501,7 @@ func check_creature_stats() -> void:
 		is_check_dialog_holding = false
 		return
 	
-	if (gm.battle_x == cursor_grid_pos.x and gm.battle_y == cursor_grid_pos.y):
+	if (gm.battle_x_cat == cursor_grid_pos.x and gm.battle_y_cat == cursor_grid_pos.y):
 		if current_creature_stats == giant:
 			current_creature_stats = null
 			var tween = create_tween()
@@ -519,11 +524,11 @@ func check_creature_stats() -> void:
 		creature_dialog_on_screen = true
 		creature_check_dialog.find_child("NameLabel").text = "Гигант"
 					
-		var stats =   str("", gm.hp, "/", gm.max_hp)
-		stats += 	str("\n", gm.current_damage)
-		stats += 	str("\n", gm.current_defence, "/", gm.max_defence)
-		stats += 	str("\n", gm.current_accuracy, "%")
-		stats += 	str("\n", gm.current_luck, "%")
+		var stats =   str("", gm.hp_cat, "/", gm.max_hp_cat)
+		stats += 	str("\n", gm.current_damage_cat)
+		stats += 	str("\n", gm.current_defence_cat, "/", gm.max_defence_cat)
+		stats += 	str("\n", gm.current_accuracy_cat, "%")
+		stats += 	str("\n", gm.current_luck_cat, "%")
 		stats += 	str("\n", gm.current_energy, "/", gm.max_energy_cat)
 		stats += 	str("\n")
 		stats += 	str("\n", gm.level)
@@ -563,6 +568,73 @@ func check_creature_stats() -> void:
 			creature_check_dialog.label_turns_high_energy.text = str(giant.turns_buff_high_energy)
 					
 		return
+	elif (gm.battle_x_human == cursor_grid_pos.x and gm.battle_y_human == cursor_grid_pos.y):
+		if current_creature_stats == giant:
+			current_creature_stats = null
+			var tween = create_tween()
+			tween.tween_property(creature_check_dialog, "position:x", -500, 0.25)
+			creature_dialog_on_screen = false
+			return
+		
+		has_target = true
+		current_creature_stats = giant
+		
+		if not creature_dialog_on_screen:
+			creature_check_dialog.position.x = -500
+			var tween = create_tween()
+			tween.tween_property(creature_check_dialog, "position:x", 40, 0.2)
+					
+			creature_check_dialog.visible = true
+			
+		creature_check_dialog.find_child("SubViewportContainer").find_child("SubViewport").find_child("Camera2D").target_position = target_local_pos	
+			
+		creature_dialog_on_screen = true
+		creature_check_dialog.find_child("NameLabel").text = "Гигант"
+					
+		var stats =   str("", gm.hp_human, "/", gm.max_hp_human)
+		stats += 	str("\n", gm.current_damage_human)
+		stats += 	str("\n", gm.current_defence_human, "/", gm.max_defence_human)
+		stats += 	str("\n", gm.current_accuracy_human, "%")
+		stats += 	str("\n", gm.current_luck_human, "%")
+		stats += 	str("\n", gm.current_energy, "/", gm.max_energy_human)
+		stats += 	str("\n")
+		stats += 	str("\n", gm.level)
+		stats += 	str("\n", gm.xp, "/", gm.xp_needed)
+		creature_check_dialog.find_child("StatsLabel").text = stats
+		
+		if human.has_debuff_weakness:
+			creature_check_dialog.debuff_weakness.visible = true
+			creature_check_dialog.label_turns_weakness.text = str(human.turns_debuff_weakness)
+		if human.has_debuff_undefend:
+			creature_check_dialog.debuff_undefend.visible = true
+			creature_check_dialog.label_turns_undefend.text = str(human.turns_debuff_undefend)
+		if human.has_debuff_inaccuracy:
+			creature_check_dialog.debuff_inaccuracy.visible = true
+			creature_check_dialog.label_turns_inaccuracy.text = str(human.turns_debuff_inaccuracy)
+		if human.has_debuff_unluck:
+			creature_check_dialog.debuff_unluck.visible = true
+			creature_check_dialog.label_turns_unluck.text = str(human.turns_debuff_unluck)
+		if human.has_debuff_low_energy:
+			creature_check_dialog.debuff_low_energy.visible = true
+			creature_check_dialog.label_turns_low_energy.text = str(human.turns_debuff_low_energy)
+			
+		if human.has_buff_strength:
+			creature_check_dialog.buff_strength.visible = true
+			creature_check_dialog.label_turns_strength.text = str(human.turns_buff_strength)
+		if human.has_buff_defend:
+			creature_check_dialog.buff_defend.visible = true
+			creature_check_dialog.label_turns_defend.text = str(human.turns_buff_defend)
+		if human.has_buff_accuracy:
+			creature_check_dialog.buff_accuracy.visible = true
+			creature_check_dialog.label_turns_accuracy.text = str(human.turns_buff_accuracy)
+		if human.has_buff_luck:
+			creature_check_dialog.buff_luck.visible = true
+			creature_check_dialog.label_turns_luck.text = str(human.turns_buff_luck)
+		if human.has_buff_high_energy:
+			creature_check_dialog.buff_high_energy.visible = true	
+			creature_check_dialog.label_turns_high_energy.text = str(human.turns_buff_high_energy)
+					
+		return	
 	else:
 		for i in range(0, find_child("Enemies").get_child_count()):
 			var target = find_child("Enemies").get_child(i)
@@ -659,12 +731,34 @@ func update_creature_dialog() -> void:
 	creature_check_dialog.buff_high_energy.visible = false
 	
 	if creature_dialog_on_screen:
-		if (gm.battle_x == cursor_grid_pos.x and gm.battle_y == cursor_grid_pos.y):		
-			var stats =   str("", gm.hp, "/", gm.max_hp)
-			stats += 	str("\n", gm.current_damage)
-			stats += 	str("\n", gm.current_defence, "/", gm.max_defence)
-			stats += 	str("\n", gm.current_accuracy, "%")
-			stats += 	str("\n", gm.current_luck, "%")
+		if (gm.battle_x_cat == cursor_grid_pos.x and gm.battle_y_cat == cursor_grid_pos.y):
+			if current_creature_stats == giant:
+				current_creature_stats = null
+				var tween = create_tween()
+				tween.tween_property(creature_check_dialog, "position:x", -500, 0.25)
+				creature_dialog_on_screen = false
+				return
+			
+			has_target = true
+			current_creature_stats = giant
+			
+			if not creature_dialog_on_screen:
+				creature_check_dialog.position.x = -500
+				var tween = create_tween()
+				tween.tween_property(creature_check_dialog, "position:x", 40, 0.2)
+						
+				creature_check_dialog.visible = true
+				
+			creature_check_dialog.find_child("SubViewportContainer").find_child("SubViewport").find_child("Camera2D").target_position = target_local_pos	
+				
+			creature_dialog_on_screen = true
+			creature_check_dialog.find_child("NameLabel").text = "Гигант"
+						
+			var stats =   str("", gm.hp_cat, "/", gm.max_hp_cat)
+			stats += 	str("\n", gm.current_damage_cat)
+			stats += 	str("\n", gm.current_defence_cat, "/", gm.max_defence_cat)
+			stats += 	str("\n", gm.current_accuracy_cat, "%")
+			stats += 	str("\n", gm.current_luck_cat, "%")
 			stats += 	str("\n", gm.current_energy, "/", gm.max_energy_cat)
 			stats += 	str("\n")
 			stats += 	str("\n", gm.level)
@@ -704,6 +798,73 @@ func update_creature_dialog() -> void:
 				creature_check_dialog.label_turns_high_energy.text = str(giant.turns_buff_high_energy)
 						
 			return
+		elif (gm.battle_x_human == cursor_grid_pos.x and gm.battle_y_human == cursor_grid_pos.y):
+			if current_creature_stats == giant:
+				current_creature_stats = null
+				var tween = create_tween()
+				tween.tween_property(creature_check_dialog, "position:x", -500, 0.25)
+				creature_dialog_on_screen = false
+				return
+			
+			has_target = true
+			current_creature_stats = giant
+			
+			if not creature_dialog_on_screen:
+				creature_check_dialog.position.x = -500
+				var tween = create_tween()
+				tween.tween_property(creature_check_dialog, "position:x", 40, 0.2)
+						
+				creature_check_dialog.visible = true
+				
+			creature_check_dialog.find_child("SubViewportContainer").find_child("SubViewport").find_child("Camera2D").target_position = target_local_pos	
+				
+			creature_dialog_on_screen = true
+			creature_check_dialog.find_child("NameLabel").text = "Гигант"
+						
+			var stats =   str("", gm.hp_human, "/", gm.max_hp_human)
+			stats += 	str("\n", gm.current_damage_human)
+			stats += 	str("\n", gm.current_defence_human, "/", gm.max_defence_human)
+			stats += 	str("\n", gm.current_accuracy_human, "%")
+			stats += 	str("\n", gm.current_luck_human, "%")
+			stats += 	str("\n", gm.current_energy, "/", gm.max_energy_human)
+			stats += 	str("\n")
+			stats += 	str("\n", gm.level)
+			stats += 	str("\n", gm.xp, "/", gm.xp_needed)
+			creature_check_dialog.find_child("StatsLabel").text = stats
+			
+			if human.has_debuff_weakness:
+				creature_check_dialog.debuff_weakness.visible = true
+				creature_check_dialog.label_turns_weakness.text = str(human.turns_debuff_weakness)
+			if human.has_debuff_undefend:
+				creature_check_dialog.debuff_undefend.visible = true
+				creature_check_dialog.label_turns_undefend.text = str(human.turns_debuff_undefend)
+			if human.has_debuff_inaccuracy:
+				creature_check_dialog.debuff_inaccuracy.visible = true
+				creature_check_dialog.label_turns_inaccuracy.text = str(human.turns_debuff_inaccuracy)
+			if human.has_debuff_unluck:
+				creature_check_dialog.debuff_unluck.visible = true
+				creature_check_dialog.label_turns_unluck.text = str(human.turns_debuff_unluck)
+			if human.has_debuff_low_energy:
+				creature_check_dialog.debuff_low_energy.visible = true
+				creature_check_dialog.label_turns_low_energy.text = str(human.turns_debuff_low_energy)
+				
+			if human.has_buff_strength:
+				creature_check_dialog.buff_strength.visible = true
+				creature_check_dialog.label_turns_strength.text = str(human.turns_buff_strength)
+			if human.has_buff_defend:
+				creature_check_dialog.buff_defend.visible = true
+				creature_check_dialog.label_turns_defend.text = str(human.turns_buff_defend)
+			if human.has_buff_accuracy:
+				creature_check_dialog.buff_accuracy.visible = true
+				creature_check_dialog.label_turns_accuracy.text = str(human.turns_buff_accuracy)
+			if human.has_buff_luck:
+				creature_check_dialog.buff_luck.visible = true
+				creature_check_dialog.label_turns_luck.text = str(human.turns_buff_luck)
+			if human.has_buff_high_energy:
+				creature_check_dialog.buff_high_energy.visible = true	
+				creature_check_dialog.label_turns_high_energy.text = str(human.turns_buff_high_energy)
+						
+			return	
 		else:
 			for i in range(0, find_child("Enemies").get_child_count()):
 				var target = find_child("Enemies").get_child(i)

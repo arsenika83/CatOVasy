@@ -1,6 +1,8 @@
-res://assets/images/characters/
 res://assets/images/
+res://scripts/objects/
+res://shaders/
 res://scripts/cards/solya/
+res://assets/images/characters/
 res://scripts/ui/
 res://scripts/character/
 res://scenes/characters/
@@ -15,9 +17,7 @@ res://
 F:/GODOTProjects/GiantCrawler/saves/
 res://scripts/
 res://scripts/global/
-res://shaders/
 res://assets/fonts/
-res://scripts/objects/
 res://scenes/objects/
 res://assets/
 res://scenes/cards/

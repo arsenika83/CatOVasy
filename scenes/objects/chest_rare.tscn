@@ -2,8 +2,14 @@
 
 [ext_resource type="Script" uid="uid://dkywasdwfgh5x" path="res://scripts/objects/chest.gd" id="1_swvbb"]
 [ext_resource type="Texture2D" uid="uid://xyqt3v2gvqv5" path="res://assets/images/objects.png" id="2_foeyd"]
+[ext_resource type="Shader" uid="uid://f3u5q65ewwtk" path="res://shaders/highlight.gdshader" id="2_spyoy"]
 [ext_resource type="AudioStream" uid="uid://bwch538phpi87" path="res://assets/soundFX/hit.wav" id="3_spyoy"]
 [ext_resource type="PackedScene" uid="uid://cr7p23s5f4urx" path="res://scenes/fx/status_fx.tscn" id="4_foeyd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_760ei"]
+shader = ExtResource("2_spyoy")
+shader_parameter/overlay_color = Color(0.9882353, 0.30588236, 0.31764707, 1)
+shader_parameter/mix_amount = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_swvbb"]
 atlas = ExtResource("2_foeyd")
@@ -35,11 +41,15 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_bas4e"]
 radius = 2.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_pejq7"]
+radius = 8.0
+
 [node name="ChestRare" type="Node2D" unique_id=1807108612]
 script = ExtResource("1_swvbb")
 rarity = "rare"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1628923774]
+material = SubResource("ShaderMaterial_760ei")
 position = Vector2(0, -3)
 sprite_frames = SubResource("SpriteFrames_pev8c")
 animation = &"open"
@@ -58,5 +68,13 @@ bus = &"SoundFX"
 [node name="StatusFX" parent="." unique_id=1192321709 instance=ExtResource("4_foeyd")]
 position = Vector2(0, -8)
 animation = &"enabled"
+
+[node name="Area2DHighlight" type="Area2D" parent="." unique_id=1338846516]
+collision_layer = 32
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2DHighlight" unique_id=1897142851]
+shape = SubResource("CircleShape2D_pejq7")
+debug_color = Color(0.69105965, 0.42790362, 0.6718197, 0.41960785)
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

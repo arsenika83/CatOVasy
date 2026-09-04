@@ -1,5 +1,6 @@
 class_name RedBallArtifact extends Artifact
 
+var character_type = "cat"
 var rarity = "common"
 var complect = ""
 var path = "red_ball"
@@ -14,10 +15,10 @@ func _process(delta: float) -> void:
 	pass
 
 func upon_pickup() -> void:
-	gm.accuracy += 1
-	gm.luck += 1
-	gm.defence += 1
-	gm.damage += 1
+	gm.accuracy_cat += 1
+	gm.luck_cat += 1
+	gm.defence_cat += 1
+	gm.damage_cat += 1
 	
 	gm.has_artifacts.append(artifact_global_id)
 	catalog.all_artifact_names.erase(path)

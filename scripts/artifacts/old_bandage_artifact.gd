@@ -1,5 +1,6 @@
 class_name OldBandageArtifact extends Artifact
 
+var character_type = "human"
 var rarity = "common"
 var complect = ""
 var path = "old_bandage"
@@ -10,7 +11,8 @@ var artifact_commentary = "\"Лучше чем ничего!\""
 
 func _ready() -> void:
 	artifact_global_id = 5
-	
+
+
 func _process(delta: float) -> void:
 	pass
 
@@ -22,10 +24,11 @@ func upon_pickup() -> void:
 	catalog.all_artifact_names_common.erase(path)
 	catalog.all_artifact_names_rare.erase(path)
 	catalog.all_artifact_names_epic.erase(path)
-	catalog.all_artifact_names_unbelievable.erase(path)	
+	catalog.all_artifact_names_unbelievable.erase(path)
+	
 func upon_use() -> void:
 	if gm.has_heart_shaped_pillow:
-		gm.hp += 5
+		gm.hp_human += 5
 	else:
-		gm.hp += 4
+		gm.hp_human += 4
 	gm.has_old_bandage = false

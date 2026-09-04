@@ -12,31 +12,51 @@ var enemies_following = 0
 var current_level_edge_positions : Array[Vector2]
 var current_music_position : float = 0.0
 
-var battle_x : int
-var battle_y : int
+var battle_x_cat : int
+var battle_y_cat : int
 
-var hp = 30
-var max_hp = 30
+var hp_cat = 30
+var max_hp_cat = 30
 
-var damage = 0
-var min_damage = -3
-var current_damage = damage
+var damage_cat = 0
+var min_damage_cat = -3
+var current_damage_cat = damage_cat
 
-var defence = 3
-var current_defence = 0
-var max_defence = 5
-var defended = false
+var defence_cat = 3
+var current_defence_cat = 0
+var max_defence_cat = 5
+var defended_cat = false
 
-var speed = 100
-var current_speed = speed
+var accuracy_cat = 70
+var min_accuracy_cat = 0
+var current_accuracy_cat = accuracy_cat
 
-var accuracy = 70
-var min_accuracy = 0
-var current_accuracy = accuracy
+var luck_cat = 10
+var min_luck_cat = -100
+var current_luck_cat = luck_cat
 
-var luck = 10
-var min_luck = -100
-var current_luck = luck
+var battle_x_human : int
+var battle_y_human : int
+
+var hp_human = 25
+var max_hp_human = 25
+
+var damage_human = 0
+var min_damage_human = -3
+var current_damage_human = damage_human
+
+var defence_human = 3
+var current_defence_human = 0
+var max_defence_human = 7
+var defended_human = false
+
+var accuracy_human = 70
+var min_accuracy_human = 0
+var current_accuracy_human = accuracy_human
+
+var luck_human = 20
+var min_luck_human = -100
+var current_luck_human = luck_human
 
 var energy_cat = 3
 var energy_human = 2
@@ -67,10 +87,15 @@ var debuff_set : Array = [["weakness", 1, 1], ["undefend", 100, 1], ["inaccuracy
 var buff_set : Array = [["strength", 1, 1], ["defend", 100, 1], ["accuracy", 10, 1],\
  ["luck", 5, 1], ["high_energy", 1, 1]]
 
-var attack_animation_time = 0.3
-var defend_animation_time = 0.3
-var debuff_animation_time = 0.6
-var buff_animation_time = 0.6
+var attack_animation_time_cat = 0.3
+var defend_animation_time_cat = 0.3
+var debuff_animation_time_cat = 0.6
+var buff_animation_time_cat = 0.6
+
+var attack_animation_time_human = 0.3
+var defend_animation_time_human = 0.3
+var debuff_animation_time_human = 0.6
+var buff_animation_time_human = 0.6
 
 func _ready() -> void:
 	current_cards_cat.set(1, AttackCard.new())
@@ -84,9 +109,11 @@ func _ready() -> void:
 	current_cards_cat.set(9, LunchCard.new())
 	current_cards_cat.set(10, LunchCard.new())
 	
-	current_cards_human.set(1, SolyaAbilityCard.new())
-	current_cards_human.set(2, SolyaAbilityCard.new())
-	current_cards_human.set(3, SolyaAbilityCard.new())
+	current_cards_human.set(1, GiveStrengthCard.new())
+	current_cards_human.set(2, GiveStrengthCard.new())
+	current_cards_human.set(3, GiveStrengthCard.new())
+	current_cards_human.set(4, LittleFireCard.new())
+	current_cards_human.set(5, LittleFireCard.new())
 	
 
 func _process(delta: float) -> void:
@@ -110,17 +137,20 @@ func add_artifact_cat(index : int, artifact : Artifact) -> void:
 func add_artifact_human(index : int, artifact : Artifact) -> void:
 	var artifact_resource = load("res://scenes/artifacts/" + artifact.path + ".tscn")
 	var added_artifact = artifact_resource.instantiate()
-	current_artifacts_human.set(index, added_artifact)		
+	current_artifacts_human.set(index, added_artifact)
 
+#CAT
 var has_cat_food = false
-var has_old_bandage = false
 var has_spinner = false
 var has_boomerang = false
-var has_regen_ring = false
-var has_portrait_of_the_unknown = false
 var has_fork = false
 var has_heart_shaped_pillow = false
 var has_toy_cat = false
 var has_rocky = false
 var has_mrs_rocky = false
 var has_tomato_cross = false
+
+#HUMAN
+var has_regen_ring = false
+var has_portrait_of_the_unknown = false
+var has_old_bandage = false

@@ -18,6 +18,14 @@ shader_parameter/time_offset = 0.0
 atlas = ExtResource("3_gcjjy")
 region = Rect2(832, 0, 448, 720)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_68a23"]
+atlas = ExtResource("4_fxcbs")
+region = Rect2(128, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_blosv"]
+atlas = ExtResource("4_fxcbs")
+region = Rect2(128, 192, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_snn0j"]
 atlas = ExtResource("4_fxcbs")
 region = Rect2(128, 32, 32, 32)
@@ -120,12 +128,34 @@ offset_bottom = 304.0
 texture = SubResource("AtlasTexture_53g1v")
 expand_mode = 1
 
+[node name="TextureRectHuman" type="TextureRect" parent="." unique_id=1715347624]
+use_parent_material = true
+layout_mode = 0
+offset_left = 200.0
+offset_top = 8.0
+offset_right = 248.0
+offset_bottom = 56.0
+tooltip_text = "Артефакт предназначен для персонажа: Соля"
+texture = SubResource("AtlasTexture_68a23")
+expand_mode = 1
+
+[node name="TextureRectCat" type="TextureRect" parent="." unique_id=1342770600]
+use_parent_material = true
+layout_mode = 0
+offset_left = 200.0
+offset_top = 8.0
+offset_right = 248.0
+offset_bottom = 56.0
+tooltip_text = "Артефакт предназначен для персонажа: Кот"
+texture = SubResource("AtlasTexture_blosv")
+expand_mode = 1
+
 [node name="Label" type="Label" parent="." unique_id=775349505]
 use_parent_material = true
 layout_mode = 0
 offset_left = 16.0
 offset_top = 8.0
-offset_right = 240.0
+offset_right = 208.0
 offset_bottom = 33.0
 theme_override_font_sizes/font_size = 22
 text = "НАЙДЕН АРТЕФАКТ!"
@@ -137,7 +167,7 @@ use_parent_material = true
 layout_mode = 0
 offset_left = 16.0
 offset_top = 32.0
-offset_right = 240.0
+offset_right = 208.0
 offset_bottom = 57.0
 theme_override_font_sizes/font_size = 20
 text = "РЕДКИЙ"

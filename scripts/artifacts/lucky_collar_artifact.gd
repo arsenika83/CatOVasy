@@ -1,10 +1,11 @@
 class_name LuckyCollarArtifact extends Artifact
 
+var character_type = "cat"
 var rarity = "common"
 var complect = ""
 var path = "lucky_collar"
 var artifact_name = "СЧАСТЛИВЫЙ ОШЕЙНИК"
-var artifact_description = "Ваша удача не может опуститься ниже 7%"
+var artifact_description = "Удача кота не может опуститься ниже 7%"
 var artifact_commentary = "\"Слуга госпожи удачи\""
 
 func _ready() -> void:
@@ -14,7 +15,7 @@ func _process(delta: float) -> void:
 	pass
 
 func upon_pickup() -> void:
-	gm.min_luck = 7
+	gm.min_luck_cat = 7
 	
 	gm.has_artifacts.append(artifact_global_id)
 	

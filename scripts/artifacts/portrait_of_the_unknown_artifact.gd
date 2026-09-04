@@ -1,10 +1,11 @@
 class_name PortraitOfTheUnknownArtifact extends Artifact
 
+var character_type = "human"
 var rarity = "rare"
 var complect = ""
 var path = "portrait_of_the_unknown"
 var artifact_name = "ПОРТРЕТ НЕИЗВЕСТНОЙ"
-var artifact_description = "Каждый успешный удар снижает удачу противника на 3%"
+var artifact_description = "Каждый успешный удар Соли снижает удачу противника на 3%"
 var artifact_commentary = "\"В последние дни меня посещало ненастье\""
 
 func _ready() -> void:

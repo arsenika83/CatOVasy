@@ -56,10 +56,12 @@ func update_artifacts(type : String) -> void:
 		for i in range(0, 10):
 			if gm.current_artifacts_cat.has(i+1) and is_instance_valid(gm.current_artifacts_cat.get(i+1)):
 				artifact_slots[i].current_artifact = gm.current_artifacts_cat.get(i+1)
+				artifact_slots[i].loaded = false
 	else:			
 		for i in range(0, 10):
 			if gm.current_artifacts_human.has(i+1) and is_instance_valid(gm.current_artifacts_human.get(i+1)):
 				artifact_slots[i].current_artifact = gm.current_artifacts_human.get(i+1)
+				artifact_slots[i].loaded = false
 				
 func set_hp_bar(value : float) -> void:
 	hp_bar.material.set_shader_parameter("fill_ratio", value)
@@ -132,6 +134,9 @@ func _on_mouse_exited() -> void:
 func clear_slots() -> void:
 	for card_slot in card_slots:
 		card_slot.clear()
+		
+	for artifact_slot in artifact_slots:
+		artifact_slot.clear()	
 
 func _on_cat_button_pressed() -> void:
 	state = "cat"

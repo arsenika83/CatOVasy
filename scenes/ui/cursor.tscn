@@ -29,6 +29,9 @@ animations = [{
 atlas = ExtResource("2_qi3ym")
 region = Rect2(16, 128, 16, 16)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qi3ym"]
+size = Vector2(32, 32)
+
 [node name="Cursor" type="Node2D" unique_id=2051460958]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1881866203]
@@ -62,3 +65,11 @@ theme_override_font_sizes/font_size = 10
 text = "2"
 horizontal_alignment = 2
 vertical_alignment = 1
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1715484920]
+collision_layer = 32
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=264611916]
+shape = SubResource("RectangleShape2D_qi3ym")
+debug_color = Color(0.7679821, 0.40522122, 0.506708, 0.41960785)

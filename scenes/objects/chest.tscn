@@ -2,25 +2,103 @@
 
 [ext_resource type="Texture2D" uid="uid://xyqt3v2gvqv5" path="res://assets/images/objects.png" id="1_bas4e"]
 [ext_resource type="Script" uid="uid://dkywasdwfgh5x" path="res://scripts/objects/chest.gd" id="1_opa1x"]
+[ext_resource type="Shader" uid="uid://f3u5q65ewwtk" path="res://shaders/highlight.gdshader" id="2_nj372"]
 [ext_resource type="AudioStream" uid="uid://bwch538phpi87" path="res://assets/soundFX/hit.wav" id="3_acra8"]
 [ext_resource type="PackedScene" uid="uid://cr7p23s5f4urx" path="res://scenes/fx/status_fx.tscn" id="4_pev8c"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5vikd"]
+shader = ExtResource("2_nj372")
+shader_parameter/overlay_color = Color(0.9882353, 0.30588236, 0.31764707, 1)
+shader_parameter/mix_amount = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eiphe"]
+atlas = ExtResource("1_bas4e")
+region = Rect2(0, 128, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_opa1x"]
 atlas = ExtResource("1_bas4e")
 region = Rect2(0, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_or75c"]
+atlas = ExtResource("1_bas4e")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nj372"]
+atlas = ExtResource("1_bas4e")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_so5va"]
+atlas = ExtResource("1_bas4e")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ekffs"]
+atlas = ExtResource("1_bas4e")
+region = Rect2(32, 128, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_acra8"]
 atlas = ExtResource("1_bas4e")
 region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mhowy"]
+atlas = ExtResource("1_bas4e")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5vikd"]
+atlas = ExtResource("1_bas4e")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cu4jo"]
+atlas = ExtResource("1_bas4e")
+region = Rect2(32, 96, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pev8c"]
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_eiphe")
+}],
+"loop": true,
+"name": &"closed_all",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_opa1x")
 }],
 "loop": false,
-"name": &"closed",
+"name": &"closed_common",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_or75c")
+}],
+"loop": true,
+"name": &"closed_epic",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nj372")
+}],
+"loop": true,
+"name": &"closed_rare",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_so5va")
+}],
+"loop": true,
+"name": &"closed_unbelievable",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ekffs")
+}],
+"loop": true,
+"name": &"open_all",
 "speed": 5.0
 }, {
 "frames": [{
@@ -28,22 +106,50 @@ animations = [{
 "texture": SubResource("AtlasTexture_acra8")
 }],
 "loop": false,
-"name": &"open",
+"name": &"open_common",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mhowy")
+}],
+"loop": true,
+"name": &"open_epic",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5vikd")
+}],
+"loop": true,
+"name": &"open_rare",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cu4jo")
+}],
+"loop": true,
+"name": &"open_unbelievable",
 "speed": 5.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bas4e"]
-radius = 2.0
+radius = 3.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nj372"]
+radius = 8.0
 
 [node name="Chest" type="Node2D" unique_id=1807108612]
 script = ExtResource("1_opa1x")
 rarity = "common"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1628923774]
+material = SubResource("ShaderMaterial_5vikd")
 position = Vector2(0, -3)
 sprite_frames = SubResource("SpriteFrames_pev8c")
-animation = &"closed"
-autoplay = "closed"
+animation = &"open_all"
+autoplay = "closed_common"
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1280983759]
 collision_layer = 16
@@ -59,4 +165,14 @@ bus = &"SoundFX"
 position = Vector2(0, -8)
 animation = &"enabled"
 
+[node name="Area2DHighlight" type="Area2D" parent="." unique_id=1735285080]
+collision_layer = 32
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2DHighlight" unique_id=2108609494]
+shape = SubResource("CircleShape2D_nj372")
+debug_color = Color(0.69105965, 0.42790362, 0.6718197, 0.41960785)
+
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="Area2DHighlight" to="." method="_on_area_2d_highlight_area_entered"]
+[connection signal="area_exited" from="Area2DHighlight" to="." method="_on_area_2d_highlight_area_exited"]
