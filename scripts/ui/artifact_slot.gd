@@ -37,6 +37,7 @@ func clear() -> void:
 	current_artifact = null
 	loaded = true
 	tooltip_text = "Пустой слот \nдля артефакта"
+	$Usable.visible = false
 
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:

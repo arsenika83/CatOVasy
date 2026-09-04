@@ -361,13 +361,13 @@ func start_battle() -> void:
 func end_battle() -> void:
 	gm.state = "idle"
 	gm.energy_cat = gm.max_energy_cat
-	gm.current_energy = gm.max_energy_human
+	gm.current_energy_cat = gm.max_energy_cat
+	gm.current_energy_human = gm.max_energy_human
 	gm.current_damage_cat = gm.damage_cat
 	gm.current_defence_cat = gm.defence_cat
 	gm.current_accuracy_cat = gm.accuracy_cat
 	gm.current_luck_cat = gm.luck_cat
 	
-	gm.energy_human = gm.max_energy_human
 	gm.current_damage_human = gm.damage_human
 	gm.current_defence_human = gm.defence_human
 	gm.current_accuracy_human = gm.accuracy_human

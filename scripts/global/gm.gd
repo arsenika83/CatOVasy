@@ -43,7 +43,7 @@ var energy_cat = 3
 var current_energy_cat = energy_cat
 var max_energy_cat = 3
 
-var current_hand_size_cat = 8
+var current_hand_size_cat = 5
 var hand_size_cat = 5
 
 #==============================================================================================

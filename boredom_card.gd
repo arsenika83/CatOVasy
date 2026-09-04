@@ -4,7 +4,7 @@ var card_path = "boredom_card.tscn"
 var icon_path = "boredom_card.png"
 var tool_tip_text = ""
 var card_name = "Скука"
-var card_description = "В этом ходу кот наносит +1 урона"
+var card_description = "Завершает ход. Вся оставшаяся энергия Соли переходит коту"
 var rarity = "common"
 var strength = 1
 var turns = 1
@@ -21,5 +21,7 @@ func _process(delta: float) -> void:
 func on_play() -> void:
 	gm.current_energy_cat += gm.current_energy_human
 	gm.current_energy_human = -1000
+	gm.state_human = "battle_boredom"
+	
 	get_parent().get_parent().get_parent().get_parent().end_turn()
 	print("END TURN BOREDOM")

@@ -12,7 +12,6 @@ var rarity = "common"
 func _ready() -> void:
 	state_modifier = "_defend"
 	type = "defend"
-	$Label.text = str("+", gm.defence_cat, " брони")
 	$Energy/Label.text = str(energy_cost)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

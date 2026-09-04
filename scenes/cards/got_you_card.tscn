@@ -67,7 +67,7 @@ offset_right = 112.0
 offset_bottom = 176.0
 mouse_filter = 1
 theme_override_font_sizes/font_size = 16
-text = "1 УРОН"
+text = "ПОПАЛИСЬ!"
 horizontal_alignment = 1
 vertical_alignment = 1
 

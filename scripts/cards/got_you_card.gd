@@ -13,7 +13,6 @@ func _ready() -> void:
 	state_modifier = "_attack"
 	type = "attack"
 	everybody_attack = true
-	$Label.text = str("Урон: ", damage, "\nВСЕМ врагам")
 	$Energy/Label.text = str(energy_cost)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

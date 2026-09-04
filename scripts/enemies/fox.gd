@@ -8,8 +8,8 @@ func _ready() -> void:
 	
 	attack_animation_time = 0.4
 	
-	max_hp = 10
-	hp = 10
+	max_hp = 30
+	hp = 30
 	
 	xp_gives = 10
 	

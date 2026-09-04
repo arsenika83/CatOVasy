@@ -77,6 +77,8 @@ func _process(delta: float) -> void:
 			sprite.play("dead")
 		"battle":
 			sprite.play("battle")
+		"battle_boredom":
+			sprite.play("battle_boredom")	
 		"battle_attack":
 			pass
 			#sprite.play("battle_attack")
@@ -465,7 +467,7 @@ func _on_take_damage_timer_timeout() -> void:
 		sprite.play("dead")
 
 func _on_idle_animation_timer_timeout() -> void:
-	gm.state_human = gm.prev_state_human
+	#gm.state_human = gm.prev_state_human
 	sprite.play("battle")
 
 func _on_miss_damage_timer_timeout() -> void:

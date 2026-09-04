@@ -196,7 +196,7 @@ func take_damage(dmg : int, time : float) -> void:
 	if dmg > 0:
 		take_damage_timer.start(time)
 	else:
-		if gm.defended:
+		if gm.defended_cat:
 			audio_defend.play()
 			status_fx.play("defended")
 			var tween1 = create_tween()
@@ -205,7 +205,7 @@ func take_damage(dmg : int, time : float) -> void:
 			var tween = create_tween()
 			tween.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
 		
-			gm.defended = false
+			gm.defended_cat = false
 		else:
 			audio_miss.play()
 		
@@ -379,7 +379,7 @@ func check_fall(delta: float) -> void:
 func check_hp() -> void:
 	if gm.hp_cat <= 0:
 		gm.hp_cat = 0
-		gm.state_cat = "dead"
+		gm.state = "dead"
 
 func check_xp() -> bool:
 	$AudioStreamPlayerPickUpXP.pitch_scale = randf_range(0.8, 1.2)

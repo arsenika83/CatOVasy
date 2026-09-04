@@ -12,7 +12,6 @@ func _ready() -> void:
 	state_modifier = "_attack"
 	type = "attack"
 	behind_attack = true
-	$Label.text = str("Урон: ", damage, "\n<Сквозной удар>")
 	$Energy/Label.text = str(energy_cost)
 
 func _process(delta: float) -> void:

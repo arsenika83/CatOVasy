@@ -29,7 +29,6 @@
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="22_d7a8j"]
 [ext_resource type="Texture2D" uid="uid://djggfi67w50cu" path="res://assets/images/card_icons/girl.png" id="27_e1tke"]
 [ext_resource type="AudioStream" uid="uid://danwjx5w4kls1" path="res://assets/music/ZONE_1.ogg" id="30_d7a8j"]
-[ext_resource type="PackedScene" uid="uid://dmq76y6cfygk7" path="res://scenes/characters/character_solya.tscn" id="31_nqtv8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fj52k"]
 shader = ExtResource("1_7s2gi")
@@ -182,7 +181,7 @@ position = Vector2(272, 48)
 position = Vector2(112, 176)
 
 [node name="Tree(1)_2" parent="Plants" unique_id=678667183 instance=ExtResource("11_d7a8j")]
-position = Vector2(208, 144)
+position = Vector2(128, 168)
 
 [node name="Enemies" type="Node2D" parent="." unique_id=946491156]
 
@@ -208,31 +207,27 @@ position = Vector2(144, 80)
 position = Vector2(144, 80)
 
 [node name="EnemyFox" parent="Enemies" unique_id=685663284 instance=ExtResource("9_ng1gw")]
-position = Vector2(272, 112)
+position = Vector2(304, 208)
 
 [node name="EnemyFox2" parent="Enemies" unique_id=1113755696 instance=ExtResource("9_ng1gw")]
-position = Vector2(272, 112)
+position = Vector2(304, 208)
 
 [node name="EnemyFox3" parent="Enemies" unique_id=1971720123 instance=ExtResource("9_ng1gw")]
-position = Vector2(272, 112)
+position = Vector2(304, 208)
 
 [node name="EnemyFox4" parent="Enemies" unique_id=314592152 instance=ExtResource("9_ng1gw")]
-position = Vector2(272, 112)
+position = Vector2(304, 208)
 
 [node name="EnemyFox5" parent="Enemies" unique_id=1974251582 instance=ExtResource("9_ng1gw")]
-position = Vector2(272, 112)
+position = Vector2(304, 208)
 
 [node name="EnemyFox6" parent="Enemies" unique_id=1966389239 instance=ExtResource("9_ng1gw")]
-position = Vector2(272, 112)
+position = Vector2(304, 208)
 
 [node name="EnemyFox7" parent="Enemies" unique_id=1475903293 instance=ExtResource("9_ng1gw")]
-position = Vector2(272, 112)
+position = Vector2(304, 208)
 
 [node name="Characters" type="Node2D" parent="." unique_id=248065707]
-
-[node name="CharacterSolya" parent="Characters" unique_id=52898326 instance=ExtResource("31_nqtv8")]
-visible = false
-position = Vector2(208, 32)
 
 [node name="Edges" type="Node2D" parent="." unique_id=1566389989]
 
