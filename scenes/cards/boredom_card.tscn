@@ -1,37 +1,39 @@
-[gd_scene format=3 uid="uid://fwpqfqkdyu8s"]
+[gd_scene format=3 uid="uid://bf5hr12qttyqg"]
 
-[ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="1_g31a8"]
-[ext_resource type="Script" uid="uid://18kl6hsidebs" path="res://scripts/cards/got_you_card.gd" id="2_v72q3"]
-[ext_resource type="Texture2D" uid="uid://b0rpbj3njbbar" path="res://assets/images/cards.png" id="3_vko6w"]
-[ext_resource type="Texture2D" uid="uid://r5vtkvriuv28" path="res://assets/images/card_icons/got_you_card.png" id="4_diln7"]
-[ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="5_sohyt"]
-[ext_resource type="FontFile" uid="uid://dub3oi8dxfpfw" path="res://assets/fonts/JeuDePixel-Regular.otf" id="6_p78nl"]
+[ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="1_ilqmx"]
+[ext_resource type="Script" uid="uid://b2j1c6r0nunn1" path="res://boredom_card.gd" id="2_ilqmx"]
+[ext_resource type="Texture2D" uid="uid://b0rpbj3njbbar" path="res://assets/images/cards.png" id="3_wpbht"]
+[ext_resource type="Texture2D" uid="uid://cwgvbf7smq8hc" path="res://assets/images/card_icons/boredom_card.png" id="4_ilqmx"]
+[ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="5_hlpfa"]
+[ext_resource type="FontFile" uid="uid://dub3oi8dxfpfw" path="res://assets/fonts/JeuDePixel-Regular.otf" id="6_mwj7r"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jl6rh"]
 resource_local_to_scene = true
-shader = ExtResource("1_g31a8")
+shader = ExtResource("1_ilqmx")
 shader_parameter/speed = 2.000000095
 shader_parameter/amplitude = 10.000000475
-shader_parameter/time_offset = 0.0
+shader_parameter/time_offset = 0.4390000208525
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0qqw3"]
-atlas = ExtResource("3_vko6w")
+atlas = ExtResource("3_wpbht")
 region = Rect2(448, 0, 64, 96)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ee5py"]
-atlas = ExtResource("5_sohyt")
-region = Rect2(0, 32, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_cti8t"]
+atlas = ExtResource("5_hlpfa")
+region = Rect2(96, 96, 32, 32)
 
-[node name="LunchCard" type="Control" unique_id=1531075916]
+[node name="BoredomCard" type="Control" unique_id=1531075916]
 z_index = 100
 z_as_relative = false
 material = SubResource("ShaderMaterial_jl6rh")
 layout_mode = 3
-anchors_preset = 0
+anchor_top = 0.13900001
+anchor_bottom = 0.13900001
+offset_top = -100.08001
 offset_right = 128.0
-offset_bottom = 192.0
+offset_bottom = 99.91999
 pivot_offset = Vector2(64, 96)
-script = ExtResource("2_v72q3")
+script = ExtResource("2_ilqmx")
 
 [node name="BG2" type="TextureRect" parent="." unique_id=1690685854]
 use_parent_material = true
@@ -56,7 +58,7 @@ offset_left = 8.0
 offset_top = 8.0
 offset_right = 120.0
 offset_bottom = 120.0
-texture = ExtResource("4_diln7")
+texture = ExtResource("4_ilqmx")
 
 [node name="Label" type="Label" parent="." unique_id=514088983]
 use_parent_material = true
@@ -65,22 +67,21 @@ offset_left = 16.0
 offset_top = 120.0
 offset_right = 112.0
 offset_bottom = 176.0
-mouse_filter = 1
 theme_override_font_sizes/font_size = 16
-text = "1 УРОН"
+text = "+1 УРОН"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Energy" type="TextureRect" parent="." unique_id=1518980124]
+[node name="Energy" type="TextureRect" parent="." unique_id=584783592]
 use_parent_material = true
 layout_mode = 0
 offset_left = 88.0
 offset_top = -8.0
 offset_right = 136.0
 offset_bottom = 40.0
-texture = SubResource("AtlasTexture_ee5py")
+texture = SubResource("AtlasTexture_cti8t")
 
-[node name="Label" type="Label" parent="Energy" unique_id=567625281]
+[node name="Label" type="Label" parent="Energy" unique_id=1275453451]
 use_parent_material = true
 layout_mode = 0
 offset_left = 8.0
@@ -91,7 +92,7 @@ mouse_filter = 1
 theme_override_colors/font_color = Color(18.892157, 18.892157, 18.892157, 1)
 theme_override_constants/outline_size = 4
 theme_override_constants/shadow_outline_size = 1
-theme_override_fonts/font = ExtResource("6_p78nl")
+theme_override_fonts/font = ExtResource("6_mwj7r")
 theme_override_font_sizes/font_size = 18
 text = "1"
 horizontal_alignment = 1

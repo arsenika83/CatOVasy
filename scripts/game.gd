@@ -391,7 +391,8 @@ func _on_battle_start_timer_timeout() -> void:
 	gm.energy_cat = gm.max_energy_cat
 	gm.energy_human = gm.max_energy_human
 	
-	gm.current_energy = gm.max_energy_human
+	gm.current_energy_human = gm.max_energy_human
+	gm.current_energy_cat = gm.max_energy_cat
 	
 	gm.current_damage_cat = gm.damage_cat
 	gm.current_defence_cat = 0
@@ -404,10 +405,11 @@ func _on_battle_start_timer_timeout() -> void:
 	gm.current_luck_human = gm.luck_human
 	
 	gm.state = "battle"
+	gm.state_human = "battle"
 	gm.prev_state = gm.state
 	
 	if gm.has_old_bandage:
-		gm.current_defence = 5
+		gm.current_defence_human = 5
 	
 	giant.light.enabled = false
 	inventory.position.x = 1500

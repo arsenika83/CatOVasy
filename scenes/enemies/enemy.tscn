@@ -74,7 +74,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fcftc")
 }],
-"loop": false,
+"loop": 0,
 "name": &"dead",
 "speed": 1.0
 }, {
@@ -97,7 +97,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_twn6s")
 }],
-"loop": true,
+"loop": 1,
 "name": &"deal_damage",
 "speed": 10.0
 }, {
@@ -105,7 +105,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jt03m")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }, {
@@ -116,7 +116,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_k4gvh")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 1.0
 }, {
@@ -124,7 +124,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_lu5c6")
 }],
-"loop": true,
+"loop": 1,
 "name": &"take_damage",
 "speed": 5.0
 }]
@@ -139,6 +139,7 @@ script = ExtResource("1_8e3ao")
 damage_indicator_scene = ExtResource("2_k4gvh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=947260883]
+visible = false
 shape = SubResource("RectangleShape2D_tihwb")
 debug_color = Color(0.5357, 0.55, 0.3355, 0.08627451)
 

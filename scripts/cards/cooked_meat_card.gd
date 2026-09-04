@@ -1,6 +1,6 @@
 class_name CookedMeatCard extends Card
 
-var damage = 1 + gm.damage
+var damage = 1 + gm.damage_cat
 var card_path = "cooked_meat_card.tscn"
 var icon_path = "cooked_meat_card.png"
 var tool_tip_text = ""

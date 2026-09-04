@@ -66,7 +66,7 @@ func _process(delta: float) -> void:
 	check_fall(delta)
 	check_hp()
 
-	match gm.state:
+	match gm.state_human:
 		"idle":
 			sprite.play("idle")
 		"resting":
@@ -87,10 +87,10 @@ func _process(delta: float) -> void:
 			pass
 			#sprite.play("battle_ability")
 			
-	move_and_slide()
+	#move_and_slide()
 
 func spawn() -> void:
-	match gm.state:
+	match gm.state_human:
 		"idle":
 			var tween = create_tween()
 			tween.tween_property(self, "scale", Vector2(1, 1), 0.5)
@@ -99,23 +99,23 @@ func spawn() -> void:
 			sprite.flip_h = true
 
 func respawn() -> void:
-	gm.state = "idle"
+	gm.state_human = "idle"
 	global_position = gm.prev_pos
-	gm.hp -= 10
+	gm.hp_human -= 10
 
 func fall() -> void:
-	if not gm.state == "falling":
-		gm.state = "falling"
+	if not gm.state_human == "falling":
+		gm.state_human = "falling"
 		respawn_timer.start()
 		audio_fall.play()
 
 func walk() -> void:
-	gm.state = "walking"
+	gm.state_human = "walking"
 	walk_timer.start()
 
 func heal(hp : int) -> void:
-	gm.prev_state = gm.state
-	gm.state = "healing"
+	gm.prev_state_human = gm.state_human
+	gm.state_human = "healing"
 	
 	if gm.has_heart_shaped_pillow:
 		hp += 1
@@ -133,9 +133,9 @@ func go_downstairs() -> void:
 func deal_damage(targets : Array[CharacterBody2D]) -> void:
 	is_hit_lucky = false
 	var energy_cost = gm.current_card.energy_cost
-	if gm.current_energy - energy_cost < 0:
+	if gm.current_energy_human - energy_cost < 0:
 		return
-	gm.current_energy -= energy_cost
+	gm.current_energy_human -= energy_cost
 	
 	var tween2 = create_tween()
 	tween2.tween_property(sprite, "position:x", sprite.position.x + 4, 0.1)
@@ -202,10 +202,10 @@ func take_damage(dmg : int, time : float) -> void:
 
 func defend(time : float) -> void:
 	var energy_cost = gm.current_card.energy_cost
-	if gm.current_energy - energy_cost < 0:
+	if gm.current_energy_human - energy_cost < 0:
 		return
 	
-	gm.current_energy -= energy_cost
+	gm.current_energy_human -= energy_cost
 	
 	gm.current_defence_human += gm.defence_human
 	
@@ -226,10 +226,10 @@ func defend(time : float) -> void:
 
 func give_debuff(targets : Array[CharacterBody2D], type : String, power : int, turns : int) -> void:
 	var energy_cost = gm.current_card.energy_cost
-	if gm.current_energy - energy_cost < 0:
+	if gm.current_energy_human - energy_cost < 0:
 		return
 	
-	gm.current_energy -= energy_cost
+	gm.current_energy_human -= energy_cost
 	
 	status_fx.scale = Vector2(0, 0)
 	status_fx.play("debuff")
@@ -287,7 +287,7 @@ func give_buff(target : CharacterBody2D, type : String, power : int, turns : int
 	var tween = create_tween()
 	tween.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
 	target.status_fx.play("buff_" + type)
-	gm.current_energy -= gm.current_card.energy_cost
+	gm.current_energy_human -= gm.current_card.energy_cost
 	
 	match type:
 		"strength":
@@ -382,7 +382,7 @@ func turn_tick() -> void:
 			has_buff_high_energy = false
 
 func check_fall(delta: float) -> void:
-	if gm.state == "falling":
+	if gm.state_human == "falling":
 		z_index = -1
 		#velocity.y += gravity * delta * 0.5
 			
@@ -393,7 +393,7 @@ func check_fall(delta: float) -> void:
 		if scale.x <= 0:
 			scale.x = 0
 			scale.y = 0
-	elif gm.state == "idle":
+	elif gm.state_human == "idle":
 		z_index = 3
 		rotation_degrees = 0
 		#velocity.y = 0
@@ -407,7 +407,7 @@ func check_fall(delta: float) -> void:
 func check_hp() -> void:
 	if gm.hp_human <= 0:
 		gm.hp_human = 0
-		gm.state = "dead"
+		gm.state_human = "dead"
 
 func check_xp() -> bool:
 	$AudioStreamPlayerPickUpXP.pitch_scale = randf_range(0.8, 1.2)
@@ -439,8 +439,8 @@ func _on_restart_timer_timeout() -> void:
 	pass # Replace with function body.
 
 func _on_walk_timer_timeout() -> void:
-	if gm.state == "walking":
-		gm.state = "idle"
+	if gm.state_human == "walking":
+		gm.state_human = "idle"
 
 func _on_take_damage_timer_timeout() -> void:
 	check_hp()
@@ -452,10 +452,10 @@ func _on_take_damage_timer_timeout() -> void:
 		add_child(indicator)
 		indicator.display_damage(taken_damage, spawn_pos)
 	
-	if not gm.state == "dead":
-		gm.prev_state = gm.state
-		gm.state = "taking_damage"
-		gm.hp -= taken_damage
+	if not gm.state_human == "dead":
+		gm.prev_state_human = gm.state_human
+		gm.state_human = "taking_damage"
+		gm.hp_human -= taken_damage
 		sprite.play("taking_damage")
 		audio_meow.play()
 		idle_animation_timer.start(0.2)
@@ -465,7 +465,7 @@ func _on_take_damage_timer_timeout() -> void:
 		sprite.play("dead")
 
 func _on_idle_animation_timer_timeout() -> void:
-	gm.state = gm.prev_state
+	gm.state_human = gm.prev_state_human
 	sprite.play("battle")
 
 func _on_miss_damage_timer_timeout() -> void:
@@ -510,9 +510,9 @@ func _on_debuff_timer_timeout() -> void:
 
 
 func _on_heal_timer_timeout() -> void:
-	gm.hp += current_heal
-	if gm.hp > gm.max_hp:
-		gm.hp = gm.max_hp
+	gm.hp_human += current_heal
+	if gm.hp_human > gm.max_hp_human:
+		gm.hp_human = gm.max_hp_human
 	
-	gm.state = gm.prev_state
-	sprite.play(gm.state)
+	gm.state_human = gm.prev_state_human
+	sprite.play(gm.state_human)

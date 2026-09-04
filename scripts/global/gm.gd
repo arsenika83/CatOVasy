@@ -2,6 +2,10 @@ extends Node
 
 var state = "idle"
 var prev_state = "idle"
+
+var state_human = "idle"
+var prev_state_human = "idle"
+
 var camera_zoom = 2
 var start_pos = Vector2i(64+16, 32+16)
 var prev_pos = Vector2i(64+16, 32+16)
@@ -35,6 +39,14 @@ var luck_cat = 10
 var min_luck_cat = -100
 var current_luck_cat = luck_cat
 
+var energy_cat = 3
+var current_energy_cat = energy_cat
+var max_energy_cat = 3
+
+var current_hand_size_cat = 8
+var hand_size_cat = 5
+
+#==============================================================================================
 var battle_x_human : int
 var battle_y_human : int
 
@@ -58,16 +70,18 @@ var luck_human = 20
 var min_luck_human = -100
 var current_luck_human = luck_human
 
-var energy_cat = 3
 var energy_human = 2
-var current_energy = energy_human
-
-var max_energy_cat = 3
+var current_energy_human = energy_human
 var max_energy_human = 2
+
+var current_hand_size_human = 4
+var hand_size_human = 4
 
 var xp = 0
 var xp_needed = 1
 var level = 1
+
+var max_hand_size = 8
 
 var current_cards_cat: Dictionary[int, Card]
 var current_cards_human: Dictionary[int, Card]
@@ -111,7 +125,7 @@ func _ready() -> void:
 	
 	current_cards_human.set(1, GiveStrengthCard.new())
 	current_cards_human.set(2, GiveStrengthCard.new())
-	current_cards_human.set(3, GiveStrengthCard.new())
+	current_cards_human.set(3, BoredomCard.new())
 	current_cards_human.set(4, LittleFireCard.new())
 	current_cards_human.set(5, LittleFireCard.new())
 	

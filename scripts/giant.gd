@@ -95,7 +95,6 @@ func _process(delta: float) -> void:
 			pass
 			#sprite.play("battle_ability")
 			
-	move_and_slide()
 
 func spawn() -> void:
 	match gm.state:
@@ -141,9 +140,9 @@ func go_downstairs() -> void:
 func deal_damage(targets : Array[CharacterBody2D]) -> void:
 	is_hit_lucky = false
 	var energy_cost = gm.current_card.energy_cost
-	if gm.current_energy - energy_cost < 0:
+	if gm.current_energy_cat - energy_cost < 0:
 		return
-	gm.current_energy -= energy_cost
+	gm.current_energy_cat -= energy_cost
 	
 	var tween2 = create_tween()
 	tween2.tween_property(sprite, "position:x", sprite.position.x + 4, 0.1)
@@ -183,14 +182,14 @@ func deal_damage(targets : Array[CharacterBody2D]) -> void:
 	deal_damage_timer.start(gm.attack_animation_time_cat)
 
 func take_damage(dmg : int, time : float) -> void:
-	if gm.current_defence - dmg >= 0:
-		gm.current_defence -= dmg
+	if gm.current_defence_cat - dmg >= 0:
+		gm.current_defence_cat -= dmg
 		if dmg > 0:
-			gm.defended = true
+			gm.defended_cat = true
 		dmg = 0
 	else:
-		dmg -= gm.current_defence
-		gm.current_defence = 0
+		dmg -= gm.current_defence_cat
+		gm.current_defence_cat = 0
 	
 	taken_damage = dmg
 	
@@ -214,10 +213,10 @@ func take_damage(dmg : int, time : float) -> void:
 
 func defend(time : float) -> void:
 	var energy_cost = gm.current_card.energy_cost
-	if gm.current_energy - energy_cost < 0:
+	if gm.current_energy_cat - energy_cost < 0:
 		return
 	
-	gm.current_energy -= energy_cost
+	gm.current_energy_cat -= energy_cost
 	
 	gm.current_defence_cat += gm.defence_cat
 	
@@ -238,10 +237,10 @@ func defend(time : float) -> void:
 
 func give_debuff(targets : Array[CharacterBody2D], type : String, power : int, turns : int) -> void:
 	var energy_cost = gm.current_card.energy_cost
-	if gm.current_energy - energy_cost < 0:
+	if gm.current_energy_cat - energy_cost < 0:
 		return
 	
-	gm.current_energy -= energy_cost
+	gm.current_energy_cat -= energy_cost
 	
 	status_fx.scale = Vector2(0, 0)
 	status_fx.play("debuff")

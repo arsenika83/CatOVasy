@@ -8,15 +8,15 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	$Label.text = str(gm.current_energy, "/", gm.max_energy_cat)
+	$Label.text = str(gm.current_energy_cat, "/", gm.max_energy_cat)
 	
-	if gm.current_energy == 1:
+	if gm.current_energy_cat == 1:
 		$BigActive.visible = false
 		$SmallActive.visible = true
 		
 		$BigNotActive.visible = true
 		$SmallNotActive.visible = false
-	elif gm.current_energy == 0:
+	elif gm.current_energy_cat == 0:
 		$BigActive.visible = false
 		$SmallActive.visible = false
 		

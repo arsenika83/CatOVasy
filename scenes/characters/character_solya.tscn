@@ -47,7 +47,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wd4ag")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }]
@@ -80,6 +80,10 @@ region = Rect2(128, 128, 32, 64)
 atlas = ExtResource("1_eb1o4")
 region = Rect2(0, 0, 32, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ijvqx"]
+atlas = ExtResource("1_eb1o4")
+region = Rect2(0, 128, 32, 64)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_5tjqq"]
 atlas = ExtResource("1_eb1o4")
 region = Rect2(0, 0, 32, 64)
@@ -99,6 +103,10 @@ region = Rect2(96, 0, 32, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_3ae6u"]
 atlas = ExtResource("1_eb1o4")
 region = Rect2(128, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_piljf"]
+atlas = ExtResource("1_eb1o4")
+region = Rect2(160, 128, 32, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eb1o4"]
 atlas = ExtResource("1_eb1o4")
@@ -183,7 +191,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bf2la")
 }],
-"loop": true,
+"loop": 1,
 "name": &"battle",
 "speed": 1.0
 }, {
@@ -191,7 +199,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7axqy")
 }],
-"loop": true,
+"loop": 1,
 "name": &"battle_attack",
 "speed": 5.0
 }, {
@@ -199,8 +207,16 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_a0gv1")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ijvqx")
+}],
+"loop": 1,
+"name": &"healing",
 "speed": 5.0
 }, {
 "frames": [{
@@ -282,9 +298,17 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3ae6u")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_piljf")
+}],
+"loop": 1,
+"name": &"taking_damage",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -293,7 +317,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ihqkh")
 }],
-"loop": true,
+"loop": 1,
 "name": &"walking",
 "speed": 10.0
 }]
@@ -400,7 +424,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xrxwe")
 }],
-"loop": false,
+"loop": 0,
 "name": &"boomerang",
 "speed": 10.0
 }, {
@@ -417,7 +441,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3xb3h")
 }],
-"loop": false,
+"loop": 0,
 "name": &"candy",
 "speed": 2.0
 }, {
@@ -425,7 +449,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_17dpp")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }, {
@@ -472,7 +496,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_mvbdv")
 }],
-"loop": false,
+"loop": 0,
 "name": &"spinner",
 "speed": 2.0
 }]
@@ -494,6 +518,7 @@ radius = 7.28011
 script = ExtResource("1_5tjqq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=9010534]
+position = Vector2(0, 16)
 shape = SubResource("RectangleShape2D_g1j1r")
 debug_color = Color(0.56, 0.54796, 0.3192, 0.05882353)
 
@@ -506,6 +531,7 @@ autoplay = "default"
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1453614389]
 position = Vector2(0, -6)
 sprite_frames = SubResource("SpriteFrames_a16jr")
+animation = &"battle"
 autoplay = "idle"
 
 [node name="ArtifactSprite" type="AnimatedSprite2D" parent="." unique_id=534946203]
@@ -530,7 +556,7 @@ texture = SubResource("GradientTexture2D_klmc7")
 height = 29.0
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1638618416]
-position = Vector2(4, 6)
+position = Vector2(4, 21)
 collision_mask = 127
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1155074132]

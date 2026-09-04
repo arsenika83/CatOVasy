@@ -160,7 +160,7 @@ offset_right = 560.0
 offset_bottom = 208.0
 theme_override_constants/h_separation = 100
 theme_override_constants/v_separation = 300
-columns = 5
+columns = 8
 
 [node name="EndButton" type="Button" parent="." unique_id=947534557]
 layout_mode = 0

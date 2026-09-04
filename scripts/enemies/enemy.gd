@@ -258,7 +258,7 @@ func check_hp() -> void:
 			is_following = false
 			gm.enemies_following -= 1
 
-func deal_damage(target : Giant) -> void:
+func deal_damage(target : CharacterBody2D) -> void:
 	var success : bool = randf_range(0.0, 1.0) * 100 <= accuracy
 	var luck_success : bool = randf_range(0.0, 1.0) * 100 <= luck
 	current_target = target

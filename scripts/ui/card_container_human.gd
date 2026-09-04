@@ -58,7 +58,7 @@ func _ready() -> void:
 	create_hand()
 
 func _process(delta: float) -> void:
-	if gm.current_energy > 0:
+	if gm.current_energy_human > 0:
 		$EndButton/StatusFX.visible = false
 		$EndButton.disabled = false
 
@@ -90,6 +90,9 @@ func _on_card_selected(clicked_card: Control) -> void:
 	gm.current_card = current_selected
 	
 func _on_card_played(played_card: Control) -> void:
+	if played_card.has_method("on_play"):
+		played_card.on_play()
+	
 	hand.remove_at(played_card.get_index())
 	played_cards.append(played_card.duplicate())
 	
@@ -103,17 +106,17 @@ func _on_card_played(played_card: Control) -> void:
 	unplayed_label.text = str(unplayed_cards.size())
 	played_label.text = str(played_cards.size())
 	
-	if gm.current_energy == 0:
+	if gm.current_energy_human == 0:
 		$EndButton/StatusFX.visible = true
 
 	$DeleteCardTimer.start()
 
 func _on_change_button_pressed() -> void:	
-	if gm.current_energy - card_change_energy_cost >= 0:
+	if gm.current_energy_human - card_change_energy_cost >= 0:
 		audio.play()
-		gm.current_energy -= card_change_energy_cost
+		gm.current_energy_human -= card_change_energy_cost
 		
-		if gm.current_energy == 0:
+		if gm.current_energy_human == 0:
 			$EndButton/StatusFX.visible = true
 		
 		for card in hand:
@@ -152,7 +155,7 @@ func remind_no_energy_for_current_card() -> void:
 	audio_no_energy.play()
 
 func _on_end_button_pressed() -> void:
-	gm.current_energy = -1000
+	gm.current_energy_human = -1000
 	get_parent().get_parent().end_turn()
 	$EndButton.disabled = true
 	$EndButton/StatusFX.visible = false
@@ -174,7 +177,7 @@ func _on_hand_clear_timer_timeout() -> void:
 	hand.clear()
 	var time_offset = 0
 	
-	for i in range(3):
+	for i in range(gm.current_hand_size_human):
 		if unplayed_cards.size() > 0:
 			var random_index = randi_range(0, unplayed_cards.size()-1)
 			hand.append(unplayed_cards.get(random_index))

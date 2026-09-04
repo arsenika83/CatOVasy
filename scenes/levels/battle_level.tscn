@@ -124,15 +124,15 @@ z_index = 31
 tile_map_data = PackedByteArray("AAAAAAAAAAACAAAAAAABAAAAAAADAAAAAAACAAAAAAADAAAAAAADAAAAAAADAAAAAAAEAAAAAAADAAAAAAAFAAAAAAADAAAAAAAGAAAAAAADAAAAAAAHAAAAAAADAAAAAAAIAAAAAAADAAAAAAAJAAAAAAAEAAAAAAAAAAEAAAACAAEAAAAAAAIAAAACAAEAAAAAAAMAAAACAAEAAAAAAAQAAAACAAEAAAAAAAUAAAACAAEAAAAAAAYAAAACAAIAAAAJAAEAAAAEAAEAAAAJAAIAAAAEAAEAAAAJAAMAAAAEAAEAAAAJAAQAAAAEAAEAAAAJAAUAAAAEAAEAAAAJAAYAAAAEAAIAAAABAAYAAAADAAIAAAACAAYAAAADAAIAAAADAAYAAAADAAIAAAAEAAYAAAADAAIAAAAFAAYAAAADAAIAAAAGAAYAAAADAAIAAAAHAAYAAAADAAIAAAAIAAYAAAADAAIAAAA=")
 tile_set = SubResource("TileSet_a7tdr")
 
-[node name="Giant" parent="." unique_id=2060885226 instance=ExtResource("6_3cs84")]
-z_index = 32
-position = Vector2(112, 112)
-
-[node name="Camera2D" type="Camera2D" parent="Giant" unique_id=1303825275]
-position = Vector2(48, 0)
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1303825275]
+position = Vector2(160, 112)
 zoom = Vector2(2, 2)
 rotation_smoothing_enabled = true
 rotation_smoothing_speed = 3.0
+
+[node name="Giant" parent="." unique_id=2060885226 instance=ExtResource("6_3cs84")]
+z_index = 32
+position = Vector2(112, 112)
 
 [node name="CharacterSolya" parent="." unique_id=52898326 instance=ExtResource("5_3cs84")]
 z_index = 32

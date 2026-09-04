@@ -8,7 +8,7 @@ var battle_ended = false
 
 @onready var cursor = $Cursor
 @onready var map = $TileMapLayerBlack
-@onready var player_camera = $Giant/Camera2D
+@onready var player_camera = $Camera2D
 @onready var giant = $Giant
 @onready var human = $CharacterSolya
 @onready var claw_fx = $ClawFX
@@ -36,6 +36,7 @@ var enemy_positions : Array[Vector2] = [Vector2(208, 112), Vector2(208, 144), Ve
 Vector2(240, 112), Vector2(240, 144), Vector2(240, 80), \
 Vector2(208, 176), Vector2(208, 48), Vector2(240, 176), Vector2(240, 48)]
 var current_enemies : Array
+var team_positions : Array[String] = ["cat", "human"]
 
 func _ready() -> void:
 	
@@ -71,6 +72,7 @@ func _process(delta: float) -> void:
 		smooth_camera_zoom(":zoom:y", gm.camera_zoom)
 		
 	if Input.is_action_just_pressed("ui_rmb"):
+		swap_characters()
 		check_creature_stats()
 		check_dialog_timer.start()
 	if Input.is_action_just_released("ui_rmb"):
@@ -133,6 +135,24 @@ func win() -> void:
 
 func lose() -> void:
 	pass	
+
+func swap_characters() -> void:
+	if team_positions.get(0) == "cat":
+		team_positions.set(0, "human")
+		team_positions.set(1, "cat")
+		gm.battle_x_cat -= 1
+		giant.position.x -= 32
+		
+		gm.battle_x_human += 1
+		human.position.x += 32
+	else:
+		team_positions.set(1, "human")
+		team_positions.set(0, "cat")
+		gm.battle_x_cat += 1
+		giant.position.x += 32
+		
+		gm.battle_x_human -= 1
+		human.position.x -= 32
 
 func display_cursor_label() -> void:
 	var cursor_grid_pos = map.local_to_map(get_global_mouse_position())
@@ -235,7 +255,13 @@ func draw_cursor() -> void:
 						t.cursor.visible = true
 					
 func choose_target(action : String) -> void:
-	if gm.current_card != null and gm.current_card.energy_cost <= gm.current_energy:
+	var current_energy = 0
+	if current_creature_turn == -2:
+		current_energy = gm.current_energy_human
+	elif current_creature_turn == -1:
+		current_energy = gm.current_energy_cat
+	
+	if gm.current_card != null and gm.current_card.energy_cost <= current_energy:
 		var cursor_grid_pos = map.local_to_map(get_global_mouse_position())
 		var target_local_pos = map.map_to_local(cursor_grid_pos)
 		
@@ -350,7 +376,7 @@ func choose_target(action : String) -> void:
 								var power = gm.current_card.strength
 								var turns = gm.current_card.turns
 								source.give_buff(giant, type, power, turns)
-	elif gm.current_card != null and gm.current_card.energy_cost > gm.current_energy:
+	elif gm.current_card != null and gm.current_card.energy_cost > current_energy:
 		card_container_cat.remind_no_energy_for_current_card()
 				
 func enemy_turn() -> void:
@@ -361,15 +387,21 @@ func enemy_turn() -> void:
 		
 	if not source.state == "dead":
 		if gm.state == "dead":
-			current_creature_turn = -1
+			current_creature_turn = -2
 			return
+			
+		var target : CharacterBody2D	
+		if team_positions.get(0) == "cat":
+			target = giant
+		else:
+			target = human
 			
 		var action_number = randi_range(0, source.move_set.size()-1)
 		var action = source.move_set.get(action_number)
 		
 		match action:
 			"deal_damage":
-				source.deal_damage(giant)
+				source.deal_damage(target)
 			"defend":
 				source.defend()
 			"debuff":
@@ -380,7 +412,7 @@ func enemy_turn() -> void:
 				source.give_debuff(giant, type, power, turns)
 			"buff":
 				var target_number = randi_range(0, find_child("Enemies").get_child_count() - 1)
-				var target = find_child("Enemies").get_child(target_number)
+				target = find_child("Enemies").get_child(target_number)
 				
 				var type_number = randi_range(0, source.buff_set.size()-1)
 				var type = source.buff_set.get(type_number).get(0)
@@ -401,8 +433,10 @@ func end_turn() -> void:
 		card_container_human.visible = true
 		$UI/EnergyHuman.visible = true
 		
-		if gm.current_energy == -1000:
-			gm.current_energy = gm.energy_cat
+		if gm.current_energy_human == -1000:
+			
+			if gm.current_energy_cat < gm.energy_cat:
+				gm.current_energy_cat = gm.energy_cat
 			current_creature_turn = -1
 			end_turn()
 			
@@ -414,8 +448,8 @@ func end_turn() -> void:
 		card_container_human.visible = false
 		$UI/EnergyHuman.visible = false
 		
-		if gm.current_energy == -1000:
-			gm.current_energy = 0
+		if gm.current_energy_cat == -1000:
+			gm.current_energy_cat = 0
 			current_creature_turn += 1
 			
 			if gm.has_rocky and not battle_ended:
@@ -459,7 +493,7 @@ func end_turn() -> void:
 			current_creature_turn += 1
 			
 			if current_creature_turn == current_enemies.size():
-				gm.current_energy = gm.energy_human
+				gm.current_energy_human = gm.energy_human
 				turn_count += 1
 				current_creature_turn = -2
 				giant.turn_tick()
@@ -529,7 +563,7 @@ func check_creature_stats() -> void:
 		stats += 	str("\n", gm.current_defence_cat, "/", gm.max_defence_cat)
 		stats += 	str("\n", gm.current_accuracy_cat, "%")
 		stats += 	str("\n", gm.current_luck_cat, "%")
-		stats += 	str("\n", gm.current_energy, "/", gm.max_energy_cat)
+		stats += 	str("\n", gm.current_energy_cat, "/", gm.max_energy_cat)
 		stats += 	str("\n")
 		stats += 	str("\n", gm.level)
 		stats += 	str("\n", gm.xp, "/", gm.xp_needed)
@@ -596,7 +630,7 @@ func check_creature_stats() -> void:
 		stats += 	str("\n", gm.current_defence_human, "/", gm.max_defence_human)
 		stats += 	str("\n", gm.current_accuracy_human, "%")
 		stats += 	str("\n", gm.current_luck_human, "%")
-		stats += 	str("\n", gm.current_energy, "/", gm.max_energy_human)
+		stats += 	str("\n", gm.current_energy_human, "/", gm.max_energy_human)
 		stats += 	str("\n")
 		stats += 	str("\n", gm.level)
 		stats += 	str("\n", gm.xp, "/", gm.xp_needed)
@@ -759,7 +793,7 @@ func update_creature_dialog() -> void:
 			stats += 	str("\n", gm.current_defence_cat, "/", gm.max_defence_cat)
 			stats += 	str("\n", gm.current_accuracy_cat, "%")
 			stats += 	str("\n", gm.current_luck_cat, "%")
-			stats += 	str("\n", gm.current_energy, "/", gm.max_energy_cat)
+			stats += 	str("\n", gm.current_energy_cat, "/", gm.max_energy_cat)
 			stats += 	str("\n")
 			stats += 	str("\n", gm.level)
 			stats += 	str("\n", gm.xp, "/", gm.xp_needed)
@@ -826,7 +860,7 @@ func update_creature_dialog() -> void:
 			stats += 	str("\n", gm.current_defence_human, "/", gm.max_defence_human)
 			stats += 	str("\n", gm.current_accuracy_human, "%")
 			stats += 	str("\n", gm.current_luck_human, "%")
-			stats += 	str("\n", gm.current_energy, "/", gm.max_energy_human)
+			stats += 	str("\n", gm.current_energy_human, "/", gm.max_energy_human)
 			stats += 	str("\n")
 			stats += 	str("\n", gm.level)
 			stats += 	str("\n", gm.xp, "/", gm.xp_needed)
