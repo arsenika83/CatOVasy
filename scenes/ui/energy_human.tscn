@@ -4,7 +4,6 @@
 [ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="2_abisq"]
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="3_lbnsp"]
 [ext_resource type="Shader" uid="uid://dm6djrn7pct8b" path="res://shaders/wobble.gdshader" id="4_6nbmw"]
-[ext_resource type="FontFile" uid="uid://dub3oi8dxfpfw" path="res://assets/fonts/JeuDePixel-Regular.otf" id="5_hyb7o"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rd0g7"]
 shader = ExtResource("2_abisq")
@@ -51,7 +50,7 @@ shader_parameter/color_offset = 0.005
 atlas = ExtResource("3_lbnsp")
 region = Rect2(96, 160, 32, 32)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_krwcv"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bm8bg"]
 shader = ExtResource("2_abisq")
 shader_parameter/speed = 1.0000000475
 shader_parameter/amplitude = 2.000000095
@@ -99,15 +98,16 @@ offset_right = 192.0
 offset_bottom = 128.0
 texture = SubResource("AtlasTexture_lbnsp")
 
-[node name="Label" type="Label" parent="." unique_id=1844991877]
-material = SubResource("ShaderMaterial_krwcv")
+[node name="Label" type="Label" parent="." unique_id=1462771490]
+material = SubResource("ShaderMaterial_bm8bg")
 layout_mode = 0
 offset_left = -16.0
 offset_top = 48.0
 offset_right = 64.0
 offset_bottom = 80.0
-theme_override_fonts/font = ExtResource("5_hyb7o")
-theme_override_font_sizes/font_size = 24
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 9
+theme_override_font_sizes/font_size = 30
 text = "2/2"
 horizontal_alignment = 1
 vertical_alignment = 1

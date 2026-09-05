@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://ddjmqi81p7g0" path="res://scripts/cards/card.gd" id="2_jl6rh"]
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="4_1q37b"]
 [ext_resource type="FontFile" uid="uid://dub3oi8dxfpfw" path="res://assets/fonts/JeuDePixel-Regular.otf" id="5_mo7yc"]
+[ext_resource type="PackedScene" uid="uid://d2qyvibo88mu1" path="res://scenes/ui/description.tscn" id="6_mo7yc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jl6rh"]
 resource_local_to_scene = true
@@ -100,6 +101,13 @@ theme_override_font_sizes/font_size = 18
 text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Description" parent="." unique_id=310287216 instance=ExtResource("6_mo7yc")]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 128.0
+offset_bottom = 192.0
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bsxo600wchpra"]
 
 [ext_resource type="Texture2D" uid="uid://4itbl0ejcd3o" path="res://assets/images/tilemap.png" id="1_hg3ry"]
-[ext_resource type="Script" uid="uid://dhlbp4vgykv6o" path="res://scripts/pillow.gd" id="1_wxprh"]
+[ext_resource type="Script" uid="uid://dhlbp4vgykv6o" path="res://scripts/objects/pillow.gd" id="1_wxprh"]
 [ext_resource type="PackedScene" uid="uid://cr7p23s5f4urx" path="res://scenes/fx/status_fx.tscn" id="3_1luaj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1luaj"]

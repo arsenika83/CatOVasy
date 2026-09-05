@@ -1,7 +1,7 @@
 extends Label
 
 
-func display_damage(amount: int, start_position: Vector2) -> void:
+func display_damage(amount, start_position: Vector2) -> void:
 
 	text = str(amount)
 	global_position = start_position

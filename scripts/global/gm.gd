@@ -31,7 +31,7 @@ var current_defence_cat = 0
 var max_defence_cat = 5
 var defended_cat = false
 
-var accuracy_cat = 70
+var accuracy_cat = 7
 var min_accuracy_cat = 0
 var current_accuracy_cat = accuracy_cat
 
@@ -109,7 +109,7 @@ var buff_animation_time_cat = 0.6
 var attack_animation_time_human = 0.3
 var defend_animation_time_human = 0.3
 var debuff_animation_time_human = 0.6
-var buff_animation_time_human = 0.6
+var buff_animation_time_human = 1.3
 
 func _ready() -> void:
 	current_cards_cat.set(1, AttackCard.new())
@@ -119,9 +119,9 @@ func _ready() -> void:
 	current_cards_cat.set(5, DefendCard.new())
 	current_cards_cat.set(6, DefendCard.new())
 	current_cards_cat.set(7, AbilityCard.new())
-	current_cards_cat.set(8, LunchCard.new())
-	current_cards_cat.set(9, LunchCard.new())
-	current_cards_cat.set(10, LunchCard.new())
+	current_cards_cat.set(8, GotYouCard.new())
+	current_cards_cat.set(9, GotYouCard.new())
+	current_cards_cat.set(10, GotYouCard.new())
 	
 	current_cards_human.set(1, GiveStrengthCard.new())
 	current_cards_human.set(2, GiveStrengthCard.new())

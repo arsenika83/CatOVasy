@@ -80,7 +80,7 @@ animations = [{
 }]
 
 [node name="ClawFX" type="AnimatedSprite2D" unique_id=158559104]
-z_index = 35
+z_index = 100
 sprite_frames = SubResource("SpriteFrames_okjh3")
 animation = &"hit"
 autoplay = "idle"

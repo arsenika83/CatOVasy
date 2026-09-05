@@ -10,6 +10,10 @@ var rarity = "common"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	shake = 0.05
+	description_rect.scale = Vector2(1, 0)
+	description_label.text = card_description
+	
 	state_modifier = "_attack"
 	type = "attack"
 	energy_cost = 0

@@ -122,7 +122,7 @@ func _on_change_button_pressed() -> void:
 			card_change_energy_cost = 0
 			
 	if gm.current_energy_cat - card_change_energy_cost >= 0:
-		audio.play()
+		$AudioStreamPlayerChange.play()
 		gm.current_energy_cat -= card_change_energy_cost
 		
 		if gm.current_energy_cat == 0:

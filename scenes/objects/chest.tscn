@@ -57,7 +57,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_eiphe")
 }],
-"loop": 1,
+"loop": true,
 "name": &"closed_all",
 "speed": 5.0
 }, {
@@ -65,7 +65,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_opa1x")
 }],
-"loop": 0,
+"loop": false,
 "name": &"closed_common",
 "speed": 5.0
 }, {
@@ -73,7 +73,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_or75c")
 }],
-"loop": 1,
+"loop": true,
 "name": &"closed_epic",
 "speed": 5.0
 }, {
@@ -81,7 +81,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_nj372")
 }],
-"loop": 1,
+"loop": true,
 "name": &"closed_rare",
 "speed": 5.0
 }, {
@@ -89,7 +89,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_so5va")
 }],
-"loop": 1,
+"loop": true,
 "name": &"closed_unbelievable",
 "speed": 5.0
 }, {
@@ -97,7 +97,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ekffs")
 }],
-"loop": 1,
+"loop": true,
 "name": &"open_all",
 "speed": 5.0
 }, {
@@ -105,7 +105,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_acra8")
 }],
-"loop": 0,
+"loop": false,
 "name": &"open_common",
 "speed": 5.0
 }, {
@@ -113,7 +113,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_mhowy")
 }],
-"loop": 1,
+"loop": true,
 "name": &"open_epic",
 "speed": 5.0
 }, {
@@ -121,7 +121,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5vikd")
 }],
-"loop": 1,
+"loop": true,
 "name": &"open_rare",
 "speed": 5.0
 }, {
@@ -129,7 +129,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_cu4jo")
 }],
-"loop": 1,
+"loop": true,
 "name": &"open_unbelievable",
 "speed": 5.0
 }]

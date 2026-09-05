@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://c3mvckwas1cvx"]
+
+[ext_resource type="Texture2D" uid="uid://4ianpjc1gein" path="res://assets/images/artifact_sprite.png" id="1_rkxex"]
+[ext_resource type="Script" uid="uid://4mfntor0uthm" path="res://scripts/boomerang_projectile.gd" id="2_6r0fw"]
+[ext_resource type="AudioStream" uid="uid://bs7g1b4pof82a" path="res://assets/soundFX/boomerang.wav" id="2_jpk6s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jpk6s"]
+atlas = ExtResource("1_rkxex")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6r0fw"]
+atlas = ExtResource("1_rkxex")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_assvy"]
+atlas = ExtResource("1_rkxex")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sf5g5"]
+atlas = ExtResource("1_rkxex")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g0otw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jpk6s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6r0fw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_assvy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sf5g5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="BoomerangProjectile" type="AnimatedSprite2D" unique_id=630239799]
+sprite_frames = SubResource("SpriteFrames_g0otw")
+autoplay = "default"
+frame_progress = 0.5219796
+script = ExtResource("2_6r0fw")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1039353818]
+stream = ExtResource("2_jpk6s")
+bus = &"SoundFX"

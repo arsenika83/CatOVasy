@@ -18,13 +18,18 @@ var enabled = true
 var energy_cost = 1
 var type = ""
 #var rarity = "common"
+var shake = 0.0
+
+@onready var description_rect = $Description
+@onready var description_label = $Description/Label
 
 const SCALE_NORMAL = Vector2(1.0, 1.0)
 const SCALE_HOVER = Vector2(1.1, 1.1)
 const SCALE_SELECTED = Vector2(1.15, 1.15)
 
 func _ready() -> void:
-	pass
+	description_rect.scale = Vector2(0, 0)
+	description_label.text = ""
 
 func _process(delta: float) -> void:
 	if enabled:
@@ -37,12 +42,19 @@ func _on_mouse_entered() -> void:
 	if enabled:
 		z_index += 10
 		animate_to(SCALE_HOVER, Color.WHITE)
+			
+		var tween = create_tween()
+		tween.tween_property(description_rect, "scale", Vector2(1, 1), 0.2)
 
 # Мышь ушла с элемента
 func _on_mouse_exited() -> void:
 	if enabled:
 		z_index -= 10
 		animate_to(SCALE_NORMAL, Color.WHITE)
+		
+		#description_rect.scale = Vector2(1, 1)
+		var tween = create_tween()
+		tween.tween_property(description_rect, "scale", Vector2(1, 0), 0.25)
 
 func animate_to(target_scale: Vector2, target_color: Color, duration: float = 0.15):
 	var tween = create_tween().set_parallel(true)
@@ -54,6 +66,7 @@ func _on_gui_input(event: InputEvent) -> void:
 			if gm.state == "leveling_up":
 				card_picked_up.emit(self)
 			else:
+				description_rect.scale = Vector2(1, 0)
 				card_clicked.emit(self)
 
 func select_card():

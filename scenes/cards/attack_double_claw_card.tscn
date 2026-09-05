@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b8kl4cpn3k455" path="res://assets/images/card_icons/double_claw_card.png" id="4_rkf8q"]
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="5_7vyus"]
 [ext_resource type="FontFile" uid="uid://dub3oi8dxfpfw" path="res://assets/fonts/JeuDePixel-Regular.otf" id="6_45tgq"]
+[ext_resource type="PackedScene" uid="uid://d2qyvibo88mu1" path="res://scenes/ui/description.tscn" id="7_45tgq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jl6rh"]
 resource_local_to_scene = true
@@ -20,7 +21,7 @@ region = Rect2(384, 0, 64, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0qqw3"]
 atlas = ExtResource("3_hg2l8")
-region = Rect2(448, 0, 64, 96)
+region = Rect2(384, 0, 64, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_633hc"]
 atlas = ExtResource("5_7vyus")
@@ -100,6 +101,13 @@ theme_override_font_sizes/font_size = 18
 text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Description" parent="." unique_id=310287216 instance=ExtResource("7_45tgq")]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 128.0
+offset_bottom = 192.0
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

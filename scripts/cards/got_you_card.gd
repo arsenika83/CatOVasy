@@ -1,4 +1,4 @@
-class_name LunchCard extends Card
+class_name GotYouCard extends Card
 
 var damage = 2
 var card_path = "got_you_card.tscn"
@@ -10,6 +10,10 @@ var rarity = "common"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	description_rect.scale = Vector2(1, 0)
+	description_label.text = card_description
+	
+	shake = 0.3
 	state_modifier = "_attack"
 	type = "attack"
 	everybody_attack = true

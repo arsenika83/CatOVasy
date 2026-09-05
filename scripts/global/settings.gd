@@ -5,6 +5,8 @@ var music_volume: float = 1.0
 var sound_fx_volume: float = 1.0
 var animation_speed: float = 1.0
 
+var lang = "rus"
+
 var path = "res://saves/saved_settings.txt"
 
 func _ready() -> void:

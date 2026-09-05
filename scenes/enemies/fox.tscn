@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://crwe3itor73kc" path="res://scripts/enemies/fox.gd" id="1_1co2e"]
 [ext_resource type="Texture2D" uid="uid://crsqvlld0supu" path="res://assets/images/enemy_sprite.png" id="2_5ba63"]
 [ext_resource type="PackedScene" uid="uid://bc1x5xpcygnvy" path="res://scenes/fx/damage_indicator.tscn" id="2_wyag3"]
+[ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="3_521xt"]
 [ext_resource type="PackedScene" uid="uid://tksv3htggrop" path="res://scenes/fx/xp_orb.tscn" id="3_b3y50"]
 [ext_resource type="PackedScene" uid="uid://cr7p23s5f4urx" path="res://scenes/fx/status_fx.tscn" id="4_wyag3"]
 [ext_resource type="AudioStream" uid="uid://bwch538phpi87" path="res://assets/soundFX/hit.wav" id="5_521xt"]
@@ -20,6 +21,38 @@ size = Vector2(32, 32)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_38ino"]
 radius = 3.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pe3k2"]
+atlas = ExtResource("3_521xt")
+region = Rect2(256, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kugq1"]
+atlas = ExtResource("3_521xt")
+region = Rect2(288, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x3klb"]
+atlas = ExtResource("3_521xt")
+region = Rect2(320, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bb1qk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pe3k2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kugq1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x3klb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kugq1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1co2e"]
 atlas = ExtResource("2_5ba63")
@@ -126,6 +159,11 @@ monitoring = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2DXP" unique_id=215588090]
 shape = SubResource("CircleShape2D_38ino")
 debug_color = Color(0.24974304, 0.61780167, 0.4339693, 0.41960785)
+
+[node name="MyTurn" type="AnimatedSprite2D" parent="." unique_id=2125306581]
+visible = false
+sprite_frames = SubResource("SpriteFrames_bb1qk")
+autoplay = "default"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=34147167]
 position = Vector2(0, 4)

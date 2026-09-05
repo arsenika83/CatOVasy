@@ -11,7 +11,9 @@ var battle_ended = false
 @onready var player_camera = $Camera2D
 @onready var giant = $Giant
 @onready var human = $CharacterSolya
+
 @onready var claw_fx = $ClawFX
+@onready var fire_fx = $FireFX
 
 @onready var audio_no_energy = $AudioStreamPlayerNoEnergy
 
@@ -31,6 +33,8 @@ var defeated = false
 
 var current_selected_card: Control = null
 var current_creature_turn = -2
+
+var boomerang_projectile
 
 var enemy_positions : Array[Vector2] = [Vector2(208, 112), Vector2(208, 144), Vector2(208, 80), \
 Vector2(240, 112), Vector2(240, 144), Vector2(240, 80), \
@@ -60,7 +64,7 @@ func _process(delta: float) -> void:
 	
 	draw_cursor()
 	display_cursor_label() 
-	update_creature_dialog()
+	#update_creature_dialog()
 	
 	if Input.is_action_just_pressed("ui_scale_up") and gm.camera_zoom <= 3:
 		gm.camera_zoom += 1
@@ -72,7 +76,6 @@ func _process(delta: float) -> void:
 		smooth_camera_zoom(":zoom:y", gm.camera_zoom)
 		
 	if Input.is_action_just_pressed("ui_rmb"):
-		swap_characters()
 		check_creature_stats()
 		check_dialog_timer.start()
 	if Input.is_action_just_released("ui_rmb"):
@@ -116,6 +119,16 @@ func init() -> void:
 		tomato.position.x = -1000
 		tomato.z_index = 50
 		$FX.add_child(tomato)
+		
+	if gm.has_boomerang:
+		print("BOOMERANG TEST================")
+		var boomerang_scene = load("res://scenes/fx/boomerang_projectile.tscn")
+		var boomerang = boomerang_scene.instantiate()
+		boomerang.position.x = -1000
+		boomerang.z_index = 50
+		$FX.add_child(boomerang)
+		
+		boomerang_projectile = boomerang
 	
 	for e in gm.current_enemies:
 		var enemy_scene = load("res://scenes/enemies/" + e.enemy_scene_path)
@@ -171,7 +184,6 @@ func display_cursor_label() -> void:
 					cursor_label.visible = true
 					cursor_icon.visible = true
 					#cursor_label.text = str(card_container.current_selected.damage - targets.get(0).current_defence)
-
 
 func find_enemy_by_position(battle_x : int, battle_y : int) -> Enemy:
 	for enemy in find_child("Enemies").get_children():
@@ -384,12 +396,13 @@ func enemy_turn() -> void:
 		return
 		
 	var source = current_enemies.get(current_creature_turn)
-		
+	
 	if not source.state == "dead":
 		if gm.state == "dead":
 			current_creature_turn = -2
 			return
 			
+		source.my_turn.visible = true	
 		var target : CharacterBody2D	
 		if team_positions.get(0) == "cat":
 			target = giant
@@ -426,6 +439,12 @@ func enemy_turn() -> void:
 
 func end_turn() -> void:
 	if current_creature_turn == -2: #СОЛЯ
+		for enemy in current_enemies:
+			enemy.my_turn.visible = false
+			
+		var camera_tween = create_tween()
+		camera_tween.tween_property(player_camera, "position:x", 128, 0.2)
+		
 		giant.my_turn.visible = false
 		human.my_turn.visible = true
 		card_container_cat.visible = false
@@ -441,6 +460,9 @@ func end_turn() -> void:
 			end_turn()
 			
 	elif current_creature_turn == -1: #КОТ
+		var cam_tween = create_tween()
+		cam_tween.tween_property(player_camera, "position:x", 144, 0.2)
+		
 		human.my_turn.visible = false
 		giant.my_turn.visible = true
 		card_container_cat.visible = true
@@ -483,8 +505,20 @@ func end_turn() -> void:
 				var tween2 = create_tween()
 				tween2.tween_property($FX/Rocky, "scale", Vector2(0, 0), 2)
 			
+			var camera_tween = create_tween()
+			camera_tween.tween_property(player_camera, "position:x", 192, 0.2)
+			
+			card_container_cat.visible = false
+			$UI/EnergyCat.visible = false
+			card_container_human.visible = false
+			$UI/EnergyHuman.visible = false
+			giant.my_turn.visible = false
+			
 			$EndTurnTimer.start()
 	else:
+		for enemy in current_enemies:
+			enemy.my_turn.visible = false
+		
 		current_enemies.get(current_creature_turn).current_energy -= 1
 	
 		if current_enemies.get(current_creature_turn).current_energy <= 0:
@@ -497,6 +531,7 @@ func end_turn() -> void:
 				turn_count += 1
 				current_creature_turn = -2
 				giant.turn_tick()
+				human.turn_tick()
 				
 				if gm.has_regen_ring: #КОЛЬЦО РЕГЕНЕРАЦИИ
 					giant.heal(2)
@@ -505,7 +540,7 @@ func end_turn() -> void:
 					e.current_energy = e.energy
 					e.turn_tick()
 					
-				end_turn()	
+				end_turn()
 				return
 				
 		enemy_turn()
@@ -527,14 +562,13 @@ func check_creature_stats() -> void:
 	creature_check_dialog.buff_luck.visible = false
 	creature_check_dialog.buff_high_energy.visible = false
 	
-	if is_check_dialog_holding:
-		current_creature_stats = null
-		var tween = create_tween()
-		tween.tween_property(creature_check_dialog, "position:x", -500, 0.25)
-		creature_dialog_on_screen = false
-		is_check_dialog_holding = false
-		return
-	
+	#if is_check_dialog_holding:
+		#current_creature_stats = null
+		#var tween = create_tween()
+		#tween.tween_property(creature_check_dialog, "position:x", -500, 0.25)
+		#creature_dialog_on_screen = false
+		#is_check_dialog_holding = false
+		#return
 	if (gm.battle_x_cat == cursor_grid_pos.x and gm.battle_y_cat == cursor_grid_pos.y):
 		if current_creature_stats == giant:
 			current_creature_stats = null
@@ -556,7 +590,7 @@ func check_creature_stats() -> void:
 		creature_check_dialog.find_child("SubViewportContainer").find_child("SubViewport").find_child("Camera2D").target_position = target_local_pos	
 			
 		creature_dialog_on_screen = true
-		creature_check_dialog.find_child("NameLabel").text = "Гигант"
+		creature_check_dialog.find_child("NameLabel").text = "Котик"
 					
 		var stats =   str("", gm.hp_cat, "/", gm.max_hp_cat)
 		stats += 	str("\n", gm.current_damage_cat)
@@ -603,7 +637,7 @@ func check_creature_stats() -> void:
 					
 		return
 	elif (gm.battle_x_human == cursor_grid_pos.x and gm.battle_y_human == cursor_grid_pos.y):
-		if current_creature_stats == giant:
+		if current_creature_stats == human:
 			current_creature_stats = null
 			var tween = create_tween()
 			tween.tween_property(creature_check_dialog, "position:x", -500, 0.25)
@@ -611,7 +645,7 @@ func check_creature_stats() -> void:
 			return
 		
 		has_target = true
-		current_creature_stats = giant
+		current_creature_stats = human
 		
 		if not creature_dialog_on_screen:
 			creature_check_dialog.position.x = -500
@@ -620,10 +654,10 @@ func check_creature_stats() -> void:
 					
 			creature_check_dialog.visible = true
 			
-		creature_check_dialog.find_child("SubViewportContainer").find_child("SubViewport").find_child("Camera2D").target_position = target_local_pos	
+		creature_check_dialog.find_child("SubViewportContainer").find_child("SubViewport").find_child("Camera2D").target_position = Vector2(target_local_pos.x, target_local_pos.y - 32)
 			
 		creature_dialog_on_screen = true
-		creature_check_dialog.find_child("NameLabel").text = "Гигант"
+		creature_check_dialog.find_child("NameLabel").text = "Соля"
 					
 		var stats =   str("", gm.hp_human, "/", gm.max_hp_human)
 		stats += 	str("\n", gm.current_damage_human)

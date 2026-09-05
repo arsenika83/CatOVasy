@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://d2qyvibo88mu1"]
+
+[ext_resource type="Texture2D" uid="uid://de2c8pnqtrt77" path="res://assets/images/inventory_ui.png" id="1_p7kps"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wpbht"]
+atlas = ExtResource("1_p7kps")
+region = Rect2(0, 0, 448, 720)
+
+[node name="Description" type="TextureRect" unique_id=310287216]
+use_parent_material = true
+offset_left = -16.0
+offset_top = -224.0
+offset_right = 112.0
+offset_bottom = -32.0
+pivot_offset = Vector2(64, 0)
+texture = SubResource("AtlasTexture_wpbht")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="." unique_id=990227631]
+use_parent_material = true
+layout_mode = 0
+offset_left = 16.0
+offset_top = 8.0
+offset_right = 112.0
+offset_bottom = 160.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 16
+text = "НАНОСИТ УРОН, РАВНЫЙ ВАШЕМУ БАЗОВОМУ + 15 ЕДИНИЦ"
+autowrap_mode = 2

@@ -6,11 +6,11 @@ var is_big = false
 
 var positions : Array[Vector2]
 
-@export var hp = 2
-@export var max_hp = 2
+@export var hp = 5
+@export var max_hp = 5
 
 var taken_damage = 0
-@export var damage = 1
+@export var damage = 2
 var current_damage = damage
 var max_damage = damage
 
@@ -34,6 +34,8 @@ var max_energy = 1
 var gave_xp = false
 var state = "idle"
 
+var shake = 0.1
+
 var enemy_type = "enemy"
 var enemy_name = "enemy"
 var enemy_scene_path = "enemy.tscn"
@@ -45,7 +47,7 @@ var is_following = false
 var standard_move_path : Array[Vector2] = [Vector2(-32, 0), Vector2(0, -32), Vector2(32, 0), Vector2(0, 32), Vector2(0, 0)]
 @export var step_count = 0
 
-var move_set : Array = ["deal_damage", "defend", "debuff", "buff"]
+var move_set : Array = ["deal_damage", "defend", "deal_damage", "buff"]
 
 var debuff_set : Array = [["weakness", 1, 2], ["undefend", 100, 2], ["inaccuracy", 10, 2], \
 ["unluck", 5, 2], ["low_energy", 1, 2]]
@@ -91,6 +93,7 @@ var defend_animation_time = 0.3
 var debuff_animation_time = 0.3
 var buff_animation_time =   0.3
 
+@onready var my_turn = $MyTurn
 @onready var sprite = $AnimatedSprite2D
 @onready var area = $Area2D
 @onready var area_xp = $Area2DXP
@@ -330,7 +333,7 @@ func defend() -> void:
 	else:
 		defend_timer.start(defend_animation_time)
 		
-func give_debuff(target : Giant, type : String, power : int, turns : int) -> void:
+func give_debuff(target : CharacterBody2D, type : String, power : int, turns : int) -> void:
 	
 	current_target = target
 	status_fx.scale = Vector2(0, 0)
@@ -552,11 +555,18 @@ func _on_deal_damage_timer_timeout() -> void:
 	tween1.tween_property(sprite, "position:x", sprite.position.x + 4, 0.1)
 	
 	if current_damage > damage:
+		get_parent().get_parent().player_camera.apply_shake(0.2 + shake)
 		audio_hit_lucky.play()
 		var tween = create_tween()
 		tween.tween_property(status_fx, "scale", Vector2(0, 0), 0.2)
+		
+		get_parent().get_parent().claw_fx.scale = Vector2(2, 2)
 	else:
+		get_parent().get_parent().player_camera.apply_shake(shake)
 		audio_hit.play()
+		
+		get_parent().get_parent().claw_fx.scale = Vector2(1, 1)
+		
 	get_parent().get_parent().claw_fx.position = current_target.position
 	get_parent().get_parent().claw_fx.play("hit")
 	

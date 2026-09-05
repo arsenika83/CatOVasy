@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://6hsq7ud5p275"]
+
+[ext_resource type="Texture2D" uid="uid://s34pblv0ga2j" path="res://assets/images/fx.png" id="1_j8ash"]
+[ext_resource type="AudioStream" uid="uid://bwch538phpi87" path="res://assets/soundFX/hit.wav" id="2_cjy55"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j8ash"]
+atlas = ExtResource("1_j8ash")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cjy55"]
+atlas = ExtResource("1_j8ash")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d0dsf"]
+atlas = ExtResource("1_j8ash")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7x1m2"]
+atlas = ExtResource("1_j8ash")
+region = Rect2(320, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tlfdt"]
+atlas = ExtResource("1_j8ash")
+region = Rect2(352, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pkxl5"]
+atlas = ExtResource("1_j8ash")
+region = Rect2(384, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d3fiw"]
+atlas = ExtResource("1_j8ash")
+region = Rect2(480, 480, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d3fiw"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j8ash")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cjy55")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d0dsf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7x1m2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tlfdt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pkxl5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d3fiw")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 12.0
+}]
+
+[node name="FireFX" type="AnimatedSprite2D" unique_id=158559104]
+z_index = 100
+sprite_frames = SubResource("SpriteFrames_d3fiw")
+animation = &"hit"
+frame = 6
+frame_progress = 1.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=250740181]
+stream = ExtResource("2_cjy55")

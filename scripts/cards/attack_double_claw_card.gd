@@ -9,6 +9,9 @@ var card_description = "Наносит урон, \nравный (2 + базов�
 var rarity = "rare"
 
 func _ready() -> void:
+	description_rect.scale = Vector2(1, 0)
+	description_label.text = card_description
+	
 	energy_cost = 1
 	type = "attack"
 	state_modifier = "_attack"

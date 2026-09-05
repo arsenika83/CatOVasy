@@ -8,6 +8,9 @@ var card_description = "Накладывает случайный негатив
 var rarity = "common"
 
 func _ready() -> void:
+	description_rect.scale = Vector2(1, 0)
+	description_label.text = card_description
+	
 	state_modifier = "_ability"
 	$Energy/Label.text = str(energy_cost)
 	type = "ability"

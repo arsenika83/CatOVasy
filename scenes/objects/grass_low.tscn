@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b8bfs4u1x4s8"]
 
-[ext_resource type="Script" uid="uid://cxqxgpmkqaaoo" path="res://scripts/grass.gd" id="1_jm5yl"]
+[ext_resource type="Script" uid="uid://cxqxgpmkqaaoo" path="res://scripts/objects/grass.gd" id="1_jm5yl"]
 [ext_resource type="Texture2D" uid="uid://4itbl0ejcd3o" path="res://assets/images/tilemap.png" id="2_8egup"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvbpf"]

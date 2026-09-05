@@ -318,7 +318,7 @@ func draw_level_up() -> void:
 	level_up_dialog.visible = true
 	level_up_dialog.position.x = 352
 	level_up_dialog.scale = Vector2(0, 0)
-	level_up_dialog.update_cards()
+	level_up_dialog.update_cards("human")
 	level_up_dialog.level_label.text = str(gm.level-1, " → ", gm.level)
 	gm.state = "leveling_up"
 	

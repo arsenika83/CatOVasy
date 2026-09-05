@@ -33,6 +33,7 @@ var current_heal = 0
 var attack_count = 0
 var taken_damage = 0
 var is_hit_lucky = false
+var just_missed = false
 
 var has_debuff_weakness = false
 var has_debuff_undefend = false
@@ -83,8 +84,8 @@ func _process(delta: float) -> void:
 			sprite.play("falling")
 		"dead":
 			sprite.play("dead")
-		"battle":
-			sprite.play("idle")
+		#"battle":
+			#sprite.play("idle")
 		"battle_attack":
 			pass
 			#sprite.play("battle_attack")
@@ -139,6 +140,7 @@ func go_downstairs() -> void:
 
 func deal_damage(targets : Array[CharacterBody2D]) -> void:
 	is_hit_lucky = false
+	just_missed = false
 	var energy_cost = gm.current_card.energy_cost
 	if gm.current_energy_cat - energy_cost < 0:
 		return
@@ -171,6 +173,7 @@ func deal_damage(targets : Array[CharacterBody2D]) -> void:
 				
 				gm.current_damage_cat *= 2
 		else:
+			just_missed = true
 			gm.current_damage_cat = 0
 			print("GIANT MISS! ")
 	
@@ -453,17 +456,38 @@ func _on_deal_damage_timer_timeout() -> void:
 	tween.tween_property(status_fx, "scale", Vector2(0, 0), 0.2)
 	
 	if is_hit_lucky:
+		get_parent().player_camera.apply_shake(0.1 + gm.current_card.shake)
 		audio_hit_lucky.play()
+		
+		get_parent().claw_fx.scale = Vector2(2, 2)
 	else:
+		get_parent().player_camera.apply_shake(gm.current_card.shake)
 		audio_hit.play()
+		
+		get_parent().claw_fx.scale = Vector2(1, 1)
 	
+	get_parent().claw_fx.position = gm.current_targets[0].position
+	get_parent().claw_fx.play("hit")
 	for target in gm.current_targets:
-		get_parent().claw_fx.position = target.position
-		get_parent().claw_fx.play("hit")
 		target.take_damage(gm.current_damage_cat, gm.attack_animation_time_cat)
 	gm.current_damage_cat = gm.damage_cat
+	
+	if just_missed:
+		if gm.has_boomerang:
+			#var boomerang = get_parent().find_child("FX").find_child("BoomerangProjectile")
+			if gm.current_card.everybody_attack:
+				get_parent().boomerang_projectile.scale = Vector2(3, 3)
+			else:
+				get_parent().boomerang_projectile.scale = Vector2(1, 1)
+			
+			get_parent().boomerang_projectile.audio.play()
+			get_parent().boomerang_projectile.position.x = -1000 
+			get_parent().boomerang_projectile.position.y = randi_range(-10, 10)
+			
+			var tween_boomerang = create_tween()
+			tween_boomerang.tween_property(get_parent().boomerang_projectile, "position", gm.current_targets[0].position + Vector2(600, +32), 1)
+	
 	idle_animation_timer.start(0.2)
-
 
 func _on_defend_timer_timeout() -> void:
 	audio_defend.play()

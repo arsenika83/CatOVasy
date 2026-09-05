@@ -6,6 +6,8 @@
 [ext_resource type="StyleBox" uid="uid://c8ga5v05dn8be" path="res://styles/slider.tres" id="4_ncfhn"]
 [ext_resource type="StyleBox" uid="uid://odkki2srv7k8" path="res://styles/slider_behind.tres" id="5_ob3hf"]
 [ext_resource type="StyleBox" uid="uid://c32ybwbapbdey" path="res://styles/slider_behind_focused.tres" id="6_ob3hf"]
+[ext_resource type="StyleBox" uid="uid://b8wibcbgivilm" path="res://styles/button_normal.tres" id="7_d4m38"]
+[ext_resource type="StyleBox" uid="uid://c66nispyhk2t0" path="res://styles/button_hover.tres" id="9_2vpyc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7pacj"]
 atlas = ExtResource("1_8wfqe")
@@ -26,6 +28,14 @@ region = Rect2(272, 48, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_ob3hf"]
 atlas = ExtResource("3_h175o")
 region = Rect2(256, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n58ha"]
+atlas = ExtResource("3_h175o")
+region = Rect2(384, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ofdip"]
+atlas = ExtResource("3_h175o")
+region = Rect2(448, 128, 64, 64)
 
 [node name="Settings" type="Control" unique_id=1558518248]
 layout_mode = 3
@@ -290,3 +300,34 @@ theme_override_font_sizes/font_size = 16
 text = "3x"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="RusButton" type="Button" parent="GAMEPLAY" unique_id=1642139160]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 128.0
+offset_right = 120.0
+offset_bottom = 184.0
+theme_override_styles/normal = ExtResource("7_d4m38")
+theme_override_styles/pressed = ExtResource("9_2vpyc")
+theme_override_styles/hover = ExtResource("9_2vpyc")
+toggle_mode = true
+icon = SubResource("AtlasTexture_n58ha")
+icon_alignment = 1
+expand_icon = true
+
+[node name="EngButton" type="Button" parent="GAMEPLAY" unique_id=1347092922]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 128.0
+offset_right = 240.0
+offset_bottom = 184.0
+theme_override_styles/normal = ExtResource("7_d4m38")
+theme_override_styles/pressed = ExtResource("9_2vpyc")
+theme_override_styles/hover = ExtResource("9_2vpyc")
+toggle_mode = true
+icon = SubResource("AtlasTexture_ofdip")
+icon_alignment = 1
+expand_icon = true
+
+[connection signal="pressed" from="GAMEPLAY/RusButton" to="." method="_on_rus_button_pressed"]
+[connection signal="pressed" from="GAMEPLAY/EngButton" to="." method="_on_eng_button_pressed"]

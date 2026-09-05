@@ -446,7 +446,7 @@ one_shot = true
 [node name="AudioStreamPlayerBattleStart" type="AudioStreamPlayer" parent="." unique_id=1295234369]
 stream = ExtResource("19_luu1i")
 volume_db = -6.0
-bus = &"Music"
+bus = &"SoundFX"
 
 [node name="AudioStreamPlayerMusic" type="AudioStreamPlayer" parent="." unique_id=179520262]
 stream = ExtResource("30_d7a8j")

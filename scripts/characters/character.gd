@@ -33,6 +33,7 @@ var current_heal = 0
 var attack_count = 0
 var taken_damage = 0
 var is_hit_lucky = false
+var just_missed = false
 
 var has_debuff_weakness = false
 var has_debuff_undefend = false
@@ -59,6 +60,7 @@ var turns_buff_luck = 0
 var turns_buff_high_energy = 0
 
 func _ready() -> void:
+	sprite.play("battle")
 	scale = Vector2(0, 0)
 	spawn()
 
@@ -76,7 +78,8 @@ func _process(delta: float) -> void:
 		"dead":
 			sprite.play("dead")
 		"battle":
-			sprite.play("battle")
+			pass
+			#sprite.play("battle")
 		"battle_boredom":
 			sprite.play("battle_boredom")	
 		"battle_attack":
@@ -134,6 +137,8 @@ func go_downstairs() -> void:
 
 func deal_damage(targets : Array[CharacterBody2D]) -> void:
 	is_hit_lucky = false
+	just_missed = false
+	
 	var energy_cost = gm.current_card.energy_cost
 	if gm.current_energy_human - energy_cost < 0:
 		return
@@ -142,6 +147,7 @@ func deal_damage(targets : Array[CharacterBody2D]) -> void:
 	var tween2 = create_tween()
 	tween2.tween_property(sprite, "position:x", sprite.position.x + 4, 0.1)
 	gm.current_targets = targets
+	audio_hit.play()
 	
 	for target in targets:
 		var success : bool = randf_range(0.0, 1.0) * 100 <= gm.current_accuracy_human
@@ -162,6 +168,7 @@ func deal_damage(targets : Array[CharacterBody2D]) -> void:
 				
 				gm.current_damage_human *= 2
 		else:
+			just_missed = true
 			gm.current_damage_human = 0
 			print("GIANT MISS! ")
 	
@@ -187,7 +194,7 @@ func take_damage(dmg : int, time : float) -> void:
 	if dmg > 0:
 		take_damage_timer.start(time)
 	else:
-		if gm.defended:
+		if gm.defended_human:
 			audio_defend.play()
 			status_fx.play("defended")
 			var tween1 = create_tween()
@@ -196,7 +203,7 @@ func take_damage(dmg : int, time : float) -> void:
 			var tween = create_tween()
 			tween.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
 		
-			gm.defended = false
+			gm.defended_human = false
 		else:
 			audio_miss.play()
 		
@@ -286,10 +293,23 @@ func give_buff(target : CharacterBody2D, type : String, power : int, turns : int
 	status_fx.scale = Vector2(0, 0)
 	status_fx.play("buff")
 	status_fx.visible = true
-	var tween = create_tween()
-	tween.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
+	#var tween = create_tween()
+	#tween.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
 	target.status_fx.play("buff_" + type)
 	gm.current_energy_human -= gm.current_card.energy_cost
+	
+	target.sprite.play("battle_buffed")
+	target.idle_animation_timer.start(gm.buff_animation_time_human)
+	sprite.play("battle_buff_cat")
+	z_index += 1
+	$AudioStreamPlayerBuff.play()
+	
+	if damage_indicator_scene:
+		var indicator = damage_indicator_scene.instantiate()
+		var spawn_pos = global_position + Vector2(0, -2)
+		
+		add_child(indicator)
+		indicator.display_damage("МУР", target.position)
 	
 	match type:
 		"strength":
@@ -319,6 +339,7 @@ func give_buff(target : CharacterBody2D, type : String, power : int, turns : int
 			target.has_buff_high_energy = true
 			target.turns_buff_high_energy += turns
 			target.energy += power
+	idle_animation_timer.start(gm.buff_animation_time_human)
 
 func turn_tick() -> void:
 	#gm.current_defence /= 2
@@ -482,16 +503,44 @@ func _on_deal_damage_timer_timeout() -> void:
 	var tween = create_tween()
 	tween.tween_property(status_fx, "scale", Vector2(0, 0), 0.2)
 	
+	
 	if is_hit_lucky:
+		get_parent().player_camera.apply_shake(0.1 + gm.current_card.shake)
 		audio_hit_lucky.play()
+		
+		get_parent().fire_fx.scale = Vector2(2, 2)
 	else:
-		audio_hit.play()
+		get_parent().player_camera.apply_shake(gm.current_card.shake)
+		
+		get_parent().fire_fx.scale = Vector2(1, 1)
+
+	
+	get_parent().fire_fx.position = Vector2(position.x + 20, position.y - 10)
+	get_parent().fire_fx.play("hit")
+	
+	var tween2 = create_tween()
+	tween2.tween_property(get_parent().fire_fx, "position", gm.current_targets[0].position, gm.attack_animation_time_human)
 	
 	for target in gm.current_targets:
-		get_parent().claw_fx.position = target.position
-		get_parent().claw_fx.play("hit")
 		target.take_damage(gm.current_damage_human, gm.attack_animation_time_human)
 	gm.current_damage_human = gm.damage_human
+	
+	if just_missed:
+		if gm.has_boomerang:
+			#var boomerang = get_parent().find_child("FX").find_child("BoomerangProjectile")
+			if gm.current_card.everybody_attack:
+				get_parent().boomerang_projectile.scale = Vector2(3, 3)
+			else:
+				get_parent().boomerang_projectile.scale = Vector2(1, 1)
+				
+			get_parent().boomerang_projectile.audio.play()	
+			get_parent().boomerang_projectile.position.x = -1000 
+			get_parent().boomerang_projectile.position.y = randi_range(-10, 10)
+			
+			var tween_boomerang = create_tween()
+			tween_boomerang.tween_property(get_parent().boomerang_projectile, "position", gm.current_targets[0].position + Vector2(600, +32), 1)
+	
+	
 	idle_animation_timer.start(0.2)
 
 

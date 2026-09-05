@@ -29,6 +29,6 @@ func _on_timer_timeout() -> void:
 	status_fx.visible = true
 	gm.state = "idle"
 	
-	gm.hp += heal_power
-	if gm.hp > gm.max_hp:
-		gm.hp = gm.max_hp
+	gm.hp_cat += heal_power
+	if gm.hp_cat > gm.max_hp_cat:
+		gm.hp_cat = gm.max_hp_cat

@@ -10,6 +10,9 @@ var rarity = "common"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	description_rect.scale = Vector2(1, 0)
+	description_label.text = card_description
+	
 	state_modifier = "_defend"
 	type = "defend"
 	$Energy/Label.text = str(energy_cost)

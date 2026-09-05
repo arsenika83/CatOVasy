@@ -9,6 +9,9 @@ extends Control
 @onready var fx_slider: HSlider = $AUDIO/FXSlider
 @onready var fx_bus_index: int = AudioServer.get_bus_index("SoundFX")
 
+@onready var rus_button = $GAMEPLAY/RusButton
+@onready var eng_button = $GAMEPLAY/EngButton
+
 func _ready() -> void:
 	var master_current_db = AudioServer.get_bus_volume_db(master_bus_index)
 	if AudioServer.is_bus_mute(master_bus_index):
@@ -61,3 +64,15 @@ func _on_fx_slider_value_changed(value: float) -> void:
 		AudioServer.set_bus_mute(fx_bus_index, false)
 		var db_value = linear_to_db(value)
 		AudioServer.set_bus_volume_db(fx_bus_index, db_value)
+
+
+func _on_rus_button_pressed() -> void:
+	settings.lang = "rus"
+	eng_button.button_pressed = false
+	
+	
+
+
+func _on_eng_button_pressed() -> void:
+	settings.lang = "eng"
+	rus_button.button_pressed = false

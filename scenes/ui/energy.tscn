@@ -1,10 +1,9 @@
 [gd_scene format=3 uid="uid://gxdo1p5x4a6b"]
 
 [ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="1_2gxwd"]
-[ext_resource type="Script" uid="uid://bpxbmrtlg7rsy" path="res://scripts/energy.gd" id="1_l6ty3"]
+[ext_resource type="Script" uid="uid://bpxbmrtlg7rsy" path="res://scripts/ui/energy.gd" id="1_l6ty3"]
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="2_l6ty3"]
 [ext_resource type="Shader" uid="uid://dm6djrn7pct8b" path="res://shaders/wobble.gdshader" id="4_krwcv"]
-[ext_resource type="FontFile" uid="uid://dub3oi8dxfpfw" path="res://assets/fonts/JeuDePixel-Regular.otf" id="4_rd0g7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rd0g7"]
 shader = ExtResource("1_2gxwd")
@@ -102,12 +101,13 @@ texture = SubResource("AtlasTexture_w68cg")
 [node name="Label" type="Label" parent="." unique_id=1844991877]
 material = SubResource("ShaderMaterial_krwcv")
 layout_mode = 0
-offset_left = -16.0
+offset_left = -24.0
 offset_top = 48.0
-offset_right = 64.0
+offset_right = 56.0
 offset_bottom = 80.0
-theme_override_fonts/font = ExtResource("4_rd0g7")
-theme_override_font_sizes/font_size = 24
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 30
 text = "2/2"
 horizontal_alignment = 1
 vertical_alignment = 1
