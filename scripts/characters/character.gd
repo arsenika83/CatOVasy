@@ -149,28 +149,27 @@ func deal_damage(targets : Array[CharacterBody2D]) -> void:
 	gm.current_targets = targets
 	audio_hit.play()
 	
-	for target in targets:
-		var success : bool = randf_range(0.0, 1.0) * 100 <= gm.current_accuracy_human
-		var luck_success : bool = randf_range(0.0, 1.0) * 100 <= gm.current_luck_human
+	var success : bool = randf_range(0.0, 1.0) * 100 <= gm.current_accuracy_human
+	var luck_success : bool = randf_range(0.0, 1.0) * 100 <= gm.current_luck_human
 		
-		if success:
-			gm.current_damage_human = gm.current_card.damage
+	if success:
+		gm.current_damage_human = gm.current_card.damage
 		
-			if luck_success:
-				is_hit_lucky = true
-				status_fx.scale = Vector2(0, 0)
-				status_fx.play("lucky")
-				var tween1 = create_tween()
-				status_fx.visible = true
+		if luck_success:
+			is_hit_lucky = true
+			status_fx.scale = Vector2(0, 0)
+			status_fx.play("lucky")
+			var tween1 = create_tween()
+			status_fx.visible = true
 				
-				var tween = create_tween()
-				tween.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
+			var tween = create_tween()
+			tween.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
 				
-				gm.current_damage_human *= 2
-		else:
-			just_missed = true
-			gm.current_damage_human = 0
-			print("GIANT MISS! ")
+			gm.current_damage_human *= 2
+	else:
+		just_missed = true
+		gm.current_damage_human = 0
+		print("GIANT MISS! ")
 	
 	#get_parent().find_child("UI").find_child("CardContainer").replace_current_card("attack")
 	sprite.play("deal_damage")
@@ -341,6 +340,14 @@ func give_buff(target : CharacterBody2D, type : String, power : int, turns : int
 			target.energy += power
 	idle_animation_timer.start(gm.buff_animation_time_human)
 
+func display_damage(dmg : int) -> void:
+	if damage_indicator_scene:
+		var indicator = damage_indicator_scene.instantiate()
+		var spawn_pos = global_position + Vector2(0, -2)
+		
+		add_child(indicator)
+		indicator.display_damage(dmg, spawn_pos)
+
 func turn_tick() -> void:
 	#gm.current_defence /= 2
 	if has_debuff_weakness:
@@ -468,12 +475,7 @@ func _on_walk_timer_timeout() -> void:
 func _on_take_damage_timer_timeout() -> void:
 	check_hp()
 	
-	if damage_indicator_scene:
-		var indicator = damage_indicator_scene.instantiate()
-		var spawn_pos = global_position + Vector2(0, -2)
-		
-		add_child(indicator)
-		indicator.display_damage(taken_damage, spawn_pos)
+	display_damage(taken_damage)
 	
 	if not gm.state_human == "dead":
 		gm.prev_state_human = gm.state_human
@@ -492,6 +494,8 @@ func _on_idle_animation_timer_timeout() -> void:
 	sprite.play("battle")
 
 func _on_miss_damage_timer_timeout() -> void:
+	display_damage(0)
+	
 	var tween = create_tween()
 	tween.tween_property(status_fx, "scale", Vector2(0, 0), 0.2)
 	get_parent().end_turn()
@@ -503,7 +507,6 @@ func _on_deal_damage_timer_timeout() -> void:
 	var tween = create_tween()
 	tween.tween_property(status_fx, "scale", Vector2(0, 0), 0.2)
 	
-	
 	if is_hit_lucky:
 		get_parent().player_camera.apply_shake(0.1 + gm.current_card.shake)
 		audio_hit_lucky.play()
@@ -514,7 +517,6 @@ func _on_deal_damage_timer_timeout() -> void:
 		
 		get_parent().fire_fx.scale = Vector2(1, 1)
 
-	
 	get_parent().fire_fx.position = Vector2(position.x + 20, position.y - 10)
 	get_parent().fire_fx.play("hit")
 	
@@ -524,6 +526,23 @@ func _on_deal_damage_timer_timeout() -> void:
 	for target in gm.current_targets:
 		target.take_damage(gm.current_damage_human, gm.attack_animation_time_human)
 	gm.current_damage_human = gm.damage_human
+	
+	#ВЗРЫВ
+	if gm.current_card.has_method("explode"):
+		get_parent().fire_fx.scale = Vector2(0, 0)
+		print (just_missed)
+		if not just_missed:
+			$ExplodeTimer.start(gm.attack_animation_time_human)
+			
+			get_parent().cat_fx.position = get_parent().giant.position
+			get_parent().giant.visible = false
+			
+			var tween3 = create_tween()
+			tween3.tween_property(get_parent().cat_fx, "position", gm.current_targets[0].position, gm.attack_animation_time_human)
+			
+			var tween4 = create_tween()
+			tween4.tween_property(get_parent().cat_fx, "rotation_degrees", 720, gm.attack_animation_time_human)
+			get_parent().cat_fx.play("hit")
 	
 	if just_missed:
 		if gm.has_boomerang:
@@ -567,3 +586,12 @@ func _on_heal_timer_timeout() -> void:
 	
 	gm.state_human = gm.prev_state_human
 	sprite.play(gm.state_human)
+
+
+func _on_explode_timer_timeout() -> void:
+	get_parent().giant_explosion_fx.position = gm.current_targets[0].position
+	get_parent().giant_explosion_fx.play("hit")
+	get_parent().player_camera.apply_shake(3)
+	$AudioExplode.play()
+	get_parent().giant.visible = true
+	get_parent().giant.display_damage(5)

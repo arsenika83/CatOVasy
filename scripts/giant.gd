@@ -399,6 +399,13 @@ func check_xp() -> bool:
 		
 	return false
 		
+func display_damage(dmg : int) -> void:
+	if damage_indicator_scene:
+		var indicator = damage_indicator_scene.instantiate()
+		var spawn_pos = global_position + Vector2(0, -2)
+		
+		add_child(indicator)
+		indicator.display_damage(dmg, spawn_pos)
 
 func _on_area_2d_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
 	#fall_timer.start()
@@ -446,6 +453,9 @@ func _on_idle_animation_timer_timeout() -> void:
 func _on_miss_damage_timer_timeout() -> void:
 	var tween = create_tween()
 	tween.tween_property(status_fx, "scale", Vector2(0, 0), 0.2)
+	
+	display_damage(0)
+	
 	get_parent().end_turn()
 
 func _on_deal_damage_timer_timeout() -> void:

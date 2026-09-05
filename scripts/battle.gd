@@ -12,8 +12,10 @@ var battle_ended = false
 @onready var giant = $Giant
 @onready var human = $CharacterSolya
 
-@onready var claw_fx = $ClawFX
-@onready var fire_fx = $FireFX
+@onready var claw_fx = $FX/ClawFX
+@onready var fire_fx = $FX/FireFX
+@onready var cat_fx = $FX/CatFX
+@onready var giant_explosion_fx = $FX/GiantExplosion
 
 @onready var audio_no_energy = $AudioStreamPlayerNoEnergy
 
@@ -1042,6 +1044,10 @@ func _on_win_timer_timeout() -> void:
 		$AudioStreamPlayerWin.play()
 		end_battle_button.visible = true
 		end_battle_button.disabled = false
+		card_container_cat.visible = false
+		card_container_human.visible = false
+		$UI/EnergyCat.visible = false
+		$UI/EnergyHuman.visible = false
 
 
 func _on_end_turn_timer_timeout() -> void:

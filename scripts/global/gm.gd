@@ -31,7 +31,7 @@ var current_defence_cat = 0
 var max_defence_cat = 5
 var defended_cat = false
 
-var accuracy_cat = 7
+var accuracy_cat = 70
 var min_accuracy_cat = 0
 var current_accuracy_cat = accuracy_cat
 
@@ -62,7 +62,7 @@ var current_defence_human = 0
 var max_defence_human = 7
 var defended_human = false
 
-var accuracy_human = 70
+var accuracy_human = 75
 var min_accuracy_human = 0
 var current_accuracy_human = accuracy_human
 
@@ -124,10 +124,9 @@ func _ready() -> void:
 	current_cards_cat.set(10, GotYouCard.new())
 	
 	current_cards_human.set(1, GiveStrengthCard.new())
-	current_cards_human.set(2, GiveStrengthCard.new())
+	current_cards_human.set(2, SollenheimerCard.new())
 	current_cards_human.set(3, BoredomCard.new())
 	current_cards_human.set(4, LittleFireCard.new())
-	current_cards_human.set(5, LittleFireCard.new())
 	
 
 func _process(delta: float) -> void:

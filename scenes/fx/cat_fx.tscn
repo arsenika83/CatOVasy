@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://b7efvk3yra5db"]
+
+[ext_resource type="Texture2D" uid="uid://s34pblv0ga2j" path="res://assets/images/fx.png" id="1_24rov"]
+[ext_resource type="AudioStream" uid="uid://bwch538phpi87" path="res://assets/soundFX/hit.wav" id="2_1bfqa"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_24rov"]
+atlas = ExtResource("1_24rov")
+region = Rect2(480, 480, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1bfqa"]
+atlas = ExtResource("1_24rov")
+region = Rect2(416, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mk5yd"]
+atlas = ExtResource("1_24rov")
+region = Rect2(480, 480, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_icfpx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_24rov")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.3,
+"texture": SubResource("AtlasTexture_1bfqa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mk5yd")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 1.0
+}]
+
+[node name="CatFX" type="AnimatedSprite2D" unique_id=158559104]
+z_index = 100
+sprite_frames = SubResource("SpriteFrames_icfpx")
+animation = &"hit"
+autoplay = "default"
+frame = 1
+frame_progress = 1.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=250740181]
+stream = ExtResource("2_1bfqa")

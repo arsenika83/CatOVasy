@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://c85j0cjbsfflo" path="res://scenes/objects/tree_1.tscn" id="9_ek61p"]
 [ext_resource type="AudioStream" uid="uid://bxhii1a001e1v" path="res://assets/music/BATTLE_WIN.mp3" id="9_mrg47"]
 [ext_resource type="PackedScene" uid="uid://bq46oyngg435a" path="res://scenes/ui/card_container_cat.tscn" id="10_ou0n0"]
+[ext_resource type="PackedScene" uid="uid://f3jfsj1vndud" path="res://scenes/fx/giant_explosion.tscn" id="11_5yn1g"]
 [ext_resource type="PackedScene" uid="uid://btcx8q72tnkf5" path="res://scenes/fx/claw_fx.tscn" id="11_nueng"]
 [ext_resource type="AudioStream" uid="uid://dnyi4oi4yn2sl" path="res://assets/soundFX/cancel.wav" id="11_obxu6"]
 [ext_resource type="AudioStream" uid="uid://bwch538phpi87" path="res://assets/soundFX/hit.wav" id="11_q70wx"]
@@ -22,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://b7oix76heqs28" path="res://scenes/ui/creature_dialog.tscn" id="13_1o703"]
 [ext_resource type="PackedScene" uid="uid://bjjafdg4et4p0" path="res://scenes/ui/paw.tscn" id="13_8ync6"]
 [ext_resource type="PackedScene" uid="uid://gxdo1p5x4a6b" path="res://scenes/ui/energy.tscn" id="14_8ync6"]
+[ext_resource type="PackedScene" uid="uid://b7efvk3yra5db" path="res://scenes/fx/cat_fx.tscn" id="14_ek61p"]
 [ext_resource type="StyleBox" uid="uid://b8wibcbgivilm" path="res://styles/button_normal.tres" id="14_ymw5c"]
 [ext_resource type="StyleBox" uid="uid://2iw7p3yvicvr" path="res://styles/button_pressed.tres" id="15_obxu6"]
 [ext_resource type="StyleBox" uid="uid://c66nispyhk2t0" path="res://styles/button_hover.tres" id="16_3cs84"]
@@ -179,10 +181,19 @@ position = Vector2(608, -16)
 
 [node name="FX" type="Node2D" parent="." unique_id=1560400902]
 
-[node name="ClawFX" parent="." unique_id=158559104 instance=ExtResource("11_nueng")]
+[node name="GiantExplosion" parent="FX" unique_id=1197458061 instance=ExtResource("11_5yn1g")]
+z_index = 100
+position = Vector2(16, -48)
+frame = 0
+frame_progress = 0.0
+
+[node name="ClawFX" parent="FX" unique_id=158559104 instance=ExtResource("11_nueng")]
 position = Vector2(-16, -16)
 
-[node name="FireFX" parent="." unique_id=997164931 instance=ExtResource("8_w756s")]
+[node name="FireFX" parent="FX" unique_id=997164931 instance=ExtResource("8_w756s")]
+
+[node name="CatFX" parent="FX" unique_id=1852378800 instance=ExtResource("14_ek61p")]
+position = Vector2(-16, -48)
 
 [node name="Effects" type="CanvasLayer" parent="." unique_id=1391118850]
 

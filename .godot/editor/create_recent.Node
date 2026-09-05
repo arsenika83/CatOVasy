@@ -1,10 +1,10 @@
 AudioStreamPlayer
+Timer
 AnimatedSprite2D
 TextureRect
 Node2D
 PointLight2D
 Button
-Timer
 CollisionShape2D
 Area2D
 TextureButton

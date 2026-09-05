@@ -426,6 +426,14 @@ func give_buff(target : CharacterBody2D, type : String, power : int, turns : int
 	
 	debuff_timer.start(debuff_animation_time)
 	
+func display_damage(dmg : int) -> void:
+	if damage_indicator_scene:
+		var indicator = damage_indicator_scene.instantiate()
+		var spawn_pos = global_position + Vector2(0, -2)
+		
+		add_child(indicator)
+		indicator.display_damage(dmg, spawn_pos)	
+	
 func turn_tick() -> void:
 	#current_defence /= 2
 	if has_debuff_weakness:
@@ -507,12 +515,7 @@ func _on_take_damage_timer_timeout() -> void:
 		luck -= 3
 		current_luck -= 3
 	
-	if damage_indicator_scene:
-		var indicator = damage_indicator_scene.instantiate()
-		var spawn_pos = global_position + Vector2(0, -2)
-		
-		add_child(indicator)
-		indicator.display_damage(taken_damage, spawn_pos)
+	display_damage(taken_damage)
 	
 	if not state == "dead":
 		sprite.play("take_damage")
@@ -528,12 +531,8 @@ func _on_take_damage_timer_timeout() -> void:
 func _on_miss_damage_timer_timeout() -> void:
 	var tween = create_tween()
 	tween.tween_property(status_fx, "scale", Vector2(0, 0), 0.2)
-	if damage_indicator_scene:
-		var indicator = damage_indicator_scene.instantiate()
-		var spawn_pos = global_position + Vector2(0, -2)
-		
-		add_child(indicator)
-		indicator.display_damage(0, spawn_pos)
+	
+	display_damage(0)
 	
 	if gm.has_boomerang:
 		take_damage(1, attack_animation_time)

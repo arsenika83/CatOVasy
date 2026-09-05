@@ -1,0 +1,96 @@
+[gd_scene format=3 uid="uid://f3jfsj1vndud"]
+
+[ext_resource type="Texture2D" uid="uid://cyebolnfd4g5k" path="res://assets/images/giant_explosion.png" id="1_85q7j"]
+[ext_resource type="Script" uid="uid://cb4hfmoetarwo" path="res://scripts/giant_explosion.gd" id="2_ht5dj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k84me"]
+atlas = ExtResource("1_85q7j")
+region = Rect2(448, 448, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ht5dj"]
+atlas = ExtResource("1_85q7j")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5nvee"]
+atlas = ExtResource("1_85q7j")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0mvgd"]
+atlas = ExtResource("1_85q7j")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yejeu"]
+atlas = ExtResource("1_85q7j")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_htybe"]
+atlas = ExtResource("1_85q7j")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7pbym"]
+atlas = ExtResource("1_85q7j")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_inrss"]
+atlas = ExtResource("1_85q7j")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1gcqg"]
+atlas = ExtResource("1_85q7j")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k84me"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k84me")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ht5dj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5nvee")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0mvgd")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_yejeu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_htybe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7pbym")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_inrss")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1gcqg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k84me")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 10.0
+}]
+
+[node name="GiantExplosion" type="AnimatedSprite2D" unique_id=1197458061]
+position = Vector2(0, 32)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_k84me")
+animation = &"hit"
+autoplay = "default"
+frame = 4
+frame_progress = 0.088324524
+offset = Vector2(0, -21.333334)
+script = ExtResource("2_ht5dj")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=490053130]

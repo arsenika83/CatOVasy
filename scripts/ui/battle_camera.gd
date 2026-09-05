@@ -27,4 +27,4 @@ func _execute_shake() -> void:
 # Главная функция, которую мы будем вызывать при ударе
 func apply_shake(intensity: float = 1.0) -> void:
 	# Устанавливаем силу тряски (значение зажимаем между 0.0 и 1.0 для безопасности)
-	shake_strength = clamp(intensity, 0.0, 1.0)
+	shake_strength = clamp(intensity, 0.0, 3.0)
