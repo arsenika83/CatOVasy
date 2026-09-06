@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://csdjjxljsbgt"]
+
+[ext_resource type="Texture2D" uid="uid://xyqt3v2gvqv5" path="res://assets/images/objects.png" id="1_443ya"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_443ya"]
+atlas = ExtResource("1_443ya")
+region = Rect2(480, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gnu5k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_443ya")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bhjn2"]
+atlas = ExtResource("1_443ya")
+region = Rect2(480, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eua1y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bhjn2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_443ya"]
+colors = PackedColorArray(1, 0.75686276, 0.67058825, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bhjn2"]
+gradient = SubResource("Gradient_443ya")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.9017094, 0.22222222)
+
+[node name="Lantern" type="Node2D" unique_id=1437025129]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1617815979]
+z_index = 10
+z_as_relative = false
+position = Vector2(0, -40)
+sprite_frames = SubResource("SpriteFrames_gnu5k")
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="." unique_id=173596035]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_eua1y")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1945220275]
+position = Vector2(0, -43)
+color = Color(1, 0.75686276, 0.67058825, 1)
+energy = 1.2
+texture = SubResource("GradientTexture2D_bhjn2")
+texture_scale = 1.88

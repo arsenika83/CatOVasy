@@ -10,11 +10,14 @@
 [ext_resource type="PackedScene" uid="uid://1by6pkucltci" path="res://scenes/objects/grass.tscn" id="6_p57ef"]
 [ext_resource type="PackedScene" uid="uid://b8bfs4u1x4s8" path="res://scenes/objects/grass_low.tscn" id="7_d3ub6"]
 [ext_resource type="PackedScene" uid="uid://c0fd45oqpmhla" path="res://scenes/objects/chest.tscn" id="7_po5je"]
+[ext_resource type="PackedScene" uid="uid://csdjjxljsbgt" path="res://scenes/objects/lantern.tscn" id="8_e1tke"]
 [ext_resource type="PackedScene" uid="uid://bsxo600wchpra" path="res://scenes/objects/pillow.tscn" id="9_7s2gi"]
 [ext_resource type="PackedScene" uid="uid://cgbiblheppx0x" path="res://scenes/enemies/fox.tscn" id="9_ng1gw"]
 [ext_resource type="PackedScene" uid="uid://c7f16y8rwf2q" path="res://scenes/objects/edge_one.tscn" id="10_m6lg1"]
 [ext_resource type="PackedScene" uid="uid://c85j0cjbsfflo" path="res://scenes/objects/tree_1.tscn" id="11_d7a8j"]
 [ext_resource type="Shader" uid="uid://dm6djrn7pct8b" path="res://shaders/wobble.gdshader" id="11_fj52k"]
+[ext_resource type="PackedScene" uid="uid://clllky54vqihv" path="res://scenes/objects/tree_2.tscn" id="12_d7a8j"]
+[ext_resource type="PackedScene" uid="uid://b0a701ex5ah6g" path="res://scenes/objects/fallen_leaves.tscn" id="12_nqtv8"]
 [ext_resource type="PackedScene" uid="uid://1bvjmpy2pf0k" path="res://scenes/enemies/enemy.tscn" id="14_m6lg1"]
 [ext_resource type="PackedScene" uid="uid://di4k2iivrnhup" path="res://scenes/ui/creature_adventure_dialog.tscn" id="15_m6lg1"]
 [ext_resource type="PackedScene" uid="uid://qgx2la7r3w7a" path="res://scenes/ui/inventory.tscn" id="16_3asx1"]
@@ -80,7 +83,7 @@ texture_region_size = Vector2i(32, 32)
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_lbhrr")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7s2gi"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d7a8j"]
 shader = ExtResource("11_fj52k")
 shader_parameter/color_levels = 62.9230028938425
 shader_parameter/chromatic_aberration = 0.0010000000475
@@ -129,33 +132,7 @@ room_number = 0
 
 [node name="Stairs" parent="Exits" unique_id=1448595182 instance=ExtResource("5_iywne")]
 position = Vector2(144, 208)
-
-[node name="Objects" type="Node2D" parent="." unique_id=1714322502]
-position = Vector2(208, 80)
-
-[node name="Pillow" parent="Objects" unique_id=564725004 instance=ExtResource("9_7s2gi")]
-charge_count = 1
-heal_power = 5
-
-[node name="Chest" parent="Objects" unique_id=977096426 instance=ExtResource("7_po5je")]
-position = Vector2(-64, -32)
-
-[node name="Chest2" parent="Objects" unique_id=1807108612 instance=ExtResource("7_po5je")]
-position = Vector2(0, -64)
-rarity = "rare"
-
-[node name="Chest3" parent="Objects" unique_id=1718915447 instance=ExtResource("7_po5je")]
-position = Vector2(-64, -64)
-rarity = "epic"
-
-[node name="Giant" parent="." unique_id=2060885226 instance=ExtResource("1_uwrxv")]
-position = Vector2(176, 48)
-
-[node name="Camera2D" type="Camera2D" parent="Giant" unique_id=1303825275]
-zoom = Vector2(2, 2)
-position_smoothing_enabled = true
-rotation_smoothing_enabled = true
-rotation_smoothing_speed = 3.0
+room_number = -1
 
 [node name="Plants" type="Node2D" parent="." unique_id=1507805972]
 
@@ -178,10 +155,46 @@ position = Vector2(48, 208)
 position = Vector2(272, 48)
 
 [node name="Tree(1)" parent="Plants" unique_id=1945600265 instance=ExtResource("11_d7a8j")]
-position = Vector2(112, 176)
+position = Vector2(112, 144)
 
 [node name="Tree(1)_2" parent="Plants" unique_id=678667183 instance=ExtResource("11_d7a8j")]
-position = Vector2(128, 168)
+position = Vector2(272, 144)
+
+[node name="Tree(2)" parent="Plants" unique_id=656862992 instance=ExtResource("12_d7a8j")]
+position = Vector2(208, 240)
+
+[node name="FallenLeaves" parent="Plants" unique_id=1081225171 instance=ExtResource("12_nqtv8")]
+position = Vector2(112, 152)
+
+[node name="Objects" type="Node2D" parent="." unique_id=1714322502]
+position = Vector2(208, 80)
+
+[node name="Pillow" parent="Objects" unique_id=564725004 instance=ExtResource("9_7s2gi")]
+charge_count = 1
+heal_power = 5
+
+[node name="Chest" parent="Objects" unique_id=977096426 instance=ExtResource("7_po5je")]
+position = Vector2(-64, -32)
+
+[node name="Chest2" parent="Objects" unique_id=1807108612 instance=ExtResource("7_po5je")]
+position = Vector2(0, -64)
+rarity = "rare"
+
+[node name="Chest3" parent="Objects" unique_id=1718915447 instance=ExtResource("7_po5je")]
+position = Vector2(-64, -64)
+rarity = "epic"
+
+[node name="Lantern" parent="Objects" unique_id=1437025129 instance=ExtResource("8_e1tke")]
+position = Vector2(-128, 136)
+
+[node name="Giant" parent="." unique_id=2060885226 instance=ExtResource("1_uwrxv")]
+position = Vector2(176, 48)
+
+[node name="Camera2D" type="Camera2D" parent="Giant" unique_id=1303825275]
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+rotation_smoothing_enabled = true
+rotation_smoothing_speed = 3.0
 
 [node name="Enemies" type="Node2D" parent="." unique_id=946491156]
 
@@ -357,21 +370,21 @@ position = Vector2(336, 240)
 [node name="Cursor" parent="." unique_id=2051460958 instance=ExtResource("4_lbhrr")]
 position = Vector2(608, -16)
 
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1236012575]
+modulate = Color(1, 1, 1, 0.5019608)
+self_modulate = Color(1, 1, 1, 0.9411765)
+color = Color(0, 0, 0, 1)
+
 [node name="Effects" type="CanvasLayer" parent="." unique_id=1391118850]
 
-[node name="ColorRect" type="ColorRect" parent="Effects" unique_id=982896523]
-material = SubResource("ShaderMaterial_7s2gi")
+[node name="ColorRect" type="ColorRect" parent="Effects" unique_id=898663152]
+material = SubResource("ShaderMaterial_d7a8j")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1236012575]
-modulate = Color(1, 1, 1, 0.5019608)
-self_modulate = Color(1, 1, 1, 0.9411765)
-color = Color(0, 0, 0, 1)
+mouse_filter = 2
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=589757551]
 

@@ -1,4 +1,4 @@
-res://scenes/levels/battle_level.tscn
+res://scenes/levels/level-1.tscn
 res://shaders/updown.gdshader
 res://shaders/vhs.gdshader
 res://shaders/wobble.gdshader
@@ -7,10 +7,14 @@ res://shaders/hp_bar.gdshader
 res://shaders/grass.gdshader
 res://shaders/foregroundFX.gdshader
 res://shaders/buckshot.gdshader
-res://scenes/cards/lick_wounds_card.tscn
-res://scripts/cards/lick_wounds_card.gd
-res://scripts/global/gm.gd
-res://scenes/characters/character_solya.tscn
+res://scenes/objects/tree_1.tscn
+res://shaders/tree.gdshader
+res://scenes/objects/tree_2.tscn
+res://scripts/game.gd
 res://scripts/giant.gd
-res://scripts/characters/character.gd
-res://scripts/enemies/enemy.gd
+res://scenes/giant.tscn
+res://scenes/levels/level0.tscn
+res://scenes/levels/battle_level.tscn
+res://scripts/objects/tree.gd
+res://scenes/objects/fallen_leaves.tscn
+res://scenes/objects/lantern.tscn

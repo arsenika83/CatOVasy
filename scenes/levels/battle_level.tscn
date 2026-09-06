@@ -203,16 +203,6 @@ animation = &"default"
 frame = 0
 frame_progress = 0.0
 
-[node name="Effects" type="CanvasLayer" parent="." unique_id=1391118850]
-
-[node name="ColorRect" type="ColorRect" parent="Effects" unique_id=1165976768]
-material = SubResource("ShaderMaterial_nueng")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="AudioStreamPlayerMusic" type="AudioStreamPlayer" parent="." unique_id=179520262]
 stream = ExtResource("8_ymw5c")
 autoplay = true
@@ -231,6 +221,17 @@ bus = &"SoundFX"
 stream = ExtResource("11_obxu6")
 pitch_scale = 1.5
 bus = &"SoundFX"
+
+[node name="Effects" type="CanvasLayer" parent="." unique_id=1391118850]
+
+[node name="ColorRect" type="ColorRect" parent="Effects" unique_id=1165976768]
+material = SubResource("ShaderMaterial_nueng")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=589757551]
 

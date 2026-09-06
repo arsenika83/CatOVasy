@@ -5,6 +5,7 @@ var current_selected: Control = null
 const ATTACK_CARD = preload("res://scenes/cards/attack_card.tscn")
 const DEFEND_CARD = preload("res://scenes/cards/defend_card.tscn")
 
+var free_changes = 0
 var card_change_energy_cost = 1
 
 @onready var end_turn_button = $EndButton
@@ -110,8 +111,23 @@ func _on_card_played(played_card: Control) -> void:
 		$EndButton/StatusFX.visible = true
 
 	$DeleteCardTimer.start()
+	
+	if free_changes > 0:
+		card_change_energy_cost = 0
+		change_cost.text = str(card_change_energy_cost)
 
-func _on_change_button_pressed() -> void:	
+func _on_change_button_pressed() -> void:
+	if free_changes > 0:
+		free_changes -= 1
+		card_change_energy_cost = 0
+		
+		if free_changes == 0:
+			#card_change_energy_cost = 1
+			change_cost.text = str(1)
+	else:
+		card_change_energy_cost = 1
+		change_cost.text = str(card_change_energy_cost)
+	
 	if gm.current_energy_human - card_change_energy_cost >= 0:
 		audio.play()
 		gm.current_energy_human -= card_change_energy_cost
@@ -127,7 +143,6 @@ func _on_change_button_pressed() -> void:
 		if card_change_amount >= 2:
 			card_change_energy_cost = 1
 		
-		change_cost.text = str(card_change_energy_cost)
 	else:
 		remind_no_energy()	
 

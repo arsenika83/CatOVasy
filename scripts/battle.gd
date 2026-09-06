@@ -375,7 +375,7 @@ func choose_target(action : String) -> void:
 								source.give_debuff(targets, type, power, turns)	
 		
 		#BUFFS
-		if gm.battle_x_cat == cursor_grid_pos.x and gm.battle_y_cat == cursor_grid_pos.y:
+		if gm.battle_x_cat == cursor_grid_pos.x and gm.battle_y_cat == cursor_grid_pos.y or gm.battle_x_human == cursor_grid_pos.x and gm.battle_y_human == cursor_grid_pos.y:
 			if not gm.state == "dead":
 				match action:
 					"defend":
@@ -391,6 +391,11 @@ func choose_target(action : String) -> void:
 								var power = gm.current_card.strength
 								var turns = gm.current_card.turns
 								source.give_buff(giant, type, power, turns)
+							"luck":
+								var power = gm.current_card.luck
+								var turns = gm.current_card.turns
+								source.give_buff(giant, type, power, turns)
+							
 	elif gm.current_card != null and gm.current_card.energy_cost > current_energy:
 		card_container_cat.remind_no_energy_for_current_card()
 				

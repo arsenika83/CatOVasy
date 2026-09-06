@@ -28,6 +28,7 @@ var character_name = "cat"
 @onready var audio_hit_lucky = $AudioStreamPlayerHitLucky
 @onready var audio_debuff = $AudioStreamPlayerDebuff
 
+var light_diff = 0.0001
 @onready var light = $PointLight2D
 
 var current_heal = 0
@@ -65,6 +66,13 @@ func _ready() -> void:
 	spawn()
 
 func _process(delta: float) -> void:
+	light.energy -= light_diff
+	
+	if light.energy <= 1.2:
+		light_diff = -0.0001
+	elif light.energy >= 1.3:
+		light_diff = 0.0001
+	
 	check_fall(delta)
 	check_hp()
 
@@ -491,7 +499,7 @@ func _on_deal_damage_timer_timeout() -> void:
 	#ВЗРЫВ
 	if gm.current_card.has_method("explode"):
 		get_parent().claw_fx.scale = Vector2(0, 0)
-		print (just_missed)
+		display_damage(4)
 		if not just_missed:
 			$ExplodeTimer.start(gm.attack_animation_time_human)
 			
@@ -564,4 +572,3 @@ func _on_explode_timer_timeout() -> void:
 	get_parent().player_camera.apply_shake(3)
 	$AudioExplode.play()
 	sprite.visible = true
-	display_damage(4)

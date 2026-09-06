@@ -31,6 +31,11 @@ var inventory_on_screen = false
 const BATTLE_SCENE = preload("res://scenes/levels/battle_level.tscn")
 
 func _ready() -> void:
+	
+	if name == "Town":
+		#giant.light.enabled = false
+		giant.walk_timer.wait_time = 0.01
+	
 	scene_transitioner.change_scene_back()
 	
 	audio.play(gm.current_music_position)

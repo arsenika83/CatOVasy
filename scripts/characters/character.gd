@@ -288,18 +288,18 @@ func give_debuff(targets : Array[CharacterBody2D], type : String, power : int, t
 	tween3.tween_property(gm.current_targets[0].status_fx, "scale", Vector2(1, 1), 0.2)	
 	debuff_timer.start(gm.debuff_animation_time)
 
-func give_buff(target : CharacterBody2D, type : String, power : int, turns : int) -> void:
+func give_buff(targets : Array[CharacterBody2D], type : String, power : int, turns : int) -> void:
 	#current_target = target
 	status_fx.scale = Vector2(0, 0)
 	status_fx.play("buff")
 	status_fx.visible = true
 	#var tween = create_tween()
 	#tween.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
-	target.status_fx.play("buff_" + type)
+	targets[0].status_fx.play("buff_" + type)
 	gm.current_energy_human -= gm.current_card.energy_cost
 	
-	target.sprite.play("battle_buffed")
-	target.idle_animation_timer.start(gm.buff_animation_time_human)
+	targets[0].sprite.play("battle_buffed")
+	targets[0].idle_animation_timer.start(gm.buff_animation_time_human)
 	sprite.play("battle_buff_cat")
 	z_index += 1
 	$AudioStreamPlayerBuff.play()
@@ -309,36 +309,36 @@ func give_buff(target : CharacterBody2D, type : String, power : int, turns : int
 		var spawn_pos = global_position + Vector2(0, -2)
 		
 		add_child(indicator)
-		indicator.display_damage("МУР", target.position)
+		indicator.display_damage("МУР", targets[0].position)
 	
 	match type:
 		"strength":
-			target.has_buff_strength = true
-			target.turns_buff_strength += turns
+			targets[0].has_buff_strength = true
+			targets[0].turns_buff_strength += turns
 			gm.current_damage_cat += power
 			gm.damage_cat += power
 		"defend":
-			target.has_buff_defend = true
-			target.turns_buff_defend += turns
-			target.current_defence += power
-			if target.current_defence <= 0:
-				target.current_defence = 0
+			targets[0].has_buff_defend = true
+			targets[0].turns_buff_defend += turns
+			targets[0].current_defence += power
+			if targets[0].current_defence <= 0:
+				targets[0].current_defence = 0
 		"accuracy":
-			target.has_buff_accuracy = true
-			target.turns_buff_accuracy += turns
-			target.current_accuracy += power
-			if target.current_accuracy > 100:
-				target.current_accuracy = 100
+			targets[0].has_buff_accuracy = true
+			targets[0].turns_buff_accuracy += turns
+			targets[0].current_accuracy += power
+			if targets[0].current_accuracy > 100:
+				targets[0].current_accuracy = 100
 		"luck":
-			target.has_buff_luck = true
-			target.turns_buff_luck += turns
-			target.current_luck += power
-			if target.current_luck > 100:
-				target.current_luck = 100
+			targets[0].has_buff_luck = true
+			targets[0].turns_buff_luck += turns
+			targets[0].current_luck += power
+			if targets[0].current_luck > 100:
+				targets[0].current_luck = 100
 		"high_energy":
-			target.has_buff_high_energy = true
-			target.turns_buff_high_energy += turns
-			target.energy += power
+			targets[0].has_buff_high_energy = true
+			targets[0].turns_buff_high_energy += turns
+			targets[0].energy += power
 	idle_animation_timer.start(gm.buff_animation_time_human)
 
 func display_damage(dmg : int) -> void:
@@ -535,7 +535,7 @@ func _on_deal_damage_timer_timeout() -> void:
 	#ВЗРЫВ
 	if gm.current_card.has_method("explode"):
 		get_parent().fire_fx.scale = Vector2(0, 0)
-		print (just_missed)
+		get_parent().giant.display_damage(5)
 		if not just_missed:
 			$ExplodeTimer.start(gm.attack_animation_time_human)
 			
@@ -599,4 +599,3 @@ func _on_explode_timer_timeout() -> void:
 	get_parent().player_camera.apply_shake(3)
 	$AudioExplode.play()
 	get_parent().giant.sprite.visible = true
-	get_parent().giant.display_damage(5)

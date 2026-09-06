@@ -6,6 +6,7 @@ const ATTACK_CARD = preload("res://scenes/cards/attack_card.tscn")
 const DEFEND_CARD = preload("res://scenes/cards/defend_card.tscn")
 
 var card_change_energy_cost = 1
+var free_changes = 0
 
 @onready var end_turn_button = $EndButton
 
@@ -53,10 +54,9 @@ func _ready() -> void:
 		child.scale = Vector2(0.5, 0.5)
 			
 	if gm.has_spinner:
-		if card_change_amount < 2:
-			card_change_energy_cost = 0
-		else:
-			card_change_energy_cost = 1
+		free_changes += 2
+		card_change_energy_cost = 0
+
 	change_cost.text = str(card_change_energy_cost)
 	unplayed_label.text = str(unplayed_cards.size())
 	played_label.text = "0"
@@ -115,11 +115,22 @@ func _on_card_played(played_card: Control) -> void:
 		$EndButton/StatusFX.visible = true
 
 	$DeleteCardTimer.start()
+	
+	if free_changes > 0:
+		card_change_energy_cost = 0
+		change_cost.text = str(card_change_energy_cost)
 
 func _on_change_button_pressed() -> void:
-	if gm.has_spinner:
-		if card_change_amount < 2:
-			card_change_energy_cost = 0
+	if free_changes > 0:
+		free_changes -= 1
+		card_change_energy_cost = 0
+		
+		if free_changes == 0:
+			card_change_energy_cost = 1
+			change_cost.text = str(card_change_energy_cost)
+	else:
+		card_change_energy_cost = 1
+		change_cost.text = str(card_change_energy_cost)
 			
 	if gm.current_energy_cat - card_change_energy_cost >= 0:
 		$AudioStreamPlayerChange.play()
