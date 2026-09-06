@@ -1,5 +1,6 @@
 class_name HumanCharacter extends CharacterBody2D
 
+var character_name = "solya"
 @export var damage_indicator_scene: PackedScene
 @onready var area = $Area2D
 @onready var sprite = $Sprite
@@ -182,7 +183,7 @@ func take_damage(dmg : int, time : float) -> void:
 	if gm.current_defence_human - dmg >= 0:
 		gm.current_defence_human -= dmg
 		if dmg > 0:
-			gm.defended = true
+			gm.defended_human = true
 		dmg = 0
 	else:
 		dmg -= gm.current_defence_human
@@ -478,6 +479,10 @@ func _on_take_damage_timer_timeout() -> void:
 	display_damage(taken_damage)
 	
 	if not gm.state_human == "dead":
+		var tween1 = create_tween()
+		tween1.tween_property(sprite, "position:x", sprite.position.x - 4, 0.1)
+		tween1.tween_property(sprite, "position:x", sprite.position.x, 0.1)
+		
 		gm.prev_state_human = gm.state_human
 		gm.state_human = "taking_damage"
 		gm.hp_human -= taken_damage
@@ -535,7 +540,7 @@ func _on_deal_damage_timer_timeout() -> void:
 			$ExplodeTimer.start(gm.attack_animation_time_human)
 			
 			get_parent().cat_fx.position = get_parent().giant.position
-			get_parent().giant.visible = false
+			get_parent().giant.sprite.visible = false
 			
 			var tween3 = create_tween()
 			tween3.tween_property(get_parent().cat_fx, "position", gm.current_targets[0].position, gm.attack_animation_time_human)
@@ -593,5 +598,5 @@ func _on_explode_timer_timeout() -> void:
 	get_parent().giant_explosion_fx.play("hit")
 	get_parent().player_camera.apply_shake(3)
 	$AudioExplode.play()
-	get_parent().giant.visible = true
+	get_parent().giant.sprite.visible = true
 	get_parent().giant.display_damage(5)

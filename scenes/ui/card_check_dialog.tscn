@@ -15,7 +15,7 @@ shader_parameter/time_offset = 10.0
 atlas = ExtResource("3_jngtl")
 region = Rect2(0, 0, 448, 720)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qjp1o"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hxdfs"]
 resource_local_to_scene = true
 shader = ExtResource("1_qjp1o")
 shader_parameter/speed = 2.000000095
@@ -60,9 +60,9 @@ autowrap_mode = 2
 use_parent_material = true
 layout_mode = 0
 offset_left = 16.0
-offset_top = 64.0
+offset_top = 40.0
 offset_right = 232.0
-offset_bottom = 256.0
+offset_bottom = 232.0
 theme_override_font_sizes/font_size = 18
 text = "Дает 15 защиты если у вас нет защиты по умолчанию дададада"
 autowrap_mode = 2
@@ -88,6 +88,6 @@ offset_right = 368.0
 offset_bottom = 208.0
 
 [node name="AttackDoubleClawCard" parent="Card" unique_id=1531075916 instance=ExtResource("4_hxdfs")]
-material = SubResource("ShaderMaterial_qjp1o")
+material = SubResource("ShaderMaterial_hxdfs")
 use_parent_material = true
 layout_mode = 2

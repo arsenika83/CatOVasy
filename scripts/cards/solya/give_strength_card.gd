@@ -4,10 +4,10 @@ var card_path = "give_strength_card.tscn"
 var icon_path = "give_strength_card.png"
 var tool_tip_text = ""
 var card_name = "Подбодрить"
-var card_description = "В этом ходу кот наносит +1 урона"
+var card_description = "Кот наносит +1 урона. Длительность 2 хода"
 var rarity = "common"
 var strength = 1
-var turns = 1
+var turns = 2
 
 func _ready() -> void:
 	description_rect.scale = Vector2(1, 0)

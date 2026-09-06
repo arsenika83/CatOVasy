@@ -7,16 +7,16 @@ var all_card_names_rare : Array[String]
 var all_card_names_epic : Array[String]
 var all_card_names_unbelievable : Array[String]
 
-var all_card_names_cat : Array[String] = ["ability", "attack", "attack_double_claw", "sharp_claw", "got_you",
-"cooked_meat"]
+var all_card_names_cat : Array[String] = ["attack_double_claw", "sharp_claw", "got_you",
+"cooked_meat", "inferno", "revenge", "cattenheimer"]
 var all_card_names_common_cat : Array[String]
-var all_card_names_rare_cat : Array[String]
-var all_card_names_epic_cat : Array[String]
+var all_card_names_rare_cat : Array[String] = ["attack_double_claw"]
+var all_card_names_epic_cat : Array[String] = ["inferno", "revenge", "cattenheimer"]
 var all_card_names_unbelievable_cat : Array[String]
 
-var all_card_names_human : Array[String] = ["little_fire", "boredom", "give_strength"]
+var all_card_names_human : Array[String] = ["little_fire", "boredom", "give_strength", "sollenheimer"]
 var all_card_names_common_human : Array[String]
-var all_card_names_rare_human : Array[String]
+var all_card_names_rare_human : Array[String] = ["boredom"]
 var all_card_names_epic_human : Array[String]
 var all_card_names_unbelievable_human : Array[String]
 

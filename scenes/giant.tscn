@@ -752,6 +752,9 @@ one_shot = true
 [node name="DebuffTimer" type="Timer" parent="." unique_id=520573255]
 one_shot = true
 
+[node name="ExplodeTimer" type="Timer" parent="." unique_id=2008295638]
+one_shot = true
+
 [node name="AudioStreamPlayerMeow" type="AudioStreamPlayer" parent="." unique_id=1429074131]
 stream = ExtResource("3_sx7hc")
 volume_db = -10.0
@@ -810,6 +813,10 @@ volume_db = 10.0
 mix_target = 2
 bus = &"SoundFX"
 
+[node name="AudioExplode" type="AudioStreamPlayer" parent="." unique_id=1567162070]
+stream = ExtResource("4_ukwaf")
+pitch_scale = 0.3
+
 [connection signal="area_shape_entered" from="Area2D" to="." method="_on_area_2d_area_shape_entered"]
 [connection signal="timeout" from="IdleAnimationTimer" to="." method="_on_idle_animation_timer_timeout"]
 [connection signal="timeout" from="RespawnTimer" to="." method="_on_respawn_timer_timeout"]
@@ -822,3 +829,4 @@ bus = &"SoundFX"
 [connection signal="timeout" from="DealDamageTimer" to="." method="_on_deal_damage_timer_timeout"]
 [connection signal="timeout" from="DefendTimer" to="." method="_on_defend_timer_timeout"]
 [connection signal="timeout" from="DebuffTimer" to="." method="_on_debuff_timer_timeout"]
+[connection signal="timeout" from="ExplodeTimer" to="." method="_on_explode_timer_timeout"]

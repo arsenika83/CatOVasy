@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://gxdo1p5x4a6b" path="res://scenes/ui/energy.tscn" id="14_8ync6"]
 [ext_resource type="PackedScene" uid="uid://b7efvk3yra5db" path="res://scenes/fx/cat_fx.tscn" id="14_ek61p"]
 [ext_resource type="StyleBox" uid="uid://b8wibcbgivilm" path="res://styles/button_normal.tres" id="14_ymw5c"]
+[ext_resource type="PackedScene" uid="uid://drtcvgk4w8njv" path="res://scenes/fx/inferno.tscn" id="15_2l0dc"]
 [ext_resource type="StyleBox" uid="uid://2iw7p3yvicvr" path="res://styles/button_pressed.tres" id="15_obxu6"]
 [ext_resource type="StyleBox" uid="uid://c66nispyhk2t0" path="res://styles/button_hover.tres" id="16_3cs84"]
 [ext_resource type="PackedScene" uid="uid://cuybslgtoc70m" path="res://scenes/ui/energy_human.tscn" id="20_xxxag"]
@@ -194,6 +195,13 @@ position = Vector2(-16, -16)
 
 [node name="CatFX" parent="FX" unique_id=1852378800 instance=ExtResource("14_ek61p")]
 position = Vector2(-16, -48)
+
+[node name="Inferno" parent="FX" unique_id=787359160 instance=ExtResource("15_2l0dc")]
+z_index = 100
+position = Vector2(-128, -64)
+animation = &"default"
+frame = 0
+frame_progress = 0.0
 
 [node name="Effects" type="CanvasLayer" parent="." unique_id=1391118850]
 

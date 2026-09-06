@@ -470,26 +470,26 @@ texture = SubResource("AtlasTexture_vj5ws")
 [node name="ArtifactCheckDialog" parent="." unique_id=1959694701 instance=ExtResource("9_i8fht")]
 visible = false
 layout_mode = 1
-offset_left = -452.0
+offset_left = -468.0
 offset_top = -96.16
-offset_right = -68.0
+offset_right = -84.0
 offset_bottom = 255.84
 
 [node name="CardCheckDialog" parent="." unique_id=1787720696 instance=ExtResource("10_5suo7")]
 visible = false
 layout_mode = 1
-offset_left = -452.0
+offset_left = -468.0
 offset_top = 279.84
-offset_right = -68.0
+offset_right = -84.0
 offset_bottom = 559.83997
 
 [node name="CatButton" type="TextureButton" parent="." unique_id=287720447]
 use_parent_material = true
 layout_mode = 0
-offset_left = -16.0
-offset_top = 48.0
+offset_left = -32.0
+offset_top = 496.0
 offset_right = 32.0
-offset_bottom = 96.0
+offset_bottom = 560.0
 mouse_filter = 1
 toggle_mode = true
 texture_normal = SubResource("AtlasTexture_5suo7")
@@ -500,10 +500,10 @@ stretch_mode = 0
 [node name="HumanButton" type="TextureButton" parent="." unique_id=1266193200]
 use_parent_material = true
 layout_mode = 0
-offset_left = -16.0
-offset_top = 112.0
+offset_left = -32.0
+offset_top = 576.0
 offset_right = 32.0
-offset_bottom = 160.0
+offset_bottom = 640.0
 mouse_filter = 1
 toggle_mode = true
 texture_normal = SubResource("AtlasTexture_hjfas")

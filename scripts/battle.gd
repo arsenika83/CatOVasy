@@ -15,6 +15,7 @@ var battle_ended = false
 @onready var claw_fx = $FX/ClawFX
 @onready var fire_fx = $FX/FireFX
 @onready var cat_fx = $FX/CatFX
+@onready var inferno_fx = $FX/Inferno
 @onready var giant_explosion_fx = $FX/GiantExplosion
 
 @onready var audio_no_energy = $AudioStreamPlayerNoEnergy

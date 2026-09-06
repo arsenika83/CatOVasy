@@ -17,13 +17,13 @@ shader_parameter/time_offset = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0qqw3"]
 atlas = ExtResource("3_vko6w")
-region = Rect2(448, 0, 64, 96)
+region = Rect2(384, 0, 64, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ee5py"]
 atlas = ExtResource("5_sohyt")
 region = Rect2(0, 32, 32, 32)
 
-[node name="LunchCard" type="Control" unique_id=1531075916]
+[node name="GotYouCard" type="Control" unique_id=1531075916]
 z_index = 100
 z_as_relative = false
 material = SubResource("ShaderMaterial_jl6rh")

@@ -1,5 +1,4 @@
-res://default_env.tres
-res://scenes/cards/sollenheimer_card.tscn
+res://scenes/levels/battle_level.tscn
 res://shaders/updown.gdshader
 res://shaders/vhs.gdshader
 res://shaders/wobble.gdshader
@@ -8,17 +7,10 @@ res://shaders/hp_bar.gdshader
 res://shaders/grass.gdshader
 res://shaders/foregroundFX.gdshader
 res://shaders/buckshot.gdshader
-res://scripts/cards/solya/sollenheimer_card.gd
+res://scenes/cards/lick_wounds_card.tscn
+res://scripts/cards/lick_wounds_card.gd
 res://scripts/global/gm.gd
-res://scenes/fx/giant_explosion.tscn
-res://scripts/giant_explosion.gd
-res://scenes/levels/battle_level.tscn
-res://scripts/characters/character.gd
-res://scripts/battle.gd
 res://scenes/characters/character_solya.tscn
-res://scripts/ui/battle_camera.gd
-res://scenes/ui/explosion_transitioner.tscn
-res://scenes/fx/cat_fx.tscn
 res://scripts/giant.gd
+res://scripts/characters/character.gd
 res://scripts/enemies/enemy.gd
-res://scenes/ui/description.tscn

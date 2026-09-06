@@ -123,7 +123,7 @@ region = Rect2(128, 0, 32, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_piljf"]
 atlas = ExtResource("1_eb1o4")
-region = Rect2(160, 128, 32, 64)
+region = Rect2(160, 192, 32, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eb1o4"]
 atlas = ExtResource("1_eb1o4")
@@ -592,9 +592,9 @@ autoplay = "default"
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1453614389]
 position = Vector2(0, -6)
 sprite_frames = SubResource("SpriteFrames_a16jr")
-animation = &"deal_damage"
+animation = &"taking_damage"
 autoplay = "idle"
-frame_progress = 0.7960464
+frame_progress = 0.7060082
 
 [node name="ArtifactSprite" type="AnimatedSprite2D" parent="." unique_id=534946203]
 visible = false

@@ -5,7 +5,7 @@ var card_path = "defend_card.tscn"
 var icon_path = "defend_card.png"
 var tool_tip_text = ""
 var card_name = "Защита"
-var card_description = "Дает защиту"
+var card_description = "Дает защиту, равную 3 + защита кота"
 var rarity = "common"
 
 # Called when the node enters the scene tree for the first time.

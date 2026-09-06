@@ -101,6 +101,10 @@ vertical_alignment = 1
 
 [node name="Description" parent="." unique_id=310287216 instance=ExtResource("7_7f8xy")]
 layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 128.0
+offset_bottom = 192.0
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

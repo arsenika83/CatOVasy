@@ -56,6 +56,7 @@ var buff_set : Array = [["strength", 1, 2], ["defend", 1, 2], ["accuracy", 10, 2
 ["luck", 5, 2], ["high_energy", 1, 2]]
 
 var just_missed = false
+var dealt_damage_to_human = false
 
 var has_debuff_weakness = false
 var has_debuff_undefend = false
@@ -270,6 +271,8 @@ func deal_damage(target : CharacterBody2D) -> void:
 	tween1.tween_property(sprite, "position:x", sprite.position.x - 4, 0.1)
 	
 	if success:
+		if target.character_name == "solya":
+			dealt_damage_to_human = true
 		if luck_success:
 			status_fx.scale = Vector2(0, 0)
 			status_fx.play("lucky")
@@ -521,6 +524,10 @@ func _on_take_damage_timer_timeout() -> void:
 		sprite.play("take_damage")
 		audio_hurt.play()
 		idle_animation_timer.start(0.2)
+		
+		var tween1 = create_tween()
+		tween1.tween_property(sprite, "position:x", sprite.position.x + 4, 0.1)
+		tween1.tween_property(sprite, "position:x", sprite.position.x, 0.1)
 		#get_parent().get_parent().end_turn()
 	else:
 		audio_fall.play()
