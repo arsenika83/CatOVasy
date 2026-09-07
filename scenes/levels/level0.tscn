@@ -136,6 +136,9 @@ room_number = -1
 
 [node name="Plants" type="Node2D" parent="." unique_id=1507805972]
 
+[node name="FallenLeaves" parent="Plants" unique_id=1081225171 instance=ExtResource("12_nqtv8")]
+position = Vector2(112, 152)
+
 [node name="GrassLow3" parent="Plants" unique_id=963626142 instance=ExtResource("7_d3ub6")]
 position = Vector2(80, 112)
 
@@ -162,9 +165,6 @@ position = Vector2(272, 144)
 
 [node name="Tree(2)" parent="Plants" unique_id=656862992 instance=ExtResource("12_d7a8j")]
 position = Vector2(208, 240)
-
-[node name="FallenLeaves" parent="Plants" unique_id=1081225171 instance=ExtResource("12_nqtv8")]
-position = Vector2(112, 152)
 
 [node name="Objects" type="Node2D" parent="." unique_id=1714322502]
 position = Vector2(208, 80)

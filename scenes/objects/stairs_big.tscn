@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://dtfad1wqq6sax"]
+
+[ext_resource type="Script" uid="uid://bexbvnke2yt8w" path="res://scripts/stairs.gd" id="1_tshag"]
+[ext_resource type="Texture2D" uid="uid://4itbl0ejcd3o" path="res://assets/images/tilemap.png" id="2_48xhg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_48xhg"]
+atlas = ExtResource("2_48xhg")
+region = Rect2(0, 128, 96, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_62ts5"]
+size = Vector2(80, 10)
+
+[node name="Stairs" type="Node2D" unique_id=175082881]
+script = ExtResource("1_tshag")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=376259947]
+texture = SubResource("AtlasTexture_48xhg")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1849586179]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=891029772]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_62ts5")
+debug_color = Color(0.7827523, 0.3974081, 0.47944582, 0.41960785)
+
+[node name="Timer" type="Timer" parent="." unique_id=98938748]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

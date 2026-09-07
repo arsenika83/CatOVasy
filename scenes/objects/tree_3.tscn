@@ -1,23 +1,23 @@
-[gd_scene format=3 uid="uid://clllky54vqihv"]
+[gd_scene format=3 uid="uid://cfyguig5a0744"]
 
-[ext_resource type="Script" uid="uid://ecfyyhblf878" path="res://scripts/objects/tree.gd" id="1_5xkma"]
-[ext_resource type="Texture2D" uid="uid://xyqt3v2gvqv5" path="res://assets/images/objects.png" id="2_bvjj0"]
-[ext_resource type="Shader" uid="uid://dmo1l352iefcn" path="res://shaders/tree.gdshader" id="3_bvjj0"]
-[ext_resource type="Texture2D" uid="uid://4itbl0ejcd3o" path="res://assets/images/tilemap.png" id="3_gc4ve"]
+[ext_resource type="Script" uid="uid://ecfyyhblf878" path="res://scripts/objects/tree.gd" id="1_3pyf0"]
+[ext_resource type="Shader" uid="uid://dmo1l352iefcn" path="res://shaders/tree.gdshader" id="2_h1kgp"]
+[ext_resource type="Texture2D" uid="uid://4itbl0ejcd3o" path="res://assets/images/tilemap.png" id="3_h33o0"]
+[ext_resource type="Texture2D" uid="uid://xyqt3v2gvqv5" path="res://assets/images/objects.png" id="4_puw0i"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b4mr8"]
-shader = ExtResource("3_bvjj0")
+shader = ExtResource("2_h1kgp")
 shader_parameter/speed = 2.0
-shader_parameter/min_strength = 0.0350000016625
-shader_parameter/max_strength = 0.0350000016625
+shader_parameter/min_strength = 0.00400000019
+shader_parameter/max_strength = 0.00400000019
 shader_parameter/wind_decay = 0.710000033725
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wmy6n"]
-atlas = ExtResource("3_gc4ve")
+atlas = ExtResource("3_h33o0")
 region = Rect2(0, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yu8pw"]
-atlas = ExtResource("3_gc4ve")
+atlas = ExtResource("3_h33o0")
 region = Rect2(32, 96, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pkg73"]
@@ -36,21 +36,28 @@ animations = [{
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bvjj0"]
 resource_local_to_scene = true
-shader = ExtResource("3_bvjj0")
+shader = ExtResource("2_h1kgp")
 shader_parameter/speed = 1.70000008075
-shader_parameter/min_strength = 0.0250000011875
-shader_parameter/max_strength = 0.0250000011875
+shader_parameter/min_strength = 0.00400000019
+shader_parameter/max_strength = 0.00400000019
 shader_parameter/wind_decay = 0.850000040375
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bvjj0"]
-atlas = ExtResource("2_bvjj0")
-region = Rect2(704, 96, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_3pyf0"]
+atlas = ExtResource("4_puw0i")
+region = Rect2(512, 64, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h1kgp"]
+atlas = ExtResource("4_puw0i")
+region = Rect2(512, 64, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gc4ve"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_bvjj0")
+"texture": SubResource("AtlasTexture_3pyf0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h1kgp")
 }],
 "loop": 1,
 "name": &"default",
@@ -59,21 +66,21 @@ animations = [{
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gc4ve"]
 resource_local_to_scene = true
-shader = ExtResource("3_bvjj0")
+shader = ExtResource("2_h1kgp")
 shader_parameter/speed = 1.70000008075
-shader_parameter/min_strength = 0.0250000011875
-shader_parameter/max_strength = 0.0250000011875
+shader_parameter/min_strength = 0.00400000019
+shader_parameter/max_strength = 0.00400000019
 shader_parameter/wind_decay = 0.950000045125
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5xkma"]
-atlas = ExtResource("2_bvjj0")
-region = Rect2(672, 0, 96, 96)
+[sub_resource type="AtlasTexture" id="AtlasTexture_h33o0"]
+atlas = ExtResource("4_puw0i")
+region = Rect2(512, 0, 32, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bvjj0"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5xkma")
+"texture": SubResource("AtlasTexture_h33o0")
 }],
 "loop": 1,
 "name": &"default",
@@ -81,23 +88,23 @@ animations = [{
 }]
 
 [node name="Tree(2)" type="Node2D" unique_id=963626142]
-script = ExtResource("1_5xkma")
+script = ExtResource("1_3pyf0")
 
 [node name="Shadow" type="AnimatedSprite2D" parent="." unique_id=1935827245]
 material = SubResource("ShaderMaterial_b4mr8")
-position = Vector2(0, -8)
-scale = Vector2(2, 1.5)
+position = Vector2(-2.3841858e-07, -7.999999)
+scale = Vector2(1, 1.0000001)
 sprite_frames = SubResource("SpriteFrames_pkg73")
 autoplay = "default"
 
 [node name="Body" type="AnimatedSprite2D" parent="." unique_id=410517297]
 material = SubResource("ShaderMaterial_bvjj0")
-position = Vector2(0, -8)
+scale = Vector2(1, 0.875)
 sprite_frames = SubResource("SpriteFrames_gc4ve")
 
 [node name="Leaves" type="AnimatedSprite2D" parent="." unique_id=1121289262]
 z_index = 5
 material = SubResource("ShaderMaterial_gc4ve")
-position = Vector2(0, -40)
+position = Vector2(0, -32)
 sprite_frames = SubResource("SpriteFrames_bvjj0")
 autoplay = "default"

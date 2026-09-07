@@ -3,6 +3,36 @@
 [ext_resource type="Script" uid="uid://ecfyyhblf878" path="res://scripts/objects/tree.gd" id="1_odkpy"]
 [ext_resource type="Texture2D" uid="uid://xyqt3v2gvqv5" path="res://assets/images/objects.png" id="2_odkpy"]
 [ext_resource type="Shader" uid="uid://dmo1l352iefcn" path="res://shaders/tree.gdshader" id="2_oq1q1"]
+[ext_resource type="Texture2D" uid="uid://4itbl0ejcd3o" path="res://assets/images/tilemap.png" id="3_6j1wh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a7tdr"]
+shader = ExtResource("2_oq1q1")
+shader_parameter/speed = 2.0
+shader_parameter/min_strength = 0.0350000016625
+shader_parameter/max_strength = 0.0350000016625
+shader_parameter/wind_decay = 0.710000033725
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wmy6n"]
+atlas = ExtResource("3_6j1wh")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yu8pw"]
+atlas = ExtResource("3_6j1wh")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f30dh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wmy6n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yu8pw")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 1.0
+}]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oq1q1"]
 resource_local_to_scene = true
@@ -22,7 +52,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_oq1q1")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }]
@@ -45,13 +75,21 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_odkpy")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 1.0
 }]
 
 [node name="Tree(1)" type="Node2D" unique_id=963626142]
 script = ExtResource("1_odkpy")
+
+[node name="Shadow" type="AnimatedSprite2D" parent="." unique_id=654735379]
+material = SubResource("ShaderMaterial_a7tdr")
+position = Vector2(0, -8)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_f30dh")
+autoplay = "default"
+frame_progress = 0.19978039
 
 [node name="Body" type="AnimatedSprite2D" parent="." unique_id=894051688]
 material = SubResource("ShaderMaterial_oq1q1")

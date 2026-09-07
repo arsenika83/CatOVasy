@@ -33,6 +33,7 @@ const BATTLE_SCENE = preload("res://scenes/levels/battle_level.tscn")
 func _ready() -> void:
 	
 	if name == "Town":
+		gm.current_music_position = 0.0
 		giant.light.energy = 0.6
 		giant.walk_timer.wait_time = 0.01
 	

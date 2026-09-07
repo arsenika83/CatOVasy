@@ -4,9 +4,11 @@
 [ext_resource type="Script" uid="uid://bv6rnws21fw7r" path="res://scripts/enemies/enemy.gd" id="1_8e3ao"]
 [ext_resource type="PackedScene" uid="uid://bc1x5xpcygnvy" path="res://scenes/fx/damage_indicator.tscn" id="2_k4gvh"]
 [ext_resource type="AudioStream" uid="uid://bwch538phpi87" path="res://assets/soundFX/hit.wav" id="3_38ino"]
+[ext_resource type="Shader" uid="uid://dmo1l352iefcn" path="res://shaders/tree.gdshader" id="3_kugq1"]
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="3_sb86v"]
 [ext_resource type="PackedScene" uid="uid://tksv3htggrop" path="res://scenes/fx/xp_orb.tscn" id="4_fcftc"]
 [ext_resource type="AudioStream" uid="uid://b78ln2t2dmc8p" path="res://assets/soundFX/meow_die.wav" id="4_nb6gf"]
+[ext_resource type="Texture2D" uid="uid://4itbl0ejcd3o" path="res://assets/images/tilemap.png" id="4_x3klb"]
 [ext_resource type="PackedScene" uid="uid://cr7p23s5f4urx" path="res://scenes/fx/status_fx.tscn" id="5_lu5c6"]
 [ext_resource type="AudioStream" uid="uid://btyuivf1mvgot" path="res://assets/soundFX/hit_lucky.wav" id="6_qch6t"]
 [ext_resource type="AudioStream" uid="uid://dnpo0un37rpje" path="res://assets/soundFX/enemies/mouse_hurt.wav" id="7_y5th1"]
@@ -21,6 +23,35 @@ size = Vector2(32, 32)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_38ino"]
 radius = 3.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_smbsv"]
+shader = ExtResource("3_kugq1")
+shader_parameter/speed = 2.0
+shader_parameter/min_strength = 0.00400000019
+shader_parameter/max_strength = 0.00400000019
+shader_parameter/wind_decay = 0.710000033725
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wmy6n"]
+atlas = ExtResource("4_x3klb")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yu8pw"]
+atlas = ExtResource("4_x3klb")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_maese"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wmy6n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yu8pw")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 1.0
+}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pe3k2"]
 atlas = ExtResource("3_sb86v")
@@ -49,7 +80,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_kugq1")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }]
@@ -107,7 +138,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fcftc")
 }],
-"loop": false,
+"loop": 0,
 "name": &"dead",
 "speed": 1.0
 }, {
@@ -130,7 +161,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_twn6s")
 }],
-"loop": true,
+"loop": 1,
 "name": &"deal_damage",
 "speed": 10.0
 }, {
@@ -138,7 +169,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jt03m")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }, {
@@ -149,7 +180,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_k4gvh")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 1.0
 }, {
@@ -157,7 +188,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_lu5c6")
 }],
-"loop": true,
+"loop": 1,
 "name": &"take_damage",
 "speed": 5.0
 }]
@@ -183,6 +214,13 @@ monitoring = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2DXP" unique_id=215588090]
 shape = SubResource("CircleShape2D_38ino")
 debug_color = Color(0.24974304, 0.61780167, 0.4339693, 0.41960785)
+
+[node name="Shadow" type="AnimatedSprite2D" parent="." unique_id=705114831]
+material = SubResource("ShaderMaterial_smbsv")
+position = Vector2(0, 6)
+scale = Vector2(1, 0.59375)
+sprite_frames = SubResource("SpriteFrames_maese")
+autoplay = "default"
 
 [node name="MyTurn" type="AnimatedSprite2D" parent="." unique_id=1223227075]
 visible = false
