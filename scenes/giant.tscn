@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://rb8g2207v4bl" path="res://scripts/giant.gd" id="1_glfi2"]
 [ext_resource type="PackedScene" uid="uid://bc1x5xpcygnvy" path="res://scenes/fx/damage_indicator.tscn" id="2_5tv6e"]
 [ext_resource type="PackedScene" uid="uid://cr7p23s5f4urx" path="res://scenes/fx/status_fx.tscn" id="3_0vpcl"]
+[ext_resource type="Texture2D" uid="uid://4itbl0ejcd3o" path="res://assets/images/tilemap.png" id="3_6y6hv"]
 [ext_resource type="AudioStream" uid="uid://cg8ponq2r4sg2" path="res://assets/soundFX/short_meow.wav" id="3_sx7hc"]
 [ext_resource type="Texture2D" uid="uid://4ianpjc1gein" path="res://assets/images/artifact_sprite.png" id="4_hd7tc"]
 [ext_resource type="AudioStream" uid="uid://b78ln2t2dmc8p" path="res://assets/soundFX/meow_die.wav" id="4_ukwaf"]
@@ -30,6 +31,28 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0)
 metadata/_snap_enabled = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vkvj7"]
+atlas = ExtResource("3_6y6hv")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vsv37"]
+atlas = ExtResource("3_6y6hv")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vsv37"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vkvj7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vsv37")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5lxgs"]
 atlas = ExtResource("5_wbhg2")
@@ -685,6 +708,11 @@ shadow_color = Color(0.81960785, 0, 0, 0.8392157)
 shadow_filter_smooth = 7.0
 texture = SubResource("GradientTexture2D_2xoio")
 height = 29.0
+
+[node name="Shadow" type="AnimatedSprite2D" parent="." unique_id=768534742]
+sprite_frames = SubResource("SpriteFrames_vsv37")
+autoplay = "default"
+frame_progress = 0.5296162
 
 [node name="MyTurn" type="AnimatedSprite2D" parent="." unique_id=2124515153]
 visible = false

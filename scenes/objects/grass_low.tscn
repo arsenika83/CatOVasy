@@ -2,9 +2,17 @@
 
 [ext_resource type="Script" uid="uid://cxqxgpmkqaaoo" path="res://scripts/objects/grass.gd" id="1_jm5yl"]
 [ext_resource type="Texture2D" uid="uid://4itbl0ejcd3o" path="res://assets/images/tilemap.png" id="2_8egup"]
+[ext_resource type="Shader" uid="uid://dmo1l352iefcn" path="res://shaders/tree.gdshader" id="2_nle0l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvbpf"]
 size = Vector2(32, 24)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_63um1"]
+shader = ExtResource("2_nle0l")
+shader_parameter/speed = 2.0
+shader_parameter/min_strength = 0.05
+shader_parameter/max_strength = 0.0
+shader_parameter/wind_decay = 0.58800002793
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jm5yl"]
 atlas = ExtResource("2_8egup")
@@ -39,6 +47,7 @@ position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_cvbpf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1121289262]
+material = SubResource("ShaderMaterial_63um1")
 sprite_frames = SubResource("SpriteFrames_u68v2")
 autoplay = "default"
 frame_progress = 0.0859399

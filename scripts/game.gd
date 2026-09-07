@@ -33,7 +33,7 @@ const BATTLE_SCENE = preload("res://scenes/levels/battle_level.tscn")
 func _ready() -> void:
 	
 	if name == "Town":
-		#giant.light.enabled = false
+		giant.light.energy = 0.6
 		giant.walk_timer.wait_time = 0.01
 	
 	scene_transitioner.change_scene_back()
