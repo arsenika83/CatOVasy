@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://bbrgur310kkfd"]
+
+[ext_resource type="Texture2D" uid="uid://cyebolnfd4g5k" path="res://assets/images/giant_explosion.png" id="1_1g26r"]
+[ext_resource type="Script" uid="uid://cb4hfmoetarwo" path="res://scripts/giant_explosion.gd" id="2_1ls61"]
+[ext_resource type="Texture2D" uid="uid://c6pakn5l71uly" path="res://assets/images/bosses/big_mouse_boss.png" id="2_11qns"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qdpvg"]
+atlas = ExtResource("1_1g26r")
+region = Rect2(448, 448, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xt8m8"]
+atlas = ExtResource("2_11qns")
+region = Rect2(480, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vgqgp"]
+atlas = ExtResource("2_11qns")
+region = Rect2(480, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_81dwy"]
+atlas = ExtResource("2_11qns")
+region = Rect2(480, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ls61"]
+atlas = ExtResource("2_11qns")
+region = Rect2(480, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_11qns"]
+atlas = ExtResource("2_11qns")
+region = Rect2(480, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xrfdn"]
+atlas = ExtResource("2_11qns")
+region = Rect2(480, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_korjn"]
+atlas = ExtResource("2_11qns")
+region = Rect2(480, 480, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nympq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qdpvg")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xt8m8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vgqgp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_81dwy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ls61")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_11qns")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xrfdn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ls61")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vgqgp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xt8m8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_korjn")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 10.0
+}]
+
+[node name="TitanEnergy" type="AnimatedSprite2D" unique_id=1197458061]
+z_index = 50
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_nympq")
+animation = &"hit"
+autoplay = "default"
+frame = 9
+frame_progress = 1.0
+script = ExtResource("2_1ls61")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=490053130]

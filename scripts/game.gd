@@ -29,13 +29,19 @@ var inventory_on_screen = false
 @onready var foregroundFX = $Effects/ColorRect
 
 const BATTLE_SCENE = preload("res://scenes/levels/battle_level.tscn")
+const BOSS_BATTLE_MOUSE_GOLEM_SCENE = preload("res://scenes/levels/battle_big_mouse_boss.tscn")
 
 func _ready() -> void:
+	$CanvasModulate.visible = true
 	
 	if name == "Town":
 		gm.current_music_position = 0.0
 		giant.light.energy = 0.6
 		giant.walk_timer.wait_time = 0.01
+	elif name == "AlmostHome":
+		gm.current_music_position = 0.0
+		giant.light.energy = 0.4
+		giant.walk_timer.wait_time = 0.2
 	
 	scene_transitioner.change_scene_back()
 	
@@ -422,7 +428,14 @@ func _on_battle_start_timer_timeout() -> void:
 	inventory_on_screen = false
 
 	player_camera.enabled = false
-	var battle = BATTLE_SCENE.instantiate()
+	
+	var battle
+	
+	if name == "BigMouseBoss":
+		battle = BOSS_BATTLE_MOUSE_GOLEM_SCENE.instantiate()
+	else:
+		battle = BATTLE_SCENE.instantiate()
+	
 	$CanvasModulate.visible = false
 	$BattleNode.add_child(battle)
 	$Effects.visible = false

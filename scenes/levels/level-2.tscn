@@ -1,0 +1,379 @@
+[gd_scene format=4 uid="uid://bv2300hacrst3"]
+
+[ext_resource type="Script" uid="uid://dws0dtqq3i1mi" path="res://scripts/game.gd" id="1_umosm"]
+[ext_resource type="Shader" uid="uid://dw8y0528dhqqe" path="res://shaders/vhs.gdshader" id="2_r0evb"]
+[ext_resource type="Texture2D" uid="uid://4itbl0ejcd3o" path="res://assets/images/tilemap.png" id="3_wd2n4"]
+[ext_resource type="Texture2D" uid="uid://ocsabt7lx6c6" path="res://assets/images/town_sprite.png" id="4_b618b"]
+[ext_resource type="PackedScene" uid="uid://bp10kb8rxtuhx" path="res://scenes/objects/stairs.tscn" id="5_dwxqr"]
+[ext_resource type="PackedScene" uid="uid://d0d5e8ltlrwqg" path="res://scenes/giant.tscn" id="15_nrbcl"]
+[ext_resource type="PackedScene" uid="uid://ba7f54d4yq2hp" path="res://scenes/ui/cursor.tscn" id="19_5j041"]
+[ext_resource type="Shader" uid="uid://dm6djrn7pct8b" path="res://shaders/wobble.gdshader" id="20_dt3it"]
+[ext_resource type="PackedScene" uid="uid://cdll7yvc84q18" path="res://scenes/ui/menu.tscn" id="21_38nce"]
+[ext_resource type="PackedScene" uid="uid://di4k2iivrnhup" path="res://scenes/ui/creature_adventure_dialog.tscn" id="22_gj8hc"]
+[ext_resource type="PackedScene" uid="uid://qgx2la7r3w7a" path="res://scenes/ui/inventory.tscn" id="23_jaki0"]
+[ext_resource type="StyleBox" uid="uid://b8wibcbgivilm" path="res://styles/button_normal.tres" id="24_iii3x"]
+[ext_resource type="StyleBox" uid="uid://2iw7p3yvicvr" path="res://styles/button_pressed.tres" id="25_df0n1"]
+[ext_resource type="StyleBox" uid="uid://c66nispyhk2t0" path="res://styles/button_hover.tres" id="26_uq4k2"]
+[ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="27_uiheo"]
+[ext_resource type="Texture2D" uid="uid://djggfi67w50cu" path="res://assets/images/card_icons/girl.png" id="28_8ynyf"]
+[ext_resource type="PackedScene" uid="uid://dpydh1bnymoa8" path="res://scenes/ui/level_up_dialog.tscn" id="29_bkno2"]
+[ext_resource type="PackedScene" uid="uid://dqyxtu1uebx5v" path="res://scenes/ui/upgrade_stats_dialog.tscn" id="30_ferws"]
+[ext_resource type="PackedScene" uid="uid://djqdt7tiwad4" path="res://scenes/ui/artifact_dialog.tscn" id="31_ctm55"]
+[ext_resource type="AudioStream" uid="uid://k300apigjs30" path="res://assets/music/BATTLE_START.mp3" id="32_wv8bq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fj52k"]
+shader = ExtResource("2_r0evb")
+shader_parameter/horizontalMovement = 2.9802400103307036e-08
+shader_parameter/verticalMovement = 2.9802400103307036e-08
+shader_parameter/frequencyStar = 0.0
+shader_parameter/sizeStar = 160.0
+shader_parameter/brightnessStar = 3.0
+shader_parameter/shineFrequencyStar = 8.0
+shader_parameter/transparencyStar = 0.50999998860048
+shader_parameter/starIterations = 3
+shader_parameter/frequencyBgStar = 0.996
+shader_parameter/shineFrequencyBgStar = 1.0
+shader_parameter/transparencyBgStar = 0.0
+shader_parameter/colorBackground = Color(0, 0, 0, 1)
+shader_parameter/transparencyBackground = 0.0
+shader_parameter/seed = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1t5oo"]
+atlas = ExtResource("3_wd2n4")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p57ef"]
+texture = ExtResource("3_wd2n4")
+texture_region_size = Vector2i(32, 32)
+1:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_u5sy4"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_p57ef")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbhrr"]
+texture = ExtResource("3_wd2n4")
+texture_region_size = Vector2i(32, 32)
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+3:2/0 = 0
+2:2/0 = 0
+4:2/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_a7tdr"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_lbhrr")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_66v34"]
+texture = ExtResource("4_b618b")
+texture_region_size = Vector2i(32, 32)
+0:15/0 = 0
+1:15/0 = 0
+2:15/0 = 0
+3:16/0 = 0
+4:17/0 = 0
+4:18/0 = 0
+5:19/0 = 0
+4:19/0 = 0
+3:19/0 = 0
+2:19/0 = 0
+1:19/0 = 0
+0:18/0 = 0
+0:17/0 = 0
+0:16/0 = 0
+1:17/0 = 0
+1:18/0 = 0
+0:19/0 = 0
+1:16/0 = 0
+2:16/0 = 0
+2:17/0 = 0
+2:18/0 = 0
+3:17/0 = 0
+3:18/0 = 0
+3:15/0 = 0
+4:15/0 = 0
+4:16/0 = 0
+5:16/0 = 0
+5:15/0 = 0
+5:17/0 = 0
+5:18/0 = 0
+6:15/0 = 0
+7:15/0 = 0
+8:15/0 = 0
+9:15/0 = 0
+10:15/0 = 0
+10:16/0 = 0
+9:17/0 = 0
+8:18/0 = 0
+7:16/0 = 0
+6:16/0 = 0
+6:17/0 = 0
+7:17/0 = 0
+8:17/0 = 0
+8:16/0 = 0
+9:16/0 = 0
+7:18/0 = 0
+9:18/0 = 0
+10:17/0 = 0
+10:18/0 = 0
+9:19/0 = 0
+10:19/0 = 0
+8:19/0 = 0
+7:19/0 = 0
+6:19/0 = 0
+6:18/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_14tv5"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_66v34")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_b618b"]
+texture = ExtResource("4_b618b")
+texture_region_size = Vector2i(32, 32)
+5:15/0 = 0
+5:16/0 = 0
+6:16/0 = 0
+6:17/0 = 0
+7:17/0 = 0
+7:16/0 = 0
+7:15/0 = 0
+6:15/0 = 0
+5:17/0 = 0
+8:15/0 = 0
+9:15/0 = 0
+8:16/0 = 0
+9:16/0 = 0
+8:17/0 = 0
+9:17/0 = 0
+10:16/0 = 0
+10:15/0 = 0
+10:17/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_66v34"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_b618b")
+
+[sub_resource type="Gradient" id="Gradient_b618b"]
+offsets = PackedFloat32Array(0, 0.74444443)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_66v34"]
+gradient = SubResource("Gradient_b618b")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_ewown"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_b618b"]
+gradient = SubResource("Gradient_ewown")
+fill_from = Vector2(0.123931624, 0.017094018)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d7a8j"]
+shader = ExtResource("20_dt3it")
+shader_parameter/color_levels = 62.9230028938425
+shader_parameter/chromatic_aberration = 0.0010000000475
+shader_parameter/blur_amount = 3.2530001545175
+shader_parameter/brightness = 0.870000017575
+shader_parameter/saturation = 1.39600001881
+shader_parameter/color_offset_multiplier = 0.0
+shader_parameter/black_offset_multiplier = 0.0
+shader_parameter/color_offset = 3.259879990946679e-09
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nqtv8"]
+atlas = ExtResource("27_uiheo")
+region = Rect2(288, 32, 32, 32)
+
+[node name="AlmostHome" type="Node2D" unique_id=2132287685]
+script = ExtResource("1_umosm")
+
+[node name="BG" type="TextureRect" parent="." unique_id=1753798166]
+z_index = -10
+material = SubResource("ShaderMaterial_fj52k")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -952.0
+offset_top = -616.0
+offset_right = 1296.0
+offset_bottom = 840.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_1t5oo")
+stretch_mode = 1
+
+[node name="TileMapLayerBlack" type="TileMapLayer" parent="." unique_id=58169357]
+tile_map_data = PackedByteArray("AAAAAAAAAAABAAAAAAABAAAAAAABAAAAAAACAAAAAAABAAAAAAADAAAAAAABAAAAAAAEAAAAAAABAAAAAAAFAAAAAAABAAAAAAAGAAAAAAABAAAAAAAHAAAAAAABAAAAAAAAAAEAAAABAAAAAAAAAAIAAAABAAAAAAAAAAMAAAABAAAAAAAAAAQAAAABAAAAAAAAAAUAAAABAAAAAAAAAAYAAAABAAAAAAAAAAcAAAABAAAAAAABAAEAAAABAAAAAAABAAIAAAABAAAAAAABAAMAAAABAAAAAAABAAQAAAABAAAAAAABAAUAAAABAAAAAAABAAYAAAABAAAAAAABAAcAAAABAAAAAAACAAEAAAABAAAAAAACAAIAAAABAAAAAAACAAMAAAABAAAAAAACAAQAAAABAAAAAAACAAUAAAABAAAAAAACAAYAAAABAAAAAAACAAcAAAABAAAAAAADAAEAAAABAAAAAAADAAIAAAABAAAAAAADAAMAAAABAAAAAAADAAQAAAABAAAAAAADAAUAAAABAAAAAAADAAYAAAABAAAAAAADAAcAAAABAAAAAAAEAAEAAAABAAAAAAAEAAIAAAABAAAAAAAEAAMAAAABAAAAAAAEAAQAAAABAAAAAAAEAAUAAAABAAAAAAAEAAYAAAABAAAAAAAEAAcAAAABAAAAAAAFAAEAAAABAAAAAAAFAAIAAAABAAAAAAAFAAMAAAABAAAAAAAFAAQAAAABAAAAAAAFAAUAAAABAAAAAAAFAAYAAAABAAAAAAAFAAcAAAABAAAAAAAGAAEAAAABAAAAAAAGAAIAAAABAAAAAAAGAAMAAAABAAAAAAAGAAQAAAABAAAAAAAGAAUAAAABAAAAAAAGAAYAAAABAAAAAAAGAAcAAAABAAAAAAAHAAEAAAABAAAAAAAHAAIAAAABAAAAAAAHAAMAAAABAAAAAAAHAAQAAAABAAAAAAAHAAUAAAABAAAAAAAHAAYAAAABAAAAAAAHAAcAAAABAAAAAAA=")
+tile_set = SubResource("TileSet_u5sy4")
+
+[node name="TileMapLayerBorder" type="TileMapLayer" parent="." unique_id=545158540]
+visible = false
+tile_map_data = PackedByteArray("AAAAAAAAAAACAAAAAAABAAAAAAADAAAAAAACAAAAAAADAAAAAAADAAAAAAADAAAAAAAEAAAAAAADAAAAAAAFAAAAAAADAAAAAAAGAAAAAAADAAAAAAAHAAAAAAADAAAAAAAIAAAAAAADAAAAAAAJAAAAAAAEAAAAAAAAAAEAAAACAAEAAAAAAAIAAAACAAEAAAAAAAMAAAACAAEAAAAAAAQAAAACAAEAAAAAAAUAAAACAAEAAAAAAAYAAAACAAEAAAAJAAEAAAAEAAEAAAAJAAIAAAAEAAEAAAAJAAMAAAAEAAEAAAAJAAQAAAAEAAEAAAAJAAUAAAAEAAEAAAAJAAYAAAAEAAEAAAAAAAcAAAACAAIAAAAJAAcAAAAEAAIAAAAIAAcAAAADAAIAAAAHAAcAAAADAAIAAAAGAAcAAAADAAIAAAAFAAcAAAADAAIAAAABAAcAAAADAAIAAAACAAcAAAADAAIAAAADAAcAAAADAAIAAAAEAAcAAAADAAIAAAA=")
+tile_set = SubResource("TileSet_a7tdr")
+
+[node name="TileMapLayerFloor" type="TileMapLayer" parent="." unique_id=1441678631]
+tile_map_data = PackedByteArray("AAAEAAUAAAACABMAAAAEAAQAAAACABIAAAAFAAUAAAADABMAAAAFAAQAAAADABIAAAAFAAMAAAACABAAAAAFAAIAAAACABAAAAAFAAEAAAACABAAAAAFAAAAAAACAA8AAAAEAAMAAAACABAAAAADAAMAAAACABEAAAACAAMAAAACABEAAAAGAAMAAAADABEAAAAGAAIAAAADABAAAAAGAAEAAAADABAAAAAGAAAAAAADAA8AAAAEAAAAAAACAA8AAAAEAAEAAAACABAAAAAEAAIAAAACABAAAAADAAIAAAACABAAAAACAAIAAAACABAAAAACAAEAAAACABAAAAACAAAAAAACAA8AAAADAAAAAAACAA8AAAADAAEAAAACABAAAAABAAMAAAABABEAAAABAAIAAAABABAAAAABAAEAAAABABAAAAABAAAAAAABAA8AAAACAAQAAAAFABIAAAACAAUAAAAFABMAAAABAAQAAAAEABIAAAABAAUAAAAEABMAAAADAAQAAAAEAA8AAAADAAUAAAAEAA8AAAADAAYAAAAEAA8AAAAEAAYAAAAEAA8AAAAFAAYAAAAEAA8AAAADAAcAAAAEAA8AAAAEAAcAAAAEAA8AAAAFAAcAAAAEAA8AAAAGAAcAAAAEAA8AAAAGAAYAAAAEAA8AAAAGAAUAAAAEAA8AAAAGAAQAAAAEAA8AAAACAAYAAAACABAAAAACAAcAAAACABAAAAABAAcAAAACABAAAAABAAYAAAACABAAAAAHAAcAAAAEAA8AAAAHAAYAAAAEAA8AAAAHAAUAAAAEAA8AAAAHAAQAAAAEAA8AAAAHAAMAAAAEAA8AAAAHAAIAAAAEAA8AAAAHAAEAAAAEAA8AAAAHAAAAAAAEAA8AAAAHAP//AAAEAA8AAAAGAP//AAAEAA8AAAAFAP//AAAEAA8AAAAEAP//AAAEAA8AAAADAP//AAAEAA8AAAACAP//AAAEAA8AAAABAP//AAAEAA8AAAAAAP//AAAEAA8AAAAAAAAAAAAEAA8AAAAAAAEAAAAEAA8AAAAAAAIAAAAEAA8AAAAAAAMAAAAEAA8AAAAAAAQAAAAEAA8AAAAAAAUAAAAEAA8AAAAAAAYAAAAEAA8AAAAAAAcAAAAEAA8AAAAAAAgAAAAEAA8AAAABAAgAAAAEAA8AAAACAAgAAAAEAA8AAAADAAgAAAAEAA8AAAAEAAgAAAAEAA8AAAAFAAgAAAAEAA8AAAAGAAgAAAAEAA8AAAAHAAgAAAAEAA8AAAA=")
+tile_set = SubResource("TileSet_14tv5")
+
+[node name="TileMapLayerWalls" type="TileMapLayer" parent="." unique_id=2045604691]
+tile_map_data = PackedByteArray("AAAHAAgAAAAHABEAAAAHAAcAAAAFABAAAAAHAAYAAAAFABAAAAAHAAUAAAAFABAAAAAHAAQAAAAFABAAAAAHAAMAAAAFABAAAAAHAAIAAAAFABAAAAAHAAEAAAAIABAAAAAHAAAAAAAFABAAAAAHAP//AAAHAA8AAAAGAP//AAAGABAAAAAFAP//AAAGABAAAAAEAP//AAAKABAAAAADAP//AAAGABAAAAACAP//AAAGABAAAAABAP//AAAGABAAAAAAAP//AAAGAA8AAAAAAAAAAAAFABAAAAAAAAEAAAAJABAAAAAAAAIAAAAFABAAAAAAAAMAAAAFABAAAAAAAAQAAAAFABAAAAAAAAUAAAAFABAAAAAAAAYAAAAFABAAAAAAAAcAAAAFABAAAAAAAAgAAAAGABEAAAABAAgAAAAGABAAAAACAAgAAAAGABAAAAADAAgAAAAFABEAAAAGAAgAAAAFAA8AAAAEAAgAAAAIAA8AAAAFAAgAAAAIAA8AAAA=")
+tile_set = SubResource("TileSet_66v34")
+
+[node name="Exits" type="Node2D" parent="." unique_id=1303112674]
+
+[node name="Stairs" parent="Exits" unique_id=1448595182 instance=ExtResource("5_dwxqr")]
+visible = false
+position = Vector2(144, 272)
+room_number = -1
+
+[node name="Stairs2" parent="Exits" unique_id=175082881 instance=ExtResource("5_dwxqr")]
+visible = false
+position = Vector2(176, 272)
+room_number = -1
+
+[node name="Stairs3" parent="Exits" unique_id=49499199 instance=ExtResource("5_dwxqr")]
+visible = false
+position = Vector2(232, 48)
+room_number = 0
+
+[node name="Plants" type="Node2D" parent="." unique_id=1507805972]
+
+[node name="Objects" type="Node2D" parent="." unique_id=1714322502]
+position = Vector2(208, 80)
+
+[node name="PointLight2D" type="PointLight2D" parent="Objects" unique_id=1472163849]
+position = Vector2(-80, -16.000002)
+scale = Vector2(3, 2)
+color = Color(0.9322568, 0.5883861, 0.23393786, 1)
+energy = 0.7
+texture = SubResource("GradientTexture2D_66v34")
+
+[node name="PointLight2D2" type="PointLight2D" parent="Objects" unique_id=918948999]
+position = Vector2(15.999996, -32)
+scale = Vector2(1.0000001, 0.5)
+color = Color(0.7176471, 0.6509804, 1, 1)
+energy = 3.1
+texture = SubResource("GradientTexture2D_b618b")
+
+[node name="Giant" parent="." unique_id=2060885226 instance=ExtResource("15_nrbcl")]
+position = Vector2(144, 240)
+
+[node name="Camera2D" type="Camera2D" parent="Giant" unique_id=1303825275]
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+rotation_smoothing_enabled = true
+rotation_smoothing_speed = 3.0
+
+[node name="Enemies" type="Node2D" parent="." unique_id=946491156]
+
+[node name="Characters" type="Node2D" parent="." unique_id=248065707]
+
+[node name="Edges" type="Node2D" parent="." unique_id=1566389989]
+
+[node name="Cursor" parent="." unique_id=2051460958 instance=ExtResource("19_5j041")]
+position = Vector2(608, -16)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1236012575]
+modulate = Color(1, 1, 1, 0.5019608)
+self_modulate = Color(1, 1, 1, 0.9411765)
+color = Color(0, 0, 0, 1)
+
+[node name="Effects" type="CanvasLayer" parent="." unique_id=1391118850]
+
+[node name="ColorRect" type="ColorRect" parent="Effects" unique_id=898663152]
+material = SubResource("ShaderMaterial_d7a8j")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=589757551]
+visible = false
+
+[node name="Menu" parent="UI" unique_id=1052398381 instance=ExtResource("21_38nce")]
+metadata/_edit_use_anchors_ = true
+
+[node name="CreatureAdventureDialog" parent="UI" unique_id=1641948652 instance=ExtResource("22_gj8hc")]
+visible = false
+z_index = 10
+
+[node name="Inventory" parent="UI" unique_id=579277200 instance=ExtResource("23_jaki0")]
+visible = false
+anchors_preset = -1
+
+[node name="InventoryButton" type="Button" parent="UI" unique_id=1283236015]
+z_index = -1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -80.0
+offset_right = 80.0
+grow_vertical = 0
+theme_override_styles/normal = ExtResource("24_iii3x")
+theme_override_styles/pressed = ExtResource("25_df0n1")
+theme_override_styles/hover = ExtResource("26_uq4k2")
+icon = SubResource("AtlasTexture_nqtv8")
+icon_alignment = 1
+expand_icon = true
+
+[node name="InventoryButtonHuman" type="Button" parent="UI" unique_id=956475560]
+z_index = -1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 96.0
+offset_top = -80.0
+offset_right = 176.0
+grow_vertical = 0
+theme_override_styles/normal = ExtResource("24_iii3x")
+theme_override_styles/pressed = ExtResource("25_df0n1")
+theme_override_styles/hover = ExtResource("26_uq4k2")
+icon = ExtResource("28_8ynyf")
+icon_alignment = 1
+expand_icon = true
+
+[node name="LevelUpDialog" parent="UI" unique_id=76690541 instance=ExtResource("29_bkno2")]
+visible = false
+offset_left = 352.0
+offset_top = 160.0
+offset_right = -352.0
+offset_bottom = -176.0
+
+[node name="UpgradeStatsDialog" parent="UI" unique_id=1192782911 instance=ExtResource("30_ferws")]
+visible = false
+offset_left = 336.0
+offset_top = 160.0
+offset_right = -344.0
+offset_bottom = -226.0
+
+[node name="ArtifactDialog" parent="UI" unique_id=947846839 instance=ExtResource("31_ctm55")]
+visible = false
+offset_left = 512.0
+offset_top = 192.0
+offset_right = -512.0
+offset_bottom = -208.0
+
+[node name="BattleNode" type="Node2D" parent="." unique_id=797394893]
+
+[node name="BattleStartTimer" type="Timer" parent="." unique_id=1709292871]
+one_shot = true
+
+[node name="AudioStreamPlayerBattleStart" type="AudioStreamPlayer" parent="." unique_id=1295234369]
+stream = ExtResource("32_wv8bq")
+volume_db = -6.0
+bus = &"SoundFX"
+
+[node name="AudioStreamPlayerMusic" type="AudioStreamPlayer" parent="." unique_id=179520262]
+bus = &"Music"
+
+[connection signal="mouse_entered" from="UI/InventoryButton" to="." method="_on_inventory_button_mouse_entered"]
+[connection signal="mouse_entered" from="UI/InventoryButtonHuman" to="." method="_on_inventory_button_human_mouse_entered"]
+[connection signal="timeout" from="BattleStartTimer" to="." method="_on_battle_start_timer_timeout"]

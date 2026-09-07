@@ -54,7 +54,8 @@ position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_eua1y")
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1945220275]
-position = Vector2(0, -43)
+position = Vector2(1.9073486e-06, -31.999996)
+scale = Vector2(1.5957447, 1.5957447)
 color = Color(1, 0.75686276, 0.67058825, 1)
 energy = 1.2
 texture = SubResource("GradientTexture2D_bhjn2")

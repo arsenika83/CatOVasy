@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://c05lufiyk1h5i"]
+
+[ext_resource type="PackedScene" uid="uid://b0a701ex5ah6g" path="res://scenes/objects/fallen_leaves.tscn" id="1_ql4uh"]
+[ext_resource type="PackedScene" uid="uid://1by6pkucltci" path="res://scenes/objects/grass.tscn" id="2_tfjxh"]
+[ext_resource type="PackedScene" uid="uid://b8bfs4u1x4s8" path="res://scenes/objects/grass_low.tscn" id="3_183ys"]
+[ext_resource type="PackedScene" uid="uid://clllky54vqihv" path="res://scenes/objects/tree_2.tscn" id="4_ifqfg"]
+[ext_resource type="PackedScene" uid="uid://cfyguig5a0744" path="res://scenes/objects/tree_3.tscn" id="5_n54ys"]
+[ext_resource type="PackedScene" uid="uid://c85j0cjbsfflo" path="res://scenes/objects/tree_1.tscn" id="6_ichsn"]
+
+[node name="Forest(2)" type="Node2D" unique_id=897692103]
+
+[node name="FallenLeaves2" parent="." unique_id=1015885049 instance=ExtResource("1_ql4uh")]
+position = Vector2(-48, -136)
+
+[node name="FallenLeaves" parent="." unique_id=1081225171 instance=ExtResource("1_ql4uh")]
+position = Vector2(-112, -8)
+
+[node name="GRASS" type="Node2D" parent="." unique_id=1870339810]
+
+[node name="Grass" parent="GRASS" unique_id=963626142 instance=ExtResource("2_tfjxh")]
+position = Vector2(48, -16)
+
+[node name="Grass2" parent="GRASS" unique_id=1321910814 instance=ExtResource("2_tfjxh")]
+position = Vector2(80, 16)
+
+[node name="Grass3" parent="GRASS" unique_id=480308083 instance=ExtResource("2_tfjxh")]
+position = Vector2(80, -112)
+
+[node name="Grass4" parent="GRASS" unique_id=969815954 instance=ExtResource("2_tfjxh")]
+position = Vector2(-112, -112)
+
+[node name="Grass5" parent="GRASS" unique_id=674349468 instance=ExtResource("2_tfjxh")]
+position = Vector2(-112, 16)
+
+[node name="GrassLow" parent="GRASS" unique_id=946641132 instance=ExtResource("3_183ys")]
+position = Vector2(-80, -48)
+
+[node name="GrassLow2" parent="GRASS" unique_id=1883847979 instance=ExtResource("3_183ys")]
+position = Vector2(144, -16)
+
+[node name="GrassLow3" parent="GRASS" unique_id=1766950055 instance=ExtResource("3_183ys")]
+position = Vector2(176, -80)
+
+[node name="GrassLow4" parent="GRASS" unique_id=1581217683 instance=ExtResource("3_183ys")]
+position = Vector2(48, -144)
+
+[node name="Tree(2)2" parent="." unique_id=1401400477 instance=ExtResource("4_ifqfg")]
+position = Vector2(-48, -144)
+
+[node name="Tree(2)3" parent="." unique_id=1179586192 instance=ExtResource("4_ifqfg")]
+position = Vector2(-112, -16)
+
+[node name="Tree(3)" parent="." unique_id=1814237870 instance=ExtResource("5_n54ys")]
+position = Vector2(176, -16)
+
+[node name="Tree(1)2" parent="." unique_id=1944078281 instance=ExtResource("6_ichsn")]
+position = Vector2(80, -16)
+
+[node name="Tree(1)3" parent="." unique_id=1252448101 instance=ExtResource("6_ichsn")]
+position = Vector2(-16, -80)
+
+[node name="Tree(1)5" parent="." unique_id=1262282253 instance=ExtResource("6_ichsn")]
+position = Vector2(-48, -16)
+
+[node name="Tree(1)6" parent="." unique_id=1356756213 instance=ExtResource("6_ichsn")]
+position = Vector2(80, -144)
+
+[node name="Tree(2)" parent="." unique_id=637274317 instance=ExtResource("4_ifqfg")]
+position = Vector2(112, -80)
+
+[node name="Tree(3)2" parent="." unique_id=337203602 instance=ExtResource("5_n54ys")]
+position = Vector2(-80, -80)

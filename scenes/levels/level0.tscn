@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b7p1hqo3g0pln" path="res://scenes/objects/stairs_up.tscn" id="4_3asx1"]
 [ext_resource type="PackedScene" uid="uid://ba7f54d4yq2hp" path="res://scenes/ui/cursor.tscn" id="4_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://bp10kb8rxtuhx" path="res://scenes/objects/stairs.tscn" id="5_iywne"]
+[ext_resource type="PackedScene" uid="uid://dtfad1wqq6sax" path="res://scenes/objects/stairs_big.tscn" id="6_6xu13"]
 [ext_resource type="PackedScene" uid="uid://1by6pkucltci" path="res://scenes/objects/grass.tscn" id="6_p57ef"]
 [ext_resource type="PackedScene" uid="uid://b8bfs4u1x4s8" path="res://scenes/objects/grass_low.tscn" id="7_d3ub6"]
 [ext_resource type="PackedScene" uid="uid://c0fd45oqpmhla" path="res://scenes/objects/chest.tscn" id="7_po5je"]
@@ -132,6 +133,10 @@ room_number = 0
 
 [node name="Stairs" parent="Exits" unique_id=1448595182 instance=ExtResource("5_iywne")]
 position = Vector2(144, 208)
+
+[node name="Stairs3" parent="Exits" unique_id=49510763 instance=ExtResource("6_6xu13")]
+position = Vector2(32, 112)
+rotation = 4.712389
 room_number = -1
 
 [node name="Plants" type="Node2D" parent="." unique_id=1507805972]
@@ -188,7 +193,7 @@ rarity = "epic"
 position = Vector2(-128, 136)
 
 [node name="Giant" parent="." unique_id=2060885226 instance=ExtResource("1_uwrxv")]
-position = Vector2(176, 48)
+position = Vector2(80, 112)
 
 [node name="Camera2D" type="Camera2D" parent="Giant" unique_id=1303825275]
 zoom = Vector2(2, 2)
@@ -371,6 +376,7 @@ position = Vector2(336, 240)
 position = Vector2(608, -16)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1236012575]
+visible = false
 modulate = Color(1, 1, 1, 0.5019608)
 self_modulate = Color(1, 1, 1, 0.9411765)
 color = Color(0, 0, 0, 1)

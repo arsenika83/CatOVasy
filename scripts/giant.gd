@@ -143,7 +143,7 @@ func heal(hp : int) -> void:
 	$HealTimer.start()
 
 func go_downstairs() -> void:
-	audio_fall.play()
+	$AudioStreamPlayerLevelUp.play()
 	var tween = create_tween()
 	tween.tween_property(self, "scale", Vector2(0, 0), 0.5)
 
@@ -164,6 +164,10 @@ func deal_damage(targets : Array[CharacterBody2D]) -> void:
 		
 	if success:
 		gm.current_damage_cat = gm.current_card.damage
+		
+		if gm.current_card.has_method("revenge"):
+			if targets[0].dealt_damage_to_human == true:
+				gm.current_damage_cat = gm.current_card.revenge()
 			
 		if gm.has_toy_cat and attack_count < 2:
 			gm.current_damage_cat *= 2

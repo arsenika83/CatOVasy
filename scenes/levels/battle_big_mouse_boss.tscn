@@ -1,0 +1,332 @@
+[gd_scene format=4 uid="uid://cmmylee0wm3sh"]
+
+[ext_resource type="Script" uid="uid://c8c5oxi48jfml" path="res://scripts/bosses/battle_big_mouse_boss.gd" id="1_adxdy"]
+[ext_resource type="Shader" uid="uid://dw8y0528dhqqe" path="res://shaders/vhs.gdshader" id="2_hrdy8"]
+[ext_resource type="Texture2D" uid="uid://4itbl0ejcd3o" path="res://assets/images/tilemap.png" id="3_5ujcq"]
+[ext_resource type="Script" uid="uid://cotqv8f0fn2go" path="res://scripts/ui/battle_camera.gd" id="4_g88m6"]
+[ext_resource type="PackedScene" uid="uid://d0d5e8ltlrwqg" path="res://scenes/giant.tscn" id="5_2qdwj"]
+[ext_resource type="PackedScene" uid="uid://dmq76y6cfygk7" path="res://scenes/characters/character_solya.tscn" id="6_87bdc"]
+[ext_resource type="PackedScene" uid="uid://1by6pkucltci" path="res://scenes/objects/grass.tscn" id="7_sqrxg"]
+[ext_resource type="PackedScene" uid="uid://b8bfs4u1x4s8" path="res://scenes/objects/grass_low.tscn" id="8_r6ibx"]
+[ext_resource type="PackedScene" uid="uid://c85j0cjbsfflo" path="res://scenes/objects/tree_1.tscn" id="9_y5ci3"]
+[ext_resource type="PackedScene" uid="uid://ba7f54d4yq2hp" path="res://scenes/ui/cursor.tscn" id="10_b0bne"]
+[ext_resource type="PackedScene" uid="uid://f3jfsj1vndud" path="res://scenes/fx/giant_explosion.tscn" id="11_800k3"]
+[ext_resource type="PackedScene" uid="uid://btcx8q72tnkf5" path="res://scenes/fx/claw_fx.tscn" id="12_fflb6"]
+[ext_resource type="PackedScene" uid="uid://6hsq7ud5p275" path="res://scenes/fx/fire_fx.tscn" id="13_hoaa3"]
+[ext_resource type="PackedScene" uid="uid://b7efvk3yra5db" path="res://scenes/fx/cat_fx.tscn" id="14_tyyvc"]
+[ext_resource type="PackedScene" uid="uid://drtcvgk4w8njv" path="res://scenes/fx/inferno.tscn" id="15_g4j75"]
+[ext_resource type="AudioStream" uid="uid://ck8shm08honae" path="res://assets/music/BATTLE_THEME_2.ogg" id="16_ak7cp"]
+[ext_resource type="PackedScene" uid="uid://bbrgur310kkfd" path="res://scenes/fx/titan_energy_projectile.tscn" id="16_hrdy8"]
+[ext_resource type="AudioStream" uid="uid://bxhii1a001e1v" path="res://assets/music/BATTLE_WIN.mp3" id="17_0pgyx"]
+[ext_resource type="AudioStream" uid="uid://bwch538phpi87" path="res://assets/soundFX/hit.wav" id="18_x8tpc"]
+[ext_resource type="AudioStream" uid="uid://dnyi4oi4yn2sl" path="res://assets/soundFX/cancel.wav" id="19_tqq42"]
+[ext_resource type="Shader" uid="uid://dm6djrn7pct8b" path="res://shaders/wobble.gdshader" id="20_7biyf"]
+[ext_resource type="PackedScene" uid="uid://cdll7yvc84q18" path="res://scenes/ui/menu.tscn" id="21_vtj4p"]
+[ext_resource type="PackedScene" uid="uid://bjjafdg4et4p0" path="res://scenes/ui/paw.tscn" id="22_4yowc"]
+[ext_resource type="PackedScene" uid="uid://b7oix76heqs28" path="res://scenes/ui/creature_dialog.tscn" id="23_tl0ir"]
+[ext_resource type="StyleBox" uid="uid://b8wibcbgivilm" path="res://styles/button_normal.tres" id="24_1v757"]
+[ext_resource type="StyleBox" uid="uid://2iw7p3yvicvr" path="res://styles/button_pressed.tres" id="25_w3xpx"]
+[ext_resource type="StyleBox" uid="uid://c66nispyhk2t0" path="res://styles/button_hover.tres" id="26_1nq0y"]
+[ext_resource type="PackedScene" uid="uid://gxdo1p5x4a6b" path="res://scenes/ui/energy.tscn" id="27_pr1p8"]
+[ext_resource type="PackedScene" uid="uid://cuybslgtoc70m" path="res://scenes/ui/energy_human.tscn" id="28_ot0n2"]
+[ext_resource type="PackedScene" uid="uid://bq46oyngg435a" path="res://scenes/ui/card_container_cat.tscn" id="29_4ihym"]
+[ext_resource type="PackedScene" uid="uid://c7lkcfyxh5uff" path="res://scenes/ui/card_container_human.tscn" id="30_6bjak"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fj52k"]
+shader = ExtResource("2_hrdy8")
+shader_parameter/horizontalMovement = 2.9802400103307036e-08
+shader_parameter/verticalMovement = 2.9802400103307036e-08
+shader_parameter/frequencyStar = 0.0
+shader_parameter/sizeStar = 160.0
+shader_parameter/brightnessStar = 3.0
+shader_parameter/shineFrequencyStar = 8.0
+shader_parameter/transparencyStar = 0.50999998860048
+shader_parameter/starIterations = 3
+shader_parameter/frequencyBgStar = 0.996
+shader_parameter/shineFrequencyBgStar = 1.0
+shader_parameter/transparencyBgStar = 0.0
+shader_parameter/colorBackground = Color(0, 0, 0, 1)
+shader_parameter/transparencyBackground = 0.0
+shader_parameter/seed = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1t5oo"]
+atlas = ExtResource("3_5ujcq")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p57ef"]
+texture = ExtResource("3_5ujcq")
+texture_region_size = Vector2i(32, 32)
+1:0/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_u5sy4"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_p57ef")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbhrr"]
+texture = ExtResource("3_5ujcq")
+texture_region_size = Vector2i(32, 32)
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+3:2/0 = 0
+2:2/0 = 0
+4:2/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_a7tdr"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_lbhrr")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nueng"]
+shader = ExtResource("20_7biyf")
+shader_parameter/color_levels = 62.9230028938425
+shader_parameter/chromatic_aberration = 0.0010000000475
+shader_parameter/blur_amount = 3.2530001545175
+shader_parameter/brightness = 0.870000017575
+shader_parameter/saturation = 1.39600001881
+shader_parameter/color_offset_multiplier = 0.0
+shader_parameter/black_offset_multiplier = 0.0
+shader_parameter/color_offset = 3.259879990946679e-09
+
+[node name="Battle" type="Node2D" unique_id=2132287685]
+script = ExtResource("1_adxdy")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2111597810]
+visible = false
+z_index = 30
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BG" type="TextureRect" parent="." unique_id=1753798166]
+z_index = 30
+material = SubResource("ShaderMaterial_fj52k")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -952.0
+offset_top = -616.0
+offset_right = 1296.0
+offset_bottom = 840.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_1t5oo")
+stretch_mode = 1
+
+[node name="TileMapLayerBlack" type="TileMapLayer" parent="." unique_id=58169357]
+z_index = 31
+tile_map_data = PackedByteArray("AAAAAAAAAAABAAAAAAABAAAAAAABAAAAAAACAAAAAAABAAAAAAADAAAAAAABAAAAAAAEAAAAAAABAAAAAAAFAAAAAAABAAAAAAAGAAAAAAABAAAAAAAHAAAAAAABAAAAAAAIAAAAAAABAAAAAAAJAAAAAAABAAAAAAAAAAEAAAABAAAAAAAAAAIAAAABAAAAAAAAAAMAAAABAAAAAAAAAAQAAAABAAAAAAAAAAUAAAABAAAAAAAAAAYAAAABAAAAAAABAAEAAAABAAAAAAABAAIAAAABAAAAAAABAAMAAAABAAAAAAABAAQAAAABAAAAAAABAAUAAAABAAAAAAABAAYAAAABAAAAAAACAAEAAAABAAAAAAACAAIAAAABAAEAAAACAAMAAAABAAEAAAACAAQAAAABAAEAAAACAAUAAAABAAAAAAACAAYAAAABAAAAAAADAAEAAAABAAAAAAADAAIAAAABAAEAAAADAAMAAAABAAEAAAADAAQAAAABAAEAAAADAAUAAAABAAAAAAADAAYAAAABAAAAAAAEAAEAAAABAAAAAAAEAAIAAAABAAAAAAAEAAMAAAABAAAAAAAEAAQAAAABAAAAAAAEAAUAAAABAAAAAAAEAAYAAAABAAAAAAAFAAEAAAABAAAAAAAFAAIAAAABAAAAAAAFAAMAAAABAAAAAAAFAAQAAAABAAAAAAAFAAUAAAABAAAAAAAFAAYAAAABAAAAAAAGAAEAAAABAAAAAAAGAAIAAAABAAEAAAAGAAMAAAABAAEAAAAGAAQAAAABAAEAAAAGAAUAAAABAAAAAAAGAAYAAAABAAAAAAAHAAEAAAABAAAAAAAHAAIAAAABAAEAAAAHAAMAAAABAAEAAAAHAAQAAAABAAEAAAAHAAUAAAABAAAAAAAHAAYAAAABAAAAAAAIAAEAAAABAAAAAAAIAAIAAAABAAAAAAAIAAMAAAABAAAAAAAIAAQAAAABAAAAAAAIAAYAAAABAAAAAAAJAAEAAAABAAAAAAAJAAIAAAABAAAAAAAJAAMAAAABAAAAAAAJAAQAAAABAAAAAAAJAAUAAAABAAAAAAAJAAYAAAABAAAAAAAIAAUAAAABAAAAAAA=")
+tile_set = SubResource("TileSet_u5sy4")
+
+[node name="TileMapLayerBorder" type="TileMapLayer" parent="." unique_id=545158540]
+z_index = 31
+tile_map_data = PackedByteArray("AAAAAAAAAAACAAAAAAABAAAAAAADAAAAAAACAAAAAAADAAAAAAADAAAAAAADAAAAAAAEAAAAAAADAAAAAAAFAAAAAAADAAAAAAAGAAAAAAADAAAAAAAHAAAAAAADAAAAAAAIAAAAAAADAAAAAAAJAAAAAAAEAAAAAAAAAAEAAAACAAEAAAAAAAIAAAACAAEAAAAAAAMAAAACAAEAAAAAAAQAAAACAAEAAAAAAAUAAAACAAEAAAAAAAYAAAACAAIAAAAJAAEAAAAEAAEAAAAJAAIAAAAEAAEAAAAJAAMAAAAEAAEAAAAJAAQAAAAEAAEAAAAJAAUAAAAEAAEAAAAJAAYAAAAEAAIAAAABAAYAAAADAAIAAAACAAYAAAADAAIAAAADAAYAAAADAAIAAAAEAAYAAAADAAIAAAAFAAYAAAADAAIAAAAGAAYAAAADAAIAAAAHAAYAAAADAAIAAAAIAAYAAAADAAIAAAA=")
+tile_set = SubResource("TileSet_a7tdr")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1303825275]
+position = Vector2(160, 112)
+zoom = Vector2(2, 2)
+rotation_smoothing_enabled = true
+rotation_smoothing_speed = 3.0
+script = ExtResource("4_g88m6")
+
+[node name="Giant" parent="." unique_id=2060885226 instance=ExtResource("5_2qdwj")]
+z_index = 32
+position = Vector2(112, 112)
+
+[node name="CharacterSolya" parent="." unique_id=52898326 instance=ExtResource("6_87bdc")]
+z_index = 32
+position = Vector2(80, 96)
+
+[node name="Enemies" type="Node2D" parent="." unique_id=946491156]
+z_index = 32
+
+[node name="Plants" type="Node2D" parent="." unique_id=1507805972]
+z_index = 32
+
+[node name="Grass2" parent="Plants" unique_id=963626142 instance=ExtResource("7_sqrxg")]
+position = Vector2(112, 208)
+
+[node name="Grass" parent="Plants" unique_id=1485131011 instance=ExtResource("7_sqrxg")]
+position = Vector2(48, 48)
+
+[node name="GrassLow" parent="Plants" unique_id=761419068 instance=ExtResource("8_r6ibx")]
+position = Vector2(176, 16)
+
+[node name="GrassLow2" parent="Plants" unique_id=862201728 instance=ExtResource("8_r6ibx")]
+position = Vector2(80, 144)
+
+[node name="GrassLow3" parent="Plants" unique_id=459249584 instance=ExtResource("8_r6ibx")]
+position = Vector2(272, 48)
+
+[node name="Tree(1)" parent="Plants" unique_id=961573235 instance=ExtResource("9_y5ci3")]
+position = Vector2(144, 16)
+
+[node name="Tree(1)2" parent="Plants" unique_id=74962108 instance=ExtResource("9_y5ci3")]
+position = Vector2(304, 112)
+
+[node name="Tree(1)3" parent="Plants" unique_id=1516154020 instance=ExtResource("9_y5ci3")]
+position = Vector2(16, 176)
+
+[node name="Cursor" parent="." unique_id=2051460958 instance=ExtResource("10_b0bne")]
+visible = false
+z_index = 35
+position = Vector2(608, -16)
+
+[node name="FX" type="Node2D" parent="." unique_id=1560400902]
+
+[node name="GiantExplosion" parent="FX" unique_id=1197458061 instance=ExtResource("11_800k3")]
+z_index = 100
+position = Vector2(16, -48)
+frame = 0
+frame_progress = 0.0
+
+[node name="ClawFX" parent="FX" unique_id=158559104 instance=ExtResource("12_fflb6")]
+position = Vector2(-16, -16)
+
+[node name="FireFX" parent="FX" unique_id=997164931 instance=ExtResource("13_hoaa3")]
+
+[node name="CatFX" parent="FX" unique_id=1852378800 instance=ExtResource("14_tyyvc")]
+position = Vector2(-16, -48)
+
+[node name="Inferno" parent="FX" unique_id=787359160 instance=ExtResource("15_g4j75")]
+z_index = 100
+position = Vector2(-128, -64)
+animation = &"default"
+frame = 0
+frame_progress = 0.0
+
+[node name="TitanEnergy" parent="FX" unique_id=1551713905 instance=ExtResource("16_hrdy8")]
+z_index = 100
+position = Vector2(88, -24)
+frame = 3
+frame_progress = 0.0
+
+[node name="AudioStreamPlayerMusic" type="AudioStreamPlayer" parent="." unique_id=179520262]
+stream = ExtResource("16_ak7cp")
+autoplay = true
+bus = &"Music"
+
+[node name="AudioStreamPlayerWin" type="AudioStreamPlayer" parent="." unique_id=446606509]
+stream = ExtResource("17_0pgyx")
+volume_db = -6.0
+bus = &"Music"
+
+[node name="AudioStreamPlayerHit" type="AudioStreamPlayer" parent="." unique_id=559939619]
+stream = ExtResource("18_x8tpc")
+bus = &"SoundFX"
+
+[node name="AudioStreamPlayerNoEnergy" type="AudioStreamPlayer" parent="." unique_id=1081212541]
+stream = ExtResource("19_tqq42")
+pitch_scale = 1.5
+bus = &"SoundFX"
+
+[node name="Effects" type="CanvasLayer" parent="." unique_id=1391118850]
+
+[node name="ColorRect" type="ColorRect" parent="Effects" unique_id=1165976768]
+material = SubResource("ShaderMaterial_nueng")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=589757551]
+
+[node name="Menu" parent="UI" unique_id=1052398381 instance=ExtResource("21_vtj4p")]
+
+[node name="Paw" parent="UI" unique_id=2011487880 instance=ExtResource("22_4yowc")]
+visible = false
+anchors_preset = 2
+anchor_top = 1.0
+anchor_right = 0.0
+offset_top = -32.0
+offset_bottom = -32.0
+grow_horizontal = 1
+grow_vertical = 0
+
+[node name="CreatureDialog" parent="UI" unique_id=1641948652 instance=ExtResource("23_tl0ir")]
+offset_left = -64.0
+offset_top = -64.16
+offset_right = 192.0
+
+[node name="EndBattleButton" type="Button" parent="UI" unique_id=235546835]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -128.0
+offset_top = -144.0
+offset_right = 128.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 26
+theme_override_styles/normal = ExtResource("24_1v757")
+theme_override_styles/pressed = ExtResource("25_w3xpx")
+theme_override_styles/hover = ExtResource("26_1nq0y")
+disabled = true
+text = "ЗАВЕРШИТЬ
+БОЙ"
+
+[node name="EnergyCat" parent="UI" unique_id=601039846 instance=ExtResource("27_pr1p8")]
+visible = false
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -232.0
+offset_top = -160.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="EnergyHuman" parent="UI" unique_id=1994060991 instance=ExtResource("28_ot0n2")]
+offset_left = 1048.0
+offset_top = 560.0
+offset_right = 1304.0
+offset_bottom = 752.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="CardContainerCat" parent="UI" unique_id=1698416944 instance=ExtResource("29_4ihym")]
+visible = false
+offset_left = 16.0
+offset_top = 504.0
+offset_right = -880.0
+offset_bottom = 40.0
+
+[node name="CardContainerHuman" parent="UI" unique_id=704997313 instance=ExtResource("30_6bjak")]
+visible = false
+offset_left = 16.0
+offset_top = 504.0
+offset_right = -880.0
+offset_bottom = 40.0
+
+[node name="CheckStatsDialogHoldTimer" type="Timer" parent="." unique_id=56407654]
+wait_time = 0.3
+one_shot = true
+
+[node name="WinTimer" type="Timer" parent="." unique_id=1769985938]
+wait_time = 0.7
+one_shot = true
+
+[node name="EndTurnTimer" type="Timer" parent="." unique_id=2145207919]
+one_shot = true
+
+[connection signal="pressed" from="UI/EndBattleButton" to="." method="_on_end_battle_button_pressed"]
+[connection signal="timeout" from="CheckStatsDialogHoldTimer" to="." method="_on_check_stats_dialog_hold_timer_timeout"]
+[connection signal="timeout" from="WinTimer" to="." method="_on_win_timer_timeout"]
+[connection signal="timeout" from="EndTurnTimer" to="." method="_on_end_turn_timer_timeout"]

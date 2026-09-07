@@ -12,7 +12,7 @@ config_version=5
 
 config/name="GiantCrawl"
 run/main_scene="res://scenes/levels/level0.tscn"
-config/features=PackedStringArray("4.7")
+config/features=PackedStringArray("4.6")
 config/icon="res://icon.png"
 
 [autoload]
@@ -42,6 +42,7 @@ folder_colors={
 "res://assets/soundFX/": "yellow",
 "res://saves/": "yellow",
 "res://scenes/": "green",
+"res://scenes/enemies/": "green",
 "res://scripts/": "red",
 "res://styles/": "pink"
 }

@@ -7,13 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://bp10kb8rxtuhx" path="res://scenes/objects/stairs.tscn" id="5_6d4iq"]
 [ext_resource type="PackedScene" uid="uid://bsxo600wchpra" path="res://scenes/objects/pillow.tscn" id="6_7plwd"]
 [ext_resource type="PackedScene" uid="uid://c0fd45oqpmhla" path="res://scenes/objects/chest.tscn" id="7_agrr7"]
-[ext_resource type="PackedScene" uid="uid://dsxoooufu2fui" path="res://scenes/objects/chest_rare.tscn" id="8_b2isc"]
-[ext_resource type="PackedScene" uid="uid://wwe2tb03ml0o" path="res://scenes/objects/chest_epic.tscn" id="9_qg8x4"]
-[ext_resource type="PackedScene" uid="uid://cq41x1n4fgtl6" path="res://scenes/objects/chest_unbelievable.tscn" id="10_nm6kf"]
-[ext_resource type="PackedScene" uid="uid://ccwnqehv5gkrc" path="res://scenes/objects/chest_all.tscn" id="11_88m6t"]
+[ext_resource type="PackedScene" uid="uid://vjpnjnw0g6lw" path="res://scenes/enemies/big_mouse_boss.tscn" id="9_arkx4"]
 [ext_resource type="PackedScene" uid="uid://d0d5e8ltlrwqg" path="res://scenes/giant.tscn" id="12_oub7f"]
-[ext_resource type="PackedScene" uid="uid://1bvjmpy2pf0k" path="res://scenes/enemies/enemy.tscn" id="13_p5q6g"]
-[ext_resource type="PackedScene" uid="uid://cgbiblheppx0x" path="res://scenes/enemies/fox.tscn" id="14_idf83"]
 [ext_resource type="PackedScene" uid="uid://b8bfs4u1x4s8" path="res://scenes/objects/grass_low.tscn" id="15_sqv5l"]
 [ext_resource type="PackedScene" uid="uid://1by6pkucltci" path="res://scenes/objects/grass.tscn" id="16_gr08b"]
 [ext_resource type="PackedScene" uid="uid://c7f16y8rwf2q" path="res://scenes/objects/edge_one.tscn" id="17_tsudw"]
@@ -21,6 +16,7 @@
 [ext_resource type="Shader" uid="uid://dm6djrn7pct8b" path="res://shaders/wobble.gdshader" id="19_u1mjy"]
 [ext_resource type="PackedScene" uid="uid://cdll7yvc84q18" path="res://scenes/ui/menu.tscn" id="20_a21j6"]
 [ext_resource type="PackedScene" uid="uid://di4k2iivrnhup" path="res://scenes/ui/creature_adventure_dialog.tscn" id="21_3e3xw"]
+[ext_resource type="Texture2D" uid="uid://djggfi67w50cu" path="res://assets/images/card_icons/girl.png" id="22_jqv5m"]
 [ext_resource type="PackedScene" uid="uid://qgx2la7r3w7a" path="res://scenes/ui/inventory.tscn" id="22_u1mhv"]
 [ext_resource type="StyleBox" uid="uid://b8wibcbgivilm" path="res://styles/button_normal.tres" id="23_5ol6i"]
 [ext_resource type="StyleBox" uid="uid://2iw7p3yvicvr" path="res://styles/button_pressed.tres" id="24_nimoc"]
@@ -93,11 +89,11 @@ shader_parameter/color_offset_multiplier = 0.0
 shader_parameter/black_offset_multiplier = 0.0
 shader_parameter/color_offset = 3.259879990946679e-09
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nqtv8"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_noix2"]
 atlas = ExtResource("26_2e78u")
 region = Rect2(288, 32, 32, 32)
 
-[node name="Game" type="Node2D" unique_id=2132287685]
+[node name="BigMouseBoss" type="Node2D" unique_id=2132287685]
 script = ExtResource("1_07dy8")
 
 [node name="BG" type="TextureRect" parent="." unique_id=1753798166]
@@ -142,48 +138,6 @@ heal_power = 5
 [node name="Chest" parent="Objects" unique_id=1807108612 instance=ExtResource("7_agrr7")]
 position = Vector2(-160, 96)
 
-[node name="Chest4" parent="Objects" unique_id=977096426 instance=ExtResource("7_agrr7")]
-position = Vector2(-64, -32)
-
-[node name="Chest5" parent="Objects" unique_id=641101638 instance=ExtResource("7_agrr7")]
-position = Vector2(-64, 0)
-
-[node name="Chest7" parent="Objects" unique_id=844894603 instance=ExtResource("7_agrr7")]
-position = Vector2(64, 0)
-
-[node name="ChestRare" parent="Objects" unique_id=505126585 instance=ExtResource("8_b2isc")]
-position = Vector2(64, -64)
-
-[node name="ChestEpic" parent="Objects" unique_id=1256877516 instance=ExtResource("9_qg8x4")]
-position = Vector2(-192, 0)
-
-[node name="ChestUnbelievable" parent="Objects" unique_id=805585204 instance=ExtResource("10_nm6kf")]
-position = Vector2(-192, -32)
-
-[node name="Chest2" parent="Objects" unique_id=530264351 instance=ExtResource("11_88m6t")]
-position = Vector2(32, -32)
-
-[node name="ChestRare2" parent="Objects" unique_id=1473647094 instance=ExtResource("8_b2isc")]
-position = Vector2(32, -64)
-
-[node name="ChestRare3" parent="Objects" unique_id=1879983419 instance=ExtResource("8_b2isc")]
-position = Vector2(96, -64)
-
-[node name="ChestRare4" parent="Objects" unique_id=413824566 instance=ExtResource("8_b2isc")]
-position = Vector2(-96, -32)
-
-[node name="ChestRare5" parent="Objects" unique_id=1757250525 instance=ExtResource("8_b2isc")]
-position = Vector2(-96, 0)
-
-[node name="Chest8" parent="Objects" unique_id=828478503 instance=ExtResource("7_agrr7")]
-position = Vector2(32, 0)
-
-[node name="Chest9" parent="Objects" unique_id=646015650 instance=ExtResource("7_agrr7")]
-position = Vector2(0, -32)
-
-[node name="ChestEpic2" parent="Objects" unique_id=1622579856 instance=ExtResource("9_qg8x4")]
-position = Vector2(0, -64)
-
 [node name="Giant" parent="." unique_id=2060885226 instance=ExtResource("12_oub7f")]
 position = Vector2(176, 48)
 
@@ -195,47 +149,14 @@ rotation_smoothing_speed = 3.0
 
 [node name="Enemies" type="Node2D" parent="." unique_id=946491156]
 
-[node name="Enemy" parent="Enemies" unique_id=772889915 instance=ExtResource("13_p5q6g")]
-position = Vector2(144, 144)
+[node name="BigMouseBoss" parent="Enemies" unique_id=685663284 instance=ExtResource("9_arkx4")]
+position = Vector2(112, 48)
 
-[node name="Enemy2" parent="Enemies" unique_id=2106804459 instance=ExtResource("13_p5q6g")]
-position = Vector2(80, 16)
+[node name="BigMouseBoss2" parent="Enemies" unique_id=1165134905 instance=ExtResource("9_arkx4")]
+position = Vector2(112, 48)
 
-[node name="Enemy3" parent="Enemies" unique_id=956625573 instance=ExtResource("13_p5q6g")]
-position = Vector2(144, 144)
-
-[node name="Enemy4" parent="Enemies" unique_id=903222958 instance=ExtResource("13_p5q6g")]
-position = Vector2(144, 144)
-
-[node name="Enemy5" parent="Enemies" unique_id=664980245 instance=ExtResource("13_p5q6g")]
-position = Vector2(144, 144)
-
-[node name="Enemy6" parent="Enemies" unique_id=785576007 instance=ExtResource("13_p5q6g")]
-position = Vector2(144, 144)
-
-[node name="Enemy7" parent="Enemies" unique_id=1139925437 instance=ExtResource("13_p5q6g")]
-position = Vector2(144, 144)
-
-[node name="EnemyFox" parent="Enemies" unique_id=685663284 instance=ExtResource("14_idf83")]
-position = Vector2(272, 112)
-
-[node name="EnemyFox2" parent="Enemies" unique_id=1113755696 instance=ExtResource("14_idf83")]
-position = Vector2(272, 112)
-
-[node name="EnemyFox3" parent="Enemies" unique_id=1971720123 instance=ExtResource("14_idf83")]
-position = Vector2(272, 112)
-
-[node name="EnemyFox4" parent="Enemies" unique_id=314592152 instance=ExtResource("14_idf83")]
-position = Vector2(272, 112)
-
-[node name="EnemyFox5" parent="Enemies" unique_id=1974251582 instance=ExtResource("14_idf83")]
-position = Vector2(272, 112)
-
-[node name="EnemyFox6" parent="Enemies" unique_id=1966389239 instance=ExtResource("14_idf83")]
-position = Vector2(272, 112)
-
-[node name="EnemyFox7" parent="Enemies" unique_id=1475903293 instance=ExtResource("14_idf83")]
-position = Vector2(272, 112)
+[node name="BigMouseBoss3" parent="Enemies" unique_id=97363241 instance=ExtResource("9_arkx4")]
+position = Vector2(112, 48)
 
 [node name="Plants" type="Node2D" parent="." unique_id=1507805972]
 
@@ -400,19 +321,21 @@ modulate = Color(1, 1, 1, 0.5019608)
 self_modulate = Color(1, 1, 1, 0.9411765)
 color = Color(0, 0, 0, 1)
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=589757551]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1958633493]
 
 [node name="Menu" parent="UI" unique_id=1052398381 instance=ExtResource("20_a21j6")]
+metadata/_edit_use_anchors_ = true
 
 [node name="CreatureAdventureDialog" parent="UI" unique_id=1641948652 instance=ExtResource("21_3e3xw")]
 visible = false
 z_index = 10
 
-[node name="Inventory" parent="UI" unique_id=579277200 instance=ExtResource("22_u1mhv")]
+[node name="Inventory" parent="UI" unique_id=690567739 instance=ExtResource("22_u1mhv")]
 visible = false
 anchors_preset = -1
 
-[node name="InventoryButton" type="Button" parent="UI" unique_id=1283236015]
+[node name="InventoryButton" type="Button" parent="UI" unique_id=1248563066]
+z_index = -1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -422,25 +345,41 @@ grow_vertical = 0
 theme_override_styles/normal = ExtResource("23_5ol6i")
 theme_override_styles/pressed = ExtResource("24_nimoc")
 theme_override_styles/hover = ExtResource("25_c52q8")
-icon = SubResource("AtlasTexture_nqtv8")
+icon = SubResource("AtlasTexture_noix2")
 icon_alignment = 1
 expand_icon = true
 
-[node name="LevelUpDialog" parent="UI" unique_id=76690541 instance=ExtResource("27_mcic2")]
+[node name="InventoryButtonHuman" type="Button" parent="UI" unique_id=2042863202]
+z_index = -1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 96.0
+offset_top = -80.0
+offset_right = 176.0
+grow_vertical = 0
+theme_override_styles/normal = ExtResource("23_5ol6i")
+theme_override_styles/pressed = ExtResource("24_nimoc")
+theme_override_styles/hover = ExtResource("25_c52q8")
+icon = ExtResource("22_jqv5m")
+icon_alignment = 1
+expand_icon = true
+
+[node name="LevelUpDialog" parent="UI" unique_id=1632864777 instance=ExtResource("27_mcic2")]
 visible = false
 offset_left = 352.0
 offset_top = 160.0
 offset_right = -352.0
 offset_bottom = -176.0
 
-[node name="UpgradeStatsDialog" parent="UI" unique_id=1192782911 instance=ExtResource("28_0p1sx")]
+[node name="UpgradeStatsDialog" parent="UI" unique_id=456530383 instance=ExtResource("28_0p1sx")]
 visible = false
 offset_left = 336.0
 offset_top = 160.0
 offset_right = -344.0
 offset_bottom = -226.0
 
-[node name="ArtifactDialog" parent="UI" unique_id=947846839 instance=ExtResource("29_qncc2")]
+[node name="ArtifactDialog" parent="UI" unique_id=1956699247 instance=ExtResource("29_qncc2")]
 visible = false
 offset_left = 512.0
 offset_top = 192.0
@@ -461,5 +400,4 @@ bus = &"Music"
 stream = ExtResource("31_wkw6o")
 bus = &"Music"
 
-[connection signal="mouse_entered" from="UI/InventoryButton" to="." method="_on_inventory_button_mouse_entered"]
 [connection signal="timeout" from="BattleStartTimer" to="." method="_on_battle_start_timer_timeout"]

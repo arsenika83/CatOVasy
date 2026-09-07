@@ -29,7 +29,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_yu8pw")
 }],
-"loop": 1,
+"loop": true,
 "name": &"default",
 "speed": 1.0
 }]
@@ -59,7 +59,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_h1kgp")
 }],
-"loop": 1,
+"loop": true,
 "name": &"default",
 "speed": 5.0
 }]
@@ -82,12 +82,12 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_h33o0")
 }],
-"loop": 1,
+"loop": true,
 "name": &"default",
 "speed": 5.0
 }]
 
-[node name="Tree(2)" type="Node2D" unique_id=963626142]
+[node name="Tree(3)" type="Node2D" unique_id=963626142]
 script = ExtResource("1_3pyf0")
 
 [node name="Shadow" type="AnimatedSprite2D" parent="." unique_id=1935827245]

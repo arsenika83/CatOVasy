@@ -1,8 +1,9 @@
 AnimatedSprite2D
 PointLight2D
-Node2D
-Sprite2D
+DirectionalLight2D
 TileMapLayer
+Sprite2D
+Node2D
 AudioStreamPlayer
 Timer
 TextureRect
@@ -11,4 +12,3 @@ CollisionShape2D
 Area2D
 TextureButton
 CharacterBody2D
-ScrollContainer

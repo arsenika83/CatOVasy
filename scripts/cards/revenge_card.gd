@@ -23,5 +23,9 @@ func on_play() -> void:
 	for target in gm.current_targets:
 		if target.dealt_damage_to_human:
 			damage = default_damage * 4
+			break
 		else:
 			damage = default_damage
+			
+func revenge() -> int:
+	return default_damage * 4

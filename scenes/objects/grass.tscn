@@ -33,7 +33,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_yu8pw")
 }],
-"loop": 1,
+"loop": true,
 "name": &"default",
 "speed": 1.0
 }]
@@ -63,7 +63,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_47uce")
 }],
-"loop": 1,
+"loop": true,
 "name": &"default",
 "speed": 1.0
 }]
@@ -95,7 +95,9 @@ frame_progress = 0.5857028
 
 [node name="Audio" type="AudioStreamPlayer2D" parent="." unique_id=2004916651]
 stream = ExtResource("4_q101s")
-max_distance = 128.0
+volume_db = 3.0
+max_distance = 150.0
+attenuation = 1.624505
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

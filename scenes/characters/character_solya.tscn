@@ -255,6 +255,11 @@ animations = [{
 "name": &"battle_defend",
 "speed": 5.0
 }, {
+"frames": [],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_6tupa")
@@ -592,9 +597,8 @@ autoplay = "default"
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1453614389]
 position = Vector2(0, -6)
 sprite_frames = SubResource("SpriteFrames_a16jr")
-animation = &"taking_damage"
+animation = &"dead"
 autoplay = "idle"
-frame_progress = 0.7060082
 
 [node name="ArtifactSprite" type="AnimatedSprite2D" parent="." unique_id=534946203]
 visible = false
