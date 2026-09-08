@@ -9,6 +9,7 @@ var rarity = "common"
 var strength = 2
 var turns = 2
 var target = "cat"
+var buff_type = "strength"
 
 func _ready() -> void:
 	description_rect.scale = Vector2(1, 0)
@@ -16,8 +17,8 @@ func _ready() -> void:
 	
 	state_modifier = "_ability"
 	$Energy/Label.text = str(energy_cost)
-	type = "strength"
+	type = "buff"
 
 func on_play() -> void:
 	var targets : Array[CharacterBody2D] = [get_parent().get_parent().get_parent().get_parent().giant]
-	get_parent().get_parent().get_parent().get_parent().human.give_buff(targets, type, strength, turns)
+	get_parent().get_parent().get_parent().get_parent().human.give_buff(targets, buff_type, strength, turns)

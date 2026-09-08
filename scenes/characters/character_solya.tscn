@@ -39,7 +39,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vsv37")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 1.0
 }]
@@ -71,7 +71,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wd4ag")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }]
@@ -111,6 +111,10 @@ region = Rect2(0, 320, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_g1j1r"]
 atlas = ExtResource("1_eb1o4")
 region = Rect2(64, 320, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_usu7w"]
+atlas = ExtResource("1_eb1o4")
+region = Rect2(64, 192, 32, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6tupa"]
 atlas = ExtResource("1_eb1o4")
@@ -239,7 +243,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bf2la")
 }],
-"loop": true,
+"loop": 1,
 "name": &"battle",
 "speed": 2.0
 }, {
@@ -247,7 +251,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7axqy")
 }],
-"loop": true,
+"loop": 1,
 "name": &"battle_ability",
 "speed": 5.0
 }, {
@@ -255,7 +259,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7axqy")
 }],
-"loop": true,
+"loop": 1,
 "name": &"battle_attack",
 "speed": 5.0
 }, {
@@ -263,7 +267,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bbpbm")
 }],
-"loop": true,
+"loop": 1,
 "name": &"battle_boredom",
 "speed": 5.0
 }, {
@@ -274,7 +278,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_g1j1r")
 }],
-"loop": true,
+"loop": 1,
 "name": &"battle_buff_cat",
 "speed": 5.0
 }, {
@@ -282,12 +286,15 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7axqy")
 }],
-"loop": true,
+"loop": 1,
 "name": &"battle_defend",
 "speed": 5.0
 }, {
-"frames": [],
-"loop": true,
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_usu7w")
+}],
+"loop": 1,
 "name": &"dead",
 "speed": 5.0
 }, {
@@ -295,7 +302,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_6tupa")
 }],
-"loop": true,
+"loop": 1,
 "name": &"deal_damage",
 "speed": 5.0
 }, {
@@ -303,7 +310,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_a0gv1")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }, {
@@ -311,7 +318,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ijvqx")
 }],
-"loop": true,
+"loop": 1,
 "name": &"healing",
 "speed": 5.0
 }, {
@@ -394,7 +401,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3ae6u")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 1.0
 }, {
@@ -402,7 +409,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_piljf")
 }],
-"loop": true,
+"loop": 1,
 "name": &"taking_damage",
 "speed": 5.0
 }, {
@@ -413,7 +420,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ihqkh")
 }],
-"loop": true,
+"loop": 1,
 "name": &"walking",
 "speed": 10.0
 }, {
@@ -424,7 +431,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_klmc7")
 }],
-"loop": true,
+"loop": 1,
 "name": &"walking_side",
 "speed": 5.0
 }]
@@ -531,7 +538,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xrxwe")
 }],
-"loop": false,
+"loop": 0,
 "name": &"boomerang",
 "speed": 10.0
 }, {
@@ -548,7 +555,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3xb3h")
 }],
-"loop": false,
+"loop": 0,
 "name": &"candy",
 "speed": 2.0
 }, {
@@ -556,7 +563,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_17dpp")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }, {
@@ -603,7 +610,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_mvbdv")
 }],
-"loop": false,
+"loop": 0,
 "name": &"spinner",
 "speed": 2.0
 }]
@@ -640,11 +647,10 @@ sprite_frames = SubResource("SpriteFrames_0qj2d")
 autoplay = "default"
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1453614389]
-position = Vector2(0, -24)
+position = Vector2(0, -22)
 sprite_frames = SubResource("SpriteFrames_a16jr")
-animation = &"walking_side"
+animation = &"dead"
 autoplay = "walking_side"
-frame_progress = 0.8994848
 
 [node name="ArtifactSprite" type="AnimatedSprite2D" parent="." unique_id=534946203]
 visible = false

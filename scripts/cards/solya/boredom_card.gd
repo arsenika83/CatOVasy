@@ -14,12 +14,15 @@ func _ready() -> void:
 	energy_cost = 0
 	state_modifier = "_ability"
 	$Energy/Label.text = str(energy_cost)
-	type = "skip_turn"
+	type = "buff"
 
 func _process(delta: float) -> void:
 	pass
 
 func on_play() -> void:
+	get_parent().get_parent().get_parent().get_parent().log_messages.append(
+		str("- [color=#1ca8fd]Соля[/color] скучает.[color=#1ca8fd] Кот[/color] получает ", gm.current_energy_human, " энергии"))
+	
 	gm.current_energy_cat = gm.energy_cat
 	gm.current_energy_cat += gm.current_energy_human
 	gm.current_energy_human = -1000

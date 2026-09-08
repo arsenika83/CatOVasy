@@ -3,7 +3,7 @@ extends Battle
 @onready var titan_energy_fx = $FX/TitanEnergy
 
 func _ready() -> void:
-	enemy_positions = [Vector2(240, 80), Vector2(208, 112), Vector2(240, 144)]
+	enemy_positions = [Vector2(240, 80), Vector2(240, 112), Vector2(240, 144)]
 	
 	creature_check_dialog.visible = false
 	end_battle_button.visible = false

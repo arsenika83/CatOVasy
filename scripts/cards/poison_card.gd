@@ -14,7 +14,7 @@ func _ready() -> void:
 	state_modifier = "_ability"
 	energy_cost = 0
 	$Energy/Label.text = str(energy_cost)
-	type = "ability"
+	type = "debuff"
 	rarity = "unbelievable"
 
 func _process(delta: float) -> void:

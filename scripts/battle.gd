@@ -7,6 +7,11 @@ var creature_dialog_on_screen = false
 var battle_ended = false
 var one_character_died = false
 
+var log_messages: Array[String] = ["[center][font_size=20]БОЙ НАЧАЛСЯ![/font_size][/center]
+\n[center]>>> ХОД 1 <<<[/center]\n\n"]
+var log_count = 1
+@onready var log_book = $UI/LogBook
+
 @onready var cursor = $Cursor
 @onready var map = $TileMapLayerBlack
 @onready var player_camera = $Camera2D
@@ -56,9 +61,15 @@ func _ready() -> void:
 	human.sprite.flip_h = false
 	init()
 	end_turn()
+	
+	log_book.text.text += log_messages[0]
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if log_count < log_messages.size():
+		log_book.text.text += log_messages[log_count]
+		log_count += 1
+	
 	if not battle_ended:
 		check_battle_status()
 	
@@ -87,7 +98,16 @@ func _process(delta: float) -> void:
 			check_creature_stats()
 		
 	if Input.is_action_just_pressed("ui_lmb"):
-		if current_creature_turn == -1 or current_creature_turn == -2:
+		if current_creature_turn == -2:
+			if gm.current_card != null:
+				match gm.current_card.type:
+					"attack":
+						choose_target("deal_damage")
+					"defend":
+						choose_target("defend")
+					"buff":
+						choose_target("buff")
+		elif current_creature_turn == -1:
 			match gm.state:
 				"battle_attack":
 					choose_target("deal_damage")
@@ -189,7 +209,7 @@ func display_cursor_label() -> void:
 					cursor_icon.visible = true
 					#cursor_label.text = str(card_container.current_selected.damage - targets.get(0).current_defence)
 
-func find_enemy_by_position(battle_x : int, battle_y : int) -> Enemy:
+func find_enemy_by_position(battle_x : int, battle_y : int) -> CharacterBody2D:
 	for enemy in find_child("Enemies").get_children():
 		if enemy.battle_x == battle_x and enemy.battle_y == battle_y:
 			return enemy
@@ -521,10 +541,13 @@ func end_turn() -> void:
 			
 			if current_creature_turn == current_enemies.size():
 				turn_count += 1
+				log_messages.append(str("\n[center]>>> ХОД ", turn_count, " <<<[/center]\n\n"))
 				
 				if gm.state_human != "dead":
 					gm.current_energy_human = gm.energy_human
 					current_creature_turn = -2
+				else:
+					current_creature_turn = -1	
 				giant.turn_tick()
 				human.turn_tick()
 				
@@ -990,6 +1013,7 @@ func check_enemy_army() -> void:
 			dead_count += 1
 
 	if dead_count >= current_enemies.size():
+		log_messages.append("[font_size=20][center]ПОБЕДА![/center][font_size]")
 		won = true
 		
 func check_giant_army() -> void:
@@ -1004,6 +1028,7 @@ func check_giant_army() -> void:
 				one_character_died = true		
 	
 	if gm.state == "dead" and gm.state_human == "dead":
+		log_messages.append("[font_size=20][center]ПОРАЖЕНИЕ![/center][/font_size]")
 		defeated = true
 
 func check_battle_status() -> void:

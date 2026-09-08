@@ -406,62 +406,62 @@ func turn_tick() -> void:
 	if has_debuff_weakness:
 		turns_debuff_weakness -= 1
 		if turns_debuff_weakness == 0:
-			gm.current_damage = gm.damage
+			gm.current_damage_human = gm.damage_human
 			has_debuff_weakness = false
 			
 	if has_debuff_undefend:
 		turns_debuff_undefend -= 1
 		if turns_debuff_undefend == 0:
-			gm.current_defence = gm.defence
+			gm.current_defence_human = gm.defence_human
 			has_debuff_undefend = false
 			
 	if has_debuff_inaccuracy:
 		turns_debuff_inaccuracy -= 1
 		if turns_debuff_inaccuracy == 0:
-			gm.current_accuracy = gm.accuracy
+			gm.current_accuracy_human = gm.accuracy_human
 			has_debuff_inaccuracy = false
 			
 	if has_debuff_unluck:
 		turns_debuff_unluck -= 1
 		if turns_debuff_unluck == 0:
-			gm.current_luck = gm.luck
+			gm.current_luck_human = gm.luck_human
 			has_debuff_unluck = false
 			
 	if has_debuff_low_energy:
 		turns_debuff_low_energy -= 1
 		if turns_debuff_low_energy == 0:
-			gm.energy = gm.max_energy
+			gm.energy_human = gm.max_energy_human
 			has_debuff_low_energy = false
 
 
 	if has_buff_strength:
 		turns_buff_strength -= 1
 		if turns_buff_strength == 0:
-			gm.current_damage = gm.damage
+			gm.current_damage_human = gm.damage_human
 			has_buff_strength = false
 			
 	if has_buff_defend:
 		turns_buff_defend -= 1
 		if turns_buff_defend == 0:
-			gm.current_defence = gm.defence
+			gm.current_defence_human = gm.defence_human
 			has_buff_defend = false
 			
 	if has_buff_accuracy:
 		turns_buff_accuracy -= 1
 		if turns_buff_accuracy == 0:
-			gm.current_accuracy = gm.accuracy
+			gm.current_accuracy_human = gm.accuracy_human
 			has_buff_accuracy = false
 			
 	if has_buff_luck:
 		turns_buff_luck -= 1
 		if turns_buff_luck == 0:
-			gm.current_luck = gm.luck
+			gm.current_luck_human = gm.luck_human
 			has_buff_luck = false
 			
 	if has_buff_high_energy:
 		turns_buff_high_energy -= 1
 		if turns_buff_high_energy == 0:
-			gm.energy = gm.max_energy
+			gm.energy_human = gm.max_energy_human
 			has_buff_high_energy = false
 
 func check_fall(delta: float) -> void:
@@ -581,13 +581,22 @@ func _on_deal_damage_timer_timeout() -> void:
 	tween2.tween_property(get_parent().fire_fx, "position", gm.current_targets[0].position, gm.attack_animation_time_human)
 	
 	for target in gm.current_targets:
+		if gm.current_damage_human == 0:
+			get_parent().log_messages.append(str("- [color=#1ca8fd]Соля[/color] атакует существо [color=#1ca8fd]", 
+			target.enemy_name_rus, "[/color]. Промах!\n"))
+		else:
+			get_parent().log_messages.append(str("- [color=#1ca8fd]Соля[/color] наносит [color=#fc4e52]", gm.current_damage_human, 
+			" урона[/color] существу [color=#1ca8fd]", target.enemy_name_rus, "[/color]\n"))
+		
 		target.take_damage(gm.current_damage_human, gm.attack_animation_time_human)
 	gm.current_damage_human = gm.damage_human
 	
 	#ВЗРЫВ
 	if gm.current_card.has_method("explode"):
+		get_parent().log_messages.append(str("- ВЗРЫВ!!! [color=#1ca8fd]Кот[/color] получил [color=#fc4e52]5 урона[/color]\n"))
 		get_parent().fire_fx.scale = Vector2(0, 0)
-		get_parent().giant.display_damage(5)
+		if gm.state != "dead":
+			get_parent().giant.display_damage(5)
 		if not just_missed:
 			$ExplodeTimer.start(gm.attack_animation_time_human)
 			
@@ -599,8 +608,10 @@ func _on_deal_damage_timer_timeout() -> void:
 			
 			var tween4 = create_tween()
 			tween4.tween_property(get_parent().cat_fx, "rotation_degrees", 720, gm.attack_animation_time_human)
-			get_parent().cat_fx.play("hit")
-	
+			if gm.state != "dead":
+				get_parent().cat_fx.play("hit")
+			else:	
+				get_parent().cat_fx.play("dead_hit")
 	if just_missed:
 		if gm.has_boomerang:
 			#var boomerang = get_parent().find_child("FX").find_child("BoomerangProjectile")
@@ -647,7 +658,10 @@ func _on_heal_timer_timeout() -> void:
 
 func _on_explode_timer_timeout() -> void:
 	get_parent().giant_explosion_fx.position = gm.current_targets[0].position
-	get_parent().giant_explosion_fx.play("hit")
+	if gm.state != "dead":
+		get_parent().giant_explosion_fx.play("hit")
+	else:	
+		get_parent().giant_explosion_fx.play("dead_hit")
 	get_parent().player_camera.apply_shake(3)
 	$AudioExplode.play()
 	get_parent().giant.sprite.visible = true

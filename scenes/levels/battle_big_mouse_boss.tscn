@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://btcx8q72tnkf5" path="res://scenes/fx/claw_fx.tscn" id="12_fflb6"]
 [ext_resource type="PackedScene" uid="uid://6hsq7ud5p275" path="res://scenes/fx/fire_fx.tscn" id="13_hoaa3"]
 [ext_resource type="PackedScene" uid="uid://b7efvk3yra5db" path="res://scenes/fx/cat_fx.tscn" id="14_tyyvc"]
-[ext_resource type="AudioStream" uid="uid://drd47qu2hqh2t" path="res://assets/music/BATTLE_THEME_3.ogg" id="14_uf3jn"]
+[ext_resource type="AudioStream" uid="uid://d376xnspnkqbg" path="res://assets/music/BATTLE_THEME_1.ogg" id="14_uf3jn"]
 [ext_resource type="PackedScene" uid="uid://drtcvgk4w8njv" path="res://scenes/fx/inferno.tscn" id="15_g4j75"]
 [ext_resource type="PackedScene" uid="uid://bbrgur310kkfd" path="res://scenes/fx/titan_energy_projectile.tscn" id="16_hrdy8"]
 [ext_resource type="AudioStream" uid="uid://bxhii1a001e1v" path="res://assets/music/BATTLE_WIN.mp3" id="17_0pgyx"]

@@ -269,7 +269,7 @@ func deal_damage(target : CharacterBody2D) -> void:
 	current_target = target
 	
 	var tween1 = create_tween()
-	tween1.tween_property(sprite, "position:x", sprite.position.x - 4, 0.1)
+	tween1.tween_property(sprite, "position:x", sprite.position.x - 32, 0.1)
 	
 	if success:
 		if target.character_name == "solya":
@@ -568,8 +568,12 @@ func _on_defend_timer_timeout() -> void:
 
 func _on_deal_damage_timer_timeout() -> void:
 	var tween1 = create_tween()
-	tween1.tween_property(sprite, "position:x", sprite.position.x - 4, 0.1)
-	tween1.tween_property(sprite, "position:x", sprite.position.x + 4, 0.1)
+	tween1.tween_property(sprite, "position:x", sprite.position.x - 32, 0.1)
+	tween1.tween_property(sprite, "position:x", sprite.position.x + 32, 0.1)
+	
+	var tween2 = create_tween()
+	tween2.tween_property(head_sprite, "position:x", sprite.position.x - 32, 0.1)
+	tween2.tween_property(head_sprite, "position:x", sprite.position.x + 32, 0.1)
 	
 	var tween = create_tween()
 	tween.tween_property(status_fx, "scale", Vector2(0, 0), 0.2)

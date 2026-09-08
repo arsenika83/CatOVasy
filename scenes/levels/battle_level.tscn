@@ -30,6 +30,7 @@
 [ext_resource type="StyleBox" uid="uid://c66nispyhk2t0" path="res://styles/button_hover.tres" id="16_3cs84"]
 [ext_resource type="PackedScene" uid="uid://cuybslgtoc70m" path="res://scenes/ui/energy_human.tscn" id="20_xxxag"]
 [ext_resource type="PackedScene" uid="uid://c7lkcfyxh5uff" path="res://scenes/ui/card_container_human.tscn" id="21_5qqwm"]
+[ext_resource type="PackedScene" uid="uid://db6mch348j5ck" path="res://scenes/ui/log_book.tscn" id="31_6g64q"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fj52k"]
 shader = ExtResource("2_y3fis")
@@ -245,7 +246,6 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=589757551]
-visible = false
 
 [node name="Menu" parent="UI" unique_id=1052398381 instance=ExtResource("11_y3fis")]
 
@@ -319,6 +319,9 @@ offset_left = 16.0
 offset_top = 504.0
 offset_right = -880.0
 offset_bottom = 40.0
+
+[node name="LogBook" parent="UI" unique_id=1252761803 instance=ExtResource("31_6g64q")]
+offset_right = 8.0
 
 [node name="CheckStatsDialogHoldTimer" type="Timer" parent="." unique_id=56407654]
 wait_time = 0.3

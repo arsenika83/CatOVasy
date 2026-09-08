@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/BATTLE_THEME_3.ogg-8c789cc9c2985e4a187c5bc3d5
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

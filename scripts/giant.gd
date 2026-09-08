@@ -498,12 +498,19 @@ func _on_deal_damage_timer_timeout() -> void:
 	get_parent().claw_fx.position = gm.current_targets[0].position
 	get_parent().claw_fx.play("hit")
 	for target in gm.current_targets:
+		if gm.current_damage_cat == 0:
+			get_parent().log_messages.append(str("- [color=#1ca8fd]Кот[/color] атакует существо [color=#1ca8fd]", 
+			target.enemy_name_rus, "[/color]. Промах!\n"))
+		else:
+			get_parent().log_messages.append(str("- [color=#1ca8fd]Кот[/color] наносит [color=#fc4e52]", gm.current_damage_cat, 
+			" урона[/color] существу [color=#1ca8fd]", target.enemy_name_rus, "[/color]\n"))
 		target.take_damage(gm.current_damage_cat, gm.attack_animation_time_cat)
 	gm.current_damage_cat = gm.damage_cat
 	
 	#ВЗРЫВ
 	if gm.current_card.has_method("explode"):
 		get_parent().claw_fx.scale = Vector2(0, 0)
+		get_parent().log_messages.append(str("- ВЗРЫВ!!! [color=#1ca8fd]Кот[/color] получил [color=#fc4e52]4 урона[/color]\n"))
 		display_damage(4)
 		if not just_missed:
 			$ExplodeTimer.start(gm.attack_animation_time_human)
@@ -515,7 +522,7 @@ func _on_deal_damage_timer_timeout() -> void:
 			tween3.tween_property(get_parent().cat_fx, "position", gm.current_targets[0].position, gm.attack_animation_time_cat)
 			
 			var tween4 = create_tween()
-			tween4.tween_property(get_parent().cat_fx, "rotation_degrees", 720, gm.attack_animation_time_cat)
+			tween4.tween_property(get_parent().cat_fx, "rotation_degrees", 720, 0.3)
 			get_parent().cat_fx.play("hit")
 			
 	#ИНФЕРНО

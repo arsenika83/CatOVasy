@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://db6mch348j5ck"]
+
+[ext_resource type="StyleBox" uid="uid://c66nispyhk2t0" path="res://styles/button_hover.tres" id="1_0htkf"]
+[ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="1_jvj0l"]
+[ext_resource type="Script" uid="uid://dly03e1fqoreb" path="res://scripts/ui/log_book.gd" id="2_5txc0"]
+[ext_resource type="StyleBox" uid="uid://b8wibcbgivilm" path="res://styles/button_normal.tres" id="3_3ec7b"]
+[ext_resource type="StyleBox" uid="uid://2iw7p3yvicvr" path="res://styles/button_pressed.tres" id="4_5txc0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6g64q"]
+shader = ExtResource("1_jvj0l")
+shader_parameter/speed = 0.0
+shader_parameter/amplitude = 4.00000019
+shader_parameter/time_offset = 0.0
+
+[node name="LogBook" type="Control" unique_id=1252761803]
+material = SubResource("ShaderMaterial_6g64q")
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 944.0
+offset_bottom = -400.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_5txc0")
+
+[node name="Panel" type="Panel" parent="." unique_id=1257289632]
+use_parent_material = true
+layout_mode = 0
+offset_left = -48.0
+offset_right = 256.0
+offset_bottom = 320.0
+pivot_offset = Vector2(128, 0)
+theme_override_styles/panel = ExtResource("1_0htkf")
+
+[node name="Text" type="RichTextLabel" parent="Panel" unique_id=533902441]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 8.0
+offset_right = 296.0
+offset_bottom = 312.0
+bbcode_enabled = true
+text = "									1 ХОД
+
+- МЫШЬ: ПРОМАХ!
+- МЫШЬ: ПРОМАХ!"
+
+[node name="ToggleLogButton" type="Button" parent="." unique_id=2078286319]
+layout_mode = 0
+offset_left = 272.0
+offset_right = 336.0
+offset_bottom = 64.0
+pivot_offset = Vector2(136, -112)
+theme_override_styles/normal = ExtResource("3_3ec7b")
+theme_override_styles/pressed = ExtResource("4_5txc0")
+theme_override_styles/hover = ExtResource("1_0htkf")
+toggle_mode = true
+text = "ЖУРНАЛ БОЯ"
+autowrap_mode = 2
+
+[connection signal="pressed" from="ToggleLogButton" to="." method="_on_toggle_log_button_pressed"]

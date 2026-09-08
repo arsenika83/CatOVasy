@@ -6,6 +6,7 @@ var tool_tip_text = ""
 var card_name = "Колесо фортуны"
 var card_description = "Дает Соле и коту 7 удачи на 2 хода"
 var rarity = "rare"
+var buff_type = "luck"
 var luck = 7
 var turns = 2
 
@@ -16,10 +17,13 @@ func _ready() -> void:
 	
 	state_modifier = "_ability"
 	$Energy/Label.text = str(energy_cost)
-	type = "luck"
+	type = "buff"
 
 
 func on_play() -> void:
+	get_parent().get_parent().get_parent().get_parent().log_messages.append(
+		str("- [color=#fdd14d]Колесо фортуны[/color]: [color=#1ca8fd]Соля[/color] и [color=#1ca8fd]Кот[/color] получают +7% к удаче!\n"))
+		
 	var targets : Array[CharacterBody2D] = [get_parent().get_parent().get_parent().get_parent().giant, get_parent().get_parent().get_parent().get_parent().human]
-	get_parent().get_parent().get_parent().get_parent().human.give_buff(targets, type, luck, turns)
+	get_parent().get_parent().get_parent().get_parent().human.give_buff(targets, buff_type, luck, turns)
 	

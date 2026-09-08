@@ -13,7 +13,7 @@ func _ready() -> void:
 	energy_cost = 1
 	state_modifier = "_ability"
 	$Energy/Label.text = str(energy_cost)
-	type = "ability"
+	type = "buff"
 
 
 func on_play() -> void:
