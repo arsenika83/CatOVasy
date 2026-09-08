@@ -4,9 +4,9 @@ var card_path = "fortune_wheel_card.tscn"
 var icon_path = "fortune_wheel_card.png"
 var tool_tip_text = ""
 var card_name = "Колесо фортуны"
-var card_description = "Дает Соле и коту 10 удачи на 2 хода"
+var card_description = "Дает Соле и коту 7 удачи на 2 хода"
 var rarity = "rare"
-var luck = 10
+var luck = 7
 var turns = 2
 
 func _ready() -> void:
@@ -20,5 +20,6 @@ func _ready() -> void:
 
 
 func on_play() -> void:
-	gm.current_energy_human -= energy_cost
-	get_parent().get_parent().free_changes += 2
+	var targets : Array[CharacterBody2D] = [get_parent().get_parent().get_parent().get_parent().giant, get_parent().get_parent().get_parent().get_parent().human]
+	get_parent().get_parent().get_parent().get_parent().human.give_buff(targets, type, luck, turns)
+	

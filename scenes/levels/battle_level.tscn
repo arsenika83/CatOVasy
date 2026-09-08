@@ -154,7 +154,7 @@ position = Vector2(112, 112)
 
 [node name="CharacterSolya" parent="." unique_id=52898326 instance=ExtResource("5_3cs84")]
 z_index = 32
-position = Vector2(80, 96)
+position = Vector2(80, 112)
 
 [node name="Enemies" type="Node2D" parent="." unique_id=946491156]
 z_index = 32
@@ -245,6 +245,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=589757551]
+visible = false
 
 [node name="Menu" parent="UI" unique_id=1052398381 instance=ExtResource("11_y3fis")]
 

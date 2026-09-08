@@ -119,6 +119,7 @@ func respawn() -> void:
 	gm.state = "idle"
 	global_position = gm.prev_pos
 	gm.hp_cat -= 10
+	display_damage(10)
 
 func fall() -> void:
 	if not gm.state == "falling":
@@ -310,31 +311,31 @@ func turn_tick() -> void:
 	if has_debuff_weakness:
 		turns_debuff_weakness -= 1
 		if turns_debuff_weakness == 0:
-			gm.current_damage = gm.damage
+			gm.current_damage_cat = gm.damage_cat
 			has_debuff_weakness = false
 			
 	if has_debuff_undefend:
 		turns_debuff_undefend -= 1
 		if turns_debuff_undefend == 0:
-			gm.current_defence = gm.defence
+			gm.current_defence_cat = gm.defence_cat
 			has_debuff_undefend = false
 			
 	if has_debuff_inaccuracy:
 		turns_debuff_inaccuracy -= 1
 		if turns_debuff_inaccuracy == 0:
-			gm.current_accuracy = gm.accuracy
+			gm.current_accuracy_cat = gm.accuracy_cat
 			has_debuff_inaccuracy = false
 			
 	if has_debuff_unluck:
 		turns_debuff_unluck -= 1
 		if turns_debuff_unluck == 0:
-			gm.current_luck = gm.luck
+			gm.current_luck_cat = gm.luck_cat
 			has_debuff_unluck = false
 			
 	if has_debuff_low_energy:
 		turns_debuff_low_energy -= 1
 		if turns_debuff_low_energy == 0:
-			gm.energy = gm.max_energy
+			gm.energy_cat = gm.max_energy_cat
 			has_debuff_low_energy = false
 
 
@@ -347,25 +348,25 @@ func turn_tick() -> void:
 	if has_buff_defend:
 		turns_buff_defend -= 1
 		if turns_buff_defend == 0:
-			gm.current_defence = gm.defence
+			gm.current_defence_cat = gm.defence_cat
 			has_buff_defend = false
 			
 	if has_buff_accuracy:
 		turns_buff_accuracy -= 1
 		if turns_buff_accuracy == 0:
-			gm.current_accuracy = gm.accuracy
+			gm.current_accuracy_cat = gm.accuracy_cat
 			has_buff_accuracy = false
 			
 	if has_buff_luck:
 		turns_buff_luck -= 1
 		if turns_buff_luck == 0:
-			gm.current_luck = gm.luck
+			gm.current_luck_cat = gm.luck_cat
 			has_buff_luck = false
 			
 	if has_buff_high_energy:
 		turns_buff_high_energy -= 1
 		if turns_buff_high_energy == 0:
-			gm.energy = gm.max_energy
+			gm.energy_cat = gm.max_energy_cat
 			has_buff_high_energy = false
 
 func check_fall(delta: float) -> void:
@@ -511,10 +512,10 @@ func _on_deal_damage_timer_timeout() -> void:
 			sprite.visible = false
 			
 			var tween3 = create_tween()
-			tween3.tween_property(get_parent().cat_fx, "position", gm.current_targets[0].position, gm.attack_animation_time_human)
+			tween3.tween_property(get_parent().cat_fx, "position", gm.current_targets[0].position, gm.attack_animation_time_cat)
 			
 			var tween4 = create_tween()
-			tween4.tween_property(get_parent().cat_fx, "rotation_degrees", 720, gm.attack_animation_time_human)
+			tween4.tween_property(get_parent().cat_fx, "rotation_degrees", 720, gm.attack_animation_time_cat)
 			get_parent().cat_fx.play("hit")
 			
 	#ИНФЕРНО

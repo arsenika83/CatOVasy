@@ -101,7 +101,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Description" parent="." unique_id=310287216 instance=ExtResource("7_ipfoa")]
-visible = false
 layout_mode = 0
 offset_left = 0.0
 offset_top = 0.0

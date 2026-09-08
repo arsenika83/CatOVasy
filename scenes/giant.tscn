@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://cfmu610s83sv5" path="res://assets/soundFX/purring.wav" id="5_2xoio"]
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="5_wbhg2"]
 [ext_resource type="AudioStream" uid="uid://dyc143w8u85ck" path="res://assets/soundFX/level_up.wav" id="6_odb8e"]
+[ext_resource type="Texture2D" uid="uid://cd6y2ykrp63it" path="res://assets/images/characters/solya_sprite.png" id="6_ycwex"]
 [ext_resource type="AudioStream" uid="uid://bq0ooer30jskk" path="res://assets/soundFX/xp_pick_up.wav" id="7_0vpcl"]
 [ext_resource type="AudioStream" uid="uid://bv07t8ic6tpma" path="res://assets/soundFX/miss.wav" id="9_q18av"]
 [ext_resource type="AudioStream" uid="uid://bclkaxhxamdmf" path="res://assets/soundFX/defend.wav" id="10_dt8fj"]
@@ -109,14 +110,6 @@ region = Rect2(96, 32, 32, 32)
 atlas = ExtResource("1")
 region = Rect2(128, 32, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wbhg2"]
-atlas = ExtResource("1")
-region = Rect2(0, 128, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6y6hv"]
-atlas = ExtResource("1")
-region = Rect2(32, 128, 32, 32)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_dku5q"]
 atlas = ExtResource("1")
 region = Rect2(0, 96, 32, 32)
@@ -136,14 +129,6 @@ region = Rect2(0, 192, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_i1883"]
 atlas = ExtResource("1")
 region = Rect2(32, 192, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hd7tc"]
-atlas = ExtResource("1")
-region = Rect2(64, 64, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5tv6e"]
-atlas = ExtResource("1")
-region = Rect2(96, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bmrke"]
 atlas = ExtResource("1")
@@ -208,6 +193,14 @@ region = Rect2(32, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_ycwex"]
 atlas = ExtResource("1")
 region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8w03u"]
+atlas = ExtResource("6_ycwex")
+region = Rect2(160, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_86ape"]
+atlas = ExtResource("6_ycwex")
+region = Rect2(192, 0, 32, 64)
 
 [sub_resource type="SpriteFrames" id="2"]
 animations = [{
@@ -278,10 +271,64 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_wbhg2")
+"texture": SubResource("AtlasTexture_sx7hc")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6y6hv")
+"texture": SubResource("AtlasTexture_ukwaf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e53s0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2xoio")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sx7hc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ukwaf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e53s0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2xoio")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sx7hc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ukwaf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e53s0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2xoio")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sx7hc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ukwaf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e53s0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2xoio")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_odb8e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ukwaf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e53s0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2xoio")
 }],
 "loop": true,
 "name": &"battle_ability",
@@ -317,10 +364,64 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_hd7tc")
+"texture": SubResource("AtlasTexture_sx7hc")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5tv6e")
+"texture": SubResource("AtlasTexture_ukwaf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e53s0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2xoio")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sx7hc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ukwaf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e53s0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2xoio")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sx7hc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ukwaf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e53s0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2xoio")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sx7hc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ukwaf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e53s0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2xoio")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_odb8e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ukwaf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e53s0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2xoio")
 }],
 "loop": true,
 "name": &"battle_defend",
@@ -502,6 +603,17 @@ animations = [{
 }],
 "loop": true,
 "name": &"taking_damage",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8w03u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_86ape")
+}],
+"loop": true,
+"name": &"walking_side",
 "speed": 5.0
 }]
 
@@ -721,9 +833,9 @@ autoplay = "default"
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1540776930]
 position = Vector2(0, -6)
 sprite_frames = SubResource("2")
-animation = &"battle_buffed"
+animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.56588787
+frame_progress = 0.26637816
 
 [node name="ArtifactSprite" type="AnimatedSprite2D" parent="." unique_id=893058165]
 position = Vector2(0, -6)
@@ -734,7 +846,8 @@ frame = 12
 frame_progress = 1.0
 
 [node name="StatusFX" parent="." unique_id=1192321709 instance=ExtResource("3_0vpcl")]
-visible = false
+position = Vector2(0, -24)
+animation = &"default"
 
 [node name="Area2D" type="Area2D" parent="." unique_id=130196955]
 position = Vector2(4, 6)

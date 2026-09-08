@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cgvgwdylce4qi" path="res://scripts/characters/character.gd" id="1_5tjqq"]
 [ext_resource type="Texture2D" uid="uid://cd6y2ykrp63it" path="res://assets/images/characters/solya_sprite.png" id="1_eb1o4"]
 [ext_resource type="PackedScene" uid="uid://bc1x5xpcygnvy" path="res://scenes/fx/damage_indicator.tscn" id="2_105hs"]
+[ext_resource type="Texture2D" uid="uid://4itbl0ejcd3o" path="res://assets/images/tilemap.png" id="3_0qj2d"]
 [ext_resource type="PackedScene" uid="uid://cr7p23s5f4urx" path="res://scenes/fx/status_fx.tscn" id="3_70pgb"]
 [ext_resource type="Texture2D" uid="uid://4ianpjc1gein" path="res://assets/images/artifact_sprite.png" id="3_l5pr8"]
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="5_105hs"]
@@ -20,6 +21,28 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g1j1r"]
 size = Vector2(32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vkvj7"]
+atlas = ExtResource("3_0qj2d")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vsv37"]
+atlas = ExtResource("3_0qj2d")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bf2la"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vkvj7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vsv37")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5lxgs"]
 atlas = ExtResource("5_105hs")
@@ -48,7 +71,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wd4ag")
 }],
-"loop": 1,
+"loop": true,
 "name": &"default",
 "speed": 5.0
 }]
@@ -133,6 +156,14 @@ region = Rect2(0, 64, 32, 64)
 atlas = ExtResource("1_eb1o4")
 region = Rect2(32, 64, 32, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqeso"]
+atlas = ExtResource("1_eb1o4")
+region = Rect2(160, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_klmc7"]
+atlas = ExtResource("1_eb1o4")
+region = Rect2(192, 0, 32, 64)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_a16jr"]
 animations = [{
 "frames": [{
@@ -208,7 +239,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bf2la")
 }],
-"loop": 1,
+"loop": true,
 "name": &"battle",
 "speed": 2.0
 }, {
@@ -216,7 +247,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7axqy")
 }],
-"loop": 1,
+"loop": true,
 "name": &"battle_ability",
 "speed": 5.0
 }, {
@@ -224,7 +255,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7axqy")
 }],
-"loop": 1,
+"loop": true,
 "name": &"battle_attack",
 "speed": 5.0
 }, {
@@ -232,7 +263,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bbpbm")
 }],
-"loop": 1,
+"loop": true,
 "name": &"battle_boredom",
 "speed": 5.0
 }, {
@@ -243,7 +274,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_g1j1r")
 }],
-"loop": 1,
+"loop": true,
 "name": &"battle_buff_cat",
 "speed": 5.0
 }, {
@@ -251,12 +282,12 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7axqy")
 }],
-"loop": 1,
+"loop": true,
 "name": &"battle_defend",
 "speed": 5.0
 }, {
 "frames": [],
-"loop": 1,
+"loop": true,
 "name": &"dead",
 "speed": 5.0
 }, {
@@ -264,7 +295,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_6tupa")
 }],
-"loop": 1,
+"loop": true,
 "name": &"deal_damage",
 "speed": 5.0
 }, {
@@ -272,7 +303,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_a0gv1")
 }],
-"loop": 1,
+"loop": true,
 "name": &"default",
 "speed": 5.0
 }, {
@@ -280,7 +311,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ijvqx")
 }],
-"loop": 1,
+"loop": true,
 "name": &"healing",
 "speed": 5.0
 }, {
@@ -363,7 +394,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3ae6u")
 }],
-"loop": 1,
+"loop": true,
 "name": &"idle",
 "speed": 1.0
 }, {
@@ -371,7 +402,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_piljf")
 }],
-"loop": 1,
+"loop": true,
 "name": &"taking_damage",
 "speed": 5.0
 }, {
@@ -382,9 +413,20 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ihqkh")
 }],
-"loop": 1,
+"loop": true,
 "name": &"walking",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dqeso")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_klmc7")
+}],
+"loop": true,
+"name": &"walking_side",
+"speed": 5.0
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_voynl"]
@@ -489,7 +531,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xrxwe")
 }],
-"loop": 0,
+"loop": false,
 "name": &"boomerang",
 "speed": 10.0
 }, {
@@ -506,7 +548,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3xb3h")
 }],
-"loop": 0,
+"loop": false,
 "name": &"candy",
 "speed": 2.0
 }, {
@@ -514,7 +556,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_17dpp")
 }],
-"loop": 1,
+"loop": true,
 "name": &"default",
 "speed": 5.0
 }, {
@@ -561,7 +603,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_mvbdv")
 }],
-"loop": 0,
+"loop": false,
 "name": &"spinner",
 "speed": 2.0
 }]
@@ -584,37 +626,42 @@ script = ExtResource("1_5tjqq")
 damage_indicator_scene = ExtResource("2_105hs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=9010534]
-position = Vector2(0, 16)
 shape = SubResource("RectangleShape2D_g1j1r")
 debug_color = Color(0.56, 0.54796, 0.3192, 0.05882353)
 
+[node name="Shadow" type="AnimatedSprite2D" parent="." unique_id=390839845]
+position = Vector2(-2.9802322e-07, -2)
+scale = Vector2(0.87500006, 1)
+sprite_frames = SubResource("SpriteFrames_bf2la")
+autoplay = "default"
+
 [node name="MyTurn" type="AnimatedSprite2D" parent="." unique_id=462630318]
-visible = false
-position = Vector2(0, 16)
 sprite_frames = SubResource("SpriteFrames_0qj2d")
 autoplay = "default"
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1453614389]
-position = Vector2(0, -6)
+position = Vector2(0, -24)
 sprite_frames = SubResource("SpriteFrames_a16jr")
-animation = &"battle_defend"
-autoplay = "idle"
+animation = &"walking_side"
+autoplay = "walking_side"
+frame_progress = 0.8994848
 
 [node name="ArtifactSprite" type="AnimatedSprite2D" parent="." unique_id=534946203]
 visible = false
-position = Vector2(0, -6)
+position = Vector2(0, -40)
 sprite_frames = SubResource("SpriteFrames_dqeso")
 animation = &"boomerang"
 autoplay = "default"
 
 [node name="StatusFX" parent="." unique_id=1192321709 instance=ExtResource("3_70pgb")]
 visible = false
-position = Vector2(0, -38)
+position = Vector2(0, -64)
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=561855431]
 visible = false
+position = Vector2(0, -24)
 scale = Vector2(8, 6)
-energy = 1.3
+energy = 0.7
 shadow_enabled = true
 shadow_color = Color(0.81960785, 0, 0, 0.8392157)
 shadow_filter_smooth = 7.0
@@ -622,7 +669,7 @@ texture = SubResource("GradientTexture2D_klmc7")
 height = 29.0
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1638618416]
-position = Vector2(4, 21)
+position = Vector2(4, 5)
 collision_mask = 127
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1155074132]

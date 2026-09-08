@@ -5,6 +5,7 @@ var cursor_map_pos
 
 var creature_dialog_on_screen = false
 var battle_ended = false
+var one_character_died = false
 
 @onready var cursor = $Cursor
 @onready var map = $TileMapLayerBlack
@@ -368,11 +369,6 @@ func choose_target(action : String) -> void:
 									
 							"debuff":
 								gm.current_card.card_played.emit(gm.current_card)
-								var type_number = randi_range(0, gm.debuff_set.size()-1)
-								var type = gm.debuff_set.get(type_number).get(0)
-								var power = gm.debuff_set.get(type_number).get(1)
-								var turns = gm.debuff_set.get(type_number).get(2)
-								source.give_debuff(targets, type, power, turns)	
 		
 		#BUFFS
 		if gm.battle_x_cat == cursor_grid_pos.x and gm.battle_y_cat == cursor_grid_pos.y or gm.battle_x_human == cursor_grid_pos.x and gm.battle_y_human == cursor_grid_pos.y:
@@ -384,17 +380,6 @@ func choose_target(action : String) -> void:
 						source.defend(defend_duration)
 					"buff":
 						gm.current_card.card_played.emit(gm.current_card)
-						var type = gm.current_card.type
-						
-						match type:
-							"strength":
-								var power = gm.current_card.strength
-								var turns = gm.current_card.turns
-								source.give_buff(giant, type, power, turns)
-							"luck":
-								var power = gm.current_card.luck
-								var turns = gm.current_card.turns
-								source.give_buff(giant, type, power, turns)
 							
 	elif gm.current_card != null and gm.current_card.energy_cost > current_energy:
 		card_container_cat.remind_no_energy_for_current_card()
@@ -406,12 +391,9 @@ func enemy_turn() -> void:
 	var source = current_enemies.get(current_creature_turn)
 	
 	if not source.state == "dead":
-		if gm.state == "dead":
-			current_creature_turn = -2
-			return
-			
-		source.my_turn.visible = true	
-		var target : CharacterBody2D	
+		source.my_turn.visible = true
+		var target : CharacterBody2D
+		
 		if team_positions.get(0) == "cat":
 			target = giant
 		else:
@@ -445,13 +427,6 @@ func enemy_turn() -> void:
 		end_turn()
 
 func end_turn() -> void:
-	if team_positions[0] == "cat":
-		if gm.state == "dead" and gm.state_human != "dead":
-			swap_characters()
-	elif team_positions[0] == "human":
-		if gm.state_human == "dead" and gm.state != "dead":
-			swap_characters()		
-	
 	if current_creature_turn == -2: #СОЛЯ
 		for enemy in current_enemies:
 			enemy.my_turn.visible = false
@@ -467,10 +442,14 @@ func end_turn() -> void:
 		$UI/EnergyHuman.visible = true
 		
 		if gm.current_energy_human == -1000:
+			gm.current_energy_human = 0
 			
-			if gm.current_energy_cat < gm.energy_cat:
-				gm.current_energy_cat = gm.energy_cat
-			current_creature_turn = -1
+			if gm.state != "dead":
+				if gm.current_energy_cat < gm.energy_cat:
+					gm.current_energy_cat = gm.energy_cat
+				current_creature_turn = -1
+			else:
+				current_creature_turn = 0	
 			end_turn()
 			
 	elif current_creature_turn == -1: #КОТ
@@ -541,9 +520,11 @@ func end_turn() -> void:
 			current_creature_turn += 1
 			
 			if current_creature_turn == current_enemies.size():
-				gm.current_energy_human = gm.energy_human
 				turn_count += 1
-				current_creature_turn = -2
+				
+				if gm.state_human != "dead":
+					gm.current_energy_human = gm.energy_human
+					current_creature_turn = -2
 				giant.turn_tick()
 				human.turn_tick()
 				
@@ -555,8 +536,7 @@ func end_turn() -> void:
 					e.turn_tick()
 					
 				end_turn()
-				return
-				
+				return	
 		enemy_turn()
 
 func check_creature_stats() -> void:
@@ -1013,6 +993,16 @@ func check_enemy_army() -> void:
 		won = true
 		
 func check_giant_army() -> void:
+	if not one_character_died:
+		if team_positions[0] == "cat":
+			if gm.state == "dead" and gm.state_human != "dead":
+				swap_characters()
+				one_character_died = true		
+		elif team_positions[0] == "human":
+			if gm.state_human == "dead" and gm.state != "dead":
+				swap_characters()
+				one_character_died = true		
+	
 	if gm.state == "dead" and gm.state_human == "dead":
 		defeated = true
 

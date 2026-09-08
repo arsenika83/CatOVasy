@@ -9,6 +9,7 @@ var creature_dialog_on_screen = false
 var inventory_on_screen = false
 
 @onready var giant = $Giant
+#@onready var human = $CharacterSolya
 @onready var map = $TileMapLayerBlack
 @onready var player_camera = $Giant/Camera2D
 @onready var cursor = $Cursor
@@ -38,6 +39,7 @@ func _ready() -> void:
 		gm.current_music_position = 0.0
 		giant.light.energy = 0.6
 		giant.walk_timer.wait_time = 0.01
+
 	elif name == "AlmostHome":
 		gm.current_music_position = 0.0
 		giant.light.energy = 0.4
@@ -94,6 +96,7 @@ func _process(delta: float) -> void:
 			if Input.is_action_just_pressed("ui_lmb"):
 				move_to_map_pos()
 				giant.walk()
+				#human.walk()
 				
 			if map.local_to_map(giant.position) == cursor_map_pos:
 				if Input.is_action_just_pressed("ui_rmb"):
@@ -139,7 +142,9 @@ func move_to_map_pos() -> void:
 	
 	if abs(diff_x) <= 1 and abs(diff_y) <= 1:
 		var tween = create_tween()
+		tween.set_parallel(true)
 		tween.tween_property(giant, "position", map.map_to_local(map_pos), 0.2)
+		#tween.tween_property(human, "position", map.map_to_local(map_pos), 0.2)
 	
 	if (diff_x == 0) and diff_y < 0:
 		var tween = create_tween()
@@ -218,7 +223,7 @@ func check_creature_stats() -> void:
 	
 	var enemy_amount = 0
 	var total_xp = 0
-	var last_target : Enemy
+	var last_target : CharacterBody2D
 	var is_dead = false
 	
 	for i in range(0, find_child("Enemies").get_child_count()):

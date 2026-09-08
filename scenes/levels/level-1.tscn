@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bp10kb8rxtuhx" path="res://scenes/objects/stairs.tscn" id="6_5o52a"]
 [ext_resource type="PackedScene" uid="uid://d0d5e8ltlrwqg" path="res://scenes/giant.tscn" id="8_002m3"]
 [ext_resource type="PackedScene" uid="uid://mbdo3rlpwigb" path="res://scenes/objects/forest(1).tscn" id="8_3s8h4"]
+[ext_resource type="PackedScene" uid="uid://dmq76y6cfygk7" path="res://scenes/characters/character_solya.tscn" id="9_bg5pv"]
 [ext_resource type="PackedScene" uid="uid://c05lufiyk1h5i" path="res://scenes/objects/forest(2).tscn" id="9_p62a4"]
 [ext_resource type="Texture2D" uid="uid://de2c8pnqtrt77" path="res://assets/images/inventory_ui.png" id="12_wrikw"]
 [ext_resource type="PackedScene" uid="uid://ba7f54d4yq2hp" path="res://scenes/ui/cursor.tscn" id="14_dk4qb"]
@@ -22,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="22_xi0mm"]
 [ext_resource type="Texture2D" uid="uid://djggfi67w50cu" path="res://assets/images/card_icons/girl.png" id="23_5nvnw"]
 [ext_resource type="PackedScene" uid="uid://dpydh1bnymoa8" path="res://scenes/ui/level_up_dialog.tscn" id="24_vq3aa"]
+[ext_resource type="PackedScene" uid="uid://3ffcu7b4ewls" path="res://scenes/ui/dialog_box.tscn" id="25_8sjvi"]
 [ext_resource type="PackedScene" uid="uid://dqyxtu1uebx5v" path="res://scenes/ui/upgrade_stats_dialog.tscn" id="25_es6wc"]
 [ext_resource type="AudioStream" uid="uid://bnhiq1jb31p7q" path="res://assets/music/night_ambient.mp3" id="25_p62a4"]
 [ext_resource type="PackedScene" uid="uid://djqdt7tiwad4" path="res://scenes/ui/artifact_dialog.tscn" id="26_rl0ei"]
@@ -313,7 +315,7 @@ tile_set = SubResource("TileSet_p62a4")
 
 [node name="TileMapLayerBuildings" type="TileMapLayer" parent="." unique_id=1950753168]
 position = Vector2(32, -32)
-tile_map_data = PackedByteArray("AAAPAAUAAAACAAIAAAAKAAUAAAACAAIAAAALAAYAAAAFAAAAAAAMAAYAAAAGAAAAAAANAAYAAAAEAAAAAAAOAAYAAAAFAAAAAAAPAAYAAAACAAMAAAAQAAYAAAAFAAAAAAARAAYAAAAGAAAAAAASAAYAAAAEAAAAAAAKAAYAAAACAAMAAAAJAAYAAAAFAAAAAAALAAUAAAAAAAUAAAAMAAUAAAAAAAUAAAANAAUAAAAAAAUAAAAOAAUAAAAAAAUAAAAJAAUAAAACAAQAAAAJAAQAAAACAAQAAAAKAAQAAAABAAQAAAALAAQAAAABAAQAAAASAAUAAAADAAUAAAASAAQAAAADAAQAAAASAAMAAAADAAQAAAASAAIAAAAAAAEAAAAJAAMAAAACAAQAAAAJAAIAAAAAAAMAAAAKAAIAAAAAAAEAAAALAAIAAAAAAAEAAAAMAAIAAAAAAAEAAAANAAIAAAAAAAEAAAAOAAIAAAAAAAEAAAAPAAIAAAAAAAEAAAAQAAIAAAAAAAEAAAARAAIAAAAAAAEAAAAKAAMAAAAAAAUAAAARAAUAAAABAAUAAAAQAAQAAAABAAQAAAANAAMAAAABAAUAAAAOAAMAAAABAAQAAAAOAAQAAAABAAQAAAAPAAQAAAABAAQAAAANAAQAAAABAAQAAAAMAAQAAAABAAQAAAAMAAMAAAAAAAUAAAALAAMAAAAAAAUAAAAPAAMAAAAAAAUAAAAQAAMAAAABAAUAAAARAAMAAAAAAAUAAAARAAQAAAABAAQAAAAQAAUAAAAAAAUAAAA=")
+tile_map_data = PackedByteArray("AAAPAAUAAAACAAIAAAAKAAUAAAACAAIAAAALAAYAAAAFAAAAAAAMAAYAAAAGAAAAAAANAAYAAAAEAAAAAAAOAAYAAAAFAAAAAAAPAAYAAAACAAMAAAAQAAYAAAAFAAAAAAARAAYAAAAGAAAAAAASAAYAAAAEAAAAAAAKAAYAAAACAAMAAAAJAAYAAAAFAAAAAAALAAUAAAAAAAUAAAAMAAUAAAAAAAUAAAANAAUAAAAAAAUAAAAOAAUAAAAAAAUAAAAJAAUAAAACAAQAAAAJAAQAAAACAAQAAAAKAAQAAAABAAQAAAALAAQAAAABAAQAAAASAAUAAAADAAUAAAASAAQAAAADAAQAAAASAAMAAAADAAQAAAASAAIAAAAAAAEAAAAJAAMAAAACAAQAAAAJAAIAAAAAAAMAAAAKAAIAAAAAAAEAAAALAAIAAAAAAAEAAAAMAAIAAAAAAAEAAAANAAIAAAAAAAEAAAAOAAIAAAAAAAEAAAAPAAIAAAAAAAEAAAAQAAIAAAAAAAEAAAARAAIAAAAAAAEAAAAKAAMAAAAAAAUAAAARAAUAAAABAAUAAAAQAAQAAAABAAQAAAANAAMAAAABAAUAAAAOAAMAAAABAAQAAAAOAAQAAAABAAQAAAAPAAQAAAABAAQAAAANAAQAAAABAAQAAAAMAAQAAAABAAQAAAAMAAMAAAAAAAUAAAALAAMAAAAAAAUAAAAPAAMAAAAAAAUAAAAQAAMAAAABAAUAAAARAAMAAAAAAAUAAAARAAQAAAABAAQAAAAQAAUAAAAAAAUAAAAXAAYAAAAEAAAAAAAYAAYAAAAFAAAAAAAaAAYAAAAFAAAAAAAbAAYAAAAGAAAAAAAcAAYAAAAGAAAAAAAZAAYAAAACAAMAAAAZAAUAAAACAAIAAAAYAAUAAAAAAAUAAAAXAAUAAAACAAUAAAAXAAQAAAACAAQAAAAXAAMAAAACAAUAAAAcAAUAAAADAAUAAAAcAAQAAAADAAQAAAAcAAMAAAADAAUAAAAbAAUAAAABAAUAAAAaAAUAAAAAAAUAAAAbAAQAAAABAAQAAAAaAAQAAAABAAQAAAAZAAQAAAABAAQAAAAZAAMAAAABAAQAAAAYAAMAAAABAAUAAAAYAAQAAAABAAQAAAAaAAMAAAAAAAUAAAAbAAMAAAAAAAUAAAAYAAIAAAAAAAEAAAAZAAIAAAAAAAEAAAAaAAIAAAAAAAEAAAAbAAIAAAAAAAEAAAAXAAIAAAAAAAMAAAAcAAIAAAAAAAEAAAA=")
 tile_set = SubResource("TileSet_5o52a")
 
 [node name="Exits" type="Node2D" parent="." unique_id=1303112674]
@@ -388,6 +390,9 @@ color = Color(0.83693564, 0.4141015, 0.7663149, 1)
 energy = 0.74
 texture = SubResource("GradientTexture2D_wrikw")
 
+[node name="CharacterSolya" parent="." unique_id=52898326 instance=ExtResource("9_bg5pv")]
+position = Vector2(2320, 424)
+
 [node name="Giant" parent="." unique_id=2060885226 instance=ExtResource("8_002m3")]
 position = Vector2(2424, 432)
 
@@ -400,7 +405,7 @@ rotation_smoothing_speed = 3.0
 [node name="Plants" type="Node2D" parent="." unique_id=1507805972]
 
 [node name="Forest(1)" parent="Plants" unique_id=897692103 instance=ExtResource("8_3s8h4")]
-position = Vector2(2304, 336)
+position = Vector2(2304, 320)
 
 [node name="Forest(1)2" parent="Plants" unique_id=1557446841 instance=ExtResource("8_3s8h4")]
 position = Vector2(2176, 736)
@@ -508,6 +513,8 @@ offset_left = 512.0
 offset_top = 192.0
 offset_right = -512.0
 offset_bottom = -208.0
+
+[node name="DialogBox" parent="." unique_id=540223241 instance=ExtResource("25_8sjvi")]
 
 [node name="BattleNode" type="Node2D" parent="." unique_id=797394893]
 

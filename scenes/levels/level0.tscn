@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://clllky54vqihv" path="res://scenes/objects/tree_2.tscn" id="12_d7a8j"]
 [ext_resource type="PackedScene" uid="uid://b0a701ex5ah6g" path="res://scenes/objects/fallen_leaves.tscn" id="12_nqtv8"]
 [ext_resource type="PackedScene" uid="uid://1bvjmpy2pf0k" path="res://scenes/enemies/enemy.tscn" id="14_m6lg1"]
+[ext_resource type="PackedScene" uid="uid://dmq76y6cfygk7" path="res://scenes/characters/character_solya.tscn" id="15_74bpm"]
 [ext_resource type="PackedScene" uid="uid://di4k2iivrnhup" path="res://scenes/ui/creature_adventure_dialog.tscn" id="15_m6lg1"]
 [ext_resource type="PackedScene" uid="uid://qgx2la7r3w7a" path="res://scenes/ui/inventory.tscn" id="16_3asx1"]
 [ext_resource type="PackedScene" uid="uid://dpydh1bnymoa8" path="res://scenes/ui/level_up_dialog.tscn" id="17_yxkm4"]
@@ -191,6 +192,9 @@ rarity = "epic"
 
 [node name="Lantern" parent="Objects" unique_id=1437025129 instance=ExtResource("8_e1tke")]
 position = Vector2(-128, 136)
+
+[node name="CharacterSolya" parent="." unique_id=52898326 instance=ExtResource("15_74bpm")]
+position = Vector2(80, 112)
 
 [node name="Giant" parent="." unique_id=2060885226 instance=ExtResource("1_uwrxv")]
 position = Vector2(80, 112)

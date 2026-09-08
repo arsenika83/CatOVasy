@@ -74,6 +74,9 @@ func _process(delta: float) -> void:
 			sprite.play("idle")
 		"resting":
 			sprite.play("resting")
+		"walking":
+			if Input.is_action_just_pressed("ui_lmb"):
+				audio_walk.play()
 		"falling":
 			sprite.play("falling")
 		"dead":
@@ -293,8 +296,11 @@ func give_buff(targets : Array[CharacterBody2D], type : String, power : int, tur
 	status_fx.scale = Vector2(0, 0)
 	status_fx.play("buff")
 	status_fx.visible = true
-	#var tween = create_tween()
-	#tween.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
+	var tween = create_tween()
+	targets[0].status_fx.visible = true
+	tween.tween_property(targets[0].status_fx, "scale", Vector2(1, 1), 0.4)
+	tween.tween_property(targets[0].status_fx, "scale", Vector2(0, 0), 0.4)
+	
 	targets[0].status_fx.play("buff_" + type)
 	gm.current_energy_human -= gm.current_card.energy_cost
 	
@@ -313,28 +319,74 @@ func give_buff(targets : Array[CharacterBody2D], type : String, power : int, tur
 	
 	match type:
 		"strength":
-			targets[0].has_buff_strength = true
-			targets[0].turns_buff_strength += turns
-			gm.current_damage_cat += power
-			gm.damage_cat += power
+			if targets.size() > 1:
+				targets[0].has_buff_strength = true
+				targets[0].turns_buff_strength += turns
+				gm.current_damage_human += power
+				gm.damage_human += power
+				
+				targets[1].has_buff_strength = true
+				targets[1].turns_buff_strength += turns
+				gm.current_damage_cat += power
+				gm.damage_cat += power
+			elif targets[0].character_name == "human":
+				targets[0].has_buff_strength = true
+				targets[0].turns_buff_strength += turns
+				gm.current_damage_human += power
+				gm.damage_human += power
+			elif targets[0].character_name == "cat":
+				targets[0].has_buff_strength = true
+				targets[0].turns_buff_strength += turns
+				gm.current_damage_cat += power
+				gm.damage_cat += power
 		"defend":
 			targets[0].has_buff_defend = true
 			targets[0].turns_buff_defend += turns
-			targets[0].current_defence += power
+			gm.current_defence_cat += power
 			if targets[0].current_defence <= 0:
 				targets[0].current_defence = 0
 		"accuracy":
-			targets[0].has_buff_accuracy = true
-			targets[0].turns_buff_accuracy += turns
-			targets[0].current_accuracy += power
-			if targets[0].current_accuracy > 100:
-				targets[0].current_accuracy = 100
+			if targets.size() > 1:
+				targets[0].has_buff_accuracy = true
+				targets[0].turns_buff_accuracy += turns
+				gm.current_accuracy_human += power
+				gm.accuracy_human += power
+				
+				targets[1].has_buff_accuracy = true
+				targets[1].turns_buff_accuracy += turns
+				gm.current_accuracy_cat += power
+				gm.accuracy_cat += power
+			elif targets[0].character_name == "human":
+				targets[0].has_buff_accuracy = true
+				targets[0].turns_buff_accuracy += turns
+				gm.current_accuracy_human += power
+				gm.accuracy_human += power
+			elif targets[0].character_name == "cat":
+				targets[0].has_buff_accuracy = true
+				targets[0].turns_buff_accuracy += turns
+				gm.current_accuracy_cat += power
+				gm.accuracy_cat += power
 		"luck":
-			targets[0].has_buff_luck = true
-			targets[0].turns_buff_luck += turns
-			targets[0].current_luck += power
-			if targets[0].current_luck > 100:
-				targets[0].current_luck = 100
+			if targets.size() > 1:
+				targets[0].has_buff_luck = true
+				targets[0].turns_buff_luck += turns
+				gm.current_luck_human += power
+				gm.luck_human += power
+				
+				targets[1].has_buff_luck = true
+				targets[1].turns_buff_luck += turns
+				gm.current_luck_cat += power
+				gm.luck_cat += power
+			elif targets[0].character_name == "human":
+				targets[0].has_buff_luck = true
+				targets[0].turns_buff_luck += turns
+				gm.current_luck_human += power
+				gm.luck_human += power
+			elif targets[0].character_name == "cat":
+				targets[0].has_buff_luck = true
+				targets[0].turns_buff_luck += turns
+				gm.current_luck_cat += power
+				gm.luck_cat += power
 		"high_energy":
 			targets[0].has_buff_high_energy = true
 			targets[0].turns_buff_high_energy += turns

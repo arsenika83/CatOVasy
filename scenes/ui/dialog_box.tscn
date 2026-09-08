@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://3ffcu7b4ewls"]
+
+[ext_resource type="Script" uid="uid://b0y1iwayw7dxc" path="res://scripts/ui/dialog_box.gd" id="1_svbij"]
+[ext_resource type="StyleBox" uid="uid://b8wibcbgivilm" path="res://styles/button_normal.tres" id="2_xovei"]
+[ext_resource type="Texture2D" uid="uid://h4u1pi7ul7kn" path="res://assets/images/characters/solya_what.png" id="3_hhmjc"]
+[ext_resource type="Shader" uid="uid://dmo1l352iefcn" path="res://shaders/tree.gdshader" id="3_rm1mb"]
+[ext_resource type="AudioStream" uid="uid://bq0ooer30jskk" path="res://assets/soundFX/xp_pick_up.wav" id="5_xovei"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xovei"]
+shader = ExtResource("3_rm1mb")
+shader_parameter/speed = 1.0000000475
+shader_parameter/min_strength = 0.05
+shader_parameter/max_strength = 0.050000002375
+shader_parameter/wind_decay = 0.1
+
+[node name="DialogBox" type="CanvasLayer" unique_id=540223241]
+script = ExtResource("1_svbij")
+
+[node name="Panel" type="Panel" parent="." unique_id=206588396]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -256.0
+offset_top = -272.0
+offset_right = 256.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = ExtResource("2_xovei")
+
+[node name="Icon" type="TextureRect" parent="Panel" unique_id=1819879475]
+material = SubResource("ShaderMaterial_xovei")
+layout_mode = 0
+offset_left = -48.0
+offset_top = -24.0
+offset_right = 216.0
+offset_bottom = 232.0
+texture = ExtResource("3_hhmjc")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="Panel" unique_id=1800975315]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 24.0
+offset_right = 160.0
+offset_bottom = 64.0
+theme_override_font_sizes/font_size = 30
+text = "СОЛЯ"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Text" type="RichTextLabel" parent="Panel" unique_id=872487115]
+layout_mode = 0
+offset_left = 168.0
+offset_top = 8.0
+offset_right = 496.0
+offset_bottom = 224.0
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "Текст текст текст"
+scroll_active = false
+vertical_alignment = 1
+
+[node name="BlipSound" type="AudioStreamPlayer" parent="." unique_id=1838963682]
+stream = ExtResource("5_xovei")
