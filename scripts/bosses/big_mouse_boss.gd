@@ -284,6 +284,7 @@ func deal_damage(target : CharacterBody2D) -> void:
 			
 			current_damage = damage * 2
 	else:
+		current_damage = 0
 		just_missed = true
 		print("MISS! ")
 	
@@ -579,17 +580,23 @@ func _on_deal_damage_timer_timeout() -> void:
 	else:
 		if not just_missed:
 			get_parent().get_parent().player_camera.apply_shake(shake)
+		else:
+			get_parent().get_parent().player_camera.apply_shake(0.05)
 		audio_hit.play()
+	
+	if just_missed:
+		current_damage = 0
+		just_missed = false
+	elif not just_missed:
+		var fx_tween = create_tween()
+		fx_tween.tween_property(get_parent().get_parent().find_child("Effects").find_child("ColorRect").material, "shader_parameter/chromatic_aberration", 0.01, 0.1)
+		fx_tween.tween_property(get_parent().get_parent().find_child("Effects").find_child("ColorRect").material, "shader_parameter/chromatic_aberration", 0.001, 0.2)
+		
+		get_parent().get_parent().titan_energy_fx.position = current_target.position
+		get_parent().get_parent().titan_energy_fx.play("hit")	
 		
 	current_target.take_damage(current_damage, attack_animation_time)	
 	current_damage = damage
-			
-	if not just_missed:
-		get_parent().get_parent().titan_energy_fx.position = current_target.position
-		get_parent().get_parent().titan_energy_fx.play("hit")
-			
-	if just_missed:
-		pass
 	
 	idle_animation_timer.start(0.2)
 

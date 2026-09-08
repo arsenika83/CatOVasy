@@ -440,12 +440,18 @@ func enemy_turn() -> void:
 				var power = source.buff_set.get(type_number).get(1)
 				var turns = source.buff_set.get(type_number).get(2)
 				source.give_buff(target, type, power, turns)
-
 		return
 	else:
 		end_turn()
 
 func end_turn() -> void:
+	if team_positions[0] == "cat":
+		if gm.state == "dead" and gm.state_human != "dead":
+			swap_characters()
+	elif team_positions[0] == "human":
+		if gm.state_human == "dead" and gm.state != "dead":
+			swap_characters()		
+	
 	if current_creature_turn == -2: #СОЛЯ
 		for enemy in current_enemies:
 			enemy.my_turn.visible = false
@@ -1007,8 +1013,8 @@ func check_enemy_army() -> void:
 		won = true
 		
 func check_giant_army() -> void:
-	if gm.state == "dead":
-		defeated = true		
+	if gm.state == "dead" and gm.state_human == "dead":
+		defeated = true
 
 func check_battle_status() -> void:
 	check_enemy_army()

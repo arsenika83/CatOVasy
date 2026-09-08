@@ -130,11 +130,22 @@ z_index = 31
 tile_map_data = PackedByteArray("AAAAAAAAAAACAAAAAAABAAAAAAADAAAAAAACAAAAAAADAAAAAAADAAAAAAADAAAAAAAEAAAAAAADAAAAAAAFAAAAAAADAAAAAAAGAAAAAAADAAAAAAAHAAAAAAADAAAAAAAIAAAAAAADAAAAAAAJAAAAAAAEAAAAAAAAAAEAAAACAAEAAAAAAAIAAAACAAEAAAAAAAMAAAACAAEAAAAAAAQAAAACAAEAAAAAAAUAAAACAAEAAAAAAAYAAAACAAIAAAAJAAEAAAAEAAEAAAAJAAIAAAAEAAEAAAAJAAMAAAAEAAEAAAAJAAQAAAAEAAEAAAAJAAUAAAAEAAEAAAAJAAYAAAAEAAIAAAABAAYAAAADAAIAAAACAAYAAAADAAIAAAADAAYAAAADAAIAAAAEAAYAAAADAAIAAAAFAAYAAAADAAIAAAAGAAYAAAADAAIAAAAHAAYAAAADAAIAAAAIAAYAAAADAAIAAAA=")
 tile_set = SubResource("TileSet_a7tdr")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1303825275]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=592073559]
 position = Vector2(160, 112)
 zoom = Vector2(2, 2)
+limit_left = -100
+limit_top = -100
+limit_right = 432
+limit_bottom = 300
+limit_smoothed = true
 rotation_smoothing_enabled = true
 rotation_smoothing_speed = 3.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.7
+drag_top_margin = 0.5
+drag_right_margin = 0.7
+drag_bottom_margin = 0.7
 script = ExtResource("4_6b374")
 
 [node name="Giant" parent="." unique_id=2060885226 instance=ExtResource("6_3cs84")]
