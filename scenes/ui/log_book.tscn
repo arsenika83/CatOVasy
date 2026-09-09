@@ -31,6 +31,7 @@ offset_left = -48.0
 offset_right = 256.0
 offset_bottom = 320.0
 pivot_offset = Vector2(128, 0)
+mouse_filter = 1
 theme_override_styles/panel = ExtResource("1_0htkf")
 
 [node name="Text" type="RichTextLabel" parent="Panel" unique_id=533902441]
@@ -39,6 +40,8 @@ offset_left = 16.0
 offset_top = 8.0
 offset_right = 296.0
 offset_bottom = 312.0
+mouse_filter = 1
+theme_override_constants/paragraph_separation = 4
 bbcode_enabled = true
 text = "									1 ХОД
 
@@ -51,6 +54,7 @@ offset_left = 272.0
 offset_right = 336.0
 offset_bottom = 64.0
 pivot_offset = Vector2(136, -112)
+mouse_filter = 1
 theme_override_styles/normal = ExtResource("3_3ec7b")
 theme_override_styles/pressed = ExtResource("4_5txc0")
 theme_override_styles/hover = ExtResource("1_0htkf")
@@ -58,4 +62,7 @@ toggle_mode = true
 text = "ЖУРНАЛ БОЯ"
 autowrap_mode = 2
 
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="ToggleLogButton" to="." method="_on_toggle_log_button_mouse_entered"]
 [connection signal="pressed" from="ToggleLogButton" to="." method="_on_toggle_log_button_pressed"]

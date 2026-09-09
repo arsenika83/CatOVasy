@@ -21,7 +21,11 @@ func _process(delta: float) -> void:
 
 func on_play() -> void:
 	get_parent().get_parent().get_parent().get_parent().log_messages.append(
-		str("- [color=#1ca8fd]Соля[/color] скучает.[color=#1ca8fd] Кот[/color] получает ", gm.current_energy_human, " энергии"))
+		str("- [color=#1ca8fd]Соля[/color] [color=#fdd14d]скучает[/color].[color=#1ca8fd] Кот[/color] получает ", gm.current_energy_human, " энергии\n"))
+	
+	get_parent().get_parent().get_parent().get_parent().human.scale.y = 0.8
+	var tween1 = create_tween()
+	tween1.tween_property(get_parent().get_parent().get_parent().get_parent().human, "scale:y", 1, 0.2)
 	
 	gm.current_energy_cat = gm.energy_cat
 	gm.current_energy_cat += gm.current_energy_human

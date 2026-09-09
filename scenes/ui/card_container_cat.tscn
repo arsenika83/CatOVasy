@@ -22,6 +22,16 @@ region = Rect2(64, 32, 32, 32)
 atlas = ExtResource("2_wau5o")
 region = Rect2(96, 32, 32, 32)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kdc2i"]
+shader = ExtResource("7_ni4uy")
+shader_parameter/speed = 8.00000038
+shader_parameter/amplitude = 10.000000475
+shader_parameter/time_offset = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tf85v"]
+atlas = ExtResource("2_wau5o")
+region = Rect2(224, 32, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_ni4uy"]
 atlas = ExtResource("2_wau5o")
 region = Rect2(128, 96, 32, 32)
@@ -45,16 +55,6 @@ region = Rect2(192, 128, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_ogknx"]
 atlas = ExtResource("2_wau5o")
 region = Rect2(160, 128, 32, 32)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_kdc2i"]
-shader = ExtResource("7_ni4uy")
-shader_parameter/speed = 8.00000038
-shader_parameter/amplitude = 10.000000475
-shader_parameter/time_offset = 0.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tf85v"]
-atlas = ExtResource("2_wau5o")
-region = Rect2(224, 32, 32, 32)
 
 [node name="CardContainer" type="Control" unique_id=1698416944]
 z_index = 100
@@ -96,6 +96,16 @@ theme_override_font_sizes/font_size = 18
 text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="StatusFX" type="TextureRect" parent="ChangeButton" unique_id=1848301608]
+visible = false
+material = SubResource("ShaderMaterial_kdc2i")
+layout_mode = 0
+offset_top = -64.0
+offset_right = 48.0
+offset_bottom = -16.0
+texture = SubResource("AtlasTexture_tf85v")
+flip_v = true
 
 [node name="UnplayedButton" type="TextureButton" parent="." unique_id=1196569886]
 layout_mode = 0

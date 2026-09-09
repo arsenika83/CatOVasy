@@ -39,7 +39,7 @@ var shake = 0.3
 var enemy_type = "enemy"
 var enemy_name = "enemy"
 var enemy_scene_path = "big_mouse_boss.tscn"
-var enemy_name_rus = "МЫШИНЫЙ ТИТАН"
+var enemy_name_rus = "ТИТАН"
 
 var follow_radius = 0
 var is_following = false

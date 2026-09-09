@@ -28,15 +28,15 @@ func _process(delta: float) -> void:
 			# Вызываем саму тряску
 			_execute_shake()
 			
-	if gm.camera_zoom == 4:
-		var mouse_pos = get_global_mouse_position()
+	#if gm.camera_zoom == 4:
+		#var mouse_pos = get_global_mouse_position()
 		#global_position = global_position.lerp(mouse_pos, 2.0 * delta)
-		camera_placed = false
-	elif gm.camera_zoom == 1 or gm.camera_zoom == 2 or gm.camera_zoom == 3:
-		if not camera_placed:
-			camera_placed = true
-			var tween = create_tween()
-			tween.tween_property(self, "global_position", Vector2(160, 112), 0.2)
+		#camera_placed = false
+	#elif gm.camera_zoom == 1 or gm.camera_zoom == 2 or gm.camera_zoom == 3:
+		#if not camera_placed:
+			#camera_placed = true
+			#var tween = create_tween()
+			#tween.tween_property(self, "global_position", Vector2(160, 112), 0.2)
 
 func _execute_shake() -> void:
 	# Выбираем случайное направление и умножаем на текущую силу и максимальное смещение

@@ -24,6 +24,10 @@ func on_play() -> void:
 	get_parent().get_parent().get_parent().get_parent().log_messages.append(
 		str("- [color=#fdd14d]Колесо фортуны[/color]: [color=#1ca8fd]Соля[/color] и [color=#1ca8fd]Кот[/color] получают +7% к удаче!\n"))
 		
+	get_parent().get_parent().get_parent().get_parent().giant.sprite.rotation_degrees = 360
+	var tween1 = create_tween()
+	tween1.tween_property(get_parent().get_parent().get_parent().get_parent().giant.sprite, "rotation_degrees", 0, 0.2)
+		
 	var targets : Array[CharacterBody2D] = [get_parent().get_parent().get_parent().get_parent().giant, get_parent().get_parent().get_parent().get_parent().human]
 	get_parent().get_parent().get_parent().get_parent().human.give_buff(targets, buff_type, luck, turns)
 	

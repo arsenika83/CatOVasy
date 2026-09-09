@@ -20,5 +20,9 @@ func _ready() -> void:
 	type = "buff"
 
 func on_play() -> void:
+	get_parent().get_parent().get_parent().get_parent().log_messages.append(
+		str("- [color=#1ca8fd]Соля[/color] [color=#fdd14d]подбадривает[/color] [color=#1ca8fd]Кота[/color]. Он получает +2 к урону\n"))
+	
+	
 	var targets : Array[CharacterBody2D] = [get_parent().get_parent().get_parent().get_parent().giant]
 	get_parent().get_parent().get_parent().get_parent().human.give_buff(targets, buff_type, strength, turns)

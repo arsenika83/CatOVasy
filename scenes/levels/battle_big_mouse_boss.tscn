@@ -27,6 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://gxdo1p5x4a6b" path="res://scenes/ui/energy.tscn" id="27_pr1p8"]
 [ext_resource type="PackedScene" uid="uid://cuybslgtoc70m" path="res://scenes/ui/energy_human.tscn" id="28_ot0n2"]
 [ext_resource type="PackedScene" uid="uid://bq46oyngg435a" path="res://scenes/ui/card_container_cat.tscn" id="29_4ihym"]
+[ext_resource type="PackedScene" uid="uid://db6mch348j5ck" path="res://scenes/ui/log_book.tscn" id="29_ltv46"]
 [ext_resource type="PackedScene" uid="uid://c7lkcfyxh5uff" path="res://scenes/ui/card_container_human.tscn" id="30_6bjak"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fj52k"]
@@ -132,15 +133,13 @@ tile_set = SubResource("TileSet_a7tdr")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1303825275]
 position = Vector2(160, 112)
 zoom = Vector2(2, 2)
+limit_enabled = false
 limit_left = -100
 limit_top = -100
 limit_right = 432
 limit_bottom = 300
 limit_smoothed = true
-rotation_smoothing_enabled = true
 rotation_smoothing_speed = 3.0
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
 drag_left_margin = 0.7
 drag_top_margin = 0.5
 drag_right_margin = 0.7
@@ -299,6 +298,9 @@ offset_left = 16.0
 offset_top = 504.0
 offset_right = -880.0
 offset_bottom = 40.0
+
+[node name="LogBook" parent="UI" unique_id=1252761803 instance=ExtResource("29_ltv46")]
+offset_right = 8.0
 
 [node name="CheckStatsDialogHoldTimer" type="Timer" parent="." unique_id=56407654]
 wait_time = 0.3

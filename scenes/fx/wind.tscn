@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://c6h0aedhxeaox"]
+
+[ext_resource type="Texture2D" uid="uid://s34pblv0ga2j" path="res://assets/images/fx.png" id="1_0ewlg"]
+[ext_resource type="Script" uid="uid://cb4hfmoetarwo" path="res://scripts/giant_explosion.gd" id="2_s2xm8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s2xm8"]
+atlas = ExtResource("1_0ewlg")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ekdru"]
+atlas = ExtResource("1_0ewlg")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s1mqf"]
+atlas = ExtResource("1_0ewlg")
+region = Rect2(160, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d8ofh"]
+atlas = ExtResource("1_0ewlg")
+region = Rect2(192, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2fo6x"]
+atlas = ExtResource("1_0ewlg")
+region = Rect2(224, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ewlg"]
+atlas = ExtResource("1_0ewlg")
+region = Rect2(256, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ti5u"]
+atlas = ExtResource("1_0ewlg")
+region = Rect2(288, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_optbk"]
+atlas = ExtResource("1_0ewlg")
+region = Rect2(320, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_scykr"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s2xm8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ekdru")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s1mqf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d8ofh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2fo6x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ewlg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ti5u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_optbk")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 10.0
+}]
+
+[node name="Wind" type="AnimatedSprite2D" unique_id=1197458061]
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_scykr")
+animation = &"hit"
+autoplay = "default"
+frame = 7
+frame_progress = 1.0
+script = ExtResource("2_s2xm8")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=490053130]

@@ -17,6 +17,9 @@ func _ready() -> void:
 
 
 func on_play() -> void:
+	get_parent().get_parent().get_parent().get_parent().log_messages.append(
+		str("- [color=#1ca8fd]Соля[/color] и [color=#1ca8fd]Кот[/color] меняются местами. [color=#1ca8fd]Соля[/color]: +3 к броне. [color=#1ca8fd]Кот[/color]: +2 к ОЗ\n"))
+	
 	get_parent().get_parent().get_parent().get_parent().swap_characters()
 	gm.current_defence_human += 3
 	

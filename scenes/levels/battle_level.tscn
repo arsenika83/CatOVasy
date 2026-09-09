@@ -28,6 +28,7 @@
 [ext_resource type="PackedScene" uid="uid://drtcvgk4w8njv" path="res://scenes/fx/inferno.tscn" id="15_2l0dc"]
 [ext_resource type="StyleBox" uid="uid://2iw7p3yvicvr" path="res://styles/button_pressed.tres" id="15_obxu6"]
 [ext_resource type="StyleBox" uid="uid://c66nispyhk2t0" path="res://styles/button_hover.tres" id="16_3cs84"]
+[ext_resource type="PackedScene" uid="uid://c6h0aedhxeaox" path="res://scenes/fx/wind.tscn" id="16_uos8e"]
 [ext_resource type="PackedScene" uid="uid://cuybslgtoc70m" path="res://scenes/ui/energy_human.tscn" id="20_xxxag"]
 [ext_resource type="PackedScene" uid="uid://c7lkcfyxh5uff" path="res://scenes/ui/card_container_human.tscn" id="21_5qqwm"]
 [ext_resource type="PackedScene" uid="uid://db6mch348j5ck" path="res://scenes/ui/log_book.tscn" id="31_6g64q"]
@@ -134,15 +135,13 @@ tile_set = SubResource("TileSet_a7tdr")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=592073559]
 position = Vector2(160, 112)
 zoom = Vector2(2, 2)
+limit_enabled = false
 limit_left = -100
 limit_top = -100
 limit_right = 432
 limit_bottom = 300
 limit_smoothed = true
-rotation_smoothing_enabled = true
 rotation_smoothing_speed = 3.0
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
 drag_left_margin = 0.7
 drag_top_margin = 0.5
 drag_right_margin = 0.7
@@ -214,6 +213,10 @@ position = Vector2(-128, -64)
 animation = &"default"
 frame = 0
 frame_progress = 0.0
+
+[node name="Wind" parent="FX" unique_id=1951947725 instance=ExtResource("16_uos8e")]
+z_index = 100
+position = Vector2(-56, -48)
 
 [node name="AudioStreamPlayerMusic" type="AudioStreamPlayer" parent="." unique_id=179520262]
 stream = ExtResource("8_ymw5c")

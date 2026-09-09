@@ -1,6 +1,7 @@
 class_name Giant extends CharacterBody2D
 
 var character_name = "cat"
+var character_name_display = "Кот"
 @export var damage_indicator_scene: PackedScene
 @onready var area = $Area2D
 @onready var sprite = $Sprite
@@ -151,6 +152,7 @@ func go_downstairs() -> void:
 func deal_damage(targets : Array[CharacterBody2D]) -> void:
 	is_hit_lucky = false
 	just_missed = false
+	
 	var energy_cost = gm.current_card.energy_cost
 	if gm.current_energy_cat - energy_cost < 0:
 		return
@@ -160,39 +162,7 @@ func deal_damage(targets : Array[CharacterBody2D]) -> void:
 	tween2.tween_property(sprite, "position:x", sprite.position.x + 4, 0.1)
 	gm.current_targets = targets
 	
-	var success : bool = randf_range(0.0, 1.0) * 100 <= gm.current_accuracy_cat
-	var luck_success : bool = randf_range(0.0, 1.0) * 100 <= gm.current_luck_cat
-		
-	if success:
-		gm.current_damage_cat = gm.current_card.damage
-		
-		if gm.current_card.has_method("revenge"):
-			if targets[0].dealt_damage_to_human == true:
-				gm.current_damage_cat = gm.current_card.revenge()
-			
-		if gm.has_toy_cat and attack_count < 2:
-			gm.current_damage_cat *= 2
-			print("TOY CAAAAAAT")
-				
-		if luck_success:
-			is_hit_lucky = true
-			status_fx.scale = Vector2(0, 0)
-			status_fx.play("lucky")
-			var tween1 = create_tween()
-			status_fx.visible = true
-				
-			var tween = create_tween()
-			tween.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
-				
-			gm.current_damage_cat *= 2
-	else:
-		just_missed = true
-		gm.current_damage_cat = 0
-		print("GIANT MISS! ")
-	
-	#get_parent().find_child("UI").find_child("CardContainer").replace_current_card("attack")
 	sprite.play("deal_damage")
-	
 	attack_count += 1
 	
 	deal_damage_timer.start(gm.attack_animation_time_cat)
@@ -233,11 +203,18 @@ func defend(time : float) -> void:
 		return
 	
 	gm.current_energy_cat -= energy_cost
-	
 	gm.current_defence_cat += gm.current_card.defence
+	var defend_diff = gm.current_card.defence
 	
 	if gm.current_defence_cat > gm.max_defence_cat:
+		#defend_diff = gm.current_defence_cat - gm.max_defence_cat
 		gm.current_defence_cat = gm.max_defence_cat
+		
+		get_parent().log_messages.append(str("- [color=#1ca8fd]Кот[/color]: +", defend_diff,
+			" защиты. Максимальная броня!\n"))
+	else:
+		get_parent().log_messages.append(str("- [color=#1ca8fd]Кот[/color]: +", defend_diff,
+			" защиты\n"))
 	
 	status_fx.scale = Vector2(0, 0)
 	status_fx.play("defend")
@@ -393,9 +370,10 @@ func check_fall(delta: float) -> void:
 			scale.y = 1
 
 func check_hp() -> void:
-	if gm.hp_cat <= 0:
-		gm.hp_cat = 0
-		gm.state = "dead"
+	if not gm.state == "dead":
+		if gm.hp_cat <= 0:
+			gm.hp_cat = 0
+			gm.state = "dead"
 
 func check_xp() -> bool:
 	$AudioStreamPlayerPickUpXP.pitch_scale = randf_range(0.8, 1.2)
@@ -460,6 +438,9 @@ func _on_take_damage_timer_timeout() -> void:
 		idle_animation_timer.start(0.2)
 		get_parent().end_turn()
 	else:
+		if get_parent().name == "Battle":
+				get_parent().log_messages.append(str("- [color=#1ca8fd]", character_name_display, "[/color] [color=#fc4e52]МЕРТВ[/color]\n"))
+		
 		audio_fall.play()
 		sprite.play("dead")
 
@@ -477,19 +458,28 @@ func _on_miss_damage_timer_timeout() -> void:
 
 func _on_deal_damage_timer_timeout() -> void:
 	var tween1 = create_tween()
-	tween1.tween_property(sprite, "position:x", sprite.position.x - 4, 0.1)
+	tween1.tween_property(sprite, "position:x", sprite.position.x-4, 0.1)
 	
 	var tween = create_tween()
 	tween.tween_property(status_fx, "scale", Vector2(0, 0), 0.2)
+	
+	var success : bool = randf_range(0.0, 1.0) * 100 <= gm.current_accuracy_cat
+	is_hit_lucky = randf_range(0.0, 1.0) * 100 <= gm.current_luck_cat
 	
 	if is_hit_lucky:
 		get_parent().player_camera.apply_shake(0.1 + gm.current_card.shake)
 		audio_hit_lucky.play()
 		
 		get_parent().claw_fx.scale = Vector2(2, 2)
+		status_fx.scale = Vector2(0, 0)
+		status_fx.play("lucky")
+		status_fx.visible = true
+				
+		var tween2 = create_tween()
+		tween2.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
+		tween2.tween_property(status_fx, "scale", Vector2(0, 0), 0.2)
 	else:
-		if not just_missed:
-			get_parent().player_camera.apply_shake(gm.current_card.shake)
+		get_parent().player_camera.apply_shake(gm.current_card.shake)
 			
 		audio_hit.play()
 		
@@ -498,13 +488,34 @@ func _on_deal_damage_timer_timeout() -> void:
 	get_parent().claw_fx.position = gm.current_targets[0].position
 	get_parent().claw_fx.play("hit")
 	for target in gm.current_targets:
+		success = randf_range(0.0, 1.0) * 100 <= gm.current_accuracy_cat
+		if success:
+			gm.current_damage_cat = gm.current_card.damage
+		else:
+			just_missed = true
+			gm.current_damage_cat = 0
+			
+		if is_hit_lucky:
+			gm.current_damage_cat *= 2
+			
+		if gm.has_toy_cat and attack_count < 2:
+			gm.current_damage_cat *= 2
+			print("TOY CAAAAAAT")
+		
 		if gm.current_damage_cat == 0:
 			get_parent().log_messages.append(str("- [color=#1ca8fd]Кот[/color] атакует существо [color=#1ca8fd]", 
 			target.enemy_name_rus, "[/color]. Промах!\n"))
+			if gm.has_boomerang:
+				get_parent().log_messages.append(str("- [color=#e9920a]Бумеранг[/color] наносит [color=#fc4e52]1 урона[/color] существу [color=#1ca8fd]", target.enemy_name_rus, "[/color]\n"))
 		else:
-			get_parent().log_messages.append(str("- [color=#1ca8fd]Кот[/color] наносит [color=#fc4e52]", gm.current_damage_cat, 
-			" урона[/color] существу [color=#1ca8fd]", target.enemy_name_rus, "[/color]\n"))
+			if is_hit_lucky:
+				get_parent().log_messages.append(str("- [color=#8bc882]Удача![/color] [color=#1ca8fd]Кот[/color] наносит [color=#fc4e52]", gm.current_damage_cat, 
+				" урона[/color] существу [color=#1ca8fd]", target.enemy_name_rus, "[/color]\n"))
+			else:
+				get_parent().log_messages.append(str("- [color=#1ca8fd]Кот[/color] наносит [color=#fc4e52]", gm.current_damage_cat, 
+				" урона[/color] существу [color=#1ca8fd]", target.enemy_name_rus, "[/color]\n"))
 		target.take_damage(gm.current_damage_cat, gm.attack_animation_time_cat)
+		
 	gm.current_damage_cat = gm.damage_cat
 	
 	#ВЗРЫВ
@@ -512,27 +523,26 @@ func _on_deal_damage_timer_timeout() -> void:
 		get_parent().claw_fx.scale = Vector2(0, 0)
 		get_parent().log_messages.append(str("- ВЗРЫВ!!! [color=#1ca8fd]Кот[/color] получил [color=#fc4e52]4 урона[/color]\n"))
 		display_damage(4)
-		if not just_missed:
-			$ExplodeTimer.start(gm.attack_animation_time_human)
+
+		$ExplodeTimer.start(gm.attack_animation_time_human)
 			
-			get_parent().cat_fx.position = position
-			sprite.visible = false
+		get_parent().cat_fx.position = position
+		sprite.visible = false
 			
-			var tween3 = create_tween()
-			tween3.tween_property(get_parent().cat_fx, "position", gm.current_targets[0].position, gm.attack_animation_time_cat)
+		var tween3 = create_tween()
+		tween3.tween_property(get_parent().cat_fx, "position", gm.current_targets[0].position, gm.attack_animation_time_cat)
 			
-			var tween4 = create_tween()
-			tween4.tween_property(get_parent().cat_fx, "rotation_degrees", 720, 0.3)
-			get_parent().cat_fx.play("hit")
+		var tween4 = create_tween()
+		tween4.tween_property(get_parent().cat_fx, "rotation_degrees", 720, 0.3)
+		get_parent().cat_fx.play("hit")
 			
 	#ИНФЕРНО
 	if gm.current_card.has_method("inferno"):
 		get_parent().claw_fx.scale = Vector2(0, 0)
-		print (just_missed)
-		if not just_missed:
-			get_parent().inferno_fx.position = gm.current_targets[0].position
-			get_parent().inferno_fx.play("hit")
-			$AudioExplode.play()
+
+		get_parent().inferno_fx.position = gm.current_targets[0].position
+		get_parent().inferno_fx.play("hit")
+		$AudioExplode.play()
 			
 	
 	if just_missed:

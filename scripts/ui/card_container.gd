@@ -67,6 +67,11 @@ func _process(delta: float) -> void:
 		$EndButton/StatusFX.visible = false
 		$EndButton.disabled = false
 
+	if hand.size() == 0:
+		$ChangeButton/StatusFX.visible = true
+	else:	
+		$ChangeButton/StatusFX.visible = false
+
 func reset_unplayed_pile():
 	for card in played_cards:
 		unplayed_cards.append(card)

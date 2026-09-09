@@ -7,8 +7,9 @@ var creature_dialog_on_screen = false
 var battle_ended = false
 var one_character_died = false
 
-var log_messages: Array[String] = ["[center][font_size=20]БОЙ НАЧАЛСЯ![/font_size][/center]
-\n[center]>>> ХОД 1 <<<[/center]\n\n"]
+var state = "default"
+
+var log_messages: Array[String] = ["[center][font_size=20]БОЙ НАЧАЛСЯ![/font_size][/center]\n[center]>>> ХОД 1 <<<[/center]\n"]
 var log_count = 1
 @onready var log_book = $UI/LogBook
 
@@ -21,6 +22,7 @@ var log_count = 1
 @onready var claw_fx = $FX/ClawFX
 @onready var fire_fx = $FX/FireFX
 @onready var cat_fx = $FX/CatFX
+@onready var wind_fx = $FX/Wind
 @onready var inferno_fx = $FX/Inferno
 @onready var giant_explosion_fx = $FX/GiantExplosion
 
@@ -81,14 +83,15 @@ func _process(delta: float) -> void:
 	display_cursor_label() 
 	#update_creature_dialog()
 	
-	if Input.is_action_just_pressed("ui_scale_up") and gm.camera_zoom <= 3:
-		gm.camera_zoom += 1
-		smooth_camera_zoom(":zoom:x", gm.camera_zoom)
-		smooth_camera_zoom(":zoom:y", gm.camera_zoom)
-	elif Input.is_action_just_pressed("ui_scale_down") and gm.camera_zoom >= 3:
-		gm.camera_zoom -= 1
-		smooth_camera_zoom(":zoom:x", gm.camera_zoom)
-		smooth_camera_zoom(":zoom:y", gm.camera_zoom)
+	if state == "default":
+		if Input.is_action_just_pressed("ui_scale_up") and gm.camera_zoom <= 3:
+			gm.camera_zoom += 1
+			smooth_camera_zoom(":zoom:x", gm.camera_zoom)
+			smooth_camera_zoom(":zoom:y", gm.camera_zoom)
+		elif Input.is_action_just_pressed("ui_scale_down") and gm.camera_zoom >= 3:
+			gm.camera_zoom -= 1
+			smooth_camera_zoom(":zoom:x", gm.camera_zoom)
+			smooth_camera_zoom(":zoom:y", gm.camera_zoom)
 		
 	if Input.is_action_just_pressed("ui_rmb"):
 		check_creature_stats()
@@ -165,6 +168,7 @@ func init() -> void:
 		
 		$Enemies.add_child(enemy)
 		current_enemies.append(enemy)
+		enemy.enemy_name_rus = str(enemy.enemy_name_rus, "(", enemy_count + 1, ")")
 		enemy_count += 1
 
 func win() -> void:
@@ -541,7 +545,7 @@ func end_turn() -> void:
 			
 			if current_creature_turn == current_enemies.size():
 				turn_count += 1
-				log_messages.append(str("\n[center]>>> ХОД ", turn_count, " <<<[/center]\n\n"))
+				log_messages.append(str("\n[center]>>> ХОД ", turn_count, " <<<[/center]\n"))
 				
 				if gm.state_human != "dead":
 					gm.current_energy_human = gm.energy_human
@@ -1013,7 +1017,6 @@ func check_enemy_army() -> void:
 			dead_count += 1
 
 	if dead_count >= current_enemies.size():
-		log_messages.append("[font_size=20][center]ПОБЕДА![/center][font_size]")
 		won = true
 		
 func check_giant_army() -> void:
@@ -1028,7 +1031,7 @@ func check_giant_army() -> void:
 				one_character_died = true		
 	
 	if gm.state == "dead" and gm.state_human == "dead":
-		log_messages.append("[font_size=20][center]ПОРАЖЕНИЕ![/center][/font_size]")
+		log_messages.append("[font_size=20][center]\nПОРАЖЕНИЕ![/center][/font_size]")
 		defeated = true
 
 func check_battle_status() -> void:
@@ -1075,6 +1078,8 @@ func _on_win_timer_timeout() -> void:
 		card_container_human.visible = false
 		$UI/EnergyCat.visible = false
 		$UI/EnergyHuman.visible = false
+		
+		log_messages.append("[font_size=20][center]\nПОБЕДА![/center][/font_size]")
 
 
 func _on_end_turn_timer_timeout() -> void:

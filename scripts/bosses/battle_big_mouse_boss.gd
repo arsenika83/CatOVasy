@@ -13,3 +13,5 @@ func _ready() -> void:
 	human.sprite.flip_h = false
 	init()
 	end_turn()
+	
+	log_book.text.text += log_messages[0]

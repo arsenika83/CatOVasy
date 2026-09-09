@@ -56,6 +56,7 @@ var buff_set : Array = [["strength", 1, 2], ["defend", 1, 2], ["accuracy", 10, 2
 ["luck", 5, 2], ["high_energy", 1, 2]]
 
 var just_missed = false
+var is_hit_lucky = false
 var dealt_damage_to_human = false
 
 var has_debuff_weakness = false
@@ -254,17 +255,20 @@ func _on_area_2dxp_area_entered(area: Area2D) -> void:
 			get_parent().get_parent().find_child("Giant").check_xp()
 
 func check_hp() -> void:
-	if hp <= 0:
-		hp = 0
-		state = "dead"
-		
-		if is_following:
-			is_following = false
-			gm.enemies_following -= 1
+	if not state == "dead":
+		if hp <= 0:
+			hp = 0
+			state = "dead"
+			
+			if is_following:
+				is_following = false
+				gm.enemies_following -= 1
 
 func deal_damage(target : CharacterBody2D) -> void:
 	var success : bool = randf_range(0.0, 1.0) * 100 <= accuracy
 	var luck_success : bool = randf_range(0.0, 1.0) * 100 <= luck
+	just_missed = false
+	is_hit_lucky = false
 	current_target = target
 	
 	var tween1 = create_tween()
@@ -282,6 +286,7 @@ func deal_damage(target : CharacterBody2D) -> void:
 			tween.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
 			
 			current_damage = damage * 2
+			is_hit_lucky = true
 	else:
 		just_missed = true
 		print("MISS! ")
@@ -321,8 +326,17 @@ func take_damage(dmg : int, time : float) -> void:
 func defend() -> void:
 	current_defence += defence
 	
+	var defend_diff = defence
+	
 	if current_defence > max_defence:
+		#defend_diff = max_defence - current_defence
 		current_defence = max_defence
+		
+		get_parent().get_parent().log_messages.append(str("- [color=#1ca8fd]", enemy_name_rus, "[/color]: +", defend_diff,
+			" защиты. Максимальная броня!\n"))
+	else:
+		get_parent().get_parent().log_messages.append(str("- [color=#1ca8fd]", enemy_name_rus, "[/color]: +", defend_diff,
+			" защиты\n"))
 	
 	status_fx.scale = Vector2(0, 0)
 	status_fx.play("defend")
@@ -514,10 +528,6 @@ func _on_idle_animation_timer_timeout() -> void:
 func _on_take_damage_timer_timeout() -> void:
 	check_hp()
 	
-	if gm.has_portrait_of_the_unknown:
-		luck -= 3
-		current_luck -= 3
-	
 	display_damage(taken_damage)
 	
 	if not state == "dead":
@@ -529,9 +539,17 @@ func _on_take_damage_timer_timeout() -> void:
 		tween1.tween_property(sprite, "position:x", sprite.position.x + 4, 0.1)
 		tween1.tween_property(sprite, "position:x", sprite.position.x, 0.1)
 		#get_parent().get_parent().end_turn()
+		
+		if gm.has_portrait_of_the_unknown:
+			luck -= 3
+			current_luck -= 3
+			get_parent().get_parent().log_messages.append(str("- [color=#e9920a]Портрет неизвестной[/color]: удача существа [color=#1ca8fd]", enemy_name_rus, "[/color] падает на 3%\n"))
 	else:
 		audio_fall.play()
 		sprite.play("dead")
+		
+		if get_parent().get_parent().name == "Battle":
+			get_parent().get_parent().log_messages.append(str("- [color=#1ca8fd]", enemy_name_rus, "[/color] [color=#fc4e52]МЕРТВ[/color]\n"))
 		
 		#get_parent().get_parent().end_turn()
 
@@ -560,7 +578,7 @@ func _on_deal_damage_timer_timeout() -> void:
 	var tween1 = create_tween()
 	tween1.tween_property(sprite, "position:x", sprite.position.x + 4, 0.1)
 	
-	if current_damage > damage:
+	if is_hit_lucky:
 		get_parent().get_parent().player_camera.apply_shake(0.2 + shake)
 		audio_hit_lucky.play()
 		var tween = create_tween()
@@ -580,6 +598,17 @@ func _on_deal_damage_timer_timeout() -> void:
 		current_damage = 0
 		just_missed = false
 	
+	if current_damage == 0:
+		get_parent().get_parent().log_messages.append(str("- [color=#1ca8fd]", enemy_name_rus, "[/color] атакует существо [color=#1ca8fd]", 
+			current_target.character_name_display, "[/color]. Промах!\n"))
+	else:
+		if is_hit_lucky:
+			get_parent().get_parent().log_messages.append(str("- [color=#8bc882]Удача![/color] [color=#1ca8fd]", enemy_name_rus, "[/color] наносит [color=#fc4e52]", current_damage, 
+			" урона[/color] существу [color=#1ca8fd]", current_target.character_name_display, "[/color]\n"))
+		else:
+			get_parent().get_parent().log_messages.append(str("- [color=#1ca8fd]", enemy_name_rus, "[/color] наносит [color=#fc4e52]", current_damage, 
+				" урона[/color] существу [color=#1ca8fd]", current_target.character_name_display, "[/color]\n"))
+			
 	current_target.take_damage(current_damage, attack_animation_time)
 	
 	current_damage = damage
