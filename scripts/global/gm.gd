@@ -129,6 +129,7 @@ func _ready() -> void:
 	current_cards_human.set(4, LittleFireCard.new())
 	current_cards_human.set(5, WindOfChangeCard.new())
 	current_cards_human.set(6, FortuneWheelCard.new())
+	current_cards_human.set(6, DontHitCard.new())
 	
 
 func _process(delta: float) -> void:

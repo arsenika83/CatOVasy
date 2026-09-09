@@ -47,8 +47,6 @@ func _ready() -> void:
 		
 		unplayed_cards.append(added_card)
 		#unplayed_cards_ui.add_child(added_card)
-		
-		print(unplayed_cards)
 	
 	for child in unplayed_cards_ui.get_children():
 		child.scale = Vector2(0.5, 0.5)
@@ -192,7 +190,7 @@ func _on_delete_card_timer_timeout() -> void:
 
 func _on_hand_clear_timer_timeout() -> void:
 	for card in hand:
-		print(card.card_path)
+
 		played_cards.append(card.duplicate())
 		
 	for child in cards_ui.get_children():

@@ -194,10 +194,10 @@ func defend(time : float) -> void:
 	if gm.current_energy_human - energy_cost < 0:
 		return
 	
-	gm.current_energy_human -= energy_cost
-	gm.current_defence_human += gm.defence_human
+	gm.current_energy_human -= gm.current_card.energy_cost
+	gm.current_defence_human += gm.current_card.defence
 	
-	var defend_diff = gm.defence_human
+	var defend_diff = gm.current_card.defence
 	
 	if gm.current_defence_human > gm.max_defence_human:
 		#defend_diff = gm.current_defence_human - gm.max_defence_human
@@ -618,8 +618,8 @@ func _on_deal_damage_timer_timeout() -> void:
 
 		$ExplodeTimer.start(gm.attack_animation_time_human)
 			
-		get_parent().cat_fx.position = position
-		sprite.visible = false
+		get_parent().cat_fx.position = get_parent().giant.position
+		get_parent().giant.sprite.visible = false
 			
 		var tween3 = create_tween()
 		tween3.tween_property(get_parent().cat_fx, "position", gm.current_targets[0].position, gm.attack_animation_time_human)

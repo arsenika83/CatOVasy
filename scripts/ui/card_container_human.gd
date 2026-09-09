@@ -47,8 +47,6 @@ func _ready() -> void:
 		
 		unplayed_cards.append(added_card)
 		#unplayed_cards_ui.add_child(added_card)
-		
-		print(unplayed_cards)
 	
 	for child in unplayed_cards_ui.get_children():
 		child.scale = Vector2(0.5, 0.5)
@@ -98,8 +96,8 @@ func _on_card_played(played_card: Control) -> void:
 	if played_card.has_method("on_play"):
 		played_card.on_play()
 	
-	hand.remove_at(played_card.get_index())
 	played_cards.append(played_card.duplicate())
+	hand.remove_at(played_card.get_index())
 	
 	card_to_free = played_card
 
@@ -186,7 +184,6 @@ func _on_delete_card_timer_timeout() -> void:
 
 func _on_hand_clear_timer_timeout() -> void:
 	for card in hand:
-		print(card.card_path)
 		played_cards.append(card.duplicate())
 		
 	for child in cards_ui.get_children():
@@ -199,7 +196,7 @@ func _on_hand_clear_timer_timeout() -> void:
 	for i in range(gm.current_hand_size_human):
 		if unplayed_cards.size() > 0:
 			var random_index = randi_range(0, unplayed_cards.size()-1)
-			hand.append(unplayed_cards.get(random_index))
+			hand.append(unplayed_cards.get(random_index).duplicate())
 			unplayed_cards.remove_at(random_index)
 		else:
 			reset_unplayed_pile()

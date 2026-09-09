@@ -400,8 +400,6 @@ func choose_target(action : String) -> void:
 				match action:
 					"defend":
 						gm.current_card.card_played.emit(gm.current_card)
-						var defend_duration : float = 0.4
-						source.defend(defend_duration)
 					"buff":
 						gm.current_card.card_played.emit(gm.current_card)
 							

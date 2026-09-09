@@ -37,7 +37,10 @@ func _process(delta: float) -> void:
 	else:
 		mouse_filter =  Control.MOUSE_FILTER_IGNORE
 
-# Наведение мыши
+
+func update_energy() -> void:
+	$Energy/Label.text = str(energy_cost)
+
 func _on_mouse_entered() -> void:
 	if enabled:
 		z_index += 10

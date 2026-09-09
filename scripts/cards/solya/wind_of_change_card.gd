@@ -20,7 +20,7 @@ func _ready() -> void:
 func on_play() -> void:
 	get_parent().get_parent().get_parent().get_parent().log_messages.append(
 		str("- [color=#fdd14d]Ветер перемен:[/color] [color=#1ca8fd]Соля[/color] получает 2 бесплатные замены карт\n"))
-	
+	 
 	get_parent().get_parent().get_parent().get_parent().wind_fx.position = get_parent().get_parent().get_parent().get_parent().human.position - Vector2(16, 32)
 	get_parent().get_parent().get_parent().get_parent().wind_fx.play("hit")
 	get_parent().get_parent().get_parent().get_parent().human.sprite.play("wind")

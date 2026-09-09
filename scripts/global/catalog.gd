@@ -15,7 +15,7 @@ var all_card_names_epic_cat : Array[String] = ["inferno", "revenge", "cattenheim
 var all_card_names_unbelievable_cat : Array[String]
 
 var all_card_names_human : Array[String] = ["little_fire", "boredom", "give_strength", "sollenheimer",
-"wind_of_change"]
+"wind_of_change", "fortune_wheel", "dont_hit"]
 var all_card_names_common_human : Array[String]
 var all_card_names_rare_human : Array[String] = ["boredom"]
 var all_card_names_epic_human : Array[String]
