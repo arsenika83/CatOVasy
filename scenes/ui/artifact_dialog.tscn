@@ -53,19 +53,13 @@ region = Rect2(160, 0, 32, 32)
 [node name="ArtifactDialog" type="Control" unique_id=1641948652]
 material = SubResource("ShaderMaterial_snn0j")
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -128.0
-offset_top = -96.0
-offset_right = -1152.0
-offset_bottom = -496.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(128, 192)
+anchors_preset = 0
+offset_right = 256.0
+offset_bottom = 320.0
+pivot_offset = Vector2(128, 8)
 script = ExtResource("2_snn0j")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1275944467]
+[node name="TextureRectBGCat" type="TextureRect" parent="." unique_id=1275944467]
 use_parent_material = true
 layout_mode = 0
 offset_right = 256.0
@@ -73,16 +67,16 @@ offset_bottom = 320.0
 texture = SubResource("AtlasTexture_53g1v")
 expand_mode = 1
 
-[node name="TextureRect3" type="TextureRect" parent="." unique_id=901294263]
+[node name="DescriptionCat" type="TextureRect" parent="." unique_id=901294263]
 use_parent_material = true
 layout_mode = 0
-offset_left = -272.0
+offset_left = -264.0
 offset_right = -8.0
 offset_bottom = 224.0
 texture = SubResource("AtlasTexture_53g1v")
 expand_mode = 1
 
-[node name="NameLabel" type="Label" parent="TextureRect3" unique_id=813957948]
+[node name="NameLabel" type="Label" parent="DescriptionCat" unique_id=813957948]
 use_parent_material = true
 layout_mode = 0
 offset_left = 16.0
@@ -94,18 +88,18 @@ text = "НАЗВАНИЕ"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DescriptionLabel" type="Label" parent="TextureRect3" unique_id=442762286]
+[node name="DescriptionLabel" type="Label" parent="DescriptionCat" unique_id=442762286]
 use_parent_material = true
 layout_mode = 0
 offset_left = 16.0
 offset_top = 40.0
-offset_right = 256.0
+offset_right = 240.0
 offset_bottom = 160.0
 theme_override_font_sizes/font_size = 18
 text = "ОПИСАНИЕ ОПИСАНИЕ ОПИСАНИЕ ОПИСАНИЕ ОПИСАНИЕ ОПИСАНИЕ ОПИСАНИЕ"
 autowrap_mode = 2
 
-[node name="CommentaryLabel" type="Label" parent="TextureRect3" unique_id=1622974282]
+[node name="CommentaryLabel" type="Label" parent="DescriptionCat" unique_id=1622974282]
 use_parent_material = true
 layout_mode = 0
 offset_left = 16.0
@@ -174,7 +168,7 @@ text = "РЕДКИЙ"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Artifacts" type="GridContainer" parent="." unique_id=1690070523]
+[node name="ArtifactCat" type="GridContainer" parent="." unique_id=1690070523]
 use_parent_material = true
 layout_mode = 0
 offset_left = 64.0
@@ -186,7 +180,7 @@ size_flags_vertical = 3
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 2
 
-[node name="OKButton" type="TextureButton" parent="." unique_id=546315634]
+[node name="OKButtonCat" type="TextureButton" parent="." unique_id=546315634]
 use_parent_material = true
 layout_mode = 0
 offset_left = 64.0
@@ -226,5 +220,5 @@ volume_db = -2.0
 bus = &"SoundFX"
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
-[connection signal="pressed" from="OKButton" to="." method="_on_ok_button_pressed"]
+[connection signal="pressed" from="OKButtonCat" to="." method="_on_ok_button_pressed"]
 [connection signal="pressed" from="CancelButton" to="." method="_on_cancel_button_pressed"]

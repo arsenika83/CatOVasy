@@ -6,6 +6,7 @@ var character_name_display = "Соля"
 @onready var area = $Area2D
 @onready var sprite = $Sprite
 @onready var my_turn = $MyTurn
+@onready var cursor = $Cursor
 @onready var status_fx = $StatusFX
 @onready var artifact_sprite = $ArtifactSprite
 

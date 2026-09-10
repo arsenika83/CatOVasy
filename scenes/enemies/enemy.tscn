@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://4itbl0ejcd3o" path="res://assets/images/tilemap.png" id="4_x3klb"]
 [ext_resource type="PackedScene" uid="uid://cr7p23s5f4urx" path="res://scenes/fx/status_fx.tscn" id="5_lu5c6"]
 [ext_resource type="AudioStream" uid="uid://btyuivf1mvgot" path="res://assets/soundFX/hit_lucky.wav" id="6_qch6t"]
+[ext_resource type="Shader" uid="uid://cuo3gko47e2p8" path="res://shaders/outline.gdshader" id="6_x3klb"]
 [ext_resource type="AudioStream" uid="uid://dnpo0un37rpje" path="res://assets/soundFX/enemies/mouse_hurt.wav" id="7_y5th1"]
 [ext_resource type="AudioStream" uid="uid://bv07t8ic6tpma" path="res://assets/soundFX/miss.wav" id="8_n7575"]
 [ext_resource type="AudioStream" uid="uid://bclkaxhxamdmf" path="res://assets/soundFX/defend.wav" id="9_qch6t"]
@@ -48,7 +49,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_yu8pw")
 }],
-"loop": 1,
+"loop": true,
 "name": &"default",
 "speed": 1.0
 }]
@@ -80,10 +81,17 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_kugq1")
 }],
-"loop": 1,
+"loop": true,
 "name": &"default",
 "speed": 5.0
 }]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_maese"]
+resource_local_to_scene = true
+shader = ExtResource("6_x3klb")
+shader_parameter/outline_color = Color(0.98803645, 0.3055162, 0.32086813, 0.70000005)
+shader_parameter/outline_thickness = 1.0000000475
+shader_parameter/is_hovered = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nb6gf"]
 atlas = ExtResource("1_6xk8f")
@@ -138,7 +146,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fcftc")
 }],
-"loop": 0,
+"loop": false,
 "name": &"dead",
 "speed": 1.0
 }, {
@@ -161,7 +169,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_twn6s")
 }],
-"loop": 1,
+"loop": true,
 "name": &"deal_damage",
 "speed": 10.0
 }, {
@@ -169,7 +177,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jt03m")
 }],
-"loop": 1,
+"loop": true,
 "name": &"default",
 "speed": 5.0
 }, {
@@ -180,7 +188,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_k4gvh")
 }],
-"loop": 1,
+"loop": true,
 "name": &"idle",
 "speed": 1.0
 }, {
@@ -188,7 +196,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_lu5c6")
 }],
-"loop": 1,
+"loop": true,
 "name": &"take_damage",
 "speed": 5.0
 }]
@@ -229,10 +237,12 @@ autoplay = "default"
 frame_progress = 0.10273628
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=34147167]
+material = SubResource("ShaderMaterial_maese")
 position = Vector2(0, -4)
 sprite_frames = SubResource("SpriteFrames_fcftc")
-animation = &"deal_damage"
+animation = &"idle"
 autoplay = "idle"
+frame_progress = 0.7831796
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1438211941]
 collision_layer = 2

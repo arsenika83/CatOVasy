@@ -5,6 +5,7 @@ var character_name_display = "Кот"
 @export var damage_indicator_scene: PackedScene
 @onready var area = $Area2D
 @onready var sprite = $Sprite
+@onready var cursor = $Cursor
 @onready var status_fx = $StatusFX
 @onready var my_turn = $MyTurn
 @onready var artifact_sprite = $ArtifactSprite

@@ -1,4 +1,4 @@
-res://scenes/ui/log_book.tscn
+res://scenes/ui/card_container_human.tscn
 res://shaders/tree.gdshader
 res://shaders/updown.gdshader
 res://shaders/vhs.gdshader
@@ -8,10 +8,7 @@ res://shaders/hp_bar.gdshader
 res://shaders/grass.gdshader
 res://shaders/foregroundFX.gdshader
 res://shaders/buckshot.gdshader
-res://scripts/enemies/enemy.gd
+res://shaders/outline.gdshader
+res://scenes/enemies/enemy.tscn
 res://scripts/battle.gd
-res://scripts/giant.gd
-res://scripts/ui/log_book.gd
-res://scripts/characters/character.gd
-res://scenes/characters/character_solya.tscn
-res://scripts/cards/solya/wind_of_change_card.gd
+res://scripts/ui/inventory.gd

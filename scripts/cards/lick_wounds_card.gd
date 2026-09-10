@@ -15,6 +15,11 @@ func _ready() -> void:
 	$Energy/Label.text = str(energy_cost)
 	type = "buff"
 
+func _process(delta: float) -> void:
+	if gm.current_energy_cat < energy_cost:
+		$Energy/Label.add_theme_color_override("font_color", Color(0.98, 0.077, 0.078))
+	else:
+		$Energy/Label.add_theme_color_override("font_color", Color.WHITE)
 
 func on_play() -> void:
 	get_parent().get_parent().get_parent().get_parent().log_messages.append(

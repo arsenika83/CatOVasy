@@ -186,6 +186,7 @@ theme_override_styles/hover = ExtResource("6_l0ewe")
 text = "ЗАВЕРШИТЬ ХОД"
 
 [node name="StatusFX" type="TextureRect" parent="EndButton" unique_id=1750069468]
+visible = false
 material = SubResource("ShaderMaterial_kdc2i")
 layout_mode = 0
 offset_left = 48.0

@@ -455,11 +455,17 @@ offset_right = -344.0
 offset_bottom = -226.0
 
 [node name="ArtifactDialog" parent="UI" unique_id=947846839 instance=ExtResource("19_db1u1")]
-visible = false
-offset_left = 512.0
-offset_top = 192.0
-offset_right = -512.0
-offset_bottom = -208.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -168.0
+offset_right = -128.0
+offset_bottom = -168.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="BattleNode" type="Node2D" parent="." unique_id=797394893]
 

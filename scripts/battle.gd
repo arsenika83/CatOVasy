@@ -222,6 +222,10 @@ func find_enemy_by_position(battle_x : int, battle_y : int) -> CharacterBody2D:
 func draw_cursor() -> void:
 	for enemy in find_child("Enemies").get_children():
 		enemy.cursor.visible = false
+		enemy.sprite.material.set_shader_parameter("is_hovered", false)
+	
+	if current_creature_turn >= 0:
+		return
 	
 	var cursor_grid_pos = map.local_to_map(get_global_mouse_position())
 	var target_local_pos = map.map_to_local(cursor_grid_pos)
@@ -292,7 +296,10 @@ func draw_cursor() -> void:
 			if e_pos.x == cursor_grid_pos.x and e_pos.y == cursor_grid_pos.y:
 				if not targets.get(0).state == "dead":
 					for t in targets:
-						t.cursor.visible = true
+							t.cursor.visible = true
+							if gm.current_card != null:
+								if gm.current_card.type == "attack" or gm.current_card.type == "debuff":
+									t.sprite.material.set_shader_parameter("is_hovered", true)
 					
 func choose_target(action : String) -> void:
 	var current_energy = 0

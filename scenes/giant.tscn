@@ -13,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://dyc143w8u85ck" path="res://assets/soundFX/level_up.wav" id="6_odb8e"]
 [ext_resource type="Texture2D" uid="uid://cd6y2ykrp63it" path="res://assets/images/characters/solya_sprite.png" id="6_ycwex"]
 [ext_resource type="AudioStream" uid="uid://bq0ooer30jskk" path="res://assets/soundFX/xp_pick_up.wav" id="7_0vpcl"]
+[ext_resource type="PackedScene" uid="uid://ba7f54d4yq2hp" path="res://scenes/ui/cursor.tscn" id="9_nwqqi"]
 [ext_resource type="AudioStream" uid="uid://bv07t8ic6tpma" path="res://assets/soundFX/miss.wav" id="9_q18av"]
 [ext_resource type="AudioStream" uid="uid://bclkaxhxamdmf" path="res://assets/soundFX/defend.wav" id="10_dt8fj"]
 [ext_resource type="AudioStream" uid="uid://bwch538phpi87" path="res://assets/soundFX/hit.wav" id="11_dku5q"]
@@ -848,6 +849,9 @@ frame_progress = 1.0
 [node name="StatusFX" parent="." unique_id=1192321709 instance=ExtResource("3_0vpcl")]
 position = Vector2(0, -24)
 animation = &"default"
+
+[node name="Cursor" parent="." unique_id=2051460958 instance=ExtResource("9_nwqqi")]
+visible = false
 
 [node name="Area2D" type="Area2D" parent="." unique_id=130196955]
 position = Vector2(4, 6)

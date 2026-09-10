@@ -1,3 +1,4 @@
+res://shaders/
 res://assets/images/characters/
 res://assets/images/
 res://scenes/ui/
@@ -6,7 +7,6 @@ res://assets/images/bosses/
 res://scripts/bosses/
 res://scenes/objects/
 res://scripts/objects/
-res://shaders/
 res://scripts/cards/solya/
 res://scripts/cards/
 res://scripts/

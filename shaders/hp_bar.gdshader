@@ -3,11 +3,11 @@ shader_type canvas_item;
 uniform float speed : hint_range(0.0, 10.0) = 2.0;       // Скорость покачивания
 uniform float amplitude : hint_range(0.0, 200.0) = 20.0; // Высота полета (в пикселях)
 uniform float time_offset : hint_range(0.0, 10.0) = 0.0;
+uniform vec4 current_color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
 
 uniform float width = 0.3;
 uniform float gradient_ease = 5.0;
 uniform float fill_ratio = 0.8;
-
 
 void fragment() {
 	float fill_angle = fill_ratio * 3.141592656 * 2.0;
@@ -19,7 +19,7 @@ void fragment() {
 		if (d >= inner_width && d <= 1.0) {
 			float w = abs((1.0 + inner_width) / 2.0 - d) / (1.0 - inner_width);
 			w = 1.0 - pow(w + 0.5, gradient_ease);
-			COLOR = vec4(vec3(1.191, 0.371, 0.385), min(1.0, w));
+			COLOR = current_color;
 		} else {
 			COLOR.a = 0.0;
 		}

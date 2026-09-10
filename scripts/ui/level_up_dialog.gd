@@ -65,13 +65,16 @@ func _on_card_picked_up(picked_card : Card) -> void:
 				break
 		else:
 			return
-	
-	if get_parent().get_parent().giant.check_xp():
-		get_parent().get_parent().draw_level_up()
+	if current_character == "human":		
+		current_character = "cat"
+		get_parent().get_parent().draw_level_up(current_character)
 	else:
-		visible = false
-		position.x = -1500
-		gm.state = "idle"
+		if get_parent().get_parent().giant.check_xp():
+			get_parent().get_parent().draw_level_up()
+		else:
+			visible = false
+			position.x = -1500
+			gm.state = "idle"
 	
 
 func _on_fire_button_1_pressed() -> void:

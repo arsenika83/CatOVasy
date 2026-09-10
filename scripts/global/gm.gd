@@ -62,7 +62,7 @@ var current_defence_human = 0
 var max_defence_human = 7
 var defended_human = false
 
-var accuracy_human = 100
+var accuracy_human = 75
 var min_accuracy_human = 0
 var current_accuracy_human = accuracy_human
 

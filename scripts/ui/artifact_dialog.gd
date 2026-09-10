@@ -1,13 +1,13 @@
 extends Control
 
-@onready var artifacts = $Artifacts
-@onready var ok_button = $OKButton
+@onready var artifacts = $ArtifactCat
+@onready var ok_button = $OKButtonCat
 @onready var cancel_button = $CancelButton
 
-@onready var artifact_name_label = $TextureRect3/NameLabel
-@onready var artifact_description_label = $TextureRect3/DescriptionLabel
+@onready var artifact_name_label = $DescriptionCat/NameLabel
+@onready var artifact_description_label = $DescriptionCat/DescriptionLabel
 @onready var artifact_rarity_label = $RarityLabel
-@onready var artifact_commentary_label = $TextureRect3/CommentaryLabel
+@onready var artifact_commentary_label = $DescriptionCat/CommentaryLabel
 
 @onready var audio_ok = $AudioStreamPlayerOK
 @onready var audio_cancel = $AudioStreamPlayerCancel

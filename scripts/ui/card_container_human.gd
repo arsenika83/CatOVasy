@@ -56,6 +56,7 @@ func _ready() -> void:
 	played_label.text = "0"
 	create_hand()
 
+
 func _process(delta: float) -> void:
 	if gm.current_energy_human > 0:
 		$EndButton/StatusFX.visible = false
@@ -64,6 +65,11 @@ func _process(delta: float) -> void:
 		$ChangeButton/StatusFX.visible = true
 	else:	
 		$ChangeButton/StatusFX.visible = false
+		
+	if gm.current_energy_human < card_change_energy_cost:
+		change_cost.add_theme_color_override("font_color", Color(0.98, 0.077, 0.078))
+	else:
+		change_cost.add_theme_color_override("font_color", Color.WHITE)	
 		
 func reset_unplayed_pile():
 	for card in played_cards:
@@ -83,6 +89,8 @@ func _on_card_selected(clicked_card: Control) -> void:
 	if current_selected == clicked_card:
 		current_selected.deselect_card()
 		current_selected = null
+		get_parent().get_parent().giant.cursor.visible = false
+		get_parent().get_parent().human.cursor.visible = false
 		return
 		
 	if current_selected != null:
@@ -92,7 +100,17 @@ func _on_card_selected(clicked_card: Control) -> void:
 	current_selected.select_card()
 	gm.current_card = current_selected
 	
+	if current_selected.type == "buff" or current_selected.type == "defend":
+		get_parent().get_parent().giant.cursor.visible = true
+		get_parent().get_parent().human.cursor.visible = true
+	else:
+		get_parent().get_parent().giant.cursor.visible = false
+		get_parent().get_parent().human.cursor.visible = false
+	
 func _on_card_played(played_card: Control) -> void:
+	get_parent().get_parent().giant.cursor.visible = false
+	get_parent().get_parent().human.cursor.visible = false
+	
 	if played_card.has_method("on_play"):
 		played_card.on_play()
 	
@@ -215,6 +233,9 @@ func _on_hand_clear_timer_timeout() -> void:
 		added_card.material.set_shader_parameter("time_offset", time_offset)
 		
 		cards_ui.add_child(added_card)
+		
+		#added_card.energy_cost = card.energy_cost
+		print(added_card.energy_cost)
 		
 	
 	for child in cards_ui.get_children():

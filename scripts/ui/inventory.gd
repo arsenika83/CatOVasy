@@ -64,6 +64,10 @@ func update_artifacts(type : String) -> void:
 				artifact_slots[i].loaded = false
 				
 func set_hp_bar(value : float) -> void:
+	if state == "cat":
+		hp_bar.material.set_shader_parameter("current_color", Color.from_string("#fc4e52", Color.WHITE))
+	else:
+		hp_bar.material.set_shader_parameter("current_color", Color.from_string("#4dbcfd", Color.WHITE))
 	hp_bar.material.set_shader_parameter("fill_ratio", value)
 	
 func draw_artifact_check_dialog(artifact : Artifact) -> void:

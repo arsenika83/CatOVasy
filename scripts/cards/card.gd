@@ -47,6 +47,7 @@ func _on_mouse_entered() -> void:
 		animate_to(SCALE_HOVER, Color.WHITE)
 			
 		var tween = create_tween()
+		#tween.tween_property(description_rect, "scale", Vector2(1, 0), 0.5)
 		tween.tween_property(description_rect, "scale", Vector2(1, 1), 0.2)
 
 # Мышь ушла с элемента
@@ -71,6 +72,8 @@ func _on_gui_input(event: InputEvent) -> void:
 			else:
 				description_rect.scale = Vector2(1, 0)
 				card_clicked.emit(self)
+		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+			description_rect.scale = Vector2(1, 1)
 
 func select_card():
 	if enabled:
