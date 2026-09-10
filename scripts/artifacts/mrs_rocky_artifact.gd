@@ -5,7 +5,7 @@ var rarity = "rare"
 var complect = ""
 var path = "mrs_rocky"
 var artifact_name = "ЖЕНА КАМУШКА"
-var artifact_description = "В конце вашего хода КАМУШЕК наносит 2 единицы урона ВСЕМ врагам"
+var artifact_description = "В конце вашего хода КАМУШЕК наносит 3 единицы урона ВСЕМ врагам"
 var artifact_commentary = "\"Ловите!\""
 
 func _ready() -> void:

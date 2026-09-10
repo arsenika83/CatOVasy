@@ -450,6 +450,15 @@ func turn_tick() -> void:
 			gm.energy_human = gm.max_energy_human
 			has_buff_high_energy = false
 
+func create_fog() -> void:
+	get_parent().fog_fx.visible = true
+	
+	var tween = create_tween()
+	tween.tween_property(get_parent().fog_fx.material, "shader_parameter/alpha", 1.0, 5)
+	
+	sprite.play("fog")
+	idle_animation_timer.start(5)
+
 func check_fall(delta: float) -> void:
 	if gm.state_human == "falling":
 		z_index = -1

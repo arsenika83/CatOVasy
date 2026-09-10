@@ -92,7 +92,7 @@ func draw_artifact_check_dialog(artifact : Artifact) -> void:
 			artifact_check_dialog.artifact_rarity.add_theme_color_override("font_color", Color(1,0,1))
 		"unbelievable":
 			artifact_check_dialog.artifact_rarity.text = "НЕВЕРОЯТНЫЙ"
-			artifact_check_dialog.artifact_rarity.add_theme_color_override("font_color", Color(0.52, 0.0, 0.0, 1.0))
+			artifact_check_dialog.artifact_rarity.add_theme_color_override("font_color", Color.from_string("fb2ac1", Color.WHITE))
 
 func draw_card_check_dialog(card : Card) -> void:
 	if card == null:
@@ -125,7 +125,7 @@ func draw_card_check_dialog(card : Card) -> void:
 			card_check_dialog.card_rarity.add_theme_color_override("font_color", Color(1,0,1))
 		"unbelievable":
 			card_check_dialog.card_rarity.text = "НЕВЕРОЯТНАЯ"
-			card_check_dialog.card_rarity.add_theme_color_override("font_color", Color(0.52, 0.0, 0.0, 1.0))
+			card_check_dialog.card_rarity.add_theme_color_override("font_color", Color.from_string("fb2ac1", Color.WHITE))
 
 func _on_mouse_entered() -> void:
 	if gm.state == "idle":

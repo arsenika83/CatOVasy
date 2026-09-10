@@ -236,6 +236,9 @@ sprite_frames = SubResource("SpriteFrames_smbsv")
 autoplay = "default"
 frame_progress = 0.10273628
 
+[node name="Cursor" parent="." unique_id=2051460958 instance=ExtResource("14_twn6s")]
+visible = false
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=34147167]
 material = SubResource("ShaderMaterial_maese")
 position = Vector2(0, -4)
@@ -256,9 +259,6 @@ debug_color = Color(0.86404556, 0.3111131, 0.46711254, 0.41960785)
 visible = false
 
 [node name="StatusFX" parent="." unique_id=1192321709 instance=ExtResource("5_lu5c6")]
-visible = false
-
-[node name="Cursor" parent="." unique_id=2051460958 instance=ExtResource("14_twn6s")]
 visible = false
 
 [node name="AudioStreamPlayerHit" type="AudioStreamPlayer" parent="." unique_id=1483378938]

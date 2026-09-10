@@ -113,14 +113,11 @@ var buff_animation_time_human = 1.3
 
 func _ready() -> void:
 	current_cards_cat.set(1, AttackCard.new())
-	current_cards_cat.set(2, AttackCard.new())
 	current_cards_cat.set(3, InfernoCard.new())
 	current_cards_cat.set(4, DefendCard.new())
 	current_cards_cat.set(5, LickWoundsCard.new())
 	current_cards_cat.set(6, DefendCard.new())
-	current_cards_cat.set(7, AbilityCard.new())
 	current_cards_cat.set(8, GotYouCard.new())
-	current_cards_cat.set(9, RevengeCard.new())
 	current_cards_cat.set(10, CattenheimerCard.new())
 	
 	current_cards_human.set(1, GiveStrengthCard.new())
@@ -130,6 +127,7 @@ func _ready() -> void:
 	current_cards_human.set(5, WindOfChangeCard.new())
 	current_cards_human.set(6, FortuneWheelCard.new())
 	current_cards_human.set(6, DontHitCard.new())
+	current_cards_human.set(7, FogCard.new())
 	
 
 func _process(delta: float) -> void:

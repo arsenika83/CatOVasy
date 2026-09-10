@@ -23,6 +23,8 @@ func _process(delta: float) -> void:
 		$Energy/Label.add_theme_color_override("font_color", Color.WHITE)
 
 func on_play() -> void:
+	gm.current_energy_human -= energy_cost
+	
 	get_parent().get_parent().get_parent().get_parent().log_messages.append(
 		str("- [color=#fdd14d]Ветер перемен:[/color] [color=#1ca8fd]Соля[/color] получает 2 бесплатные замены карт\n"))
 	 
@@ -47,6 +49,5 @@ func on_play() -> void:
 	"position:x", 
 	get_parent().get_parent().get_parent().get_parent().human.sprite.position.x, 
 	0.2)
-	
-	gm.current_energy_human -= energy_cost
+
 	get_parent().get_parent().free_changes += 2

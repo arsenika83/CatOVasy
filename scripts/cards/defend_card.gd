@@ -21,3 +21,6 @@ func _process(delta: float) -> void:
 		$Energy/Label.add_theme_color_override("font_color", Color(0.98, 0.077, 0.078))
 	else:
 		$Energy/Label.add_theme_color_override("font_color", Color.WHITE)
+		
+func on_play() -> void:
+	get_parent().get_parent().get_parent().get_parent().giant.defend(gm.defend_animation_time_cat)

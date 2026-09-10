@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://c6pakn5l71uly" path="res://assets/images/bosses/big_mouse_boss.png" id="6_5s42r"]
 [ext_resource type="Texture2D" uid="uid://crsqvlld0supu" path="res://assets/images/enemy_sprite.png" id="6_yv02c"]
 [ext_resource type="PackedScene" uid="uid://tksv3htggrop" path="res://scenes/fx/xp_orb.tscn" id="7_gesnp"]
+[ext_resource type="Shader" uid="uid://cuo3gko47e2p8" path="res://shaders/outline.gdshader" id="8_48dok"]
 [ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="8_daato"]
 [ext_resource type="PackedScene" uid="uid://cr7p23s5f4urx" path="res://scenes/fx/status_fx.tscn" id="8_qgjqb"]
 [ext_resource type="PackedScene" uid="uid://ba7f54d4yq2hp" path="res://scenes/ui/cursor.tscn" id="9_yf6tk"]
@@ -195,6 +196,12 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e4n3j"]
+shader = ExtResource("8_48dok")
+shader_parameter/outline_color = Color(0.9882353, 0.30588236, 0.32156864, 0.7019608)
+shader_parameter/outline_thickness = 1.0
+shader_parameter/is_hovered = false
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_l4nfb"]
 atlas = ExtResource("6_5s42r")
 region = Rect2(192, 32, 96, 64)
@@ -314,6 +321,9 @@ sprite_frames = SubResource("SpriteFrames_smbsv")
 autoplay = "default"
 frame_progress = 0.10273628
 
+[node name="Cursor" parent="." unique_id=2051460958 instance=ExtResource("9_yf6tk")]
+visible = false
+
 [node name="Energy" type="AnimatedSprite2D" parent="." unique_id=1785247557]
 material = SubResource("ShaderMaterial_daato")
 position = Vector2(0, -50)
@@ -330,6 +340,7 @@ autoplay = "idle"
 frame_progress = 0.0818368
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=34147167]
+material = SubResource("ShaderMaterial_e4n3j")
 position = Vector2(-1, -20)
 sprite_frames = SubResource("SpriteFrames_fcftc")
 animation = &"idle"
@@ -350,9 +361,6 @@ visible = false
 [node name="StatusFX" parent="." unique_id=1192321709 instance=ExtResource("8_qgjqb")]
 visible = false
 position = Vector2(0, -80)
-
-[node name="Cursor" parent="." unique_id=2051460958 instance=ExtResource("9_yf6tk")]
-visible = false
 
 [node name="AudioStreamPlayerHit" type="AudioStreamPlayer" parent="." unique_id=1483378938]
 stream = ExtResource("10_hcoa4")

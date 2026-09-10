@@ -31,6 +31,7 @@
 [ext_resource type="PackedScene" uid="uid://c6h0aedhxeaox" path="res://scenes/fx/wind.tscn" id="16_uos8e"]
 [ext_resource type="PackedScene" uid="uid://cuybslgtoc70m" path="res://scenes/ui/energy_human.tscn" id="20_xxxag"]
 [ext_resource type="PackedScene" uid="uid://c7lkcfyxh5uff" path="res://scenes/ui/card_container_human.tscn" id="21_5qqwm"]
+[ext_resource type="Shader" uid="uid://dwaf44tsm3ri3" path="res://shaders/fog.gdshader" id="22_3tvrp"]
 [ext_resource type="PackedScene" uid="uid://db6mch348j5ck" path="res://scenes/ui/log_book.tscn" id="31_6g64q"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fj52k"]
@@ -94,6 +95,13 @@ shader_parameter/saturation = 1.39600001881
 shader_parameter/color_offset_multiplier = 0.0
 shader_parameter/black_offset_multiplier = 0.0
 shader_parameter/color_offset = 3.259879990946679e-09
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m7lo1"]
+shader = ExtResource("22_3tvrp")
+shader_parameter/fog_color = Color(0.5001984, 0.60192496, 0.7039783, 0.5411765)
+shader_parameter/speed = 0.05
+shader_parameter/density = 1.0
+shader_parameter/alpha = 0.0
 
 [node name="Battle" type="Node2D" unique_id=2132287685]
 script = ExtResource("1_ou0n0")
@@ -248,6 +256,16 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="Fog" type="ColorRect" parent="Effects" unique_id=562646634]
+visible = false
+material = SubResource("ShaderMaterial_m7lo1")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.29954746, 0.29954746, 0.29954743, 1)
+
 [node name="UI" type="CanvasLayer" parent="." unique_id=589757551]
 
 [node name="Menu" parent="UI" unique_id=1052398381 instance=ExtResource("11_y3fis")]
@@ -325,6 +343,7 @@ offset_bottom = 40.0
 
 [node name="LogBook" parent="UI" unique_id=1252761803 instance=ExtResource("31_6g64q")]
 offset_right = 8.0
+offset_bottom = -656.0
 
 [node name="CheckStatsDialogHoldTimer" type="Timer" parent="." unique_id=56407654]
 wait_time = 0.3

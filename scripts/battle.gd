@@ -26,6 +26,8 @@ var log_count = 1
 @onready var inferno_fx = $FX/Inferno
 @onready var giant_explosion_fx = $FX/GiantExplosion
 
+@onready var fog_fx = $Effects/Fog
+
 @onready var audio_no_energy = $AudioStreamPlayerNoEnergy
 
 @onready var end_battle_button = $UI/EndBattleButton
@@ -110,6 +112,8 @@ func _process(delta: float) -> void:
 						choose_target("defend")
 					"buff":
 						choose_target("buff")
+					"debuff":
+						choose_target("debuff")	
 		elif current_creature_turn == -1:
 			match gm.state:
 				"battle_attack":
@@ -505,7 +509,7 @@ func end_turn() -> void:
 						if enemy.state != "dead":
 							targets.append(enemy)
 					for t in targets:
-						t.take_damage(2, 0.5)
+						t.take_damage(3, 0.5)
 				else:
 					var i = randi_range(0, find_child("Enemies").get_child_count()-1)
 					
@@ -515,7 +519,7 @@ func end_turn() -> void:
 					while targets.get(0).state == "dead":
 						targets.set(0, find_child("Enemies").get_child(j))
 						j += 1
-					targets.get(0).take_damage(2, 0.5)
+					targets.get(0).take_damage(3, 0.5)
 					
 				$FX/Rocky.scale = Vector2(rocky_scale, rocky_scale)
 				$FX/Rocky.position = Vector2(targets.get(0).position.x, targets.get(0).position.y - 700)

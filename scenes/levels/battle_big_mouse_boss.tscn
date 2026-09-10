@@ -10,12 +10,14 @@
 [ext_resource type="PackedScene" uid="uid://f3jfsj1vndud" path="res://scenes/fx/giant_explosion.tscn" id="11_800k3"]
 [ext_resource type="PackedScene" uid="uid://btcx8q72tnkf5" path="res://scenes/fx/claw_fx.tscn" id="12_fflb6"]
 [ext_resource type="PackedScene" uid="uid://6hsq7ud5p275" path="res://scenes/fx/fire_fx.tscn" id="13_hoaa3"]
+[ext_resource type="PackedScene" uid="uid://c6h0aedhxeaox" path="res://scenes/fx/wind.tscn" id="14_hrdy8"]
 [ext_resource type="PackedScene" uid="uid://b7efvk3yra5db" path="res://scenes/fx/cat_fx.tscn" id="14_tyyvc"]
 [ext_resource type="AudioStream" uid="uid://d376xnspnkqbg" path="res://assets/music/BATTLE_THEME_1.ogg" id="14_uf3jn"]
 [ext_resource type="PackedScene" uid="uid://drtcvgk4w8njv" path="res://scenes/fx/inferno.tscn" id="15_g4j75"]
 [ext_resource type="PackedScene" uid="uid://bbrgur310kkfd" path="res://scenes/fx/titan_energy_projectile.tscn" id="16_hrdy8"]
 [ext_resource type="AudioStream" uid="uid://bxhii1a001e1v" path="res://assets/music/BATTLE_WIN.mp3" id="17_0pgyx"]
 [ext_resource type="AudioStream" uid="uid://bwch538phpi87" path="res://assets/soundFX/hit.wav" id="18_x8tpc"]
+[ext_resource type="Shader" uid="uid://dwaf44tsm3ri3" path="res://shaders/fog.gdshader" id="19_adxdy"]
 [ext_resource type="AudioStream" uid="uid://dnyi4oi4yn2sl" path="res://assets/soundFX/cancel.wav" id="19_tqq42"]
 [ext_resource type="Shader" uid="uid://dm6djrn7pct8b" path="res://shaders/wobble.gdshader" id="20_7biyf"]
 [ext_resource type="PackedScene" uid="uid://cdll7yvc84q18" path="res://scenes/ui/menu.tscn" id="21_vtj4p"]
@@ -91,6 +93,13 @@ shader_parameter/saturation = 1.39600001881
 shader_parameter/color_offset_multiplier = 0.0
 shader_parameter/black_offset_multiplier = 0.0
 shader_parameter/color_offset = 3.259879990946679e-09
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hrdy8"]
+shader = ExtResource("19_adxdy")
+shader_parameter/fog_color = Color(0.5001984, 0.60192496, 0.7039783, 0.5411765)
+shader_parameter/speed = 0.05
+shader_parameter/density = 1.0
+shader_parameter/alpha = 0.0
 
 [node name="Battle" type="Node2D" unique_id=2132287685]
 script = ExtResource("1_adxdy")
@@ -194,6 +203,10 @@ position = Vector2(88, -24)
 frame = 3
 frame_progress = 0.0
 
+[node name="Wind" parent="FX" unique_id=75901647 instance=ExtResource("14_hrdy8")]
+z_index = 100
+position = Vector2(-56, -48)
+
 [node name="AudioStreamPlayerMusic" type="AudioStreamPlayer" parent="." unique_id=179520262]
 stream = ExtResource("14_uf3jn")
 autoplay = true
@@ -223,6 +236,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="Fog" type="ColorRect" parent="Effects" unique_id=1034225786]
+visible = false
+material = SubResource("ShaderMaterial_hrdy8")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.29954746, 0.29954746, 0.29954743, 1)
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=589757551]
 

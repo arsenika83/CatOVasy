@@ -37,6 +37,3 @@ func on_play() -> void:
 		
 	get_parent().get_parent().get_parent().get_parent().human.defend(gm.defend_animation_time_human)
 	
-	if energy_cost > 0:
-		energy_cost -= 1
-		$Energy/Label.text = str(energy_cost)

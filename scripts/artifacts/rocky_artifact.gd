@@ -5,7 +5,7 @@ var rarity = "common"
 var complect = ""
 var path = "rocky"
 var artifact_name = "КАМУШЕК"
-var artifact_description = "В конце вашего хода наносит случайному врагу 2 единицы урона"
+var artifact_description = "В конце вашего хода наносит случайному врагу 3 единицы урона"
 var artifact_commentary = "\"Лови!\""
 
 func _ready() -> void:

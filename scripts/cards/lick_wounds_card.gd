@@ -22,6 +22,8 @@ func _process(delta: float) -> void:
 		$Energy/Label.add_theme_color_override("font_color", Color.WHITE)
 
 func on_play() -> void:
+	gm.current_energy_cat -= energy_cost
+	
 	get_parent().get_parent().get_parent().get_parent().log_messages.append(
 		str("- [color=#1ca8fd]Соля[/color] и [color=#1ca8fd]Кот[/color] меняются местами. [color=#1ca8fd]Соля[/color]: +3 к броне. [color=#1ca8fd]Кот[/color]: +2 к ОЗ\n"))
 	

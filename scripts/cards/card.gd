@@ -26,6 +26,7 @@ var shake = 0.0
 const SCALE_NORMAL = Vector2(1.0, 1.0)
 const SCALE_HOVER = Vector2(1.1, 1.1)
 const SCALE_SELECTED = Vector2(1.15, 1.15)
+const SCALE_VIEW = Vector2(1.5, 1.5)
 
 func _ready() -> void:
 	description_rect.scale = Vector2(0, 0)
@@ -73,7 +74,8 @@ func _on_gui_input(event: InputEvent) -> void:
 				description_rect.scale = Vector2(1, 0)
 				card_clicked.emit(self)
 		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
-			description_rect.scale = Vector2(1, 1)
+			description_rect.scale = Vector2(1, 0)
+			animate_to(SCALE_VIEW, Color(1.191, 0.371, 0.385))
 
 func select_card():
 	if enabled:
@@ -113,3 +115,10 @@ func destroy() -> void:
 	
 	var tween1 = create_tween()
 	tween1.tween_property(self, "rotation_degrees", 90, 0.2)
+	
+func use_up_animation() -> void:
+	var tween = create_tween()
+	tween.tween_property(self, "position:y", position.y - 200, 0.1)	
+	tween.tween_property(self, "scale:x", 1.5, 0.05)
+	tween.tween_property(self, "scale:x", 0, 0.2)
+	

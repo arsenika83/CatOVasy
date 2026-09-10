@@ -194,6 +194,7 @@ rarity = "epic"
 position = Vector2(-128, 136)
 
 [node name="CharacterSolya" parent="." unique_id=52898326 instance=ExtResource("15_74bpm")]
+visible = false
 position = Vector2(80, 112)
 
 [node name="Giant" parent="." unique_id=2060885226 instance=ExtResource("1_uwrxv")]
