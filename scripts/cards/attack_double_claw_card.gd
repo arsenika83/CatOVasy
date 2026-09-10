@@ -4,8 +4,8 @@ var damage = (2 + gm.damage_cat) * 2
 var card_path = "attack_double_claw_card.tscn"
 var icon_path = "double_claw_card.png"
 var tool_tip_text = ""
-var card_name = "Двойной удар"
-var card_description = "Наносит урон, \nравный (2 + базовый урон) x2"
+var card_name = settings.card_text_cat.get("double_claw_name")
+var card_description = settings.card_text_cat.get("double_claw_desc")
 var rarity = "rare"
 
 func _ready() -> void:
@@ -17,6 +17,7 @@ func _ready() -> void:
 	state_modifier = "_attack"
 	rarity = "rare"
 	$Energy/Label.text = str(energy_cost)
+	$Label.text = settings.card_text_cat.get("double_claw_name")
 
 func _process(delta: float) -> void:
 	if gm.current_energy_cat < energy_cost:

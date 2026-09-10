@@ -14,6 +14,7 @@ func _ready() -> void:
 	
 	state_modifier = "_ability"
 	$Energy/Label.text = str(energy_cost)
+	$Label.text = "Ветер перемен"
 	type = "buff"
 
 func _process(delta: float) -> void:
@@ -30,6 +31,7 @@ func on_play() -> void:
 	 
 	get_parent().get_parent().get_parent().get_parent().wind_fx.position = get_parent().get_parent().get_parent().get_parent().human.position - Vector2(16, 32)
 	get_parent().get_parent().get_parent().get_parent().wind_fx.play("hit")
+	get_parent().get_parent().get_parent().get_parent().wind_fx.audio.play()
 	get_parent().get_parent().get_parent().get_parent().human.sprite.play("wind")
 	get_parent().get_parent().get_parent().get_parent().human.idle_animation_timer.start(0.3)
 	

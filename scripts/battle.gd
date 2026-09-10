@@ -25,10 +25,12 @@ var log_count = 1
 @onready var wind_fx = $FX/Wind
 @onready var inferno_fx = $FX/Inferno
 @onready var giant_explosion_fx = $FX/GiantExplosion
+@onready var fog_summon_fx = $FX/FogSummon
 
 @onready var fog_fx = $Effects/Fog
 
 @onready var audio_no_energy = $AudioStreamPlayerNoEnergy
+@onready var audio_music = $AudioStreamPlayerMusic
 
 @onready var end_battle_button = $UI/EndBattleButton
 @onready var creature_check_dialog = $UI/CreatureDialog
@@ -103,7 +105,7 @@ func _process(delta: float) -> void:
 			check_creature_stats()
 		
 	if Input.is_action_just_pressed("ui_lmb"):
-		if current_creature_turn == -2:
+		if current_creature_turn == -2 or current_creature_turn == -1:
 			if gm.current_card != null:
 				match gm.current_card.type:
 					"attack":
@@ -113,15 +115,7 @@ func _process(delta: float) -> void:
 					"buff":
 						choose_target("buff")
 					"debuff":
-						choose_target("debuff")	
-		elif current_creature_turn == -1:
-			match gm.state:
-				"battle_attack":
-					choose_target("deal_damage")
-				"battle_defend":
-					choose_target("defend")
-				"battle_ability":
-					choose_target("buff")
+						choose_target("debuff")
 
 func smooth_camera_zoom(value1, value2) -> void:
 	var tween = create_tween()
@@ -407,12 +401,11 @@ func choose_target(action : String) -> void:
 		
 		#BUFFS
 		if gm.battle_x_cat == cursor_grid_pos.x and gm.battle_y_cat == cursor_grid_pos.y or gm.battle_x_human == cursor_grid_pos.x and gm.battle_y_human == cursor_grid_pos.y:
-			if not gm.state == "dead":
-				match action:
-					"defend":
-						gm.current_card.card_played.emit(gm.current_card)
-					"buff":
-						gm.current_card.card_played.emit(gm.current_card)
+			match action:
+				"defend":
+					gm.current_card.card_played.emit(gm.current_card)
+				"buff":
+					gm.current_card.card_played.emit(gm.current_card)
 							
 	elif gm.current_card != null and gm.current_card.energy_cost > current_energy:
 		card_container_cat.remind_no_energy_for_current_card()
@@ -422,6 +415,10 @@ func enemy_turn() -> void:
 		return
 		
 	var source = current_enemies.get(current_creature_turn)
+	
+	if source.current_energy == 0:
+		end_turn()
+		return
 	
 	if not source.state == "dead":
 		source.my_turn.visible = true
@@ -1087,6 +1084,13 @@ func _on_win_timer_timeout() -> void:
 		card_container_human.visible = false
 		$UI/EnergyCat.visible = false
 		$UI/EnergyHuman.visible = false
+		
+		if gm.state == "dead":
+			gm.state = "idle"
+			gm.hp_cat += 1
+		elif gm.state_human == "dead":
+			gm.state_human = "idle"
+			gm.hp_human += 1	
 		
 		log_messages.append("[font_size=20][center]\nПОБЕДА![/center][/font_size]")
 

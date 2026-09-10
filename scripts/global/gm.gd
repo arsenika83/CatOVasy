@@ -113,12 +113,14 @@ var buff_animation_time_human = 1.3
 
 func _ready() -> void:
 	current_cards_cat.set(1, AttackCard.new())
-	current_cards_cat.set(3, InfernoCard.new())
-	current_cards_cat.set(4, DefendCard.new())
-	current_cards_cat.set(5, LickWoundsCard.new())
-	current_cards_cat.set(6, DefendCard.new())
-	current_cards_cat.set(8, GotYouCard.new())
-	current_cards_cat.set(10, CattenheimerCard.new())
+	current_cards_cat.set(2, InfernoCard.new())
+	current_cards_cat.set(3, DefendCard.new())
+	current_cards_cat.set(4, LickWoundsCard.new())
+	current_cards_cat.set(5, DefendCard.new())
+	current_cards_cat.set(6, GotYouCard.new())
+	current_cards_cat.set(7, CattenheimerCard.new())
+	current_cards_cat.set(8, CompensationCard.new())
+	current_cards_cat.set(9, EclipseCard.new())
 	
 	current_cards_human.set(1, GiveStrengthCard.new())
 	current_cards_human.set(2, SollenheimerCard.new())
@@ -126,8 +128,9 @@ func _ready() -> void:
 	current_cards_human.set(4, LittleFireCard.new())
 	current_cards_human.set(5, WindOfChangeCard.new())
 	current_cards_human.set(6, FortuneWheelCard.new())
-	current_cards_human.set(6, DontHitCard.new())
-	current_cards_human.set(7, FogCard.new())
+	current_cards_human.set(7, DontHitCard.new())
+	current_cards_human.set(8, FogCard.new())
+	current_cards_human.set(9, NeutralityCard.new())
 	
 
 func _process(delta: float) -> void:

@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://s34pblv0ga2j" path="res://assets/images/fx.png" id="1_0ewlg"]
 [ext_resource type="Script" uid="uid://cb4hfmoetarwo" path="res://scripts/giant_explosion.gd" id="2_s2xm8"]
+[ext_resource type="AudioStream" uid="uid://csbh1s54eftkg" path="res://assets/soundFX/wind.wav" id="3_s2xm8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s2xm8"]
 atlas = ExtResource("1_0ewlg")
@@ -82,3 +83,4 @@ frame_progress = 1.0
 script = ExtResource("2_s2xm8")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=490053130]
+stream = ExtResource("3_s2xm8")

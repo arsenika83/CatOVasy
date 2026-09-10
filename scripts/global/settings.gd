@@ -5,7 +5,10 @@ var music_volume: float = 1.0
 var sound_fx_volume: float = 1.0
 var animation_speed: float = 1.0
 
+
 var lang = "rus"
+var card_text_cat : Dictionary = load_json(str("res://lang/", lang, "_card_text_cat.json"))
+
 
 var path = "res://saves/saved_settings.txt"
 
@@ -13,8 +16,6 @@ func _ready() -> void:
 	read_settings_from_file()
 	apply_audio_settings()
 
-func _process(delta: float) -> void:
-	pass
 		
 func apply_audio_settings() -> void:
 	if master_volume <= 0.05:
@@ -64,3 +65,25 @@ func save_settings_to_file() -> void:
 		print("Файл успешно сохранен!")
 	else:
 		print("Ошибка открытия файла для записи: ", FileAccess.get_open_error())
+
+
+func load_json(path: String) -> Dictionary:
+	if not FileAccess.file_exists(path):
+		print("Файл сохранения не найден!")
+		return {}
+		
+	var file = FileAccess.open(path, FileAccess.READ)
+	if not file:
+		print("Не удалось открыть файл для чтения.")
+		return {}
+		
+	var json_text = file.get_as_text()
+	file.close()
+	
+	var parsed_data = JSON.parse_string(json_text)
+	
+	if parsed_data == null:
+		print("Ошибка чтения JSON: Файл поврежден или имеет неверный синтаксис!")
+		return {}
+		
+	return parsed_data

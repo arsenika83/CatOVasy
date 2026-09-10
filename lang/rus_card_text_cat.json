@@ -1,0 +1,37 @@
+{
+"attack_name" : "Когти",
+"attack_desc" : "Наносит урон, равный 3 + базовый",
+"attack_log" : "",
+
+"double_claw_name" : "Двойной удар",
+"double_claw_desc" : "Наносит урон, \nравный (2 + базовый урон) x2",
+"double_claw_log" : "",
+
+"attack_name" : "Когти",
+"attack_desc" : "Когти",
+"attack_log" : "Когти",
+
+"attack_name" : "Когти",
+"attack_desc" : "Когти",
+"attack_log" : "Когти",
+
+"attack_name" : "Когти",
+"attack_desc" : "Когти",
+"attack_log" : "Когти",
+
+"attack_name" : "Когти",
+"attack_desc" : "Когти",
+"attack_log" : "Когти",
+
+"attack_name" : "Когти",
+"attack_desc" : "Когти",
+"attack_log" : "Когти",
+
+"attack_name" : "Когти",
+"attack_desc" : "Когти",
+"attack_log" : "Когти",
+	
+"eclipse_name" : "Затмение",
+"eclipse_desc" : "ВСЕ враги теряют 10% точности и 1 энергию в этом бою. Расходуется",
+"eclipse_log" : "- [color=#ff93c1]ЗАТМЕНИЕ[/color]: все враги теряют 10% точности и 1 энергии\n"
+}

@@ -26,6 +26,9 @@ func _process(delta: float) -> void:
 func on_play() -> void:
 	gm.current_energy_human -= energy_cost
 	
+	get_parent().get_parent().get_parent().get_parent().log_messages.append(
+		str("- [color=#ff93c1]ТУМАН[/color]: все враги теряют 35% точности\n"))
+	
 	for enemy in get_parent().get_parent().get_parent().get_parent().current_enemies:
 		if enemy.state != "dead":
 			enemy.current_accuracy -= 35

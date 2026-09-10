@@ -454,10 +454,21 @@ func create_fog() -> void:
 	get_parent().fog_fx.visible = true
 	
 	var tween = create_tween()
-	tween.tween_property(get_parent().fog_fx.material, "shader_parameter/alpha", 1.0, 5)
+	tween.tween_property(get_parent().fog_fx.material, "shader_parameter/alpha", 0.7, 3)
 	
 	sprite.play("fog")
-	idle_animation_timer.start(5)
+	idle_animation_timer.start(3)
+	
+	get_parent().fog_summon_fx.position = position + Vector2(0, -64)
+	get_parent().fog_summon_fx.play("hit")
+	get_parent().fog_summon_fx.audio.play()
+	get_parent().wind_fx.audio.play()
+	get_parent().player_camera.apply_shake(1)
+	
+	var tween1 = create_tween()
+	tween1.tween_property(get_parent().audio_music, "volume_db", -15.0, 1)
+	tween1.tween_property(get_parent().audio_music, "volume_db", 0, 5)
+	
 
 func check_fall(delta: float) -> void:
 	if gm.state_human == "falling":
@@ -580,8 +591,6 @@ func _on_deal_damage_timer_timeout() -> void:
 		tween2.tween_property(status_fx, "scale", Vector2(0, 0), 0.2)
 	else:
 		get_parent().player_camera.apply_shake(gm.current_card.shake)
-			
-		audio_hit.play()
 		
 		get_parent().fire_fx.scale = Vector2(1, 1)
 	
@@ -622,20 +631,21 @@ func _on_deal_damage_timer_timeout() -> void:
 	
 	#ВЗРЫВ
 	if gm.current_card.has_method("explode"):
-		get_parent().claw_fx.scale = Vector2(0, 0)
+		get_parent().fire_fx.scale = Vector2(0, 0)
 		get_parent().log_messages.append(str("- ВЗРЫВ!!! [color=#1ca8fd]Кот[/color] получил [color=#fc4e52]5 урона[/color]\n"))
 		get_parent().giant.display_damage(5)
 
 		$ExplodeTimer.start(gm.attack_animation_time_human)
 			
 		get_parent().cat_fx.position = get_parent().giant.position
+		get_parent().cat_fx.rotation_degrees = 720
 		get_parent().giant.sprite.visible = false
 			
 		var tween3 = create_tween()
 		tween3.tween_property(get_parent().cat_fx, "position", gm.current_targets[0].position, gm.attack_animation_time_human)
 			
 		var tween4 = create_tween()
-		tween4.tween_property(get_parent().cat_fx, "rotation_degrees", 720, 0.3)
+		tween4.tween_property(get_parent().cat_fx, "rotation_degrees", 0, 0.3)
 		get_parent().cat_fx.play("hit")
 			
 			
@@ -691,3 +701,4 @@ func _on_explode_timer_timeout() -> void:
 	get_parent().player_camera.apply_shake(3)
 	$AudioExplode.play()
 	get_parent().giant.sprite.visible = true
+	

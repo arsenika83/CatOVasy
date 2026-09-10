@@ -8,18 +8,18 @@ var all_card_names_epic : Array[String]
 var all_card_names_unbelievable : Array[String]
 
 var all_card_names_cat : Array[String] = ["attack_double_claw", "sharp_claw", "got_you",
-"cooked_meat", "inferno", "revenge", "cattenheimer", "lick_wounds"]
+"cooked_meat", "inferno", "revenge", "cattenheimer", "lick_wounds", "compensation"]
 var all_card_names_common_cat : Array[String]
-var all_card_names_rare_cat : Array[String] = ["attack_double_claw", "lick_wounds"]
+var all_card_names_rare_cat : Array[String] = ["attack_double_claw", "lick_wounds", "compensation"]
 var all_card_names_epic_cat : Array[String] = ["inferno", "revenge", "cattenheimer"]
 var all_card_names_unbelievable_cat : Array[String]
 
 var all_card_names_human : Array[String] = ["little_fire", "boredom", "give_strength", "sollenheimer",
-"wind_of_change", "fortune_wheel", "dont_hit"]
+"wind_of_change", "fortune_wheel", "dont_hit", "fog"]
 var all_card_names_common_human : Array[String]
-var all_card_names_rare_human : Array[String] = ["boredom"]
-var all_card_names_epic_human : Array[String]
-var all_card_names_unbelievable_human : Array[String]
+var all_card_names_rare_human : Array[String] = ["boredom", "fortune_wheel"]
+var all_card_names_epic_human : Array[String] = ["sollenheimer"]
+var all_card_names_unbelievable_human : Array[String] = ["fog"]
 
 var all_artifact_names : Array[String] = ["red_ball", "blue_ball", "heart_shaped_pillow", "cat_food",
 "old_bandage", "spinner", "boomerang", "regen_ring", "candy", "portrait_of_the_unknown", "fork",

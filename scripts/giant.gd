@@ -528,13 +528,14 @@ func _on_deal_damage_timer_timeout() -> void:
 		$ExplodeTimer.start(gm.attack_animation_time_human)
 			
 		get_parent().cat_fx.position = position
+		get_parent().cat_fx.rotation_degrees = 720
 		sprite.visible = false
 			
 		var tween3 = create_tween()
 		tween3.tween_property(get_parent().cat_fx, "position", gm.current_targets[0].position, gm.attack_animation_time_cat)
-			
+		
 		var tween4 = create_tween()
-		tween4.tween_property(get_parent().cat_fx, "rotation_degrees", 720, 0.3)
+		tween4.tween_property(get_parent().cat_fx, "rotation_degrees", 0, 0.3)
 		get_parent().cat_fx.play("hit")
 			
 	#ИНФЕРНО

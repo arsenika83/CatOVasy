@@ -1,6 +1,9 @@
+ColorRect
+CanvasModulate
+PointLight2D
+AnimatedSprite2D
 ParallaxBackground
 ParallaxLayer
-ColorRect
 Panel
 AudioStreamPlayer
 Label
@@ -8,8 +11,4 @@ RichTextLabel
 TextureRect
 PanelContainer
 CanvasLayer
-AnimatedSprite2D
-PointLight2D
 DirectionalLight2D
-TileMapLayer
-Sprite2D

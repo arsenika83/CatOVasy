@@ -127,15 +127,11 @@ region = Rect2(0, 0, 32, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x86bq"]
 atlas = ExtResource("1_eb1o4")
-region = Rect2(0, 384, 64, 64)
+region = Rect2(0, 384, 32, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gubmq"]
 atlas = ExtResource("1_eb1o4")
-region = Rect2(64, 384, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ivdl6"]
-atlas = ExtResource("1_eb1o4")
-region = Rect2(128, 384, 64, 64)
+region = Rect2(32, 384, 32, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ijvqx"]
 atlas = ExtResource("1_eb1o4")
@@ -336,21 +332,15 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 3.0,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_x86bq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gubmq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ivdl6")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_gubmq")
 }],
 "loop": true,
 "name": &"fog",
-"speed": 4.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -700,7 +690,7 @@ position = Vector2(0, -22)
 sprite_frames = SubResource("SpriteFrames_a16jr")
 animation = &"fog"
 autoplay = "walking_side"
-frame_progress = 0.673247
+frame_progress = 0.7333343
 
 [node name="ArtifactSprite" type="AnimatedSprite2D" parent="." unique_id=534946203]
 visible = false

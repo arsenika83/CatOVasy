@@ -198,7 +198,7 @@ visible = false
 position = Vector2(80, 112)
 
 [node name="Giant" parent="." unique_id=2060885226 instance=ExtResource("1_uwrxv")]
-position = Vector2(80, 112)
+position = Vector2(80, 80)
 
 [node name="Camera2D" type="Camera2D" parent="Giant" unique_id=1303825275]
 zoom = Vector2(2, 2)

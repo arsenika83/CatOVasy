@@ -1,0 +1,182 @@
+[gd_scene format=3 uid="uid://dvjdgdd0vjil4"]
+
+[ext_resource type="Texture2D" uid="uid://cyebolnfd4g5k" path="res://assets/images/giant_explosion.png" id="1_hgccb"]
+[ext_resource type="Shader" uid="uid://dmo1l352iefcn" path="res://shaders/tree.gdshader" id="1_m10as"]
+[ext_resource type="Script" uid="uid://cb4hfmoetarwo" path="res://scripts/giant_explosion.gd" id="2_4hdoa"]
+[ext_resource type="AudioStream" uid="uid://b10sie8vnytw1" path="res://assets/soundFX/fog_summon.wav" id="3_4hdoa"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5k0rj"]
+shader = ExtResource("1_m10as")
+shader_parameter/speed = 10.0
+shader_parameter/min_strength = 0.10000000475
+shader_parameter/max_strength = 0.10000000475
+shader_parameter/wind_decay = 0.4290000203775
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hgccb"]
+atlas = ExtResource("1_hgccb")
+region = Rect2(0, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4hdoa"]
+atlas = ExtResource("1_hgccb")
+region = Rect2(64, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m10as"]
+atlas = ExtResource("1_hgccb")
+region = Rect2(128, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5k0rj"]
+atlas = ExtResource("1_hgccb")
+region = Rect2(192, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vly2g"]
+atlas = ExtResource("1_hgccb")
+region = Rect2(256, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2wrb5"]
+atlas = ExtResource("1_hgccb")
+region = Rect2(320, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ul3or"]
+atlas = ExtResource("1_hgccb")
+region = Rect2(384, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mn101"]
+atlas = ExtResource("1_hgccb")
+region = Rect2(448, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rlr05"]
+atlas = ExtResource("1_hgccb")
+region = Rect2(0, 256, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0aaff"]
+atlas = ExtResource("1_hgccb")
+region = Rect2(64, 256, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_013sm"]
+atlas = ExtResource("1_hgccb")
+region = Rect2(128, 256, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rlr05"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hgccb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4hdoa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m10as")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5k0rj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vly2g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2wrb5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ul3or")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mn101")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vly2g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2wrb5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ul3or")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mn101")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vly2g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2wrb5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ul3or")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mn101")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vly2g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2wrb5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ul3or")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mn101")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vly2g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2wrb5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ul3or")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mn101")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vly2g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2wrb5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ul3or")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mn101")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rlr05")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0aaff")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_013sm")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"hit",
+"speed": 10.0
+}]
+
+[node name="FogSummon" type="AnimatedSprite2D" unique_id=1197458061]
+material = SubResource("ShaderMaterial_5k0rj")
+position = Vector2(0, 64)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_rlr05")
+animation = &"hit"
+autoplay = "default"
+frame = 31
+frame_progress = 1.0
+offset = Vector2(0, -32)
+script = ExtResource("2_4hdoa")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=490053130]
+stream = ExtResource("3_4hdoa")
+bus = &"SoundFX"
