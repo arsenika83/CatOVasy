@@ -121,6 +121,7 @@ func _ready() -> void:
 	current_cards_cat.set(7, CattenheimerCard.new())
 	current_cards_cat.set(8, CompensationCard.new())
 	current_cards_cat.set(9, EclipseCard.new())
+	current_cards_cat.set(10, DoubleClawCard.new())
 	
 	current_cards_human.set(1, GiveStrengthCard.new())
 	current_cards_human.set(2, SollenheimerCard.new())

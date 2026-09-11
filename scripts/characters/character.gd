@@ -632,7 +632,6 @@ func _on_deal_damage_timer_timeout() -> void:
 	#ВЗРЫВ
 	if gm.current_card.has_method("explode"):
 		get_parent().fire_fx.scale = Vector2(0, 0)
-		get_parent().log_messages.append(str("- ВЗРЫВ!!! [color=#1ca8fd]Кот[/color] получил [color=#fc4e52]5 урона[/color]\n"))
 		get_parent().giant.display_damage(5)
 
 		$ExplodeTimer.start(gm.attack_animation_time_human)

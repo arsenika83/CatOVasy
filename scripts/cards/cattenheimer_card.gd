@@ -28,6 +28,8 @@ func _process(delta: float) -> void:
 func on_play() -> void:
 	gm.hp_cat -= 4
 	
+	get_parent().get_parent().get_parent().get_parent().log_messages.append(settings.card_text_cat.get("cattenheimer_log"))
+	
 	if gm.hp_cat <= 0:
 		gm.hp_cat = 0
 		gm.state = "dead"

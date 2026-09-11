@@ -3,7 +3,7 @@
 [ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="1_qjp1o"]
 [ext_resource type="Script" uid="uid://b6bfyqjmol052" path="res://scripts/ui/card_check_dialog.gd" id="2_hxdfs"]
 [ext_resource type="Texture2D" uid="uid://de2c8pnqtrt77" path="res://assets/images/inventory_ui.png" id="3_jngtl"]
-[ext_resource type="PackedScene" uid="uid://hoerixcuuuk3" path="res://scenes/cards/attack_double_claw_card.tscn" id="4_hxdfs"]
+[ext_resource type="PackedScene" uid="uid://hoerixcuuuk3" path="res://scenes/cards/double_claw_card.tscn" id="4_hxdfs"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qtlqx"]
 shader = ExtResource("1_qjp1o")

@@ -4,32 +4,41 @@
 "attack_log" : "",
 
 "double_claw_name" : "Двойной удар",
-"double_claw_desc" : "Наносит урон, \nравный (2 + базовый урон) x2",
+"double_claw_desc" : "Наносит урон, \nравный (3 + базовый урон) x2",
 "double_claw_log" : "",
 
-"attack_name" : "Когти",
-"attack_desc" : "Когти",
-"attack_log" : "Когти",
+"cattenheimer_name" : "КОТТЕНГЕЙМЕР",
+"cattenheimer_desc" : "Наносит ВСЕМ врагам 40 урона + базовый урон кота. Котик теряет 4 ОЗ",
+"cattenheimer_log" : "- ВЗРЫВ!!! [color=#1ca8fd]Кот[/color] получил [color=#fc4e52]4 урона[/color]\n",
 
-"attack_name" : "Когти",
-"attack_desc" : "Когти",
-"attack_log" : "Когти",
+"_name" : "",
+"_desc" : "",
+"_log" : "",
 
-"attack_name" : "Когти",
-"attack_desc" : "Когти",
-"attack_log" : "Когти",
+"_name" : "",
+"_desc" : "",
+"_log" : "",
 
-"attack_name" : "Когти",
-"attack_desc" : "Когти",
-"attack_log" : "Когти",
+"_name" : "",
+"_desc" : "",
+"_log" : "",
 
-"attack_name" : "Когти",
-"attack_desc" : "Когти",
-"attack_log" : "Когти",
+"_name" : "",
+"_desc" : "",
+"_log" : "",
 
-"attack_name" : "Когти",
-"attack_desc" : "Когти",
-"attack_log" : "Когти",
+"_name" : "",
+"_desc" : "",
+"_log" : "",
+
+"_name" : "",
+"_desc" : "",
+"_log" : "",
+
+"_name" : "",
+"_desc" : "",
+"_log" : "",
+
 	
 "eclipse_name" : "Затмение",
 "eclipse_desc" : "ВСЕ враги теряют 10% точности и 1 энергию в этом бою. Расходуется",

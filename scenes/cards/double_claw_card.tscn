@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://hoerixcuuuk3"]
 
 [ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="1_g8qkn"]
-[ext_resource type="Script" uid="uid://ba0s4lfft32jk" path="res://scripts/cards/attack_double_claw_card.gd" id="2_c8sde"]
+[ext_resource type="Script" uid="uid://ba0s4lfft32jk" path="res://scripts/cards/double_claw_card.gd" id="2_c8sde"]
 [ext_resource type="Texture2D" uid="uid://b0rpbj3njbbar" path="res://assets/images/cards.png" id="3_hg2l8"]
 [ext_resource type="Texture2D" uid="uid://b8kl4cpn3k455" path="res://assets/images/card_icons/double_claw_card.png" id="4_rkf8q"]
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="5_7vyus"]
