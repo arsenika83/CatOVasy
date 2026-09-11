@@ -4,8 +4,8 @@ var damage = 40 + gm.damage_cat
 var card_path = "cattenheimer_card.tscn"
 var icon_path = "cattenheimer_card.png"
 var tool_tip_text = ""
-var card_name = "КОТТЕНГЕЙМЕР"
-var card_description = "Наносит ВСЕМ врагам 40 урона + базовый урон кота. Котик теряет 4 ОЗ"
+var card_name = settings.card_text_cat.get("cattenheimer_name")
+var card_description = settings.card_text_cat.get("cattenheimer_desc")
 var rarity = "epic"
 
 func _ready() -> void:
@@ -18,6 +18,7 @@ func _ready() -> void:
 	type = "attack"
 	energy_cost = 3
 	$Energy/Label.text = str(energy_cost)
+	$Label.text = settings.card_text_cat.get("cattenheimer_name")
 
 func _process(delta: float) -> void:
 	if gm.current_energy_cat < energy_cost:

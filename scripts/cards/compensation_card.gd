@@ -3,8 +3,8 @@ class_name CompensationCard extends Card
 var card_path = "compensation_card.tscn"
 var icon_path = "compensation_card.png"
 var tool_tip_text = ""
-var card_name = "Компенсация"
-var card_description = "Кот теряет 40% удачи и получает 20% точности. Расходуется"
+var card_name = settings.card_text_cat.get("compensation_name")
+var card_description =  settings.card_text_cat.get("compensation_desc")
 var rarity = "rare"
 
 func _ready() -> void:
@@ -13,6 +13,7 @@ func _ready() -> void:
 	energy_cost = 1
 	state_modifier = "_ability"
 	$Energy/Label.text = str(energy_cost)
+	$Label.text = settings.card_text_cat.get("compensation_name")
 	type = "buff"
 
 func _process(delta: float) -> void:
@@ -24,8 +25,7 @@ func _process(delta: float) -> void:
 func on_play() -> void:
 	gm.current_energy_cat -= energy_cost
 	
-	get_parent().get_parent().get_parent().get_parent().log_messages.append(
-		str("- [color=#1ca8fd]Кот[/color] потерял 40% удачи. Он [color=#fdd14d]компенсирует[/color] 20% точности!\n"))
+	get_parent().get_parent().get_parent().get_parent().log_messages.append(settings.card_text_cat.get("compensation_log"))
 	
 	gm.current_luck_cat -= 40
 	gm.current_accuracy_cat += 20

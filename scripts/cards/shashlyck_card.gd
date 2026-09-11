@@ -1,11 +1,11 @@
 class_name CookedMeatCard extends Card
 
-var damage = 1 + gm.damage_cat
+var damage = 2 + gm.damage_cat
 var card_path = "cooked_meat_card.tscn"
 var icon_path = "cooked_meat_card.png"
 var tool_tip_text = ""
-var card_name = "Шашлык"
-var card_description = "Наносит урон, равный 1 + базовый. Удар проходит цель насквозь"
+var card_name = settings.card_text_cat.get("shashlyck_name")
+var card_description = settings.card_text_cat.get("shashlyck_desc")
 var rarity = "common"
 
 func _ready() -> void:

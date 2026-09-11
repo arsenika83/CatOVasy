@@ -399,6 +399,14 @@ func display_damage(dmg : int) -> void:
 		add_child(indicator)
 		indicator.display_damage(dmg, spawn_pos)
 
+func eclipse() -> void:
+	get_parent().sun_fx.visible = true
+	get_parent().sun_fx.position = Vector2(160, 400)
+	
+	var tween = create_tween()
+	tween.tween_property(get_parent().sun_fx, "position", Vector2(160, -48), 1)
+	tween.tween_property(get_parent().sun_fx, "z_index", 100, 1)
+
 func _on_area_2d_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
 	#fall_timer.start()
 	pass

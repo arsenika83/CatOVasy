@@ -5,7 +5,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rmneu"]
 shader = ExtResource("1_n1hag")
-shader_parameter/rotation_speed = 0.10000047974999937
+shader_parameter/rotation_speed = 0.10000047974999936
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_rmneu"]
 animations = [{
@@ -13,7 +13,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("1_gx0co")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }]
@@ -32,6 +32,7 @@ material = SubResource("ShaderMaterial_rmneu")
 sprite_frames = SubResource("SpriteFrames_rmneu")
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=285367551]
+visible = false
 position = Vector2(3.8146973e-06, 64.00003)
 scale = Vector2(8, 5.9999995)
 color = Color(0.994716, 0.59822077, 0.73385966, 1)

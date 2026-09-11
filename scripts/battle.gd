@@ -26,6 +26,7 @@ var log_count = 1
 @onready var inferno_fx = $FX/Inferno
 @onready var giant_explosion_fx = $FX/GiantExplosion
 @onready var fog_summon_fx = $FX/FogSummon
+@onready var sun_fx = $FX/Sun
 
 @onready var fog_fx = $Effects/Fog
 

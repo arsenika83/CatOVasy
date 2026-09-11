@@ -23,6 +23,8 @@ var shake = 0.0
 @onready var description_rect = $Description
 @onready var description_label = $Description/Label
 
+@onready var audio_hover = $AudioHover
+
 const SCALE_NORMAL = Vector2(1.0, 1.0)
 const SCALE_HOVER = Vector2(1.1, 1.1)
 const SCALE_SELECTED = Vector2(1.15, 1.15)
@@ -45,6 +47,7 @@ func update_energy() -> void:
 func _on_mouse_entered() -> void:
 	if enabled:
 		z_index += 10
+		audio_hover.play()
 		animate_to(SCALE_HOVER, Color.WHITE)
 			
 		var tween = create_tween()

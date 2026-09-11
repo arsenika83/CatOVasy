@@ -19,6 +19,7 @@ var card_change_energy_cost = 1
 @onready var played_label = $PlayedButton/Label
 
 @onready var audio_no_energy = $AudioStreamPlayerNoEnergy
+@onready var audio_hover = $AudioStreamPlayerHover
 var no_energy_max_volume = 5
 var no_energy_max_scale = 5
 

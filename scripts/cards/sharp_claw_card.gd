@@ -1,11 +1,11 @@
-class_name AttackSharpClaw extends Card
+class_name SharpClawCard extends Card
 
 var damage = 3
 var card_path = "sharp_claw_card.tscn"
 var icon_path = "sharp_claw_card.png"
 var tool_tip_text = ""
-var card_name = "Острый коготь"
-var card_description = "Наносит 3 урона"
+var card_name = settings.card_text_cat.get("sharp_claw_name")
+var card_description = settings.card_text_cat.get("sharp_claw_desc")
 var rarity = "common"
 
 func _ready() -> void:
@@ -16,6 +16,7 @@ func _ready() -> void:
 	type = "attack"
 	state_modifier = "_attack"
 	$Energy/Label.text = str(energy_cost)
+	$Label.text = settings.card_text_cat.get("sharp_claw_name")
 
 func _process(delta: float) -> void:
 	if gm.current_energy_cat < energy_cost:

@@ -26,5 +26,5 @@ func _process(delta: float) -> void:
 		$Energy/Label.add_theme_color_override("font_color", Color.WHITE)
 
 func on_play() -> void:
-	gm.current_energy_cat -= energy_cost
+	#gm.current_energy_cat -= energy_cost
 	get_parent().get_parent().get_parent().get_parent().giant.deal_damage(gm.current_targets)

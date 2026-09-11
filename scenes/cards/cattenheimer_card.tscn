@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://pdhj22cf43ia" path="res://assets/images/card_icons/cattenheimer_card.png" id="4_m5r4s"]
 [ext_resource type="FontFile" uid="uid://dub3oi8dxfpfw" path="res://assets/fonts/JeuDePixel-Regular.otf" id="5_m1in6"]
 [ext_resource type="PackedScene" uid="uid://d2qyvibo88mu1" path="res://scenes/ui/description.tscn" id="6_633i0"]
+[ext_resource type="AudioStream" uid="uid://bq0ooer30jskk" path="res://assets/soundFX/xp_pick_up.wav" id="8_ffskl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jl6rh"]
 resource_local_to_scene = true
@@ -105,6 +106,12 @@ offset_left = 0.0
 offset_top = 0.0
 offset_right = 128.0
 offset_bottom = 192.0
+
+[node name="AudioHover" type="AudioStreamPlayer" parent="." unique_id=993132222]
+stream = ExtResource("8_ffskl")
+volume_db = -8.0
+pitch_scale = 0.5
+bus = &"SoundFX"
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

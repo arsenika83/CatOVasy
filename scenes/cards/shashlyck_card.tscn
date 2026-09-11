@@ -1,12 +1,13 @@
 [gd_scene format=3 uid="uid://7jtyls8hy804"]
 
 [ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="1_ise6u"]
-[ext_resource type="Script" uid="uid://b4m5dyfk1utet" path="res://scripts/cards/cooked_meat_card.gd" id="2_o8kkw"]
+[ext_resource type="Script" uid="uid://b4m5dyfk1utet" path="res://scripts/cards/shashlyck_card.gd" id="2_o8kkw"]
 [ext_resource type="Texture2D" uid="uid://b0rpbj3njbbar" path="res://assets/images/cards.png" id="3_41orq"]
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="4_28012"]
 [ext_resource type="Texture2D" uid="uid://cp5k75k8rywu4" path="res://assets/images/card_icons/cooked_meat_card.png" id="4_o8kkw"]
 [ext_resource type="FontFile" uid="uid://dub3oi8dxfpfw" path="res://assets/fonts/JeuDePixel-Regular.otf" id="5_iaoan"]
 [ext_resource type="PackedScene" uid="uid://d2qyvibo88mu1" path="res://scenes/ui/description.tscn" id="7_41orq"]
+[ext_resource type="AudioStream" uid="uid://bq0ooer30jskk" path="res://assets/soundFX/xp_pick_up.wav" id="8_tqi6y"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jl6rh"]
 resource_local_to_scene = true
@@ -104,6 +105,12 @@ offset_left = 0.0
 offset_top = 0.0
 offset_right = 128.0
 offset_bottom = 192.0
+
+[node name="AudioHover" type="AudioStreamPlayer" parent="." unique_id=1141642975]
+stream = ExtResource("8_tqi6y")
+volume_db = -8.0
+pitch_scale = 0.5
+bus = &"SoundFX"
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

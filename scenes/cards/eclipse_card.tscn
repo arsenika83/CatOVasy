@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="4_edoax"]
 [ext_resource type="FontFile" uid="uid://dub3oi8dxfpfw" path="res://assets/fonts/JeuDePixel-Regular.otf" id="5_wml1l"]
 [ext_resource type="PackedScene" uid="uid://d2qyvibo88mu1" path="res://scenes/ui/description.tscn" id="6_hwa1k"]
+[ext_resource type="AudioStream" uid="uid://bq0ooer30jskk" path="res://assets/soundFX/xp_pick_up.wav" id="8_b3xno"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jl6rh"]
 resource_local_to_scene = true
@@ -105,6 +106,12 @@ offset_left = 0.0
 offset_top = 0.0
 offset_right = 128.0
 offset_bottom = 192.0
+
+[node name="AudioHover" type="AudioStreamPlayer" parent="." unique_id=606666090]
+stream = ExtResource("8_b3xno")
+volume_db = -8.0
+pitch_scale = 0.5
+bus = &"SoundFX"
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

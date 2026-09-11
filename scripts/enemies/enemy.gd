@@ -514,6 +514,14 @@ func turn_tick() -> void:
 			energy = max_energy
 			has_buff_high_energy = false
 
+func die() -> void:
+		audio_fall.play()
+		sprite.play("dead")
+		
+		if get_parent().get_parent().name == "Battle":
+			get_parent().get_parent().log_messages.append(str("- [color=#1ca8fd]", enemy_name_rus, "[/color] [color=#fc4e52]МЕРТВ[/color]\n"))
+		
+
 func after_battle_update() -> void:
 	match state:
 		"dead":
@@ -545,13 +553,7 @@ func _on_take_damage_timer_timeout() -> void:
 			current_luck -= 3
 			get_parent().get_parent().log_messages.append(str("- [color=#e9920a]Портрет неизвестной[/color]: удача существа [color=#1ca8fd]", enemy_name_rus, "[/color] падает на 3%\n"))
 	else:
-		audio_fall.play()
-		sprite.play("dead")
-		
-		if get_parent().get_parent().name == "Battle":
-			get_parent().get_parent().log_messages.append(str("- [color=#1ca8fd]", enemy_name_rus, "[/color] [color=#fc4e52]МЕРТВ[/color]\n"))
-		
-		#get_parent().get_parent().end_turn()
+		die()
 
 func _on_miss_damage_timer_timeout() -> void:
 	var tween = create_tween()

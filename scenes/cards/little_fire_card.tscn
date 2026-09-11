@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="5_o2yja"]
 [ext_resource type="FontFile" uid="uid://dub3oi8dxfpfw" path="res://assets/fonts/JeuDePixel-Regular.otf" id="6_0x07k"]
 [ext_resource type="PackedScene" uid="uid://d2qyvibo88mu1" path="res://scenes/ui/description.tscn" id="7_gxqws"]
+[ext_resource type="AudioStream" uid="uid://bq0ooer30jskk" path="res://assets/soundFX/xp_pick_up.wav" id="8_htrqt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jl6rh"]
 resource_local_to_scene = true
@@ -23,7 +24,7 @@ region = Rect2(448, 0, 64, 96)
 atlas = ExtResource("5_o2yja")
 region = Rect2(96, 96, 32, 32)
 
-[node name="Card" type="Control" unique_id=1531075916]
+[node name="LittleFire" type="Control" unique_id=1531075916]
 z_index = 100
 z_as_relative = false
 material = SubResource("ShaderMaterial_jl6rh")
@@ -105,6 +106,12 @@ offset_left = 0.0
 offset_top = 0.0
 offset_right = 128.0
 offset_bottom = 192.0
+
+[node name="AudioHover" type="AudioStreamPlayer" parent="." unique_id=1412936433]
+stream = ExtResource("8_htrqt")
+volume_db = -8.0
+pitch_scale = 0.5
+bus = &"SoundFX"
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

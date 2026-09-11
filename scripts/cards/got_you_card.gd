@@ -4,8 +4,8 @@ var damage = 5
 var card_path = "got_you_card.tscn"
 var icon_path = "got_you_card.png"
 var tool_tip_text = ""
-var card_name = "ПОПАЛИСЬ!"
-var card_description = "Наносит 5 урона ВСЕМ врагам"
+var card_name = settings.card_text_cat.get("got_you_name")
+var card_description = settings.card_text_cat.get("got_you_desc")
 var rarity = "rare"
 
 # Called when the node enters the scene tree for the first time.
@@ -18,6 +18,7 @@ func _ready() -> void:
 	type = "attack"
 	everybody_attack = true
 	$Energy/Label.text = str(energy_cost)
+	$Label.text = settings.card_text_cat.get("got_you_name")
 
 func _process(delta: float) -> void:
 	if gm.current_energy_cat < energy_cost:

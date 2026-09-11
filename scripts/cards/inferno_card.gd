@@ -4,8 +4,8 @@ var damage = 15 + gm.damage_cat
 var card_path = "inferno_card.tscn"
 var icon_path = "inferno_card.png"
 var tool_tip_text = ""
-var card_name = "Инферно"
-var card_description = "Наносит 15 урона + базовый. Крестообразная атака"
+var card_name = settings.card_text_cat.get("inferno_name")
+var card_description = settings.card_text_cat.get("inferno_desc")
 var rarity = "epic"
 
 func _ready() -> void:
@@ -18,6 +18,7 @@ func _ready() -> void:
 	type = "attack"
 	energy_cost = 1
 	$Energy/Label.text = str(energy_cost)
+	$Label.text = settings.card_text_cat.get("inferno_name")
 
 func _process(delta: float) -> void:
 	if gm.current_energy_cat < energy_cost:

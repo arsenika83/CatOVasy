@@ -132,6 +132,7 @@ func _ready() -> void:
 	current_cards_human.set(7, DontHitCard.new())
 	current_cards_human.set(8, FogCard.new())
 	current_cards_human.set(9, NeutralityCard.new())
+	current_cards_human.set(10, TimesUpCard.new())
 	
 
 func _process(delta: float) -> void:

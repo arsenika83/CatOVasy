@@ -11,36 +11,82 @@
 "cattenheimer_desc" : "Наносит ВСЕМ врагам 40 урона + базовый урон кота. Котик теряет 4 ОЗ",
 "cattenheimer_log" : "- ВЗРЫВ!!! [color=#1ca8fd]Кот[/color] получил [color=#fc4e52]4 урона[/color]\n",
 
-"_name" : "",
-"_desc" : "",
-"_log" : "",
+"compensation_name" : "Компенсация",
+"compensation_desc" : "Кот теряет 40% удачи и получает 20% точности. Расходуется",
+"compensation_log" : "- [color=#1ca8fd]Кот[/color] потерял 40% удачи. Он [color=#fdd14d]компенсирует[/color] 20% точности!\n",
 
-"_name" : "",
-"_desc" : "",
-"_log" : "",
+"shashlyck_name" : "Шашлык",
+"shashlyck_desc" : "Наносит урон, равный 2 + базовый. Удар проходит цель насквозь",
+"shashlyck_log" : "",
 
-"_name" : "",
-"_desc" : "",
-"_log" : "",
+"got_you_name" : "ПОПАЛИСЬ!",
+"got_you_desc" : "Наносит 5 урона ВСЕМ врагам",
+"got_you_log" : "",
 
-"_name" : "",
-"_desc" : "",
-"_log" : "",
+"inferno_name" : "Инферно",
+"inferno_desc" : "Наносит 15 урона + базовый. Крестообразная атака",
+"inferno_log" : "",
 
-"_name" : "",
-"_desc" : "",
-"_log" : "",
+"lick_wounds_name" : "Зализать раны",
+"lick_wounds_desc" : "Восстанавливает 2 ОЗ. Соля получает 3 защиты. Соля и кот меняются местами",
+"lick_wounds_log" : "- [color=#1ca8fd]Соля[/color] и [color=#1ca8fd]Кот[/color] меняются местами. [color=#1ca8fd]Соля[/color]: +3 к броне. [color=#1ca8fd]Кот[/color]: +2 к ОЗ\n",
 
-"_name" : "",
-"_desc" : "",
-"_log" : "",
+"revenge_name" : "Месть",
+"revenge_desc" : "Наносит 10 + базовый урон кота. Урон умножается на 4, если враг ранил Солю в этом бою",
+"revenge_log" : "",
 
-"_name" : "",
-"_desc" : "",
-"_log" : "",
+"sharp_claw_name" : "Острый коготь",
+"sharp_claw_desc" : "Наносит 3 урона",
+"sharp_claw_log" : "",
 
-	
 "eclipse_name" : "Затмение",
 "eclipse_desc" : "ВСЕ враги теряют 10% точности и 1 энергию в этом бою. Расходуется",
-"eclipse_log" : "- [color=#ff93c1]ЗАТМЕНИЕ[/color]: все враги теряют 10% точности и 1 энергии\n"
+"eclipse_log" : "- [color=#ff93c1]ЗАТМЕНИЕ[/color]: все враги теряют 10% точности и 1 энергии\n",
+
+"_name" : "",
+"_desc" : "",
+"_log" : "",
+
+"_name" : "",
+"_desc" : "",
+"_log" : "",
+
+"_name" : "",
+"_desc" : "",
+"_log" : "",
+
+"_name" : "",
+"_desc" : "",
+"_log" : "",
+
+"_name" : "",
+"_desc" : "",
+"_log" : "",
+
+"_name" : "",
+"_desc" : "",
+"_log" : "",
+
+"_name" : "",
+"_desc" : "",
+"_log" : "",
+
+"_name" : "",
+"_desc" : "",
+"_log" : "",
+
+"_name" : "",
+"_desc" : "",
+"_log" : "",
+
+"_name" : "",
+"_desc" : "",
+"_log" : "",
+
+"_name" : "",
+"_desc" : "",
+"_log" : ""
+
+	
+
 }

@@ -1,14 +1,14 @@
 extends Node
 
-var all_card_names : Array[String] = ["ability", "attack", "attack_double_claw", "sharp_claw", "got_you",
+var all_card_names : Array[String] = ["ability", "attack", "double_claw", "sharp_claw", "got_you",
 "cooked_meat"]
 var all_card_names_common : Array[String]
 var all_card_names_rare : Array[String]
 var all_card_names_epic : Array[String]
 var all_card_names_unbelievable : Array[String]
 
-var all_card_names_cat : Array[String] = ["attack_double_claw", "sharp_claw", "got_you",
-"cooked_meat", "inferno", "revenge", "cattenheimer", "lick_wounds", "compensation"]
+var all_card_names_cat : Array[String] = ["double_claw", "sharp_claw", "got_you",
+"shashlyck", "inferno", "revenge", "cattenheimer", "lick_wounds", "compensation"]
 var all_card_names_common_cat : Array[String]
 var all_card_names_rare_cat : Array[String] = ["attack_double_claw", "lick_wounds", "compensation"]
 var all_card_names_epic_cat : Array[String] = ["inferno", "revenge", "cattenheimer"]

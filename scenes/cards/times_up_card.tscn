@@ -1,38 +1,41 @@
-[gd_scene format=3 uid="uid://c1n6wsku6v54n"]
+[gd_scene format=3 uid="uid://b14kyhlbf53xn"]
 
-[ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="1_mdphn"]
-[ext_resource type="Script" uid="uid://xms2paobh5lq" path="res://scripts/cards/poison_card.gd" id="2_mdphn"]
-[ext_resource type="Texture2D" uid="uid://b0rpbj3njbbar" path="res://assets/images/cards.png" id="3_6gh31"]
-[ext_resource type="Texture2D" uid="uid://dw4lhidhcfov" path="res://assets/images/card_icons/poison_card.png" id="4_3ra1j"]
-[ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="4_l3vrh"]
-[ext_resource type="FontFile" uid="uid://dub3oi8dxfpfw" path="res://assets/fonts/JeuDePixel-Regular.otf" id="5_m65ex"]
-[ext_resource type="PackedScene" uid="uid://d2qyvibo88mu1" path="res://scenes/ui/description.tscn" id="7_6gh31"]
+[ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="1_x2g4u"]
+[ext_resource type="Script" uid="uid://3hvb0jvrc08j" path="res://scripts/cards/solya/times_up_card.gd" id="2_x2g4u"]
+[ext_resource type="Texture2D" uid="uid://b0rpbj3njbbar" path="res://assets/images/cards.png" id="3_od0l4"]
+[ext_resource type="Texture2D" uid="uid://pg41goqjhdv8" path="res://assets/images/card_icons/times_up_card.png" id="4_x2g4u"]
+[ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="5_nofgh"]
+[ext_resource type="FontFile" uid="uid://dub3oi8dxfpfw" path="res://assets/fonts/JeuDePixel-Regular.otf" id="6_t774n"]
+[ext_resource type="PackedScene" uid="uid://d2qyvibo88mu1" path="res://scenes/ui/description.tscn" id="7_x7bcx"]
+[ext_resource type="AudioStream" uid="uid://bq0ooer30jskk" path="res://assets/soundFX/xp_pick_up.wav" id="8_7va6i"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jl6rh"]
 resource_local_to_scene = true
-shader = ExtResource("1_mdphn")
+shader = ExtResource("1_x2g4u")
 shader_parameter/speed = 2.000000095
 shader_parameter/amplitude = 10.000000475
 shader_parameter/time_offset = 0.4390000208525
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0qqw3"]
-atlas = ExtResource("3_6gh31")
-region = Rect2(448, 0, 64, 96)
+atlas = ExtResource("3_od0l4")
+region = Rect2(256, 0, 64, 96)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dkdsv"]
-atlas = ExtResource("4_l3vrh")
-region = Rect2(0, 32, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_cti8t"]
+atlas = ExtResource("5_nofgh")
+region = Rect2(96, 96, 32, 32)
 
-[node name="PoisonCard" type="Control" unique_id=1531075916]
+[node name="TimesUpCard" type="Control" unique_id=1531075916]
 z_index = 100
 z_as_relative = false
 material = SubResource("ShaderMaterial_jl6rh")
 layout_mode = 3
-anchors_preset = 0
+anchor_top = 0.13900001
+anchor_bottom = 0.13900001
+offset_top = -100.08001
 offset_right = 128.0
-offset_bottom = 192.0
+offset_bottom = 99.91999
 pivot_offset = Vector2(64, 96)
-script = ExtResource("2_mdphn")
+script = ExtResource("2_x2g4u")
 
 [node name="BG2" type="TextureRect" parent="." unique_id=1690685854]
 use_parent_material = true
@@ -57,7 +60,7 @@ offset_left = 8.0
 offset_top = 8.0
 offset_right = 120.0
 offset_bottom = 120.0
-texture = ExtResource("4_3ra1j")
+texture = ExtResource("4_x2g4u")
 
 [node name="Label" type="Label" parent="." unique_id=514088983]
 use_parent_material = true
@@ -67,21 +70,20 @@ offset_top = 120.0
 offset_right = 112.0
 offset_bottom = 176.0
 theme_override_font_sizes/font_size = 16
-text = "ЯД (3)
-на 2 хода"
+text = "ВРЕМЯ ВЫШЛО"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Energy" type="TextureRect" parent="." unique_id=1035835300]
+[node name="Energy" type="TextureRect" parent="." unique_id=584783592]
 use_parent_material = true
 layout_mode = 0
 offset_left = -8.0
 offset_top = -8.0
 offset_right = 40.0
 offset_bottom = 40.0
-texture = SubResource("AtlasTexture_dkdsv")
+texture = SubResource("AtlasTexture_cti8t")
 
-[node name="Label" type="Label" parent="Energy" unique_id=1051397202]
+[node name="Label" type="Label" parent="Energy" unique_id=1275453451]
 use_parent_material = true
 layout_mode = 0
 offset_left = 8.0
@@ -92,18 +94,24 @@ mouse_filter = 1
 theme_override_colors/font_color = Color(18.892157, 18.892157, 18.892157, 1)
 theme_override_constants/outline_size = 4
 theme_override_constants/shadow_outline_size = 1
-theme_override_fonts/font = ExtResource("5_m65ex")
+theme_override_fonts/font = ExtResource("6_t774n")
 theme_override_font_sizes/font_size = 18
 text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Description" parent="." unique_id=310287216 instance=ExtResource("7_6gh31")]
+[node name="Description" parent="." unique_id=310287216 instance=ExtResource("7_x7bcx")]
 layout_mode = 0
 offset_left = 0.0
 offset_top = 0.0
 offset_right = 128.0
 offset_bottom = 192.0
+
+[node name="AudioHover" type="AudioStreamPlayer" parent="." unique_id=1546825189]
+stream = ExtResource("8_7va6i")
+volume_db = -8.0
+pitch_scale = 0.5
+bus = &"SoundFX"
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
