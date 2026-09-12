@@ -380,10 +380,11 @@ func check_hp() -> void:
 			gm.state = "dead"
 
 func check_xp() -> bool:
-	$AudioStreamPlayerPickUpXP.pitch_scale = randf_range(0.8, 1.2)
-	$AudioStreamPlayerPickUpXP.play()
-	xp_diff = gm.xp - gm.xp_needed
 	if gm.xp >= gm.xp_needed and (gm.state == "idle" or gm.state == "walking"):
+		
+		$AudioStreamPlayerPickUpXP.pitch_scale = randf_range(0.8, 1.2)
+		$AudioStreamPlayerPickUpXP.play()
+		xp_diff = gm.xp - gm.xp_needed
 		
 		gm.level += 1
 		gm.xp = gm.xp - gm.xp_needed

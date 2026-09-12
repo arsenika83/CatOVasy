@@ -102,14 +102,15 @@ var buff_animation_time =   0.3
 
 @onready var cursor = $Cursor
 
-@onready var audio_follow = $AudioStreamPlayerFollow
-@onready var audio_hit = $AudioStreamPlayerHit
-@onready var audio_hit_lucky = $AudioStreamPlayerHitLucky
-@onready var audio_hurt = $AudioStreamPlayerHurt
-@onready var audio_fall = $AudioStreamPlayerFall
-@onready var audio_miss = $AudioStreamPlayerMiss
-@onready var audio_defend = $AudioStreamPlayerDefend
-@onready var audio_debuff = $AudioStreamPlayerDebuff
+@onready var audio_follow = $AudioFollow
+@onready var audio_hit = $AudioHit
+@onready var audio_hit_lucky = $AudioHitLucky
+@onready var audio_hurt = $AudioHurt
+@onready var audio_fall = $AudioFall
+@onready var audio_miss = $AudioMiss
+@onready var audio_defend = $AudioDefend
+@onready var audio_debuff = $AudioDebuff
+@onready var audio_xp = $AudioXP
 
 @onready var idle_animation_timer = $IdleAnimationTimer
 @onready var deal_damage_timer = $DealDamageTimer
@@ -252,6 +253,7 @@ func _on_area_2dxp_area_entered(area: Area2D) -> void:
 			xp_orb.visible = false
 			gave_xp = true
 			gm.xp += xp_gives
+			audio_xp.play()
 			#get_parent().get_parent().find_child("Giant").check_xp()
 
 func check_hp() -> void:
