@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://b14kyhlbf53xn"]
 
 [ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="1_x2g4u"]
-[ext_resource type="Script" uid="uid://3hvb0jvrc08j" path="res://scripts/cards/solya/times_up_card.gd" id="2_x2g4u"]
+[ext_resource type="Script" uid="uid://3hvb0jvrc08j" path="res://scripts/cards/solya/burn_down_card.gd" id="2_x2g4u"]
 [ext_resource type="Texture2D" uid="uid://b0rpbj3njbbar" path="res://assets/images/cards.png" id="3_od0l4"]
-[ext_resource type="Texture2D" uid="uid://pg41goqjhdv8" path="res://assets/images/card_icons/times_up_card.png" id="4_x2g4u"]
+[ext_resource type="Texture2D" uid="uid://pg41goqjhdv8" path="res://assets/images/card_icons/burn_down_card.png" id="4_x2g4u"]
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="5_nofgh"]
 [ext_resource type="FontFile" uid="uid://dub3oi8dxfpfw" path="res://assets/fonts/JeuDePixel-Regular.otf" id="6_t774n"]
 [ext_resource type="PackedScene" uid="uid://d2qyvibo88mu1" path="res://scenes/ui/description.tscn" id="7_x7bcx"]
@@ -24,7 +24,7 @@ region = Rect2(256, 0, 64, 96)
 atlas = ExtResource("5_nofgh")
 region = Rect2(96, 96, 32, 32)
 
-[node name="TimesUpCard" type="Control" unique_id=1531075916]
+[node name="BurnDownCard" type="Control" unique_id=1531075916]
 z_index = 100
 z_as_relative = false
 material = SubResource("ShaderMaterial_jl6rh")

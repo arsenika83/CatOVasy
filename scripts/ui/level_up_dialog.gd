@@ -69,6 +69,7 @@ func _on_card_picked_up(picked_card : Card) -> void:
 		current_character = "cat"
 		get_parent().get_parent().draw_level_up(current_character)
 	else:
+		gm.state = "idle"
 		if get_parent().get_parent().giant.check_xp():
 			get_parent().get_parent().draw_level_up()
 		else:

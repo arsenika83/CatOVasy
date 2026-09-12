@@ -114,12 +114,16 @@ func _on_stat_selected(stat : Control) -> void:
 			gm.max_energy_cat += 2
 			gm.energy_cat += 2
 	
-	if get_parent().get_parent().giant.check_xp():
-		get_parent().get_parent().draw_level_up()
+	gm.state = "idle"
+	if get_parent().get_parent().level_up_dialog.current_character == "human":
+		get_parent().get_parent().draw_level_up("cat")
+	else:	
+		if get_parent().get_parent().giant.check_xp():
+			get_parent().get_parent().draw_level_up("human")
 	
 	visible = false
 	position.x = -1500		
-	gm.state = "idle"
+	#gm.state = "idle"
 
 
 func _on_mouse_entered() -> void:

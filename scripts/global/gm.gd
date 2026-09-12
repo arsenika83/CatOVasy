@@ -32,7 +32,7 @@ var max_defence_cat = 5
 var defended_cat = false
 
 var accuracy_cat = 70
-var min_accuracy_cat = 0
+var min_accuracy_cat = 5
 var current_accuracy_cat = accuracy_cat
 
 var luck_cat = 10
@@ -62,8 +62,8 @@ var current_defence_human = 0
 var max_defence_human = 7
 var defended_human = false
 
-var accuracy_human = 75
-var min_accuracy_human = 0
+var accuracy_human = 100
+var min_accuracy_human = 5
 var current_accuracy_human = accuracy_human
 
 var luck_human = 20
@@ -123,16 +123,16 @@ func _ready() -> void:
 	current_cards_cat.set(9, EclipseCard.new())
 	current_cards_cat.set(10, DoubleClawCard.new())
 	
-	current_cards_human.set(1, GiveStrengthCard.new())
+	#current_cards_human.set(1, GiveStrengthCard.new())
 	current_cards_human.set(2, SollenheimerCard.new())
-	current_cards_human.set(3, BoredomCard.new())
+	#current_cards_human.set(3, BoredomCard.new())
 	current_cards_human.set(4, LittleFireCard.new())
 	current_cards_human.set(5, WindOfChangeCard.new())
-	current_cards_human.set(6, FortuneWheelCard.new())
-	current_cards_human.set(7, DontHitCard.new())
+	#current_cards_human.set(6, FortuneWheelCard.new())
+	#current_cards_human.set(7, DontHitCard.new())
 	current_cards_human.set(8, FogCard.new())
-	current_cards_human.set(9, NeutralityCard.new())
-	current_cards_human.set(10, TimesUpCard.new())
+	#current_cards_human.set(9, NeutralityCard.new())
+	current_cards_human.set(10, BurnDownCard.new())
 	
 
 func _process(delta: float) -> void:

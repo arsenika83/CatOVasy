@@ -321,7 +321,9 @@ func choose_target(action : String) -> void:
 			var targets : Array[CharacterBody2D] = [find_child("Enemies").get_child(i)]
 			
 			if gm.current_card != null: #ВЫБОР ЦЕЛЕЙ
-				if gm.current_card.behind_attack or gm.has_fork:
+				if gm.current_card.only_one_target:
+					pass
+				elif gm.current_card.behind_attack or gm.has_fork:
 					var target_2 = find_enemy_by_position(targets[0].battle_x + 1, targets[0].battle_y)
 					if target_2 != null:
 						if target_2.state != "dead":
@@ -378,12 +380,13 @@ func choose_target(action : String) -> void:
 						if enemy == targets.get(0) or enemy.state == "dead":
 							continue
 						targets.append(enemy)
-						
+			
 			for e_pos in targets.get(0).positions:
 				if e_pos.x == cursor_grid_pos.x and e_pos.y == cursor_grid_pos.y:
 					if not targets.get(0).state == "dead":
 						match action:
 							"deal_damage":
+								gm.current_targets = targets
 								source.deal_damage(targets)
 								gm.current_card.card_played.emit(gm.current_card)
 								
@@ -398,6 +401,7 @@ func choose_target(action : String) -> void:
 									tween2.tween_property($FX/TomatoCrossProjectile, "scale", Vector2(0, 0), 1.5)
 									
 							"debuff":
+								gm.current_targets = targets
 								gm.current_card.card_played.emit(gm.current_card)
 		
 		#BUFFS

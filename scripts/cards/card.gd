@@ -5,6 +5,7 @@ signal card_picked_up(card_node)
 signal card_played(card_node)
 var is_selected: bool = false
 
+var only_one_target = false
 var behind_attack = false
 var cross_attack = false
 var row_attack_3 = false

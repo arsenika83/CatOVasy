@@ -117,8 +117,9 @@ func _on_card_played(played_card: Control) -> void:
 		
 	hand.remove_at(played_card.get_index())
 	card_to_free = played_card
-
-	current_selected.deselect_card()
+	
+	if current_selected != null:
+		current_selected.deselect_card()
 	
 	if played_card.has_method("use_up"):
 		card_to_free.use_up_animation()

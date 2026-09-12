@@ -152,7 +152,7 @@ func deal_damage(targets : Array[CharacterBody2D]) -> void:
 	
 	var tween2 = create_tween()
 	tween2.tween_property(sprite, "position:x", sprite.position.x + 4, 0.1)
-	gm.current_targets = targets
+	#gm.current_targets = targets
 	audio_hit.play()
 	
 	sprite.play("deal_damage")
@@ -235,7 +235,7 @@ func give_debuff(targets : Array[CharacterBody2D], type : String, power : int, t
 	status_fx.visible = true
 	var tween = create_tween()
 	tween.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
-	gm.current_targets = targets
+	#gm.current_targets = targets
 	
 	gm.current_targets[0].status_fx.play("debuff_" + type)
 	

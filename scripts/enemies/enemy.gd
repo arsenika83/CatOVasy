@@ -247,12 +247,12 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 
 func _on_area_2dxp_area_entered(area: Area2D) -> void:
 	print(str("NOW: ", gm.state))
-	if gm.state == "idle" or gm.state ==  "walking":
+	if gm.state == "idle" or gm.state == "walking" or gm.state == "leveling_up":
 		if not gave_xp:
 			xp_orb.visible = false
 			gave_xp = true
 			gm.xp += xp_gives
-			get_parent().get_parent().find_child("Giant").check_xp()
+			#get_parent().get_parent().find_child("Giant").check_xp()
 
 func check_hp() -> void:
 	if not state == "dead":

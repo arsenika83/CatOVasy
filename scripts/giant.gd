@@ -33,6 +33,8 @@ var character_name_display = "Кот"
 var light_diff = 0.0001
 @onready var light = $PointLight2D
 
+var xp_diff = 0
+
 var current_heal = 0
 var attack_count = 0
 var taken_damage = 0
@@ -77,6 +79,7 @@ func _process(delta: float) -> void:
 	
 	check_fall(delta)
 	check_hp()
+	check_xp()
 
 	match gm.state:
 		"idle":
@@ -161,7 +164,7 @@ func deal_damage(targets : Array[CharacterBody2D]) -> void:
 	
 	var tween2 = create_tween()
 	tween2.tween_property(sprite, "position:x", sprite.position.x + 4, 0.1)
-	gm.current_targets = targets
+	#gm.current_targets = targets
 	
 	sprite.play("deal_damage")
 	attack_count += 1
@@ -242,7 +245,7 @@ func give_debuff(targets : Array[CharacterBody2D], type : String, power : int, t
 	status_fx.visible = true
 	var tween = create_tween()
 	tween.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
-	gm.current_targets = targets
+	#gm.current_targets = targets
 	
 	gm.current_targets[0].status_fx.play("debuff_" + type)
 	
@@ -379,8 +382,9 @@ func check_hp() -> void:
 func check_xp() -> bool:
 	$AudioStreamPlayerPickUpXP.pitch_scale = randf_range(0.8, 1.2)
 	$AudioStreamPlayerPickUpXP.play()
-	
-	if gm.xp >= gm.xp_needed:
+	xp_diff = gm.xp - gm.xp_needed
+	if gm.xp >= gm.xp_needed and (gm.state == "idle" or gm.state == "walking"):
+		
 		gm.level += 1
 		gm.xp = gm.xp - gm.xp_needed
 		gm.xp_needed += 1
