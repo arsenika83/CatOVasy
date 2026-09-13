@@ -27,12 +27,10 @@ func _process(delta: float) -> void:
 		$Energy/Label.add_theme_color_override("font_color", Color.WHITE)
 
 func on_play() -> void:
-	for target in gm.current_targets:
-		if target.dealt_damage_to_human:
-			damage = default_damage * 4
-			break
-		else:
-			damage = default_damage
+	pass
 			
 func revenge() -> int:
-	return default_damage * 4
+	return default_damage * 3
+	
+func cant_miss() -> void:
+	pass

@@ -121,9 +121,12 @@ var buff_animation_time =   0.3
 
 @onready var xp_orb = $XpOrb
 @onready var status_fx = $StatusFX
+@onready var defence_sprite = $DefenceSprite
+@onready var defence_label = $DefenceSprite/DefenceLabel
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	defence_sprite.visible = false
 	status_fx.play("found_you")
 	battle_x = get_parent().get_parent().find_child("TileMapLayerBlack").local_to_map(position).x
 	battle_y = get_parent().get_parent().find_child("TileMapLayerBlack").local_to_map(position).y
@@ -131,6 +134,12 @@ func _ready() -> void:
 	positions.append(Vector2(battle_x, battle_y))
 
 func _process(delta: float) -> void:
+	if current_defence > 0 and state != "dead":
+		defence_sprite.visible = true
+		defence_label.text = str(current_defence)
+	else:
+		defence_sprite.visible = false
+	
 	check_hp()
 	
 	match state:

@@ -27,6 +27,8 @@ var inventory_on_screen = false
 @onready var inventory_button_cat = $UI/InventoryButton
 @onready var inventory_button_human = $UI/InventoryButtonHuman
 
+@onready var bg = $UI/BG
+
 @onready var foregroundFX = $Effects/ColorRect
 
 const BATTLE_SCENE = preload("res://scenes/levels/battle_level.tscn")
@@ -34,6 +36,7 @@ const BOSS_BATTLE_MOUSE_GOLEM_SCENE = preload("res://scenes/levels/battle_big_mo
 
 func _ready() -> void:
 	$CanvasModulate.visible = true
+	bg.color = Color(0, 0, 0, 0)
 	
 	if name == "Town":
 		gm.current_music_position = 0.0
@@ -269,30 +272,7 @@ func draw_inventory() -> void:
 			
 		inventory_on_screen = false
 	else:
-		if inventory.state == "cat":
-			inventory.hp_label.text = str(gm.hp_cat, " / ", gm.max_hp_cat)
-				
-			var stats = str(gm.damage_cat)
-			stats += 	str("\n", gm.defence_cat, " (", gm.max_defence_cat, ")")
-			stats += 	str("\n", gm.accuracy_cat, "%")
-			stats += 	str("\n", gm.luck_cat, "%")
-			stats += 	str("\n", gm.max_energy_cat)
-			stats += 	str("\n")
-			stats += 	str("\n", gm.level)
-			stats += 	str("\n", gm.xp, "/", gm.xp_needed)
-			inventory.find_child("StatsLabel").text = stats
-		else:
-			inventory.hp_label.text = str(gm.hp_human, " / ", gm.max_hp_human)
-				
-			var stats = str(gm.damage_human)
-			stats += 	str("\n", gm.defence_human, " (", gm.max_defence_human, ")")
-			stats += 	str("\n", gm.accuracy_human, "%")
-			stats += 	str("\n", gm.luck_human, "%")
-			stats += 	str("\n", gm.max_energy_human)
-			stats += 	str("\n")
-			stats += 	str("\n", gm.level)
-			stats += 	str("\n", gm.xp, "/", gm.xp_needed)
-			inventory.find_child("StatsLabel").text = stats
+		inventory.update_stats()
 			
 		var tween = create_tween()
 		tween.tween_property(inventory, "position:x", 828, 0.3)
@@ -332,6 +312,9 @@ func update_inventory() -> void:
 	
 
 func draw_level_up(character : String = "human") -> void:
+	var tween1 = create_tween()
+	tween1.tween_property(bg, "color", Color(0, 0, 0, 0.7), 0.3)
+
 	level_up_dialog.visible = true
 	level_up_dialog.position.x = 352
 	level_up_dialog.scale = Vector2(0, 0)
@@ -343,13 +326,16 @@ func draw_level_up(character : String = "human") -> void:
 	gm.state = "leveling_up"
 	
 	var tween = create_tween()
-	tween.tween_property(level_up_dialog, "scale", Vector2(1, 1), 0.5)
+	tween.tween_property(level_up_dialog, "scale", Vector2(1, 1), 0.3)
 	
 func draw_upgrade_stats(rarity : String) -> void:
+	bg.visible = true
 	upgrade_stats_dialog.visible = true
 	upgrade_stats_dialog.position.x = 320
 	upgrade_stats_dialog.scale = Vector2(0, 0)
+	upgrade_stats_dialog.swap_characters()
 	upgrade_stats_dialog.update_stats(rarity)
+	upgrade_stats_dialog.update_stats_on_screen()
 	
 	gm.state = "leveling_up"
 	
@@ -357,6 +343,7 @@ func draw_upgrade_stats(rarity : String) -> void:
 	tween.tween_property(upgrade_stats_dialog, "scale", Vector2(1, 1), 0.3)
 	
 func draw_artifact_dialog() -> void:
+	bg.visible = true
 	artifact_dialog.visible = true
 	artifact_dialog.position.x = 512
 	artifact_dialog.scale = Vector2(0, 0)

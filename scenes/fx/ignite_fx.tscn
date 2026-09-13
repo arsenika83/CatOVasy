@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://6vs2qmfipgw8"]
+
+[ext_resource type="Texture2D" uid="uid://cyebolnfd4g5k" path="res://assets/images/giant_explosion.png" id="1_7j3wn"]
+[ext_resource type="Script" uid="uid://cb4hfmoetarwo" path="res://scripts/giant_explosion.gd" id="2_ul5rd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7j3wn"]
+atlas = ExtResource("1_7j3wn")
+region = Rect2(0, 320, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ul5rd"]
+atlas = ExtResource("1_7j3wn")
+region = Rect2(32, 320, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tp2uf"]
+atlas = ExtResource("1_7j3wn")
+region = Rect2(64, 320, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_niscb"]
+atlas = ExtResource("1_7j3wn")
+region = Rect2(96, 320, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gbodm"]
+atlas = ExtResource("1_7j3wn")
+region = Rect2(128, 320, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xkeaq"]
+atlas = ExtResource("1_7j3wn")
+region = Rect2(160, 320, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lupsg"]
+atlas = ExtResource("1_7j3wn")
+region = Rect2(192, 320, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2xqku"]
+atlas = ExtResource("1_7j3wn")
+region = Rect2(480, 480, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c1mck"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7j3wn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ul5rd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tp2uf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_niscb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gbodm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xkeaq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lupsg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2xqku")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 10.0
+}]
+
+[node name="IgniteFX" type="AnimatedSprite2D" unique_id=1197458061]
+position = Vector2(0, 7.1525574e-07)
+sprite_frames = SubResource("SpriteFrames_c1mck")
+animation = &"hit"
+autoplay = "default"
+frame = 7
+frame_progress = 1.0
+script = ExtResource("2_ul5rd")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=490053130]

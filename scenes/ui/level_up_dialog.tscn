@@ -3,10 +3,12 @@
 [ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="1_vtgeg"]
 [ext_resource type="Script" uid="uid://74lchd7cw1fp" path="res://scripts/ui/level_up_dialog.gd" id="2_6dcm8"]
 [ext_resource type="Texture2D" uid="uid://de2c8pnqtrt77" path="res://assets/images/inventory_ui.png" id="3_i3v37"]
-[ext_resource type="FontFile" uid="uid://dub3oi8dxfpfw" path="res://assets/fonts/JeuDePixel-Regular.otf" id="4_qph1y"]
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="5_jekd8"]
+[ext_resource type="StyleBox" uid="uid://b8wibcbgivilm" path="res://styles/button_normal.tres" id="6_jekd8"]
 [ext_resource type="AudioStream" uid="uid://bngxs878f1apy" path="res://assets/soundFX/card_pick.wav" id="6_vtgeg"]
 [ext_resource type="AudioStream" uid="uid://c8uwkxk272amx" path="res://assets/soundFX/burn.wav" id="7_6dcm8"]
+[ext_resource type="StyleBox" uid="uid://2iw7p3yvicvr" path="res://styles/button_pressed.tres" id="7_n6hbc"]
+[ext_resource type="StyleBox" uid="uid://c66nispyhk2t0" path="res://styles/button_hover.tres" id="8_mj3lq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qtlqx"]
 shader = ExtResource("1_vtgeg")
@@ -21,22 +23,6 @@ region = Rect2(832, 0, 448, 720)
 [sub_resource type="AtlasTexture" id="AtlasTexture_mj3lq"]
 atlas = ExtResource("5_jekd8")
 region = Rect2(0, 192, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_i3v37"]
-atlas = ExtResource("5_jekd8")
-region = Rect2(0, 240, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qph1y"]
-atlas = ExtResource("5_jekd8")
-region = Rect2(16, 224, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jekd8"]
-atlas = ExtResource("5_jekd8")
-region = Rect2(0, 224, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_n6hbc"]
-atlas = ExtResource("5_jekd8")
-region = Rect2(16, 240, 16, 16)
 
 [node name="LevelUpDialog" type="Control" unique_id=1641948652]
 material = SubResource("ShaderMaterial_qtlqx")
@@ -53,7 +39,19 @@ grow_vertical = 2
 pivot_offset = Vector2(288, 192)
 script = ExtResource("2_6dcm8")
 
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1572983629]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+color = Color(0.16565639, 0.16565642, 0.16565639, 1)
+
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1275944467]
+visible = false
 use_parent_material = true
 layout_mode = 0
 offset_right = 576.0
@@ -62,6 +60,7 @@ texture = SubResource("AtlasTexture_53g1v")
 expand_mode = 1
 
 [node name="TextureRect2" type="TextureRect" parent="." unique_id=1621686300]
+visible = false
 use_parent_material = true
 layout_mode = 0
 offset_left = 16.0
@@ -74,20 +73,20 @@ expand_mode = 1
 [node name="TextureRect3" type="TextureRect" parent="." unique_id=764859019]
 use_parent_material = true
 layout_mode = 0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 136.0
+offset_top = -176.0
+offset_right = 168.0
+offset_bottom = -144.0
 texture = SubResource("AtlasTexture_mj3lq")
 expand_mode = 1
 
 [node name="TextureRect4" type="TextureRect" parent="." unique_id=895001076]
 use_parent_material = true
 layout_mode = 0
-offset_left = 536.0
-offset_top = 8.0
-offset_right = 568.0
-offset_bottom = 40.0
+offset_left = 408.0
+offset_top = -176.0
+offset_right = 440.0
+offset_bottom = -144.0
 texture = SubResource("AtlasTexture_mj3lq")
 expand_mode = 1
 
@@ -95,11 +94,10 @@ expand_mode = 1
 use_parent_material = true
 layout_mode = 0
 offset_left = 16.0
-offset_top = 8.0
+offset_top = -176.0
 offset_right = 560.0
-offset_bottom = 33.0
-theme_override_colors/font_color = Color(0.99215686, 0.3019608, 0.30980393, 1)
-theme_override_font_sizes/font_size = 24
+offset_bottom = -145.0
+theme_override_font_sizes/font_size = 30
 text = "ПОВЫШЕНИЕ УРОВНЯ!"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -107,11 +105,11 @@ vertical_alignment = 1
 [node name="LevelLabel" type="Label" parent="." unique_id=910599828]
 use_parent_material = true
 layout_mode = 0
-offset_left = 40.0
-offset_top = 6.0
-offset_right = 112.0
-offset_bottom = 31.0
-theme_override_fonts/font = ExtResource("4_qph1y")
+offset_left = 240.0
+offset_top = -144.0
+offset_right = 336.0
+offset_bottom = -119.0
+theme_override_font_sizes/font_size = 24
 text = "1 → 2"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -120,11 +118,11 @@ vertical_alignment = 1
 use_parent_material = true
 layout_mode = 0
 offset_left = 16.0
-offset_top = 48.0
+offset_top = -22.0
 offset_right = 560.0
-offset_bottom = 73.0
-theme_override_font_sizes/font_size = 20
-text = "Выберите награду:"
+offset_bottom = 3.0
+theme_override_font_sizes/font_size = 24
+text = "ВЫБЕРИТЕ НАГРАДУ:"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -132,67 +130,32 @@ vertical_alignment = 1
 use_parent_material = true
 layout_mode = 0
 offset_left = 32.0
-offset_top = 96.0
+offset_top = 48.0
 offset_right = 544.0
-offset_bottom = 288.0
+offset_bottom = 240.0
 size_flags_vertical = 3
 theme_override_constants/h_separation = 192
 theme_override_constants/v_separation = 12
 columns = 3
 
-[node name="FireButton1" type="TextureButton" parent="." unique_id=1162815828]
+[node name="FireButton1" type="Button" parent="." unique_id=1920054543]
 z_index = 30
 use_parent_material = true
 layout_mode = 0
-offset_left = 72.0
-offset_top = 312.0
-offset_right = 120.0
-offset_bottom = 360.0
+offset_left = 176.0
+offset_top = 288.0
+offset_right = 400.0
+offset_bottom = 336.0
 tooltip_text = "Сжечь карту
 ради повышения
 характеристик"
 mouse_filter = 1
-texture_normal = SubResource("AtlasTexture_i3v37")
-texture_pressed = SubResource("AtlasTexture_qph1y")
-texture_hover = SubResource("AtlasTexture_jekd8")
-texture_disabled = SubResource("AtlasTexture_n6hbc")
-stretch_mode = 0
-
-[node name="FireButton2" type="TextureButton" parent="." unique_id=1899458398]
-z_index = 30
-use_parent_material = true
-layout_mode = 0
-offset_left = 264.0
-offset_top = 312.0
-offset_right = 312.0
-offset_bottom = 360.0
-tooltip_text = "Сжечь карту
-ради повышения
-характеристик"
-mouse_filter = 1
-texture_normal = SubResource("AtlasTexture_i3v37")
-texture_pressed = SubResource("AtlasTexture_qph1y")
-texture_hover = SubResource("AtlasTexture_jekd8")
-texture_disabled = SubResource("AtlasTexture_n6hbc")
-stretch_mode = 0
-
-[node name="FireButton3" type="TextureButton" parent="." unique_id=1525506068]
-z_index = 30
-use_parent_material = true
-layout_mode = 0
-offset_left = 456.0
-offset_top = 312.0
-offset_right = 504.0
-offset_bottom = 360.0
-tooltip_text = "Сжечь карту
-ради повышения
-характеристик"
-mouse_filter = 1
-texture_normal = SubResource("AtlasTexture_i3v37")
-texture_pressed = SubResource("AtlasTexture_qph1y")
-texture_hover = SubResource("AtlasTexture_jekd8")
-texture_disabled = SubResource("AtlasTexture_n6hbc")
-stretch_mode = 0
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = ExtResource("6_jekd8")
+theme_override_styles/pressed = ExtResource("7_n6hbc")
+theme_override_styles/hover = ExtResource("8_mj3lq")
+text = "СЖЕЧЬ"
+autowrap_mode = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=344300564]
 stream = ExtResource("6_vtgeg")
@@ -206,5 +169,3 @@ bus = &"SoundFX"
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="pressed" from="FireButton1" to="." method="_on_fire_button_1_pressed"]
-[connection signal="pressed" from="FireButton2" to="." method="_on_fire_button_2_pressed"]
-[connection signal="pressed" from="FireButton3" to="." method="_on_fire_button_3_pressed"]

@@ -31,7 +31,7 @@ var current_defence_cat = 0
 var max_defence_cat = 5
 var defended_cat = false
 
-var accuracy_cat = 70
+var accuracy_cat = 10
 var min_accuracy_cat = 5
 var current_accuracy_cat = accuracy_cat
 
@@ -121,7 +121,7 @@ func _ready() -> void:
 	current_cards_cat.set(7, CattenheimerCard.new())
 	current_cards_cat.set(8, CompensationCard.new())
 	current_cards_cat.set(9, EclipseCard.new())
-	current_cards_cat.set(10, DoubleClawCard.new())
+	current_cards_cat.set(10, RevengeCard.new())
 	
 	#current_cards_human.set(1, GiveStrengthCard.new())
 	current_cards_human.set(2, SollenheimerCard.new())

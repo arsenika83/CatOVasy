@@ -292,6 +292,8 @@ func give_buff(targets : Array[CharacterBody2D], type : String, power : int, tur
 	
 	targets[0].sprite.play("battle_buffed")
 	targets[0].idle_animation_timer.start(gm.buff_animation_time_human)
+	if get_parent().team_positions[0] == "human":
+		sprite.flip_h = true
 	sprite.play("battle_buff_cat")
 	z_index += 1
 	$AudioStreamPlayerBuff.play()
@@ -468,6 +470,11 @@ func create_fog() -> void:
 	var tween1 = create_tween()
 	tween1.tween_property(get_parent().audio_music, "volume_db", -15.0, 1)
 	tween1.tween_property(get_parent().audio_music, "volume_db", 0, 5)
+
+func ignite(pos : Vector2) -> void:
+	get_parent().ignite_fx.position = pos
+	get_parent().ignite_fx.play("hit")
+	get_parent().ignite_fx.audio.play()
 	
 
 func check_fall(delta: float) -> void:
@@ -559,6 +566,7 @@ func _on_take_damage_timer_timeout() -> void:
 func _on_idle_animation_timer_timeout() -> void:
 	#gm.state_human = gm.prev_state_human
 	sprite.play("battle")
+	sprite.flip_h = false
 
 func _on_miss_damage_timer_timeout() -> void:
 	display_damage(0)
@@ -601,6 +609,10 @@ func _on_deal_damage_timer_timeout() -> void:
 	
 	for target in gm.current_targets:
 		success = randf_range(0.0, 1.0) * 100 <= gm.current_accuracy_human
+		
+		if gm.current_card.has_method("cant_miss"):
+			success = true
+		
 		if success:
 			gm.current_damage_human = gm.current_card.damage
 		else:

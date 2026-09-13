@@ -1,4 +1,6 @@
-res://scenes/levels/level0.tscn
-res://scripts/characters/character.gd
-res://lang/rus_card_text_cat.json
-res://scripts/cards/cattenheimer_card.gd
+res://scenes/enemies/fox.tscn
+res://shaders/outline.gdshader
+res://shaders/card_glow.gdshader
+res://scripts/ui/card_container_human.gd
+res://scenes/enemies/enemy.tscn
+res://scenes/cards/fog_card.tscn

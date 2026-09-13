@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dow0c2wpd5srt"]
+
+[node name="PlayerTeamStats" type="Control" unique_id=1641203734]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0

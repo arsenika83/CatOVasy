@@ -15,19 +15,19 @@ var all_card_names_epic_cat : Array[String] = ["inferno", "revenge", "cattenheim
 var all_card_names_unbelievable_cat : Array[String]
 
 var all_card_names_human : Array[String] = ["little_fire", "boredom", "give_strength", "sollenheimer",
-"wind_of_change", "fortune_wheel", "dont_hit", "fog"]
+"wind_of_change", "fortune_wheel", "dont_hit", "fog", "big_fire", "burn_down"]
 var all_card_names_common_human : Array[String]
 var all_card_names_rare_human : Array[String] = ["boredom", "fortune_wheel"]
 var all_card_names_epic_human : Array[String] = ["sollenheimer"]
-var all_card_names_unbelievable_human : Array[String] = ["fog"]
+var all_card_names_unbelievable_human : Array[String] = ["fog", "burn_down"]
 
 var all_artifact_names : Array[String] = ["red_ball", "blue_ball", "heart_shaped_pillow", "cat_food",
 "old_bandage", "spinner", "boomerang", "regen_ring", "candy", "portrait_of_the_unknown", "fork",
 "lucky_collar", "toy_cat", "rocky", "tomato_cross"]
 
-var all_artifact_names_common : Array[String] = ["red_ball", "old_bandage", "candy", "lucky_collar", "rocky"]
+var all_artifact_names_common : Array[String] = ["red_ball", "old_bandage", "candy", "lucky_collar", "rocky", "fork"]
 var all_artifact_names_rare : Array[String] = ["blue_ball", "cat_food", "spinner", "boomerang", 
-"portrait_of_the_unknown", "fork"]
+"portrait_of_the_unknown"]
 var all_artifact_names_epic : Array[String] = ["heart_shaped_pillow", "toy_cat", "tomato_cross"]
 var all_artifact_names_unbelievable : Array[String] = ["regen_ring"]
 

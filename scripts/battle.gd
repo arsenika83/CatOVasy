@@ -24,6 +24,7 @@ var log_count = 1
 @onready var cat_fx = $FX/CatFX
 @onready var wind_fx = $FX/Wind
 @onready var inferno_fx = $FX/Inferno
+@onready var ignite_fx = $FX/IgniteFX
 @onready var giant_explosion_fx = $FX/GiantExplosion
 @onready var fog_summon_fx = $FX/FogSummon
 @onready var sun_fx = $FX/Sun
@@ -70,8 +71,10 @@ func _ready() -> void:
 	end_turn()
 	
 	log_book.text.text += log_messages[0]
+	
+	draw_turn_label("player")
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
 func _process(delta: float) -> void:
 	if log_count < log_messages.size():
 		log_book.text.text += log_messages[log_count]
@@ -217,6 +220,20 @@ func find_enemy_by_position(battle_x : int, battle_y : int) -> CharacterBody2D:
 		if enemy.battle_x == battle_x and enemy.battle_y == battle_y:
 			return enemy
 	return null
+
+func draw_turn_label(type : String) -> void:
+	$UI/TurnLabel.scale = Vector2(0, 0)
+	
+	match type:
+		"player":
+			$UI/TurnLabel.text = str("ХОД #", turn_count)
+		"enemy":
+			$UI/TurnLabel.text = str("ХОД ПРОТИВНИКА")
+	var tween = create_tween()
+	tween.tween_property($UI/TurnLabel, "scale", Vector2(1, 1), 0.5)
+	tween.tween_property($UI/TurnLabel, "scale", Vector2(1, 1), 1)
+	tween.tween_property($UI/TurnLabel, "scale", Vector2(1, 0), 0.5)
+	
 
 func draw_cursor() -> void:
 	for enemy in find_child("Enemies").get_children():
@@ -463,6 +480,7 @@ func enemy_turn() -> void:
 
 func end_turn() -> void:
 	if current_creature_turn == -2: #СОЛЯ
+		
 		for enemy in current_enemies:
 			enemy.my_turn.visible = false
 			
@@ -486,8 +504,11 @@ func end_turn() -> void:
 			else:
 				current_creature_turn = 0	
 			end_turn()
+		else:
+			draw_turn_label("player")	
 			
 	elif current_creature_turn == -1: #КОТ
+		
 		var cam_tween = create_tween()
 		cam_tween.tween_property(player_camera, "position:x", 144, 0.2)
 		
@@ -542,6 +563,7 @@ func end_turn() -> void:
 			$UI/EnergyHuman.visible = false
 			giant.my_turn.visible = false
 			
+			draw_turn_label("enemy")
 			$EndTurnTimer.start()
 	else:
 		for enemy in current_enemies:
@@ -562,6 +584,7 @@ func end_turn() -> void:
 					gm.current_energy_human = gm.energy_human
 					current_creature_turn = -2
 				else:
+					gm.current_energy_cat = gm.energy_cat
 					current_creature_turn = -1	
 				giant.turn_tick()
 				human.turn_tick()

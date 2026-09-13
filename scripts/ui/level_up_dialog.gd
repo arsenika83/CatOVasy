@@ -73,6 +73,7 @@ func _on_card_picked_up(picked_card : Card) -> void:
 		if get_parent().get_parent().giant.check_xp():
 			get_parent().get_parent().draw_level_up()
 		else:
+			get_parent().get_parent().bg.color = Color(0, 0, 0, 0)
 			visible = false
 			position.x = -1500
 			gm.state = "idle"
@@ -83,21 +84,31 @@ func _on_fire_button_1_pressed() -> void:
 	audio_burn.play()
 	visible = false
 	position.x = -1500
-	get_parent().get_parent().draw_upgrade_stats(cards.get_child(0).rarity)
-
-func _on_fire_button_2_pressed() -> void:
-	audio_burn.pitch_scale = randf_range(0.8, 1.1)
-	audio_burn.play()
-	visible = false
-	position.x = -1500
-	get_parent().get_parent().draw_upgrade_stats(cards.get_child(1).rarity)
-
-func _on_fire_button_3_pressed() -> void:
-	audio_burn.pitch_scale = randf_range(0.8, 1.1)
-	audio_burn.play()
-	visible = false
-	position.x = -1500
-	get_parent().get_parent().draw_upgrade_stats(cards.get_child(2).rarity)
+	
+	var max_rarity = "common"
+	var max_k = 0
+	
+	for card in cards.get_children():
+		var k = 0
+		if card.rarity == "rare":
+			k = 1
+		if card.rarity == "epic":
+			k = 2
+		if card.rarity == "unbelievable":
+			k = 3
+		
+		if k > max_k:
+			max_k = k	
+	
+	match max_k:
+		1:
+			max_rarity = "rare"
+		2:
+			max_rarity = "epic"
+		3:
+			max_rarity = "unbelievable"
+		
+	get_parent().get_parent().draw_upgrade_stats(max_rarity)
 
 func _on_mouse_entered() -> void:
 	gm.state = "leveling_up"

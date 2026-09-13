@@ -56,7 +56,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 256.0
 offset_bottom = 320.0
-pivot_offset = Vector2(128, 8)
+pivot_offset = Vector2(128, 168)
 script = ExtResource("2_snn0j")
 
 [node name="TextureRectBGCat" type="TextureRect" parent="." unique_id=1275944467]

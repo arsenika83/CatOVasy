@@ -8,6 +8,7 @@ const SCALE_SELECTED = Vector2(1.15, 1.15)
 
 @onready var icon = $TextureRect2/Icon
 @onready var label = $Label
+@onready var bg = $BG
 
 var rarity = "common"
 var action = "base_damage_1"
@@ -22,6 +23,7 @@ func _process(delta: float) -> void:
 	if not loaded:
 		loaded = true
 		icon.texture = load("res://assets/images/stat_upgrades/" + action + ".png")
+		bg.texture = load("res://assets/images/stat_upgrades/" + rarity + ".png")
 		match action:
 			"base_damage_1":
 				description = "+1 к базовому \nурону"
@@ -77,10 +79,16 @@ func animate_to(target_scale: Vector2, target_color: Color, duration: float = 0.
 func _on_mouse_entered() -> void:
 	z_index += 10
 	animate_to(SCALE_HOVER, Color.WHITE)
+	
+	get_parent().get_parent().human_icon.texture = load("res://assets/images/characters/solya_what.png")
+	get_parent().get_parent().cat_icon.texture = load("res://assets/images/characters/cat_handsome_what.png")
 
 func _on_mouse_exited() -> void:
 	z_index -= 10
 	animate_to(SCALE_NORMAL, Color.WHITE)
+	
+	get_parent().get_parent().human_icon.texture = load("res://assets/images/characters/solya_default.png")
+	get_parent().get_parent().cat_icon.texture = load("res://assets/images/characters/cat_handsome.png")	
 
 
 func _on_gui_input(event: InputEvent) -> void:

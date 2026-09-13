@@ -503,8 +503,16 @@ func _on_deal_damage_timer_timeout() -> void:
 	get_parent().claw_fx.play("hit")
 	for target in gm.current_targets:
 		success = randf_range(0.0, 1.0) * 100 <= gm.current_accuracy_cat
+		
+		if gm.current_card.has_method("cant_miss"):
+			success = true
+		
 		if success:
 			gm.current_damage_cat = gm.current_card.damage
+			
+			if gm.current_card.has_method("revenge") and target.dealt_damage_to_human:
+				gm.current_damage_cat = gm.current_card.revenge()
+			
 		else:
 			just_missed = true
 			gm.current_damage_cat = 0

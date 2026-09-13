@@ -1,31 +1,21 @@
 shader_type canvas_item;
 
-// Настройки, доступные из инспектора и кода
-uniform vec4 outline_color : source_color = vec4(1.0, 1.0, 1.0, 1.0); // Цвет обводки
-uniform float outline_thickness : hint_range(0.0, 10.0) = 1.0;       // Толщина в пикселях
-uniform bool is_hovered = false;                                      // Переключатель эффекта
+// Настройки в инспекторе
+uniform vec4 tint_color : source_color = vec4(1.0, 1.0, 1.0, 1.0); // Цвет наложения
+uniform float tint_amount : hint_range(0.0, 1.0) = 0.5;            // Сила наложения (0.0 - нет эффекта, 1.0 - полностью закрашен)
+uniform bool is_hovered = false;                                    // Переключатель
 
 void fragment() {
-    vec4 current_color = texture(TEXTURE, UV);
+    // Получаем исходный цвет пикселя спрайта
+    vec4 texture_color = texture(TEXTURE, UV);
     
-    // Если наведение включено и текущий пиксель прозрачный, ищем края
-    if (is_hovered && current_color.a == 0.0) {
-        vec2 size = TEXTURE_PIXEL_SIZE * outline_thickness;
-        float alpha = 0.0;
+    if (is_hovered) {
+        // Плавно смешиваем исходный RGB-цвет с цветом наложения
+        vec3 mixed_rgb = mix(texture_color.rgb, tint_color.rgb, tint_amount);
         
-        // Проверяем 4 соседних пикселя (крестом) для пиксельной точности
-        alpha += texture(TEXTURE, UV + vec2(size.x, 0.0)).a;
-        alpha += texture(TEXTURE, UV + vec2(-size.x, 0.0)).a;
-        alpha += texture(TEXTURE, UV + vec2(0.0, size.y)).a;
-        alpha += texture(TEXTURE, UV + vec2(0.0, -size.y)).a;
-        
-        // Если рядом есть непрозрачные пиксели персонажа — красим этот пиксель в цвет обводки
-        if (alpha > 0.0) {
-            COLOR = outline_color;
-        } else {
-            COLOR = current_color;
-        }
+        // Выводим результат, обязательно сохраняя оригинальную прозрачность спрайта
+        COLOR = vec4(mixed_rgb, texture_color.a);
     } else {
-        COLOR = current_color;
+        COLOR = texture_color;
     }
 }

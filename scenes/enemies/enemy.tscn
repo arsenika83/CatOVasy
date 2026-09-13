@@ -15,6 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://dnpo0un37rpje" path="res://assets/soundFX/enemies/mouse_hurt.wav" id="7_y5th1"]
 [ext_resource type="AudioStream" uid="uid://bv07t8ic6tpma" path="res://assets/soundFX/miss.wav" id="8_n7575"]
 [ext_resource type="AudioStream" uid="uid://bclkaxhxamdmf" path="res://assets/soundFX/defend.wav" id="9_qch6t"]
+[ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="11_maese"]
 [ext_resource type="AudioStream" uid="uid://ceun5aaxxb0o7" path="res://assets/soundFX/debuff.wav" id="11_tihwb"]
 [ext_resource type="AudioStream" uid="uid://vid6rjo3jggy" path="res://assets/soundFX/follow.wav" id="12_p7w77"]
 [ext_resource type="PackedScene" uid="uid://ba7f54d4yq2hp" path="res://scenes/ui/cursor.tscn" id="14_twn6s"]
@@ -50,7 +51,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_yu8pw")
 }],
-"loop": 1,
+"loop": true,
 "name": &"default",
 "speed": 1.0
 }]
@@ -82,7 +83,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_kugq1")
 }],
-"loop": 1,
+"loop": true,
 "name": &"default",
 "speed": 5.0
 }]
@@ -90,8 +91,8 @@ animations = [{
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_maese"]
 resource_local_to_scene = true
 shader = ExtResource("6_x3klb")
-shader_parameter/outline_color = Color(0.98803645, 0.3055162, 0.32086813, 0.70000005)
-shader_parameter/outline_thickness = 1.0000000475
+shader_parameter/tint_color = Color(0.99215686, 0.3019608, 0.30980393, 1)
+shader_parameter/tint_amount = 0.30000001425
 shader_parameter/is_hovered = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nb6gf"]
@@ -147,7 +148,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fcftc")
 }],
-"loop": 0,
+"loop": false,
 "name": &"dead",
 "speed": 1.0
 }, {
@@ -170,7 +171,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_twn6s")
 }],
-"loop": 1,
+"loop": true,
 "name": &"deal_damage",
 "speed": 10.0
 }, {
@@ -178,7 +179,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jt03m")
 }],
-"loop": 1,
+"loop": true,
 "name": &"default",
 "speed": 5.0
 }, {
@@ -189,7 +190,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_k4gvh")
 }],
-"loop": 1,
+"loop": true,
 "name": &"idle",
 "speed": 1.0
 }, {
@@ -197,13 +198,29 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_lu5c6")
 }],
-"loop": 1,
+"loop": true,
 "name": &"take_damage",
 "speed": 5.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lu5c6"]
 radius = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4f0mh"]
+shader = ExtResource("11_maese")
+shader_parameter/speed = 2.000000095
+shader_parameter/amplitude = 1.0000000475
+shader_parameter/time_offset = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gc4hx"]
+atlas = ExtResource("3_sb86v")
+region = Rect2(0, 128, 16, 16)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gc4hx"]
+shader = ExtResource("11_maese")
+shader_parameter/speed = 2.000000095
+shader_parameter/amplitude = 1.0000000475
+shader_parameter/time_offset = 0.0
 
 [node name="Enemy" type="CharacterBody2D" unique_id=685663284]
 collision_layer = 2
@@ -261,6 +278,25 @@ visible = false
 
 [node name="StatusFX" parent="." unique_id=1192321709 instance=ExtResource("5_lu5c6")]
 visible = false
+
+[node name="DefenceSprite" type="Sprite2D" parent="." unique_id=496402197]
+visible = false
+material = SubResource("ShaderMaterial_4f0mh")
+position = Vector2(-16, 8)
+texture = SubResource("AtlasTexture_gc4hx")
+
+[node name="DefenceLabel" type="RichTextLabel" parent="DefenceSprite" unique_id=634810452]
+material = SubResource("ShaderMaterial_gc4hx")
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/normal_font_size = 8
+text = "12"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
 
 [node name="AudioHit" type="AudioStreamPlayer" parent="." unique_id=1483378938]
 stream = ExtResource("3_38ino")

@@ -31,12 +31,14 @@ func on_play() -> void:
 
 	get_parent().get_parent().get_parent().get_parent().log_messages.append(str("- [color=#ff93c1]СОЖЖЕНИЕ[/color]: [color=#1ca8fd]", enemy.enemy_name_rus, "[/color] сжигается\n"))
 
+	get_parent().get_parent().get_parent().get_parent().human.ignite(enemy.position)
 	enemy.hp = 0
 	enemy.check_hp()
 	enemy.die()
 	
 	var tween = create_tween()
-	tween.tween_property(enemy.sprite, "scale", Vector2(0, 0), 0.2)
+	tween.tween_property(enemy.sprite, "scale", Vector2(1, 1), 0.2)
+	tween.tween_property(enemy.sprite, "scale", Vector2(0, 0), 0.3)
 	
 func use_up() -> void:
 	pass

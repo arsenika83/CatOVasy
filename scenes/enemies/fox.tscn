@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://btyuivf1mvgot" path="res://assets/soundFX/hit_lucky.wav" id="6_bb1qk"]
 [ext_resource type="AudioStream" uid="uid://dnpo0un37rpje" path="res://assets/soundFX/enemies/mouse_hurt.wav" id="7_yyc8d"]
 [ext_resource type="AudioStream" uid="uid://b78ln2t2dmc8p" path="res://assets/soundFX/meow_die.wav" id="8_2sef5"]
+[ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="8_6hju4"]
 [ext_resource type="AudioStream" uid="uid://bv07t8ic6tpma" path="res://assets/soundFX/miss.wav" id="9_6hju4"]
 [ext_resource type="AudioStream" uid="uid://bclkaxhxamdmf" path="res://assets/soundFX/defend.wav" id="10_pdutp"]
 [ext_resource type="AudioStream" uid="uid://ceun5aaxxb0o7" path="res://assets/soundFX/debuff.wav" id="11_rhgp0"]
@@ -51,7 +52,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_kugq1")
 }],
-"loop": 1,
+"loop": true,
 "name": &"default",
 "speed": 5.0
 }]
@@ -59,9 +60,9 @@ animations = [{
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yyc8d"]
 resource_local_to_scene = true
 shader = ExtResource("4_bb1qk")
-shader_parameter/outline_color = Color(0.9882353, 0.30588236, 0.32156864, 0.7019608)
-shader_parameter/outline_thickness = 1.0
-shader_parameter/is_hovered = true
+shader_parameter/tint_color = Color(0.99215686, 0.3019608, 0.30980393, 1)
+shader_parameter/tint_amount = 0.30000001425
+shader_parameter/is_hovered = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1co2e"]
 atlas = ExtResource("2_5ba63")
@@ -93,7 +94,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_1co2e")
 }],
-"loop": 0,
+"loop": false,
 "name": &"dead",
 "speed": 1.0
 }, {
@@ -101,12 +102,12 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5ba63")
 }],
-"loop": 1,
+"loop": true,
 "name": &"deal_damage",
 "speed": 10.0
 }, {
 "frames": [],
-"loop": 1,
+"loop": true,
 "name": &"default",
 "speed": 5.0
 }, {
@@ -135,7 +136,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wyag3")
 }],
-"loop": 1,
+"loop": true,
 "name": &"idle",
 "speed": 1.0
 }, {
@@ -143,13 +144,29 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_521xt")
 }],
-"loop": 1,
+"loop": true,
 "name": &"take_damage",
 "speed": 5.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lu5c6"]
 radius = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pdutp"]
+shader = ExtResource("8_6hju4")
+shader_parameter/speed = 2.000000095
+shader_parameter/amplitude = 1.0000000475
+shader_parameter/time_offset = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rhgp0"]
+atlas = ExtResource("3_521xt")
+region = Rect2(0, 128, 16, 16)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xdg4m"]
+shader = ExtResource("8_6hju4")
+shader_parameter/speed = 2.000000095
+shader_parameter/amplitude = 1.0000000475
+shader_parameter/time_offset = 0.0
 
 [node name="EnemyFox" type="CharacterBody2D" unique_id=685663284]
 collision_layer = 2
@@ -195,6 +212,25 @@ visible = false
 
 [node name="StatusFX" parent="." unique_id=1192321709 instance=ExtResource("4_wyag3")]
 visible = false
+
+[node name="DefenceSprite" type="Sprite2D" parent="." unique_id=1953672452]
+visible = false
+material = SubResource("ShaderMaterial_pdutp")
+position = Vector2(-21, 8)
+texture = SubResource("AtlasTexture_rhgp0")
+
+[node name="DefenceLabel" type="RichTextLabel" parent="DefenceSprite" unique_id=1727405532]
+material = SubResource("ShaderMaterial_xdg4m")
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/normal_font_size = 8
+text = "12"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
 
 [node name="Cursor" parent="." unique_id=2051460958 instance=ExtResource("5_b3y50")]
 visible = false

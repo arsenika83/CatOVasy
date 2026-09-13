@@ -1,11 +1,12 @@
-F:/GODOTProjects/GiantCrawler/lang/
-res://scripts/cards/solya/
+res://assets/fonts/
+res://assets/images/characters/
 res://assets/images/
+res://scenes/ui/
 res://shaders/
+res://scripts/cards/solya/
+F:/GODOTProjects/GiantCrawler/lang/
 res://scenes/fx/
 res://scripts/cards/
-res://assets/images/characters/
-res://scenes/ui/
 res://scripts/ui/
 res://assets/images/bosses/
 res://scripts/bosses/
@@ -20,5 +21,4 @@ res://scripts/enemies/
 res://
 F:/GODOTProjects/GiantCrawler/saves/
 res://scripts/global/
-res://assets/fonts/
 res://assets/

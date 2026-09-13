@@ -62,6 +62,32 @@ func update_artifacts(type : String) -> void:
 			if gm.current_artifacts_human.has(i+1) and is_instance_valid(gm.current_artifacts_human.get(i+1)):
 				artifact_slots[i].current_artifact = gm.current_artifacts_human.get(i+1)
 				artifact_slots[i].loaded = false
+
+func update_stats() -> void:
+	if state == "cat":
+		hp_label.text = str(gm.hp_cat, " / ", gm.max_hp_cat)
+				
+		var stats = str(gm.damage_cat)
+		stats += 	str("\n", gm.defence_cat, " (", gm.max_defence_cat, ")")
+		stats += 	str("\n", gm.accuracy_cat, "%")
+		stats += 	str("\n", gm.luck_cat, "%")
+		stats += 	str("\n", gm.max_energy_cat)
+		stats += 	str("\n")
+		stats += 	str("\n", gm.level)
+		stats += 	str("\n", gm.xp, "/", gm.xp_needed)
+		$StatsLabel.text = stats
+	else:
+		hp_label.text = str(gm.hp_human, " / ", gm.max_hp_human)
+				
+		var stats = str(gm.damage_human)
+		stats += 	str("\n", gm.defence_human, " (", gm.max_defence_human, ")")
+		stats += 	str("\n", gm.accuracy_human, "%")
+		stats += 	str("\n", gm.luck_human, "%")
+		stats += 	str("\n", gm.max_energy_human)
+		stats += 	str("\n")
+		stats += 	str("\n", gm.level)
+		stats += 	str("\n", gm.xp, "/", gm.xp_needed)
+		$StatsLabel.text = stats
 				
 func set_hp_bar(value : float) -> void:
 	if state == "cat":
