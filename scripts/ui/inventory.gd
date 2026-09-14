@@ -25,6 +25,9 @@ artifact_slot_4, artifact_slot_5, artifact_slot_6, artifact_slot_7, artifact_slo
 @onready var cat_button = $CatButton
 @onready var human_button = $HumanButton
 
+var cat_button_already_pressed = false
+var human_button_already_pressed = false
+
 var state = "cat"
 
 # Called when the node enters the scene tree for the first time.
@@ -39,7 +42,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	$AmountLabel.text = str("Спички:\n", gm.match_amount, "/20")
 
 func update_cards(type : String) -> void:
 	if type == "cat":
@@ -169,16 +172,29 @@ func clear_slots() -> void:
 		artifact_slot.clear()	
 
 func _on_cat_button_pressed() -> void:
+	if cat_button_already_pressed:
+		get_parent().get_parent().draw_inventory()
+		return
 	state = "cat"
 	clear_slots()
 	human_button.button_pressed = false
 	update_cards("cat")
 	update_artifacts("cat")
+	
+	cat_button_already_pressed = true
+	human_button_already_pressed = false
 
 
 func _on_human_button_pressed() -> void:
+	if human_button_already_pressed:
+		get_parent().get_parent().draw_inventory()
+		return
+		
 	state = "human"
 	clear_slots()
 	cat_button.button_pressed = false
 	update_cards("human")
 	update_artifacts("human")
+	
+	cat_button_already_pressed = false
+	human_button_already_pressed = true

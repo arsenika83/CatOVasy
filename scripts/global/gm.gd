@@ -10,6 +10,9 @@ var camera_zoom = 2
 var start_pos = Vector2i(64+16, 32+16)
 var prev_pos = Vector2i(64+16, 32+16)
 
+var match_amount = 5
+
+
 var current_chest_rarity = ""
 
 var enemies_following = 0
@@ -134,6 +137,9 @@ func _ready() -> void:
 	#current_cards_human.set(9, NeutralityCard.new())
 	current_cards_human.set(10, BurnDownCard.new())
 	
+	current_artifacts_cat.set(1, CatFoodArtifact.new())
+	current_artifacts_human.set(1, MatchesArtifact.new())
+	
 
 func _process(delta: float) -> void:
 	pass
@@ -159,7 +165,7 @@ func add_artifact_human(index : int, artifact : Artifact) -> void:
 	current_artifacts_human.set(index, added_artifact)
 
 #CAT
-var has_cat_food = false
+var has_cat_food = true
 var has_spinner = false
 var has_boomerang = false
 var has_fork = false

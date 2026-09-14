@@ -24,6 +24,12 @@ func _ready() -> void:
 	
 func _process(delta: float) -> void:
 	update()
+	
+	if current_card != null:
+		if gm.match_amount > 0:
+			fire_button.disabled = false
+		else:
+			fire_button.disabled = true
 			
 func update() -> void:
 	if current_card != null and not icon_loaded:
@@ -48,6 +54,8 @@ func _on_fire_button_pressed() -> void:
 	audio.pitch_scale = randf_range(0.8, 1.1)
 	audio.play()
 	
+	gm.match_amount -= 1
+	
 	if get_parent().get_parent().get_parent().state == "cat":
 		if gm.current_cards_cat.erase(id):
 			print(id)
@@ -58,7 +66,7 @@ func _on_fire_button_pressed() -> void:
 	tooltip_text = "Пустой слот \nдля карты"
 	icon.texture = load("res://assets/images/card_icons/attack_card_default.png")
 	
-	get_parent().get_parent().get_parent().get_parent().get_parent().draw_upgrade_stats(rarity)
+	get_parent().get_parent().get_parent().get_parent().get_parent().draw_upgrade_stats(get_parent().get_parent().get_parent().state, rarity)
 		
 	current_card = null
 	fire_button.disabled = true

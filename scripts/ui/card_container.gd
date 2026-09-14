@@ -224,6 +224,9 @@ func _on_hand_clear_timer_timeout() -> void:
 	var time_offset = 0
 	
 	for i in range(gm.current_hand_size_cat):
+		if i >= unplayed_cards.size() + played_cards.size() + hand.size():
+			break
+		
 		if unplayed_cards.size() > 0:
 			var random_index = randi_range(0, unplayed_cards.size()-1)
 			hand.append(unplayed_cards.get(random_index))

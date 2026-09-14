@@ -6,6 +6,10 @@ extends Control
 @onready var audio = $AudioStreamPlayer
 @onready var audio_burn = $AudioStreamPlayerBurn
 
+@onready var particles_left = $ParticlesLeft
+@onready var particles_right = $ParticlesRight
+
+
 var current_character : String = "cat"
 
 func _ready() -> void:
@@ -15,6 +19,8 @@ func _process(delta: float) -> void:
 	pass
 
 func update_cards(character : String) -> void:
+	$ParticleTimer.start(0.3)
+	
 	current_character = character
 	
 	for card in cards.get_children():
@@ -108,7 +114,12 @@ func _on_fire_button_1_pressed() -> void:
 		3:
 			max_rarity = "unbelievable"
 		
-	get_parent().get_parent().draw_upgrade_stats(max_rarity)
+	get_parent().get_parent().draw_upgrade_stats(current_character, max_rarity)
 
 func _on_mouse_entered() -> void:
 	gm.state = "leveling_up"
+
+
+func _on_particle_timer_timeout() -> void:
+	particles_left.restart()
+	particles_right.restart()

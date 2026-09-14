@@ -26,7 +26,7 @@ var all_artifact_names : Array[String] = ["red_ball", "blue_ball", "heart_shaped
 "lucky_collar", "toy_cat", "rocky", "tomato_cross"]
 
 var all_artifact_names_common : Array[String] = ["red_ball", "old_bandage", "candy", "lucky_collar", "rocky", "fork"]
-var all_artifact_names_rare : Array[String] = ["blue_ball", "cat_food", "spinner", "boomerang", 
+var all_artifact_names_rare : Array[String] = ["blue_ball", "spinner", "boomerang", 
 "portrait_of_the_unknown"]
 var all_artifact_names_epic : Array[String] = ["heart_shaped_pillow", "toy_cat", "tomato_cross"]
 var all_artifact_names_unbelievable : Array[String] = ["regen_ring"]

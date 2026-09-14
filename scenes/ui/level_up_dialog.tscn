@@ -24,6 +24,53 @@ region = Rect2(832, 0, 448, 720)
 atlas = ExtResource("5_jekd8")
 region = Rect2(0, 192, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_5suo7"]
+atlas = ExtResource("5_jekd8")
+region = Rect2(0, 224, 16, 16)
+
+[sub_resource type="Gradient" id="Gradient_qph1y"]
+offsets = PackedFloat32Array(0, 0.28985506, 0.5, 0.5507246, 0.73188406, 0.89855075, 0.95652175)
+colors = PackedColorArray(1, 0, 0, 1, 0.18470514, 0.114301495, 1, 1, 0.035916895, 0.58915496, 0.68277144, 1, 0, 0.733042, 0.15080154, 1, 0.48280412, 0.08673445, 0.9999997, 1, 0.9647059, 0.8862745, 0.1254902, 1, 0.9647059, 0.1764706, 0.1254902, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qph1y"]
+gradient = SubResource("Gradient_qph1y")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qph1y"]
+resource_local_to_scene = true
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, -1, 0)
+direction = Vector3(1, -1, 0)
+spread = 101.129
+initial_velocity_min = 300.0
+initial_velocity_max = 500.0
+gravity = Vector3(0, 300, 0)
+scale_min = 3.0
+scale_max = 10.0
+color_ramp = SubResource("GradientTexture1D_qph1y")
+turbulence_noise_strength = 20.0
+turbulence_noise_scale = 4.051
+turbulence_influence_max = 0.21200001
+
+[sub_resource type="Gradient" id="Gradient_jekd8"]
+offsets = PackedFloat32Array(0, 0.24637681, 0.5217391, 0.7246377, 0.8695652)
+colors = PackedColorArray(0.93333334, 0, 0, 1, 0.13739347, 0.5720904, 1, 1, 1, 0.8039216, 0.27450982, 1, 0.25338978, 0.72090054, 1.92523e-07, 1, 0.8513238, 0, 0.26511547, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_n6hbc"]
+gradient = SubResource("Gradient_jekd8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jekd8"]
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+direction = Vector3(-1, -1, 0)
+spread = 103.065
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+gravity = Vector3(0, 300, 0)
+scale_min = 3.0
+scale_max = 6.0
+color_ramp = SubResource("GradientTexture1D_n6hbc")
+
 [node name="LevelUpDialog" type="Control" unique_id=1641948652]
 material = SubResource("ShaderMaterial_qtlqx")
 layout_mode = 3
@@ -129,12 +176,12 @@ vertical_alignment = 1
 [node name="Cards" type="GridContainer" parent="." unique_id=1690070523]
 use_parent_material = true
 layout_mode = 0
-offset_left = 32.0
+offset_left = 80.0
 offset_top = 48.0
-offset_right = 544.0
+offset_right = 496.0
 offset_bottom = 240.0
 size_flags_vertical = 3
-theme_override_constants/h_separation = 192
+theme_override_constants/h_separation = 144
 theme_override_constants/v_separation = 12
 columns = 3
 
@@ -146,7 +193,7 @@ offset_left = 176.0
 offset_top = 288.0
 offset_right = 400.0
 offset_bottom = 336.0
-tooltip_text = "Сжечь карту
+tooltip_text = "Сжечь карты
 ради повышения
 характеристик"
 mouse_filter = 1
@@ -155,7 +202,10 @@ theme_override_styles/normal = ExtResource("6_jekd8")
 theme_override_styles/pressed = ExtResource("7_n6hbc")
 theme_override_styles/hover = ExtResource("8_mj3lq")
 text = "СЖЕЧЬ"
+icon = SubResource("AtlasTexture_5suo7")
 autowrap_mode = 2
+icon_alignment = 2
+expand_icon = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=344300564]
 stream = ExtResource("6_vtgeg")
@@ -167,5 +217,35 @@ stream = ExtResource("7_6dcm8")
 volume_db = 2.0
 bus = &"SoundFX"
 
+[node name="ParticlesLeft" type="GPUParticles2D" parent="." unique_id=1751026032]
+z_index = 100
+position = Vector2(-416, 64)
+emitting = false
+amount = 200
+lifetime = 5.0
+one_shot = true
+explosiveness = 1.0
+randomness = 0.1
+trail_enabled = true
+trail_lifetime = 0.03
+process_material = SubResource("ParticleProcessMaterial_qph1y")
+
+[node name="ParticlesRight" type="GPUParticles2D" parent="." unique_id=641734907]
+z_index = 100
+position = Vector2(992, 64)
+emitting = false
+amount = 200
+lifetime = 5.0
+one_shot = true
+explosiveness = 1.0
+randomness = 0.1
+trail_enabled = true
+trail_lifetime = 0.03
+process_material = SubResource("ParticleProcessMaterial_jekd8")
+
+[node name="ParticleTimer" type="Timer" parent="." unique_id=2136707067]
+one_shot = true
+
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="pressed" from="FireButton1" to="." method="_on_fire_button_1_pressed"]
+[connection signal="timeout" from="ParticleTimer" to="." method="_on_particle_timer_timeout"]

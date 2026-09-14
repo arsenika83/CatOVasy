@@ -1,7 +1,7 @@
 class_name CatFoodArtifact extends Artifact
 
 var character_type = "cat"
-var rarity = "rare"
+var rarity = "common"
 var complect = ""
 var path = "cat_food"
 var tool_tip_text = "КОШАЧИЙ КОРМ\n\n"

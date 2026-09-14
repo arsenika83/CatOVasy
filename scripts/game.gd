@@ -328,12 +328,14 @@ func draw_level_up(character : String = "human") -> void:
 	var tween = create_tween()
 	tween.tween_property(level_up_dialog, "scale", Vector2(1, 1), 0.3)
 	
-func draw_upgrade_stats(rarity : String) -> void:
+func draw_upgrade_stats(character : String = "human", rarity : String = "common") -> void:
 	bg.visible = true
 	upgrade_stats_dialog.visible = true
 	upgrade_stats_dialog.position.x = 320
 	upgrade_stats_dialog.scale = Vector2(0, 0)
-	upgrade_stats_dialog.swap_characters()
+
+	#upgrade_stats_dialog.swap_characters()
+	upgrade_stats_dialog.character = character
 	upgrade_stats_dialog.update_stats(rarity)
 	upgrade_stats_dialog.update_stats_on_screen()
 	
