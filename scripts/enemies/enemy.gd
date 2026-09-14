@@ -123,9 +123,11 @@ var buff_animation_time =   0.3
 @onready var status_fx = $StatusFX
 @onready var defence_sprite = $DefenceSprite
 @onready var defence_label = $DefenceSprite/DefenceLabel
+@onready var hp_bar = $HPBar
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	hp_bar.max_value = max_hp
 	defence_sprite.visible = false
 	status_fx.play("found_you")
 	battle_x = get_parent().get_parent().find_child("TileMapLayerBlack").local_to_map(position).x
@@ -140,6 +142,7 @@ func _process(delta: float) -> void:
 	else:
 		defence_sprite.visible = false
 	
+	hp_bar.value = float(hp)
 	check_hp()
 	
 	match state:

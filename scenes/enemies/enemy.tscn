@@ -51,7 +51,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_yu8pw")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 1.0
 }]
@@ -83,7 +83,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_kugq1")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }]
@@ -148,7 +148,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fcftc")
 }],
-"loop": false,
+"loop": 0,
 "name": &"dead",
 "speed": 1.0
 }, {
@@ -171,7 +171,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_twn6s")
 }],
-"loop": true,
+"loop": 1,
 "name": &"deal_damage",
 "speed": 10.0
 }, {
@@ -179,7 +179,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jt03m")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }, {
@@ -190,7 +190,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_k4gvh")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 1.0
 }, {
@@ -198,7 +198,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_lu5c6")
 }],
-"loop": true,
+"loop": 1,
 "name": &"take_damage",
 "speed": 5.0
 }]
@@ -221,6 +221,14 @@ shader = ExtResource("11_maese")
 shader_parameter/speed = 2.000000095
 shader_parameter/amplitude = 1.0000000475
 shader_parameter/time_offset = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a7tdr"]
+atlas = ExtResource("3_sb86v")
+region = Rect2(0, 256, 32, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f30dh"]
+atlas = ExtResource("3_sb86v")
+region = Rect2(0, 272, 32, 16)
 
 [node name="Enemy" type="CharacterBody2D" unique_id=685663284]
 collision_layer = 2
@@ -365,6 +373,17 @@ one_shot = true
 
 [node name="DebuffTimer" type="Timer" parent="." unique_id=573649907]
 one_shot = true
+
+[node name="HPBar" type="TextureProgressBar" parent="." unique_id=465101241]
+visible = false
+offset_left = -16.0
+offset_top = 12.0
+offset_right = 16.0
+offset_bottom = 28.0
+max_value = 5.0
+value = 5.0
+texture_under = SubResource("AtlasTexture_a7tdr")
+texture_progress = SubResource("AtlasTexture_f30dh")
 
 [connection signal="area_entered" from="Area2DXP" to="." method="_on_area_2dxp_area_entered"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

@@ -172,6 +172,7 @@ func init() -> void:
 		current_enemies.append(enemy)
 		enemy.enemy_name_rus = str(enemy.enemy_name_rus, "(", enemy_count + 1, ")")
 		enemy_count += 1
+		enemy.hp_bar.visible = true
 
 func win() -> void:
 	pass
