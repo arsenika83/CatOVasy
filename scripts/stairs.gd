@@ -11,6 +11,7 @@ func _process(delta: float) -> void:
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	print("ENTER ", room_number)
+	gm.level_number += 1
 	if gm.has_cat_food:
 		gm.hp_cat += 2
 		if gm.hp_cat > gm.max_hp_cat:

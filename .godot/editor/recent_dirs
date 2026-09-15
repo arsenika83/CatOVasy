@@ -1,13 +1,15 @@
-res://scripts/cards/solya/
+res://scripts/cards/
+res://scripts/enemies/
+res://assets/images/
+F:/GODOTProjects/GiantCrawler/saves/profiles/
 res://scripts/ui/
+res://scenes/ui/
+res://scripts/cards/solya/
 res://assets/fonts/
 res://assets/images/characters/
-res://assets/images/
-res://scenes/ui/
 res://shaders/
 F:/GODOTProjects/GiantCrawler/lang/
 res://scenes/fx/
-res://scripts/cards/
 res://assets/images/bosses/
 res://scripts/bosses/
 res://scenes/objects/
@@ -17,7 +19,6 @@ res://scenes/characters/
 res://styles/
 res://scripts/artifacts/
 res://scenes/
-res://scripts/enemies/
 res://
 F:/GODOTProjects/GiantCrawler/saves/
 res://scripts/global/

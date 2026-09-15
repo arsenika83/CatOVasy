@@ -11,7 +11,7 @@ const SCALE_SELECTED = Vector2(1.15, 1.15)
 @onready var bg = $BG
 
 var rarity = "common"
-var action = "base_damage_1"
+var action = "base_damage_rare"
 var description = ""
 
 var loaded = false
@@ -25,49 +25,49 @@ func _process(delta: float) -> void:
 		icon.texture = load("res://assets/images/stat_upgrades/" + action + ".png")
 		bg.texture = load("res://assets/images/stat_upgrades/" + rarity + ".png")
 		match action:
-			"base_damage_1":
+			"base_damage_rare":
 				description = "+1 к базовому \nурону"
-			"base_damage_3":
+			"base_damage_epic":
 				description = "+3 к базовому \nурону"
-			"base_damage_5":
+			"base_damage_unbelievable":
 				description = "+5 к базовому \nурону"
-			"defence_2":
+			"defence_common":
+				description = "+1 брони"
+			"defence_rare":
 				description = "+2 брони"
-			"defence_4":
+			"defence_epic":
 				description = "+4 брони"
-			"defence_7":
-				description = "+7 брони"
-			"max_defence_3":
+			"max_defence_common":
 				description = "+3 максимальной \nброни"
-			"max_defence_6":
-				description = "+6 максимальной \nброни"
-			"max_defence_12":
-				description = "+12 максимальной \nброни"
-			"accuracy_1":
+			"max_defence_rare":
+				description = "+5 максимальной \nброни"
+			"max_defence_epic":
+				description = "+7 максимальной \nброни"
+			"accuracy_common":
 				description = "+1% точности"
-			"accuracy_3":
+			"accuracy_rare":
 				description = "+3% точности"
-			"accuracy_5":
+			"accuracy_epic":
 				description = "+5% точности"
-			"luck_2":
+			"luck_common":
 				description = "+2% к удаче"
-			"luck_4":
+			"luck_rare":
 				description = "+4% к удаче"
-			"luck_7":
+			"luck_epic":
 				description = "+7% к удаче"
-			"hp_2":
-				description = "+2 ОЗ"	
-			"hp_5":
+			"hp_common":
+				description = "+2 ОЗ"
+			"hp_rare":
 				description = "+5 ОЗ"
-			"hp_10":
+			"hp_epic":
 				description = "+10 ОЗ"
-			"hp_20":
+			"hp_unbelievable":
 				description = "+20 ОЗ"
-			"hp_50":
-				description = "+50 ОЗ"	
-			"energy_1":
+			"hp_legendary":
+				description = "+50 ОЗ"
+			"energy_unbelievable":
 				description = "+1 заряд \nэнергии"
-			"energy_2":
+			"energy_legendary":
 				description = "+2 заряда \nэнергии"
 		
 		label.text = description

@@ -26,6 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://dpydh1bnymoa8" path="res://scenes/ui/level_up_dialog.tscn" id="17_yxkm4"]
 [ext_resource type="PackedScene" uid="uid://dqyxtu1uebx5v" path="res://scenes/ui/upgrade_stats_dialog.tscn" id="18_3ebcg"]
 [ext_resource type="StyleBox" uid="uid://b8wibcbgivilm" path="res://styles/button_normal.tres" id="19_56goh"]
+[ext_resource type="PackedScene" uid="uid://bba0p261tppfu" path="res://scenes/enemies/flying_mouse.tscn" id="19_a1vlu"]
 [ext_resource type="PackedScene" uid="uid://djqdt7tiwad4" path="res://scenes/ui/artifact_dialog.tscn" id="19_db1u1"]
 [ext_resource type="AudioStream" uid="uid://k300apigjs30" path="res://assets/music/BATTLE_START.mp3" id="19_luu1i"]
 [ext_resource type="StyleBox" uid="uid://2iw7p3yvicvr" path="res://styles/button_pressed.tres" id="20_j4kqp"]
@@ -277,6 +278,21 @@ position = Vector2(304, 208)
 [node name="EnemyFox7" parent="Enemies" unique_id=1475903293 instance=ExtResource("9_ng1gw")]
 position = Vector2(304, 208)
 
+[node name="FlyingMouse" parent="Enemies" unique_id=1686711816 instance=ExtResource("19_a1vlu")]
+position = Vector2(80, 16)
+
+[node name="FlyingMouse2" parent="Enemies" unique_id=1435161689 instance=ExtResource("19_a1vlu")]
+position = Vector2(80, 16)
+
+[node name="FlyingMouse3" parent="Enemies" unique_id=200893418 instance=ExtResource("19_a1vlu")]
+position = Vector2(80, 16)
+
+[node name="FlyingMouse4" parent="Enemies" unique_id=876873533 instance=ExtResource("19_a1vlu")]
+position = Vector2(80, 16)
+
+[node name="FlyingMouse5" parent="Enemies" unique_id=299814217 instance=ExtResource("19_a1vlu")]
+position = Vector2(80, 16)
+
 [node name="Characters" type="Node2D" parent="." unique_id=248065707]
 
 [node name="Edges" type="Node2D" parent="." unique_id=1566389989]
@@ -413,8 +429,10 @@ self_modulate = Color(1, 1, 1, 0.9411765)
 color = Color(0, 0, 0, 1)
 
 [node name="Effects" type="CanvasLayer" parent="." unique_id=1391118850]
+visible = false
 
 [node name="ColorRect" type="ColorRect" parent="Effects" unique_id=898663152]
+visible = false
 material = SubResource("ShaderMaterial_d7a8j")
 anchors_preset = 15
 anchor_right = 1.0

@@ -2,12 +2,13 @@
 
 [ext_resource type="Script" uid="uid://b5r500k2wlvrp" path="res://scripts/damage_indicator.gd" id="1_ni1fv"]
 
-[node name="DamageIndicator" type="Label" unique_id=348309478]
+[node name="DamageIndicator" type="RichTextLabel" unique_id=947859593]
 z_index = 50
 offset_right = 24.0
 offset_bottom = 25.0
-theme_override_font_sizes/font_size = 24
+bbcode_enabled = true
 text = "0"
+scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("1_ni1fv")

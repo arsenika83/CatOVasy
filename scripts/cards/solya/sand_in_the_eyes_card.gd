@@ -27,6 +27,21 @@ func _process(delta: float) -> void:
 		$Energy/Label.add_theme_color_override("font_color", Color.WHITE)
 		
 func on_play() -> void:
+	get_parent().get_parent().get_parent().get_parent().human.sand_particles.emitting = true
+	get_parent().get_parent().get_parent().get_parent().human.sand_particles.restart()
+	
+	get_parent().get_parent().get_parent().get_parent().wind_fx.position = get_parent().get_parent().get_parent().get_parent().human.position - Vector2(16, 32)
+	get_parent().get_parent().get_parent().get_parent().wind_fx.play("hit")
+	get_parent().get_parent().get_parent().get_parent().wind_fx.audio.play()
+	get_parent().get_parent().get_parent().get_parent().human.sprite.play("wind")
+	get_parent().get_parent().get_parent().get_parent().human.idle_animation_timer.start(0.3)
+	
+
+func on_after_play() -> void:
 	for enemy in gm.current_targets:
-		enemy.current_accuracy -= 2
-		enemy.accuracy -= 2
+		if not enemy.player_just_missed:
+			enemy.current_accuracy -= 2
+			enemy.accuracy -= 2
+
+func sand():
+	pass

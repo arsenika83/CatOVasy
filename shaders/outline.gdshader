@@ -16,6 +16,6 @@ void fragment() {
         // Выводим результат, обязательно сохраняя оригинальную прозрачность спрайта
         COLOR = vec4(mixed_rgb, texture_color.a);
     } else {
-        COLOR = texture_color;
+       // COLOR = texture_color;
     }
 }

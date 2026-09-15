@@ -30,4 +30,7 @@ func on_play() -> void:
 	pass
 
 func on_after_play() -> void:
-	get_parent().get_parent().get_parent().get_parent().human.next_strike_lucky = true	
+	get_parent().get_parent().get_parent().get_parent().human.next_strike_lucky = true
+
+func lucky_spear():
+	pass

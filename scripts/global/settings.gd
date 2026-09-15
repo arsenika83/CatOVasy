@@ -5,7 +5,6 @@ var music_volume: float = 1.0
 var sound_fx_volume: float = 1.0
 var animation_speed: float = 1.0
 
-
 var lang = "rus"
 var card_text_cat : Dictionary = load_json(str("res://lang/", lang, "_card_text_cat.json"))
 

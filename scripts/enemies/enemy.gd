@@ -2,8 +2,6 @@ class_name Enemy extends CharacterBody2D
 
 @export var damage_indicator_scene: PackedScene
 
-var is_big = false
-
 var positions : Array[Vector2]
 
 @export var hp = 5
@@ -35,6 +33,7 @@ var gave_xp = false
 var state = "idle"
 
 var is_flying = false
+var is_big = false
 
 var shake = 0.1
 
@@ -58,6 +57,7 @@ var buff_set : Array = [["strength", 1, 2], ["defend", 1, 2], ["accuracy", 10, 2
 ["luck", 5, 2], ["high_energy", 1, 2]]
 
 var just_missed = false
+var player_just_missed = false
 var is_hit_lucky = false
 var dealt_damage_to_human = false
 
@@ -146,10 +146,13 @@ func _process(delta: float) -> void:
 	else:
 		defence_sprite.visible = false
 	
+	hp_bar.value = float(hp)
 	if hp_bar.value < max_hp:
 		hp_bar.visible = true
+	else:	
+		hp_bar.visible = false		
 	
-	hp_bar.value = float(hp)
+	
 	check_hp()
 	
 	match state:
@@ -329,9 +332,12 @@ func take_damage(dmg : int, time : float) -> void:
 	taken_damage = dmg
 	
 	if dmg > 0:
+		player_just_missed = false
 		take_damage_timer.start(time)
 	else:
 		if defended:
+			player_just_missed = false
+			
 			audio_defend.play()
 			status_fx.play("defended")
 			status_fx.visible = true
@@ -342,6 +348,7 @@ func take_damage(dmg : int, time : float) -> void:
 			defended = false
 		else:
 			audio_miss.play()
+			player_just_missed = true
 		miss_damage_timer.start(time)
 		
 func defend() -> void:
@@ -470,7 +477,7 @@ func display_damage(dmg : int) -> void:
 		var spawn_pos = global_position + Vector2(0, -2)
 		
 		add_child(indicator)
-		indicator.display_damage(dmg, spawn_pos)	
+		indicator.display_damage(dmg, spawn_pos)
 	
 func turn_tick() -> void:
 	#current_defence /= 2
@@ -558,6 +565,7 @@ func _on_idle_animation_timer_timeout() -> void:
 func _on_take_damage_timer_timeout() -> void:
 	hp -= taken_damage
 	check_hp()
+	$HPParticles.restart()
 	
 	display_damage(taken_damage)
 	

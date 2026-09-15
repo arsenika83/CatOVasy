@@ -1,0 +1,136 @@
+[gd_scene format=3 uid="uid://cv287toqe0prk"]
+
+[ext_resource type="Script" uid="uid://ddlyprivcjeq4" path="res://scripts/ui/main_menu.gd" id="1_btxxm"]
+[ext_resource type="Shader" uid="uid://dw8y0528dhqqe" path="res://shaders/vhs.gdshader" id="1_sl1te"]
+[ext_resource type="StyleBox" uid="uid://b8wibcbgivilm" path="res://styles/button_normal.tres" id="2_m1kxf"]
+[ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="2_uhagc"]
+[ext_resource type="StyleBox" uid="uid://2iw7p3yvicvr" path="res://styles/button_pressed.tres" id="3_x2yvf"]
+[ext_resource type="StyleBox" uid="uid://c66nispyhk2t0" path="res://styles/button_hover.tres" id="4_uhagc"]
+[ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="5_x2yvf"]
+[ext_resource type="PackedScene" uid="uid://dx03fuh67lecn" path="res://scenes/ui/settings_main_menu.tscn" id="8_8g5eo"]
+[ext_resource type="AudioStream" uid="uid://bq0ooer30jskk" path="res://assets/soundFX/xp_pick_up.wav" id="8_wb0q5"]
+[ext_resource type="AudioStream" uid="uid://b11ss30e1i1v3" path="res://assets/music/SHOP_THEME_1.mp3" id="9_q85j6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fe2o3"]
+shader = ExtResource("1_sl1te")
+shader_parameter/horizontalMovement = -0.5999999791383199
+shader_parameter/verticalMovement = 0.1
+shader_parameter/frequencyStar = 0.0
+shader_parameter/sizeStar = 110.0
+shader_parameter/brightnessStar = 3.0
+shader_parameter/shineFrequencyStar = 8.0
+shader_parameter/transparencyStar = 0.0
+shader_parameter/starIterations = 3
+shader_parameter/frequencyBgStar = 0.996
+shader_parameter/shineFrequencyBgStar = 1.0
+shader_parameter/transparencyBgStar = 0.0
+shader_parameter/colorBackground = Color(0, 0, 0, 1)
+shader_parameter/transparencyBackground = 0.0
+shader_parameter/seed = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_btxxm"]
+shader = ExtResource("2_uhagc")
+shader_parameter/speed = 1.0000000475
+shader_parameter/amplitude = 2.000000095
+shader_parameter/time_offset = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uhagc"]
+atlas = ExtResource("5_x2yvf")
+region = Rect2(224, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_btxxm"]
+atlas = ExtResource("5_x2yvf")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x2yvf"]
+atlas = ExtResource("5_x2yvf")
+region = Rect2(224, 0, 32, 32)
+
+[node name="MainMenu" type="Control" unique_id=1493397660]
+z_index = 100
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_btxxm")
+
+[node name="BG" type="ColorRect" parent="." unique_id=1474486571]
+material = SubResource("ShaderMaterial_fe2o3")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Buttons" type="Control" parent="." unique_id=519160145]
+material = SubResource("ShaderMaterial_btxxm")
+anchors_preset = 0
+offset_left = 56.0
+offset_top = 320.0
+offset_right = 376.0
+offset_bottom = 704.0
+
+[node name="GameButton" type="Button" parent="Buttons" unique_id=1244850671]
+use_parent_material = true
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 64.0
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = ExtResource("2_m1kxf")
+theme_override_styles/pressed = ExtResource("3_x2yvf")
+theme_override_styles/hover = ExtResource("4_uhagc")
+text = "ИГРАТЬ"
+icon = SubResource("AtlasTexture_uhagc")
+expand_icon = true
+
+[node name="SettingsButton" type="Button" parent="Buttons" unique_id=840576870]
+use_parent_material = true
+layout_mode = 0
+offset_top = 88.0
+offset_right = 320.0
+offset_bottom = 152.0
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = ExtResource("2_m1kxf")
+theme_override_styles/pressed = ExtResource("3_x2yvf")
+theme_override_styles/hover = ExtResource("4_uhagc")
+text = "НАСТРОЙКИ"
+icon = SubResource("AtlasTexture_btxxm")
+expand_icon = true
+
+[node name="QuitButton" type="Button" parent="Buttons" unique_id=1165200072]
+use_parent_material = true
+layout_mode = 0
+offset_top = 264.0
+offset_right = 320.0
+offset_bottom = 328.0
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = ExtResource("2_m1kxf")
+theme_override_styles/pressed = ExtResource("3_x2yvf")
+theme_override_styles/hover = ExtResource("4_uhagc")
+text = "ВЫЙТИ"
+icon = SubResource("AtlasTexture_x2yvf")
+expand_icon = true
+
+[node name="Settings" parent="." unique_id=1558518248 instance=ExtResource("8_8g5eo")]
+use_parent_material = true
+layout_mode = 0
+offset_left = 400.0
+offset_top = 280.0
+offset_right = 400.0
+offset_bottom = 280.0
+
+[node name="AudioStreamPlayerClick" type="AudioStreamPlayer" parent="." unique_id=815851711]
+stream = ExtResource("8_wb0q5")
+bus = &"SoundFX"
+
+[node name="AudioStreamPlayerMusic" type="AudioStreamPlayer" parent="." unique_id=1120015822]
+stream = ExtResource("9_q85j6")
+autoplay = true
+bus = &"Music"
+
+[connection signal="pressed" from="Buttons/GameButton" to="." method="_on_game_button_pressed"]
+[connection signal="pressed" from="Buttons/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="Buttons/QuitButton" to="." method="_on_quit_button_pressed"]

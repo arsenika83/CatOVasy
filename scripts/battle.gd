@@ -53,8 +53,8 @@ var current_creature_turn = -2
 
 var boomerang_projectile
 
-var enemy_positions : Array[Vector2] = [Vector2(208, 112), Vector2(208, 144), Vector2(208, 80), \
-Vector2(240, 112), Vector2(240, 144), Vector2(240, 80), \
+var enemy_positions : Array[Vector2] = [Vector2(208, 112), Vector2(208, 80), Vector2(208, 144), \
+Vector2(240, 112), Vector2(240, 80), Vector2(240, 144),
 Vector2(208, 176), Vector2(208, 48), Vector2(240, 176), Vector2(240, 48)]
 var current_enemies : Array
 var team_positions : Array[String] = ["cat", "human"]
@@ -219,8 +219,13 @@ func draw_turn_label(type : String) -> void:
 
 func draw_cursor() -> void:
 	for enemy in find_child("Enemies").get_children():
+		enemy.sprite.modulate.a = 1.0
 		enemy.cursor.visible = false
-		enemy.sprite.material.set_shader_parameter("is_hovered", false)
+		
+		enemy.cursor.label.visible = false
+		enemy.cursor.icon.visible = false
+		enemy.cursor.icon2.visible = false
+		#enemy.sprite.material.set_shader_parameter("is_hovered", false)
 	
 	if current_creature_turn >= 0:
 		return
@@ -293,33 +298,42 @@ func draw_cursor() -> void:
 		for e_pos in targets.get(0).positions:
 			if e_pos.x == cursor_grid_pos.x and e_pos.y == cursor_grid_pos.y:
 				if not targets.get(0).state == "dead":
+					for enemy in find_child("Enemies").get_children():
+						if enemy == targets[0]:
+							var a_tween = create_tween()
+							a_tween.tween_property(enemy.sprite, "modulate:a", 0.9, 0.1)
+						else:
+							if enemy.state != "dead":
+								var a_tween = create_tween()
+								a_tween.tween_property(enemy.sprite, "modulate:a", 0.25, 0.1)
+					
 					for t in targets:
-							t.cursor.visible = true
-							if gm.current_card != null:
-								if gm.current_card.type == "debuff":
-									t.cursor.label.visible = false
-									t.cursor.icon.visible = false
-									t.cursor.icon2.visible = false
-									t.sprite.material.set_shader_parameter("is_hovered", true)
+						t.cursor.visible = true
+						if gm.current_card != null:
+							if gm.current_card.type == "debuff":
+								t.cursor.label.visible = false
+								t.cursor.icon.visible = false
+								t.cursor.icon2.visible = false
+								#t.sprite.material.set_shader_parameter("is_hovered", true)
 									
-								elif gm.current_card.type == "attack":
-									t.sprite.material.set_shader_parameter("is_hovered", true)
+							elif gm.current_card.type == "attack":
+								#t.sprite.material.set_shader_parameter("is_hovered", true)
 									
-									var hp_damage = t.hp - (t.hp + t.current_defence - gm.current_card.damage)
-									if hp_damage < 0:
-										hp_damage = 0
-									elif hp_damage > t.hp:
-										hp_damage = t.hp
+								var hp_damage = t.hp - (t.hp + t.current_defence - gm.current_card.damage)
+								if hp_damage < 0:
+									hp_damage = 0
+								elif hp_damage > t.hp:
+									hp_damage = t.hp
 										
-									t.cursor.label.visible = true
-									t.cursor.icon.visible = true
-									t.cursor.icon2.visible = true
-									t.cursor.label.text = str(gm.current_card.damage, "\n", hp_damage)
+								t.cursor.label.visible = true
+								t.cursor.icon.visible = true
+								t.cursor.icon2.visible = true
+								t.cursor.label.text = str(gm.current_card.damage, "\n", hp_damage)
 							else:
 								t.cursor.label.visible = false
 								t.cursor.icon.visible = false
 								t.cursor.icon2.visible = false
-					
+		
 func choose_target(action : String) -> void:
 	var current_energy = 0
 	if current_creature_turn == -2:

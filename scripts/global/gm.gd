@@ -1,5 +1,7 @@
 extends Node
 
+var level_number = 20
+
 var state = "idle"
 var prev_state = "idle"
 
@@ -65,7 +67,7 @@ var current_defence_human = 0
 var max_defence_human = 7
 var defended_human = false
 
-var accuracy_human = 100
+var accuracy_human = 60
 var min_accuracy_human = 5
 var current_accuracy_human = accuracy_human
 
@@ -119,7 +121,7 @@ func _ready() -> void:
 	current_cards_cat.set(2, InfernoCard.new())
 	current_cards_cat.set(3, DefendCard.new())
 	current_cards_cat.set(4, LickWoundsCard.new())
-	current_cards_cat.set(5, DefendCard.new())
+	current_cards_cat.set(5, DinnerCard.new())
 	current_cards_cat.set(6, GotYouCard.new())
 	current_cards_cat.set(7, CattenheimerCard.new())
 	current_cards_cat.set(8, CompensationCard.new())

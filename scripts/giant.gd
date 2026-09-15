@@ -40,6 +40,7 @@ var xp_diff = 0
 var current_heal = 0
 var attack_count = 0
 var taken_damage = 0
+var last_damage_dealt = 0
 var is_hit_lucky = false
 var just_missed = false
 
@@ -149,6 +150,7 @@ func heal(hp : int) -> void:
 	sprite.play("healing")
 	audio_resting.play()
 	$HealTimer.start()
+	
 
 func go_downstairs() -> void:
 	$AudioStreamPlayerLevelUp.play()
@@ -473,6 +475,7 @@ func _on_miss_damage_timer_timeout() -> void:
 	get_parent().end_turn()
 
 func _on_deal_damage_timer_timeout() -> void:
+	last_damage_dealt = 0
 	var tween1 = create_tween()
 	tween1.tween_property(sprite, "position:x", sprite.position.x-4, 0.1)
 	
@@ -506,6 +509,7 @@ func _on_deal_damage_timer_timeout() -> void:
 	
 	get_parent().claw_fx.position = gm.current_targets[0].position
 	get_parent().claw_fx.play("hit")
+	
 	for target in gm.current_targets:
 		success = randf_range(0.0, 1.0) * 100 <= gm.current_accuracy_cat
 		
@@ -517,7 +521,6 @@ func _on_deal_damage_timer_timeout() -> void:
 			
 			if gm.current_card.has_method("revenge") and target.dealt_damage_to_human:
 				gm.current_damage_cat = gm.current_card.revenge()
-			
 		else:
 			just_missed = true
 			gm.current_damage_cat = 0
@@ -528,6 +531,14 @@ func _on_deal_damage_timer_timeout() -> void:
 		if gm.has_toy_cat and attack_count < 2:
 			gm.current_damage_cat *= 2
 			print("TOY CAAAAAAT")
+		
+		var damage_dealt = gm.current_damage_cat - target.current_defence
+		if damage_dealt < 0:
+			damage_dealt = 0
+		if damage_dealt > target.hp:
+			damage_dealt = target.hp
+			
+		last_damage_dealt += damage_dealt
 		
 		if gm.current_damage_cat == 0:
 			get_parent().log_messages.append(str("- [color=#1ca8fd]Кот[/color] атакует существо [color=#1ca8fd]", 
@@ -615,7 +626,7 @@ func _on_heal_timer_timeout() -> void:
 	
 	gm.state = gm.prev_state
 	sprite.play(gm.state)
-		
+	display_damage(-current_heal)
 		
 
 func _on_explode_timer_timeout() -> void:

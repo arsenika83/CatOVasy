@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://cte1o5card0yr"]
+
+[ext_resource type="Script" uid="uid://v3l1uxp47wks" path="res://scripts/ui/profiles.gd" id="1_3ye3m"]
+[ext_resource type="StyleBox" uid="uid://c66nispyhk2t0" path="res://styles/button_hover.tres" id="1_cu5bn"]
+[ext_resource type="PackedScene" uid="uid://ckrti5vbexnck" path="res://scenes/ui/profile.tscn" id="1_mvbx3"]
+[ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="3_6iluh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3ye3m"]
+resource_local_to_scene = true
+shader = ExtResource("3_6iluh")
+shader_parameter/speed = 1.0000000475
+shader_parameter/amplitude = 4.00000019
+shader_parameter/time_offset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nid0k"]
+resource_local_to_scene = true
+shader = ExtResource("3_6iluh")
+shader_parameter/speed = 1.0000000475
+shader_parameter/amplitude = 4.00000019
+shader_parameter/time_offset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p15w1"]
+resource_local_to_scene = true
+shader = ExtResource("3_6iluh")
+shader_parameter/speed = 1.0000000475
+shader_parameter/amplitude = 4.00000019
+shader_parameter/time_offset = 0.0
+
+[node name="Profiles" type="Control" unique_id=1254785470]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 672.0
+offset_bottom = 320.0
+pivot_offset = Vector2(336, 128)
+script = ExtResource("1_3ye3m")
+
+[node name="Panel" type="Panel" parent="." unique_id=523536700]
+layout_mode = 0
+offset_right = 672.0
+offset_bottom = 320.0
+theme_override_styles/panel = ExtResource("1_cu5bn")
+
+[node name="GridContainer" type="GridContainer" parent="." unique_id=1068270161]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 32.0
+offset_right = 656.0
+offset_bottom = 232.0
+theme_override_constants/h_separation = 224
+columns = 3
+
+[node name="Profile1" parent="GridContainer" unique_id=177672394 instance=ExtResource("1_mvbx3")]
+material = SubResource("ShaderMaterial_3ye3m")
+layout_mode = 2
+id = 1
+
+[node name="Profile2" parent="GridContainer" unique_id=1864591201 instance=ExtResource("1_mvbx3")]
+material = SubResource("ShaderMaterial_nid0k")
+layout_mode = 2
+id = 2
+
+[node name="Profile3" parent="GridContainer" unique_id=1019167110 instance=ExtResource("1_mvbx3")]
+material = SubResource("ShaderMaterial_p15w1")
+layout_mode = 2
+id = 3

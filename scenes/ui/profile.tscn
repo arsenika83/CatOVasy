@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://ckrti5vbexnck"]
+
+[ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="1_8j0wr"]
+[ext_resource type="StyleBox" uid="uid://b8wibcbgivilm" path="res://styles/button_normal.tres" id="1_h7my7"]
+[ext_resource type="Script" uid="uid://ca6a2agfnq7ce" path="res://scripts/ui/profile.gd" id="1_one17"]
+[ext_resource type="StyleBox" uid="uid://2iw7p3yvicvr" path="res://styles/button_pressed.tres" id="2_one17"]
+[ext_resource type="StyleBox" uid="uid://c66nispyhk2t0" path="res://styles/button_hover.tres" id="3_8j0wr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y5emt"]
+resource_local_to_scene = true
+shader = ExtResource("1_8j0wr")
+shader_parameter/speed = 1.0000000475
+shader_parameter/amplitude = 4.00000019
+shader_parameter/time_offset = 0.0
+
+[node name="Profile" type="Control" unique_id=177672394]
+material = SubResource("ShaderMaterial_y5emt")
+layout_mode = 3
+anchors_preset = 0
+offset_right = 192.0
+offset_bottom = 256.0
+script = ExtResource("1_one17")
+
+[node name="Button" type="Button" parent="." unique_id=1410049528]
+use_parent_material = true
+layout_mode = 0
+offset_right = 192.0
+offset_bottom = 256.0
+pivot_offset = Vector2(64, 96)
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = ExtResource("1_h7my7")
+theme_override_styles/pressed = ExtResource("2_one17")
+theme_override_styles/hover = ExtResource("3_8j0wr")
+text = "ПУСТО"
+
+[node name="Timer" type="Timer" parent="." unique_id=1729280200]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

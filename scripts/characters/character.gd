@@ -33,6 +33,7 @@ var character_name_display = "Соля"
 @onready var light = $PointLight2D
 
 @onready var luck_particles = $LuckParticles
+@onready var sand_particles = $SandParticles
 
 var current_heal = 0
 var attack_count = 0
@@ -571,6 +572,7 @@ func _on_idle_animation_timer_timeout() -> void:
 	#gm.state_human = gm.prev_state_human
 	sprite.play("battle")
 	sprite.flip_h = false
+	#get_parent().fire_fx.visible = true
 
 func _on_miss_damage_timer_timeout() -> void:
 	display_damage(0)
@@ -669,6 +671,10 @@ func _on_deal_damage_timer_timeout() -> void:
 		var tween4 = create_tween()
 		tween4.tween_property(get_parent().cat_fx, "rotation_degrees", 0, 0.3)
 		get_parent().cat_fx.play("hit")
+		
+	#Песок
+	if gm.current_card.has_method("sand"):
+		get_parent().fire_fx.scale = Vector2(0, 0)
 			
 			
 	if just_missed:

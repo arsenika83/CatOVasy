@@ -30,13 +30,80 @@ func update_cards(character : String) -> void:
 	for i in range(0, 3):
 		var card_index
 		var card_name 
+		var rarity = "common"
 		
 		if current_character == "cat":
-			card_index = randi_range(0, catalog.all_card_names_cat.size()-1)
-			card_name = catalog.all_card_names_cat.get(card_index)
+			for j in range(0, 3):
+				match rarity:
+					"all":
+						pass
+					"common":
+						var rare_chance = randi_range(1, 100) < catalog.rare_card_chance[gm.level_number-1]
+						if rare_chance or catalog.all_card_names_common_cat.size() == 0:
+							rarity = "rare"
+						
+					"rare":
+						var epic_chance = randi_range(1, 100) < catalog.epic_card_chance[gm.level_number-1]
+						if epic_chance or catalog.all_card_names_rare_cat.size() == 0:
+							rarity = "epic"
+						
+					"epic":
+						var unbelievable_chance = randi_range(1, 100) < catalog.unbelievable_card_chance[gm.level_number-1]
+						if unbelievable_chance or catalog.all_card_names_epic_cat.size() == 0:
+							rarity = "unbelievable"
+								
+			match rarity:
+				"all":
+					card_index = randi_range(0, catalog.all_card_names_cat.size()-1)
+					card_name = catalog.all_card_names_cat.get(card_index)
+				"common":
+					card_index = randi_range(0, catalog.all_card_names_common_cat.size()-1)
+					card_name = catalog.all_card_names_common_cat.get(card_index)
+				"rare":
+					card_index = randi_range(0, catalog.all_card_names_rare_cat.size()-1)
+					card_name = catalog.all_card_names_rare_cat.get(card_index)
+				"epic":
+					card_index = randi_range(0, catalog.all_card_names_epic_cat.size()-1)
+					card_name = catalog.all_card_names_epic_cat.get(card_index)
+				"unbelievable":
+					card_index = randi_range(0, catalog.all_card_names_unbelievable_cat.size()-1)
+					card_name = catalog.all_card_names_unbelievable_cat.get(card_index)
 		else:
-			card_index = randi_range(0, catalog.all_card_names_human.size()-1)
-			card_name = catalog.all_card_names_human.get(card_index)
+			for j in range(0, 3):
+				match rarity:
+					"all":
+						pass
+					"common":
+						var rare_chance = randi_range(1, 100) < catalog.rare_card_chance[gm.level_number-1]
+						if rare_chance or catalog.all_card_names_common_human.size() == 0:
+							rarity = "rare"
+						
+					"rare":
+						var epic_chance = randi_range(1, 100) < catalog.epic_card_chance[gm.level_number-1]
+						if epic_chance or catalog.all_card_names_rare_human.size() == 0:
+							rarity = "epic"
+						
+					"epic":
+						var unbelievable_chance = randi_range(1, 100) < catalog.unbelievable_card_chance[gm.level_number-1]
+						if unbelievable_chance or catalog.all_card_names_epic_human.size() == 0:
+							rarity = "unbelievable"
+								
+			match rarity:
+				"all":
+					card_index = randi_range(0, catalog.all_card_names_human.size()-1)
+					card_name = catalog.all_card_names_human.get(card_index)
+				"common":
+					card_index = randi_range(0, catalog.all_card_names_common_human.size()-1)
+					card_name = catalog.all_card_names_common_human.get(card_index)
+				"rare":
+					card_index = randi_range(0, catalog.all_card_names_rare_human.size()-1)
+					card_name = catalog.all_card_names_rare_human.get(card_index)
+				"epic":
+					card_index = randi_range(0, catalog.all_card_names_epic_human.size()-1)
+					card_name = catalog.all_card_names_epic_human.get(card_index)
+				"unbelievable":
+					card_index = randi_range(0, catalog.all_card_names_unbelievable_human.size()-1)
+					card_name = catalog.all_card_names_unbelievable_human.get(card_index)
 			
 		var card_scene = load("res://scenes/cards/" + card_name + "_card.tscn")
 		var card = card_scene.instantiate()
