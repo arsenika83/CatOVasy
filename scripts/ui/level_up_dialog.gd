@@ -5,10 +5,10 @@ extends Control
 
 @onready var audio = $AudioStreamPlayer
 @onready var audio_burn = $AudioStreamPlayerBurn
+@onready var audio_boom = $AudioBoom
 
 @onready var particles_left = $ParticlesLeft
 @onready var particles_right = $ParticlesRight
-
 
 var current_character : String = "cat"
 
@@ -121,5 +121,7 @@ func _on_mouse_entered() -> void:
 
 
 func _on_particle_timer_timeout() -> void:
+	audio_boom.pitch_scale = randf_range(0.8, 1.2)
+	audio_boom.play()
 	particles_left.restart()
 	particles_right.restart()

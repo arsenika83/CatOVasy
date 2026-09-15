@@ -15,10 +15,10 @@
 [ext_resource type="AudioStream" uid="uid://bq0ooer30jskk" path="res://assets/soundFX/xp_pick_up.wav" id="9_7axqy"]
 [ext_resource type="AudioStream" uid="uid://bv07t8ic6tpma" path="res://assets/soundFX/miss.wav" id="10_a0gv1"]
 [ext_resource type="AudioStream" uid="uid://bclkaxhxamdmf" path="res://assets/soundFX/defend.wav" id="11_piljf"]
-[ext_resource type="AudioStream" uid="uid://btyuivf1mvgot" path="res://assets/soundFX/hit_lucky.wav" id="13_bbpbm"]
 [ext_resource type="AudioStream" uid="uid://ceun5aaxxb0o7" path="res://assets/soundFX/debuff.wav" id="14_6tupa"]
 [ext_resource type="AudioStream" uid="uid://bm7pxholhb1v4" path="res://assets/soundFX/magic.wav" id="14_105hs"]
 [ext_resource type="AudioStream" uid="uid://b5kgcekrp1yv2" path="res://assets/soundFX/walk.wav" id="15_kygiq"]
+[ext_resource type="AudioStream" uid="uid://b281edhvbfgf6" path="res://assets/soundFX/luck.wav" id="17_bf2la"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g1j1r"]
 size = Vector2(32, 32)
@@ -667,6 +667,31 @@ metadata/_snap_enabled = true
 [sub_resource type="CircleShape2D" id="CircleShape2D_usu7w"]
 radius = 7.28011
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ivdl6"]
+atlas = ExtResource("5_105hs")
+region = Rect2(16, 144, 16, 16)
+
+[sub_resource type="Curve" id="Curve_bf2la"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.6594203, 0.022471905), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_7axqy"]
+curve = SubResource("Curve_bf2la")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vyhtu"]
+particle_flag_disable_z = true
+angle_min = 1.0728835e-05
+angle_max = 30.000011
+direction = Vector3(0, 10, 0)
+initial_velocity_max = 50.0
+angular_velocity_min = 4.999984
+angular_velocity_max = 99.999985
+gravity = Vector3(0, -100, 0)
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_7axqy")
+hue_variation_min = -2.2351742e-08
+hue_variation_max = 0.019999977
+
 [node name="CharacterSolya" type="CharacterBody2D" unique_id=52898326]
 script = ExtResource("1_5tjqq")
 damage_indicator_scene = ExtResource("2_105hs")
@@ -688,9 +713,8 @@ autoplay = "default"
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1453614389]
 position = Vector2(0, -22)
 sprite_frames = SubResource("SpriteFrames_a16jr")
-animation = &"fog"
+animation = &"battle"
 autoplay = "walking_side"
-frame_progress = 0.7333343
 
 [node name="ArtifactSprite" type="AnimatedSprite2D" parent="." unique_id=534946203]
 visible = false
@@ -725,6 +749,17 @@ collision_mask = 127
 position = Vector2(-4, -5)
 shape = SubResource("CircleShape2D_usu7w")
 debug_color = Color(0.9065989, 0.2383379, 0.48185843, 0.41960785)
+
+[node name="LuckParticles" type="GPUParticles2D" parent="." unique_id=1649125458]
+z_index = 10
+position = Vector2(0, -64)
+emitting = false
+amount = 7
+texture = SubResource("AtlasTexture_ivdl6")
+lifetime = 7.02
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_vyhtu")
 
 [node name="IdleAnimationTimer" type="Timer" parent="." unique_id=1427834787]
 one_shot = true
@@ -814,7 +849,7 @@ volume_db = 3.0
 bus = &"SoundFX"
 
 [node name="AudioStreamPlayerHitLucky" type="AudioStreamPlayer" parent="." unique_id=1785666445]
-stream = ExtResource("13_bbpbm")
+stream = ExtResource("17_bf2la")
 volume_db = -3.0
 bus = &"SoundFX"
 

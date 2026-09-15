@@ -10,7 +10,6 @@
 [ext_resource type="AudioStream" uid="uid://b78ln2t2dmc8p" path="res://assets/soundFX/meow_die.wav" id="4_nb6gf"]
 [ext_resource type="Texture2D" uid="uid://4itbl0ejcd3o" path="res://assets/images/tilemap.png" id="4_x3klb"]
 [ext_resource type="PackedScene" uid="uid://cr7p23s5f4urx" path="res://scenes/fx/status_fx.tscn" id="5_lu5c6"]
-[ext_resource type="AudioStream" uid="uid://btyuivf1mvgot" path="res://assets/soundFX/hit_lucky.wav" id="6_qch6t"]
 [ext_resource type="Shader" uid="uid://cuo3gko47e2p8" path="res://shaders/outline.gdshader" id="6_x3klb"]
 [ext_resource type="AudioStream" uid="uid://dnpo0un37rpje" path="res://assets/soundFX/enemies/mouse_hurt.wav" id="7_y5th1"]
 [ext_resource type="AudioStream" uid="uid://bv07t8ic6tpma" path="res://assets/soundFX/miss.wav" id="8_n7575"]
@@ -18,6 +17,7 @@
 [ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="11_maese"]
 [ext_resource type="AudioStream" uid="uid://ceun5aaxxb0o7" path="res://assets/soundFX/debuff.wav" id="11_tihwb"]
 [ext_resource type="AudioStream" uid="uid://vid6rjo3jggy" path="res://assets/soundFX/follow.wav" id="12_p7w77"]
+[ext_resource type="AudioStream" uid="uid://b281edhvbfgf6" path="res://assets/soundFX/luck.wav" id="13_maese"]
 [ext_resource type="PackedScene" uid="uid://ba7f54d4yq2hp" path="res://scenes/ui/cursor.tscn" id="14_twn6s"]
 [ext_resource type="AudioStream" uid="uid://bq0ooer30jskk" path="res://assets/soundFX/xp_pick_up.wav" id="19_smbsv"]
 
@@ -51,7 +51,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_yu8pw")
 }],
-"loop": 1,
+"loop": true,
 "name": &"default",
 "speed": 1.0
 }]
@@ -83,7 +83,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_kugq1")
 }],
-"loop": 1,
+"loop": true,
 "name": &"default",
 "speed": 5.0
 }]
@@ -148,7 +148,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fcftc")
 }],
-"loop": 0,
+"loop": false,
 "name": &"dead",
 "speed": 1.0
 }, {
@@ -171,7 +171,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_twn6s")
 }],
-"loop": 1,
+"loop": true,
 "name": &"deal_damage",
 "speed": 10.0
 }, {
@@ -179,7 +179,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jt03m")
 }],
-"loop": 1,
+"loop": true,
 "name": &"default",
 "speed": 5.0
 }, {
@@ -190,7 +190,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_k4gvh")
 }],
-"loop": 1,
+"loop": true,
 "name": &"idle",
 "speed": 1.0
 }, {
@@ -198,7 +198,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_lu5c6")
 }],
-"loop": 1,
+"loop": true,
 "name": &"take_damage",
 "speed": 5.0
 }]
@@ -222,13 +222,44 @@ shader_parameter/speed = 2.000000095
 shader_parameter/amplitude = 1.0000000475
 shader_parameter/time_offset = 0.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_4f0mh"]
+atlas = ExtResource("3_sb86v")
+region = Rect2(16, 144, 16, 16)
+
+[sub_resource type="Curve" id="Curve_gc4hx"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.6594203, 0.022471905), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_f6y8w"]
+curve = SubResource("Curve_gc4hx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_y2gxb"]
+particle_flag_disable_z = true
+angle_min = 1.0728835e-05
+angle_max = 30.000011
+direction = Vector3(0, 10, 0)
+initial_velocity_max = 50.0
+angular_velocity_min = 4.999984
+angular_velocity_max = 99.999985
+gravity = Vector3(0, -100, 0)
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_f6y8w")
+hue_variation_min = -2.2351742e-08
+hue_variation_max = 0.019999977
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f6y8w"]
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_a7tdr"]
 atlas = ExtResource("3_sb86v")
-region = Rect2(0, 256, 32, 8)
+region = Rect2(4, 256, 24, 3)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f30dh"]
 atlas = ExtResource("3_sb86v")
-region = Rect2(0, 272, 32, 16)
+region = Rect2(4, 258, 24, 3)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_maese"]
+atlas = ExtResource("3_sb86v")
+region = Rect2(0, 258, 32, 1)
 
 [node name="Enemy" type="CharacterBody2D" unique_id=685663284]
 collision_layer = 2
@@ -306,13 +337,24 @@ scroll_active = false
 autowrap_mode = 0
 horizontal_alignment = 1
 
+[node name="LuckParticles" type="GPUParticles2D" parent="." unique_id=347101049]
+z_index = 10
+position = Vector2(0, -16)
+emitting = false
+amount = 7
+texture = SubResource("AtlasTexture_4f0mh")
+lifetime = 7.02
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_y2gxb")
+
 [node name="AudioHit" type="AudioStreamPlayer" parent="." unique_id=1483378938]
 stream = ExtResource("3_38ino")
 volume_db = 3.0
 bus = &"SoundFX"
 
 [node name="AudioHitLucky" type="AudioStreamPlayer" parent="." unique_id=1904462849]
-stream = ExtResource("6_qch6t")
+stream = ExtResource("13_maese")
 volume_db = -3.0
 bus = &"SoundFX"
 
@@ -376,14 +418,25 @@ one_shot = true
 
 [node name="HPBar" type="TextureProgressBar" parent="." unique_id=465101241]
 visible = false
-offset_left = -16.0
-offset_top = 12.0
-offset_right = 16.0
-offset_bottom = 28.0
+material = SubResource("ShaderMaterial_f6y8w")
+offset_left = -12.0
+offset_top = -6.0
+offset_right = 12.0
+offset_bottom = -3.0
 max_value = 5.0
 value = 5.0
 texture_under = SubResource("AtlasTexture_a7tdr")
 texture_progress = SubResource("AtlasTexture_f30dh")
+
+[node name="TakeDamageBar" type="TextureProgressBar" parent="." unique_id=1737042330]
+visible = false
+offset_left = -16.0
+offset_top = -6.0
+offset_right = 16.0
+offset_bottom = -5.0
+max_value = 5.0
+value = 2.0
+texture_progress = SubResource("AtlasTexture_maese")
 
 [connection signal="area_entered" from="Area2DXP" to="." method="_on_area_2dxp_area_entered"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

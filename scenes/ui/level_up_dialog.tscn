@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://c8uwkxk272amx" path="res://assets/soundFX/burn.wav" id="7_6dcm8"]
 [ext_resource type="StyleBox" uid="uid://2iw7p3yvicvr" path="res://styles/button_pressed.tres" id="7_n6hbc"]
 [ext_resource type="StyleBox" uid="uid://c66nispyhk2t0" path="res://styles/button_hover.tres" id="8_mj3lq"]
+[ext_resource type="AudioStream" uid="uid://dy4ke1qyhmxey" path="res://assets/soundFX/celebrate_boom.wav" id="10_jekd8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qtlqx"]
 shader = ExtResource("1_vtgeg")
@@ -214,6 +215,11 @@ bus = &"SoundFX"
 [node name="AudioStreamPlayerBurn" type="AudioStreamPlayer" parent="." unique_id=803297642]
 stream = ExtResource("7_6dcm8")
 volume_db = 2.0
+bus = &"SoundFX"
+
+[node name="AudioBoom" type="AudioStreamPlayer" parent="." unique_id=935820485]
+stream = ExtResource("10_jekd8")
+volume_db = -6.0
 bus = &"SoundFX"
 
 [node name="ParticlesLeft" type="GPUParticles2D" parent="." unique_id=1751026032]

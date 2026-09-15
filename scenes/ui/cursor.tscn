@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://ba7f54d4yq2hp"]
 
 [ext_resource type="Texture2D" uid="uid://4itbl0ejcd3o" path="res://assets/images/tilemap.png" id="1_1eco6"]
+[ext_resource type="Script" uid="uid://bttrs3so2yvd8" path="res://scripts/ui/cursor.gd" id="1_ea65e"]
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="2_qi3ym"]
+[ext_resource type="Shader" uid="uid://c8kgj3ayylkt6" path="res://shaders/card_glow.gdshader" id="3_ea65e"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s0nli"]
 atlas = ExtResource("1_1eco6")
@@ -20,19 +22,32 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ndevg")
 }],
-"loop": 1,
+"loop": true,
 "name": &"default",
 "speed": 1.0
 }]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ytdos"]
+shader = ExtResource("3_ea65e")
+shader_parameter/glow_color = Color(0.2, 0.6, 1, 1)
+shader_parameter/glow_intensity = 2.982000141645
+shader_parameter/glow_size = 0.55600002641
+shader_parameter/pulse_speed = 6.7730003217175
+shader_parameter/is_active = true
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gbfun"]
 atlas = ExtResource("2_qi3ym")
 region = Rect2(16, 128, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ea65e"]
+atlas = ExtResource("2_qi3ym")
+region = Rect2(32, 128, 16, 16)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qi3ym"]
 size = Vector2(32, 32)
 
 [node name="Cursor" type="Node2D" unique_id=2051460958]
+script = ExtResource("1_ea65e")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1881866203]
 sprite_frames = SubResource("SpriteFrames_f30dh")
@@ -41,28 +56,45 @@ frame_progress = 0.23370326
 
 [node name="Icon" type="TextureRect" parent="." unique_id=420227113]
 visible = false
-z_index = 90
-offset_left = -25.0
-offset_top = -4.0
-offset_right = -18.0
-offset_bottom = 4.0
+z_index = 200
+z_as_relative = false
+material = SubResource("ShaderMaterial_ytdos")
+offset_left = -1.0
+offset_top = -8.0
+offset_right = 6.0
+pivot_offset = Vector2(-7, 4)
 texture = SubResource("AtlasTexture_gbfun")
+expand_mode = 1
+
+[node name="Icon2" type="TextureRect" parent="." unique_id=798336060]
+visible = false
+z_index = 200
+material = SubResource("ShaderMaterial_ytdos")
+offset_left = -1.0
+offset_right = 6.0
+offset_bottom = 8.0
+pivot_offset = Vector2(-7, 4)
+texture = SubResource("AtlasTexture_ea65e")
 expand_mode = 1
 
 [node name="Label" type="Label" parent="." unique_id=1482008603]
 visible = false
-z_index = 90
-offset_left = -74.0
-offset_top = -8.0
-offset_right = -26.0
-offset_bottom = 8.0
-theme_override_colors/font_outline_color = Color(0.6509804, 0.3019608, 0.30588236, 1)
+z_index = 200
+z_as_relative = false
+offset_left = -56.0
+offset_top = -10.0
+offset_right = -2.0
+offset_bottom = 9.0
+pivot_offset = Vector2(48, 8)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -3
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 0
-theme_override_constants/outline_size = 1
+theme_override_constants/outline_size = 2
 theme_override_constants/shadow_outline_size = 1
 theme_override_font_sizes/font_size = 10
-text = "2"
+text = "200
+100"
 horizontal_alignment = 2
 vertical_alignment = 1
 

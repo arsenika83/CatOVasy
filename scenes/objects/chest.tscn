@@ -32,12 +32,13 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_yu8pw")
 }],
-"loop": 1,
+"loop": true,
 "name": &"default",
 "speed": 1.0
 }]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5vikd"]
+resource_local_to_scene = true
 shader = ExtResource("2_nj372")
 shader_parameter/overlay_color = Color(0.9882353, 0.30588236, 0.31764707, 1)
 shader_parameter/mix_amount = 0.0
@@ -88,7 +89,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_eiphe")
 }],
-"loop": 1,
+"loop": true,
 "name": &"closed_all",
 "speed": 5.0
 }, {
@@ -96,7 +97,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_opa1x")
 }],
-"loop": 0,
+"loop": false,
 "name": &"closed_common",
 "speed": 5.0
 }, {
@@ -104,7 +105,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_or75c")
 }],
-"loop": 1,
+"loop": true,
 "name": &"closed_epic",
 "speed": 5.0
 }, {
@@ -112,7 +113,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_nj372")
 }],
-"loop": 1,
+"loop": true,
 "name": &"closed_rare",
 "speed": 5.0
 }, {
@@ -120,7 +121,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_so5va")
 }],
-"loop": 1,
+"loop": true,
 "name": &"closed_unbelievable",
 "speed": 5.0
 }, {
@@ -128,7 +129,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ekffs")
 }],
-"loop": 1,
+"loop": true,
 "name": &"open_all",
 "speed": 5.0
 }, {
@@ -136,7 +137,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_acra8")
 }],
-"loop": 0,
+"loop": false,
 "name": &"open_common",
 "speed": 5.0
 }, {
@@ -144,7 +145,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_mhowy")
 }],
-"loop": 1,
+"loop": true,
 "name": &"open_epic",
 "speed": 5.0
 }, {
@@ -152,7 +153,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5vikd")
 }],
-"loop": 1,
+"loop": true,
 "name": &"open_rare",
 "speed": 5.0
 }, {
@@ -160,7 +161,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_cu4jo")
 }],
-"loop": 1,
+"loop": true,
 "name": &"open_unbelievable",
 "speed": 5.0
 }]

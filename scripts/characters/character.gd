@@ -32,11 +32,15 @@ var character_name_display = "Соля"
 
 @onready var light = $PointLight2D
 
+@onready var luck_particles = $LuckParticles
+
 var current_heal = 0
 var attack_count = 0
 var taken_damage = 0
 var is_hit_lucky = false
 var just_missed = false
+
+var next_strike_lucky = false
 
 var has_debuff_weakness = false
 var has_debuff_undefend = false
@@ -585,7 +589,14 @@ func _on_deal_damage_timer_timeout() -> void:
 	var success : bool = randf_range(0.0, 1.0) * 100 <= gm.current_accuracy_human
 	is_hit_lucky = randf_range(0.0, 1.0) * 100 <= gm.current_luck_human
 	
+	if next_strike_lucky:
+		next_strike_lucky = false
+		is_hit_lucky = true
+	
 	if is_hit_lucky:
+		luck_particles.emitting = true
+		luck_particles.restart()
+		
 		get_parent().player_camera.apply_shake(0.1 + gm.current_card.shake)
 		audio_hit_lucky.play()
 		
@@ -675,6 +686,8 @@ func _on_deal_damage_timer_timeout() -> void:
 			var tween_boomerang = create_tween()
 			tween_boomerang.tween_property(get_parent().boomerang_projectile, "position", gm.current_targets[0].position + Vector2(600, +32), 1)
 	
+	if gm.current_card.has_method("on_after_play"):
+		gm.current_card.on_after_play()
 	idle_animation_timer.start(0.2)
 
 

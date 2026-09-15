@@ -34,6 +34,8 @@ var max_energy = 1
 var gave_xp = false
 var state = "idle"
 
+var is_flying = false
+
 var shake = 0.1
 
 var enemy_type = "enemy"
@@ -125,6 +127,8 @@ var buff_animation_time =   0.3
 @onready var defence_label = $DefenceSprite/DefenceLabel
 @onready var hp_bar = $HPBar
 
+@onready var luck_particles = $LuckParticles
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	hp_bar.max_value = max_hp
@@ -142,6 +146,9 @@ func _process(delta: float) -> void:
 	else:
 		defence_sprite.visible = false
 	
+	if hp_bar.value < max_hp:
+		hp_bar.visible = true
+	
 	hp_bar.value = float(hp)
 	check_hp()
 	
@@ -149,6 +156,7 @@ func _process(delta: float) -> void:
 		"idle":
 			pass
 		"dead":
+			hp_bar.visible = false
 			area_xp.monitoring = true
 			area.monitoring = false
 			
@@ -321,7 +329,6 @@ func take_damage(dmg : int, time : float) -> void:
 	taken_damage = dmg
 	
 	if dmg > 0:
-		hp -= dmg
 		take_damage_timer.start(time)
 	else:
 		if defended:
@@ -531,6 +538,7 @@ func turn_tick() -> void:
 func die() -> void:
 		audio_fall.play()
 		sprite.play("dead")
+		hp_bar.visible = false
 		
 		if get_parent().get_parent().name == "Battle":
 			get_parent().get_parent().log_messages.append(str("- [color=#1ca8fd]", enemy_name_rus, "[/color] [color=#fc4e52]МЕРТВ[/color]\n"))
@@ -548,6 +556,7 @@ func _on_idle_animation_timer_timeout() -> void:
 	sprite.play("idle")
 
 func _on_take_damage_timer_timeout() -> void:
+	hp -= taken_damage
 	check_hp()
 	
 	display_damage(taken_damage)
@@ -595,6 +604,9 @@ func _on_deal_damage_timer_timeout() -> void:
 	tween1.tween_property(sprite, "position:x", sprite.position.x + 4, 0.1)
 	
 	if is_hit_lucky:
+		luck_particles.emitting = true
+		luck_particles.restart()
+		
 		get_parent().get_parent().player_camera.apply_shake(0.2 + shake)
 		audio_hit_lucky.play()
 		var tween = create_tween()

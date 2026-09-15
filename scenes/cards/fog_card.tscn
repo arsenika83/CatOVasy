@@ -8,6 +8,7 @@
 [ext_resource type="FontFile" uid="uid://dub3oi8dxfpfw" path="res://assets/fonts/JeuDePixel-Regular.otf" id="6_r5kvv"]
 [ext_resource type="PackedScene" uid="uid://d2qyvibo88mu1" path="res://scenes/ui/description.tscn" id="7_oxksr"]
 [ext_resource type="AudioStream" uid="uid://bq0ooer30jskk" path="res://assets/soundFX/xp_pick_up.wav" id="8_2dpku"]
+[ext_resource type="Texture2D" uid="uid://s34pblv0ga2j" path="res://assets/images/fx.png" id="9_4mspy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jl6rh"]
 resource_local_to_scene = true
@@ -15,6 +16,21 @@ shader = ExtResource("1_ghaix")
 shader_parameter/speed = 2.000000095
 shader_parameter/amplitude = 10.000000475
 shader_parameter/time_offset = 0.4390000208525
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i20ma"]
+atlas = ExtResource("9_4mspy")
+region = Rect2(0, 160, 5, 5)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2dpku"]
+particle_flag_disable_z = true
+direction = Vector3(0, -10, 0)
+spread = 90.0
+initial_velocity_min = 5.0
+initial_velocity_max = 45.0
+angular_velocity_min = -457.91
+angular_velocity_max = 656.74
+gravity = Vector3(0, -40, 0)
+scale_max = 3.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0qqw3"]
 atlas = ExtResource("3_4mspy")
@@ -36,6 +52,16 @@ offset_right = 128.0
 offset_bottom = 99.91999
 pivot_offset = Vector2(64, 96)
 script = ExtResource("2_2dpku")
+
+[node name="Particles" type="GPUParticles2D" parent="." unique_id=1593589265]
+position = Vector2(64, 88)
+emitting = false
+amount = 20
+texture = SubResource("AtlasTexture_i20ma")
+lifetime = 3.0
+randomness = 0.3
+trail_lifetime = 2.2699999999999996
+process_material = SubResource("ParticleProcessMaterial_2dpku")
 
 [node name="BG2" type="TextureRect" parent="." unique_id=1690685854]
 use_parent_material = true

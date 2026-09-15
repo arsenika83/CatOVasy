@@ -30,6 +30,8 @@ var character_name_display = "Кот"
 @onready var audio_hit_lucky = $AudioStreamPlayerHitLucky
 @onready var audio_debuff = $AudioStreamPlayerDebuff
 
+@onready var luck_particles = $LuckParticles
+
 var light_diff = 0.0001
 @onready var light = $PointLight2D
 
@@ -481,6 +483,9 @@ func _on_deal_damage_timer_timeout() -> void:
 	is_hit_lucky = randf_range(0.0, 1.0) * 100 <= gm.current_luck_cat
 	
 	if is_hit_lucky:
+		luck_particles.emitting = true
+		luck_particles.restart()
+		
 		get_parent().player_camera.apply_shake(0.1 + gm.current_card.shake)
 		audio_hit_lucky.play()
 		
@@ -583,6 +588,8 @@ func _on_deal_damage_timer_timeout() -> void:
 			var tween_boomerang = create_tween()
 			tween_boomerang.tween_property(get_parent().boomerang_projectile, "position", gm.current_targets[0].position + Vector2(600, +32), 1)
 	
+	if gm.current_card.has_method("on_after_play"):
+		gm.current_card.on_after_play()
 	idle_animation_timer.start(0.2)
 
 func _on_defend_timer_timeout() -> void:

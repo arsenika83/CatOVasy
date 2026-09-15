@@ -1,3 +1,6 @@
+GPUParticles2D
+CanvasLayer
+AudioStreamPlayer
 TextureRect
 AnimatedSprite2D
 Control
@@ -9,7 +12,3 @@ Label
 Button
 Node2D
 ColorRect
-CanvasModulate
-PointLight2D
-ParallaxBackground
-ParallaxLayer

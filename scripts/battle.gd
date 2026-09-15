@@ -88,7 +88,6 @@ func _process(delta: float) -> void:
 	cursor.global_position = map.map_to_local(cursor_map_pos)
 	
 	draw_cursor()
-	display_cursor_label() 
 	#update_creature_dialog()
 	
 	if state == "default":
@@ -150,7 +149,6 @@ func init() -> void:
 		$FX.add_child(tomato)
 		
 	if gm.has_boomerang:
-		print("BOOMERANG TEST================")
 		var boomerang_scene = load("res://scenes/fx/boomerang_projectile.tscn")
 		var boomerang = boomerang_scene.instantiate()
 		boomerang.position.x = -1000
@@ -172,7 +170,7 @@ func init() -> void:
 		current_enemies.append(enemy)
 		enemy.enemy_name_rus = str(enemy.enemy_name_rus, "(", enemy_count + 1, ")")
 		enemy_count += 1
-		enemy.hp_bar.visible = true
+		#enemy.hp_bar.visible = true
 
 func win() -> void:
 	pass
@@ -198,24 +196,7 @@ func swap_characters() -> void:
 		gm.battle_x_human -= 1
 		human.position.x -= 32
 
-func display_cursor_label() -> void:
-	var cursor_grid_pos = map.local_to_map(get_global_mouse_position())
-	var target_local_pos = map.map_to_local(cursor_grid_pos)
-	var cursor_label = cursor.find_child("Label")
-	cursor_label.visible = false
-	var cursor_icon = cursor.find_child("Icon")
-	cursor_icon.visible = false
-	
-	for i in range(0, find_child("Enemies").get_child_count()):
-		var targets : Array[CharacterBody2D] = [find_child("Enemies").get_child(i)]
-		
-		if targets[0].battle_x == cursor_grid_pos.x and targets[0].battle_y == cursor_grid_pos.y:
-			if not targets.get(0).state == "dead":
-				if gm.state == "battle_attack":
-					cursor_label.visible = true
-					cursor_icon.visible = true
-					#cursor_label.text = str(card_container.current_selected.damage - targets.get(0).current_defence)
-
+					
 func find_enemy_by_position(battle_x : int, battle_y : int) -> CharacterBody2D:
 	for enemy in find_child("Enemies").get_children():
 		if enemy.battle_x == battle_x and enemy.battle_y == battle_y:
@@ -315,8 +296,29 @@ func draw_cursor() -> void:
 					for t in targets:
 							t.cursor.visible = true
 							if gm.current_card != null:
-								if gm.current_card.type == "attack" or gm.current_card.type == "debuff":
+								if gm.current_card.type == "debuff":
+									t.cursor.label.visible = false
+									t.cursor.icon.visible = false
+									t.cursor.icon2.visible = false
 									t.sprite.material.set_shader_parameter("is_hovered", true)
+									
+								elif gm.current_card.type == "attack":
+									t.sprite.material.set_shader_parameter("is_hovered", true)
+									
+									var hp_damage = t.hp - (t.hp + t.current_defence - gm.current_card.damage)
+									if hp_damage < 0:
+										hp_damage = 0
+									elif hp_damage > t.hp:
+										hp_damage = t.hp
+										
+									t.cursor.label.visible = true
+									t.cursor.icon.visible = true
+									t.cursor.icon2.visible = true
+									t.cursor.label.text = str(gm.current_card.damage, "\n", hp_damage)
+							else:
+								t.cursor.label.visible = false
+								t.cursor.icon.visible = false
+								t.cursor.icon2.visible = false
 					
 func choose_target(action : String) -> void:
 	var current_energy = 0
@@ -447,10 +449,21 @@ func enemy_turn() -> void:
 		source.my_turn.visible = true
 		var target : CharacterBody2D
 		
-		if team_positions.get(0) == "cat":
-			target = giant
+		if source.is_flying:
+			if team_positions.get(1) == "cat":
+				target = giant
+			else:
+				target = human
 		else:
+			if team_positions.get(0) == "cat":
+				target = giant
+			else:
+				target = human
+		
+		if target == giant and gm.state == "dead":
 			target = human
+		if target == human and gm.state_human == "dead":
+			target = giant	
 			
 		var action_number = randi_range(0, source.move_set.size()-1)
 		var action = source.move_set.get(action_number)

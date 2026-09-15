@@ -91,7 +91,7 @@ func select_card():
 		gm.state = "battle" + state_modifier
 		gm.prev_state = gm.state
 
-func deselect_card():
+func deselect_card(is_played : bool):
 	if enabled:
 		z_index -= 10
 		is_selected = false
@@ -99,6 +99,9 @@ func deselect_card():
 		tween.tween_property(self, "position:y", position.y+30, 0.1)
 		animate_to(SCALE_NORMAL, Color.WHITE)
 		gm.state = "battle"
+		
+		if not is_played:
+			gm.current_card = null
 
 func create() -> void:
 	scale = Vector2(2, 2)

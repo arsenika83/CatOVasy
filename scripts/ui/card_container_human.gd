@@ -88,14 +88,14 @@ func _on_card_selected(clicked_card: Control) -> void:
 	audio.play()
 	
 	if current_selected == clicked_card:
-		current_selected.deselect_card()
+		current_selected.deselect_card(false)
 		current_selected = null
 		get_parent().get_parent().giant.cursor.visible = false
 		get_parent().get_parent().human.cursor.visible = false
 		return
 		
 	if current_selected != null:
-		current_selected.deselect_card()
+		current_selected.deselect_card(false)
 		
 	current_selected = clicked_card
 	current_selected.select_card()
@@ -119,7 +119,7 @@ func _on_card_played(played_card: Control) -> void:
 	card_to_free = played_card
 	
 	if current_selected != null:
-		current_selected.deselect_card()
+		current_selected.deselect_card(true)
 	
 	if played_card.has_method("use_up"):
 		card_to_free.use_up_animation()
@@ -201,10 +201,15 @@ func _on_end_button_pressed() -> void:
 	$EndButton.disabled = true
 	$EndButton/StatusFX.visible = false
 	reset_no_energy()
+	
+	if current_selected != null:
+		current_selected.deselect_card(false)
+		current_selected = null
 
 func _on_delete_card_timer_timeout() -> void:
 	cards_ui.remove_child(card_to_free)
 	card_to_free.queue_free()
+	gm.current_card = null
 
 func _on_hand_clear_timer_timeout() -> void:
 	for card in hand:

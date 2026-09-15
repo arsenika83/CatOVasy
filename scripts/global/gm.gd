@@ -34,7 +34,7 @@ var current_defence_cat = 0
 var max_defence_cat = 5
 var defended_cat = false
 
-var accuracy_cat = 10
+var accuracy_cat = 70
 var min_accuracy_cat = 5
 var current_accuracy_cat = accuracy_cat
 
@@ -126,9 +126,9 @@ func _ready() -> void:
 	current_cards_cat.set(9, EclipseCard.new())
 	current_cards_cat.set(10, RevengeCard.new())
 	
-	#current_cards_human.set(1, GiveStrengthCard.new())
+	current_cards_human.set(1, SandInTheEyesCard.new())
 	current_cards_human.set(2, SollenheimerCard.new())
-	#current_cards_human.set(3, BoredomCard.new())
+	current_cards_human.set(3, LuckySpearCard.new())
 	current_cards_human.set(4, LittleFireCard.new())
 	current_cards_human.set(5, WindOfChangeCard.new())
 	#current_cards_human.set(6, FortuneWheelCard.new())
