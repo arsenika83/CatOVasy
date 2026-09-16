@@ -31,6 +31,7 @@ var character_name_display = "Кот"
 @onready var audio_debuff = $AudioStreamPlayerDebuff
 
 @onready var luck_particles = $LuckParticles
+@onready var unluck_particles = $UnluckParticles
 
 var light_diff = 0.0001
 @onready var light = $PointLight2D
@@ -42,6 +43,7 @@ var attack_count = 0
 var taken_damage = 0
 var last_damage_dealt = 0
 var is_hit_lucky = false
+var is_hit_unlucky = false
 var just_missed = false
 
 var next_strike_lucky = false
@@ -161,6 +163,7 @@ func go_downstairs() -> void:
 
 func deal_damage(targets : Array[CharacterBody2D]) -> void:
 	is_hit_lucky = false
+	is_hit_unlucky = false
 	just_missed = false
 	
 	var energy_cost = gm.current_card.energy_cost
@@ -436,6 +439,7 @@ func _on_walk_timer_timeout() -> void:
 		gm.state = "idle"
 
 func _on_take_damage_timer_timeout() -> void:
+	$HPParticles.restart()
 	check_hp()
 	
 	if damage_indicator_scene:
@@ -485,11 +489,15 @@ func _on_deal_damage_timer_timeout() -> void:
 	tween.tween_property(status_fx, "scale", Vector2(0, 0), 0.2)
 	
 	var success : bool = randf_range(0.0, 1.0) * 100 <= gm.current_accuracy_cat
-	is_hit_lucky = randf_range(0.0, 1.0) * 100 <= gm.current_luck_cat
+	if gm.current_luck_cat > 0:
+		is_hit_lucky = randf_range(0.0, 1.0) * 100 <= gm.current_luck_cat
+	elif gm.current_luck_cat < 0:
+		is_hit_unlucky = randf_range(0.0, 1.0) * 100 <= abs(gm.current_luck_cat)
 	
 	if next_strike_lucky:
 		next_strike_lucky = false
 		is_hit_lucky = true
+		is_hit_unlucky = false
 	
 	if is_hit_lucky:
 		luck_particles.emitting = true
@@ -506,6 +514,12 @@ func _on_deal_damage_timer_timeout() -> void:
 		var tween2 = create_tween()
 		tween2.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
 		tween2.tween_property(status_fx, "scale", Vector2(0, 0), 0.2)
+	elif is_hit_unlucky:
+		unluck_particles.restart()
+		
+		get_parent().player_camera.apply_shake(0.1)
+		$AudioStreamPlayerHitUnlucky.play()
+		get_parent().claw_fx.scale = Vector2(1, 1)
 	else:
 		get_parent().player_camera.apply_shake(gm.current_card.shake)
 			
@@ -533,6 +547,8 @@ func _on_deal_damage_timer_timeout() -> void:
 			
 		if is_hit_lucky:
 			gm.current_damage_cat *= 2
+		elif is_hit_unlucky:
+			gm.current_damage_cat /= 2
 			
 		if gm.has_toy_cat and attack_count < 2:
 			gm.current_damage_cat *= 2

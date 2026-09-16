@@ -33,12 +33,15 @@ var character_name_display = "Соля"
 @onready var light = $PointLight2D
 
 @onready var luck_particles = $LuckParticles
+@onready var unluck_particles = $UnluckParticles
 @onready var sand_particles = $SandParticles
 
 var current_heal = 0
 var attack_count = 0
 var taken_damage = 0
+var last_damage_dealt = 0
 var is_hit_lucky = false
+var is_hit_unlucky = false
 var just_missed = false
 
 var next_strike_lucky = false
@@ -148,6 +151,7 @@ func go_downstairs() -> void:
 
 func deal_damage(targets : Array[CharacterBody2D]) -> void:
 	is_hit_lucky = false
+	is_hit_unlucky = false
 	just_missed = false
 	
 	var energy_cost = gm.current_card.energy_cost
@@ -545,6 +549,7 @@ func _on_walk_timer_timeout() -> void:
 		gm.state_human = "idle"
 
 func _on_take_damage_timer_timeout() -> void:
+	$HPParticles.restart()
 	check_hp()
 	
 	display_damage(taken_damage)
@@ -569,8 +574,8 @@ func _on_take_damage_timer_timeout() -> void:
 		sprite.play("dead")
 
 func _on_idle_animation_timer_timeout() -> void:
-	#gm.state_human = gm.prev_state_human
-	sprite.play("battle")
+	gm.state_human = gm.prev_state_human
+	sprite.play(gm.state_human)
 	sprite.flip_h = false
 	#get_parent().fire_fx.visible = true
 
@@ -582,6 +587,7 @@ func _on_miss_damage_timer_timeout() -> void:
 	get_parent().end_turn()
 
 func _on_deal_damage_timer_timeout() -> void:
+	last_damage_dealt = 0
 	var tween1 = create_tween()
 	tween1.tween_property(sprite, "position:x", sprite.position.x - 4, 0.1)
 	
@@ -589,14 +595,17 @@ func _on_deal_damage_timer_timeout() -> void:
 	tween.tween_property(status_fx, "scale", Vector2(0, 0), 0.2)
 	
 	var success : bool = randf_range(0.0, 1.0) * 100 <= gm.current_accuracy_human
-	is_hit_lucky = randf_range(0.0, 1.0) * 100 <= gm.current_luck_human
+	if gm.current_luck_human > 0:
+		is_hit_lucky = randf_range(0.0, 1.0) * 100 <= gm.current_luck_human
+	elif gm.current_luck_human < 0:
+		is_hit_unlucky = randf_range(0.0, 1.0) * 100 <= abs(gm.current_luck_human)
 	
 	if next_strike_lucky:
 		next_strike_lucky = false
 		is_hit_lucky = true
+		is_hit_unlucky = false
 	
 	if is_hit_lucky:
-		luck_particles.emitting = true
 		luck_particles.restart()
 		
 		get_parent().player_camera.apply_shake(0.1 + gm.current_card.shake)
@@ -610,6 +619,12 @@ func _on_deal_damage_timer_timeout() -> void:
 		var tween2 = create_tween()
 		tween2.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
 		tween2.tween_property(status_fx, "scale", Vector2(0, 0), 0.2)
+	elif is_hit_unlucky:
+		unluck_particles.restart()
+		
+		get_parent().player_camera.apply_shake(0.1)
+		get_parent().fire_fx.scale = Vector2(1, 1)
+		$AudioStreamPlayerHitUnlucky.play()
 	else:
 		get_parent().player_camera.apply_shake(gm.current_card.shake)
 		
@@ -639,7 +654,16 @@ func _on_deal_damage_timer_timeout() -> void:
 			
 		if is_hit_lucky:
 			gm.current_damage_human *= 2
+		elif is_hit_unlucky:
+			gm.current_damage_human /= 2
 			
+		var damage_dealt = gm.current_damage_cat - target.current_defence
+		if damage_dealt < 0:
+			damage_dealt = 0
+		if damage_dealt > target.hp:
+			damage_dealt = target.hp
+			
+		last_damage_dealt += damage_dealt		
 
 		if gm.current_damage_human == 0:
 			get_parent().log_messages.append(str("- [color=#1ca8fd]Соля[/color] атакует существо [color=#1ca8fd]", 
@@ -699,7 +723,7 @@ func _on_deal_damage_timer_timeout() -> void:
 	
 	if gm.current_card.has_method("on_after_play"):
 		gm.current_card.on_after_play()
-	idle_animation_timer.start(0.2)
+	idle_animation_timer.start(0.4)
 
 
 func _on_defend_timer_timeout() -> void:

@@ -20,6 +20,7 @@
 [ext_resource type="AudioStream" uid="uid://bm7pxholhb1v4" path="res://assets/soundFX/magic.wav" id="14_105hs"]
 [ext_resource type="AudioStream" uid="uid://b5kgcekrp1yv2" path="res://assets/soundFX/walk.wav" id="15_kygiq"]
 [ext_resource type="AudioStream" uid="uid://b281edhvbfgf6" path="res://assets/soundFX/luck.wav" id="17_bf2la"]
+[ext_resource type="AudioStream" uid="uid://kn3dv6vl4ov1" path="res://assets/soundFX/unluck.wav" id="19_piljf"]
 [ext_resource type="AudioStream" uid="uid://cpj4ex8gfs0ie" path="res://assets/soundFX/coin-flip.wav" id="21_a0gv1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g1j1r"]
@@ -42,7 +43,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vsv37")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 1.0
 }]
@@ -74,7 +75,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wd4ag")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }]
@@ -262,7 +263,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bf2la")
 }],
-"loop": true,
+"loop": 1,
 "name": &"battle",
 "speed": 2.0
 }, {
@@ -270,7 +271,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7axqy")
 }],
-"loop": true,
+"loop": 1,
 "name": &"battle_ability",
 "speed": 5.0
 }, {
@@ -278,7 +279,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7axqy")
 }],
-"loop": true,
+"loop": 1,
 "name": &"battle_attack",
 "speed": 5.0
 }, {
@@ -286,7 +287,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bbpbm")
 }],
-"loop": true,
+"loop": 1,
 "name": &"battle_boredom",
 "speed": 5.0
 }, {
@@ -297,7 +298,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_g1j1r")
 }],
-"loop": true,
+"loop": 1,
 "name": &"battle_buff_cat",
 "speed": 5.0
 }, {
@@ -305,7 +306,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7axqy")
 }],
-"loop": true,
+"loop": 1,
 "name": &"battle_defend",
 "speed": 5.0
 }, {
@@ -313,7 +314,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_usu7w")
 }],
-"loop": true,
+"loop": 1,
 "name": &"dead",
 "speed": 5.0
 }, {
@@ -321,7 +322,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_6tupa")
 }],
-"loop": true,
+"loop": 1,
 "name": &"deal_damage",
 "speed": 5.0
 }, {
@@ -329,7 +330,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_a0gv1")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }, {
@@ -340,7 +341,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_gubmq")
 }],
-"loop": true,
+"loop": 1,
 "name": &"fog",
 "speed": 5.0
 }, {
@@ -348,7 +349,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ijvqx")
 }],
-"loop": true,
+"loop": 1,
 "name": &"healing",
 "speed": 5.0
 }, {
@@ -431,7 +432,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3ae6u")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 1.0
 }, {
@@ -439,7 +440,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_piljf")
 }],
-"loop": true,
+"loop": 1,
 "name": &"taking_damage",
 "speed": 5.0
 }, {
@@ -450,7 +451,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ihqkh")
 }],
-"loop": true,
+"loop": 1,
 "name": &"walking",
 "speed": 10.0
 }, {
@@ -461,7 +462,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_klmc7")
 }],
-"loop": true,
+"loop": 1,
 "name": &"walking_side",
 "speed": 5.0
 }, {
@@ -472,7 +473,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_oe2kp")
 }],
-"loop": true,
+"loop": 1,
 "name": &"wind",
 "speed": 12.0
 }]
@@ -579,7 +580,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xrxwe")
 }],
-"loop": false,
+"loop": 0,
 "name": &"boomerang",
 "speed": 10.0
 }, {
@@ -596,7 +597,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3xb3h")
 }],
-"loop": false,
+"loop": 0,
 "name": &"candy",
 "speed": 2.0
 }, {
@@ -604,7 +605,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_17dpp")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }, {
@@ -651,7 +652,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_mvbdv")
 }],
-"loop": false,
+"loop": 0,
 "name": &"spinner",
 "speed": 2.0
 }]
@@ -694,6 +695,31 @@ scale_curve = SubResource("CurveTexture_7axqy")
 hue_variation_min = -2.2351742e-08
 hue_variation_max = 0.019999977
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_rtbp2"]
+atlas = ExtResource("5_105hs")
+region = Rect2(48, 144, 16, 16)
+
+[sub_resource type="Curve" id="Curve_a0gv1"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.6594203, 0.022471905), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_a0gv1"]
+curve = SubResource("Curve_a0gv1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ijvqx"]
+particle_flag_disable_z = true
+angle_min = 1.0728835e-05
+angle_max = 30.000011
+direction = Vector3(0, 10, 0)
+initial_velocity_max = 50.0
+angular_velocity_min = 4.999984
+angular_velocity_max = 99.999985
+gravity = Vector3(0, -100, 0)
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_a0gv1")
+hue_variation_min = -2.2351742e-08
+hue_variation_max = 0.019999977
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bf2la"]
 particle_flag_disable_z = true
 angle_min = 1.0728835e-05
@@ -718,6 +744,20 @@ radial_velocity_max = 19.999977
 gravity = Vector3(0, 400, 0)
 scale_min = 0.19999999
 scale_max = 0.5
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bbpbm"]
+particle_flag_disable_z = true
+angle_min = 1.0728835e-05
+angle_max = 120.000015
+direction = Vector3(0, -1, 0)
+spread = 120.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 98, 0)
+scale_min = 2.0
+scale_max = 4.0
+color = Color(0.9918012, 0.15241173, 0.12503403, 1)
+hue_variation_min = -0.12000002
+hue_variation_max = 0.029999977
 
 [node name="CharacterSolya" type="CharacterBody2D" unique_id=52898326]
 script = ExtResource("1_5tjqq")
@@ -789,6 +829,14 @@ explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_vyhtu")
 
 [node name="UnluckParticles" type="GPUParticles2D" parent="." unique_id=273573431]
+position = Vector2(0, -64)
+emitting = false
+amount = 5
+texture = SubResource("AtlasTexture_rtbp2")
+lifetime = 5.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_ijvqx")
 
 [node name="SandParticles" type="GPUParticles2D" parent="." unique_id=585188691]
 position = Vector2(0, -16)
@@ -807,6 +855,18 @@ lifetime = 4.0
 one_shot = true
 trail_sections = 2
 process_material = SubResource("ParticleProcessMaterial_piljf")
+
+[node name="HPParticles" type="GPUParticles2D" parent="." unique_id=1301671773]
+position = Vector2(0, -24)
+emitting = false
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+randomness = 0.57
+trail_lifetime = 0.1
+trail_sections = 2
+trail_section_subdivisions = 10
+process_material = SubResource("ParticleProcessMaterial_bbpbm")
 
 [node name="IdleAnimationTimer" type="Timer" parent="." unique_id=1427834787]
 one_shot = true
@@ -897,6 +957,11 @@ bus = &"SoundFX"
 
 [node name="AudioStreamPlayerHitLucky" type="AudioStreamPlayer" parent="." unique_id=1785666445]
 stream = ExtResource("17_bf2la")
+volume_db = -3.0
+bus = &"SoundFX"
+
+[node name="AudioStreamPlayerHitUnlucky" type="AudioStreamPlayer" parent="." unique_id=1593412616]
+stream = ExtResource("19_piljf")
 volume_db = -3.0
 bus = &"SoundFX"
 

@@ -17,6 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://bclkaxhxamdmf" path="res://assets/soundFX/defend.wav" id="10_pdutp"]
 [ext_resource type="AudioStream" uid="uid://ceun5aaxxb0o7" path="res://assets/soundFX/debuff.wav" id="11_rhgp0"]
 [ext_resource type="AudioStream" uid="uid://vid6rjo3jggy" path="res://assets/soundFX/follow.wav" id="12_5ba63"]
+[ext_resource type="AudioStream" uid="uid://kn3dv6vl4ov1" path="res://assets/soundFX/unluck.wav" id="12_6hju4"]
 [ext_resource type="AudioStream" uid="uid://bq0ooer30jskk" path="res://assets/soundFX/xp_pick_up.wav" id="17_yyc8d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tihwb"]
@@ -52,7 +53,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_kugq1")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }]
@@ -94,7 +95,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_1co2e")
 }],
-"loop": false,
+"loop": 0,
 "name": &"dead",
 "speed": 1.0
 }, {
@@ -102,12 +103,12 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5ba63")
 }],
-"loop": true,
+"loop": 1,
 "name": &"deal_damage",
 "speed": 10.0
 }, {
 "frames": [],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }, {
@@ -136,7 +137,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wyag3")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 1.0
 }, {
@@ -144,7 +145,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_521xt")
 }],
-"loop": true,
+"loop": 1,
 "name": &"take_damage",
 "speed": 5.0
 }]
@@ -190,6 +191,31 @@ angular_velocity_max = 99.999985
 gravity = Vector3(0, -100, 0)
 scale_max = 1.5
 scale_curve = SubResource("CurveTexture_f6y8w")
+hue_variation_min = -2.2351742e-08
+hue_variation_max = 0.019999977
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6hju4"]
+atlas = ExtResource("3_521xt")
+region = Rect2(48, 144, 16, 16)
+
+[sub_resource type="Curve" id="Curve_pdutp"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.6594203, 0.022471905), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_rhgp0"]
+curve = SubResource("Curve_pdutp")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xdg4m"]
+particle_flag_disable_z = true
+angle_min = 1.0728835e-05
+angle_max = 30.000011
+direction = Vector3(0, 10, 0)
+initial_velocity_max = 50.0
+angular_velocity_min = 4.999984
+angular_velocity_max = 99.999985
+gravity = Vector3(0, -100, 0)
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_rhgp0")
 hue_variation_min = -2.2351742e-08
 hue_variation_max = 0.019999977
 
@@ -295,13 +321,23 @@ one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_pdutp")
 
+[node name="UnluckParticles" type="GPUParticles2D" parent="." unique_id=2082754275]
+position = Vector2(0, -64)
+emitting = false
+amount = 5
+texture = SubResource("AtlasTexture_6hju4")
+lifetime = 5.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_xdg4m")
+
 [node name="HPParticles" type="GPUParticles2D" parent="." unique_id=821095716]
 emitting = false
 lifetime = 0.3
 one_shot = true
 explosiveness = 1.0
 randomness = 0.57
-trail_lifetime = 0.09999999999999999
+trail_lifetime = 0.1
 trail_sections = 2
 trail_section_subdivisions = 10
 process_material = SubResource("ParticleProcessMaterial_2sef5")
@@ -331,6 +367,11 @@ bus = &"SoundFX"
 
 [node name="AudioHitLucky" type="AudioStreamPlayer" parent="." unique_id=1232764872]
 stream = ExtResource("6_bb1qk")
+volume_db = -3.0
+bus = &"SoundFX"
+
+[node name="AudioStreamPlayerHitUnlucky" type="AudioStreamPlayer" parent="." unique_id=914077085]
+stream = ExtResource("12_6hju4")
 volume_db = -3.0
 bus = &"SoundFX"
 
@@ -375,12 +416,11 @@ mix_target = 2
 bus = &"SoundFX"
 
 [node name="HPBar" type="TextureProgressBar" parent="." unique_id=1080976010]
-visible = false
 material = SubResource("ShaderMaterial_rhgp0")
 offset_left = -12.0
-offset_top = -6.0
+offset_top = -10.0
 offset_right = 12.0
-offset_bottom = -3.0
+offset_bottom = -7.0
 max_value = 5.0
 value = 5.0
 texture_under = SubResource("AtlasTexture_xdg4m")

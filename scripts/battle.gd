@@ -108,8 +108,8 @@ func _process(delta: float) -> void:
 			check_creature_stats()
 		
 	if Input.is_action_just_pressed("ui_lmb"):
-		if current_creature_turn == -2 or current_creature_turn == -1:
-			if gm.current_card != null:
+		if current_creature_turn == -2:
+			if gm.current_card != null and gm.state_human == "battle":
 				match gm.current_card.type:
 					"attack":
 						choose_target("deal_damage")
@@ -119,6 +119,17 @@ func _process(delta: float) -> void:
 						choose_target("buff")
 					"debuff":
 						choose_target("debuff")
+		elif current_creature_turn == -1:
+			if gm.current_card != null and gm.state == "battle":
+				match gm.current_card.type:
+					"attack":
+						choose_target("deal_damage")
+					"defend":
+						choose_target("defend")
+					"buff":
+						choose_target("buff")
+					"debuff":
+						choose_target("debuff")						
 
 func smooth_camera_zoom(value1, value2) -> void:
 	var tween = create_tween()
@@ -131,6 +142,9 @@ func init() -> void:
 	
 	gm.battle_x_human = map.local_to_map(human.position).x
 	gm.battle_y_human = map.local_to_map(human.position).y
+	
+	gm.state = "battle"
+	gm.state_human = "battle"
 	
 	var enemy_count = 0
 	
@@ -340,6 +354,7 @@ func choose_target(action : String) -> void:
 	var current_energy = 0
 	if current_creature_turn == -2:
 		current_energy = gm.current_energy_human
+		
 	elif current_creature_turn == -1:
 		current_energy = gm.current_energy_cat
 	
@@ -350,8 +365,12 @@ func choose_target(action : String) -> void:
 		var source
 		if current_creature_turn == -2:
 			source = human
+			gm.prev_state_human = gm.state_human
+			gm.state_human = "playing_a_card"
 		else:
 			source = giant
+			gm.prev_state = gm.state
+			gm.state = "playing_a_card"
 		
 		for i in range(0, find_child("Enemies").get_child_count()):
 			var targets : Array[CharacterBody2D] = [find_child("Enemies").get_child(i)]

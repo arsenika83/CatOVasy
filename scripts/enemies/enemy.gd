@@ -59,6 +59,7 @@ var buff_set : Array = [["strength", 1, 2], ["defend", 1, 2], ["accuracy", 10, 2
 var just_missed = false
 var player_just_missed = false
 var is_hit_lucky = false
+var is_hit_unlucky = false
 var dealt_damage_to_human = false
 
 var has_debuff_weakness = false
@@ -128,6 +129,7 @@ var buff_animation_time =   0.3
 @onready var hp_bar = $HPBar
 
 @onready var luck_particles = $LuckParticles
+@onready var unluck_particles = $UnluckParticles
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -291,10 +293,15 @@ func check_hp() -> void:
 
 func deal_damage(target : CharacterBody2D) -> void:
 	var success : bool = randf_range(0.0, 1.0) * 100 <= accuracy
-	var luck_success : bool = randf_range(0.0, 1.0) * 100 <= luck
 	just_missed = false
 	is_hit_lucky = false
+	is_hit_unlucky = false
 	current_target = target
+	
+	if current_luck > 0:
+		is_hit_lucky = randf_range(0.0, 1.0) * 100 <= current_luck
+	elif current_luck < 0:
+		is_hit_unlucky = randf_range(0.0, 1.0) * 100 <= abs(current_luck)	
 	
 	var tween1 = create_tween()
 	tween1.tween_property(sprite, "position:x", sprite.position.x - 4, 0.1)
@@ -302,7 +309,7 @@ func deal_damage(target : CharacterBody2D) -> void:
 	if success:
 		if target.character_name == "solya":
 			dealt_damage_to_human = true
-		if luck_success:
+		if is_hit_lucky:
 			status_fx.scale = Vector2(0, 0)
 			status_fx.play("lucky")
 			status_fx.visible = true
@@ -311,7 +318,8 @@ func deal_damage(target : CharacterBody2D) -> void:
 			tween.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
 			
 			current_damage = damage * 2
-			is_hit_lucky = true
+		elif is_hit_unlucky:
+			current_damage = damage / 2
 	else:
 		just_missed = true
 		print("MISS! ")
@@ -621,6 +629,10 @@ func _on_deal_damage_timer_timeout() -> void:
 		tween.tween_property(status_fx, "scale", Vector2(0, 0), 0.2)
 		
 		get_parent().get_parent().claw_fx.scale = Vector2(2, 2)
+	elif is_hit_unlucky:
+		unluck_particles.restart()
+		$AudioStreamPlayerHitUnlucky.play()
+		get_parent().get_parent().player_camera.apply_shake(0.1)
 	else:
 		get_parent().get_parent().player_camera.apply_shake(shake)
 		audio_hit.play()
