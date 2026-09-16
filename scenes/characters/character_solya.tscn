@@ -788,6 +788,8 @@ one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_vyhtu")
 
+[node name="UnluckParticles" type="GPUParticles2D" parent="." unique_id=273573431]
+
 [node name="SandParticles" type="GPUParticles2D" parent="." unique_id=585188691]
 position = Vector2(0, -16)
 emitting = false

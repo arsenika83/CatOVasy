@@ -44,6 +44,8 @@ var last_damage_dealt = 0
 var is_hit_lucky = false
 var just_missed = false
 
+var next_strike_lucky = false
+
 var has_debuff_weakness = false
 var has_debuff_undefend = false
 var has_debuff_inaccuracy = false
@@ -484,6 +486,10 @@ func _on_deal_damage_timer_timeout() -> void:
 	
 	var success : bool = randf_range(0.0, 1.0) * 100 <= gm.current_accuracy_cat
 	is_hit_lucky = randf_range(0.0, 1.0) * 100 <= gm.current_luck_cat
+	
+	if next_strike_lucky:
+		next_strike_lucky = false
+		is_hit_lucky = true
 	
 	if is_hit_lucky:
 		luck_particles.emitting = true

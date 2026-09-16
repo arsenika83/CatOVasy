@@ -1,13 +1,3 @@
-res://scenes/artifacts/lucky_coin.tscn
+res://scenes/characters/character_solya.tscn
 res://shaders/card_glow.gdshader
 res://shaders/outline.gdshader
-res://scenes/artifacts/cat_food.tscn
-res://scripts/artifacts/lucky_coin.gd
-res://scripts/global/catalog.gd
-res://scripts/global/gm.gd
-res://scripts/characters/solya_character.gd
-res://scenes/characters/character_solya.tscn
-res://scripts/cards/dinner_card.gd
-res://scenes/artifacts/heart_shaped_pillow.tscn
-res://scripts/artifacts/heart_shaped_pillow.gd
-res://scenes/ui/main_menu.tscn

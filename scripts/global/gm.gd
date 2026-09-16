@@ -69,12 +69,12 @@ var current_defence_human = 0
 var max_defence_human = 7
 var defended_human = false
 
-var accuracy_human = 20
+var accuracy_human = 65
 var min_accuracy_human = 5
 var max_accuracy_human = 99
 var current_accuracy_human = accuracy_human
 
-var luck_human = 80
+var luck_human = 15
 var min_luck_human = -100
 var max_luck_human = 100
 var current_luck_human = luck_human
