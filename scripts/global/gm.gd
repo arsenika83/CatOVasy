@@ -38,10 +38,12 @@ var defended_cat = false
 
 var accuracy_cat = 70
 var min_accuracy_cat = 5
+var max_accuracy_cat = 99
 var current_accuracy_cat = accuracy_cat
 
 var luck_cat = 10
 var min_luck_cat = -100
+var max_luck_cat = 100
 var current_luck_cat = luck_cat
 
 var energy_cat = 3
@@ -67,12 +69,14 @@ var current_defence_human = 0
 var max_defence_human = 7
 var defended_human = false
 
-var accuracy_human = 60
+var accuracy_human = 20
 var min_accuracy_human = 5
+var max_accuracy_human = 99
 var current_accuracy_human = accuracy_human
 
-var luck_human = 20
+var luck_human = 80
 var min_luck_human = -100
+var max_luck_human = 100
 var current_luck_human = luck_human
 
 var energy_human = 2
@@ -181,3 +185,4 @@ var has_tomato_cross = false
 var has_regen_ring = false
 var has_portrait_of_the_unknown = false
 var has_old_bandage = false
+var has_lucky_coin = false

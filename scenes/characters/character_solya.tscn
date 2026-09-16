@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dmq76y6cfygk7"]
 
-[ext_resource type="Script" uid="uid://cgvgwdylce4qi" path="res://scripts/characters/character.gd" id="1_5tjqq"]
+[ext_resource type="Script" uid="uid://cgvgwdylce4qi" path="res://scripts/characters/solya_character.gd" id="1_5tjqq"]
 [ext_resource type="Texture2D" uid="uid://cd6y2ykrp63it" path="res://assets/images/characters/solya_sprite.png" id="1_eb1o4"]
 [ext_resource type="PackedScene" uid="uid://bc1x5xpcygnvy" path="res://scenes/fx/damage_indicator.tscn" id="2_105hs"]
 [ext_resource type="Texture2D" uid="uid://4itbl0ejcd3o" path="res://assets/images/tilemap.png" id="3_0qj2d"]
@@ -13,12 +13,14 @@
 [ext_resource type="PackedScene" uid="uid://ba7f54d4yq2hp" path="res://scenes/ui/cursor.tscn" id="8_7axqy"]
 [ext_resource type="AudioStream" uid="uid://dyc143w8u85ck" path="res://assets/soundFX/level_up.wav" id="8_bf2la"]
 [ext_resource type="AudioStream" uid="uid://bq0ooer30jskk" path="res://assets/soundFX/xp_pick_up.wav" id="9_7axqy"]
+[ext_resource type="Texture2D" uid="uid://boubbyapyimvw" path="res://assets/images/artifacts/lucky_coin.png" id="9_a0gv1"]
 [ext_resource type="AudioStream" uid="uid://bv07t8ic6tpma" path="res://assets/soundFX/miss.wav" id="10_a0gv1"]
 [ext_resource type="AudioStream" uid="uid://bclkaxhxamdmf" path="res://assets/soundFX/defend.wav" id="11_piljf"]
 [ext_resource type="AudioStream" uid="uid://ceun5aaxxb0o7" path="res://assets/soundFX/debuff.wav" id="14_6tupa"]
 [ext_resource type="AudioStream" uid="uid://bm7pxholhb1v4" path="res://assets/soundFX/magic.wav" id="14_105hs"]
 [ext_resource type="AudioStream" uid="uid://b5kgcekrp1yv2" path="res://assets/soundFX/walk.wav" id="15_kygiq"]
 [ext_resource type="AudioStream" uid="uid://b281edhvbfgf6" path="res://assets/soundFX/luck.wav" id="17_bf2la"]
+[ext_resource type="AudioStream" uid="uid://cpj4ex8gfs0ie" path="res://assets/soundFX/coin-flip.wav" id="21_a0gv1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g1j1r"]
 size = Vector2(32, 32)
@@ -703,6 +705,20 @@ orbit_velocity_max = 0.1140001
 gravity = Vector3(3000, 0, 0)
 scale_max = 2.0
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_piljf"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 20.0
+initial_velocity_min = 70.0
+initial_velocity_max = 100.0
+angular_velocity_min = 9.999984
+angular_velocity_max = 39.999985
+radial_velocity_min = 4.9999776
+radial_velocity_max = 19.999977
+gravity = Vector3(0, 400, 0)
+scale_min = 0.19999999
+scale_max = 0.5
+
 [node name="CharacterSolya" type="CharacterBody2D" unique_id=52898326]
 script = ExtResource("1_5tjqq")
 damage_indicator_scene = ExtResource("2_105hs")
@@ -779,6 +795,16 @@ amount = 70
 lifetime = 0.4
 one_shot = true
 process_material = SubResource("ParticleProcessMaterial_bf2la")
+
+[node name="LuckyCoinParticles" type="GPUParticles2D" parent="." unique_id=1932093970]
+position = Vector2(0, -56)
+emitting = false
+amount = 1
+texture = ExtResource("9_a0gv1")
+lifetime = 4.0
+one_shot = true
+trail_sections = 2
+process_material = SubResource("ParticleProcessMaterial_piljf")
 
 [node name="IdleAnimationTimer" type="Timer" parent="." unique_id=1427834787]
 one_shot = true
@@ -886,6 +912,12 @@ bus = &"SoundFX"
 
 [node name="AudioStreamPlayerBuff" type="AudioStreamPlayer" parent="." unique_id=195865133]
 stream = ExtResource("7_0qj2d")
+volume_db = -3.0
+mix_target = 2
+bus = &"SoundFX"
+
+[node name="AudioCoin" type="AudioStreamPlayer" parent="." unique_id=1280448607]
+stream = ExtResource("21_a0gv1")
 volume_db = -3.0
 mix_target = 2
 bus = &"SoundFX"

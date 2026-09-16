@@ -1,5 +1,6 @@
-RichTextLabel
+Label
 GPUParticles2D
+RichTextLabel
 Timer
 Panel
 Button

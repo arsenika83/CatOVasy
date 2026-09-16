@@ -6,7 +6,7 @@ var complect = ""
 var path = "heart_shaped_pillow"
 var tool_tip_text = ""
 var artifact_name = "ПОДУШКА В ВИДЕ СЕРДЦА"
-var artifact_description = "Увеличивает максимальные ОЗ кота на 20\n\nВсе виды лечения восстанавливают на 1 ОЗ больше (работает для всей команды)"
+var artifact_description = "Увеличивает максимальные ОЗ кота на 20\nВсе виды лечения восстанавливают на 1 ОЗ больше (работает для всей команды)"
 var artifact_commentary = "\"Мягко и удобно\""
 
 func _ready() -> void:

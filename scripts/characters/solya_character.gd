@@ -623,6 +623,11 @@ func _on_deal_damage_timer_timeout() -> void:
 	for target in gm.current_targets:
 		success = randf_range(0.0, 1.0) * 100 <= gm.current_accuracy_human
 		
+		if is_hit_lucky and gm.has_lucky_coin:
+			success = true
+			$LuckyCoinParticles.restart()
+			$AudioCoin.play()
+			
 		if gm.current_card.has_method("cant_miss"):
 			success = true
 		

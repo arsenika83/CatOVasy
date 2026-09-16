@@ -298,6 +298,8 @@ func draw_cursor() -> void:
 		for e_pos in targets.get(0).positions:
 			if e_pos.x == cursor_grid_pos.x and e_pos.y == cursor_grid_pos.y:
 				if not targets.get(0).state == "dead":
+					#check_enemy_stats_hover(targets[0])
+
 					for enemy in find_child("Enemies").get_children():
 						if enemy == targets[0]:
 							var a_tween = create_tween()
@@ -863,6 +865,66 @@ func check_creature_stats() -> void:
 		var tween = create_tween()
 		tween.tween_property(creature_check_dialog, "position:x", -500, 0.25)
 		creature_dialog_on_screen = false
+		
+func check_enemy_stats_hover(target : CharacterBody2D):
+	current_creature_stats = target
+						
+	if not creature_dialog_on_screen:
+		creature_check_dialog.position.x = -500
+		var tween = create_tween()
+		tween.tween_property(creature_check_dialog, "position:x", 40, 0.2)
+						
+		creature_check_dialog.find_child("SubViewportContainer").find_child("SubViewport").find_child("Camera2D").target_position = target.position
+		creature_check_dialog.visible = true
+						
+		creature_dialog_on_screen = true
+						
+		if target.has_debuff_weakness:
+			creature_check_dialog.debuff_weakness.visible = true
+			creature_check_dialog.label_turns_weakness.text = str(target.turns_debuff_weakness)
+		if target.has_debuff_undefend:
+			creature_check_dialog.debuff_undefend.visible = true
+			creature_check_dialog.label_turns_undefend.text = str(target.turns_debuff_undefend)
+		if target.has_debuff_inaccuracy:
+			creature_check_dialog.debuff_inaccuracy.visible = true
+			creature_check_dialog.label_turns_inaccuracy.text = str(target.turns_debuff_inaccuracy)
+		if target.has_debuff_unluck:
+			creature_check_dialog.debuff_unluck.visible = true
+			creature_check_dialog.label_turns_unluck.text = str(target.turns_debuff_unluck)
+		if target.has_debuff_low_energy:
+			creature_check_dialog.debuff_low_energy.visible = true
+			creature_check_dialog.label_turns_low_energy.text = str(target.turns_debuff_low_energy)
+						
+		if target.has_buff_strength:
+			creature_check_dialog.buff_strength.visible = true
+			creature_check_dialog.label_turns_strength.text = str(target.turns_buff_strength)
+		if target.has_buff_defend:
+			creature_check_dialog.buff_defend.visible = true
+			creature_check_dialog.label_turns_defend.text = str(target.turns_buff_defend)
+		if target.has_buff_accuracy:
+			creature_check_dialog.buff_accuracy.visible = true
+			creature_check_dialog.label_turns_accuracy.text = str(target.turns_buff_accuracy)
+		if target.has_buff_luck:
+			creature_check_dialog.buff_luck.visible = true
+			creature_check_dialog.label_turns_luck.text = str(target.turns_buff_luck)
+		if target.has_buff_high_energy:
+			creature_check_dialog.buff_high_energy.visible = true
+			creature_check_dialog.label_turns_high_energy.text = str(target.turns_buff_high_energy)
+							
+		creature_check_dialog.find_child("NameLabel").text = target.enemy_name_rus
+						
+		var stats =   str(target.hp, "/", target.max_hp)
+		stats += 	str("\n", target.current_damage)
+		stats += 	str("\n", target.current_defence, "/", target.max_defence)
+		stats += 	str("\n", target.current_accuracy, "%")
+		stats += 	str("\n", target.current_luck, "%")
+		stats += 	str("\n", target.current_energy, "/", target.max_energy)
+		stats += 	str("\n")
+		stats += 	str("\n-")
+		stats += 	str("\n", target.xp_gives)
+		creature_check_dialog.find_child("StatsLabel").text = stats
+						
+		return
 
 func update_creature_dialog() -> void:
 	var cursor_grid_pos = map.local_to_map(get_global_mouse_position())

@@ -35,15 +35,24 @@ var all_card_names_rare_human : Array[String] = ["boredom", "fortune_wheel", "lu
 var all_card_names_epic_human : Array[String] = ["sollenheimer"]
 var all_card_names_unbelievable_human : Array[String] = ["fog", "burn_down"]
 
+
+
+
+
 var all_artifact_names : Array[String] = ["red_ball", "blue_ball", "heart_shaped_pillow", "cat_food",
 "old_bandage", "spinner", "boomerang", "regen_ring", "candy", "portrait_of_the_unknown", "fork",
-"lucky_collar", "toy_cat", "rocky", "tomato_cross"]
+"lucky_collar", "toy_cat", "rocky", "tomato_cross", "lucky_coin"]
 
 var all_artifact_names_common : Array[String] = ["red_ball", "old_bandage", "candy", "lucky_collar", "rocky", "fork"]
 var all_artifact_names_rare : Array[String] = ["blue_ball", "spinner", "boomerang", 
-"portrait_of_the_unknown"]
+"portrait_of_the_unknown", "lucky_coin"]
 var all_artifact_names_epic : Array[String] = ["heart_shaped_pillow", "toy_cat", "tomato_cross"]
 var all_artifact_names_unbelievable : Array[String] = ["regen_ring"]
+
+
+
+
+
 
 var all_stat_names : Array[String] = ["base_damage_rare", "base_damage_epic", "base_damage_unbelievable",
 "defence_common", "defence_rare", "defence_epic", "max_defence_common", "max_defence_rare", "max_defence_epic",

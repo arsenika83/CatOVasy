@@ -69,17 +69,17 @@ func update_stats(rarity : String) -> void:
 					rarity = "rare"
 					
 			"rare":
-				var epic_chance = randi_range(1, 100) < 2
+				var epic_chance = randi_range(1, 100) < 5
 				if epic_chance:
 					rarity = "epic"
 					
 			"epic":
-				var unbelievable_chance = randi_range(1, 100) < 2
+				var unbelievable_chance = randi_range(1, 100) < 5
 				if unbelievable_chance:
 					rarity = "unbelievable"
 					
 			"unbelievable":
-				var legendary_chance = randi_range(1, 100) < 3
+				var legendary_chance = randi_range(1, 100) < 5
 				if legendary_chance:
 					rarity = "legendary"
 					
