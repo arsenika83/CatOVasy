@@ -728,7 +728,7 @@ func _on_deal_damage_timer_timeout() -> void:
 
 func _on_defend_timer_timeout() -> void:
 	audio_defend.play()
-	#idle_animation_timer.start(0.2)
+	idle_animation_timer.start(0.2)
 	var tween = create_tween()
 	tween.tween_property(status_fx, "scale", Vector2(0, 0), 0.2)
 	

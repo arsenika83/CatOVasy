@@ -40,7 +40,7 @@ region = Rect2(448, 128, 64, 64)
 [node name="Settings" type="Control" unique_id=1558518248]
 layout_mode = 3
 anchors_preset = 0
-pivot_offset = Vector2(272, 192)
+pivot_offset = Vector2(-8, 192)
 script = ExtResource("1_ob3hf")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=681546958]
@@ -78,9 +78,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 128.0
+offset_left = -136.0
 offset_top = -168.0
-offset_right = 144.0
+offset_right = -128.0
 offset_bottom = -160.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -94,9 +94,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 128.0
+offset_left = -136.0
 offset_top = 160.0
-offset_right = 144.0
+offset_right = -128.0
 offset_bottom = 168.0
 grow_horizontal = 2
 grow_vertical = 2

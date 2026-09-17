@@ -1,3 +1,14 @@
-res://scenes/characters/character_solya.tscn
+res://scenes/levels/level0.tscn
 res://shaders/card_glow.gdshader
 res://shaders/outline.gdshader
+res://scripts/ui/menu.gd
+res://scenes/ui/menu.tscn
+res://scenes/ui/level_up_dialog.tscn
+res://scripts/ui/level_up_dialog.gd
+res://scripts/giant.gd
+res://scripts/game.gd
+res://scenes/ui/settings.tscn
+res://scenes/cards/wind_shield_card.tscn
+res://scripts/cards/solya/wind_shield_card.gd
+res://scripts/global/catalog.gd
+res://scripts/global/gm.gd

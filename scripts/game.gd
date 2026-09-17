@@ -75,7 +75,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	if gm.state == "battle":
+	if gm.state == "battle" or gm.state == "playing_a_card":
 		pass
 	
 	cursor_pos = get_global_mouse_position()
@@ -321,7 +321,7 @@ func draw_level_up(character : String = "human") -> void:
 	if character == "human":
 		level_up_dialog.update_cards("human")
 	else:
-		level_up_dialog.update_cards("cat")	
+		level_up_dialog.update_cards("cat")
 	level_up_dialog.level_label.text = str(gm.level-1, " → ", gm.level)
 	gm.state = "leveling_up"
 	
@@ -368,6 +368,7 @@ func start_battle() -> void:
 		battle_start_timer.start()
 	
 func end_battle() -> void:
+	gm.prev_state = "idle"
 	gm.state = "idle"
 	gm.energy_cat = gm.max_energy_cat
 	gm.current_energy_cat = gm.max_energy_cat

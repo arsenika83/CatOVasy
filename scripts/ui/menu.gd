@@ -20,7 +20,7 @@ func show_menu() -> void:
 	$MenuRect.visible = true
 	menu_on_screen = true
 	
-	#gm.prev_state = gm.state
+	gm.prev_state = gm.state
 	gm.state = "checking_menu"
 
 func hide_menu() -> void:
@@ -71,3 +71,14 @@ func _on_save_quit_button_pressed() -> void:
 
 func _on_give_up_button_pressed() -> void:
 	audio_click.play()
+
+
+func _on_mouse_entered() -> void:
+	if get_parent().get_parent().name != "Battle":
+		if menu_on_screen:
+			get_parent().get_parent().level_up_dialog.mouse_filter = MouseFilter.MOUSE_FILTER_IGNORE
+		else:
+			get_parent().get_parent().level_up_dialog.mouse_filter = MouseFilter.MOUSE_FILTER_STOP
+
+func _on_menu_rect_mouse_entered() -> void:
+	gm.state = "checking_menu"

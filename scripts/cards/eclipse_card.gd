@@ -37,6 +37,7 @@ func on_play() -> void:
 			enemy.current_energy -= 1
 
 	get_parent().get_parent().get_parent().get_parent().giant.eclipse()
+	get_parent().get_parent().get_parent().get_parent().giant.idle_animation_timer.start(0.6)
 	
 func use_up() -> void:
 	pass

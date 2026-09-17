@@ -72,12 +72,16 @@ var turns_buff_accuracy = 0
 var turns_buff_luck = 0
 var turns_buff_high_energy = 0
 
+var state = "battle"
+
 func _ready() -> void:
 	scale = Vector2(0, 0)
 	spawn()
 
 func _process(delta: float) -> void:
 	light.energy -= light_diff
+	
+	print(gm.state)
 	
 	if light.energy <= 1.2:
 		light_diff = -0.0001
@@ -389,7 +393,7 @@ func check_hp() -> void:
 			gm.state = "dead"
 
 func check_xp() -> bool:
-	if gm.xp >= gm.xp_needed and (gm.state == "idle" or gm.state == "walking"):
+	if gm.xp >= gm.xp_needed and (gm.state == "idle" or gm.state == "walking") and gm.prev_state != "leveling_up":
 		
 		$AudioStreamPlayerPickUpXP.pitch_scale = randf_range(0.8, 1.2)
 		$AudioStreamPlayerPickUpXP.play()
@@ -400,7 +404,7 @@ func check_xp() -> bool:
 		gm.xp_needed += 1
 		get_parent().draw_level_up()
 		
-		$AudioStreamPlayerLevelUp.play()
+		#$AudioStreamPlayerLevelUp.play()
 		return true
 		
 	return false
@@ -627,7 +631,7 @@ func _on_deal_damage_timer_timeout() -> void:
 
 func _on_defend_timer_timeout() -> void:
 	audio_defend.play()
-	#idle_animation_timer.start(0.2)
+	idle_animation_timer.start(0.2)
 	var tween = create_tween()
 	tween.tween_property(status_fx, "scale", Vector2(0, 0), 0.2)
 	
@@ -646,6 +650,8 @@ func _on_heal_timer_timeout() -> void:
 	if gm.hp_cat > gm.max_hp_cat:
 		gm.hp_cat = gm.max_hp_cat
 	
+	if gm.prev_state == "playing_a_card":
+		gm.prev_state = "battle"
 	gm.state = gm.prev_state
 	sprite.play(gm.state)
 	display_damage(-current_heal)

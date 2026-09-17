@@ -36,6 +36,7 @@ func _ready() -> void:
 	description_label.text = ""
 
 func _process(delta: float) -> void:
+	
 	if enabled:
 		mouse_filter = Control.MOUSE_FILTER_STOP
 	else:

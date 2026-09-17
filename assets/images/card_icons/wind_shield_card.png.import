@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bf3jyasoipc0t"
-path="res://.godot/imported/ability_card.png-2371d165a7a2d99ea78e9a000bc158ba.ctex"
+uid="uid://b4qgj6tvrfn3k"
+path="res://.godot/imported/wind_shield_card.png-4f9669c8ac7524f2c2dd0edd342706ec.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/card_icons/ability_card.png"
-dest_files=["res://.godot/imported/ability_card.png-2371d165a7a2d99ea78e9a000bc158ba.ctex"]
+source_file="res://assets/images/card_icons/wind_shield_card.png"
+dest_files=["res://.godot/imported/wind_shield_card.png-4f9669c8ac7524f2c2dd0edd342706ec.ctex"]
 
 [params]
 

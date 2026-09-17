@@ -35,5 +35,5 @@ func change_energy_cost():
 func on_play() -> void:
 	#gm.current_energy_human -= energy_cost
 		
-	get_parent().get_parent().get_parent().get_parent().human.defend(gm.defend_animation_time_human)
+	get_parent().get_parent().get_parent().get_parent().human.defend(0.6)
 	

@@ -143,3 +143,7 @@ func _on_cancel_button_pressed() -> void:
 	audio_cancel.play()
 	visible = false
 	gm.state = "idle"
+
+
+func _on_mouse_entered() -> void:
+	gm.state = "leveling_up"

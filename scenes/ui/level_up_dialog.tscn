@@ -10,6 +10,7 @@
 [ext_resource type="StyleBox" uid="uid://2iw7p3yvicvr" path="res://styles/button_pressed.tres" id="7_n6hbc"]
 [ext_resource type="StyleBox" uid="uid://c66nispyhk2t0" path="res://styles/button_hover.tres" id="8_mj3lq"]
 [ext_resource type="AudioStream" uid="uid://dy4ke1qyhmxey" path="res://assets/soundFX/celebrate_boom.wav" id="10_jekd8"]
+[ext_resource type="AudioStream" uid="uid://dyc143w8u85ck" path="res://assets/soundFX/level_up.wav" id="11_n6hbc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qtlqx"]
 shader = ExtResource("1_vtgeg")
@@ -118,6 +119,7 @@ texture = SubResource("AtlasTexture_53g1v")
 expand_mode = 1
 
 [node name="TextureRect3" type="TextureRect" parent="." unique_id=764859019]
+z_as_relative = false
 use_parent_material = true
 layout_mode = 0
 offset_left = 136.0
@@ -128,6 +130,7 @@ texture = SubResource("AtlasTexture_mj3lq")
 expand_mode = 1
 
 [node name="TextureRect4" type="TextureRect" parent="." unique_id=895001076]
+z_as_relative = false
 use_parent_material = true
 layout_mode = 0
 offset_left = 408.0
@@ -138,6 +141,7 @@ texture = SubResource("AtlasTexture_mj3lq")
 expand_mode = 1
 
 [node name="Label" type="Label" parent="." unique_id=775349505]
+z_as_relative = false
 use_parent_material = true
 layout_mode = 0
 offset_left = 16.0
@@ -150,6 +154,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="LevelLabel" type="Label" parent="." unique_id=910599828]
+z_as_relative = false
 use_parent_material = true
 layout_mode = 0
 offset_left = 240.0
@@ -162,6 +167,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label3" type="Label" parent="." unique_id=1530541452]
+z_as_relative = false
 use_parent_material = true
 layout_mode = 0
 offset_left = 16.0
@@ -186,7 +192,7 @@ theme_override_constants/v_separation = 12
 columns = 3
 
 [node name="FireButton1" type="Button" parent="." unique_id=1920054543]
-z_index = 30
+z_as_relative = false
 use_parent_material = true
 layout_mode = 0
 offset_left = 176.0
@@ -220,6 +226,10 @@ bus = &"SoundFX"
 [node name="AudioBoom" type="AudioStreamPlayer" parent="." unique_id=935820485]
 stream = ExtResource("10_jekd8")
 volume_db = -6.0
+bus = &"SoundFX"
+
+[node name="AudioLevelUp" type="AudioStreamPlayer" parent="." unique_id=709211353]
+stream = ExtResource("11_n6hbc")
 bus = &"SoundFX"
 
 [node name="ParticlesLeft" type="GPUParticles2D" parent="." unique_id=1751026032]

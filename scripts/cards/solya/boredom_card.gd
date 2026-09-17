@@ -34,5 +34,6 @@ func on_play() -> void:
 	gm.current_energy_cat += gm.current_energy_human
 	gm.current_energy_human = -1000
 	
+	get_parent().get_parent().get_parent().get_parent().human.idle_animation_timer.start(0.6)
 	get_parent().get_parent().get_parent().get_parent().end_turn()
 	print("END TURN BOREDOM")

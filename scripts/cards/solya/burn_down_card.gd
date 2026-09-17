@@ -36,6 +36,8 @@ func on_play() -> void:
 	enemy.check_hp()
 	enemy.die()
 	
+	get_parent().get_parent().get_parent().get_parent().human.idle_animation_timer.start(0.6)
+	
 	var tween = create_tween()
 	tween.tween_property(enemy.sprite, "scale", Vector2(1, 1), 0.2)
 	tween.tween_property(enemy.sprite, "scale", Vector2(0, 0), 0.3)

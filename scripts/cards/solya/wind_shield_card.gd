@@ -1,16 +1,17 @@
-class_name DefendCard extends Card
+class_name WindShieldCard extends Card
 
-var defence = 3 + gm.defence_cat
-var card_path = "defend_card.tscn"
-var icon_path = "defend_card.png"
+var defence = 2
+var card_path = "wind_shield_card.tscn"
+var icon_path = "wind_shield_card.png"
 var tool_tip_text = ""
-var card_name = "Защита"
-var card_description = "Дает защиту, равную 3 + защита кота"
+var card_name = "Щит ветра"
+var card_description = "Дает 2 защиты Соле"
 var rarity = "common"
 
 func _ready() -> void:
 	description_rect.scale = Vector2(1, 0)
 	description_label.text = card_description
+	energy_cost = 0
 	
 	state_modifier = "_defend"
 	type = "defend"
@@ -23,4 +24,4 @@ func _process(delta: float) -> void:
 		$Energy/Label.add_theme_color_override("font_color", Color.WHITE)
 		
 func on_play() -> void:
-	get_parent().get_parent().get_parent().get_parent().giant.defend(0.6)
+	get_parent().get_parent().get_parent().get_parent().human.defend(0.6)

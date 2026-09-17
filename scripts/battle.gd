@@ -251,6 +251,8 @@ func draw_cursor() -> void:
 		var targets : Array[CharacterBody2D] = [find_child("Enemies").get_child(i)]
 			
 		if gm.current_card != null: #ВЫБОР ЦЕЛЕЙ
+			if gm.current_card.only_one_target:
+				pass	
 			if gm.current_card.behind_attack or gm.has_fork:
 				var target_2 = find_enemy_by_position(targets[0].battle_x + 1, targets[0].battle_y)
 				if target_2 != null:
@@ -363,14 +365,6 @@ func choose_target(action : String) -> void:
 		var target_local_pos = map.map_to_local(cursor_grid_pos)
 		
 		var source
-		if current_creature_turn == -2:
-			source = human
-			gm.prev_state_human = gm.state_human
-			gm.state_human = "playing_a_card"
-		else:
-			source = giant
-			gm.prev_state = gm.state
-			gm.state = "playing_a_card"
 		
 		for i in range(0, find_child("Enemies").get_child_count()):
 			var targets : Array[CharacterBody2D] = [find_child("Enemies").get_child(i)]
@@ -439,6 +433,16 @@ func choose_target(action : String) -> void:
 			for e_pos in targets.get(0).positions:
 				if e_pos.x == cursor_grid_pos.x and e_pos.y == cursor_grid_pos.y:
 					if not targets.get(0).state == "dead":
+						
+						if current_creature_turn == -2:
+							source = human
+							gm.prev_state_human = gm.state_human
+							gm.state_human = "playing_a_card"
+						else:
+							source = giant
+							gm.prev_state = gm.state
+							gm.state = "playing_a_card"
+						
 						match action:
 							"deal_damage":
 								gm.current_targets = targets
@@ -461,6 +465,15 @@ func choose_target(action : String) -> void:
 		
 		#BUFFS
 		if gm.battle_x_cat == cursor_grid_pos.x and gm.battle_y_cat == cursor_grid_pos.y or gm.battle_x_human == cursor_grid_pos.x and gm.battle_y_human == cursor_grid_pos.y:
+			if current_creature_turn == -2:
+				source = human
+				gm.prev_state_human = gm.state_human
+				gm.state_human = "playing_a_card"
+			else:
+				source = giant
+				gm.prev_state = gm.state
+				gm.state = "playing_a_card"
+			
 			match action:
 				"defend":
 					gm.current_card.card_played.emit(gm.current_card)

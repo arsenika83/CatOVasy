@@ -20,6 +20,7 @@ func _process(delta: float) -> void:
 
 func update_cards(character : String) -> void:
 	$ParticleTimer.start(0.3)
+	$AudioLevelUp.play()
 	
 	current_character = character
 	
@@ -142,6 +143,7 @@ func _on_card_picked_up(picked_card : Card) -> void:
 		current_character = "cat"
 		get_parent().get_parent().draw_level_up(current_character)
 	else:
+		gm.prev_state = "idle"
 		gm.state = "idle"
 		if get_parent().get_parent().giant.check_xp():
 			get_parent().get_parent().draw_level_up()
@@ -184,7 +186,9 @@ func _on_fire_button_1_pressed() -> void:
 	get_parent().get_parent().draw_upgrade_stats(current_character, max_rarity)
 
 func _on_mouse_entered() -> void:
-	gm.state = "leveling_up"
+	if not get_parent().get_parent().menu.menu_on_screen:
+		gm.prev_state = gm.state
+		gm.state = "leveling_up"
 
 
 func _on_particle_timer_timeout() -> void:

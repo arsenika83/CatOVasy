@@ -29,6 +29,8 @@ func on_play() -> void:
 	
 	gm.current_luck_cat -= 40
 	gm.current_accuracy_cat += 20
+	
+	get_parent().get_parent().get_parent().get_parent().giant.idle_animation_timer.start(0.6)
 
 func use_up() -> void:
 	pass

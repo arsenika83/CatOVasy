@@ -138,7 +138,7 @@ func _ready() -> void:
 	current_cards_human.set(4, LittleFireCard.new())
 	current_cards_human.set(5, WindOfChangeCard.new())
 	current_cards_human.set(6, LittleFireCard.new())
-	#current_cards_human.set(7, DontHitCard.new())
+	current_cards_human.set(7, WindShieldCard.new())
 	current_cards_human.set(8, LittleFireCard.new())
 	#current_cards_human.set(9, NeutralityCard.new())
 	current_cards_human.set(10, BigFireCard.new())
