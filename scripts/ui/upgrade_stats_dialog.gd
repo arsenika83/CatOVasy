@@ -225,7 +225,7 @@ func _on_stat_selected(stat : Control) -> void:
 	gm.state = "idle"
 	if get_parent().get_parent().level_up_dialog.current_character == "human":
 		get_parent().get_parent().draw_level_up("cat")
-	else:	
+	else:
 		if get_parent().get_parent().giant.check_xp():
 			get_parent().get_parent().draw_level_up("human")
 	

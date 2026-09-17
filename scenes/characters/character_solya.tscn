@@ -15,6 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://bq0ooer30jskk" path="res://assets/soundFX/xp_pick_up.wav" id="9_7axqy"]
 [ext_resource type="Texture2D" uid="uid://boubbyapyimvw" path="res://assets/images/artifacts/lucky_coin.png" id="9_a0gv1"]
 [ext_resource type="AudioStream" uid="uid://bv07t8ic6tpma" path="res://assets/soundFX/miss.wav" id="10_a0gv1"]
+[ext_resource type="Texture2D" uid="uid://s34pblv0ga2j" path="res://assets/images/fx.png" id="10_ijvqx"]
 [ext_resource type="AudioStream" uid="uid://bclkaxhxamdmf" path="res://assets/soundFX/defend.wav" id="11_piljf"]
 [ext_resource type="AudioStream" uid="uid://ceun5aaxxb0o7" path="res://assets/soundFX/debuff.wav" id="14_6tupa"]
 [ext_resource type="AudioStream" uid="uid://bm7pxholhb1v4" path="res://assets/soundFX/magic.wav" id="14_105hs"]
@@ -779,6 +780,25 @@ color = Color(0.9918012, 0.15241173, 0.12503403, 1)
 hue_variation_min = -0.12000002
 hue_variation_max = 0.029999977
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_xbutk"]
+atlas = ExtResource("10_ijvqx")
+region = Rect2(32, 56, 32, 32)
+
+[sub_resource type="Curve" id="Curve_jx0ba"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.96407187, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_icmx6"]
+curve = SubResource("Curve_jx0ba")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_txvxk"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 15.0
+gravity = Vector3(0, 98, 0)
+scale_curve = SubResource("CurveTexture_icmx6")
+
 [node name="CharacterSolya" type="CharacterBody2D" unique_id=52898326]
 script = ExtResource("1_5tjqq")
 damage_indicator_scene = ExtResource("2_105hs")
@@ -889,6 +909,15 @@ trail_lifetime = 0.1
 trail_sections = 2
 trail_section_subdivisions = 10
 process_material = SubResource("ParticleProcessMaterial_bbpbm")
+
+[node name="RainbowDefendParticles" type="GPUParticles2D" parent="." unique_id=2100340095]
+z_index = 11
+position = Vector2(0, -72)
+emitting = false
+amount = 1
+texture = SubResource("AtlasTexture_xbutk")
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_txvxk")
 
 [node name="IdleAnimationTimer" type="Timer" parent="." unique_id=1427834787]
 one_shot = true

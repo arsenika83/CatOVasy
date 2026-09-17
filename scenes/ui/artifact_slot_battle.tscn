@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://yui7y6te36pt"]
+
+[ext_resource type="Script" uid="uid://bjglq45j1hgm6" path="res://scripts/ui/artifact_slot_battle.gd" id="1_ft7nc"]
+[ext_resource type="Texture2D" uid="uid://b0rpbj3njbbar" path="res://assets/images/cards.png" id="2_m4icd"]
+[ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="3_3tcwf"]
+[ext_resource type="PackedScene" uid="uid://cwweylicgnvss" path="res://scenes/ui/artifact_icon.tscn" id="4_xr22g"]
+[ext_resource type="AudioStream" uid="uid://c8uwkxk272amx" path="res://assets/soundFX/burn.wav" id="5_da1j7"]
+[ext_resource type="AudioStream" uid="uid://bq0ooer30jskk" path="res://assets/soundFX/xp_pick_up.wav" id="6_hw6qd"]
+[ext_resource type="AudioStream" uid="uid://y0ff3yglt38w" path="res://assets/soundFX/use.wav" id="7_lt5mo"]
+
+[sub_resource type="Theme" id="Theme_urfd8"]
+TooltipLabel/colors/font_outline_color = Color(0, 0, 0, 1)
+TooltipLabel/colors/font_shadow_color = Color(0, 0, 0, 1)
+TooltipPanel/styles/new_style = null
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r5mde"]
+atlas = ExtResource("2_m4icd")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_63ukf"]
+atlas = ExtResource("3_3tcwf")
+region = Rect2(160, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q8tqv"]
+atlas = ExtResource("3_3tcwf")
+region = Rect2(128, 64, 32, 32)
+
+[node name="ArtifactSlot" type="PanelContainer" unique_id=2125635525]
+use_parent_material = true
+custom_minimum_size = Vector2(32, 32)
+anchors_preset = -1
+offset_right = 32.0
+offset_bottom = 32.0
+pivot_offset = Vector2(32, 32)
+tooltip_text = "Пустой слот для артефакта"
+mouse_filter = 1
+theme = SubResource("Theme_urfd8")
+script = ExtResource("1_ft7nc")
+
+[node name="Back" type="TextureRect" parent="." unique_id=149876587]
+use_parent_material = true
+layout_mode = 2
+texture = SubResource("AtlasTexture_r5mde")
+expand_mode = 1
+
+[node name="Usable" type="TextureRect" parent="." unique_id=775257671]
+visible = false
+use_parent_material = true
+layout_mode = 2
+texture = SubResource("AtlasTexture_63ukf")
+expand_mode = 1
+
+[node name="Use" type="TextureRect" parent="." unique_id=1361374770]
+visible = false
+use_parent_material = true
+layout_mode = 2
+texture = SubResource("AtlasTexture_q8tqv")
+expand_mode = 1
+
+[node name="Icon" parent="." unique_id=2140108611 instance=ExtResource("4_xr22g")]
+use_parent_material = true
+layout_mode = 2
+expand_mode = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=286171554]
+stream = ExtResource("5_da1j7")
+bus = &"SoundFX"
+
+[node name="AudioStreamPlayerHover" type="AudioStreamPlayer" parent="." unique_id=735487266]
+stream = ExtResource("6_hw6qd")
+volume_db = -6.0
+pitch_scale = 0.7
+bus = &"SoundFX"
+
+[node name="AudioStreamPlayerClick" type="AudioStreamPlayer" parent="." unique_id=1199186479]
+stream = ExtResource("7_lt5mo")
+volume_db = -5.0
+pitch_scale = 1.1
+bus = &"SoundFX"
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="Icon" to="." method="_on_icon_mouse_entered"]
+[connection signal="mouse_exited" from="Icon" to="." method="_on_icon_mouse_exited"]

@@ -1,0 +1,113 @@
+[gd_scene format=3 uid="uid://c2y8aeinkk1su"]
+
+[ext_resource type="Script" uid="uid://xeuhata3thwo" path="res://scripts/ui/battle_artifacts.gd" id="1_6tgrp"]
+[ext_resource type="PackedScene" uid="uid://yui7y6te36pt" path="res://scenes/ui/artifact_slot_battle.tscn" id="1_ofuvc"]
+[ext_resource type="PackedScene" uid="uid://55268lbppycn" path="res://scenes/ui/artifact_check_dialog.tscn" id="2_sylqf"]
+
+[node name="BattleArtifacts" type="Control" unique_id=1980600395]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6tgrp")
+
+[node name="ArtifactsHuman" type="GridContainer" parent="." unique_id=968083130]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 356.0
+
+[node name="ArtifactSlot1" parent="ArtifactsHuman" unique_id=2125635525 instance=ExtResource("1_ofuvc")]
+layout_mode = 2
+id = 1
+
+[node name="ArtifactSlot2" parent="ArtifactsHuman" unique_id=942965370 instance=ExtResource("1_ofuvc")]
+layout_mode = 2
+id = 2
+
+[node name="ArtifactSlot3" parent="ArtifactsHuman" unique_id=1405860238 instance=ExtResource("1_ofuvc")]
+layout_mode = 2
+id = 3
+
+[node name="ArtifactSlot4" parent="ArtifactsHuman" unique_id=732311399 instance=ExtResource("1_ofuvc")]
+layout_mode = 2
+id = 4
+
+[node name="ArtifactSlot5" parent="ArtifactsHuman" unique_id=974310701 instance=ExtResource("1_ofuvc")]
+layout_mode = 2
+id = 5
+
+[node name="ArtifactSlot6" parent="ArtifactsHuman" unique_id=411924908 instance=ExtResource("1_ofuvc")]
+layout_mode = 2
+id = 6
+
+[node name="ArtifactSlot7" parent="ArtifactsHuman" unique_id=706056020 instance=ExtResource("1_ofuvc")]
+layout_mode = 2
+id = 7
+
+[node name="ArtifactSlot8" parent="ArtifactsHuman" unique_id=932543761 instance=ExtResource("1_ofuvc")]
+layout_mode = 2
+id = 8
+
+[node name="ArtifactSlot9" parent="ArtifactsHuman" unique_id=1204724063 instance=ExtResource("1_ofuvc")]
+layout_mode = 2
+id = 9
+
+[node name="ArtifactSlot10" parent="ArtifactsHuman" unique_id=901877863 instance=ExtResource("1_ofuvc")]
+layout_mode = 2
+id = 10
+
+[node name="ArtifactsCat" type="GridContainer" parent="." unique_id=1783049450]
+layout_mode = 0
+offset_left = 32.0
+offset_right = 64.0
+offset_bottom = 356.0
+
+[node name="ArtifactSlot1" parent="ArtifactsCat" unique_id=1122329573 instance=ExtResource("1_ofuvc")]
+layout_mode = 2
+id = 1
+
+[node name="ArtifactSlot2" parent="ArtifactsCat" unique_id=475995115 instance=ExtResource("1_ofuvc")]
+layout_mode = 2
+id = 2
+
+[node name="ArtifactSlot3" parent="ArtifactsCat" unique_id=697843620 instance=ExtResource("1_ofuvc")]
+layout_mode = 2
+id = 3
+
+[node name="ArtifactSlot4" parent="ArtifactsCat" unique_id=1283020984 instance=ExtResource("1_ofuvc")]
+layout_mode = 2
+id = 4
+
+[node name="ArtifactSlot5" parent="ArtifactsCat" unique_id=431795080 instance=ExtResource("1_ofuvc")]
+layout_mode = 2
+id = 5
+
+[node name="ArtifactSlot6" parent="ArtifactsCat" unique_id=1179021796 instance=ExtResource("1_ofuvc")]
+layout_mode = 2
+id = 6
+
+[node name="ArtifactSlot7" parent="ArtifactsCat" unique_id=228626230 instance=ExtResource("1_ofuvc")]
+layout_mode = 2
+id = 7
+
+[node name="ArtifactSlot8" parent="ArtifactsCat" unique_id=809504475 instance=ExtResource("1_ofuvc")]
+layout_mode = 2
+id = 8
+
+[node name="ArtifactSlot9" parent="ArtifactsCat" unique_id=1769271235 instance=ExtResource("1_ofuvc")]
+layout_mode = 2
+id = 9
+
+[node name="ArtifactSlot10" parent="ArtifactsCat" unique_id=1134541038 instance=ExtResource("1_ofuvc")]
+layout_mode = 2
+id = 10
+
+[node name="ArtifactCheckDialog" parent="." unique_id=1641948652 instance=ExtResource("2_sylqf")]
+visible = false
+layout_mode = 1
+offset_left = -40.0
+offset_top = -40.160004
+offset_right = 344.0
+offset_bottom = 223.84

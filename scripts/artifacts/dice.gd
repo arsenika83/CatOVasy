@@ -1,12 +1,12 @@
-class_name DiscountArtifact extends Artifact
+class_name DiceArtifact extends Artifact
 
 var character_type = "human"
-var rarity = "rare"
+var rarity = "epic"
 var complect = ""
-var path = "discount"
-var artifact_name = "СКИДОЧНЫЙ КУПОН"
-var artifact_description = "В начале боя делает случайную карту в руке бесплатной на этот ход.\nДает скидку 10% в магазинах"
-var artifact_commentary = "\"Выгодно!\""
+var path = "dice"
+var artifact_name = "ИГРАЛЬНЫЕ КОСТИ"
+var artifact_description = "Каждый удар Соли будет удачным! Появляется 15% шанс, что ваш удар будет направлен против вас..."
+var artifact_commentary = "\"На все своя воля\""
 
 func _ready() -> void:
 	artifact_global_id = 8
@@ -24,4 +24,4 @@ func upon_pickup() -> void:
 	catalog.all_artifact_names_epic.erase(path)
 	catalog.all_artifact_names_unbelievable.erase(path)
 	
-	gm.has_discount = true
+	gm.has_dice = true

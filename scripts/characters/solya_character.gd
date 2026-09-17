@@ -36,6 +36,8 @@ var character_name_display = "Соля"
 @onready var unluck_particles = $UnluckParticles
 @onready var sand_particles = $SandParticles
 
+var enemy_name_rus = "Соля"
+
 var current_heal = 0
 var attack_count = 0
 var taken_damage = 0
@@ -43,6 +45,7 @@ var last_damage_dealt = 0
 var is_hit_lucky = false
 var is_hit_unlucky = false
 var just_missed = false
+var is_self_damage = false
 
 var next_strike_lucky = false
 
@@ -78,6 +81,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	check_fall(delta)
 	check_hp()
+	#print(gm.state_human)
 
 	match gm.state_human:
 		"idle":
@@ -153,6 +157,7 @@ func deal_damage(targets : Array[CharacterBody2D]) -> void:
 	is_hit_lucky = false
 	is_hit_unlucky = false
 	just_missed = false
+	is_self_damage = false
 	
 	var energy_cost = gm.current_card.energy_cost
 	if gm.current_energy_human - energy_cost < 0:
@@ -490,17 +495,11 @@ func rainbow_defend(def : int) -> void:
 	gm.current_defence_human += def
 	if gm.current_defence_human > gm.max_defence_human:
 		gm.current_defence_human = gm.max_defence_human
-		
+	$RainbowDefendParticles.restart()
+	audio_defend.play()	
 	get_parent().log_messages.append(str("- [color=#1ca8fd]Соля[/color] +", def,
 		" защиты. [color=#c20303]Р[/color][color=#e17120]А[/color][color=#e5c306]Д[/color][color=#88dc1c]У[/color][color=#63c1e9]Г[/color][color=#2f62e1]А[/color][color=#7516dc]![/color]\n"))
 	
-	status_fx.scale = Vector2(0, 0)
-	status_fx.play("defend")
-	status_fx.visible = true
-	
-	var tween2 = create_tween()
-	tween2.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
-	defend_timer.start(0.4)
 
 func check_fall(delta: float) -> void:
 	if gm.state_human == "falling":
@@ -575,13 +574,15 @@ func _on_take_damage_timer_timeout() -> void:
 		tween1.tween_property(sprite, "position:x", sprite.position.x - 4, 0.1)
 		tween1.tween_property(sprite, "position:x", sprite.position.x, 0.1)
 		
-		gm.prev_state_human = gm.state_human
+		#gm.prev_state_human = gm.state_human
 		gm.state_human = "taking_damage"
 		gm.hp_human -= taken_damage
 		sprite.play("taking_damage")
 		audio_meow.play()
 		idle_animation_timer.start(0.2)
-		get_parent().end_turn()
+		
+		if not is_self_damage:
+			get_parent().end_turn()
 	else:
 		if get_parent().name == "Battle":
 			get_parent().log_messages.append(str("- [color=#1ca8fd]", character_name_display, "[/color] [color=#fc4e52]МЕРТВА[/color]\n"))
@@ -604,6 +605,7 @@ func _on_miss_damage_timer_timeout() -> void:
 
 func _on_deal_damage_timer_timeout() -> void:
 	last_damage_dealt = 0
+	
 	var tween1 = create_tween()
 	tween1.tween_property(sprite, "position:x", sprite.position.x - 4, 0.1)
 	
@@ -621,6 +623,10 @@ func _on_deal_damage_timer_timeout() -> void:
 		is_hit_lucky = true
 		is_hit_unlucky = false
 	
+	if gm.has_dice:
+		is_hit_lucky = true
+		is_self_damage = randi_range(0, 100) < 15
+		
 	if is_hit_lucky:
 		if gm.has_rainbow_pot: #ГОРШОЧЕК РАДУГИ
 			get_parent().human.rainbow_defend(2)
@@ -649,6 +655,9 @@ func _on_deal_damage_timer_timeout() -> void:
 		
 		get_parent().fire_fx.scale = Vector2(1, 1)
 	
+	if is_self_damage:
+		gm.current_targets = [self]
+	
 	get_parent().fire_fx.position = position + Vector2(22, -24)
 	var tween2 = create_tween()
 	tween2.tween_property(get_parent().fire_fx, "position", gm.current_targets[0].position, gm.attack_animation_time_human)
@@ -675,12 +684,14 @@ func _on_deal_damage_timer_timeout() -> void:
 			gm.current_damage_human *= 2
 		elif is_hit_unlucky:
 			gm.current_damage_human /= 2
-			
-		var damage_dealt = gm.current_damage_cat - target.current_defence
-		if damage_dealt < 0:
-			damage_dealt = 0
-		if damage_dealt > target.hp:
-			damage_dealt = target.hp
+		
+		var damage_dealt = 0
+		if not target == self:	
+			damage_dealt = gm.current_damage_human - target.current_defence
+			if damage_dealt < 0:
+				damage_dealt = 0
+			if damage_dealt > target.hp:
+				damage_dealt = target.hp
 			
 		last_damage_dealt += damage_dealt		
 

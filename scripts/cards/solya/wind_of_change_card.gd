@@ -33,7 +33,7 @@ func on_play() -> void:
 	get_parent().get_parent().get_parent().get_parent().wind_fx.play("hit")
 	get_parent().get_parent().get_parent().get_parent().wind_fx.audio.play()
 	get_parent().get_parent().get_parent().get_parent().human.sprite.play("wind")
-	get_parent().get_parent().get_parent().get_parent().human.idle_animation_timer.start(0.4)
+	get_parent().get_parent().get_parent().get_parent().human.idle_animation_timer.start(0.6)
 	
 	var tween = create_tween()
 	tween.tween_property(get_parent().get_parent().get_parent().get_parent().wind_fx, 

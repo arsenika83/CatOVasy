@@ -383,6 +383,8 @@ func end_battle() -> void:
 	gm.current_accuracy_human = gm.accuracy_human
 	gm.current_luck_human = gm.luck_human
 	gm.energy_human = gm.max_energy_human
+	
+	update_inventory()
 
 	audio.play(gm.current_music_position)
 	$Effects.visible = true

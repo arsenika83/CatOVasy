@@ -33,4 +33,6 @@ func on_play() -> void:
 	get_parent().get_parent().get_parent().get_parent().giant.audio_meow.play()
 	get_parent().get_parent().get_parent().get_parent().giant.next_strike_lucky = true
 	
+	get_parent().get_parent().get_parent().get_parent().human.idle_animation_timer.start(0.6)
+	
 	

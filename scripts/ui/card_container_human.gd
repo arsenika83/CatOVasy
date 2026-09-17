@@ -263,11 +263,11 @@ func _on_hand_clear_timer_timeout() -> void:
 	if hand_count == 1 and gm.has_discount:
 		var random_card = -1
 		var i = 0
-		for card in hand:
+		for card in cards_ui.get_children():
 			if card.energy_cost > 0:
 				random_card = i
 				break
-			i += 1	
+			i += 1
 		
 		if random_card == -1:
 			return

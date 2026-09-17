@@ -1,10 +1,10 @@
+GridContainer
 GPUParticles2D
 Label
 RichTextLabel
 Timer
 Panel
 Button
-GridContainer
 Camera2D
 Control
 ColorRect

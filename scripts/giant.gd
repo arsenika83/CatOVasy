@@ -81,7 +81,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	light.energy -= light_diff
 	
-	print(gm.state)
+	#print(gm.prev_state)
+	#print(gm.state)
 	
 	if light.energy <= 1.2:
 		light_diff = -0.0001
@@ -393,7 +394,7 @@ func check_hp() -> void:
 			gm.state = "dead"
 
 func check_xp() -> bool:
-	if gm.xp >= gm.xp_needed and (gm.state == "idle" or gm.state == "walking") and gm.prev_state != "leveling_up":
+	if gm.xp >= gm.xp_needed and (gm.state == "idle" or gm.state == "walking"):
 		
 		$AudioStreamPlayerPickUpXP.pitch_scale = randf_range(0.8, 1.2)
 		$AudioStreamPlayerPickUpXP.play()
