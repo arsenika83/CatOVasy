@@ -8,6 +8,8 @@ const DEFEND_CARD = preload("res://scenes/cards/defend_card.tscn")
 var free_changes = 0
 var card_change_energy_cost = 1
 
+var hand_count = 0
+
 @onready var end_turn_button = $EndButton
 
 @onready var cards_ui = $Cards
@@ -212,6 +214,7 @@ func _on_delete_card_timer_timeout() -> void:
 	gm.current_card = null
 
 func _on_hand_clear_timer_timeout() -> void:
+	hand_count += 1
 	for card in hand:
 		played_cards.append(card.duplicate())
 		
@@ -256,7 +259,24 @@ func _on_hand_clear_timer_timeout() -> void:
 			child.card_clicked.connect(_on_card_selected)
 			child.card_played.connect(_on_card_played)
 			child.create()
+	
+	if hand_count == 1 and gm.has_discount:
+		var random_card = -1
+		var i = 0
+		for card in hand:
+			if card.energy_cost > 0:
+				random_card = i
+				break
+			i += 1	
 		
+		if random_card == -1:
+			return
+		
+		cards_ui.get_child(random_card).energy_cost = 0
+		cards_ui.get_child(random_card).find_child("Energy").find_child("Label").text = str(0)
+		cards_ui.get_child(random_card).find_child("Energy").find_child("Label").add_theme_color_override("font_color", Color.from_string("#88dc1c", Color.WHITE))
+		
+		print(cards_ui.get_child(random_card).name)
 
 func _on_unplayed_button_pressed() -> void:
 	$UnplayedContainer.visible = true

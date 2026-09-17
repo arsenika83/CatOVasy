@@ -485,6 +485,22 @@ func ignite(pos : Vector2) -> void:
 	get_parent().ignite_fx.play("hit")
 	get_parent().ignite_fx.audio.play()
 	
+	
+func rainbow_defend(def : int) -> void:
+	gm.current_defence_human += def
+	if gm.current_defence_human > gm.max_defence_human:
+		gm.current_defence_human = gm.max_defence_human
+		
+	get_parent().log_messages.append(str("- [color=#1ca8fd]Соля[/color] +", def,
+		" защиты. [color=#c20303]Р[/color][color=#e17120]А[/color][color=#e5c306]Д[/color][color=#88dc1c]У[/color][color=#63c1e9]Г[/color][color=#2f62e1]А[/color][color=#7516dc]![/color]\n"))
+	
+	status_fx.scale = Vector2(0, 0)
+	status_fx.play("defend")
+	status_fx.visible = true
+	
+	var tween2 = create_tween()
+	tween2.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
+	defend_timer.start(0.4)
 
 func check_fall(delta: float) -> void:
 	if gm.state_human == "falling":
@@ -606,6 +622,9 @@ func _on_deal_damage_timer_timeout() -> void:
 		is_hit_unlucky = false
 	
 	if is_hit_lucky:
+		if gm.has_rainbow_pot: #ГОРШОЧЕК РАДУГИ
+			get_parent().human.rainbow_defend(2)
+		
 		luck_particles.restart()
 		
 		get_parent().player_camera.apply_shake(0.1 + gm.current_card.shake)

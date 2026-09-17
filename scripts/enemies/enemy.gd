@@ -620,7 +620,9 @@ func _on_deal_damage_timer_timeout() -> void:
 	tween1.tween_property(sprite, "position:x", sprite.position.x + 4, 0.1)
 	
 	if is_hit_lucky:
-		luck_particles.emitting = true
+		if gm.has_rainbow_pot: #ГОРШОЧЕК РАДУГИ
+			get_parent().get_parent().human.rainbow_defend(2)
+		
 		luck_particles.restart()
 		
 		get_parent().get_parent().player_camera.apply_shake(0.2 + shake)

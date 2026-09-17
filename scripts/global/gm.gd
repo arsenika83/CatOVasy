@@ -185,4 +185,6 @@ var has_tomato_cross = false
 var has_regen_ring = false
 var has_portrait_of_the_unknown = false
 var has_old_bandage = false
+var has_rainbow_pot = false
 var has_lucky_coin = false
+var has_discount = false

@@ -43,11 +43,11 @@ var all_card_names_unbelievable_human : Array[String] = ["fog", "burn_down"]
 
 var all_artifact_names : Array[String] = ["red_ball", "blue_ball", "heart_shaped_pillow", "cat_food",
 "old_bandage", "spinner", "boomerang", "regen_ring", "candy", "portrait_of_the_unknown", "fork",
-"lucky_collar", "toy_cat", "rocky", "tomato_cross", "lucky_coin"]
+"lucky_collar", "toy_cat", "rocky", "tomato_cross", "lucky_coin", "med_kit", "rainbow_pot", "discount"]
 
 var all_artifact_names_common : Array[String] = ["red_ball", "old_bandage", "candy", "lucky_collar", "rocky", "fork"]
 var all_artifact_names_rare : Array[String] = ["blue_ball", "spinner", "boomerang", 
-"portrait_of_the_unknown", "lucky_coin"]
+"portrait_of_the_unknown", "lucky_coin", "med_kit", "rainbow_pot", "discount"]
 var all_artifact_names_epic : Array[String] = ["heart_shaped_pillow", "toy_cat", "tomato_cross"]
 var all_artifact_names_unbelievable : Array[String] = ["regen_ring"]
 
