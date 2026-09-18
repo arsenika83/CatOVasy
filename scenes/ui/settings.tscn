@@ -37,6 +37,18 @@ region = Rect2(384, 128, 64, 64)
 atlas = ExtResource("3_h175o")
 region = Rect2(448, 128, 64, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_7d8i4"]
+atlas = ExtResource("3_h175o")
+region = Rect2(288, 112, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b0ygv"]
+atlas = ExtResource("3_h175o")
+region = Rect2(256, 96, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2vpyc"]
+atlas = ExtResource("3_h175o")
+region = Rect2(256, 96, 32, 16)
+
 [node name="Settings" type="Control" unique_id=1558518248]
 layout_mode = 3
 anchors_preset = 0
@@ -302,6 +314,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="RusButton" type="Button" parent="GAMEPLAY" unique_id=1642139160]
+visible = false
 layout_mode = 0
 offset_left = 16.0
 offset_top = 128.0
@@ -316,6 +329,7 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="EngButton" type="Button" parent="GAMEPLAY" unique_id=1347092922]
+visible = false
 layout_mode = 0
 offset_left = 136.0
 offset_top = 128.0
@@ -328,6 +342,107 @@ toggle_mode = true
 icon = SubResource("AtlasTexture_ofdip")
 icon_alignment = 1
 expand_icon = true
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=1787877059]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 264.0
+offset_top = -8.0
+offset_right = 520.0
+offset_bottom = 376.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_7pacj")
+expand_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="TextureRect2" unique_id=575752518]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.0
+offset_top = -168.0
+offset_right = -128.0
+offset_bottom = -160.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_ptynm")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="TextureRect2" unique_id=1867994850]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.0
+offset_top = 160.0
+offset_right = -128.0
+offset_bottom = 168.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_ptynm")
+expand_mode = 1
+
+[node name="VIDEO" type="Control" parent="." unique_id=127873668]
+anchors_preset = 0
+offset_left = 264.0
+offset_top = -32.0
+offset_right = 304.0
+offset_bottom = 8.0
+
+[node name="TextureRect" type="TextureRect" parent="VIDEO" unique_id=34658787]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = 12.0
+offset_right = 228.0
+offset_bottom = 372.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_7pacj")
+expand_mode = 1
+
+[node name="VideoLabel" type="Label" parent="VIDEO" unique_id=1049605487]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 40.0
+offset_right = 211.0
+offset_bottom = 64.0
+theme_override_font_sizes/font_size = 18
+text = "ВИДЕО"
+horizontal_alignment = 1
+
+[node name="FilterLabel" type="Label" parent="VIDEO" unique_id=1230244988]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 64.0
+offset_right = 180.0
+offset_bottom = 88.0
+theme_override_font_sizes/font_size = 16
+text = "ВИЗУАЛЬНЫЙ ФИЛЬТР"
+vertical_alignment = 1
+
+[node name="FilterCheckButton" type="CheckButton" parent="VIDEO" unique_id=1591013235]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 64.0
+offset_right = 56.0
+offset_bottom = 88.0
+theme_override_icons/checked = SubResource("AtlasTexture_7d8i4")
+theme_override_icons/unchecked = SubResource("AtlasTexture_b0ygv")
+theme_override_icons/unchecked_disabled = SubResource("AtlasTexture_2vpyc")
 
 [connection signal="pressed" from="GAMEPLAY/RusButton" to="." method="_on_rus_button_pressed"]
 [connection signal="pressed" from="GAMEPLAY/EngButton" to="." method="_on_eng_button_pressed"]

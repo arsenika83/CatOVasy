@@ -528,6 +528,13 @@ offset_bottom = -168.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Front" type="Control" parent="UI" unique_id=396458543]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
 [node name="BattleNode" type="Node2D" parent="." unique_id=797394893]
 
 [node name="BattleStartTimer" type="Timer" parent="." unique_id=1709292871]

@@ -5,6 +5,8 @@
 [ext_resource type="Script" uid="uid://ca6a2agfnq7ce" path="res://scripts/ui/profile.gd" id="1_one17"]
 [ext_resource type="StyleBox" uid="uid://2iw7p3yvicvr" path="res://styles/button_pressed.tres" id="2_one17"]
 [ext_resource type="StyleBox" uid="uid://c66nispyhk2t0" path="res://styles/button_hover.tres" id="3_8j0wr"]
+[ext_resource type="StyleBox" uid="uid://bgpxax381abr0" path="res://styles/button_disabled.tres" id="6_brpva"]
+[ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="6_y5emt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y5emt"]
 resource_local_to_scene = true
@@ -12,6 +14,14 @@ shader = ExtResource("1_8j0wr")
 shader_parameter/speed = 1.0000000475
 shader_parameter/amplitude = 4.00000019
 shader_parameter/time_offset = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a7tdr"]
+atlas = ExtResource("6_y5emt")
+region = Rect2(352, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y5emt"]
+atlas = ExtResource("6_y5emt")
+region = Rect2(352, 32, 32, 32)
 
 [node name="Profile" type="Control" unique_id=177672394]
 material = SubResource("ShaderMaterial_y5emt")
@@ -31,11 +41,42 @@ theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = ExtResource("1_h7my7")
 theme_override_styles/pressed = ExtResource("2_one17")
 theme_override_styles/hover = ExtResource("3_8j0wr")
+theme_override_styles/disabled = ExtResource("6_brpva")
 text = "ПУСТО"
 
 [node name="Timer" type="Timer" parent="." unique_id=1729280200]
 wait_time = 0.5
 one_shot = true
 
+[node name="DeleteButton" type="Button" parent="." unique_id=691789381]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 272.0
+offset_right = 120.0
+offset_bottom = 320.0
+pivot_offset = Vector2(24, 24)
+theme_override_styles/normal = ExtResource("1_h7my7")
+theme_override_styles/pressed = ExtResource("2_one17")
+theme_override_styles/hover = ExtResource("3_8j0wr")
+icon = SubResource("AtlasTexture_a7tdr")
+icon_alignment = 1
+expand_icon = true
+
+[node name="CreateButton" type="Button" parent="." unique_id=723424819]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 272.0
+offset_right = 120.0
+offset_bottom = 320.0
+pivot_offset = Vector2(24, 24)
+theme_override_styles/normal = ExtResource("1_h7my7")
+theme_override_styles/pressed = ExtResource("2_one17")
+theme_override_styles/hover = ExtResource("3_8j0wr")
+icon = SubResource("AtlasTexture_y5emt")
+icon_alignment = 1
+expand_icon = true
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="DeleteButton" to="." method="_on_delete_button_pressed"]
+[connection signal="pressed" from="CreateButton" to="." method="_on_create_button_pressed"]

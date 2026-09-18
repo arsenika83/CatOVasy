@@ -32,6 +32,11 @@ func _on_game_button_pressed() -> void:
 		var tween = create_tween()
 		tween.tween_property(profiles_menu, "scale:x", 0, 0.1)
 		profiles_on_screen = false
+		
+	if settings_on_screen:
+		var tween = create_tween()
+		tween.tween_property(settings_menu, "scale:x", 0, 0.1)
+		settings_on_screen = false	
 
 
 func _on_settings_button_pressed() -> void:
@@ -44,6 +49,11 @@ func _on_settings_button_pressed() -> void:
 		var tween = create_tween()
 		tween.tween_property(settings_menu, "scale:x", 0, 0.1)
 		settings_on_screen = false
+		
+	if profiles_on_screen:
+		var tween = create_tween()
+		tween.tween_property(profiles_menu, "scale:x", 0, 0.1)
+		profiles_on_screen = false	
 
 
 func _on_quit_button_pressed() -> void:

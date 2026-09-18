@@ -36,8 +36,9 @@ script = ExtResource("1_3ye3m")
 
 [node name="Panel" type="Panel" parent="." unique_id=523536700]
 layout_mode = 0
+offset_top = -56.0
 offset_right = 672.0
-offset_bottom = 320.0
+offset_bottom = 368.0
 theme_override_styles/panel = ExtResource("1_cu5bn")
 
 [node name="GridContainer" type="GridContainer" parent="." unique_id=1068270161]
@@ -63,3 +64,14 @@ id = 2
 material = SubResource("ShaderMaterial_p15w1")
 layout_mode = 2
 id = 3
+
+[node name="Label" type="Label" parent="." unique_id=833275580]
+layout_mode = 0
+offset_left = 112.0
+offset_top = -40.0
+offset_right = 560.0
+offset_bottom = -8.0
+theme_override_font_sizes/font_size = 32
+text = "Профили"
+horizontal_alignment = 1
+vertical_alignment = 1

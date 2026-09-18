@@ -436,6 +436,13 @@ text = "ХОД ПРОТИВНИКА"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Front" type="Control" parent="UI" unique_id=346224006]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
 [node name="CheckStatsDialogHoldTimer" type="Timer" parent="." unique_id=56407654]
 wait_time = 0.3
 one_shot = true

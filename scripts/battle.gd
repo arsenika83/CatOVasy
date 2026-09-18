@@ -43,6 +43,8 @@ var log_count = 1
 @onready var check_dialog_timer = $CheckStatsDialogHoldTimer
 var is_check_dialog_holding = false
 
+@onready var front = $UI/Front
+
 var turn_count = 1
 
 var won = false

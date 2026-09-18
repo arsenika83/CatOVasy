@@ -28,6 +28,7 @@ var inventory_on_screen = false
 @onready var inventory_button_human = $UI/InventoryButtonHuman
 
 @onready var bg = $UI/BG
+@onready var front = $UI/Front
 
 @onready var foregroundFX = $Effects/ColorRect
 
@@ -131,7 +132,7 @@ func _process(delta: float) -> void:
 
 func smooth_camera_zoom(value1, value2) -> void:
 	var tween = create_tween()
-	tween.tween_property(player_camera, str(value1), value2, 0.5)	
+	tween.tween_property(player_camera, str(value1), value2, 0.5)		
 	
 func move_to_map_pos() -> void:
 	var map_pos = map.local_to_map(cursor_pos)
