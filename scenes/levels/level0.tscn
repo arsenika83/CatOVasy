@@ -238,6 +238,7 @@ rotation_smoothing_speed = 3.0
 
 [node name="Enemy" parent="Enemies" unique_id=772889915 instance=ExtResource("14_m6lg1")]
 position = Vector2(144, 80)
+is_leader = true
 
 [node name="Enemy2" parent="Enemies" unique_id=2106804459 instance=ExtResource("14_m6lg1")]
 position = Vector2(80, 16)
@@ -259,6 +260,7 @@ position = Vector2(144, 80)
 
 [node name="EnemyFox" parent="Enemies" unique_id=685663284 instance=ExtResource("9_ng1gw")]
 position = Vector2(304, 208)
+is_leader = true
 
 [node name="EnemyFox2" parent="Enemies" unique_id=1113755696 instance=ExtResource("9_ng1gw")]
 position = Vector2(304, 208)
@@ -280,6 +282,7 @@ position = Vector2(304, 208)
 
 [node name="FlyingMouse" parent="Enemies" unique_id=1686711816 instance=ExtResource("19_a1vlu")]
 position = Vector2(80, 16)
+is_leader = true
 
 [node name="FlyingMouse2" parent="Enemies" unique_id=1435161689 instance=ExtResource("19_a1vlu")]
 position = Vector2(80, 16)

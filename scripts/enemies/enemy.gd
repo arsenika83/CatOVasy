@@ -4,6 +4,8 @@ class_name Enemy extends CharacterBody2D
 
 var positions : Array[Vector2]
 
+@export var is_leader = false
+
 @export var hp = 5
 @export var max_hp = 5
 
@@ -140,6 +142,7 @@ func _ready() -> void:
 	battle_y = get_parent().get_parent().find_child("TileMapLayerBlack").local_to_map(position).y
 	
 	positions.append(Vector2(battle_x, battle_y))
+	check_team()
 
 func _process(delta: float) -> void:
 	if current_defence > 0 and state != "dead":
@@ -152,7 +155,7 @@ func _process(delta: float) -> void:
 	if hp_bar.value < max_hp:
 		hp_bar.visible = true
 	else:	
-		hp_bar.visible = false		
+		hp_bar.visible = false
 	
 	
 	check_hp()
@@ -165,10 +168,24 @@ func _process(delta: float) -> void:
 			area_xp.monitoring = true
 			area.monitoring = false
 			
-	move_and_slide()
+	
+
+func check_team() -> void:
+	if not is_leader:
+		return
+	
+	if get_parent().get_parent().name != "Game":
+		return
+		
+	for enemy in get_parent().get_children():
+		if enemy.position == self.position and not enemy.is_leader:
+			enemy.visible = false
+		else:
+			enemy.visible = true
 
 func move(g_pos : Vector2, e_pos : Vector2) -> void:
 	if state == "idle":
+		check_team()
 		var diff_x = g_pos.x - e_pos.x
 		var diff_y = g_pos.y - e_pos.y
 		status_fx.visible = true
@@ -488,7 +505,7 @@ func display_damage(dmg : int) -> void:
 		indicator.display_damage(dmg, spawn_pos)
 	
 func turn_tick() -> void:
-	#current_defence /= 2
+	current_defence = 0
 	if has_debuff_weakness:
 		turns_debuff_weakness -= 1
 		if turns_debuff_weakness == 0:

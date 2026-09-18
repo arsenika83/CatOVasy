@@ -8,7 +8,6 @@ shader = ExtResource("1_7gfag")
 shader_parameter/speed = 2.0
 shader_parameter/amplitude = 2.000000095
 shader_parameter/time_offset = 0.0
-shader_parameter/flash_intensity = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7gfag"]
 atlas = ExtResource("1_8jtww")
@@ -46,6 +45,7 @@ animations = [{
 }]
 
 [sub_resource type="Gradient" id="Gradient_7gfag"]
+offsets = PackedFloat32Array(0, 0.87027025)
 colors = PackedColorArray(1, 0.32156864, 0.32941177, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_7gfag"]
@@ -64,6 +64,6 @@ frame_progress = 0.5510547
 position = Vector2(2.861023e-06, 2.861023e-06)
 scale = Vector2(0.75, 0.75)
 color = Color(0.99, 0.29700002, 0.30854982, 0.6039216)
-energy = 2.0
+energy = 0.9
 texture = SubResource("GradientTexture2D_7gfag")
 height = 10.0

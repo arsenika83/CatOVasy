@@ -1,8 +1,8 @@
+Timer
 GridContainer
 GPUParticles2D
 Label
 RichTextLabel
-Timer
 Panel
 Button
 Camera2D

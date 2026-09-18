@@ -9,6 +9,8 @@ var character_name_display = "Соля"
 @onready var cursor = $Cursor
 @onready var status_fx = $StatusFX
 @onready var artifact_sprite = $ArtifactSprite
+@onready var defence_sprite = $DefenceSprite
+@onready var defence_label = $DefenceSprite/DefenceLabel
 
 @onready var respawn_timer = $RespawnTimer
 @onready var fall_timer = $FallTimer
@@ -82,6 +84,12 @@ func _process(delta: float) -> void:
 	check_fall(delta)
 	check_hp()
 	#print(gm.state_human)
+	
+	if gm.current_defence_human > 0 and gm.state_human != "dead":
+		defence_sprite.visible = true
+		defence_label.text = str(gm.current_defence_human)
+	else:
+		defence_sprite.visible = false	
 
 	match gm.state_human:
 		"idle":
@@ -404,7 +412,7 @@ func display_damage(dmg : int) -> void:
 		indicator.display_damage(dmg, spawn_pos)
 
 func turn_tick() -> void:
-	#gm.current_defence /= 2
+	gm.current_defence_human = 0
 	if has_debuff_weakness:
 		turns_debuff_weakness -= 1
 		if turns_debuff_weakness == 0:
@@ -492,6 +500,8 @@ func ignite(pos : Vector2) -> void:
 	
 	
 func rainbow_defend(def : int) -> void:
+	shine_artifact("rainbow_pot")
+	
 	gm.current_defence_human += def
 	if gm.current_defence_human > gm.max_defence_human:
 		gm.current_defence_human = gm.max_defence_human
@@ -544,7 +554,15 @@ func check_xp() -> bool:
 		return true
 		
 	return false
-		
+	
+	
+func shine_artifact(art : String) -> void:
+	var i = 1
+	for artifact in gm.current_artifacts_human.values():
+		if artifact.path == art:
+			get_parent().find_child("UI").find_child("BattleArtifacts").artifact_slots_human.get(i-1).shine()
+			break
+		i += 1
 
 func _on_area_2d_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
 	#fall_timer.start()
@@ -624,6 +642,7 @@ func _on_deal_damage_timer_timeout() -> void:
 		is_hit_unlucky = false
 	
 	if gm.has_dice:
+		shine_artifact("dice")
 		is_hit_lucky = true
 		is_self_damage = randi_range(0, 100) < 15
 		
@@ -667,6 +686,7 @@ func _on_deal_damage_timer_timeout() -> void:
 		success = randf_range(0.0, 1.0) * 100 <= gm.current_accuracy_human
 		
 		if is_hit_lucky and gm.has_lucky_coin:
+			shine_artifact("lucky_coin")
 			success = true
 			$LuckyCoinParticles.restart()
 			$AudioCoin.play()

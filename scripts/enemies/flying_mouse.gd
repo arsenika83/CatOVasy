@@ -39,6 +39,7 @@ func _ready() -> void:
 	battle_y = get_parent().get_parent().find_child("TileMapLayerBlack").local_to_map(position).y
 	
 	positions.append(Vector2(battle_x, battle_y))
+	check_team()
 	
 func _process(delta: float) -> void:
 	if current_defence > 0 and state != "dead":
@@ -63,4 +64,3 @@ func _process(delta: float) -> void:
 			area_xp.monitoring = true
 			area.monitoring = false
 			
-	move_and_slide()	

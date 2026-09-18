@@ -627,6 +627,9 @@ func end_turn() -> void:
 			
 			draw_turn_label("enemy")
 			$EndTurnTimer.start()
+			
+			for e in current_enemies:
+				e.turn_tick()
 	else:
 		for enemy in current_enemies:
 			enemy.my_turn.visible = false
@@ -656,7 +659,6 @@ func end_turn() -> void:
 				
 				for e in current_enemies:
 					e.current_energy = e.energy
-					e.turn_tick()
 					
 				end_turn()
 				return	

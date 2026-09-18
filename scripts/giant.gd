@@ -9,6 +9,8 @@ var character_name_display = "Кот"
 @onready var status_fx = $StatusFX
 @onready var my_turn = $MyTurn
 @onready var artifact_sprite = $ArtifactSprite
+@onready var defence_sprite = $DefenceSprite
+@onready var defence_label = $DefenceSprite/DefenceLabel
 
 @onready var respawn_timer = $RespawnTimer
 @onready var fall_timer = $FallTimer
@@ -92,6 +94,12 @@ func _process(delta: float) -> void:
 	check_fall(delta)
 	check_hp()
 	check_xp()
+	
+	if gm.current_defence_cat > 0 and gm.state != "dead":
+		defence_sprite.visible = true
+		defence_label.text = str(gm.current_defence_cat)
+	else:
+		defence_sprite.visible = false	
 
 	match gm.state:
 		"idle":
@@ -302,7 +310,7 @@ func give_debuff(targets : Array[CharacterBody2D], type : String, power : int, t
 	debuff_timer.start(gm.debuff_animation_time)
 
 func turn_tick() -> void:
-	#gm.current_defence /= 2
+	gm.current_defence_cat = 0
 	if has_debuff_weakness:
 		turns_debuff_weakness -= 1
 		if turns_debuff_weakness == 0:
@@ -409,6 +417,14 @@ func check_xp() -> bool:
 		return true
 		
 	return false
+		
+func shine_artifact(art : String) -> void:
+	var i = 1
+	for artifact in gm.current_artifacts_cat.values():
+		if artifact.path == art:
+			get_parent().find_child("UI").find_child("BattleArtifacts").artifact_slots_cat.get(i-1).shine()
+			break
+		i += 1		
 		
 func display_damage(dmg : int) -> void:
 	if damage_indicator_scene:

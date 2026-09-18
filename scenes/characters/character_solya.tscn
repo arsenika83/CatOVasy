@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://b78ln2t2dmc8p" path="res://assets/soundFX/meow_die.wav" id="6_105hs"]
 [ext_resource type="AudioStream" uid="uid://cfmu610s83sv5" path="res://assets/soundFX/purring.wav" id="7_0qj2d"]
 [ext_resource type="PackedScene" uid="uid://ba7f54d4yq2hp" path="res://scenes/ui/cursor.tscn" id="8_7axqy"]
+[ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="8_bbpbm"]
 [ext_resource type="AudioStream" uid="uid://dyc143w8u85ck" path="res://assets/soundFX/level_up.wav" id="8_bf2la"]
 [ext_resource type="AudioStream" uid="uid://bq0ooer30jskk" path="res://assets/soundFX/xp_pick_up.wav" id="9_7axqy"]
 [ext_resource type="Texture2D" uid="uid://boubbyapyimvw" path="res://assets/images/artifacts/lucky_coin.png" id="9_a0gv1"]
@@ -678,6 +679,22 @@ animations = [{
 "speed": 2.0
 }]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6tupa"]
+shader = ExtResource("8_bbpbm")
+shader_parameter/speed = 2.000000095
+shader_parameter/amplitude = 1.0000000475
+shader_parameter/time_offset = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jx0ba"]
+atlas = ExtResource("5_105hs")
+region = Rect2(0, 128, 16, 16)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_icmx6"]
+shader = ExtResource("8_bbpbm")
+shader_parameter/speed = 2.000000095
+shader_parameter/amplitude = 1.0000000475
+shader_parameter/time_offset = 0.0
+
 [sub_resource type="Gradient" id="Gradient_e53s0"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
@@ -835,6 +852,25 @@ autoplay = "default"
 [node name="StatusFX" parent="." unique_id=1192321709 instance=ExtResource("3_70pgb")]
 visible = false
 position = Vector2(0, -64)
+
+[node name="DefenceSprite" type="Sprite2D" parent="." unique_id=1092316381]
+visible = false
+material = SubResource("ShaderMaterial_6tupa")
+position = Vector2(16, -8)
+texture = SubResource("AtlasTexture_jx0ba")
+
+[node name="DefenceLabel" type="RichTextLabel" parent="DefenceSprite" unique_id=1296448884]
+material = SubResource("ShaderMaterial_icmx6")
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/normal_font_size = 8
+text = "12"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
 
 [node name="Cursor" parent="." unique_id=2051460958 instance=ExtResource("8_7axqy")]
 visible = false

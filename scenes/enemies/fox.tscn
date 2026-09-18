@@ -53,7 +53,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_kugq1")
 }],
-"loop": 1,
+"loop": true,
 "name": &"default",
 "speed": 5.0
 }]
@@ -95,7 +95,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_1co2e")
 }],
-"loop": 0,
+"loop": false,
 "name": &"dead",
 "speed": 1.0
 }, {
@@ -103,12 +103,12 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5ba63")
 }],
-"loop": 1,
+"loop": true,
 "name": &"deal_damage",
 "speed": 10.0
 }, {
 "frames": [],
-"loop": 1,
+"loop": true,
 "name": &"default",
 "speed": 5.0
 }, {
@@ -137,7 +137,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wyag3")
 }],
-"loop": 1,
+"loop": true,
 "name": &"idle",
 "speed": 1.0
 }, {
@@ -145,7 +145,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_521xt")
 }],
-"loop": 1,
+"loop": true,
 "name": &"take_damage",
 "speed": 5.0
 }]
@@ -416,6 +416,7 @@ mix_target = 2
 bus = &"SoundFX"
 
 [node name="HPBar" type="TextureProgressBar" parent="." unique_id=1080976010]
+visible = false
 material = SubResource("ShaderMaterial_rhgp0")
 offset_left = -12.0
 offset_top = -10.0

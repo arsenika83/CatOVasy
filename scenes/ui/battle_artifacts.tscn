@@ -4,6 +4,66 @@
 [ext_resource type="PackedScene" uid="uid://yui7y6te36pt" path="res://scenes/ui/artifact_slot_battle.tscn" id="1_ofuvc"]
 [ext_resource type="PackedScene" uid="uid://55268lbppycn" path="res://scenes/ui/artifact_check_dialog.tscn" id="2_sylqf"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6tgrp"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eowg4"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ldy8p"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_egphk"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rmnh6"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bio0b"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ndcwp"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5uv7v"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6fp02"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e3qji"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m18xr"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4yxkq"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_srsf4"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hkkil"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6v7xo"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bt22l"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o8csg"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w3tm4"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5jjiq"]
+resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xhqyt"]
+resource_local_to_scene = true
+
 [node name="BattleArtifacts" type="Control" unique_id=1980600395]
 layout_mode = 3
 anchors_preset = 15
@@ -19,42 +79,52 @@ offset_right = 32.0
 offset_bottom = 356.0
 
 [node name="ArtifactSlot1" parent="ArtifactsHuman" unique_id=2125635525 instance=ExtResource("1_ofuvc")]
+material = SubResource("ShaderMaterial_6tgrp")
 layout_mode = 2
 id = 1
 
 [node name="ArtifactSlot2" parent="ArtifactsHuman" unique_id=942965370 instance=ExtResource("1_ofuvc")]
+material = SubResource("ShaderMaterial_eowg4")
 layout_mode = 2
 id = 2
 
 [node name="ArtifactSlot3" parent="ArtifactsHuman" unique_id=1405860238 instance=ExtResource("1_ofuvc")]
+material = SubResource("ShaderMaterial_ldy8p")
 layout_mode = 2
 id = 3
 
 [node name="ArtifactSlot4" parent="ArtifactsHuman" unique_id=732311399 instance=ExtResource("1_ofuvc")]
+material = SubResource("ShaderMaterial_egphk")
 layout_mode = 2
 id = 4
 
 [node name="ArtifactSlot5" parent="ArtifactsHuman" unique_id=974310701 instance=ExtResource("1_ofuvc")]
+material = SubResource("ShaderMaterial_rmnh6")
 layout_mode = 2
 id = 5
 
 [node name="ArtifactSlot6" parent="ArtifactsHuman" unique_id=411924908 instance=ExtResource("1_ofuvc")]
+material = SubResource("ShaderMaterial_bio0b")
 layout_mode = 2
 id = 6
 
 [node name="ArtifactSlot7" parent="ArtifactsHuman" unique_id=706056020 instance=ExtResource("1_ofuvc")]
+material = SubResource("ShaderMaterial_ndcwp")
 layout_mode = 2
 id = 7
 
 [node name="ArtifactSlot8" parent="ArtifactsHuman" unique_id=932543761 instance=ExtResource("1_ofuvc")]
+material = SubResource("ShaderMaterial_5uv7v")
 layout_mode = 2
 id = 8
 
 [node name="ArtifactSlot9" parent="ArtifactsHuman" unique_id=1204724063 instance=ExtResource("1_ofuvc")]
+material = SubResource("ShaderMaterial_6fp02")
 layout_mode = 2
 id = 9
 
 [node name="ArtifactSlot10" parent="ArtifactsHuman" unique_id=901877863 instance=ExtResource("1_ofuvc")]
+material = SubResource("ShaderMaterial_e3qji")
 layout_mode = 2
 id = 10
 
@@ -65,42 +135,52 @@ offset_right = 64.0
 offset_bottom = 356.0
 
 [node name="ArtifactSlot1" parent="ArtifactsCat" unique_id=1122329573 instance=ExtResource("1_ofuvc")]
+material = SubResource("ShaderMaterial_m18xr")
 layout_mode = 2
 id = 1
 
 [node name="ArtifactSlot2" parent="ArtifactsCat" unique_id=475995115 instance=ExtResource("1_ofuvc")]
+material = SubResource("ShaderMaterial_4yxkq")
 layout_mode = 2
 id = 2
 
 [node name="ArtifactSlot3" parent="ArtifactsCat" unique_id=697843620 instance=ExtResource("1_ofuvc")]
+material = SubResource("ShaderMaterial_srsf4")
 layout_mode = 2
 id = 3
 
 [node name="ArtifactSlot4" parent="ArtifactsCat" unique_id=1283020984 instance=ExtResource("1_ofuvc")]
+material = SubResource("ShaderMaterial_hkkil")
 layout_mode = 2
 id = 4
 
 [node name="ArtifactSlot5" parent="ArtifactsCat" unique_id=431795080 instance=ExtResource("1_ofuvc")]
+material = SubResource("ShaderMaterial_6v7xo")
 layout_mode = 2
 id = 5
 
 [node name="ArtifactSlot6" parent="ArtifactsCat" unique_id=1179021796 instance=ExtResource("1_ofuvc")]
+material = SubResource("ShaderMaterial_bt22l")
 layout_mode = 2
 id = 6
 
 [node name="ArtifactSlot7" parent="ArtifactsCat" unique_id=228626230 instance=ExtResource("1_ofuvc")]
+material = SubResource("ShaderMaterial_o8csg")
 layout_mode = 2
 id = 7
 
 [node name="ArtifactSlot8" parent="ArtifactsCat" unique_id=809504475 instance=ExtResource("1_ofuvc")]
+material = SubResource("ShaderMaterial_w3tm4")
 layout_mode = 2
 id = 8
 
 [node name="ArtifactSlot9" parent="ArtifactsCat" unique_id=1769271235 instance=ExtResource("1_ofuvc")]
+material = SubResource("ShaderMaterial_5jjiq")
 layout_mode = 2
 id = 9
 
 [node name="ArtifactSlot10" parent="ArtifactsCat" unique_id=1134541038 instance=ExtResource("1_ofuvc")]
+material = SubResource("ShaderMaterial_xhqyt")
 layout_mode = 2
 id = 10
 

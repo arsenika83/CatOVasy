@@ -5,8 +5,12 @@
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="3_3tcwf"]
 [ext_resource type="PackedScene" uid="uid://cwweylicgnvss" path="res://scenes/ui/artifact_icon.tscn" id="4_xr22g"]
 [ext_resource type="AudioStream" uid="uid://c8uwkxk272amx" path="res://assets/soundFX/burn.wav" id="5_da1j7"]
+[ext_resource type="Shader" uid="uid://c8kgj3ayylkt6" path="res://shaders/card_glow.gdshader" id="5_m4icd"]
 [ext_resource type="AudioStream" uid="uid://bq0ooer30jskk" path="res://assets/soundFX/xp_pick_up.wav" id="6_hw6qd"]
 [ext_resource type="AudioStream" uid="uid://y0ff3yglt38w" path="res://assets/soundFX/use.wav" id="7_lt5mo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3tcwf"]
+resource_local_to_scene = true
 
 [sub_resource type="Theme" id="Theme_urfd8"]
 TooltipLabel/colors/font_outline_color = Color(0, 0, 0, 1)
@@ -25,7 +29,17 @@ region = Rect2(160, 64, 32, 32)
 atlas = ExtResource("3_3tcwf")
 region = Rect2(128, 64, 32, 32)
 
-[node name="ArtifactSlot" type="PanelContainer" unique_id=2125635525]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xr22g"]
+resource_local_to_scene = true
+shader = ExtResource("5_m4icd")
+shader_parameter/glow_color = Color(0.7427833, 0.53105885, 0.5021704, 1)
+shader_parameter/glow_intensity = 3.0000001425
+shader_parameter/glow_size = 10.000000475
+shader_parameter/pulse_speed = 7.0000003325
+shader_parameter/is_active = false
+
+[node name="ArtifactSlotBattle" type="PanelContainer" unique_id=2125635525]
+material = SubResource("ShaderMaterial_3tcwf")
 use_parent_material = true
 custom_minimum_size = Vector2(32, 32)
 anchors_preset = -1
@@ -58,7 +72,7 @@ texture = SubResource("AtlasTexture_q8tqv")
 expand_mode = 1
 
 [node name="Icon" parent="." unique_id=2140108611 instance=ExtResource("4_xr22g")]
-use_parent_material = true
+material = SubResource("ShaderMaterial_xr22g")
 layout_mode = 2
 expand_mode = 1
 
@@ -78,6 +92,11 @@ volume_db = -5.0
 pitch_scale = 1.1
 bus = &"SoundFX"
 
+[node name="ShineTimer" type="Timer" parent="." unique_id=75459447]
+wait_time = 0.5
+one_shot = true
+
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="Icon" to="." method="_on_icon_mouse_entered"]
 [connection signal="mouse_exited" from="Icon" to="." method="_on_icon_mouse_exited"]
+[connection signal="timeout" from="ShineTimer" to="." method="_on_shine_timer_timeout"]

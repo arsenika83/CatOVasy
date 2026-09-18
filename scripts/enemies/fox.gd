@@ -11,6 +11,9 @@ func _ready() -> void:
 	max_hp = 30
 	hp = 30
 	
+	hp_bar.max_value = max_hp
+	hp_bar.value = float(hp)
+	
 	xp_gives = 10
 	
 	damage = 3
@@ -34,16 +37,29 @@ func _ready() -> void:
 	battle_y = get_parent().get_parent().find_child("TileMapLayerBlack").local_to_map(position).y
 	
 	positions.append(Vector2(battle_x, battle_y))
+	check_team()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if current_defence > 0 and state != "dead":
+		defence_sprite.visible = true
+		defence_label.text = str(current_defence)
+	else:
+		defence_sprite.visible = false
+		
+	hp_bar.value = float(hp)
+	
+	if hp_bar.value < max_hp:
+		hp_bar.visible = true
+	else:	
+		hp_bar.visible = false
 	check_hp()
 	
 	match state:
 		"idle":
 			pass
 		"dead":
+			hp_bar.visible = false
 			area_xp.monitoring = true
 			area.monitoring = false
 			
-	move_and_slide()

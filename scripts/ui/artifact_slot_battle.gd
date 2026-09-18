@@ -79,4 +79,12 @@ func _on_icon_mouse_exited() -> void:
 	
 	if current_artifact != null:
 		if current_artifact.has_method("upon_use"):
-			$Use.visible = false	
+			$Use.visible = false
+
+func shine() -> void:
+	icon.material.set_shader_parameter("is_active", true)
+	$ShineTimer.start()
+
+
+func _on_shine_timer_timeout() -> void:
+	icon.material.set_shader_parameter("is_active", false)
