@@ -1,6 +1,10 @@
 extends Node
 
-var level_number = 20
+var path = "res://saves/save_1.json"
+var save : Dictionary
+
+var level_number: int = 1
+var current_level_name = ""
 
 var state = "idle"
 var prev_state = "idle"
@@ -12,85 +16,84 @@ var camera_zoom = 2
 var start_pos = Vector2i(64+16, 32+16)
 var prev_pos = Vector2i(64+16, 32+16)
 
-var match_amount = 5
-
+var match_amount: int = 5
 
 var current_chest_rarity = ""
 
-var enemies_following = 0
+var enemies_following: int = 0
 var current_level_edge_positions : Array[Vector2]
 var current_music_position : float = 0.0
 
 var battle_x_cat : int
 var battle_y_cat : int
 
-var hp_cat = 30
-var max_hp_cat = 30
+var hp_cat: int = 30
+var max_hp_cat: int = 30
 
-var damage_cat = 0
-var min_damage_cat = -3
-var current_damage_cat = damage_cat
+var damage_cat: int = 0
+var min_damage_cat: int = -3
+var current_damage_cat: int = damage_cat
 
-var defence_cat = 3
-var current_defence_cat = 0
-var max_defence_cat = 5
+var defence_cat: int = 3
+var current_defence_cat: int = 0
+var max_defence_cat: int = 5
 var defended_cat = false
 
-var accuracy_cat = 70
-var min_accuracy_cat = 5
-var max_accuracy_cat = 99
-var current_accuracy_cat = accuracy_cat
+var accuracy_cat: int = 70
+var min_accuracy_cat: int = 5
+var max_accuracy_cat: int = 99
+var current_accuracy_cat: int = accuracy_cat
 
-var luck_cat = 10
-var min_luck_cat = -100
-var max_luck_cat = 100
-var current_luck_cat = luck_cat
+var luck_cat: int = 10
+var min_luck_cat: int = -100
+var max_luck_cat: int = 100
+var current_luck_cat: int = luck_cat
 
-var energy_cat = 3
-var current_energy_cat = energy_cat
-var max_energy_cat = 3
+var energy_cat: int = 3
+var current_energy_cat: int = energy_cat
+var max_energy_cat: int = 3
 
-var current_hand_size_cat = 5
-var hand_size_cat = 5
+var current_hand_size_cat: int = 5
+var hand_size_cat: int = 5
 
 #==============================================================================================
 var battle_x_human : int
 var battle_y_human : int
 
-var hp_human = 25
-var max_hp_human = 25
+var hp_human: int = 25
+var max_hp_human: int = 25
 
-var damage_human = 0
-var min_damage_human = -3
-var current_damage_human = damage_human
+var damage_human: int = 0
+var min_damage_human: int = -3
+var current_damage_human: int = damage_human
 
-var defence_human = 3
-var current_defence_human = 0
-var max_defence_human = 7
+var defence_human: int = 3
+var current_defence_human: int = 0
+var max_defence_human: int = 7
 var defended_human = false
 
-var accuracy_human = 65
-var min_accuracy_human = 5
-var max_accuracy_human = 99
-var current_accuracy_human = accuracy_human
+var accuracy_human: int = 65
+var min_accuracy_human: int = 5
+var max_accuracy_human: int = 99
+var current_accuracy_human: int = accuracy_human
 
-var luck_human = 15
-var min_luck_human = -100
-var max_luck_human = 100
-var current_luck_human = luck_human
+var luck_human: int = 15
+var min_luck_human: int = -100
+var max_luck_human: int = 100
+var current_luck_human: int = luck_human
 
-var energy_human = 2
-var current_energy_human = energy_human
-var max_energy_human = 2
+var energy_human: int = 2
+var current_energy_human: int = energy_human
+var max_energy_human: int = 2
 
-var current_hand_size_human = 4
-var hand_size_human = 4
+var current_hand_size_human: int = 4
+var hand_size_human: int = 4
 
-var xp = 0
-var xp_needed = 1
-var level = 1
+var xp: int = 0
+var xp_needed: int = 1
+var level: int = 1
 
-var max_hand_size = 8
+var max_hand_size: int = 8
 
 var current_cards_cat: Dictionary[int, Card]
 var current_cards_human: Dictionary[int, Card]
@@ -121,34 +124,124 @@ var debuff_animation_time_human = 0.6
 var buff_animation_time_human = 1.3
 
 func _ready() -> void:
-	current_cards_cat.set(1, AttackCard.new())
-	current_cards_cat.set(2, InfernoCard.new())
-	current_cards_cat.set(3, DefendCard.new())
-	current_cards_cat.set(4, LickWoundsCard.new())
-	current_cards_cat.set(5, DinnerCard.new())
-	current_cards_cat.set(6, GotYouCard.new())
-	current_cards_cat.set(7, CattenheimerCard.new())
-	current_cards_cat.set(8, CompensationCard.new())
-	current_cards_cat.set(9, EclipseCard.new())
-	current_cards_cat.set(10, RevengeCard.new())
-	
-	current_cards_human.set(1, SandInTheEyesCard.new())
-	current_cards_human.set(2, SollenheimerCard.new())
-	current_cards_human.set(3, LuckySpearCard.new())
-	current_cards_human.set(4, LittleFireCard.new())
-	current_cards_human.set(5, WindOfChangeCard.new())
-	current_cards_human.set(6, LittleFireCard.new())
-	current_cards_human.set(7, WindShieldCard.new())
-	current_cards_human.set(8, LittleFireCard.new())
-	#current_cards_human.set(9, NeutralityCard.new())
-	current_cards_human.set(10, BigFireCard.new())
-	
-	current_artifacts_cat.set(1, CatFoodArtifact.new())
-	current_artifacts_human.set(1, MatchesArtifact.new())
-	
+	pass
 
 func _process(delta: float) -> void:
 	pass
+		
+func save_game() -> void:
+	var card_names_cat: Dictionary
+	for card in current_cards_cat:
+		card_names_cat.set(card, current_cards_cat.get(card).card_path)
+	
+	var card_names_human: Dictionary
+	for card in current_cards_human:
+		card_names_human.set(card, current_cards_human.get(card).card_path)
+	
+	var artifact_names_cat: Dictionary
+	for art in current_artifacts_cat:
+		artifact_names_cat.set(art, current_artifacts_cat.get(art).path)
+	
+	var artifact_names_human: Dictionary
+	for art in current_artifacts_human:
+		artifact_names_human.set(art, current_artifacts_human.get(art).path)
+	
+	var save_data = {
+		"level_number": level_number,
+		"current_level_name": current_level_name,
+		"camera_zoom": camera_zoom,
+		
+		"match_amount": match_amount,
+		
+		"hp_cat": hp_cat,
+		"max_hp_cat": max_hp_cat,
+		"damage_cat": damage_cat,
+		"min_damage_cat": min_damage_cat,
+		"current_damage_cat": current_damage_cat,
+		
+		"defence_cat": defence_cat,
+		"current_defence_cat": current_defence_cat,
+		"max_defence_cat": max_defence_cat,
+		
+		"accuracy_cat": accuracy_cat,
+		"min_accuracy_cat": min_accuracy_cat,
+		"max_accuracy_cat": max_accuracy_cat,
+		"current_accuracy_cat": current_accuracy_cat,
+		
+		"luck_cat": luck_cat,
+		"min_luck_cat": min_luck_cat,
+		"max_luck_cat": max_luck_cat,
+		"current_luck_cat": current_luck_cat,
+
+		"energy_cat": energy_cat,
+		"current_energy_cat": current_energy_cat,
+		"max_energy_cat": max_energy_cat,
+
+		"current_hand_size_cat": current_hand_size_cat,
+		"hand_size_cat": hand_size_cat,
+		
+		"hp_human": hp_human,
+		"max_hp_human": max_hp_human,
+
+		"damage_human": damage_human,
+		"min_damage_human": min_damage_human,
+		"current_damage_human": current_damage_human,
+
+		"defence_human": defence_human,
+		"current_defence_human": current_defence_human,
+		"max_defence_human": max_defence_human,
+
+		"accuracy_human": accuracy_human,
+		"min_accuracy_human": min_accuracy_human,
+		"max_accuracy_human": max_accuracy_human,
+		"current_accuracy_human": current_accuracy_human,
+
+		"luck_human": luck_human,
+		"min_luck_human": min_luck_human,
+		"max_luck_human": max_luck_human,
+		"current_luck_human": current_luck_human,
+
+		"energy_human": energy_human,
+		"current_energy_human": current_energy_human,
+		"max_energy_human": max_energy_human,
+
+		"current_hand_size_human": current_hand_size_human,
+		"hand_size_human": hand_size_human,
+		
+		"level": level,
+		"xp": xp,
+		"xp_needed": xp_needed,
+		
+		"max_hand_size": max_hand_size,
+		
+		"current_cards_cat": card_names_cat,
+		"current_cards_human": card_names_human,
+		
+		"current_artifacts_cat": artifact_names_cat,
+		"current_artifacts_human": artifact_names_human,
+		
+		"has_cat_food" : has_cat_food,
+		"has_spinner" : has_spinner,
+		"has_boomerang" : has_boomerang,
+		"has_fork" : has_fork,
+		"has_heart_shaped_pillow" : has_heart_shaped_pillow,
+		"has_toy_cat" : has_toy_cat,
+		"has_rocky" : has_rocky,
+		"has_mrs_rocky" : has_mrs_rocky,
+		"has_tomato_cross" : has_tomato_cross,
+		"has_motivational_poster" : has_motivational_poster,
+
+		"has_regen_ring" : has_regen_ring,
+		"has_portrait_of_the_unknown" : has_portrait_of_the_unknown,
+		"has_old_bandage" : has_old_bandage,
+		"has_rainbow_pot" : has_rainbow_pot,
+		"has_lucky_coin": has_lucky_coin,
+		"has_discount" : has_discount,
+		"has_dice" : has_dice,
+	}
+	sm.save_data = save_data
+	sm.save_game()
+
 
 func add_card_cat(index : int, card : Card) -> void:
 	var card_resource = load("res://scenes/cards/" + card.card_path)

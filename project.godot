@@ -12,7 +12,7 @@ config_version=5
 
 config/name="GiantCrawl"
 run/main_scene="uid://cv287toqe0prk"
-config/features=PackedStringArray("4.6")
+config/features=PackedStringArray("4.7")
 config/icon="res://icon.png"
 
 [autoload]
@@ -21,6 +21,7 @@ gm="*uid://l0febx8ncuyv"
 scene_transitioner="*uid://c5gpfg7xp2c1c"
 catalog="*uid://djdfvj81ae716"
 settings="*uid://cp7sy664ksm6n"
+sm="*uid://bydsner101073"
 
 [display]
 
@@ -51,6 +52,9 @@ folder_colors={
 
 [gui]
 
+theme/default_font_antialiasing=0
+theme/default_font_generate_mipmaps=true
+theme/custom="uid://6ydql0hb6ji7"
 theme/custom_font="uid://c01ismt76d301"
 common/drop_mouse_on_gui_input_disabled=true
 

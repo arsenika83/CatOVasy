@@ -79,6 +79,7 @@ func _on_button_pressed() -> void:
 	if not is_empty:
 		$Timer.start()
 		scene_transitioner.change_scene_to()
+		sm.load_game()
 	else:
 		print("Создание профиля")
 

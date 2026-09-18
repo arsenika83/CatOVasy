@@ -860,6 +860,7 @@ position = Vector2(16, -8)
 texture = SubResource("AtlasTexture_jx0ba")
 
 [node name="DefenceLabel" type="RichTextLabel" parent="DefenceSprite" unique_id=1296448884]
+texture_filter = 1
 material = SubResource("ShaderMaterial_icmx6")
 offset_left = -8.0
 offset_top = -8.0

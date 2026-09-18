@@ -83,6 +83,8 @@ func _on_open_menu_button_mouse_exited() -> void:
 
 func _on_save_quit_button_pressed() -> void:
 	audio_click.play()
+	#if not gm.state == "battle" and not gm.state == "playing_a_card":
+		#sm.save_game() #СОХРАНЕНИЕ ТОЛЬКО НЕ В БОЮ
 	settings.save_settings_to_file()
 	get_tree().quit()
 

@@ -76,6 +76,9 @@ offset_left = -8.0
 offset_top = 8.0
 offset_right = 40.0
 offset_bottom = 56.0
+tooltip_text = "Замена руки. 
+Все карты в руке сбрасываются и 
+вы берёте новые"
 texture_normal = SubResource("AtlasTexture_0mux7")
 texture_pressed = SubResource("AtlasTexture_wau5o")
 texture_hover = SubResource("AtlasTexture_eov42")
@@ -113,6 +116,9 @@ offset_left = -8.0
 offset_top = 72.0
 offset_right = 40.0
 offset_bottom = 120.0
+tooltip_text = "Стопка ещё не разыгранных
+карт. При замене руки, 
+карты берутся отсюда"
 texture_normal = SubResource("AtlasTexture_cwvv5")
 texture_pressed = SubResource("AtlasTexture_kdc2i")
 texture_hover = SubResource("AtlasTexture_cd1kh")
@@ -139,6 +145,8 @@ offset_left = -8.0
 offset_top = 136.0
 offset_right = 40.0
 offset_bottom = 184.0
+tooltip_text = "Стопка уже 
+разыгранных карт"
 texture_normal = SubResource("AtlasTexture_mo7p4")
 texture_pressed = SubResource("AtlasTexture_lsa6a")
 texture_hover = SubResource("AtlasTexture_ogknx")

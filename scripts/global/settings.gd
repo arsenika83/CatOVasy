@@ -8,7 +8,6 @@ var animation_speed: float = 1.0
 var lang = "rus"
 var card_text_cat : Dictionary = load_json(str("res://lang/", lang, "_card_text_cat.json"))
 
-
 var path = "res://saves/saved_settings.txt"
 
 func _ready() -> void:

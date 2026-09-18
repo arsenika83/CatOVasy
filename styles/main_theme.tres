@@ -1,0 +1,8 @@
+[gd_resource type="Theme" format=3 uid="uid://6ydql0hb6ji7"]
+
+[ext_resource type="StyleBox" uid="uid://b8wibcbgivilm" path="res://styles/button_normal.tres" id="1_pjbn5"]
+
+[resource]
+TooltipLabel/font_sizes/font_size = 24
+TooltipPanel/colors/title_color = Color(0, 0, 0, 1)
+TooltipPanel/styles/panel = ExtResource("1_pjbn5")
