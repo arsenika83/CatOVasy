@@ -180,6 +180,7 @@ var has_toy_cat = false
 var has_rocky = false
 var has_mrs_rocky = false
 var has_tomato_cross = false
+var has_motivational_poster = false
 
 #HUMAN
 var has_regen_ring = false

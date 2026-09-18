@@ -1,6 +1,7 @@
+GPUParticles2D
+TextureRect
 Timer
 GridContainer
-GPUParticles2D
 Label
 RichTextLabel
 Panel
@@ -10,5 +11,4 @@ Control
 ColorRect
 CanvasLayer
 AudioStreamPlayer
-TextureRect
 AnimatedSprite2D

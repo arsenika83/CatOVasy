@@ -34,6 +34,7 @@ var character_name_display = "Кот"
 
 @onready var luck_particles = $LuckParticles
 @onready var unluck_particles = $UnluckParticles
+@onready var poster_particles = $PosterParticles
 
 var light_diff = 0.0001
 @onready var light = $PointLight2D
@@ -47,6 +48,8 @@ var last_damage_dealt = 0
 var is_hit_lucky = false
 var is_hit_unlucky = false
 var just_missed = false
+
+var poster_amount = 0
 
 var next_strike_lucky = false
 
@@ -178,6 +181,7 @@ func deal_damage(targets : Array[CharacterBody2D]) -> void:
 	is_hit_lucky = false
 	is_hit_unlucky = false
 	just_missed = false
+	poster_amount = 0
 	
 	var energy_cost = gm.current_card.energy_cost
 	if gm.current_energy_cat - energy_cost < 0:
@@ -442,6 +446,20 @@ func eclipse() -> void:
 	tween.tween_property(get_parent().sun_fx, "position", Vector2(160, -48), 1)
 	tween.tween_property(get_parent().sun_fx, "z_index", 100, 1)
 
+func poster_defend(def : int) -> void:
+	for i in range(0, poster_amount):
+		gm.current_defence_cat += def
+	
+	if gm.current_defence_cat > gm.max_defence_cat:
+		gm.current_defence_cat = gm.max_defence_cat
+		
+	get_parent().log_messages.append(str("- [color=#1ca8fd]Кот[/color]: +", def,
+			" защиты. Держись!\n"))
+	
+	shine_artifact("motivational_poster")
+	poster_particles.amount = poster_amount
+	poster_particles.restart()
+
 func _on_area_2d_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
 	#fall_timer.start()
 	pass
@@ -546,7 +564,6 @@ func _on_deal_damage_timer_timeout() -> void:
 		get_parent().claw_fx.scale = Vector2(1, 1)
 	else:
 		get_parent().player_camera.apply_shake(gm.current_card.shake)
-			
 		audio_hit.play()
 		
 		get_parent().claw_fx.scale = Vector2(1, 1)
@@ -567,6 +584,7 @@ func _on_deal_damage_timer_timeout() -> void:
 				gm.current_damage_cat = gm.current_card.revenge()
 		else:
 			just_missed = true
+			poster_amount += 1
 			gm.current_damage_cat = 0
 			
 		if is_hit_lucky:
@@ -631,6 +649,9 @@ func _on_deal_damage_timer_timeout() -> void:
 			
 	
 	if just_missed:
+		if gm.has_motivational_poster:
+			poster_defend(3)
+		
 		if gm.has_boomerang:
 			#var boomerang = get_parent().find_child("FX").find_child("BoomerangProjectile")
 			if gm.current_card.everybody_attack:

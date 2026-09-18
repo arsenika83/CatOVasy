@@ -143,6 +143,12 @@ func _on_cancel_button_pressed() -> void:
 	audio_cancel.play()
 	visible = false
 	gm.state = "idle"
+	
+	catalog.all_artifact_names.erase(artifacts.get_child(0).path)
+	catalog.all_artifact_names_common.erase(artifacts.get_child(0).path)
+	catalog.all_artifact_names_rare.erase(artifacts.get_child(0).path)
+	catalog.all_artifact_names_epic.erase(artifacts.get_child(0).path)
+	catalog.all_artifact_names_unbelievable.erase(artifacts.get_child(0).path)
 
 
 func _on_mouse_entered() -> void:

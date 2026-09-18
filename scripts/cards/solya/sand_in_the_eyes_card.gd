@@ -39,9 +39,14 @@ func on_play() -> void:
 
 func on_after_play() -> void:
 	for enemy in gm.current_targets:
-		if not enemy.player_just_missed:
-			enemy.current_accuracy -= 2
-			enemy.accuracy -= 2
+		if enemy != get_parent().get_parent().get_parent().get_parent().human:
+			if not enemy.player_just_missed:
+				enemy.current_accuracy -= 2
+				enemy.accuracy -= 2
+		else:
+			if not enemy.just_missed:
+				enemy.current_accuracy -= 2
+				enemy.accuracy -= 2	
 
 func sand():
 	pass
