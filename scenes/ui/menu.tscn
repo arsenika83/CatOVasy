@@ -91,9 +91,9 @@ alignment = 0
 [node name="SettingsButton" type="Button" parent="MenuRect" unique_id=1940889036]
 layout_mode = 0
 offset_left = 24.0
-offset_top = 72.0
+offset_top = 80.0
 offset_right = 232.0
-offset_bottom = 112.0
+offset_bottom = 132.0
 theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = ExtResource("2_w6y0u")
 theme_override_styles/pressed = ExtResource("3_cx0sj")
@@ -105,9 +105,9 @@ alignment = 0
 [node name="MainMenuButton" type="Button" parent="MenuRect" unique_id=873371576]
 layout_mode = 0
 offset_left = 24.0
-offset_top = 120.0
+offset_top = 136.0
 offset_right = 232.0
-offset_bottom = 160.0
+offset_bottom = 188.0
 theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = ExtResource("2_w6y0u")
 theme_override_styles/pressed = ExtResource("3_cx0sj")
@@ -119,9 +119,9 @@ alignment = 0
 [node name="SaveQuitButton" type="Button" parent="MenuRect" unique_id=1886285253]
 layout_mode = 0
 offset_left = 24.0
-offset_top = 192.0
+offset_top = 208.0
 offset_right = 232.0
-offset_bottom = 232.0
+offset_bottom = 260.0
 theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = ExtResource("2_w6y0u")
 theme_override_styles/pressed = ExtResource("3_cx0sj")

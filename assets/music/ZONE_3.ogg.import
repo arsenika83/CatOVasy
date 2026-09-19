@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/ZONE_3.ogg-c579252d2f1167c42b29f28320737138.o
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

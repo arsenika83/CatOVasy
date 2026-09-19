@@ -1,14 +1,14 @@
 extends Node
 
-var rare_card_chance : Array[int] = [10, 10, 10, 15, 15, 15, 20, 20, 25, 35, 
+var rare_card_chance : Array = [10, 10, 10, 15, 15, 15, 20, 20, 25, 35, 
 40, 40, 40, 45, 45, 50, 50, 50, 50, 50,
 55, 55, 60, 60, 60, 60, 65, 70, 70, 70]
 
-var epic_card_chance : Array[int] = [0, 0, 0, 3, 3, 5, 5, 5, 10, 10, 
+var epic_card_chance : Array = [0, 0, 0, 3, 3, 5, 5, 5, 10, 10, 
 10, 10, 10, 15, 15, 15, 20, 20, 20, 20,
 25, 25, 30, 30, 30, 30, 35, 50, 60, 80]
 
-var unbelievable_card_chance : Array[int] = [0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 
+var unbelievable_card_chance : Array = [0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 
 10, 10, 10, 15, 15, 15, 20, 20, 20, 20,
 25, 25, 30, 30, 30, 30, 35, 50, 60, 80]
 
@@ -38,22 +38,17 @@ var all_card_names_epic_human : Array[String] = ["sollenheimer", "neutrality"]
 var all_card_names_unbelievable_human : Array[String] = ["fog", "burn_down"]
 
 
-
-
-
-var all_artifact_names : Array[String] = ["red_ball", "blue_ball", "heart_shaped_pillow", "cat_food",
+var all_artifact_names : Array = ["red_ball", "blue_ball", "heart_shaped_pillow", "cat_food",
 "old_bandage", "spinner", "boomerang", "regen_ring", "candy", "portrait_of_the_unknown", "fork",
 "lucky_collar", "toy_cat", "rocky", "tomato_cross", "lucky_coin", "med_kit", "rainbow_pot", "discount",
 "dice", "motivational_poster"]
 
-var all_artifact_names_common : Array[String] = ["red_ball", "old_bandage", "candy", "lucky_collar", "rocky", "fork"]
-var all_artifact_names_rare : Array[String] = ["blue_ball", "spinner", "boomerang", 
+var all_artifact_names_common : Array = ["red_ball", "old_bandage", "candy", "lucky_collar", "rocky", "fork"]
+var all_artifact_names_rare : Array = ["blue_ball", "spinner", "boomerang", 
 "portrait_of_the_unknown", "lucky_coin", "med_kit", "rainbow_pot", "discount"]
-var all_artifact_names_epic : Array[String] = ["heart_shaped_pillow", "toy_cat", "tomato_cross", "dice",
+var all_artifact_names_epic : Array = ["heart_shaped_pillow", "toy_cat", "tomato_cross", "dice",
 "motivational_poster"]
-var all_artifact_names_unbelievable : Array[String] = ["regen_ring"]
-
-
+var all_artifact_names_unbelievable : Array = ["regen_ring"]
 
 
 

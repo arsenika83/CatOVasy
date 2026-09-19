@@ -4,7 +4,7 @@ var path = "res://saves/save_1.json"
 var save : Dictionary
 
 var level_number: int = 1
-var current_level_name = ""
+var current_level_name = "level0"
 
 var state = "idle"
 var prev_state = "idle"

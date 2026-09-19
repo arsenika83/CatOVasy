@@ -14,6 +14,8 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	gm.save_game()
 	
 	gm.level_number += 1
+	gm.current_level_name = str("level", room_number)
+	
 	if gm.has_cat_food:
 		gm.hp_cat += 2
 		if gm.hp_cat > gm.max_hp_cat:
@@ -25,4 +27,4 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 
 func _on_timer_timeout() -> void:
 	gm.current_music_position = get_parent().get_parent().audio.get_playback_position() + 0.001
-	get_tree().change_scene_to_file(str("res://scenes/levels/level", room_number, ".tscn"))
+	lm.change_scene_with_loading(str("res://scenes/levels/level", room_number, ".tscn"))

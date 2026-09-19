@@ -16,6 +16,11 @@ func _ready() -> void:
 	settings_menu.scale.x = 0
 	profiles_menu.scale.x = 0
 	scene_transitioner.change_scene_back()
+	
+	gm.state = "idle"
+	gm.prev_state = "idle"
+	gm.state_human = "idle"
+	gm.prev_state_human = "idle"
 
 
 func _process(delta: float) -> void:

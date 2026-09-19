@@ -125,6 +125,12 @@ var save_data = {
 	"has_lucky_coin": false,
 	"has_discount" : false,
 	"has_dice" : false,
+	
+	"all_artifact_names" : catalog.all_artifact_names,
+	"all_artifact_names_common" : catalog.all_artifact_names_common,
+	"all_artifact_names_rare" : catalog.all_artifact_names_rare,
+	"all_artifact_names_epic" : catalog.all_artifact_names_epic,
+	"all_artifact_names_unbelievable" : catalog.all_artifact_names_unbelievable,	
 }
 
 func save_file():
@@ -247,6 +253,12 @@ func save_game():
 		"has_lucky_coin": gm.has_lucky_coin,
 		"has_discount" : gm.has_discount,
 		"has_dice" : gm.has_dice,
+		
+		"all_artifact_names" : catalog.all_artifact_names,
+		"all_artifact_names_common" : catalog.all_artifact_names_common,
+		"all_artifact_names_rare" : catalog.all_artifact_names_rare,
+		"all_artifact_names_epic" : catalog.all_artifact_names_epic,
+		"all_artifact_names_unbelievable" : catalog.all_artifact_names_unbelievable,
 	}
 	
 	save_file()
@@ -270,6 +282,8 @@ func load_file():
 	var error = json.parse(json_string)
 	
 	if error == OK:
+		if save_data.get("level") == null:
+			return
 		# Обновляем наш рабочий словарь данными из файла
 		if typeof(json.data) == TYPE_DICTIONARY:
 			save_data = json.data
@@ -401,4 +415,21 @@ func load_game():
 	for art in artifacts_human:
 		var art_scene = load(str("res://scenes/artifacts/", artifacts_human.get(art), ".tscn"))
 		var added_art = art_scene.instantiate()
-		gm.current_artifacts_human.set(int(art), added_art)		
+		gm.current_artifacts_human.set(int(art), added_art)
+		
+	catalog.all_artifact_names = save_data.get("all_artifact_names")
+	catalog.all_artifact_names_common = save_data.get("all_artifact_names_common")
+	catalog.all_artifact_names_rare = save_data.get("all_artifact_names_rare")
+	catalog.all_artifact_names_epic = save_data.get("all_artifact_names_epic")
+	catalog.all_artifact_names_unbelievable = save_data.get("all_artifact_names_unbelievable")
+	
+func clear_save():
+	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
+	if file == null:
+		push_error("Не удалось создать файл сохранения: " + str(FileAccess.get_open_error()))
+		return
+	
+	file.store_string("")
+	file.close()
+	print("Игра успешно сохранена!")	
+	

@@ -84,8 +84,7 @@ func _on_button_pressed() -> void:
 		print("Создание профиля")
 
 func _on_timer_timeout() -> void:
-	get_tree().change_scene_to_file(str("res://scenes/levels/level", room_number, ".tscn"))
-
+	lm.change_scene_with_loading(str("res://scenes/levels/level", room_number, ".tscn"))
 
 func _on_create_button_pressed() -> void:
 	save_to_file(test_text)

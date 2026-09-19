@@ -1,0 +1,110 @@
+[gd_scene format=3 uid="uid://br7kjhqgqqkkh"]
+
+[ext_resource type="Script" uid="uid://2bem8goqchfg" path="res://scripts/ui/loading_screen.gd" id="1_q4fso"]
+[ext_resource type="StyleBox" uid="uid://ch7rotapn28xj" path="res://styles/loading.tres" id="1_rqdcv"]
+[ext_resource type="Texture2D" uid="uid://cd6y2ykrp63it" path="res://assets/images/characters/solya_sprite.png" id="3_5fj0j"]
+[ext_resource type="Shader" uid="uid://dmo1l352iefcn" path="res://shaders/tree.gdshader" id="3_s41fs"]
+[ext_resource type="Texture2D" uid="uid://dhpxrfjobvnw8" path="res://assets/images/player_sprite.png" id="4_y06jl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1erco"]
+shader = ExtResource("3_s41fs")
+shader_parameter/speed = 1.0000000475
+shader_parameter/min_strength = 0.10000000475
+shader_parameter/max_strength = 0.10000000475
+shader_parameter/wind_decay = 0.50000002375
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g5iak"]
+atlas = ExtResource("4_y06jl")
+region = Rect2(0, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2hmxs"]
+atlas = ExtResource("4_y06jl")
+region = Rect2(32, 192, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a7tdr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g5iak")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2hmxs")
+}],
+"loop": 1,
+"name": &"1",
+"speed": 5.0
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6df0m"]
+shader = ExtResource("3_s41fs")
+shader_parameter/speed = 1.0000000475
+shader_parameter/min_strength = 0.10000000475
+shader_parameter/max_strength = 0.10000000475
+shader_parameter/wind_decay = 0.50000002375
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s2kth"]
+atlas = ExtResource("3_5fj0j")
+region = Rect2(0, 320, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s41fs"]
+atlas = ExtResource("3_5fj0j")
+region = Rect2(64, 320, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f30dh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s2kth")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s41fs")
+}],
+"loop": 1,
+"name": &"1",
+"speed": 5.0
+}]
+
+[node name="LoadingScreen" type="Control" unique_id=436840845]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_q4fso")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1258578373]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=1051280711]
+layout_mode = 0
+offset_left = 384.0
+offset_top = 604.0
+offset_right = 896.0
+offset_bottom = 640.0
+theme_override_font_sizes/font_size = 32
+theme_override_styles/fill = ExtResource("1_rqdcv")
+
+[node name="Cat" type="AnimatedSprite2D" parent="." unique_id=860533927]
+material = SubResource("ShaderMaterial_1erco")
+position = Vector2(704, 384)
+scale = Vector2(4, 3.9999995)
+sprite_frames = SubResource("SpriteFrames_a7tdr")
+animation = &"1"
+autoplay = "1"
+frame_progress = 0.5158051
+
+[node name="Solya" type="AnimatedSprite2D" parent="." unique_id=420404358]
+material = SubResource("ShaderMaterial_6df0m")
+position = Vector2(576, 320)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_f30dh")
+animation = &"1"
+autoplay = "1"
+frame_progress = 0.91274273

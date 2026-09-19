@@ -90,6 +90,10 @@ func _on_save_quit_button_pressed() -> void:
 
 func _on_give_up_button_pressed() -> void:
 	audio_click.play()
+	sm.clear_save()
+	sm.load_game()
+	
+	lm.change_scene_with_loading(str("res://scenes/levels/", gm.current_level_name, ".tscn"))
 
 
 func _on_mouse_entered() -> void:
@@ -104,4 +108,4 @@ func _on_menu_rect_mouse_entered() -> void:
 
 
 func _on_main_menu_button_pressed() -> void:
-	get_tree().change_scene_to_file(str("res://scenes/ui/main_menu.tscn"))
+	lm.change_scene_with_loading(str("res://scenes/ui/main_menu.tscn"))

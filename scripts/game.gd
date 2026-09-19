@@ -36,6 +36,7 @@ const BATTLE_SCENE = preload("res://scenes/levels/battle_level.tscn")
 const BOSS_BATTLE_MOUSE_GOLEM_SCENE = preload("res://scenes/levels/battle_big_mouse_boss.tscn")
 
 func _ready() -> void:
+	gm.current_enemies = []
 	$CanvasModulate.visible = true
 	bg.color = Color(0, 0, 0, 0)
 	
