@@ -1,3 +1,4 @@
+res://shaders/
 res://scripts/artifacts/
 res://scripts/ui/
 res://scenes/ui/
@@ -8,7 +9,6 @@ res://scripts/enemies/
 res://assets/images/
 F:/GODOTProjects/GiantCrawler/saves/profiles/
 res://assets/fonts/
-res://shaders/
 F:/GODOTProjects/GiantCrawler/lang/
 res://scenes/fx/
 res://assets/images/bosses/

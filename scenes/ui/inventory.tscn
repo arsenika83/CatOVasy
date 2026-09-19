@@ -10,6 +10,7 @@
 [ext_resource type="Shader" uid="uid://dcoiis0rcw7lq" path="res://shaders/hp_bar.gdshader" id="8_vj5ws"]
 [ext_resource type="PackedScene" uid="uid://55268lbppycn" path="res://scenes/ui/artifact_check_dialog.tscn" id="9_i8fht"]
 [ext_resource type="PackedScene" uid="uid://bhwyxtkmsfidf" path="res://scenes/ui/card_check_dialog.tscn" id="10_5suo7"]
+[ext_resource type="AudioStream" uid="uid://cpj4ex8gfs0ie" path="res://assets/soundFX/coin-flip.wav" id="11_u3v1c"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qtlqx"]
 shader = ExtResource("1_s887n")
@@ -90,6 +91,10 @@ region = Rect2(128, 160, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_8poyu"]
 atlas = ExtResource("4_p7iul")
 region = Rect2(192, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6qj3p"]
+atlas = ExtResource("4_p7iul")
+region = Rect2(0, 272, 16, 16)
 
 [node name="Inventory" type="Control" unique_id=1641948652]
 material = SubResource("ShaderMaterial_qtlqx")
@@ -525,6 +530,32 @@ text = "Спички:
 autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="MoneyIcon" type="TextureRect" parent="." unique_id=1698874606]
+use_parent_material = true
+layout_mode = 0
+offset_left = 384.0
+offset_top = 208.0
+offset_right = 424.0
+offset_bottom = 248.0
+texture = SubResource("AtlasTexture_6qj3p")
+
+[node name="MoneyLabel" type="RichTextLabel" parent="MoneyIcon" unique_id=823551103]
+use_parent_material = true
+layout_mode = 0
+offset_left = -128.0
+offset_bottom = 40.0
+theme_override_font_sizes/normal_font_size = 22
+text = "100"
+autowrap_mode = 0
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="AudioMoney" type="AudioStreamPlayer" parent="." unique_id=35675000]
+stream = ExtResource("11_u3v1c")
+volume_db = -5.0
+pitch_scale = 0.9
+bus = &"SoundFX"
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

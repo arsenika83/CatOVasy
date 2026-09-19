@@ -25,6 +25,8 @@ artifact_slot_4, artifact_slot_5, artifact_slot_6, artifact_slot_7, artifact_slo
 @onready var cat_button = $CatButton
 @onready var human_button = $HumanButton
 
+@onready var money_label = $MoneyIcon/MoneyLabel
+
 var cat_button_already_pressed = false
 var human_button_already_pressed = false
 
@@ -43,6 +45,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	$AmountLabel.text = str("Спички:\n", gm.match_amount, "/20")
+	money_label.text = str(gm.money)
 
 func update_cards(type : String) -> void:
 	if type == "cat":

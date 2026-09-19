@@ -143,6 +143,9 @@ func _on_cancel_button_pressed() -> void:
 	audio_cancel.play()
 	visible = false
 	gm.state = "idle"
+	gm.money += 50
+	$AudioMoney.play()
+	get_parent().get_parent().giant.money_particles.restart()
 	
 	catalog.all_artifact_names.erase(artifacts.get_child(0).path)
 	catalog.all_artifact_names_common.erase(artifacts.get_child(0).path)

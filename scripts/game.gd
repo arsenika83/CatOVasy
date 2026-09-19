@@ -37,6 +37,9 @@ const BOSS_BATTLE_MOUSE_GOLEM_SCENE = preload("res://scenes/levels/battle_big_mo
 
 func _ready() -> void:
 	gm.current_enemies = []
+	gm.state = "idle"
+	gm.prev_state = "idle"
+	
 	$CanvasModulate.visible = true
 	bg.color = Color(0, 0, 0, 0)
 	
@@ -49,6 +52,12 @@ func _ready() -> void:
 		gm.current_music_position = 0.0
 		giant.light.energy = 0.4
 		giant.walk_timer.wait_time = 0.2
+	elif name == "Game2":
+		$CanvasModulate.visible = false
+		gm.current_music_position = 0.0
+		giant.light.enabled = false
+		giant.walk_timer.wait_time = 0.2
+		giant.find_child("Bubble").visible = true
 	
 	scene_transitioner.change_scene_back()
 	
@@ -182,7 +191,7 @@ func move_to_map_pos() -> void:
 		var tween = create_tween()
 		tween.tween_property(giant, "position", Vector2(giant.position.x - 32, giant.position.y - 32), 0.2)
 		
-	enemy_turn()
+	#enemy_turn()
 	
 func draw_cursor() -> void:
 	cursor.visible = true
@@ -365,6 +374,7 @@ func start_battle() -> void:
 		audio.stop()
 		$UI.visible = false
 		
+		$EnemyMoveTimer.stop()
 		$AudioStreamPlayerBattleStart.play()
 		scene_transitioner.change_scene_to()
 		battle_start_timer.start()
@@ -387,6 +397,7 @@ func end_battle() -> void:
 	gm.energy_human = gm.max_energy_human
 	
 	update_inventory()
+	$EnemyMoveTimer.start()
 
 	audio.play(gm.current_music_position)
 	$Effects.visible = true
@@ -463,3 +474,7 @@ func _on_inventory_button_human_mouse_entered() -> void:
 		inventory.human_button.button_pressed = true
 		inventory.cat_button.button_pressed = false
 		draw_inventory()
+
+
+func _on_enemy_move_timer_timeout() -> void:
+	enemy_turn()

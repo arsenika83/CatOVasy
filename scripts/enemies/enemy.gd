@@ -30,6 +30,7 @@ var current_energy = energy
 var max_energy = 1
 
 @export var xp_gives = 1
+@export var money_gives = 5
 
 var gave_xp = false
 var state = "idle"

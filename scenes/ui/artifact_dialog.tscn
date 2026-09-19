@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="4_fxcbs"]
 [ext_resource type="AudioStream" uid="uid://bq0ooer30jskk" path="res://assets/soundFX/xp_pick_up.wav" id="6_snn0j"]
 [ext_resource type="AudioStream" uid="uid://dnyi4oi4yn2sl" path="res://assets/soundFX/cancel.wav" id="7_68a23"]
+[ext_resource type="AudioStream" uid="uid://cpj4ex8gfs0ie" path="res://assets/soundFX/coin-flip.wav" id="8_gcjjy"]
 [ext_resource type="AudioStream" uid="uid://bxhii1a001e1v" path="res://assets/music/BATTLE_WIN.mp3" id="8_snn0j"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_snn0j"]
@@ -217,6 +218,12 @@ bus = &"SoundFX"
 [node name="AudioStreamPlayerCancel" type="AudioStreamPlayer" parent="." unique_id=803297642]
 stream = ExtResource("7_68a23")
 volume_db = -2.0
+bus = &"SoundFX"
+
+[node name="AudioMoney" type="AudioStreamPlayer" parent="." unique_id=1032434654]
+stream = ExtResource("8_gcjjy")
+volume_db = -5.0
+pitch_scale = 0.9
 bus = &"SoundFX"
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

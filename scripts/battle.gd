@@ -8,6 +8,7 @@ var battle_ended = false
 var one_character_died = false
 
 var state = "default"
+var initial_money = 0
 
 var log_messages: Array[String] = ["[center][font_size=20]БОЙ НАЧАЛСЯ![/font_size][/center]\n[center]>>> ХОД 1 <<<[/center]\n"]
 var log_count = 1
@@ -44,6 +45,8 @@ var log_count = 1
 var is_check_dialog_holding = false
 
 @onready var front = $UI/Front
+@onready var money_icon = $UI/MoneyIcon
+@onready var money_label = $UI/MoneyIcon/MoneyLabel
 
 var turn_count = 1
 
@@ -62,6 +65,7 @@ var current_enemies : Array
 var team_positions : Array[String] = ["cat", "human"]
 
 func _ready() -> void:
+	money_icon.visible = false
 	
 	creature_check_dialog.visible = false
 	end_battle_button.visible = false
@@ -84,6 +88,10 @@ func _process(delta: float) -> void:
 	
 	if not battle_ended:
 		check_battle_status()
+	
+	if money_icon.visible:
+		money_label.text = str(initial_money)
+		
 	
 	cursor_pos = map.get_global_mouse_position()
 	cursor_map_pos = map.local_to_map(cursor_pos)
@@ -1205,13 +1213,22 @@ func check_battle_status() -> void:
 		battle_ended = true
 		$WinTimer.start()	
 		
+func _play_money_sounds(duration: float) -> void:
+	var timer = get_tree().create_timer(duration)
+	while timer.time_left > 0:
+		if $AudioMoney: $AudioMoney.play()
+		await get_tree().create_timer(0.06).timeout
 
 func _on_end_battle_button_pressed() -> void:
 	if won:
+		var added_money = 0
+
 		for enemy in gm.current_enemies:
 			enemy.state = "dead"
+			added_money += enemy.money_gives
 			enemy.after_battle_update()
-			
+		
+		gm.money += added_money
 		gm.current_enemies.clear()
 		print("ПОБЕДА")
 		get_parent().get_parent().end_battle()
@@ -1231,6 +1248,8 @@ func _on_win_timer_timeout() -> void:
 		var tween = create_tween()
 		tween.tween_property($AudioStreamPlayerMusic, "volume_db", -15, 0.3)
 		
+		money_icon.visible = true
+		
 		$AudioStreamPlayerWin.play()
 		end_battle_button.visible = true
 		end_battle_button.disabled = false
@@ -1247,6 +1266,19 @@ func _on_win_timer_timeout() -> void:
 			gm.hp_human += 1	
 		
 		log_messages.append("[font_size=20][center]\nПОБЕДА![/center][/font_size]")
+		
+		$AudioMoney.play()
+		var added_money = 0
+		for enemy in gm.current_enemies:
+			added_money += enemy.money_gives
+		
+		added_money += gm.money
+		
+		initial_money = gm.money
+		var tween_money = create_tween()
+		tween_money.tween_property(self, "initial_money", added_money, 0.5)
+		
+		_play_money_sounds(0.5)
 
 
 func _on_end_turn_timer_timeout() -> void:

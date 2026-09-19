@@ -35,6 +35,7 @@ var character_name_display = "Кот"
 @onready var luck_particles = $LuckParticles
 @onready var unluck_particles = $UnluckParticles
 @onready var poster_particles = $PosterParticles
+@onready var money_particles = $MoneyParticles
 
 var light_diff = 0.0001
 @onready var light = $PointLight2D
@@ -592,9 +593,8 @@ func _on_deal_damage_timer_timeout() -> void:
 		elif is_hit_unlucky:
 			gm.current_damage_cat /= 2
 			
-		if gm.has_toy_cat and attack_count < 2:
+		if gm.has_toy_cat and attack_count <= 2:
 			gm.current_damage_cat *= 2
-			print("TOY CAAAAAAT")
 		
 		var damage_dealt = gm.current_damage_cat - target.current_defence
 		if damage_dealt < 0:

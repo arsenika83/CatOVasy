@@ -85,6 +85,7 @@ func _on_save_quit_button_pressed() -> void:
 	audio_click.play()
 	#if not gm.state == "battle" and not gm.state == "playing_a_card":
 		#sm.save_game() #СОХРАНЕНИЕ ТОЛЬКО НЕ В БОЮ
+	scene_transitioner.change_scene_to()
 	settings.save_settings_to_file()
 	get_tree().quit()
 
@@ -93,7 +94,8 @@ func _on_give_up_button_pressed() -> void:
 	sm.clear_save()
 	sm.load_game()
 	
-	lm.change_scene_with_loading(str("res://scenes/levels/", gm.current_level_name, ".tscn"))
+	scene_transitioner.change_scene_to()
+	lm.change_scene_with_loading(str("res://scenes/ui/main_menu.tscn"))
 
 
 func _on_mouse_entered() -> void:
@@ -108,4 +110,5 @@ func _on_menu_rect_mouse_entered() -> void:
 
 
 func _on_main_menu_button_pressed() -> void:
+	scene_transitioner.change_scene_to()
 	lm.change_scene_with_loading(str("res://scenes/ui/main_menu.tscn"))

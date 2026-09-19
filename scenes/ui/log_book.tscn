@@ -50,9 +50,9 @@ text = "									1 ХОД
 
 [node name="ToggleLogButton" type="Button" parent="." unique_id=2078286319]
 layout_mode = 0
-offset_left = 272.0
+offset_left = 264.0
 offset_right = 336.0
-offset_bottom = 64.0
+offset_bottom = 72.0
 pivot_offset = Vector2(136, -112)
 mouse_filter = 1
 theme_override_styles/normal = ExtResource("3_3ec7b")

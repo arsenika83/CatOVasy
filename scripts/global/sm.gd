@@ -20,6 +20,7 @@ var save_data = {
 	"camera_zoom": gm.camera_zoom,
 	
 	"match_amount": gm.match_amount,
+	"money": 100,
 	
 	"hp_cat": 30,
 	"max_hp_cat": 30,
@@ -167,6 +168,7 @@ func save_game():
 		"camera_zoom": gm.camera_zoom,
 		
 		"match_amount": gm.match_amount,
+		"money": gm.money,
 		
 		"hp_cat": gm.hp_cat,
 		"max_hp_cat": gm.max_hp_cat,
@@ -291,7 +293,7 @@ func load_file():
 		else:
 			push_error("Неверный формат данных в файле.")
 	else:
-		push_error("Ошибка парсинга JSON: ", json.get_error_message())
+		print("Ошибка парсинга JSON: ", json.get_error_message())
 
 func load_game():
 	load_file()
@@ -302,6 +304,7 @@ func load_game():
 	gm.camera_zoom = save_data.get("camera_zoom")
 
 	gm.match_amount = save_data.get("match_amount")
+	gm.money = save_data.get("money")
 
 	gm.hp_cat = save_data.get("hp_cat")
 	gm.max_hp_cat = save_data.get("max_hp_cat")
@@ -431,5 +434,4 @@ func clear_save():
 	
 	file.store_string("")
 	file.close()
-	print("Игра успешно сохранена!")	
 	

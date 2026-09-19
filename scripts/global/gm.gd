@@ -17,6 +17,7 @@ var start_pos = Vector2i(64+16, 32+16)
 var prev_pos = Vector2i(64+16, 32+16)
 
 var match_amount: int = 5
+var money: int = 100
 
 var current_chest_rarity = ""
 

@@ -1,0 +1,550 @@
+[gd_scene format=4 uid="uid://mxd268j4ypub"]
+
+[ext_resource type="Script" uid="uid://dws0dtqq3i1mi" path="res://scripts/game.gd" id="1_h3qar"]
+[ext_resource type="Shader" uid="uid://dw8y0528dhqqe" path="res://shaders/vhs.gdshader" id="2_r00g1"]
+[ext_resource type="Texture2D" uid="uid://4itbl0ejcd3o" path="res://assets/images/tilemap.png" id="3_liaw4"]
+[ext_resource type="PackedScene" uid="uid://b7p1hqo3g0pln" path="res://scenes/objects/stairs_up.tscn" id="4_m0i7f"]
+[ext_resource type="PackedScene" uid="uid://bp10kb8rxtuhx" path="res://scenes/objects/stairs.tscn" id="5_grqcv"]
+[ext_resource type="PackedScene" uid="uid://dtfad1wqq6sax" path="res://scenes/objects/stairs_big.tscn" id="6_jvp1d"]
+[ext_resource type="PackedScene" uid="uid://b8bfs4u1x4s8" path="res://scenes/objects/grass_low.tscn" id="8_k6387"]
+[ext_resource type="PackedScene" uid="uid://1by6pkucltci" path="res://scenes/objects/grass.tscn" id="9_ev32s"]
+[ext_resource type="PackedScene" uid="uid://bsxo600wchpra" path="res://scenes/objects/pillow.tscn" id="12_51ehb"]
+[ext_resource type="PackedScene" uid="uid://c0fd45oqpmhla" path="res://scenes/objects/chest.tscn" id="13_fhdct"]
+[ext_resource type="PackedScene" uid="uid://dmq76y6cfygk7" path="res://scenes/characters/character_solya.tscn" id="15_4rsgv"]
+[ext_resource type="PackedScene" uid="uid://d0d5e8ltlrwqg" path="res://scenes/giant.tscn" id="16_7ppig"]
+[ext_resource type="PackedScene" uid="uid://1bvjmpy2pf0k" path="res://scenes/enemies/enemy.tscn" id="17_ehvql"]
+[ext_resource type="PackedScene" uid="uid://cgbiblheppx0x" path="res://scenes/enemies/fox.tscn" id="18_h04ra"]
+[ext_resource type="Shader" uid="uid://kg18ttph4c3c" path="res://shaders/underwater.gdshader" id="19_6igki"]
+[ext_resource type="PackedScene" uid="uid://bba0p261tppfu" path="res://scenes/enemies/flying_mouse.tscn" id="19_8kmpq"]
+[ext_resource type="PackedScene" uid="uid://c7f16y8rwf2q" path="res://scenes/objects/edge_one.tscn" id="20_aegon"]
+[ext_resource type="PackedScene" uid="uid://ba7f54d4yq2hp" path="res://scenes/ui/cursor.tscn" id="21_sfoeb"]
+[ext_resource type="Shader" uid="uid://dm6djrn7pct8b" path="res://shaders/wobble.gdshader" id="22_ruqmt"]
+[ext_resource type="PackedScene" uid="uid://cdll7yvc84q18" path="res://scenes/ui/menu.tscn" id="23_u14ie"]
+[ext_resource type="PackedScene" uid="uid://di4k2iivrnhup" path="res://scenes/ui/creature_adventure_dialog.tscn" id="24_4gj1t"]
+[ext_resource type="PackedScene" uid="uid://qgx2la7r3w7a" path="res://scenes/ui/inventory.tscn" id="25_mlgdn"]
+[ext_resource type="StyleBox" uid="uid://b8wibcbgivilm" path="res://styles/button_normal.tres" id="26_ymbjt"]
+[ext_resource type="StyleBox" uid="uid://2iw7p3yvicvr" path="res://styles/button_pressed.tres" id="27_nur43"]
+[ext_resource type="StyleBox" uid="uid://c66nispyhk2t0" path="res://styles/button_hover.tres" id="28_18c7p"]
+[ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="29_rx8pp"]
+[ext_resource type="Texture2D" uid="uid://djggfi67w50cu" path="res://assets/images/card_icons/girl.png" id="30_noj58"]
+[ext_resource type="PackedScene" uid="uid://dpydh1bnymoa8" path="res://scenes/ui/level_up_dialog.tscn" id="31_fw5m5"]
+[ext_resource type="PackedScene" uid="uid://dqyxtu1uebx5v" path="res://scenes/ui/upgrade_stats_dialog.tscn" id="32_68c13"]
+[ext_resource type="PackedScene" uid="uid://djqdt7tiwad4" path="res://scenes/ui/artifact_dialog.tscn" id="33_qx1qr"]
+[ext_resource type="AudioStream" uid="uid://k300apigjs30" path="res://assets/music/BATTLE_START.mp3" id="34_k3dic"]
+[ext_resource type="AudioStream" uid="uid://danwjx5w4kls1" path="res://assets/music/ZONE_1.ogg" id="35_whwul"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fj52k"]
+shader = ExtResource("2_r00g1")
+shader_parameter/horizontalMovement = 2.9802400103307036e-08
+shader_parameter/verticalMovement = 2.9802400103307036e-08
+shader_parameter/frequencyStar = 0.0
+shader_parameter/sizeStar = 160.0
+shader_parameter/brightnessStar = 3.0
+shader_parameter/shineFrequencyStar = 8.0
+shader_parameter/transparencyStar = 0.50999998860048
+shader_parameter/starIterations = 3
+shader_parameter/frequencyBgStar = 0.996
+shader_parameter/shineFrequencyBgStar = 1.0
+shader_parameter/transparencyBgStar = 0.0
+shader_parameter/colorBackground = Color(0, 0, 0, 1)
+shader_parameter/transparencyBackground = 0.0
+shader_parameter/seed = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1t5oo"]
+atlas = ExtResource("3_liaw4")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p57ef"]
+texture = ExtResource("3_liaw4")
+texture_region_size = Vector2i(32, 32)
+1:0/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+5:5/0 = 0
+4:5/0 = 0
+2:4/0 = 0
+2:6/0 = 0
+3:6/0 = 0
+3:5/0 = 0
+5:6/0 = 0
+4:6/0 = 0
+3:7/0 = 0
+3:8/0 = 0
+4:7/0 = 0
+4:8/0 = 0
+5:8/0 = 0
+5:7/0 = 0
+1:6/0 = 0
+0:7/0 = 0
+0:8/0 = 0
+0:9/0 = 0
+1:1/0 = 0
+6:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_u5sy4"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_p57ef")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbhrr"]
+texture = ExtResource("3_liaw4")
+texture_region_size = Vector2i(32, 32)
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+3:2/0 = 0
+2:2/0 = 0
+4:2/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_a7tdr"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_lbhrr")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d7a8j"]
+shader = ExtResource("22_ruqmt")
+shader_parameter/color_levels = 62.9230028938425
+shader_parameter/chromatic_aberration = 0.0010000000475
+shader_parameter/blur_amount = 3.2530001545175
+shader_parameter/brightness = 0.870000017575
+shader_parameter/saturation = 1.39600001881
+shader_parameter/color_offset_multiplier = 0.0
+shader_parameter/black_offset_multiplier = 0.0
+shader_parameter/color_offset = 3.259879990946679e-09
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hlvfl"]
+shader = ExtResource("19_6igki")
+shader_parameter/water_color = Color(0, 0.5673332, 0.92, 0.1254902)
+shader_parameter/wave_speed = 1.0000000475
+shader_parameter/wave_frequency = 4.00000019
+shader_parameter/wave_amplitude = 0.0010000000475
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nqtv8"]
+atlas = ExtResource("29_rx8pp")
+region = Rect2(288, 32, 32, 32)
+
+[node name="Game2" type="Node2D" unique_id=2132287685]
+script = ExtResource("1_h3qar")
+
+[node name="BG" type="TextureRect" parent="." unique_id=1753798166]
+z_index = -10
+material = SubResource("ShaderMaterial_fj52k")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -952.0
+offset_top = -616.0
+offset_right = 1296.0
+offset_bottom = 840.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_1t5oo")
+stretch_mode = 1
+
+[node name="TileMapLayerBlack" type="TileMapLayer" parent="." unique_id=58169357]
+tile_map_data = PackedByteArray("AAAAAAAAAAABAAAAAAABAAAAAAABAAAAAAACAAAAAAABAAAAAAADAAAAAAABAAAAAAAEAAAAAAABAAAAAAAFAAAAAAABAAAAAAAGAAAAAAABAAAAAAAHAAAAAAABAAAAAAAIAAAAAAABAAAAAAAJAAAAAAABAAAAAAAAAAEAAAABAAAAAAAAAAIAAAABAAAAAAAAAAMAAAABAAAAAAAAAAQAAAABAAAAAAAAAAUAAAABAAAAAAAAAAYAAAABAAAAAAAAAAcAAAABAAAAAAABAAEAAAABAAAAAAABAAIAAAABAAAAAAABAAMAAAABAAAAAAABAAQAAAABAAAAAAABAAUAAAABAAAAAAABAAYAAAABAAAAAAABAAcAAAABAAAAAAACAAEAAAABAAAAAAACAAIAAAABAAAAAAACAAMAAAABAAAAAAACAAQAAAABAAAAAAACAAUAAAABAAAAAAACAAYAAAABAAAAAAACAAcAAAABAAAAAAADAAEAAAABAAAAAAADAAIAAAABAAAAAAADAAMAAAABAAAAAAADAAQAAAABAAAAAAADAAUAAAABAAAAAAADAAYAAAABAAAAAAADAAcAAAABAAAAAAAEAAEAAAABAAAAAAAEAAIAAAABAAAAAAAEAAMAAAABAAAAAAAEAAQAAAABAAAAAAAEAAUAAAABAAAAAAAEAAYAAAABAAAAAAAEAAcAAAABAAAAAAAFAAEAAAABAAAAAAAFAAIAAAABAAAAAAAFAAMAAAABAAAAAAAFAAQAAAABAAAAAAAFAAUAAAABAAAAAAAFAAYAAAABAAAAAAAFAAcAAAABAAAAAAAGAAEAAAABAAAAAAAGAAIAAAABAAAAAAAGAAMAAAABAAAAAAAGAAQAAAABAAAAAAAGAAUAAAABAAAAAAAGAAYAAAABAAAAAAAGAAcAAAABAAAAAAAHAAEAAAABAAAAAAAHAAIAAAABAAAAAAAHAAMAAAABAAAAAAAHAAQAAAABAAAAAAAHAAUAAAABAAAAAAAHAAYAAAABAAAAAAAHAAcAAAABAAAAAAAIAAEAAAABAAAAAAAIAAIAAAABAAAAAAAIAAMAAAABAAAAAAAIAAQAAAABAAAAAAAIAAYAAAABAAAAAAAIAAcAAAABAAAAAAAJAAEAAAABAAAAAAAJAAIAAAABAAAAAAAJAAMAAAABAAAAAAAJAAQAAAABAAAAAAAJAAUAAAABAAAAAAAJAAYAAAABAAAAAAAJAAcAAAABAAAAAAA=")
+tile_set = SubResource("TileSet_u5sy4")
+
+[node name="TileMapLayerGround" type="TileMapLayer" parent="." unique_id=1075166232]
+tile_map_data = PackedByteArray("AAAAAAAAAAAGAAAAAAABAAAAAAAGAAAAAAACAAAAAAAGAAAAAAADAAAAAAAGAAAAAAAEAAAAAAAGAAAAAAAFAAAAAAAGAAAAAAAGAAAAAAAGAAAAAAAHAAAAAAAGAAAAAAAIAAAAAAAGAAAAAAAJAAAAAAAGAAAAAAAAAAEAAAAGAAAAAAAAAAIAAAAGAAAAAAAAAAMAAAAGAAAAAAAAAAQAAAAGAAAAAAAAAAUAAAAGAAAAAAAAAAYAAAAGAAAAAAAAAAcAAAAGAAAAAAABAAEAAAAGAAAAAAABAAIAAAAGAAAAAAABAAMAAAAGAAAAAAABAAQAAAAGAAAAAAABAAUAAAAGAAAAAAABAAYAAAAGAAAAAAABAAcAAAAGAAAAAAACAAEAAAAGAAAAAAACAAIAAAAGAAAAAAACAAMAAAAGAAAAAAACAAQAAAAGAAAAAAACAAUAAAAGAAAAAAACAAYAAAAGAAAAAAACAAcAAAAGAAAAAAADAAEAAAAGAAAAAAADAAIAAAAGAAAAAAADAAMAAAAGAAAAAAADAAQAAAAGAAAAAAADAAUAAAAGAAAAAAADAAYAAAAGAAAAAAADAAcAAAAGAAAAAAAEAAEAAAAGAAAAAAAEAAIAAAAGAAAAAAAEAAMAAAAGAAAAAAAEAAQAAAAGAAAAAAAEAAUAAAAGAAAAAAAEAAYAAAAGAAAAAAAEAAcAAAAGAAAAAAAFAAEAAAAGAAAAAAAFAAIAAAAGAAAAAAAFAAMAAAAGAAAAAAAFAAQAAAAGAAAAAAAFAAUAAAAGAAAAAAAFAAYAAAAGAAAAAAAFAAcAAAAGAAAAAAAGAAEAAAAGAAAAAAAGAAIAAAAGAAAAAAAGAAQAAAAGAAAAAAAGAAUAAAAGAAAAAAAGAAYAAAAGAAAAAAAGAAcAAAAGAAAAAAAHAAEAAAAGAAAAAAAHAAIAAAAGAAAAAAAHAAMAAAAGAAAAAAAHAAQAAAAGAAAAAAAHAAUAAAAGAAAAAAAHAAYAAAAGAAAAAAAHAAcAAAAGAAAAAAAIAAEAAAAGAAAAAAAIAAIAAAAGAAAAAAAIAAMAAAAGAAAAAAAIAAQAAAAGAAAAAAAIAAYAAAAGAAAAAAAIAAcAAAAGAAAAAAAJAAEAAAAGAAAAAAAJAAIAAAAGAAAAAAAJAAMAAAAGAAAAAAAJAAQAAAAGAAAAAAAJAAUAAAAGAAAAAAAJAAYAAAAGAAAAAAAJAAcAAAAGAAAAAAAGAAMAAAAGAAAAAAAIAAUAAAAGAAAAAAA=")
+tile_set = SubResource("TileSet_u5sy4")
+
+[node name="TileMapLayerBorder" type="TileMapLayer" parent="." unique_id=545158540]
+tile_map_data = PackedByteArray("AAAAAAAAAAACAAAAAAABAAAAAAADAAAAAAACAAAAAAADAAAAAAADAAAAAAADAAAAAAAEAAAAAAADAAAAAAAFAAAAAAADAAAAAAAGAAAAAAADAAAAAAAHAAAAAAADAAAAAAAIAAAAAAADAAAAAAAJAAAAAAAEAAAAAAAAAAEAAAACAAEAAAAAAAIAAAACAAEAAAAAAAMAAAACAAEAAAAAAAQAAAACAAEAAAAAAAUAAAACAAEAAAAAAAYAAAACAAEAAAAJAAEAAAAEAAEAAAAJAAIAAAAEAAEAAAAJAAMAAAAEAAEAAAAJAAQAAAAEAAEAAAAJAAUAAAAEAAEAAAAJAAYAAAAEAAEAAAAAAAcAAAACAAIAAAAJAAcAAAAEAAIAAAAIAAcAAAADAAIAAAAHAAcAAAADAAIAAAAGAAcAAAADAAIAAAAFAAcAAAADAAIAAAABAAcAAAADAAIAAAACAAcAAAADAAIAAAADAAcAAAADAAIAAAAEAAcAAAADAAIAAAAIAAUAAAADAAEAAAA=")
+tile_set = SubResource("TileSet_a7tdr")
+
+[node name="Exits" type="Node2D" parent="." unique_id=1303112674]
+
+[node name="Stairs2" parent="Exits" unique_id=175082881 instance=ExtResource("4_m0i7f")]
+position = Vector2(176, 16)
+room_number = 0
+
+[node name="Stairs" parent="Exits" unique_id=1448595182 instance=ExtResource("5_grqcv")]
+position = Vector2(144, 208)
+
+[node name="Stairs3" parent="Exits" unique_id=49510763 instance=ExtResource("6_jvp1d")]
+position = Vector2(32, 112)
+rotation = 4.712389
+room_number = 0
+
+[node name="Plants" type="Node2D" parent="." unique_id=1507805972]
+
+[node name="GrassLow3" parent="Plants" unique_id=963626142 instance=ExtResource("8_k6387")]
+position = Vector2(80, 112)
+
+[node name="GrassLow" parent="Plants" unique_id=1576059805 instance=ExtResource("8_k6387")]
+position = Vector2(208, 208)
+
+[node name="Grass" parent="Plants" unique_id=1301032520 instance=ExtResource("9_ev32s")]
+position = Vector2(48, 48)
+
+[node name="Grass2" parent="Plants" unique_id=701532192 instance=ExtResource("9_ev32s")]
+position = Vector2(240, 112)
+
+[node name="Grass3" parent="Plants" unique_id=88116230 instance=ExtResource("9_ev32s")]
+position = Vector2(48, 208)
+
+[node name="GrassLow2" parent="Plants" unique_id=503904768 instance=ExtResource("8_k6387")]
+position = Vector2(272, 48)
+
+[node name="Objects" type="Node2D" parent="." unique_id=1714322502]
+position = Vector2(208, 80)
+
+[node name="Pillow" parent="Objects" unique_id=564725004 instance=ExtResource("12_51ehb")]
+charge_count = 1
+heal_power = 5
+
+[node name="Chest" parent="Objects" unique_id=977096426 instance=ExtResource("13_fhdct")]
+position = Vector2(-64, -32)
+
+[node name="Chest2" parent="Objects" unique_id=1807108612 instance=ExtResource("13_fhdct")]
+position = Vector2(0, -64)
+rarity = "rare"
+
+[node name="Chest3" parent="Objects" unique_id=1718915447 instance=ExtResource("13_fhdct")]
+position = Vector2(-64, -64)
+rarity = "epic"
+
+[node name="CharacterSolya" parent="." unique_id=52898326 instance=ExtResource("15_4rsgv")]
+visible = false
+position = Vector2(-112, 112)
+
+[node name="Giant" parent="." unique_id=2060885226 instance=ExtResource("16_7ppig")]
+position = Vector2(80, 80)
+
+[node name="Camera2D" type="Camera2D" parent="Giant" unique_id=1303825275]
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+rotation_smoothing_enabled = true
+rotation_smoothing_speed = 3.0
+
+[node name="Enemies" type="Node2D" parent="." unique_id=946491156]
+
+[node name="Enemy" parent="Enemies" unique_id=772889915 instance=ExtResource("17_ehvql")]
+position = Vector2(144, 80)
+is_leader = true
+
+[node name="Enemy2" parent="Enemies" unique_id=2106804459 instance=ExtResource("17_ehvql")]
+position = Vector2(80, 16)
+
+[node name="Enemy3" parent="Enemies" unique_id=956625573 instance=ExtResource("17_ehvql")]
+position = Vector2(144, 80)
+
+[node name="Enemy4" parent="Enemies" unique_id=903222958 instance=ExtResource("17_ehvql")]
+position = Vector2(144, 80)
+
+[node name="Enemy5" parent="Enemies" unique_id=664980245 instance=ExtResource("17_ehvql")]
+position = Vector2(144, 80)
+
+[node name="Enemy6" parent="Enemies" unique_id=785576007 instance=ExtResource("17_ehvql")]
+position = Vector2(144, 80)
+
+[node name="Enemy7" parent="Enemies" unique_id=1139925437 instance=ExtResource("17_ehvql")]
+position = Vector2(144, 80)
+
+[node name="EnemyFox" parent="Enemies" unique_id=685663284 instance=ExtResource("18_h04ra")]
+position = Vector2(304, 208)
+is_leader = true
+
+[node name="EnemyFox2" parent="Enemies" unique_id=1113755696 instance=ExtResource("18_h04ra")]
+position = Vector2(304, 208)
+
+[node name="EnemyFox3" parent="Enemies" unique_id=1971720123 instance=ExtResource("18_h04ra")]
+position = Vector2(304, 208)
+
+[node name="EnemyFox4" parent="Enemies" unique_id=314592152 instance=ExtResource("18_h04ra")]
+position = Vector2(304, 208)
+
+[node name="EnemyFox5" parent="Enemies" unique_id=1974251582 instance=ExtResource("18_h04ra")]
+position = Vector2(304, 208)
+
+[node name="EnemyFox6" parent="Enemies" unique_id=1966389239 instance=ExtResource("18_h04ra")]
+position = Vector2(304, 208)
+
+[node name="EnemyFox7" parent="Enemies" unique_id=1475903293 instance=ExtResource("18_h04ra")]
+position = Vector2(304, 208)
+
+[node name="FlyingMouse" parent="Enemies" unique_id=1686711816 instance=ExtResource("19_8kmpq")]
+position = Vector2(80, 16)
+is_leader = true
+
+[node name="FlyingMouse2" parent="Enemies" unique_id=1435161689 instance=ExtResource("19_8kmpq")]
+position = Vector2(80, 16)
+
+[node name="FlyingMouse3" parent="Enemies" unique_id=200893418 instance=ExtResource("19_8kmpq")]
+position = Vector2(80, 16)
+
+[node name="FlyingMouse4" parent="Enemies" unique_id=876873533 instance=ExtResource("19_8kmpq")]
+position = Vector2(80, 16)
+
+[node name="FlyingMouse5" parent="Enemies" unique_id=299814217 instance=ExtResource("19_8kmpq")]
+position = Vector2(80, 16)
+
+[node name="Characters" type="Node2D" parent="." unique_id=248065707]
+
+[node name="Edges" type="Node2D" parent="." unique_id=1566389989]
+
+[node name="EdgeOne" parent="Edges" unique_id=433375762 instance=ExtResource("20_aegon")]
+position = Vector2(272, 176)
+
+[node name="EdgeOne2" parent="Edges" unique_id=1430481290 instance=ExtResource("20_aegon")]
+position = Vector2(336, 208)
+
+[node name="EdgeOne3" parent="Edges" unique_id=1298315878 instance=ExtResource("20_aegon")]
+position = Vector2(336, 176)
+
+[node name="EdgeOne4" parent="Edges" unique_id=1963093859 instance=ExtResource("20_aegon")]
+position = Vector2(336, 144)
+
+[node name="EdgeOne5" parent="Edges" unique_id=1887831300 instance=ExtResource("20_aegon")]
+position = Vector2(336, 112)
+
+[node name="EdgeOne6" parent="Edges" unique_id=312200138 instance=ExtResource("20_aegon")]
+position = Vector2(336, 80)
+
+[node name="EdgeOne7" parent="Edges" unique_id=221046357 instance=ExtResource("20_aegon")]
+position = Vector2(336, 48)
+
+[node name="EdgeOne8" parent="Edges" unique_id=614713258 instance=ExtResource("20_aegon")]
+position = Vector2(336, 16)
+
+[node name="EdgeOne9" parent="Edges" unique_id=700030298 instance=ExtResource("20_aegon")]
+position = Vector2(336, -16)
+
+[node name="EdgeOne10" parent="Edges" unique_id=892660015 instance=ExtResource("20_aegon")]
+position = Vector2(304, -16)
+
+[node name="EdgeOne11" parent="Edges" unique_id=851415900 instance=ExtResource("20_aegon")]
+position = Vector2(272, -16)
+
+[node name="EdgeOne12" parent="Edges" unique_id=2017897262 instance=ExtResource("20_aegon")]
+position = Vector2(240, -16)
+
+[node name="EdgeOne13" parent="Edges" unique_id=61537299 instance=ExtResource("20_aegon")]
+position = Vector2(208, -16)
+
+[node name="EdgeOne14" parent="Edges" unique_id=611330096 instance=ExtResource("20_aegon")]
+position = Vector2(176, -16)
+
+[node name="EdgeOne15" parent="Edges" unique_id=906106574 instance=ExtResource("20_aegon")]
+position = Vector2(144, -16)
+
+[node name="EdgeOne16" parent="Edges" unique_id=428905170 instance=ExtResource("20_aegon")]
+position = Vector2(112, -16)
+
+[node name="EdgeOne17" parent="Edges" unique_id=1723005909 instance=ExtResource("20_aegon")]
+position = Vector2(80, -16)
+
+[node name="EdgeOne18" parent="Edges" unique_id=426417526 instance=ExtResource("20_aegon")]
+position = Vector2(48, -16)
+
+[node name="EdgeOne19" parent="Edges" unique_id=2113583702 instance=ExtResource("20_aegon")]
+position = Vector2(16, -16)
+
+[node name="EdgeOne20" parent="Edges" unique_id=1816631634 instance=ExtResource("20_aegon")]
+position = Vector2(-16, -16)
+
+[node name="EdgeOne21" parent="Edges" unique_id=85925192 instance=ExtResource("20_aegon")]
+position = Vector2(-16, 16)
+
+[node name="EdgeOne22" parent="Edges" unique_id=556521283 instance=ExtResource("20_aegon")]
+position = Vector2(-16, 48)
+
+[node name="EdgeOne23" parent="Edges" unique_id=231793366 instance=ExtResource("20_aegon")]
+position = Vector2(-16, 80)
+
+[node name="EdgeOne24" parent="Edges" unique_id=1359169798 instance=ExtResource("20_aegon")]
+position = Vector2(-16, 112)
+
+[node name="EdgeOne25" parent="Edges" unique_id=1928521320 instance=ExtResource("20_aegon")]
+position = Vector2(-16, 144)
+
+[node name="EdgeOne26" parent="Edges" unique_id=446823847 instance=ExtResource("20_aegon")]
+position = Vector2(-16, 176)
+
+[node name="EdgeOne27" parent="Edges" unique_id=590613362 instance=ExtResource("20_aegon")]
+position = Vector2(-16, 208)
+
+[node name="EdgeOne28" parent="Edges" unique_id=1462285830 instance=ExtResource("20_aegon")]
+position = Vector2(-16, 240)
+
+[node name="EdgeOne29" parent="Edges" unique_id=129723947 instance=ExtResource("20_aegon")]
+position = Vector2(-16, 272)
+
+[node name="EdgeOne30" parent="Edges" unique_id=2135245273 instance=ExtResource("20_aegon")]
+position = Vector2(16, 272)
+
+[node name="EdgeOne31" parent="Edges" unique_id=891138195 instance=ExtResource("20_aegon")]
+position = Vector2(48, 272)
+
+[node name="EdgeOne32" parent="Edges" unique_id=1431559422 instance=ExtResource("20_aegon")]
+position = Vector2(80, 272)
+
+[node name="EdgeOne33" parent="Edges" unique_id=1050131666 instance=ExtResource("20_aegon")]
+position = Vector2(112, 272)
+
+[node name="EdgeOne34" parent="Edges" unique_id=367813835 instance=ExtResource("20_aegon")]
+position = Vector2(144, 272)
+
+[node name="EdgeOne35" parent="Edges" unique_id=1103872624 instance=ExtResource("20_aegon")]
+position = Vector2(176, 272)
+
+[node name="EdgeOne36" parent="Edges" unique_id=587972391 instance=ExtResource("20_aegon")]
+position = Vector2(208, 272)
+
+[node name="EdgeOne37" parent="Edges" unique_id=58425644 instance=ExtResource("20_aegon")]
+position = Vector2(240, 272)
+
+[node name="EdgeOne38" parent="Edges" unique_id=779559744 instance=ExtResource("20_aegon")]
+position = Vector2(272, 272)
+
+[node name="EdgeOne39" parent="Edges" unique_id=388074798 instance=ExtResource("20_aegon")]
+position = Vector2(304, 272)
+
+[node name="EdgeOne40" parent="Edges" unique_id=2038105317 instance=ExtResource("20_aegon")]
+position = Vector2(336, 272)
+
+[node name="EdgeOne41" parent="Edges" unique_id=1617364559 instance=ExtResource("20_aegon")]
+position = Vector2(336, 240)
+
+[node name="Cursor" parent="." unique_id=2051460958 instance=ExtResource("21_sfoeb")]
+position = Vector2(608, -16)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1236012575]
+modulate = Color(1, 1, 1, 0.5019608)
+self_modulate = Color(1, 1, 1, 0.9411765)
+color = Color(0.7474423, 0.2899965, 0.3517346, 0.14509805)
+
+[node name="Effects" type="CanvasLayer" parent="." unique_id=1391118850]
+
+[node name="ColorRect" type="ColorRect" parent="Effects" unique_id=898663152]
+visible = false
+material = SubResource("ShaderMaterial_d7a8j")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="UnderWater" type="ColorRect" parent="Effects" unique_id=1492904618]
+material = SubResource("ShaderMaterial_hlvfl")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=589757551]
+layer = 3
+
+[node name="BG" type="ColorRect" parent="UI" unique_id=1330597319]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.675)
+
+[node name="Menu" parent="UI" unique_id=1052398381 instance=ExtResource("23_u14ie")]
+z_as_relative = false
+metadata/_edit_use_anchors_ = true
+
+[node name="CreatureAdventureDialog" parent="UI" unique_id=1641948652 instance=ExtResource("24_4gj1t")]
+visible = false
+z_index = 10
+
+[node name="Inventory" parent="UI" unique_id=579277200 instance=ExtResource("25_mlgdn")]
+visible = false
+anchors_preset = -1
+
+[node name="InventoryButton" type="Button" parent="UI" unique_id=1283236015]
+z_index = -1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -80.0
+offset_right = 80.0
+grow_vertical = 0
+theme_override_styles/normal = ExtResource("26_ymbjt")
+theme_override_styles/pressed = ExtResource("27_nur43")
+theme_override_styles/hover = ExtResource("28_18c7p")
+icon = SubResource("AtlasTexture_nqtv8")
+icon_alignment = 1
+expand_icon = true
+
+[node name="InventoryButtonHuman" type="Button" parent="UI" unique_id=956475560]
+z_index = -1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 96.0
+offset_top = -80.0
+offset_right = 176.0
+grow_vertical = 0
+theme_override_styles/normal = ExtResource("26_ymbjt")
+theme_override_styles/pressed = ExtResource("27_nur43")
+theme_override_styles/hover = ExtResource("28_18c7p")
+icon = ExtResource("30_noj58")
+icon_alignment = 1
+expand_icon = true
+
+[node name="LevelUpDialog" parent="UI" unique_id=76690541 instance=ExtResource("31_fw5m5")]
+visible = false
+z_index = 150
+z_as_relative = false
+anchors_preset = -1
+offset_top = 192.0
+offset_bottom = -144.0
+
+[node name="UpgradeStatsDialog" parent="UI" unique_id=1192782911 instance=ExtResource("32_68c13")]
+visible = false
+offset_left = 336.0
+offset_top = 160.0
+offset_right = -344.0
+offset_bottom = -226.0
+
+[node name="ArtifactDialog" parent="UI" unique_id=947846839 instance=ExtResource("33_qx1qr")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -168.0
+offset_right = -128.0
+offset_bottom = -168.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Front" type="Control" parent="UI" unique_id=396458543]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="BattleNode" type="Node2D" parent="." unique_id=797394893]
+
+[node name="BattleStartTimer" type="Timer" parent="." unique_id=1709292871]
+one_shot = true
+
+[node name="AudioStreamPlayerBattleStart" type="AudioStreamPlayer" parent="." unique_id=1295234369]
+stream = ExtResource("34_k3dic")
+volume_db = -6.0
+bus = &"SoundFX"
+
+[node name="AudioStreamPlayerMusic" type="AudioStreamPlayer" parent="." unique_id=179520262]
+stream = ExtResource("35_whwul")
+bus = &"Music"
+
+[connection signal="mouse_entered" from="UI/InventoryButton" to="." method="_on_inventory_button_mouse_entered"]
+[connection signal="mouse_entered" from="UI/InventoryButtonHuman" to="." method="_on_inventory_button_human_mouse_entered"]
+[connection signal="timeout" from="BattleStartTimer" to="." method="_on_battle_start_timer_timeout"]
