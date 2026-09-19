@@ -148,11 +148,12 @@ func _on_card_played(played_card: Control) -> void:
 
 func _on_change_button_pressed() -> void:
 	if free_changes > 0:
+		
 		free_changes -= 1
 		card_change_energy_cost = 0
 		
 		if free_changes == 0:
-			card_change_energy_cost = 1
+			#card_change_energy_cost = 1
 			change_cost.text = str(card_change_energy_cost)
 	else:
 		card_change_energy_cost = 1

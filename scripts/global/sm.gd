@@ -97,7 +97,7 @@ var save_data = {
 		2: "little_fire_card.tscn",
 		3: "little_fire_card.tscn",
 		4: "wind_shield_card.tscn",
-		5: "wind_shield_card.tscn",
+		5: "dont_hit_card.tscn",
 		6: "sollenheimer_card.tscn"
 	},
 	
