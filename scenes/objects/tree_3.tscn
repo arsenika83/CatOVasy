@@ -29,7 +29,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_yu8pw")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 1.0
 }]
@@ -59,7 +59,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_h1kgp")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }]
@@ -82,10 +82,13 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_h33o0")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3pyf0"]
+radius = 8.0
 
 [node name="Tree(3)" type="Node2D" unique_id=963626142]
 script = ExtResource("1_3pyf0")
@@ -108,3 +111,9 @@ material = SubResource("ShaderMaterial_gc4ve")
 position = Vector2(0, -32)
 sprite_frames = SubResource("SpriteFrames_bvjj0")
 autoplay = "default"
+
+[node name="Area2D" type="Area2D" parent="." unique_id=402913131]
+collision_layer = 16384
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=254588596]
+shape = SubResource("CircleShape2D_3pyf0")

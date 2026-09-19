@@ -34,7 +34,7 @@ region = Rect2(480, 480, 32, 32)
 [sub_resource type="SpriteFrames" id="SpriteFrames_d3fiw"]
 animations = [{
 "frames": [],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }, {
@@ -60,17 +60,42 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_d3fiw")
 }],
-"loop": false,
+"loop": 0,
 "name": &"hit",
 "speed": 12.0
 }]
+
+[sub_resource type="Curve" id="Curve_j8ash"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.9101796, 0.011235952), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_a7tdr"]
+curve = SubResource("Curve_j8ash")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_f30dh"]
+particle_flag_disable_z = true
+angle_min = 10.0000105
+angle_max = 80.000015
+direction = Vector3(-1, 0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 300.0
+gravity = Vector3(-400, 30, 0)
+scale_max = 1.1999999
+scale_curve = SubResource("CurveTexture_a7tdr")
+color = Color(0.9707355, 0.75513774, 0.6536752, 1)
+hue_variation_min = -0.16000003
+hue_variation_max = 0.12999998
 
 [node name="FireFX" type="AnimatedSprite2D" unique_id=158559104]
 z_index = 100
 sprite_frames = SubResource("SpriteFrames_d3fiw")
 animation = &"hit"
-frame = 6
-frame_progress = 1.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=250740181]
 stream = ExtResource("2_cjy55")
+
+[node name="Particles" type="GPUParticles2D" parent="." unique_id=1936016427]
+emitting = false
+amount = 10
+trail_enabled = true
+process_material = SubResource("ParticleProcessMaterial_f30dh")

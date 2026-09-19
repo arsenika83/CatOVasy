@@ -107,7 +107,8 @@ func _process(delta: float) -> void:
 
 	match gm.state:
 		"idle":
-			sprite.play("idle")
+			pass
+			#sprite.play("idle")
 		"walking":
 			if Input.is_action_just_pressed("ui_lmb"):
 				var do_meow = randf_range(0.0, 1.0) <= 0.05
@@ -191,6 +192,10 @@ func deal_damage(targets : Array[CharacterBody2D]) -> void:
 	
 	var tween2 = create_tween()
 	tween2.tween_property(sprite, "position:x", sprite.position.x + 4, 0.1)
+	
+	var tween1 = create_tween()
+	tween1.tween_property(sprite, "scale", Vector2(1.2, 1.2), 0.1)
+	tween1.tween_property(sprite, "scale", Vector2(1, 1), 0.1)
 	#gm.current_targets = targets
 	
 	sprite.play("deal_damage")
@@ -546,7 +551,7 @@ func _on_deal_damage_timer_timeout() -> void:
 		luck_particles.emitting = true
 		luck_particles.restart()
 		
-		get_parent().player_camera.apply_shake(0.1 + gm.current_card.shake)
+		get_parent().player_camera.apply_shake(0.3 + gm.current_card.shake)
 		audio_hit_lucky.play()
 		
 		get_parent().claw_fx.scale = Vector2(2, 2)
@@ -560,7 +565,7 @@ func _on_deal_damage_timer_timeout() -> void:
 	elif is_hit_unlucky:
 		unluck_particles.restart()
 		
-		get_parent().player_camera.apply_shake(0.1)
+		get_parent().player_camera.apply_shake(0)
 		$AudioStreamPlayerHitUnlucky.play()
 		get_parent().claw_fx.scale = Vector2(1, 1)
 	else:

@@ -37,6 +37,7 @@ var character_name_display = "Соля"
 @onready var luck_particles = $LuckParticles
 @onready var unluck_particles = $UnluckParticles
 @onready var sand_particles = $SandParticles
+@onready var neutrality_particles = $NeutralityParticles
 
 var enemy_name_rus = "Соля"
 
@@ -174,6 +175,10 @@ func deal_damage(targets : Array[CharacterBody2D]) -> void:
 	
 	var tween2 = create_tween()
 	tween2.tween_property(sprite, "position:x", sprite.position.x + 4, 0.1)
+	
+	var tween1 = create_tween()
+	tween1.tween_property(sprite, "scale", Vector2(1.2, 1.2), 0.1)
+	tween1.tween_property(sprite, "scale", Vector2(1, 1), 0.1)
 	#gm.current_targets = targets
 	audio_hit.play()
 	

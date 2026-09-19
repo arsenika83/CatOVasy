@@ -149,49 +149,43 @@ func move_to_map_pos() -> void:
 	
 	var diff_x = map_pos.x - map.local_to_map(giant.position).x
 	var diff_y = map_pos.y - map.local_to_map(giant.position).y
+	var result_position: Vector2
 	
 	if turn_count > 0:
 		gm.prev_pos = giant.position
 	turn_count += 1
 	
 	if abs(diff_x) <= 1 and abs(diff_y) <= 1:
-		var tween = create_tween()
-		tween.set_parallel(true)
-		tween.tween_property(giant, "position", map.map_to_local(map_pos), 0.2)
-		#tween.tween_property(human, "position", map.map_to_local(map_pos), 0.2)
+		result_position = map.map_to_local(map_pos)
 	
 	if (diff_x == 0) and diff_y < 0:
-		var tween = create_tween()
-		tween.tween_property(giant, "position", Vector2(giant.position.x, giant.position.y - 32), 0.2)
+		result_position = Vector2(giant.position.x, giant.position.y - 32)
 	elif diff_x > 0 and diff_y < 0:
 		giant.sprite.flip_h = true
-		var tween = create_tween()
-		tween.tween_property(giant, "position", Vector2(giant.position.x + 32, giant.position.y - 32), 0.2)
+		result_position = Vector2(giant.position.x + 32, giant.position.y - 32)
 	elif diff_x > 0 and (diff_y == 0):
 		giant.sprite.flip_h = true
-		var tween = create_tween()
-		tween.tween_property(giant, "position", Vector2(giant.position.x + 32, giant.position.y), 0.2)
+		result_position = Vector2(giant.position.x + 32, giant.position.y)
 	elif diff_x > 0 and diff_y > 0:
 		giant.sprite.flip_h = true
-		var tween = create_tween()
-		tween.tween_property(giant, "position", Vector2(giant.position.x + 32, giant.position.y + 32), 0.2)
+		result_position = Vector2(giant.position.x + 32, giant.position.y + 32)
 	elif (diff_x == 0) and diff_y > 0:
-		var tween = create_tween()
-		tween.tween_property(giant, "position", Vector2(giant.position.x, giant.position.y + 32), 0.2)
+		result_position = Vector2(giant.position.x, giant.position.y + 32)
 	elif diff_x < 0 and diff_y > 0:
 		giant.sprite.flip_h = false
-		var tween = create_tween()
-		tween.tween_property(giant, "position", Vector2(giant.position.x - 32, giant.position.y + 32), 0.2)
+		result_position = Vector2(giant.position.x - 32, giant.position.y + 32)
 	elif diff_x < 0 and (diff_y == 0):
 		giant.sprite.flip_h = false
-		var tween = create_tween()
-		tween.tween_property(giant, "position", Vector2(giant.position.x - 32, giant.position.y), 0.2)
+		result_position = Vector2(giant.position.x - 32, giant.position.y)
 	elif diff_x < 0 and diff_y < 0:
 		giant.sprite.flip_h = false
-		var tween = create_tween()
-		tween.tween_property(giant, "position", Vector2(giant.position.x - 32, giant.position.y - 32), 0.2)
-		
-	#enemy_turn()
+		result_position = Vector2(giant.position.x - 32, giant.position.y - 32)
+	
+	var tween = create_tween()
+	tween.tween_property(giant, "position", result_position, 0.2)
+	
+	gm.player_pos = result_position
+	enemy_turn()
 	
 func draw_cursor() -> void:
 	cursor.visible = true
@@ -374,7 +368,7 @@ func start_battle() -> void:
 		audio.stop()
 		$UI.visible = false
 		
-		$EnemyMoveTimer.stop()
+		#$EnemyMoveTimer.stop()
 		$AudioStreamPlayerBattleStart.play()
 		scene_transitioner.change_scene_to()
 		battle_start_timer.start()
@@ -396,8 +390,9 @@ func end_battle() -> void:
 	gm.current_luck_human = gm.luck_human
 	gm.energy_human = gm.max_energy_human
 	
+	
 	update_inventory()
-	$EnemyMoveTimer.start()
+	#$EnemyMoveTimer.start()
 
 	audio.play(gm.current_music_position)
 	$Effects.visible = true

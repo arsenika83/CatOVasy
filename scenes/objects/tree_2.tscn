@@ -80,6 +80,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_gc4ve"]
+radius = 8.0
+
 [node name="Tree(2)" type="Node2D" unique_id=963626142]
 script = ExtResource("1_5xkma")
 
@@ -101,3 +104,9 @@ material = SubResource("ShaderMaterial_gc4ve")
 position = Vector2(0, -40)
 sprite_frames = SubResource("SpriteFrames_bvjj0")
 autoplay = "default"
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1184298581]
+collision_layer = 16384
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1438753988]
+shape = SubResource("CircleShape2D_gc4ve")

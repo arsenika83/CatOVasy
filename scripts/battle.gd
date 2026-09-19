@@ -444,17 +444,17 @@ func choose_target(action : String) -> void:
 				if e_pos.x == cursor_grid_pos.x and e_pos.y == cursor_grid_pos.y:
 					if not targets.get(0).state == "dead":
 						
-						if current_creature_turn == -2:
-							source = human
-							gm.prev_state_human = gm.state_human
-							gm.state_human = "playing_a_card"
-						else:
-							source = giant
-							gm.prev_state = gm.state
-							gm.state = "playing_a_card"
-						
 						match action:
 							"deal_damage":
+								if current_creature_turn == -2:
+									source = human
+									gm.prev_state_human = gm.state_human
+									gm.state_human = "playing_a_card"
+								else:
+									source = giant
+									gm.prev_state = gm.state
+									gm.state = "playing_a_card"
+								
 								gm.current_targets = targets
 								source.deal_damage(targets)
 								gm.current_card.card_played.emit(gm.current_card)
@@ -470,24 +470,41 @@ func choose_target(action : String) -> void:
 									tween2.tween_property($FX/TomatoCrossProjectile, "scale", Vector2(0, 0), 1.5)
 									
 							"debuff":
+								if current_creature_turn == -2:
+									source = human
+									gm.prev_state_human = gm.state_human
+									gm.state_human = "playing_a_card"
+								else:
+									source = giant
+									gm.prev_state = gm.state
+									gm.state = "playing_a_card"
+								
 								gm.current_targets = targets
 								gm.current_card.card_played.emit(gm.current_card)
 		
 		#BUFFS
 		if gm.battle_x_cat == cursor_grid_pos.x and gm.battle_y_cat == cursor_grid_pos.y or gm.battle_x_human == cursor_grid_pos.x and gm.battle_y_human == cursor_grid_pos.y:
-			if current_creature_turn == -2:
-				source = human
-				gm.prev_state_human = gm.state_human
-				gm.state_human = "playing_a_card"
-			else:
-				source = giant
-				gm.prev_state = gm.state
-				gm.state = "playing_a_card"
-			
 			match action:
 				"defend":
+					if current_creature_turn == -2:
+						source = human
+						gm.prev_state_human = gm.state_human
+						gm.state_human = "playing_a_card"
+					else:
+						source = giant
+						gm.prev_state = gm.state
+						gm.state = "playing_a_card"
+					
 					gm.current_card.card_played.emit(gm.current_card)
 				"buff":
+					if current_creature_turn == -2:
+						source = human
+						gm.prev_state_human = gm.state_human
+						gm.state_human = "playing_a_card"
+					else:
+						source = giant
+						gm.prev_state = gm.state
+						gm.state = "playing_a_card"	
 					gm.current_card.card_played.emit(gm.current_card)
 							
 	elif gm.current_card != null and gm.current_card.energy_cost > current_energy:

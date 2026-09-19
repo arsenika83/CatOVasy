@@ -321,8 +321,12 @@ func deal_damage(target : CharacterBody2D) -> void:
 	elif current_luck < 0:
 		is_hit_unlucky = randf_range(0.0, 1.0) * 100 <= abs(current_luck)	
 	
+	var tween2 = create_tween()
+	tween2.tween_property(sprite, "position:x", sprite.position.x - 4, 0.1)
+	
 	var tween1 = create_tween()
-	tween1.tween_property(sprite, "position:x", sprite.position.x - 4, 0.1)
+	tween1.tween_property(sprite, "scale", Vector2(1.2, 1.2), 0.1)
+	tween1.tween_property(sprite, "scale", Vector2(1, 1), 0.1)
 	
 	if success:
 		if target.character_name == "solya":
@@ -603,6 +607,10 @@ func _on_take_damage_timer_timeout() -> void:
 		var tween1 = create_tween()
 		tween1.tween_property(sprite, "position:x", sprite.position.x + 4, 0.1)
 		tween1.tween_property(sprite, "position:x", sprite.position.x, 0.1)
+		
+		var tween2 = create_tween()
+		tween2.tween_property(sprite, "scale:y", 0.8, 0.1)
+		tween2.tween_property(sprite, "scale:y", 1, 0.1)
 		#get_parent().get_parent().end_turn()
 		
 		if gm.has_portrait_of_the_unknown:

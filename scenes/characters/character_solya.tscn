@@ -18,6 +18,8 @@
 [ext_resource type="AudioStream" uid="uid://bv07t8ic6tpma" path="res://assets/soundFX/miss.wav" id="10_a0gv1"]
 [ext_resource type="Texture2D" uid="uid://s34pblv0ga2j" path="res://assets/images/fx.png" id="10_ijvqx"]
 [ext_resource type="AudioStream" uid="uid://bclkaxhxamdmf" path="res://assets/soundFX/defend.wav" id="11_piljf"]
+[ext_resource type="Texture2D" uid="uid://d1sl15sg1w6ci" path="res://assets/images/fx/neutrality_fx_1.png" id="12_kygiq"]
+[ext_resource type="Texture2D" uid="uid://stxdkuif5e28" path="res://assets/images/fx/neutrality_fx_2.png" id="13_g1j1r"]
 [ext_resource type="AudioStream" uid="uid://ceun5aaxxb0o7" path="res://assets/soundFX/debuff.wav" id="14_6tupa"]
 [ext_resource type="AudioStream" uid="uid://bm7pxholhb1v4" path="res://assets/soundFX/magic.wav" id="14_105hs"]
 [ext_resource type="AudioStream" uid="uid://b5kgcekrp1yv2" path="res://assets/soundFX/walk.wav" id="15_kygiq"]
@@ -816,6 +818,35 @@ initial_velocity_max = 15.0
 gravity = Vector3(0, 98, 0)
 scale_curve = SubResource("CurveTexture_icmx6")
 
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_dv2e1"]
+frames = 2
+frame_0/texture = ExtResource("12_kygiq")
+frame_0/duration = 0.4
+frame_1/texture = ExtResource("13_g1j1r")
+frame_1/duration = 0.4
+
+[sub_resource type="Curve" id="Curve_kygiq"]
+_data = [Vector2(0, 0.033707857), 0.0, 0.0, 0, 0, Vector2(0.10778442, 1), 0.0, 0.0, 0, 0, Vector2(0.9820359, 0.988764), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_dqeso"]
+curve = SubResource("Curve_kygiq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6tupa"]
+particle_flag_disable_z = true
+direction = Vector3(-1, 0, 0)
+spread = 0.0
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+angular_velocity_min = -1.6093254e-05
+angular_velocity_max = -1.6093254e-05
+orbit_velocity_min = 0.40000013
+orbit_velocity_max = 0.40000013
+radial_velocity_min = 0.99997765
+radial_velocity_max = 0.99997765
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_dqeso")
+
 [node name="CharacterSolya" type="CharacterBody2D" unique_id=52898326]
 script = ExtResource("1_5tjqq")
 damage_indicator_scene = ExtResource("2_105hs")
@@ -956,6 +987,15 @@ amount = 1
 texture = SubResource("AtlasTexture_xbutk")
 one_shot = true
 process_material = SubResource("ParticleProcessMaterial_txvxk")
+
+[node name="NeutralityParticles" type="GPUParticles2D" parent="." unique_id=1101343703]
+position = Vector2(0, -104)
+emitting = false
+amount = 1
+texture = SubResource("AnimatedTexture_dv2e1")
+lifetime = 30.0
+trail_lifetime = 0.4
+process_material = SubResource("ParticleProcessMaterial_6tupa")
 
 [node name="IdleAnimationTimer" type="Timer" parent="." unique_id=1427834787]
 one_shot = true

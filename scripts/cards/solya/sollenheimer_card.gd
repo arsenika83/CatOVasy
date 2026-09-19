@@ -5,7 +5,7 @@ var card_path = "sollenheimer_card.tscn"
 var icon_path = "sollenheimer_card.png"
 var tool_tip_text = ""
 var card_name = "СОЛЛЕНГЕЙМЕР"
-var card_description = "Наносит ВСЕМ врагам 50 урона + базовый урон Соли. Котик теряет 5 ОЗ"
+var card_description = "Наносит ВСЕМ врагам 50 урона + базовый урон Соли. Котик теряет 5 ОЗ. Не может промахнуться"
 var rarity = "epic"
 
 func _ready() -> void:
@@ -33,4 +33,7 @@ func on_play() -> void:
 		gm.state = "dead"
 
 func explode() -> void:
+	pass
+
+func cant_miss():
 	pass

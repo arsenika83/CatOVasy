@@ -54,7 +54,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vsv37")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 1.0
 }]
@@ -89,7 +89,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5lxgs")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }]
@@ -198,6 +198,34 @@ region = Rect2(32, 0, 32, 32)
 atlas = ExtResource("1")
 region = Rect2(128, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_r342d"]
+atlas = ExtResource("1")
+region = Rect2(0, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_42x6q"]
+atlas = ExtResource("1")
+region = Rect2(32, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wmyib"]
+atlas = ExtResource("1")
+region = Rect2(64, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f46js"]
+atlas = ExtResource("1")
+region = Rect2(96, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ggyq7"]
+atlas = ExtResource("1")
+region = Rect2(128, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j47tc"]
+atlas = ExtResource("1")
+region = Rect2(160, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bmhpy"]
+atlas = ExtResource("1")
+region = Rect2(192, 224, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_8w03u"]
 atlas = ExtResource("6_ycwex")
 region = Rect2(160, 0, 32, 64)
@@ -269,7 +297,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2xoio")
 }],
-"loop": true,
+"loop": 1,
 "name": &"battle",
 "speed": 5.0
 }, {
@@ -334,7 +362,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2xoio")
 }],
-"loop": true,
+"loop": 1,
 "name": &"battle_ability",
 "speed": 1.0
 }, {
@@ -351,7 +379,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_p1oqw")
 }],
-"loop": true,
+"loop": 1,
 "name": &"battle_attack",
 "speed": 5.0
 }, {
@@ -362,7 +390,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_i1883")
 }],
-"loop": true,
+"loop": 1,
 "name": &"battle_buffed",
 "speed": 5.0
 }, {
@@ -427,7 +455,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2xoio")
 }],
-"loop": true,
+"loop": 1,
 "name": &"battle_defend",
 "speed": 1.0
 }, {
@@ -435,7 +463,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bmrke")
 }],
-"loop": true,
+"loop": 1,
 "name": &"dead",
 "speed": 5.0
 }, {
@@ -452,7 +480,7 @@ animations = [{
 "duration": 4.0,
 "texture": SubResource("AtlasTexture_3ywdo")
 }],
-"loop": false,
+"loop": 0,
 "name": &"deal_damage",
 "speed": 10.0
 }, {
@@ -460,7 +488,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0vpcl")
 }],
-"loop": true,
+"loop": 1,
 "name": &"falling",
 "speed": 5.0
 }, {
@@ -510,7 +538,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ayw8s")
 }],
-"loop": false,
+"loop": 0,
 "name": &"healing",
 "speed": 10.0
 }, {
@@ -575,7 +603,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2xoio")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 5.0
 }, {
@@ -586,7 +614,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_dt8fj")
 }],
-"loop": true,
+"loop": 1,
 "name": &"resting",
 "speed": 1.0
 }, {
@@ -597,7 +625,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_glfi2")
 }],
-"loop": true,
+"loop": 1,
 "name": &"stop",
 "speed": 1.0
 }, {
@@ -605,9 +633,35 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ycwex")
 }],
-"loop": true,
+"loop": 1,
 "name": &"taking_damage",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r342d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_42x6q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wmyib")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f46js")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ggyq7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j47tc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bmhpy")
+}],
+"loop": 1,
+"name": &"walk_around",
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -616,7 +670,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_86ape")
 }],
-"loop": true,
+"loop": 1,
 "name": &"walking_side",
 "speed": 5.0
 }]
@@ -727,7 +781,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xrxwe")
 }],
-"loop": false,
+"loop": 0,
 "name": &"boomerang",
 "speed": 10.0
 }, {
@@ -744,7 +798,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3xb3h")
 }],
-"loop": false,
+"loop": 0,
 "name": &"candy",
 "speed": 2.0
 }, {
@@ -752,7 +806,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_17dpp")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }, {
@@ -799,7 +853,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_mvbdv")
 }],
-"loop": false,
+"loop": 0,
 "name": &"spinner",
 "speed": 2.0
 }]
@@ -972,9 +1026,9 @@ autoplay = "default"
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1540776930]
 position = Vector2(0, -6)
 sprite_frames = SubResource("2")
-animation = &"idle"
+animation = &"walk_around"
 autoplay = "idle"
-frame_progress = 0.26637816
+frame_progress = 0.37879518
 
 [node name="Bubble" type="Sprite2D" parent="." unique_id=1627104492]
 visible = false
@@ -994,6 +1048,7 @@ position = Vector2(0, -24)
 animation = &"default"
 
 [node name="DefenceSprite" type="Sprite2D" parent="." unique_id=91589030]
+visible = false
 material = SubResource("ShaderMaterial_3ywdo")
 position = Vector2(16, 8)
 texture = SubResource("AtlasTexture_gf3y7")

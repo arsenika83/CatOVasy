@@ -3,6 +3,8 @@ extends Node
 var path = "res://saves/save_1.json"
 var save : Dictionary
 
+var player_pos: Vector2
+
 var level_number: int = 1
 var current_level_name = "level0"
 

@@ -106,6 +106,14 @@ texture_region_size = Vector2i(32, 32)
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_lbhrr")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hlvfl"]
+resource_local_to_scene = true
+shader = ExtResource("19_6igki")
+shader_parameter/water_color = Color(0.36588383, 0.59348035, 0.6378468, 0.15686275)
+shader_parameter/wave_speed = 0.30000001425
+shader_parameter/wave_frequency = 4.00000019
+shader_parameter/wave_amplitude = 0.002000000095
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d7a8j"]
 shader = ExtResource("22_ruqmt")
 shader_parameter/color_levels = 62.9230028938425
@@ -116,13 +124,6 @@ shader_parameter/saturation = 1.39600001881
 shader_parameter/color_offset_multiplier = 0.0
 shader_parameter/black_offset_multiplier = 0.0
 shader_parameter/color_offset = 3.259879990946679e-09
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hlvfl"]
-shader = ExtResource("19_6igki")
-shader_parameter/water_color = Color(0, 0.5673332, 0.92, 0.1254902)
-shader_parameter/wave_speed = 1.0000000475
-shader_parameter/wave_frequency = 4.00000019
-shader_parameter/wave_amplitude = 0.0010000000475
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nqtv8"]
 atlas = ExtResource("29_rx8pp")
@@ -422,6 +423,14 @@ color = Color(0.7474423, 0.2899965, 0.3517346, 0.14509805)
 
 [node name="Effects" type="CanvasLayer" parent="." unique_id=1391118850]
 
+[node name="UnderWater" type="ColorRect" parent="Effects" unique_id=1492904618]
+material = SubResource("ShaderMaterial_hlvfl")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="ColorRect" type="ColorRect" parent="Effects" unique_id=898663152]
 visible = false
 material = SubResource("ShaderMaterial_d7a8j")
@@ -431,14 +440,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-
-[node name="UnderWater" type="ColorRect" parent="Effects" unique_id=1492904618]
-material = SubResource("ShaderMaterial_hlvfl")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=589757551]
 layer = 3

@@ -6,8 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://xyqt3v2gvqv5" path="res://assets/images/objects.png" id="3_63um1"]
 [ext_resource type="AudioStream" uid="uid://d3funsw4mnuco" path="res://assets/soundFX/grass.wav" id="4_63um1"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cvbpf"]
-size = Vector2(32, 24)
+[sub_resource type="CircleShape2D" id="CircleShape2D_wvtj8"]
+radius = 4.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_goycc"]
 shader = ExtResource("2_nle0l")
@@ -77,7 +77,7 @@ collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1364762886]
 position = Vector2(0, 4)
-shape = SubResource("RectangleShape2D_cvbpf")
+shape = SubResource("CircleShape2D_wvtj8")
 
 [node name="Shadow" type="AnimatedSprite2D" parent="." unique_id=1189016600]
 material = SubResource("ShaderMaterial_goycc")

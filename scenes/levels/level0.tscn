@@ -551,7 +551,6 @@ stream = ExtResource("30_d7a8j")
 bus = &"Music"
 
 [node name="EnemyMoveTimer" type="Timer" parent="." unique_id=919189686]
-autostart = true
 
 [connection signal="mouse_entered" from="UI/InventoryButton" to="." method="_on_inventory_button_mouse_entered"]
 [connection signal="mouse_entered" from="UI/InventoryButtonHuman" to="." method="_on_inventory_button_human_mouse_entered"]

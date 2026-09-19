@@ -80,6 +80,9 @@ animations = [{
 "speed": 1.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_f30dh"]
+radius = 3.0
+
 [node name="Tree(1)" type="Node2D" unique_id=963626142]
 script = ExtResource("1_odkpy")
 
@@ -103,3 +106,12 @@ position = Vector2(0, -40)
 sprite_frames = SubResource("SpriteFrames_u68v2")
 autoplay = "default"
 frame_progress = 0.5857028
+
+[node name="Area2D" type="Area2D" parent="." unique_id=472658651]
+collision_layer = 16384
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1490893937]
+position = Vector2(0, 6)
+shape = SubResource("CircleShape2D_f30dh")
+
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

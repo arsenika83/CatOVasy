@@ -93,8 +93,8 @@ theme_override_styles/fill = ExtResource("1_rqdcv")
 
 [node name="Cat" type="AnimatedSprite2D" parent="." unique_id=860533927]
 material = SubResource("ShaderMaterial_1erco")
-position = Vector2(704, 384)
-scale = Vector2(4, 3.9999995)
+position = Vector2(688, 399.99997)
+scale = Vector2(3, 3.0000005)
 sprite_frames = SubResource("SpriteFrames_a7tdr")
 animation = &"1"
 autoplay = "1"
@@ -102,8 +102,8 @@ frame_progress = 0.5158051
 
 [node name="Solya" type="AnimatedSprite2D" parent="." unique_id=420404358]
 material = SubResource("ShaderMaterial_6df0m")
-position = Vector2(576, 320)
-scale = Vector2(4, 4)
+position = Vector2(608, 352)
+scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_f30dh")
 animation = &"1"
 autoplay = "1"
