@@ -17,7 +17,7 @@ shader_parameter/time_offset = 10.0
 atlas = ExtResource("3_jngtl")
 region = Rect2(0, 0, 448, 720)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qjp1o"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_br7ip"]
 resource_local_to_scene = true
 shader = ExtResource("1_qjp1o")
 shader_parameter/speed = 2.000000095
@@ -90,7 +90,7 @@ offset_right = 368.0
 offset_bottom = 240.0
 
 [node name="AttackDoubleClawCard" parent="Card" unique_id=1531075916 instance=ExtResource("4_hxdfs")]
-material = SubResource("ShaderMaterial_qjp1o")
+material = SubResource("ShaderMaterial_br7ip")
 use_parent_material = true
 layout_mode = 2
 

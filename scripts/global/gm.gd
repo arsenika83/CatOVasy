@@ -65,7 +65,8 @@ var might_resistance_cat: float = 0.25
 var death_resistance_cat: float = 0
 var life_resistance_cat: float = 0
 var luck_resistance_cat: float = 0.0
-var accuracy_resistance_cat: float = 0.0
+var unluck_resistance_cat: float = 0.0
+var inaccuracy_resistance_cat: float = 0.0
 
 #==============================================================================================
 var battle_x_human : int
@@ -112,7 +113,8 @@ var might_resistance_human: float = 0.0
 var death_resistance_human: float = 0
 var life_resistance_human: float = 0
 var luck_resistance_human: float = 0.0
-var accuracy_resistance_human: float = 0.0
+var unluck_resistance_human: float = 0.0
+var inaccuracy_resistance_human: float = 0.0
 #============================================================================
 
 var current_cards_cat: Dictionary[int, Card]

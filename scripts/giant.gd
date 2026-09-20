@@ -616,7 +616,7 @@ func _on_deal_damage_timer_timeout() -> void:
 			elif gm.current_card.element == "death":
 				gm.current_damage_cat = int(gm.current_damage_cat * (1.0 - target.death_resistance))
 			elif gm.current_card.element == "life":
-				gm.current_damage_cat = int(gm.current_damage_cat * (1.0 - target.death_resistance))	
+				gm.current_damage_cat = int(gm.current_damage_cat * (1.0 - target.life_resistance))	
 		
 		
 		if gm.current_damage_cat == 0:

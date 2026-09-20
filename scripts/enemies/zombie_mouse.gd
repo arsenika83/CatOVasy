@@ -1,38 +1,38 @@
-class_name Fox extends Enemy
+class_name ZombieMouse extends Enemy
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	enemy_scene_path = "fox.tscn"
-	enemy_name = "Fox"
-	enemy_name_rus = "Лиса"
+	enemy_scene_path = "zombie_mouse.tscn"
+	enemy_name = "Zombie mouse"
+	enemy_name_rus = "Мышь-зомби"
+	defence_sprite.visible = false
 	
 	attack_animation_time = 0.4
 	
-	luck_resistance = 1.0
-	unluck_resistance = 1.0
-	max_hp = 30
-	hp = 30
+	element = "death"
+	death_resistance = 0.75
+	
+	max_hp = 10
+	hp = 10
 	
 	hp_bar.max_value = max_hp
 	hp_bar.value = float(hp)
 	
-	xp_gives = 10
+	xp_gives = 3
 	
 	damage = 3
 	current_damage = 3
 	
-	accuracy = 70
+	accuracy = 65
 	current_accuracy = accuracy
 	
-	luck = 40
-	current_luck = 40
+	luck = 0
+	current_luck = 0
 	
-	current_energy = 2
-	energy = 2
-	max_energy = 2
+	current_energy = 5
+	energy = 5
+	max_energy = 5
 	
-	move_set = ["deal_damage", "buff"]
-	buff_set = [["luck", 10, 2]]
+	move_set = ["deal_damage"]
 	
 	status_fx.play("found_you")
 	battle_x = get_parent().get_parent().find_child("TileMapLayerBlack").local_to_map(position).x
@@ -40,8 +40,7 @@ func _ready() -> void:
 	
 	positions.append(Vector2(battle_x, battle_y))
 	check_team()
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+	
 func _process(delta: float) -> void:
 	if current_defence > 0 and state != "dead":
 		defence_sprite.visible = true

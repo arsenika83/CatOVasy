@@ -53,7 +53,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_kugq1")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }]
@@ -95,7 +95,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_1co2e")
 }],
-"loop": false,
+"loop": 0,
 "name": &"dead",
 "speed": 1.0
 }, {
@@ -103,12 +103,12 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5ba63")
 }],
-"loop": true,
+"loop": 1,
 "name": &"deal_damage",
 "speed": 10.0
 }, {
 "frames": [],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }, {
@@ -137,7 +137,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wyag3")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 1.0
 }, {
@@ -145,7 +145,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_521xt")
 }],
-"loop": true,
+"loop": 1,
 "name": &"take_damage",
 "speed": 5.0
 }]

@@ -30,6 +30,7 @@
 [ext_resource type="PackedScene" uid="uid://djqdt7tiwad4" path="res://scenes/ui/artifact_dialog.tscn" id="19_db1u1"]
 [ext_resource type="AudioStream" uid="uid://k300apigjs30" path="res://assets/music/BATTLE_START.mp3" id="19_luu1i"]
 [ext_resource type="StyleBox" uid="uid://2iw7p3yvicvr" path="res://styles/button_pressed.tres" id="20_j4kqp"]
+[ext_resource type="PackedScene" uid="uid://bvk81wapljhs4" path="res://scenes/enemies/zombie_mouse.tscn" id="20_xremi"]
 [ext_resource type="PackedScene" uid="uid://cdll7yvc84q18" path="res://scenes/ui/menu.tscn" id="21_mtrs4"]
 [ext_resource type="StyleBox" uid="uid://c66nispyhk2t0" path="res://styles/button_hover.tres" id="21_wcmim"]
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="22_d7a8j"]
@@ -296,6 +297,16 @@ position = Vector2(80, 16)
 
 [node name="FlyingMouse5" parent="Enemies" unique_id=299814217 instance=ExtResource("19_a1vlu")]
 position = Vector2(80, 16)
+
+[node name="ZombieMouse" parent="Enemies" unique_id=1599419982 instance=ExtResource("20_xremi")]
+position = Vector2(272, 16)
+is_leader = true
+
+[node name="ZombieMouse2" parent="Enemies" unique_id=2101527669 instance=ExtResource("20_xremi")]
+position = Vector2(272, 16)
+
+[node name="ZombieMouse3" parent="Enemies" unique_id=813830644 instance=ExtResource("20_xremi")]
+position = Vector2(272, 16)
 
 [node name="Characters" type="Node2D" parent="." unique_id=248065707]
 

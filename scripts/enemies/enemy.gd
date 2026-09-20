@@ -95,7 +95,8 @@ var turns_buff_high_energy = 0
 @export var death_resistance: float = 0
 @export var life_resistance: float = 0
 @export var luck_resistance: float = 0
-@export var accuracy_resistance: float = 0
+@export var unluck_resistance: float = 0
+@export var inaccuracy_resistance: float = 0
 
 var element = "might"
 
@@ -695,7 +696,7 @@ func _on_deal_damage_timer_timeout() -> void:
 	#elif element == "death":
 	#	current_damage = int(current_damage * (1.0 - current_target.death_resistance))
 	#elif element == "life":
-	#	current_damage = int(current_damage * (1.0 - current_target.death_resistance))	
+	#	current_damage = int(current_damage * (1.0 - current_target.life_resistance))	
 	
 	if current_damage == 0:
 		get_parent().get_parent().log_messages.append(str("- [color=#1ca8fd]", enemy_name_rus, "[/color] атакует существо [color=#1ca8fd]", 

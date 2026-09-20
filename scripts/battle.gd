@@ -759,8 +759,10 @@ func check_creature_stats() -> void:
 			abilities += str("- Сопротивление [color=#5dc3ff]ЖИЗНИ[/color] ", int(gm.life_resistance_cat*100), "%\n")
 		if gm.luck_resistance_cat != 0.0:
 			abilities += str("- Сопротивление [color=#a5da70]УДАЧЕ[/color] ", int(gm.luck_resistance_cat*100), "%\n")
-		if gm.accuracy_resistance_cat != 0.0:
-			abilities += str("- Сопротивление [color=#fd4d4f]ТОЧНОСТИ[/color] ", int(gm.accuracy_resistance_cat*100), "%\n")	
+		if gm.unluck_resistance_cat != 0.0:
+			abilities += str("- Сопротивление [color=#ba037e]НЕУДАЧЕ[/color] ", int(gm.unluck_resistance_cat*100), "%\n")
+		if gm.inaccuracy_resistance_cat != 0.0:
+			abilities += str("- Сопротивление [color=#fd4d4f]ТОЧНОСТИ[/color] ", int(gm.inaccuracy_resistance_cat*100), "%\n")	
 		creature_check_dialog.find_child("AbilitiesLabel").text = abilities
 		
 		if giant.has_debuff_weakness:
@@ -840,8 +842,10 @@ func check_creature_stats() -> void:
 			abilities += str("- Сопротивление [color=#5dc3ff]ЖИЗНИ[/color] ", int(gm.life_resistance_human*100), "%\n")
 		if gm.luck_resistance_human != 0.0:
 			abilities += str("- Сопротивление [color=#a5da70]УДАЧЕ[/color] ", int(gm.luck_resistance_human*100), "%\n")
-		if gm.accuracy_resistance_human != 0.0:
-			abilities += str("- Сопротивление [color=#fd4d4f]ТОЧНОСТИ[/color] ", int(gm.accuracy_resistance_human*100), "%\n")	
+		if gm.unluck_resistance_human != 0.0:
+			abilities += str("- Сопротивление [color=#ba037e]НЕУДАЧЕ[/color] ", int(gm.unluck_resistance_human*100), "%\n")
+		if gm.inaccuracy_resistance_human != 0.0:
+			abilities += str("- Сопротивление [color=#fd4d4f]НЕТОЧНОСТИ[/color] ", int(gm.inaccuracy_resistance_human*100), "%\n")	
 		creature_check_dialog.find_child("AbilitiesLabel").text = abilities	
 		
 		if human.has_debuff_weakness:
@@ -974,8 +978,10 @@ func check_creature_stats() -> void:
 							abilities += str("- Сопротивление [color=#5dc3ff]ЖИЗНИ[/color] ", int(target.life_resistance*100), "%\n")
 						if target.luck_resistance != 0.0:
 							abilities += str("- Сопротивление [color=#a5da70]УДАЧЕ[/color] ", int(target.luck_resistance*100), "%\n")
-						if target.accuracy_resistance != 0.0:
-							abilities += str("- Сопротивление [color=#fd4d4f]ТОЧНОСТИ[/color] ", int(target.accuracy_resistance*100), "%\n")	
+						if target.unluck_resistance != 0.0:
+							abilities += str("- Сопротивление [color=#ba037e]НЕУДАЧЕ[/color] ", int(target.unluck_resistance*100), "%\n")
+						if target.inaccuracy_resistance != 0.0:
+							abilities += str("- Сопротивление [color=#fd4d4f]ТОЧНОСТИ[/color] ", int(target.inaccuracy_resistance*100), "%\n")	
 						creature_check_dialog.find_child("AbilitiesLabel").text = abilities
 						return
 				

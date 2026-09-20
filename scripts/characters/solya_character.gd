@@ -53,14 +53,6 @@ var is_self_damage = false
 
 var next_strike_lucky = false
 
-var fire_resistance: float = 0.5
-var wind_resistance: float = 0.0
-var might_resistance: float = 0.5
-var death_resistance: float = 0
-var life_resistance: float = 0
-var luck_resistance: float = 0.0
-var accuracy_resistance: float = 0.0
-
 var has_debuff_weakness = false
 var has_debuff_undefend = false
 var has_debuff_inaccuracy = false
@@ -742,7 +734,7 @@ func _on_deal_damage_timer_timeout() -> void:
 			elif gm.current_card.element == "death":
 				gm.current_damage_human = int(gm.current_damage_human * (1.0 - target.death_resistance))
 			elif gm.current_card.element == "life":
-				gm.current_damage_human = int(gm.current_damage_human * (1.0 - target.death_resistance))	
+				gm.current_damage_human = int(gm.current_damage_human * (1.0 - target.life_resistance))	
 		
 
 		if gm.current_damage_human == 0:
@@ -835,7 +827,8 @@ func _on_explode_timer_timeout() -> void:
 	get_parent().giant_explosion_fx.position = gm.current_targets[0].position
 	if gm.state != "dead":
 		get_parent().giant_explosion_fx.play("hit")
-	else:	
+	else:
+		gm.current_card.element = "death"
 		get_parent().giant_explosion_fx.play("dead_hit")
 	get_parent().player_camera.apply_shake(3)
 	$AudioExplode.play()
