@@ -79,12 +79,12 @@ func _on_button_pressed() -> void:
 	if not is_empty:
 		$Timer.start()
 		scene_transitioner.change_scene_to()
-		sm.load_game()
 	else:
 		print("Создание профиля")
 
 func _on_timer_timeout() -> void:
 	lm.change_scene_with_loading(str("res://scenes/levels/level", room_number, ".tscn"))
+	sm.load_game()
 
 func _on_create_button_pressed() -> void:
 	save_to_file(test_text)

@@ -169,8 +169,8 @@ func _process(delta: float) -> void:
 	else:	
 		hp_bar.visible = false
 	
-	
 	check_hp()
+	#check_team()
 	
 	match state:
 		"idle":
@@ -179,8 +179,6 @@ func _process(delta: float) -> void:
 			hp_bar.visible = false
 			area_xp.monitoring = true
 			area.monitoring = false
-			
-	
 
 func check_team() -> void:
 	if not is_leader:
@@ -190,10 +188,11 @@ func check_team() -> void:
 		return
 		
 	for enemy in get_parent().get_children():
-		if enemy.position == self.position and not enemy.is_leader:
-			enemy.visible = false
-		else:
-			enemy.visible = true
+		if enemy.position == self.position:
+			if not enemy.is_leader:
+				enemy.visible = false
+			else:
+				enemy.visible = true
 
 func move(g_pos : Vector2, e_pos : Vector2) -> void:
 	if state == "idle":
@@ -684,19 +683,33 @@ func _on_deal_damage_timer_timeout() -> void:
 	if just_missed:
 		current_damage = 0
 		just_missed = false
-		
-	#if element == "might":
-	#	current_damage = int(current_damage * (1.0 - current_target.might_resistance))
-	#elif element == "fire":
-	#	current_damage = int(current_damage * (1.0 - current_target.fire_resistance))
-	#elif element == "wind":
-	#	current_damage = int(current_damage * (1.0 - current_target.wind_resistance))
-	#elif element == "luck":
-	#	current_damage = int(current_damage * (1.0 - current_target.luck_resistance))
-	#elif element == "death":
-	#	current_damage = int(current_damage * (1.0 - current_target.death_resistance))
-	#elif element == "life":
-	#	current_damage = int(current_damage * (1.0 - current_target.life_resistance))	
+	
+	if current_target == get_parent().get_parent().giant:
+		if element == "might":
+			current_damage = int(current_damage * (1.0 - gm.might_resistance_cat))
+		elif element == "fire":
+			current_damage = int(current_damage * (1.0 - gm.fire_resistance_cat))
+		elif element == "wind":
+			current_damage = int(current_damage * (1.0 - gm.wind_resistance_cat))
+		elif element == "luck":
+			current_damage = int(current_damage * (1.0 - gm.luck_resistance_cat))
+		elif element == "death":
+			current_damage = int(current_damage * (1.0 - gm.death_resistance_cat))
+		elif element == "life":
+			current_damage = int(current_damage * (1.0 - gm.life_resistance_cat))
+	elif current_target == get_parent().get_parent().human:
+		if element == "might":
+			current_damage = int(current_damage * (1.0 - gm.might_resistance_human))
+		elif element == "fire":
+			current_damage = int(current_damage * (1.0 - gm.fire_resistance_human))
+		elif element == "wind":
+			current_damage = int(current_damage * (1.0 - gm.wind_resistance_human))
+		elif element == "luck":
+			current_damage = int(current_damage * (1.0 - gm.luck_resistance_human))
+		elif element == "death":
+			current_damage = int(current_damage * (1.0 - gm.death_resistance_human))
+		elif element == "life":
+			current_damage = int(current_damage * (1.0 - gm.life_resistance_human))
 	
 	if current_damage == 0:
 		get_parent().get_parent().log_messages.append(str("- [color=#1ca8fd]", enemy_name_rus, "[/color] атакует существо [color=#1ca8fd]", 

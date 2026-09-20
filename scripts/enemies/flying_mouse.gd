@@ -55,11 +55,13 @@ func _process(delta: float) -> void:
 	else:	
 		hp_bar.visible = false
 	check_hp()
+	#check_team()
 	
 	match state:
 		"idle":
 			pass
 		"dead":
+			sprite.material.set_shader_parameter("speed", 0)
 			hp_bar.visible = false
 			area_xp.monitoring = true
 			area.monitoring = false

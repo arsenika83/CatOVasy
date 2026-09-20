@@ -235,6 +235,7 @@ z_index = 32
 position = Vector2(80, 112)
 
 [node name="Enemies" type="Node2D" parent="." unique_id=946491156]
+light_mask = 2
 z_index = 32
 
 [node name="Plants" type="Node2D" parent="." unique_id=1507805972]

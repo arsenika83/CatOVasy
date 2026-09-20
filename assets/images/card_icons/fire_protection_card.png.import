@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dw4lhidhcfov"
-path="res://.godot/imported/poison_card.png-5660f93bd8c7ca0b6f0085fa0ac3fa82.ctex"
+uid="uid://dtovjysv1x0vb"
+path="res://.godot/imported/fire_protection_card.png-fb296dc613df15b074cf7002ff010f51.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/card_icons/poison_card.png"
-dest_files=["res://.godot/imported/poison_card.png-5660f93bd8c7ca0b6f0085fa0ac3fa82.ctex"]
+source_file="res://assets/images/card_icons/fire_protection_card.png"
+dest_files=["res://.godot/imported/fire_protection_card.png-fb296dc613df15b074cf7002ff010f51.ctex"]
 
 [params]
 

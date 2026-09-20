@@ -4,10 +4,10 @@ var card_path = "fortune_wheel_card.tscn"
 var icon_path = "fortune_wheel_card.png"
 var tool_tip_text = ""
 var card_name = "Колесо фортуны"
-var card_description = "Дает Соле и коту 7 удачи на 2 хода"
+var card_description = "Дает Соле и коту +10% удачи на 2 хода"
 var rarity = "rare"
 var buff_type = "luck"
-var luck = 7
+var luck = 10
 var turns = 2
 
 func _ready() -> void:

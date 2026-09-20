@@ -350,6 +350,8 @@ func draw_upgrade_stats(character : String = "human", rarity : String = "common"
 	tween.tween_property(upgrade_stats_dialog, "scale", Vector2(1, 1), 0.3)
 	
 func draw_artifact_dialog() -> void:
+	gm.state = "leveling_up"
+	
 	bg.visible = true
 	artifact_dialog.visible = true
 	artifact_dialog.position.x = 512
@@ -357,8 +359,6 @@ func draw_artifact_dialog() -> void:
 	artifact_dialog.update_artifact()
 	artifact_dialog.audio_appear.play()
 
-	gm.state = "leveling_up"
-	
 	var tween = create_tween()
 	tween.tween_property(artifact_dialog, "scale", Vector2(1, 1), 0.5)	
 
@@ -427,6 +427,7 @@ func _on_battle_start_timer_timeout() -> void:
 	gm.state = "battle"
 	gm.state_human = "battle"
 	gm.prev_state = gm.state
+	gm.prev_state_human = gm.state_human
 	
 	if gm.has_old_bandage:
 		gm.current_defence_human = 5

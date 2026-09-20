@@ -72,72 +72,85 @@ func update_artifact() -> void:
 			artifact_name = catalog.all_artifact_names_unbelievable.get(artifact_index)
 	
 	print(artifact_name)
-	var artifact_scene = load("res://scenes/artifacts/" + artifact_name + ".tscn")
-	var artifact = artifact_scene.instantiate()
-	
-	if artifact.character_type == "cat":
-		cat_texture.visible = true
-		human_texture.visible = false
-	else:
-		cat_texture.visible = false
-		human_texture.visible = true
+	if not artifact_name == null:
+		var artifact_scene = load("res://scenes/artifacts/" + artifact_name + ".tscn")
+		var artifact = artifact_scene.instantiate()
 		
-	artifact_name_label.text = artifact.artifact_name
-	artifact_description_label.text = artifact.artifact_description
-	artifact_commentary_label.text = artifact.artifact_commentary
-	
-	match artifact.rarity:
-		"common":
-			artifact_rarity_label.text = "ОБЫЧНЫЙ"
-			artifact_rarity_label.add_theme_color_override("font_color", Color(1,1,1))
-		"rare":
-			artifact_rarity_label.text = "РЕДКИЙ"
-			artifact_rarity_label.add_theme_color_override("font_color", Color(0.944, 0.522, 0.29, 1.0))
-		"epic":
-			artifact_rarity_label.text = "ЭПИЧЕСКИЙ"
-			artifact_rarity_label.add_theme_color_override("font_color", Color(1,0,1))
-		"unbelievable":
-			artifact_rarity_label.text = "НЕВЕРОЯТНЫЙ"
-			artifact_rarity_label.add_theme_color_override("font_color", Color(0.52, 0.0, 0.0, 1.0))
-	
-	artifact.use_parent_material = true
-	
-	artifacts.add_child(artifact)
-	
+		if artifact.character_type == "cat":
+			cat_texture.visible = true
+			human_texture.visible = false
+		else:
+			cat_texture.visible = false
+			human_texture.visible = true
+			
+		artifact_name_label.text = artifact.artifact_name
+		artifact_description_label.text = artifact.artifact_description
+		artifact_commentary_label.text = artifact.artifact_commentary
+		
+		match artifact.rarity:
+			"common":
+				artifact_rarity_label.text = "ОБЫЧНЫЙ"
+				artifact_rarity_label.add_theme_color_override("font_color", Color(1,1,1))
+			"rare":
+				artifact_rarity_label.text = "РЕДКИЙ"
+				artifact_rarity_label.add_theme_color_override("font_color", Color(0.944, 0.522, 0.29, 1.0))
+			"epic":
+				artifact_rarity_label.text = "ЭПИЧЕСКИЙ"
+				artifact_rarity_label.add_theme_color_override("font_color", Color(1,0,1))
+			"unbelievable":
+				artifact_rarity_label.text = "НЕВЕРОЯТНЫЙ"
+				artifact_rarity_label.add_theme_color_override("font_color", Color(0.52, 0.0, 0.0, 1.0))
+		
+		artifact.use_parent_material = true
+		
+		artifacts.add_child(artifact)
+	else:
+		visible = false
+		gm.state = "idle"
+		gm.money += 50
+		$AudioMoney.play()
+		get_parent().get_parent().giant.money_particles.restart()
 
 func _on_ok_button_pressed() -> void:
 	audio_ok.play()
 	
-	if artifacts.get_child(0).character_type == "cat":
-		if gm.current_artifacts_cat.size() < 10:
-			visible = false
-			gm.state = "idle"
-			
-			for i in range(1, 11):
-				if gm.current_artifacts_cat.has(i):
-					continue
-						
-				gm.add_artifact_cat(i, artifacts.get_child(0))
-				break
-			
-			artifacts.get_child(0).upon_pickup()
+	if not artifacts.get_child(0) == null:
+		if artifacts.get_child(0).character_type == "cat":
+			if gm.current_artifacts_cat.size() < 10:
+				visible = false
+				gm.state = "idle"
+				
+				for i in range(1, 11):
+					if gm.current_artifacts_cat.has(i):
+						continue
+							
+					gm.add_artifact_cat(i, artifacts.get_child(0))
+					break
+				
+				artifacts.get_child(0).upon_pickup()
+			else:
+				return
 		else:
-			return
+			if gm.current_artifacts_human.size() < 10:
+				visible = false
+				gm.state = "idle"
+				
+				for i in range(1, 11):
+					if gm.current_artifacts_human.has(i):
+						continue
+							
+					gm.add_artifact_human(i, artifacts.get_child(0))
+					break
+				
+				artifacts.get_child(0).upon_pickup()
+			else:
+				return
 	else:
-		if gm.current_artifacts_human.size() < 10:
-			visible = false
-			gm.state = "idle"
-			
-			for i in range(1, 11):
-				if gm.current_artifacts_human.has(i):
-					continue
-						
-				gm.add_artifact_human(i, artifacts.get_child(0))
-				break
-			
-			artifacts.get_child(0).upon_pickup()
-		else:
-			return
+		visible = false
+		gm.state = "idle"
+		gm.money += 50
+		$AudioMoney.play()
+		get_parent().get_parent().giant.money_particles.restart()
 
 func _on_cancel_button_pressed() -> void:
 	audio_cancel.play()
@@ -147,11 +160,12 @@ func _on_cancel_button_pressed() -> void:
 	$AudioMoney.play()
 	get_parent().get_parent().giant.money_particles.restart()
 	
-	catalog.all_artifact_names.erase(artifacts.get_child(0).path)
-	catalog.all_artifact_names_common.erase(artifacts.get_child(0).path)
-	catalog.all_artifact_names_rare.erase(artifacts.get_child(0).path)
-	catalog.all_artifact_names_epic.erase(artifacts.get_child(0).path)
-	catalog.all_artifact_names_unbelievable.erase(artifacts.get_child(0).path)
+	if not artifacts.get_child(0) == null:
+		catalog.all_artifact_names.erase(artifacts.get_child(0).path)
+		catalog.all_artifact_names_common.erase(artifacts.get_child(0).path)
+		catalog.all_artifact_names_rare.erase(artifacts.get_child(0).path)
+		catalog.all_artifact_names_epic.erase(artifacts.get_child(0).path)
+		catalog.all_artifact_names_unbelievable.erase(artifacts.get_child(0).path)
 
 
 func _on_mouse_entered() -> void:

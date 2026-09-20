@@ -206,8 +206,6 @@ position = Vector2(208, 240)
 position = Vector2(208, 80)
 
 [node name="Pillow" parent="Objects" unique_id=564725004 instance=ExtResource("9_7s2gi")]
-charge_count = 1
-heal_power = 5
 
 [node name="Chest" parent="Objects" unique_id=977096426 instance=ExtResource("7_po5je")]
 position = Vector2(-64, -32)

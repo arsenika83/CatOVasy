@@ -56,6 +56,7 @@ func _process(delta: float) -> void:
 	else:	
 		hp_bar.visible = false
 	check_hp()
+	#check_team()
 	
 	match state:
 		"idle":
