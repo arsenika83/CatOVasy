@@ -10,6 +10,7 @@ var rarity = "rare"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	element = "luck"
 	shake = 0.05
 	behind_attack = true
 	description_rect.scale = Vector2(1, 0)

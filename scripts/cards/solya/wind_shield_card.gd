@@ -9,6 +9,7 @@ var card_description = "Дает 2 защиты Соле"
 var rarity = "common"
 
 func _ready() -> void:
+	element = "wind"
 	description_rect.scale = Vector2(1, 0)
 	description_label.text = card_description
 	energy_cost = 0

@@ -4,6 +4,8 @@
 [ext_resource type="Script" uid="uid://b6bfyqjmol052" path="res://scripts/ui/card_check_dialog.gd" id="2_hxdfs"]
 [ext_resource type="Texture2D" uid="uid://de2c8pnqtrt77" path="res://assets/images/inventory_ui.png" id="3_jngtl"]
 [ext_resource type="PackedScene" uid="uid://hoerixcuuuk3" path="res://scenes/cards/double_claw_card.tscn" id="4_hxdfs"]
+[ext_resource type="Texture2D" uid="uid://bu6vlrr33geyb" path="res://assets/images/elements/luck_element.png" id="4_qjp1o"]
+[ext_resource type="StyleBox" uid="uid://b8wibcbgivilm" path="res://styles/button_normal.tres" id="5_br7ip"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qtlqx"]
 shader = ExtResource("1_qjp1o")
@@ -15,7 +17,7 @@ shader_parameter/time_offset = 10.0
 atlas = ExtResource("3_jngtl")
 region = Rect2(0, 0, 448, 720)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hxdfs"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qjp1o"]
 resource_local_to_scene = true
 shader = ExtResource("1_qjp1o")
 shader_parameter/speed = 2.000000095
@@ -40,7 +42,7 @@ script = ExtResource("2_hxdfs")
 use_parent_material = true
 layout_mode = 0
 offset_right = 384.0
-offset_bottom = 280.0
+offset_bottom = 288.0
 texture = SubResource("AtlasTexture_qtlqx")
 expand_mode = 1
 
@@ -71,9 +73,9 @@ autowrap_mode = 2
 use_parent_material = true
 layout_mode = 0
 offset_left = 240.0
-offset_top = 232.0
+offset_top = 248.0
 offset_right = 368.0
-offset_bottom = 264.0
+offset_bottom = 280.0
 theme_override_font_sizes/font_size = 18
 text = "РЕДКИЙ"
 horizontal_alignment = 1
@@ -83,11 +85,41 @@ autowrap_mode = 2
 use_parent_material = true
 layout_mode = 0
 offset_left = 240.0
-offset_top = 16.0
+offset_top = 48.0
 offset_right = 368.0
-offset_bottom = 208.0
+offset_bottom = 240.0
 
 [node name="AttackDoubleClawCard" parent="Card" unique_id=1531075916 instance=ExtResource("4_hxdfs")]
-material = SubResource("ShaderMaterial_hxdfs")
+material = SubResource("ShaderMaterial_qjp1o")
 use_parent_material = true
 layout_mode = 2
+
+[node name="Panel" type="Panel" parent="." unique_id=1796143940]
+use_parent_material = true
+layout_mode = 0
+offset_left = 240.0
+offset_top = 8.0
+offset_right = 368.0
+offset_bottom = 40.0
+theme_override_styles/panel = ExtResource("5_br7ip")
+
+[node name="ElementIcon" type="TextureRect" parent="Panel" unique_id=409879037]
+use_parent_material = true
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 30.0
+offset_bottom = 30.0
+texture = ExtResource("4_qjp1o")
+
+[node name="ElementLabel" type="Label" parent="Panel" unique_id=2072118518]
+use_parent_material = true
+layout_mode = 0
+offset_left = 32.0
+offset_right = 128.0
+offset_bottom = 32.0
+theme_override_font_sizes/font_size = 18
+text = "ОГОНЬ"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2

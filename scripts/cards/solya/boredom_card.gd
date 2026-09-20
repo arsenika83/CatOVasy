@@ -8,6 +8,7 @@ var card_description = "Завершает ход. Вся оставшаяся �
 var rarity = "rare"
 
 func _ready() -> void:
+	element = "energy"
 	description_rect.scale = Vector2(1, 0)
 	description_label.text = card_description
 	

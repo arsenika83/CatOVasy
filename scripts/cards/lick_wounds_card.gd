@@ -8,6 +8,7 @@ var card_description = settings.card_text_cat.get("lick_wounds_desc")
 var rarity = "rare"
 
 func _ready() -> void:
+	element = "life"
 	description_rect.scale = Vector2(1, 0)
 	description_label.text = card_description
 	energy_cost = 1

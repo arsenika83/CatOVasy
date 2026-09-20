@@ -31,6 +31,7 @@ var character_name_display = "Соля"
 @onready var audio_hit = $AudioStreamPlayerHit
 @onready var audio_hit_lucky = $AudioStreamPlayerHitLucky
 @onready var audio_debuff = $AudioStreamPlayerDebuff
+@onready var audio_neutrality = $AudioNeutrality
 
 @onready var light = $PointLight2D
 
@@ -51,6 +52,14 @@ var just_missed = false
 var is_self_damage = false
 
 var next_strike_lucky = false
+
+var fire_resistance: float = 0.5
+var wind_resistance: float = 0.0
+var might_resistance: float = 0.5
+var death_resistance: float = 0
+var life_resistance: float = 0
+var luck_resistance: float = 0.0
+var accuracy_resistance: float = 0.0
 
 var has_debuff_weakness = false
 var has_debuff_undefend = false
@@ -408,7 +417,7 @@ func give_buff(targets : Array[CharacterBody2D], type : String, power : int, tur
 			targets[0].energy += power
 	idle_animation_timer.start(gm.buff_animation_time_human)
 
-func display_damage(dmg : int) -> void:
+func display_damage(dmg) -> void:
 	if damage_indicator_scene:
 		var indicator = damage_indicator_scene.instantiate()
 		var spawn_pos = global_position + Vector2(0, -2)
@@ -718,7 +727,23 @@ func _on_deal_damage_timer_timeout() -> void:
 			if damage_dealt > target.hp:
 				damage_dealt = target.hp
 			
-		last_damage_dealt += damage_dealt		
+		last_damage_dealt += damage_dealt
+		
+		if gm.current_card != null:
+			print(target.fire_resistance)
+			if gm.current_card.element == "might":
+				gm.current_damage_human = int(gm.current_damage_human * (1.0 - target.might_resistance))
+			elif gm.current_card.element == "fire":
+				gm.current_damage_human = int(gm.current_damage_human * (1.0 - target.fire_resistance))
+			elif gm.current_card.element == "wind":
+				gm.current_damage_human = int(gm.current_damage_human * (1.0 - target.wind_resistance))
+			elif gm.current_card.element == "luck":
+				gm.current_damage_human = int(gm.current_damage_human * (1.0 - target.luck_resistance))
+			elif gm.current_card.element == "death":
+				gm.current_damage_human = int(gm.current_damage_human * (1.0 - target.death_resistance))
+			elif gm.current_card.element == "life":
+				gm.current_damage_human = int(gm.current_damage_human * (1.0 - target.death_resistance))	
+		
 
 		if gm.current_damage_human == 0:
 			get_parent().log_messages.append(str("- [color=#1ca8fd]Соля[/color] атакует существо [color=#1ca8fd]", 

@@ -8,6 +8,7 @@ var card_description = "Сжигает врага. Снижает текущие
 var rarity = "unbelievable"
 
 func _ready() -> void:
+	element = "fire"
 	only_one_target = true
 	description_rect.scale = Vector2(1, 0)
 	description_label.text = card_description

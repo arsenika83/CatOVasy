@@ -89,6 +89,16 @@ var turns_buff_accuracy = 0
 var turns_buff_luck = 0
 var turns_buff_high_energy = 0
 
+@export var fire_resistance: float = 0
+@export var wind_resistance: float = 0
+@export var might_resistance: float = 0
+@export var death_resistance: float = 0
+@export var life_resistance: float = 0
+@export var luck_resistance: float = 0
+@export var accuracy_resistance: float = 0
+
+var element = "might"
+
 var follow_step_count = 0
 var follow_distance = 5
 
@@ -501,7 +511,7 @@ func give_buff(target : CharacterBody2D, type : String, power : int, turns : int
 	
 	debuff_timer.start(debuff_animation_time)
 	
-func display_damage(dmg : int) -> void:
+func display_damage(dmg) -> void:
 	if damage_indicator_scene:
 		var indicator = damage_indicator_scene.instantiate()
 		var spawn_pos = global_position + Vector2(0, -2)
@@ -673,6 +683,19 @@ func _on_deal_damage_timer_timeout() -> void:
 	if just_missed:
 		current_damage = 0
 		just_missed = false
+		
+	#if element == "might":
+	#	current_damage = int(current_damage * (1.0 - current_target.might_resistance))
+	#elif element == "fire":
+	#	current_damage = int(current_damage * (1.0 - current_target.fire_resistance))
+	#elif element == "wind":
+	#	current_damage = int(current_damage * (1.0 - current_target.wind_resistance))
+	#elif element == "luck":
+	#	current_damage = int(current_damage * (1.0 - current_target.luck_resistance))
+	#elif element == "death":
+	#	current_damage = int(current_damage * (1.0 - current_target.death_resistance))
+	#elif element == "life":
+	#	current_damage = int(current_damage * (1.0 - current_target.death_resistance))	
 	
 	if current_damage == 0:
 		get_parent().get_parent().log_messages.append(str("- [color=#1ca8fd]", enemy_name_rus, "[/color] атакует существо [color=#1ca8fd]", 

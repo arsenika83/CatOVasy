@@ -59,6 +59,14 @@ var max_energy_cat: int = 3
 var current_hand_size_cat: int = 5
 var hand_size_cat: int = 5
 
+var fire_resistance_cat: float = 0
+var wind_resistance_cat: float = 0.0
+var might_resistance_cat: float = 0.25
+var death_resistance_cat: float = 0
+var life_resistance_cat: float = 0
+var luck_resistance_cat: float = 0.0
+var accuracy_resistance_cat: float = 0.0
+
 #==============================================================================================
 var battle_x_human : int
 var battle_y_human : int
@@ -97,6 +105,15 @@ var xp_needed: int = 1
 var level: int = 1
 
 var max_hand_size: int = 8
+
+var fire_resistance_human: float = 0.25
+var wind_resistance_human: float = 0.0
+var might_resistance_human: float = 0.0
+var death_resistance_human: float = 0
+var life_resistance_human: float = 0
+var luck_resistance_human: float = 0.0
+var accuracy_resistance_human: float = 0.0
+#============================================================================
 
 var current_cards_cat: Dictionary[int, Card]
 var current_cards_human: Dictionary[int, Card]

@@ -9,6 +9,7 @@ var card_description = "Наносит ВСЕМ врагам 50 урона + б�
 var rarity = "epic"
 
 func _ready() -> void:
+	element = "fire"
 	everybody_attack = true
 	shake = 0.01
 	description_rect.scale = Vector2(1, 0)

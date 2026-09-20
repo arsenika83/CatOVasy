@@ -144,6 +144,7 @@ func draw_card_check_dialog(card : Card) -> void:
 	card_check_dialog.visible = true
 	card_check_dialog.card_name.text = card.card_name
 	card_check_dialog.card_description.text = card.card_description
+	card_check_dialog.element = added_card.element
 	
 	match card.rarity:
 		"common":

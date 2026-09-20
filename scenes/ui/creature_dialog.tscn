@@ -1,22 +1,18 @@
 [gd_scene format=3 uid="uid://b7oix76heqs28"]
 
 [ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="1_hh0f6"]
-[ext_resource type="Texture2D" uid="uid://b0rpbj3njbbar" path="res://assets/images/cards.png" id="1_uuaso"]
 [ext_resource type="Script" uid="uid://dli8hinl5yqyr" path="res://scripts/ui/creature_dialog.gd" id="2_f0otj"]
 [ext_resource type="FontFile" uid="uid://dub3oi8dxfpfw" path="res://assets/fonts/JeuDePixel-Regular.otf" id="3_qtlqx"]
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="4_j5lms"]
 [ext_resource type="Script" uid="uid://dc16ko7ka7cxo" path="res://scripts/ui/camera_subview_port.gd" id="5_0tj0i"]
 [ext_resource type="Script" uid="uid://dyuhxmo8ve3q1" path="res://scripts/ui/sub_viewport.gd" id="5_epww1"]
+[ext_resource type="StyleBox" uid="uid://b8wibcbgivilm" path="res://styles/button_normal.tres" id="8_0d5n0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qtlqx"]
 shader = ExtResource("1_hh0f6")
 shader_parameter/speed = 2.000000095
 shader_parameter/amplitude = 2.000000095
 shader_parameter/time_offset = 10.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qtlqx"]
-atlas = ExtResource("1_uuaso")
-region = Rect2(448, 0, 64, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hh0f6"]
 atlas = ExtResource("4_j5lms")
@@ -45,14 +41,6 @@ region = Rect2(16, 144, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_loxxi"]
 atlas = ExtResource("4_j5lms")
 region = Rect2(32, 144, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yatuc"]
-atlas = ExtResource("4_j5lms")
-region = Rect2(0, 192, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yhyxs"]
-atlas = ExtResource("4_j5lms")
-region = Rect2(16, 192, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0tj0i"]
 atlas = ExtResource("4_j5lms")
@@ -108,13 +96,12 @@ offset_bottom = 223.84
 grow_vertical = 2
 script = ExtResource("2_f0otj")
 
-[node name="TextureRect2" type="TextureRect" parent="." unique_id=1275944467]
+[node name="TextureRect2" type="Panel" parent="." unique_id=1369763668]
 use_parent_material = true
 layout_mode = 0
 offset_right = 384.0
 offset_bottom = 352.0
-texture = SubResource("AtlasTexture_qtlqx")
-expand_mode = 1
+theme_override_styles/panel = ExtResource("8_0d5n0")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1053014275]
 use_parent_material = true
@@ -164,17 +151,14 @@ layout_mode = 0
 offset_left = 36.0
 offset_top = 39.0
 offset_right = 128.0
-offset_bottom = 296.0
+offset_bottom = 192.0
 theme_override_font_sizes/font_size = 22
 text = "ОЗ: 
 УРОН: 
 ЗАЩИТА: 
 ТОЧНОСТЬ: 
 УДАЧА: 
-ЭНЕРГИЯ: 
-
-УРОВЕНЬ: 
-ОПЫТ: "
+ЭНЕРГИЯ: "
 
 [node name="StatsLabel" type="Label" parent="." unique_id=1704144968]
 use_parent_material = true
@@ -182,17 +166,14 @@ layout_mode = 0
 offset_left = 128.0
 offset_top = 40.0
 offset_right = 220.0
-offset_bottom = 297.0
+offset_bottom = 193.0
 theme_override_font_sizes/font_size = 22
 text = "1
 2
 3
 4
 5
-6
-
-7
-8"
+6"
 
 [node name="Stats" type="Control" parent="." unique_id=1702192420]
 use_parent_material = true
@@ -255,24 +236,6 @@ offset_top = 127.0
 offset_right = 24.0
 offset_bottom = 143.0
 texture = SubResource("AtlasTexture_loxxi")
-
-[node name="TextureStat7" type="TextureRect" parent="Stats" unique_id=1123635346]
-use_parent_material = true
-layout_mode = 0
-offset_left = 8.0
-offset_top = 179.0
-offset_right = 24.0
-offset_bottom = 195.0
-texture = SubResource("AtlasTexture_yatuc")
-
-[node name="TextureStat8" type="TextureRect" parent="Stats" unique_id=1988012867]
-use_parent_material = true
-layout_mode = 0
-offset_left = 8.0
-offset_top = 204.0
-offset_right = 24.0
-offset_bottom = 220.0
-texture = SubResource("AtlasTexture_yhyxs")
 
 [node name="Debuffs" type="Control" parent="." unique_id=1814506075]
 use_parent_material = true
@@ -539,3 +502,25 @@ script = ExtResource("5_epww1")
 z_index = 100
 zoom = Vector2(2.5, 2.5)
 script = ExtResource("5_0tj0i")
+
+[node name="AbilitiesLabel" type="RichTextLabel" parent="." unique_id=1797564692]
+use_parent_material = true
+layout_mode = 0
+offset_left = 16.0
+offset_top = 200.0
+offset_right = 232.0
+offset_bottom = 336.0
+theme_override_font_sizes/normal_font_size = 18
+bbcode_enabled = true
+text = "- БЬЕТ ЗАДНЮЮ ЦЕЛЬ
+- СОПРОТИВЛЕНИЕ ОГНЮ 50%
+- СОПРОТИВЛЕНИЕ СИЛЕ 50%
+- СОПРОТИВЛЕНИЕ СИЛЕ 50%
+- СОПРОТИВЛЕНИЕ СИЛЕ 50%
+- СОПРОТИВЛЕНИЕ СИЛЕ 50%
+- СОПРОТИВЛЕНИЕ СИЛЕ 50%
+- СОПРОТИВЛЕНИЕ СИЛЕ 50%
+- СОПРОТИВЛЕНИЕ СИЛЕ 50%
+- СОПРОТИВЛЕНИЕ СИЛЕ 50%
+- СОПРОТИВЛЕНИЕ СИЛЕ 50%
+- СОПРОТИВЛЕНИЕ СИЛЕ 50%"

@@ -12,6 +12,7 @@ var target = "cat"
 var buff_type = "strength"
 
 func _ready() -> void:
+	element = "might"
 	description_rect.scale = Vector2(1, 0)
 	description_label.text = card_description
 	

@@ -8,8 +8,8 @@ var card_name = settings.card_text_cat.get("attack_name")
 var card_description = settings.card_text_cat.get("attack_desc")
 var rarity = "common"
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	element = "might"
 	shake = 0.1
 	description_rect.scale = Vector2(1, 0)
 	description_label.text = card_description

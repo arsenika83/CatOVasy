@@ -10,6 +10,7 @@ var card_description = settings.card_text_cat.get("revenge_desc")
 var rarity = "epic"
 
 func _ready() -> void:
+	element = "might"
 	shake = 0.1
 	description_rect.scale = Vector2(1, 0)
 	description_label.text = card_description

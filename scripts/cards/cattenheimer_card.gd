@@ -9,6 +9,7 @@ var card_description = settings.card_text_cat.get("cattenheimer_desc")
 var rarity = "epic"
 
 func _ready() -> void:
+	element = "fire"
 	everybody_attack = true
 	shake = 0.01
 	description_rect.scale = Vector2(1, 0)

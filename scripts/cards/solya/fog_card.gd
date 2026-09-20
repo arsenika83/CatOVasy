@@ -8,6 +8,7 @@ var card_description = "Снижает точность ВСЕХ врагов н
 var rarity = "unbelievable"
 
 func _ready() -> void:
+	element = "wind"
 	description_rect.scale = Vector2(1, 0)
 	description_label.text = card_description
 	energy_cost = 2

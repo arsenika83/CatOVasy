@@ -18,6 +18,7 @@ var state_modifier = ""
 var enabled = true
 var energy_cost = 1
 var type = ""
+var element = ""
 #var rarity = "common"
 var shake = 0.0
 

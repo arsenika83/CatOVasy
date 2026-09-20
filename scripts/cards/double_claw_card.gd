@@ -9,6 +9,7 @@ var card_description = settings.card_text_cat.get("double_claw_desc")
 var rarity = "rare"
 
 func _ready() -> void:
+	element = "might"
 	description_rect.scale = Vector2(1, 0)
 	description_label.text = card_description
 	

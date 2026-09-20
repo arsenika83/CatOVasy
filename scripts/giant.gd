@@ -436,7 +436,7 @@ func shine_artifact(art : String) -> void:
 			break
 		i += 1		
 		
-func display_damage(dmg : int) -> void:
+func display_damage(dmg) -> void:
 	if damage_indicator_scene:
 		var indicator = damage_indicator_scene.instantiate()
 		var spawn_pos = global_position + Vector2(0, -2)
@@ -486,13 +486,8 @@ func _on_walk_timer_timeout() -> void:
 func _on_take_damage_timer_timeout() -> void:
 	$HPParticles.restart()
 	check_hp()
-	
-	if damage_indicator_scene:
-		var indicator = damage_indicator_scene.instantiate()
-		var spawn_pos = global_position + Vector2(0, -2)
 		
-		add_child(indicator)
-		indicator.display_damage(taken_damage, spawn_pos)
+	display_damage(taken_damage)
 	
 	if not gm.state == "dead":
 		var tween1 = create_tween()
@@ -609,6 +604,21 @@ func _on_deal_damage_timer_timeout() -> void:
 			
 		last_damage_dealt += damage_dealt
 		
+		if gm.current_card != null:
+			if gm.current_card.element == "might":
+				gm.current_damage_cat = int(gm.current_damage_cat * (1.0 - target.might_resistance))
+			elif gm.current_card.element == "fire":
+				gm.current_damage_cat = int(gm.current_damage_cat * (1.0 - target.fire_resistance))
+			elif gm.current_card.element == "wind":
+				gm.current_damage_cat = int(gm.current_damage_cat * (1.0 - target.wind_resistance))
+			elif gm.current_card.element == "luck":
+				gm.current_damage_cat = int(gm.current_damage_cat * (1.0 - target.luck_resistance))
+			elif gm.current_card.element == "death":
+				gm.current_damage_cat = int(gm.current_damage_cat * (1.0 - target.death_resistance))
+			elif gm.current_card.element == "life":
+				gm.current_damage_cat = int(gm.current_damage_cat * (1.0 - target.death_resistance))	
+		
+		
 		if gm.current_damage_cat == 0:
 			get_parent().log_messages.append(str("- [color=#1ca8fd]Кот[/color] атакует существо [color=#1ca8fd]", 
 			target.enemy_name_rus, "[/color]. Промах!\n"))
@@ -621,6 +631,7 @@ func _on_deal_damage_timer_timeout() -> void:
 			else:
 				get_parent().log_messages.append(str("- [color=#1ca8fd]Кот[/color] наносит [color=#fc4e52]", gm.current_damage_cat, 
 				" урона[/color] существу [color=#1ca8fd]", target.enemy_name_rus, "[/color]\n"))
+		
 		target.take_damage(gm.current_damage_cat, gm.attack_animation_time_cat)
 		
 	gm.current_damage_cat = gm.damage_cat

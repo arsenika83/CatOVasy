@@ -8,7 +8,7 @@ func display_damage(amount, start_position: Vector2) -> void:
 	elif int(amount) == 0: 
 		text = str(amount)
 	elif int(amount) > 0 and int(amount) <= 10:
-		text = str("[color=#d90206]", amount, " [/color]")
+		text = str("[outline_size=4][outline_color=white][color=#d90206]", amount, " [/color][/outline_color][/outline_size]")
 	elif int(amount) > 10 and int(amount) <= 100:
 		text = str("[outline_size=4][outline_color=white][color=#e10374]", amount, " [/color][/outline_color][/outline_size]")	
 	else:
