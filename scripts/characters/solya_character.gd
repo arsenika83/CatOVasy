@@ -651,7 +651,7 @@ func _on_deal_damage_timer_timeout() -> void:
 	if gm.has_dice:
 		shine_artifact("dice")
 		is_hit_lucky = true
-		is_self_damage = randi_range(0, 100) < 15
+		is_self_damage = randi_range(0, 100) < 20
 		
 	if is_hit_lucky:
 		if gm.has_rainbow_pot: #ГОРШОЧЕК РАДУГИ
@@ -722,21 +722,34 @@ func _on_deal_damage_timer_timeout() -> void:
 			
 		last_damage_dealt += damage_dealt
 		
-		if gm.current_card != null:
-			print(target.fire_resistance)
-			if gm.current_card.element == "might":
-				gm.current_damage_human = int(gm.current_damage_human * (1.0 - target.might_resistance))
-			elif gm.current_card.element == "fire":
-				gm.current_damage_human = int(gm.current_damage_human * (1.0 - target.fire_resistance))
-			elif gm.current_card.element == "wind":
-				gm.current_damage_human = int(gm.current_damage_human * (1.0 - target.wind_resistance))
-			elif gm.current_card.element == "luck":
-				gm.current_damage_human = int(gm.current_damage_human * (1.0 - target.luck_resistance))
-			elif gm.current_card.element == "death":
-				gm.current_damage_human = int(gm.current_damage_human * (1.0 - target.death_resistance))
-			elif gm.current_card.element == "life":
-				gm.current_damage_human = int(gm.current_damage_human * (1.0 - target.life_resistance))	
-		
+		if not is_self_damage:
+			if gm.current_card != null:
+				if gm.current_card.element == "might":
+					gm.current_damage_human = int(gm.current_damage_human * (1.0 - target.might_resistance))
+				elif gm.current_card.element == "fire":
+					gm.current_damage_human = int(gm.current_damage_human * (1.0 - target.fire_resistance))
+				elif gm.current_card.element == "wind":
+					gm.current_damage_human = int(gm.current_damage_human * (1.0 - target.wind_resistance))
+				elif gm.current_card.element == "luck":
+					gm.current_damage_human = int(gm.current_damage_human * (1.0 - target.luck_resistance))
+				elif gm.current_card.element == "death":
+					gm.current_damage_human = int(gm.current_damage_human * (1.0 - target.death_resistance))
+				elif gm.current_card.element == "life":
+					gm.current_damage_human = int(gm.current_damage_human * (1.0 - target.life_resistance))	
+		else:
+			if gm.current_card != null:
+				if gm.current_card.element == "might":
+					gm.current_damage_human = int(gm.current_damage_human * (1.0 - gm.might_resistance_human))
+				elif gm.current_card.element == "fire":
+					gm.current_damage_human = int(gm.current_damage_human * (1.0 - gm.fire_resistance_human))
+				elif gm.current_card.element == "wind":
+					gm.current_damage_human = int(gm.current_damage_human * (1.0 - gm.wind_resistance_human))
+				elif gm.current_card.element == "luck":
+					gm.current_damage_human = int(gm.current_damage_human * (1.0 - gm.luck_resistance_human))
+				elif gm.current_card.element == "death":
+					gm.current_damage_human = int(gm.current_damage_human * (1.0 - gm.death_resistance_human))
+				elif gm.current_card.element == "life":
+					gm.current_damage_human = int(gm.current_damage_human * (1.0 - gm.life_resistance_human))	
 
 		if gm.current_damage_human == 0:
 			get_parent().log_messages.append(str("- [color=#1ca8fd]Соля[/color] атакует существо [color=#1ca8fd]", 

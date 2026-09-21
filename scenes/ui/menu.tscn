@@ -126,7 +126,7 @@ theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = ExtResource("2_w6y0u")
 theme_override_styles/pressed = ExtResource("3_cx0sj")
 theme_override_styles/hover = ExtResource("4_ntye7")
-text = "СОХРАНИТЬ И ВЫЙТИ"
+text = "ВЫЙТИ ИЗ ИГРЫ"
 icon = SubResource("AtlasTexture_tub5d")
 alignment = 0
 
