@@ -262,6 +262,9 @@ func _on_hand_clear_timer_timeout() -> void:
 			child.card_played.connect(_on_card_played)
 			child.create()
 		
+		if child.has_method("on_hand"):
+			child.on_hand()		
+		
 
 func _on_unplayed_button_pressed() -> void:
 	$UnplayedContainer.visible = true

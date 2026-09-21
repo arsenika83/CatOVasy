@@ -1,30 +1,30 @@
-[gd_scene format=3 uid="uid://bysnoca8ilwgs"]
+[gd_scene format=3 uid="uid://dd2kvue7dwft4"]
 
-[ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="1_yetgt"]
-[ext_resource type="Script" uid="uid://ddjmqi81p7g0" path="res://scripts/cards/card.gd" id="2_mhb1o"]
-[ext_resource type="Texture2D" uid="uid://b0rpbj3njbbar" path="res://assets/images/cards.png" id="3_cti8t"]
-[ext_resource type="Texture2D" uid="uid://b0il324ulqkl2" path="res://assets/images/card_icons/solya_ability_card.png" id="4_mhb1o"]
-[ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="4_xpbm2"]
-[ext_resource type="FontFile" uid="uid://dub3oi8dxfpfw" path="res://assets/fonts/JeuDePixel-Regular.otf" id="5_v37ah"]
-[ext_resource type="PackedScene" uid="uid://d2qyvibo88mu1" path="res://scenes/ui/description.tscn" id="7_cti8t"]
-[ext_resource type="AudioStream" uid="uid://bq0ooer30jskk" path="res://assets/soundFX/xp_pick_up.wav" id="8_xpbm2"]
+[ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="1_qow3c"]
+[ext_resource type="Script" uid="uid://b8mkowutm7tyi" path="res://scripts/cards/curses/pain_curse_card.gd" id="2_qow3c"]
+[ext_resource type="Texture2D" uid="uid://b0rpbj3njbbar" path="res://assets/images/cards.png" id="3_gewst"]
+[ext_resource type="Texture2D" uid="uid://bqyydcnfhd7fm" path="res://assets/images/card_icons/pain_curse_card.png" id="4_qow3c"]
+[ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="5_bqbh5"]
+[ext_resource type="FontFile" uid="uid://dub3oi8dxfpfw" path="res://assets/fonts/JeuDePixel-Regular.otf" id="6_17my7"]
+[ext_resource type="PackedScene" uid="uid://d2qyvibo88mu1" path="res://scenes/ui/description.tscn" id="7_ayuts"]
+[ext_resource type="AudioStream" uid="uid://bq0ooer30jskk" path="res://assets/soundFX/xp_pick_up.wav" id="8_ujbkm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jl6rh"]
 resource_local_to_scene = true
-shader = ExtResource("1_yetgt")
+shader = ExtResource("1_qow3c")
 shader_parameter/speed = 2.000000095
 shader_parameter/amplitude = 10.000000475
 shader_parameter/time_offset = 0.4390000208525
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0qqw3"]
-atlas = ExtResource("3_cti8t")
-region = Rect2(448, 0, 64, 96)
+atlas = ExtResource("3_gewst")
+region = Rect2(448, 96, 64, 96)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cti8t"]
-atlas = ExtResource("4_xpbm2")
-region = Rect2(96, 96, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_4igd3"]
+atlas = ExtResource("5_bqbh5")
+region = Rect2(64, 160, 32, 32)
 
-[node name="Card" type="Control" unique_id=1531075916]
+[node name="PainCurseCard" type="Control" unique_id=1531075916]
 z_index = 100
 z_as_relative = false
 material = SubResource("ShaderMaterial_jl6rh")
@@ -35,7 +35,7 @@ offset_top = -100.08001
 offset_right = 128.0
 offset_bottom = 99.91999
 pivot_offset = Vector2(64, 96)
-script = ExtResource("2_mhb1o")
+script = ExtResource("2_qow3c")
 
 [node name="BG2" type="TextureRect" parent="." unique_id=1690685854]
 use_parent_material = true
@@ -60,7 +60,7 @@ offset_left = 8.0
 offset_top = 8.0
 offset_right = 120.0
 offset_bottom = 120.0
-texture = ExtResource("4_mhb1o")
+texture = ExtResource("4_qow3c")
 
 [node name="Label" type="Label" parent="." unique_id=514088983]
 use_parent_material = true
@@ -70,7 +70,7 @@ offset_top = 120.0
 offset_right = 112.0
 offset_bottom = 176.0
 theme_override_font_sizes/font_size = 16
-text = "+1 УРОН"
+text = "БОЛЬ"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -81,7 +81,7 @@ offset_left = -8.0
 offset_top = -8.0
 offset_right = 40.0
 offset_bottom = 40.0
-texture = SubResource("AtlasTexture_cti8t")
+texture = SubResource("AtlasTexture_4igd3")
 
 [node name="Label" type="Label" parent="Energy" unique_id=1275453451]
 use_parent_material = true
@@ -94,21 +94,21 @@ mouse_filter = 1
 theme_override_colors/font_color = Color(18.892157, 18.892157, 18.892157, 1)
 theme_override_constants/outline_size = 4
 theme_override_constants/shadow_outline_size = 1
-theme_override_fonts/font = ExtResource("5_v37ah")
+theme_override_fonts/font = ExtResource("6_17my7")
 theme_override_font_sizes/font_size = 18
 text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Description" parent="." unique_id=310287216 instance=ExtResource("7_cti8t")]
+[node name="Description" parent="." unique_id=310287216 instance=ExtResource("7_ayuts")]
 layout_mode = 0
 offset_left = 0.0
 offset_top = 0.0
 offset_right = 128.0
 offset_bottom = 192.0
 
-[node name="AudioHover" type="AudioStreamPlayer" parent="." unique_id=661862438]
-stream = ExtResource("8_xpbm2")
+[node name="AudioHover" type="AudioStreamPlayer" parent="." unique_id=477079808]
+stream = ExtResource("8_ujbkm")
 volume_db = -8.0
 pitch_scale = 0.5
 bus = &"SoundFX"

@@ -38,6 +38,8 @@ var card_to_free : Control
 
 @onready var audio = $AudioStreamPlayer
 
+var has_windless = false
+
 func _ready() -> void:
 	var card_count = 0
 	
@@ -61,6 +63,11 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	if has_windless:
+		free_changes = 0
+		card_change_energy_cost = 2
+		change_cost.text = str(card_change_energy_cost)
+	
 	if gm.current_energy_human > 0:
 		$EndButton/StatusFX.visible = false
 		$EndButton.disabled = false
@@ -153,7 +160,10 @@ func _on_change_button_pressed() -> void:
 			#card_change_energy_cost = 1
 			change_cost.text = str(1)
 	else:
-		card_change_energy_cost = 1
+		if has_windless:
+			card_change_energy_cost = 2
+		else:
+			card_change_energy_cost = 1
 		change_cost.text = str(card_change_energy_cost)
 	
 	if gm.current_energy_human - card_change_energy_cost >= 0:
@@ -214,6 +224,8 @@ func _on_delete_card_timer_timeout() -> void:
 	gm.current_card = null
 
 func _on_hand_clear_timer_timeout() -> void:
+	has_windless = false
+	
 	hand_count += 1
 	for card in hand:
 		played_cards.append(card.duplicate())
@@ -259,6 +271,9 @@ func _on_hand_clear_timer_timeout() -> void:
 			child.card_clicked.connect(_on_card_selected)
 			child.card_played.connect(_on_card_played)
 			child.create()
+		
+		if child.has_method("on_hand"):
+			child.on_hand()
 	
 	if hand_count == 1 and gm.has_discount:
 		var random_card = -1
@@ -275,8 +290,7 @@ func _on_hand_clear_timer_timeout() -> void:
 		cards_ui.get_child(random_card).energy_cost = 0
 		cards_ui.get_child(random_card).find_child("Energy").find_child("Label").text = str(0)
 		cards_ui.get_child(random_card).find_child("Energy").find_child("Label").add_theme_color_override("font_color", Color.from_string("#88dc1c", Color.WHITE))
-		
-		print(cards_ui.get_child(random_card).name)
+	
 
 func _on_unplayed_button_pressed() -> void:
 	$UnplayedContainer.visible = true

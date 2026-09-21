@@ -55,6 +55,7 @@ func _on_fire_button_pressed() -> void:
 	audio.play()
 	
 	gm.match_amount -= 1
+	var is_stat_upgrade = true
 	
 	if get_parent().get_parent().get_parent().state == "cat":
 		if gm.current_cards_cat.erase(id):
@@ -66,7 +67,8 @@ func _on_fire_button_pressed() -> void:
 	tooltip_text = "Пустой слот \nдля карты"
 	icon.texture = load("res://assets/images/card_icons/attack_card_default.png")
 	
-	get_parent().get_parent().get_parent().get_parent().get_parent().draw_upgrade_stats(get_parent().get_parent().get_parent().state, rarity)
+	if not current_card.has_method("curse"):
+		get_parent().get_parent().get_parent().get_parent().get_parent().draw_upgrade_stats(get_parent().get_parent().get_parent().state, rarity)
 		
 	current_card = null
 	fire_button.disabled = true
