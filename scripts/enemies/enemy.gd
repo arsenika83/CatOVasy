@@ -686,30 +686,30 @@ func _on_deal_damage_timer_timeout() -> void:
 	
 	if current_target == get_parent().get_parent().giant:
 		if element == "might":
-			current_damage = int(current_damage * (1.0 - gm.might_resistance_cat))
+			current_damage = int(current_damage * (1.0 - gm.current_might_resistance_cat))
 		elif element == "fire":
-			current_damage = int(current_damage * (1.0 - gm.fire_resistance_cat))
+			current_damage = int(current_damage * (1.0 - gm.current_fire_resistance_cat))
 		elif element == "wind":
-			current_damage = int(current_damage * (1.0 - gm.wind_resistance_cat))
+			current_damage = int(current_damage * (1.0 - gm.current_wind_resistance_cat))
 		elif element == "luck":
-			current_damage = int(current_damage * (1.0 - gm.luck_resistance_cat))
+			current_damage = int(current_damage * (1.0 - gm.current_luck_resistance_cat))
 		elif element == "death":
-			current_damage = int(current_damage * (1.0 - gm.death_resistance_cat))
+			current_damage = int(current_damage * (1.0 - gm.current_death_resistance_cat))
 		elif element == "life":
-			current_damage = int(current_damage * (1.0 - gm.life_resistance_cat))
+			current_damage = int(current_damage * (1.0 - gm.current_life_resistance_cat))
 	elif current_target == get_parent().get_parent().human:
 		if element == "might":
-			current_damage = int(current_damage * (1.0 - gm.might_resistance_human))
+			current_damage = int(current_damage * (1.0 - gm.current_might_resistance_human))
 		elif element == "fire":
-			current_damage = int(current_damage * (1.0 - gm.fire_resistance_human))
+			current_damage = int(current_damage * (1.0 - gm.current_fire_resistance_human))
 		elif element == "wind":
-			current_damage = int(current_damage * (1.0 - gm.wind_resistance_human))
+			current_damage = int(current_damage * (1.0 - gm.current_wind_resistance_human))
 		elif element == "luck":
-			current_damage = int(current_damage * (1.0 - gm.luck_resistance_human))
+			current_damage = int(current_damage * (1.0 - gm.current_luck_resistance_human))
 		elif element == "death":
-			current_damage = int(current_damage * (1.0 - gm.death_resistance_human))
+			current_damage = int(current_damage * (1.0 - gm.current_death_resistance_human))
 		elif element == "life":
-			current_damage = int(current_damage * (1.0 - gm.life_resistance_human))
+			current_damage = int(current_damage * (1.0 - gm.current_life_resistance_human))
 	
 	if current_damage == 0:
 		get_parent().get_parent().log_messages.append(str("- [color=#1ca8fd]", enemy_name_rus, "[/color] атакует существо [color=#1ca8fd]", 

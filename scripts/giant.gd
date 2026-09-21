@@ -54,29 +54,8 @@ var poster_amount = 0
 
 var next_strike_lucky = false
 
-var has_debuff_weakness = false
-var has_debuff_undefend = false
-var has_debuff_inaccuracy = false
-var has_debuff_unluck = false
-var has_debuff_low_energy = false
-
-var turns_debuff_weakness = 0
-var turns_debuff_undefend = 0
-var turns_debuff_inaccuracy = 0
-var turns_debuff_unluck = 0
-var turns_debuff_low_energy = 0
-
-var has_buff_strength = false
-var has_buff_defend = false
-var has_buff_accuracy = false
-var has_buff_luck = false
-var has_buff_high_energy = false
-
-var turns_buff_strength = 0
-var turns_buff_defend = 0
-var turns_buff_accuracy = 0
-var turns_buff_luck = 0
-var turns_buff_high_energy = 0
+var current_buffs : Dictionary[String, Array]
+var current_debuffs : Dictionary[String, Array]
 
 var state = "battle"
 
@@ -321,66 +300,20 @@ func give_debuff(targets : Array[CharacterBody2D], type : String, power : int, t
 
 func turn_tick() -> void:
 	gm.current_defence_cat = 0
-	if has_debuff_weakness:
-		turns_debuff_weakness -= 1
-		if turns_debuff_weakness == 0:
-			gm.current_damage_cat = gm.damage_cat
-			has_debuff_weakness = false
+	
+	for buff in current_buffs:
+		var turns = current_buffs.get(buff).get(1)
+		current_buffs.get(buff).set(1, turns-1)
+		
+		if current_buffs.get(buff).get(1) == 0:
+			current_buffs.erase(buff)
 			
-	if has_debuff_undefend:
-		turns_debuff_undefend -= 1
-		if turns_debuff_undefend == 0:
-			gm.current_defence_cat = gm.defence_cat
-			has_debuff_undefend = false
-			
-	if has_debuff_inaccuracy:
-		turns_debuff_inaccuracy -= 1
-		if turns_debuff_inaccuracy == 0:
-			gm.current_accuracy_cat = gm.accuracy_cat
-			has_debuff_inaccuracy = false
-			
-	if has_debuff_unluck:
-		turns_debuff_unluck -= 1
-		if turns_debuff_unluck == 0:
-			gm.current_luck_cat = gm.luck_cat
-			has_debuff_unluck = false
-			
-	if has_debuff_low_energy:
-		turns_debuff_low_energy -= 1
-		if turns_debuff_low_energy == 0:
-			gm.energy_cat = gm.max_energy_cat
-			has_debuff_low_energy = false
-
-
-	if has_buff_strength:
-		turns_buff_strength -= 1
-		if turns_buff_strength == 0:
-			gm.current_damage_cat = gm.damage_cat
-			has_buff_strength = false
-			
-	if has_buff_defend:
-		turns_buff_defend -= 1
-		if turns_buff_defend == 0:
-			gm.current_defence_cat = gm.defence_cat
-			has_buff_defend = false
-			
-	if has_buff_accuracy:
-		turns_buff_accuracy -= 1
-		if turns_buff_accuracy == 0:
-			gm.current_accuracy_cat = gm.accuracy_cat
-			has_buff_accuracy = false
-			
-	if has_buff_luck:
-		turns_buff_luck -= 1
-		if turns_buff_luck == 0:
-			gm.current_luck_cat = gm.luck_cat
-			has_buff_luck = false
-			
-	if has_buff_high_energy:
-		turns_buff_high_energy -= 1
-		if turns_buff_high_energy == 0:
-			gm.energy_cat = gm.max_energy_cat
-			has_buff_high_energy = false
+	for debuff in current_debuffs:
+		var turns = current_debuffs.get(debuff).get(1)
+		current_debuffs.get(debuff).set(1, turns-1)
+		
+		if current_debuffs.get(debuff).get(1) == 0:
+			current_debuffs.erase(debuff)	
 
 func check_fall(delta: float) -> void:
 	if gm.state == "falling":

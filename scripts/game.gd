@@ -390,6 +390,23 @@ func end_battle() -> void:
 	gm.current_luck_human = gm.luck_human
 	gm.energy_human = gm.max_energy_human
 	
+	gm.current_might_resistance_cat = gm.might_resistance_cat
+	gm.current_wind_resistance_cat = gm.wind_resistance_cat
+	gm.current_fire_resistance_cat = gm.fire_resistance_cat
+	gm.current_luck_resistance_cat = gm.luck_resistance_cat
+	gm.current_unluck_resistance_cat = gm.unluck_resistance_cat
+	gm.current_death_resistance_cat = gm.death_resistance_cat
+	gm.current_life_resistance_cat = gm.life_resistance_cat
+	gm.current_inaccuracy_resistance_cat = gm.inaccuracy_resistance_cat
+	
+	gm.current_might_resistance_human = gm.might_resistance_human
+	gm.current_wind_resistance_human = gm.wind_resistance_human
+	gm.current_fire_resistance_human = gm.fire_resistance_human
+	gm.current_luck_resistance_human = gm.luck_resistance_human
+	gm.current_unluck_resistance_human = gm.unluck_resistance_human
+	gm.current_death_resistance_human = gm.death_resistance_human
+	gm.current_life_resistance_human = gm.life_resistance_human
+	gm.current_inaccuracy_resistance_human = gm.inaccuracy_resistance_human
 	
 	update_inventory()
 	#$EnemyMoveTimer.start()

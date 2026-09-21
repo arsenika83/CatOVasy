@@ -53,29 +53,8 @@ var is_self_damage = false
 
 var next_strike_lucky = false
 
-var has_debuff_weakness = false
-var has_debuff_undefend = false
-var has_debuff_inaccuracy = false
-var has_debuff_unluck = false
-var has_debuff_low_energy = false
-
-var turns_debuff_weakness = 0
-var turns_debuff_undefend = 0
-var turns_debuff_inaccuracy = 0
-var turns_debuff_unluck = 0
-var turns_debuff_low_energy = 0
-
-var has_buff_strength = false
-var has_buff_defend = false
-var has_buff_accuracy = false
-var has_buff_luck = false
-var has_buff_high_energy = false
-
-var turns_buff_strength = 0
-var turns_buff_defend = 0
-var turns_buff_accuracy = 0
-var turns_buff_luck = 0
-var turns_buff_high_energy = 0
+var current_buffs : Dictionary[String, Array]
+var current_debuffs : Dictionary[String, Array]
 
 func _ready() -> void:
 	sprite.play("battle")
@@ -420,66 +399,28 @@ func display_damage(dmg) -> void:
 
 func turn_tick() -> void:
 	gm.current_defence_human = 0
-	if has_debuff_weakness:
-		turns_debuff_weakness -= 1
-		if turns_debuff_weakness == 0:
-			gm.current_damage_human = gm.damage_human
-			has_debuff_weakness = false
+	for buff in current_buffs:
+		var turns = current_buffs.get(buff).get(1)
+		current_buffs.get(buff).set(1, turns-1)
+		
+		if current_buffs.get(buff).get(1) == 0:
+			current_buffs.erase(buff)
+	
+	if current_buffs.get("strength") == null:
+		gm.current_damage_human = gm.damage_human
+	if current_buffs.get("luck") == null:
+		gm.current_luck_human = gm.luck_human
+	if current_buffs.get("accuracy") == null:
+		gm.current_luck_human = gm.luck_human
+	if current_buffs.get("accuracy") == null:
+		gm.current_luck_human = gm.luck_human		
 			
-	if has_debuff_undefend:
-		turns_debuff_undefend -= 1
-		if turns_debuff_undefend == 0:
-			gm.current_defence_human = gm.defence_human
-			has_debuff_undefend = false
-			
-	if has_debuff_inaccuracy:
-		turns_debuff_inaccuracy -= 1
-		if turns_debuff_inaccuracy == 0:
-			gm.current_accuracy_human = gm.accuracy_human
-			has_debuff_inaccuracy = false
-			
-	if has_debuff_unluck:
-		turns_debuff_unluck -= 1
-		if turns_debuff_unluck == 0:
-			gm.current_luck_human = gm.luck_human
-			has_debuff_unluck = false
-			
-	if has_debuff_low_energy:
-		turns_debuff_low_energy -= 1
-		if turns_debuff_low_energy == 0:
-			gm.energy_human = gm.max_energy_human
-			has_debuff_low_energy = false
-
-
-	if has_buff_strength:
-		turns_buff_strength -= 1
-		if turns_buff_strength == 0:
-			gm.current_damage_human = gm.damage_human
-			has_buff_strength = false
-			
-	if has_buff_defend:
-		turns_buff_defend -= 1
-		if turns_buff_defend == 0:
-			gm.current_defence_human = gm.defence_human
-			has_buff_defend = false
-			
-	if has_buff_accuracy:
-		turns_buff_accuracy -= 1
-		if turns_buff_accuracy == 0:
-			gm.current_accuracy_human = gm.accuracy_human
-			has_buff_accuracy = false
-			
-	if has_buff_luck:
-		turns_buff_luck -= 1
-		if turns_buff_luck == 0:
-			gm.current_luck_human = gm.luck_human
-			has_buff_luck = false
-			
-	if has_buff_high_energy:
-		turns_buff_high_energy -= 1
-		if turns_buff_high_energy == 0:
-			gm.energy_human = gm.max_energy_human
-			has_buff_high_energy = false
+	for debuff in current_debuffs:
+		var turns = current_debuffs.get(debuff).get(1)
+		current_debuffs.get(debuff).set(1, turns-1)
+		
+		if current_debuffs.get(debuff).get(1) == 0:
+			current_debuffs.erase(debuff)		
 
 func create_fog() -> void:
 	get_parent().fog_fx.visible = true
@@ -739,17 +680,17 @@ func _on_deal_damage_timer_timeout() -> void:
 		else:
 			if gm.current_card != null:
 				if gm.current_card.element == "might":
-					gm.current_damage_human = int(gm.current_damage_human * (1.0 - gm.might_resistance_human))
+					gm.current_damage_human = int(gm.current_damage_human * (1.0 - gm.current_might_resistance_human))
 				elif gm.current_card.element == "fire":
-					gm.current_damage_human = int(gm.current_damage_human * (1.0 - gm.fire_resistance_human))
+					gm.current_damage_human = int(gm.current_damage_human * (1.0 - gm.current_fire_resistance_human))
 				elif gm.current_card.element == "wind":
-					gm.current_damage_human = int(gm.current_damage_human * (1.0 - gm.wind_resistance_human))
+					gm.current_damage_human = int(gm.current_damage_human * (1.0 - gm.current_wind_resistance_human))
 				elif gm.current_card.element == "luck":
-					gm.current_damage_human = int(gm.current_damage_human * (1.0 - gm.luck_resistance_human))
+					gm.current_damage_human = int(gm.current_damage_human * (1.0 - gm.current_luck_resistance_human))
 				elif gm.current_card.element == "death":
-					gm.current_damage_human = int(gm.current_damage_human * (1.0 - gm.death_resistance_human))
+					gm.current_damage_human = int(gm.current_damage_human * (1.0 - gm.current_death_resistance_human))
 				elif gm.current_card.element == "life":
-					gm.current_damage_human = int(gm.current_damage_human * (1.0 - gm.life_resistance_human))	
+					gm.current_damage_human = int(gm.current_damage_human * (1.0 - gm.current_life_resistance_human))	
 
 		if gm.current_damage_human == 0:
 			get_parent().log_messages.append(str("- [color=#1ca8fd]Соля[/color] атакует существо [color=#1ca8fd]", 

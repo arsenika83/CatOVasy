@@ -68,6 +68,14 @@ var luck_resistance_cat: float = 0.0
 var unluck_resistance_cat: float = 0.0
 var inaccuracy_resistance_cat: float = 0.0
 
+var current_might_resistance_cat: float = 0.5
+var current_fire_resistance_cat: float = 0
+var current_wind_resistance_cat: float = 0.0
+var current_death_resistance_cat: float = 0
+var current_life_resistance_cat: float = 0
+var current_luck_resistance_cat: float = 0.0
+var current_unluck_resistance_cat: float = 0.0
+var current_inaccuracy_resistance_cat: float = 0.0
 #==============================================================================================
 var battle_x_human : int
 var battle_y_human : int
@@ -115,6 +123,15 @@ var life_resistance_human: float = 0
 var luck_resistance_human: float = 0.0
 var unluck_resistance_human: float = 0.0
 var inaccuracy_resistance_human: float = 0.0
+
+var current_fire_resistance_human: float = 0.25
+var current_wind_resistance_human: float = 0.0
+var current_might_resistance_human: float = 0.0
+var current_death_resistance_human: float = 0
+var current_life_resistance_human: float = 0
+var current_luck_resistance_human: float = 0.0
+var current_unluck_resistance_human: float = 0.0
+var current_inaccuracy_resistance_human: float = 0.0
 #============================================================================
 
 var current_cards_cat: Dictionary[int, Card]
