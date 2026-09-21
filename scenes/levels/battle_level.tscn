@@ -32,6 +32,7 @@
 [ext_resource type="PackedScene" uid="uid://dvjdgdd0vjil4" path="res://scenes/fx/fog_summon.tscn" id="17_m7lo1"]
 [ext_resource type="PackedScene" uid="uid://derr777d63a58" path="res://scenes/fx/sun.tscn" id="18_xn8yx"]
 [ext_resource type="PackedScene" uid="uid://6vs2qmfipgw8" path="res://scenes/fx/ignite_fx.tscn" id="19_q5ox2"]
+[ext_resource type="PackedScene" uid="uid://dx7md5aany4ph" path="res://scenes/fx/armageddon_fx.tscn" id="20_t4r8s"]
 [ext_resource type="PackedScene" uid="uid://cuybslgtoc70m" path="res://scenes/ui/energy_human.tscn" id="20_xxxag"]
 [ext_resource type="PackedScene" uid="uid://c7lkcfyxh5uff" path="res://scenes/ui/card_container_human.tscn" id="21_5qqwm"]
 [ext_resource type="Shader" uid="uid://dwaf44tsm3ri3" path="res://shaders/fog.gdshader" id="22_3tvrp"]
@@ -308,6 +309,10 @@ position = Vector2(160, -48)
 [node name="IgniteFX" parent="FX" unique_id=1806312279 instance=ExtResource("19_q5ox2")]
 z_index = 100
 position = Vector2(-48, -40)
+
+[node name="ArmageddonFX" parent="FX" unique_id=1026751608 instance=ExtResource("20_t4r8s")]
+z_index = 100
+position = Vector2(176, -32)
 
 [node name="AudioStreamPlayerMusic" type="AudioStreamPlayer" parent="." unique_id=179520262]
 stream = ExtResource("8_ymw5c")

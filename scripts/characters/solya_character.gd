@@ -85,8 +85,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	check_fall(delta)
 	check_hp()
-	print(gm.prev_state_human)
-	print(gm.state_human)
+	#print(gm.prev_state_human)
+	#print(gm.state_human)
 	
 	if gm.current_defence_human > 0 and gm.state_human != "dead":
 		defence_sprite.visible = true
