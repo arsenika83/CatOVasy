@@ -55,14 +55,16 @@ var won = false
 var defeated = false
 
 var current_selected_card: Control = null
-var current_creature_turn = -2
+var current_creature_turn: CharacterBody2D
 
 var boomerang_projectile
 
 var enemy_positions : Array[Vector2] = [Vector2(208, 112), Vector2(208, 80), Vector2(208, 144), \
 Vector2(240, 112), Vector2(240, 80), Vector2(240, 144),
 Vector2(208, 176), Vector2(208, 48), Vector2(240, 176), Vector2(240, 48)]
-var current_enemies : Array
+var current_enemies : Array[CharacterBody2D]
+var creatures : Array[CharacterBody2D]
+var turn_speed_line : Array[CharacterBody2D]
 var team_positions : Array[String] = ["cat", "human"]
 
 func _ready() -> void:
@@ -75,7 +77,7 @@ func _ready() -> void:
 	player_camera.zoom.y = gm.camera_zoom
 	human.sprite.flip_h = false
 	init()
-	end_turn()
+	$EndTurnTimer.start(1)
 	
 	log_book.text.text += log_messages[0]
 	
@@ -119,7 +121,7 @@ func _process(delta: float) -> void:
 			check_creature_stats()
 		
 	if Input.is_action_just_pressed("ui_lmb"):
-		if current_creature_turn == -2:
+		if current_creature_turn == human:
 			if gm.current_card != null and gm.state_human == "battle":
 				match gm.current_card.type:
 					"attack":
@@ -130,7 +132,7 @@ func _process(delta: float) -> void:
 						choose_target("buff")
 					"debuff":
 						choose_target("debuff")
-		elif current_creature_turn == -1:
+		elif current_creature_turn == giant:
 			if gm.current_card != null and gm.state == "battle":
 				match gm.current_card.type:
 					"attack":
@@ -196,6 +198,14 @@ func init() -> void:
 		enemy.enemy_name_rus = str(enemy.enemy_name_rus, "(", enemy_count + 1, ")")
 		enemy_count += 1
 		#enemy.hp_bar.visible = true
+	
+	creatures.assign(current_enemies)	
+	creatures.append(human)
+	creatures.append(giant)
+	
+	turn_speed_line.assign(creatures)
+	turn_speed_line.sort_custom(func(a, b) : return a.current_speed > b.current_speed)
+	current_creature_turn = turn_speed_line[0]
 
 func win() -> void:
 	pass
@@ -252,8 +262,8 @@ func draw_cursor() -> void:
 		enemy.cursor.icon2.visible = false
 		#enemy.sprite.material.set_shader_parameter("is_hovered", false)
 	
-	if current_creature_turn >= 0:
-		return
+	#if current_creature_turn >= 0:
+		#return
 	
 	var cursor_grid_pos = map.local_to_map(get_global_mouse_position())
 	var target_local_pos = map.map_to_local(cursor_grid_pos)
@@ -365,10 +375,10 @@ func draw_cursor() -> void:
 		
 func choose_target(action : String) -> void:
 	var current_energy = 0
-	if current_creature_turn == -2:
+	if current_creature_turn == human:
 		current_energy = gm.current_energy_human
 		
-	elif current_creature_turn == -1:
+	elif current_creature_turn == giant:
 		current_energy = gm.current_energy_cat
 	
 	if gm.current_card != null and gm.current_card.energy_cost <= current_energy:
@@ -447,7 +457,7 @@ func choose_target(action : String) -> void:
 						
 						match action:
 							"deal_damage":
-								if current_creature_turn == -2:
+								if current_creature_turn == human:
 									source = human
 									gm.prev_state_human = gm.state_human
 									gm.state_human = "playing_a_card"
@@ -471,7 +481,7 @@ func choose_target(action : String) -> void:
 									tween2.tween_property($FX/TomatoCrossProjectile, "scale", Vector2(0, 0), 1.5)
 									
 							"debuff":
-								if current_creature_turn == -2:
+								if current_creature_turn == human:
 									source = human
 									gm.prev_state_human = gm.state_human
 									gm.state_human = "playing_a_card"
@@ -487,7 +497,7 @@ func choose_target(action : String) -> void:
 		if gm.battle_x_cat == cursor_grid_pos.x and gm.battle_y_cat == cursor_grid_pos.y or gm.battle_x_human == cursor_grid_pos.x and gm.battle_y_human == cursor_grid_pos.y:
 			match action:
 				"defend":
-					if current_creature_turn == -2:
+					if current_creature_turn == human:
 						source = human
 						gm.prev_state_human = gm.state_human
 						gm.state_human = "playing_a_card"
@@ -498,7 +508,7 @@ func choose_target(action : String) -> void:
 					
 					gm.current_card.card_played.emit(gm.current_card)
 				"buff":
-					if current_creature_turn == -2:
+					if current_creature_turn == human:
 						source = human
 						gm.prev_state_human = gm.state_human
 						gm.state_human = "playing_a_card"
@@ -512,14 +522,10 @@ func choose_target(action : String) -> void:
 		card_container_cat.remind_no_energy_for_current_card()
 				
 func enemy_turn() -> void:
-	if current_creature_turn == -1 or current_creature_turn == -2:
+	if current_creature_turn == giant or current_creature_turn == human:
 		return
 		
-	var source = current_enemies.get(current_creature_turn)
-	
-	if source.current_energy == 0:
-		end_turn()
-		return
+	var source = current_creature_turn
 	
 	if not source.state == "dead":
 		source.my_turn.visible = true
@@ -564,18 +570,19 @@ func enemy_turn() -> void:
 				var power = source.buff_set.get(type_number).get(1)
 				var turns = source.buff_set.get(type_number).get(2)
 				source.give_buff(target, type, power, turns)
+		current_creature_turn.current_energy -= 1		
 		return
 	else:
+		progress_turn()
 		end_turn()
 
 func end_turn() -> void:
-	if current_creature_turn == -2: #СОЛЯ
-		
+	if current_creature_turn == human: #СОЛЯ
 		for enemy in current_enemies:
 			enemy.my_turn.visible = false
-			
-		var camera_tween = create_tween()
-		camera_tween.tween_property(player_camera, "position:x", 128, 0.2)
+		
+		if gm.state_human == "dead":
+			progress_turn()
 		
 		giant.my_turn.visible = false
 		human.my_turn.visible = true
@@ -584,21 +591,26 @@ func end_turn() -> void:
 		card_container_human.visible = true
 		$UI/EnergyHuman.visible = true
 		
+		var camera_tween = create_tween()
+		camera_tween.tween_property(player_camera, "position:x", 128, 0.2)
+		
 		if gm.current_energy_human == -1000:
 			gm.current_energy_human = 0
+			progress_turn()
 			
-			if gm.state != "dead":
-				if gm.current_energy_cat < gm.energy_cat:
-					gm.current_energy_cat = gm.energy_cat
-				current_creature_turn = -1
-			else:
-				current_creature_turn = 0	
-			end_turn()
-		else:
-			draw_turn_label("player")	
-			
-	elif current_creature_turn == -1: #КОТ
+			if current_creature_turn == giant:
+				$EndTurnTimer.start(0.1)
+			else:	
+				$EndTurnTimer.start(0.5)
 		
+		elif gm.current_energy_human <= 0:
+			gm.current_energy_human = gm.energy_human	
+			
+	elif current_creature_turn == giant: #КОТ
+		if gm.state == "dead":
+			progress_turn()
+			end_turn()
+			
 		var cam_tween = create_tween()
 		cam_tween.tween_property(player_camera, "position:x", 144, 0.2)
 		
@@ -609,9 +621,11 @@ func end_turn() -> void:
 		card_container_human.visible = false
 		$UI/EnergyHuman.visible = false
 		
+		
 		if gm.current_energy_cat == -1000:
 			gm.current_energy_cat = 0
-			current_creature_turn += 1
+			
+			progress_turn()
 			
 			if gm.has_rocky and not battle_ended:
 				var targets: Array[CharacterBody2D]
@@ -643,6 +657,11 @@ func end_turn() -> void:
 				
 				var tween2 = create_tween()
 				tween2.tween_property($FX/Rocky, "scale", Vector2(0, 0), 2)
+				
+				if current_creature_turn != human:
+					$EndTurnTimer.start(1)
+				else:	
+					$EndTurnTimer.start()
 			
 			var camera_tween = create_tween()
 			camera_tween.tween_property(player_camera, "position:x", 192, 0.2)
@@ -653,44 +672,44 @@ func end_turn() -> void:
 			$UI/EnergyHuman.visible = false
 			giant.my_turn.visible = false
 			
-			draw_turn_label("enemy")
-			$EndTurnTimer.start()
-			
-			for e in current_enemies:
-				e.turn_tick()
+		elif gm.current_energy_cat <= 0:
+			gm.current_energy_cat = gm.energy_cat
 	else:
 		for enemy in current_enemies:
 			enemy.my_turn.visible = false
-		
-		current_enemies.get(current_creature_turn).current_energy -= 1
 	
-		if current_enemies.get(current_creature_turn).current_energy <= 0:
-			current_enemies.get(current_creature_turn).current_energy = 0
+		if current_creature_turn.current_energy <= 0:
+			current_creature_turn.current_energy = 0
 			
-			current_creature_turn += 1
+			progress_turn()
+			$EndTurnTimer.start(0.5)
+			return
 			
-			if current_creature_turn == current_enemies.size():
-				turn_count += 1
-				log_messages.append(str("\n[center]>>> ХОД ", turn_count, " <<<[/center]\n"))
-				
-				if gm.state_human != "dead":
-					gm.current_energy_human = gm.energy_human
-					current_creature_turn = -2
-				else:
-					gm.current_energy_cat = gm.energy_cat
-					current_creature_turn = -1	
-				giant.turn_tick()
-				human.turn_tick()
-				
-				if gm.has_regen_ring: #КОЛЬЦО РЕГЕНЕРАЦИИ
-					giant.heal(2)
-				
-				for e in current_enemies:
-					e.current_energy = e.energy
-					
-				end_turn()
-				return	
 		enemy_turn()
+
+func progress_turn():
+	turn_speed_line.remove_at(0)
+	if turn_speed_line.size() == 0:
+		draw_turn_label("player")
+		
+		turn_speed_line.assign(creatures)
+		turn_speed_line.sort_custom(func(a, b) : return a.current_speed > b.current_speed)
+		
+		current_creature_turn = turn_speed_line[0]
+		
+		turn_count += 1
+		log_messages.append(str("\n[center]>>> ХОД ", turn_count, " <<<[/center]\n"))
+				
+		if gm.has_regen_ring: #КОЛЬЦО РЕГЕНЕРАЦИИ
+			giant.heal(2)
+				
+		for e in current_enemies:
+			e.turn_tick()
+			e.current_energy = e.energy
+			
+		$EndTurnTimer.start()
+	else:
+		current_creature_turn = turn_speed_line[0]	
 
 func check_creature_stats() -> void:
 	var cursor_grid_pos = map.local_to_map(get_global_mouse_position())
@@ -1256,4 +1275,4 @@ func _on_win_timer_timeout() -> void:
 
 
 func _on_end_turn_timer_timeout() -> void:
-	enemy_turn()
+	end_turn()

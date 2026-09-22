@@ -25,6 +25,9 @@ var current_accuracy = accuracy
 @export var luck = 15
 var current_luck = luck
 
+@export var speed = 90
+var current_speed = speed
+
 var energy = 1
 var current_energy = energy
 var max_energy = 1

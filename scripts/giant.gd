@@ -59,6 +59,9 @@ var current_accuracy = accuracy
 var luck = 15
 var current_luck = luck
 
+var speed = 60
+var current_speed = speed
+
 var energy = 1
 var current_energy = energy
 var max_energy = 1
@@ -566,6 +569,8 @@ func _on_take_damage_timer_timeout() -> void:
 		sprite.play("dead")
 
 func _on_idle_animation_timer_timeout() -> void:
+	if gm.prev_state == "playing_a_card" or gm.prev_state == "taking_damage":
+		gm.prev_state = "battle"
 	gm.state = gm.prev_state
 	sprite.play(gm.state)
 

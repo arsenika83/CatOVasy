@@ -242,6 +242,7 @@ is_leader = true
 
 [node name="Enemy2" parent="Enemies" unique_id=2106804459 instance=ExtResource("14_m6lg1")]
 position = Vector2(80, 16)
+speed = 80
 
 [node name="Enemy3" parent="Enemies" unique_id=956625573 instance=ExtResource("14_m6lg1")]
 position = Vector2(144, 80)

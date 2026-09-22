@@ -52,6 +52,9 @@ var min_luck_cat: int = -100
 var max_luck_cat: int = 100
 var current_luck_cat: int = luck_cat
 
+var speed_cat: int = 60
+var current_speed_cat = speed_cat
+
 var energy_cat: int = 3
 var current_energy_cat: int = energy_cat
 var max_energy_cat: int = 3
@@ -101,6 +104,9 @@ var luck_human: int = 15
 var min_luck_human: int = -100
 var max_luck_human: int = 100
 var current_luck_human: int = luck_human
+
+var speed_human: int = 70
+var current_speed_human = speed_human
 
 var energy_human: int = 2
 var current_energy_human: int = energy_human

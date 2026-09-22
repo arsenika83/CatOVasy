@@ -59,6 +59,9 @@ var current_accuracy = accuracy
 var luck = 15
 var current_luck = luck
 
+var speed = 70
+var current_speed = speed
+
 var energy = 1
 var current_energy = energy
 var max_energy = 1
@@ -138,7 +141,6 @@ func _ready() -> void:
 	current_luck_resistance = luck_resistance
 	current_unluck_resistance = unluck_resistance
 	current_inaccuracy_resistance = inaccuracy_resistance
-
 
 
 func _process(delta: float) -> void:
@@ -635,15 +637,20 @@ func _on_take_damage_timer_timeout() -> void:
 	else:
 		if get_parent().name == "Battle":
 			get_parent().log_messages.append(str("- [color=#1ca8fd]", character_name_display, "[/color] [color=#fc4e52]МЕРТВА[/color]\n"))
-			if get_parent().current_creature_turn == -2:
+			if get_parent().current_creature_turn == get_parent().human:
 				gm.current_energy_human = -1000
+				get_parent().progress_turn()
 				get_parent().end_turn()
 			
 		audio_fall.play()
 		sprite.play("dead")
 
 func _on_idle_animation_timer_timeout() -> void:
+	if gm.prev_state_human == "playing_a_card" or gm.prev_state_human == "taking_damage":
+		gm.prev_state_human = "battle"
+	
 	gm.state_human = gm.prev_state_human
+	
 	sprite.play(gm.state_human)
 	sprite.flip_h = false
 	#get_parent().fire_fx.visible = true
