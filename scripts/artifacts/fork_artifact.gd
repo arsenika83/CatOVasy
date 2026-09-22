@@ -5,7 +5,7 @@ var rarity = "common"
 var complect = ""
 var path = "fork"
 var artifact_name = "РЖАВАЯ ВИЛКА"
-var artifact_description = "ВСЕ ваши атаки наносят урон врагу позади цели"
+var artifact_description = "ВСЕ ваши атаки наносят урон врагу позади цели. Улучшает карты элемента Еда"
 var artifact_commentary = "\"За компанию!\""
 
 func _ready() -> void:

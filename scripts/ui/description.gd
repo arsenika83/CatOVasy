@@ -14,6 +14,7 @@ extends TextureRect
 @onready var unluck_icon = preload("res://assets/images/elements/unluck_element.png") 
 @onready var inaccuracy_icon = preload("res://assets/images/elements/inaccuracy_element.png")
 @onready var energy_icon = preload("res://assets/images/elements/energy_element.png") 
+@onready var food_icon = preload("res://assets/images/elements/food_element.png") 
 
 func _ready() -> void:
 	pass # Replace with function body.
@@ -54,5 +55,8 @@ func get_element():
 			icon.texture = inaccuracy_icon	
 		"energy":
 			element.text = "ЭНЕРГИЯ"
-			icon.texture = energy_icon			
+			icon.texture = energy_icon
+		"food":
+			element.text = "ЕДА"
+			icon.texture = food_icon
 			

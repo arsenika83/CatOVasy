@@ -65,30 +65,6 @@ var is_hit_lucky = false
 var is_hit_unlucky = false
 var dealt_damage_to_human = false
 
-var has_debuff_weakness = false
-var has_debuff_undefend = false
-var has_debuff_inaccuracy = false
-var has_debuff_unluck = false
-var has_debuff_low_energy = false
-
-var turns_debuff_weakness = 0
-var turns_debuff_undefend = 0
-var turns_debuff_inaccuracy = 0
-var turns_debuff_unluck = 0
-var turns_debuff_low_energy = 0
-
-var has_buff_strength = false
-var has_buff_defend = false
-var has_buff_accuracy = false
-var has_buff_luck = false
-var has_buff_high_energy = false
-
-var turns_buff_strength = 0
-var turns_buff_defend = 0
-var turns_buff_accuracy = 0
-var turns_buff_luck = 0
-var turns_buff_high_energy = 0
-
 @export var fire_resistance: float = 0
 @export var wind_resistance: float = 0
 @export var might_resistance: float = 0
@@ -428,37 +404,6 @@ func give_debuff(target : CharacterBody2D, type : String, power : int, turns : i
 	tween.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
 	current_target.status_fx.play("debuff_" + type)
 	
-	match type:
-		"weakness":
-			current_target.has_debuff_weakness = true
-			current_target.turns_debuff_weakness += turns
-			gm.current_damage -= power
-			if gm.current_damage < gm.min_damage:
-				gm.current_damage = gm.min_damage
-		"undefend":
-			current_target.has_debuff_undefend = true
-			current_target.turns_debuff_undefend += turns
-			gm.current_defence -= power
-			if gm.current_defence < 0:
-				gm.current_defence = 0
-		"inaccuracy":
-			current_target.has_debuff_inaccuracy = true
-			current_target.turns_debuff_inaccuracy += turns
-			gm.current_accuracy -= power
-			if gm.current_accuracy < gm.min_accuracy:
-				gm.current_accuracy = gm.min_accuracy
-		"unluck":
-			current_target.has_debuff_unluck = true
-			current_target.turns_debuff_unluck += turns
-			gm.current_luck -= power
-			if gm.current_luck < gm.min_luck:
-				gm.current_luck = gm.min_luck
-		"low_energy":
-			current_target.has_debuff_low_energy = true
-			current_target.turns_debuff_low_energy += turns
-			gm.energy -= power
-			if gm.energy < 0:
-				gm.energy = 0
 	
 	status_fx.visible = true
 	var tween3 = create_tween()
@@ -476,35 +421,6 @@ func give_buff(target : CharacterBody2D, type : String, power : int, turns : int
 	tween.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
 	current_target.status_fx.play("buff_" + type)
 	
-	match type:
-		"strength":
-			current_target.has_buff_strength = true
-			current_target.turns_buff_strength += turns
-			current_target.current_damage += power
-			current_target.damage += power
-		"defend":
-			current_target.has_buff_defend = true
-			current_target.turns_buff_defend += turns
-			current_target.current_defence += power
-			if current_target.current_defence <= 0:
-				current_target.current_defence = 0
-		"accuracy":
-			current_target.has_buff_accuracy = true
-			current_target.turns_buff_accuracy += turns
-			current_target.current_accuracy += power
-			if current_target.current_accuracy > 100:
-				current_target.current_accuracy = 100
-		"luck":
-			current_target.has_buff_luck = true
-			current_target.turns_buff_luck += turns
-			current_target.current_luck += power
-			if current_target.current_luck > 100:
-				current_target.current_luck = 100
-		"high_energy":
-			current_target.has_buff_high_energy = true
-			current_target.turns_buff_high_energy += turns
-			current_target.energy += power
-	
 	status_fx.visible = true
 	var tween3 = create_tween()
 	tween3.tween_property(current_target.status_fx, "scale", Vector2(1, 1), 0.2)
@@ -521,66 +437,6 @@ func display_damage(dmg) -> void:
 	
 func turn_tick() -> void:
 	current_defence = 0
-	if has_debuff_weakness:
-		turns_debuff_weakness -= 1
-		if turns_debuff_weakness == 0:
-			current_damage = max_damage
-			has_debuff_weakness = false
-			
-	if has_debuff_undefend:
-		turns_debuff_undefend -= 1
-		if turns_debuff_undefend == 0:
-			current_defence = defence
-			has_debuff_undefend = false
-			
-	if has_debuff_inaccuracy:
-		turns_debuff_inaccuracy -= 1
-		if turns_debuff_inaccuracy == 0:
-			current_accuracy = accuracy
-			has_debuff_inaccuracy = false
-			
-	if has_debuff_unluck:
-		turns_debuff_unluck -= 1
-		if turns_debuff_unluck == 0:
-			current_luck = luck
-			has_debuff_unluck = false
-			
-	if has_debuff_low_energy:
-		turns_debuff_low_energy -= 1
-		if turns_debuff_low_energy == 0:
-			energy = max_energy
-			has_debuff_low_energy = false
-
-
-	if has_buff_strength:
-		turns_buff_strength -= 1
-		if turns_buff_strength == 0:
-			current_damage = max_damage
-			has_buff_strength = false
-			
-	if has_buff_defend:
-		turns_buff_defend -= 1
-		if turns_buff_defend == 0:
-			current_defence = defence
-			has_buff_defend = false
-			
-	if has_buff_accuracy:
-		turns_buff_accuracy -= 1
-		if turns_buff_accuracy == 0:
-			current_accuracy = accuracy
-			has_buff_accuracy = false
-			
-	if has_buff_luck:
-		turns_buff_luck -= 1
-		if turns_buff_luck == 0:
-			current_luck = luck
-			has_buff_luck = false
-			
-	if has_buff_high_energy:
-		turns_buff_high_energy -= 1
-		if turns_buff_high_energy == 0:
-			energy = max_energy
-			has_buff_high_energy = false
 
 func die() -> void:
 		audio_fall.play()

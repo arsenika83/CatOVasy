@@ -9,7 +9,7 @@ var card_description = settings.card_text_cat.get("shashlyck_desc")
 var rarity = "common"
 
 func _ready() -> void:
-	element = "might"
+	element = "food"
 	description_rect.scale = Vector2(1, 0)
 	description_label.text = card_description
 	
@@ -24,3 +24,10 @@ func _process(delta: float) -> void:
 		$Energy/Label.add_theme_color_override("font_color", Color(0.98, 0.077, 0.078))
 	else:
 		$Energy/Label.add_theme_color_override("font_color", Color.WHITE)
+		
+func on_after_play() -> void:
+	var heal_amount = gm.current_targets.size()
+	
+	if gm.has_fork:
+		heal_amount *= damage
+	get_parent().get_parent().get_parent().get_parent().giant.heal(heal_amount)

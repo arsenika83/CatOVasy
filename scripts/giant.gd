@@ -42,15 +42,55 @@ var light_diff = 0.0001
 
 var xp_diff = 0
 
+var hp = 5
+var max_hp = hp
+
+var damage = 2
+var current_damage = damage
+var max_damage = damage
+
+var defence = 1
+var current_defence = 0
+var max_defence = 3
+
+var accuracy = 60
+var current_accuracy = accuracy
+
+var luck = 15
+var current_luck = luck
+
+var energy = 1
+var current_energy = energy
+var max_energy = 1
+
+var fire_resistance: float = 0
+var wind_resistance: float = 0
+var might_resistance: float = 0
+var death_resistance: float = 0
+var life_resistance: float = 0
+var luck_resistance: float = 0
+var unluck_resistance: float = 0
+var inaccuracy_resistance: float = 0
+
+var current_fire_resistance: float = 0
+var current_wind_resistance: float = 0
+var current_might_resistance: float = 0
+var current_death_resistance: float = 0
+var current_life_resistance: float = 0
+var current_luck_resistance: float = 0
+var current_unluck_resistance: float = 0
+var current_inaccuracy_resistance: float = 0
+
 var current_heal = 0
 var attack_count = 0
 var taken_damage = 0
 var last_damage_dealt = 0
+var poster_amount = 0
+var defended = false
 var is_hit_lucky = false
 var is_hit_unlucky = false
 var just_missed = false
-
-var poster_amount = 0
+var is_self_damage = false
 
 var next_strike_lucky = false
 
@@ -62,6 +102,45 @@ var state = "battle"
 func _ready() -> void:
 	scale = Vector2(0, 0)
 	spawn()
+	
+	hp = gm.hp_cat
+	max_hp = gm.max_hp_cat
+
+	damage = gm.damage_cat
+	current_damage = damage
+
+	defence = gm.defence_cat
+	current_defence = 0
+	max_defence = gm.max_defence_cat
+
+	accuracy = gm.accuracy_cat
+	current_accuracy = accuracy
+
+	luck = gm.luck_cat
+	current_luck = luck
+
+	energy = gm.energy_cat
+	current_energy = energy
+	max_energy = gm.max_energy_cat
+
+	fire_resistance = gm.fire_resistance_cat
+	wind_resistance = gm.wind_resistance_cat
+	might_resistance = gm.might_resistance_cat
+	death_resistance = gm.death_resistance_cat
+	life_resistance = gm.life_resistance_cat
+	luck_resistance = gm.luck_resistance_cat
+	unluck_resistance = gm.unluck_resistance_cat
+	inaccuracy_resistance = gm.inaccuracy_resistance_cat
+
+	current_fire_resistance = fire_resistance
+	current_wind_resistance = wind_resistance
+	current_might_resistance = might_resistance
+	current_death_resistance = death_resistance
+	current_life_resistance = life_resistance
+	current_luck_resistance = luck_resistance
+	current_unluck_resistance = unluck_resistance
+	current_inaccuracy_resistance = inaccuracy_resistance
+	
 
 func _process(delta: float) -> void:
 	light.energy -= light_diff
@@ -307,13 +386,58 @@ func turn_tick() -> void:
 		
 		if current_buffs.get(buff).get(1) == 0:
 			current_buffs.erase(buff)
+	
+	if current_buffs.get("strength") == null:
+		gm.current_damage_cat = gm.damage_cat
+	if current_buffs.get("luck") == null:
+		gm.current_luck_cat = gm.luck_cat
+	if current_buffs.get("accuracy") == null:
+		gm.current_luck_cat = gm.luck_cat
+	if current_buffs.get("fire_resistance") == null:
+		gm.current_fire_resistance_cat = gm.fire_resistance_cat
+	if current_buffs.get("wind_resistance") == null:
+		gm.current_wind_resistance_cat = gm.wind_resistance_cat
+	if current_buffs.get("luck_resistance") == null:
+		gm.current_luck_resistance_cat = gm.luck_resistance_cat
+	if current_buffs.get("unluck_resistance") == null:
+		gm.current_unluck_resistance_cat = gm.unluck_resistance_cat
+	if current_buffs.get("inaccuracy_resistance") == null:
+		gm.current_inaccuracy_resistance_cat = gm.inaccuracy_resistance_cat
+	if current_buffs.get("death_resistance") == null:
+		gm.current_death_resistance_cat = gm.death_resistance_cat
+	if current_buffs.get("life_resistance") == null:
+		gm.current_life_resistance_cat = gm.life_resistance_cat
 			
 	for debuff in current_debuffs:
 		var turns = current_debuffs.get(debuff).get(1)
 		current_debuffs.get(debuff).set(1, turns-1)
 		
 		if current_debuffs.get(debuff).get(1) == 0:
-			current_debuffs.erase(debuff)	
+			current_debuffs.erase(debuff)
+	
+	if current_debuffs.get("weakness") == null:
+		gm.current_damage_cat = gm.damage_cat
+	if current_debuffs.get("unluck") == null:
+		gm.current_luck_cat = gm.luck_cat
+	if current_debuffs.get("inaccuracy") == null:
+		gm.current_luck_cat = gm.luck_cat
+	if current_debuffs.get("fire_mark") == null:
+		gm.current_fire_resistance_cat = gm.fire_resistance_cat
+	if current_debuffs.get("wind_mark") == null:
+		gm.current_wind_resistance_cat = gm.wind_resistance_cat
+	if current_debuffs.get("luck_mark") == null:
+		gm.current_luck_resistance_cat = gm.luck_resistance_cat
+	if current_debuffs.get("unluck_mark") == null:
+		gm.current_unluck_resistance_cat = gm.unluck_resistance_cat
+	if current_debuffs.get("inaccuracy_mark") == null:
+		gm.current_inaccuracy_resistance_cat = gm.inaccuracy_resistance_cat
+	if current_debuffs.get("death_mark") == null:
+		gm.current_death_resistance_cat = gm.death_resistance_cat
+	if current_debuffs.get("life_mark") == null:
+		gm.current_life_resistance_cat = gm.life_resistance_cat
+	if current_debuffs.get("laziness") == null:
+		gm.current_energy_cat = gm.energy_cat
+
 
 func check_fall(delta: float) -> void:
 	if gm.state == "falling":

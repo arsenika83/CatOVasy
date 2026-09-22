@@ -16,7 +16,8 @@ extends Control
 @onready var accuracy_icon = preload("res://assets/images/elements/accuracy_element.png")
 @onready var unluck_icon = preload("res://assets/images/elements/unluck_element.png") 
 @onready var inaccuracy_icon = preload("res://assets/images/elements/inaccuracy_element.png")
-@onready var energy_icon = preload("res://assets/images/elements/energy_element.png") 
+@onready var energy_icon = preload("res://assets/images/elements/energy_element.png")
+@onready var food_icon = preload("res://assets/images/elements/food_element.png") 
 
 var element = "might"
 
@@ -61,3 +62,6 @@ func get_element():
 		"energy":
 			element_label.text = "ЭНЕРГИЯ"
 			element_icon.texture = energy_icon
+		"food":
+			element_label.text = "ЕДА"
+			element_icon.texture = food_icon	

@@ -10,7 +10,7 @@ var rarity = "unbelievable"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	element = "might"
+	element = "food"
 	shake = 0.3
 	description_rect.scale = Vector2(1, 0)
 	description_label.text = card_description

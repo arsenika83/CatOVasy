@@ -740,7 +740,7 @@ func check_creature_stats() -> void:
 		creature_check_dialog.find_child("NameLabel").text = "Котик"
 					
 		var stats =   str("", gm.hp_cat, "/", gm.max_hp_cat)
-		stats += 	str("\n", gm.current_damage_cat)
+		stats += 	str("\n", giant.current_damage)
 		stats += 	str("\n", gm.current_defence_cat, "/", gm.max_defence_cat)
 		stats += 	str("\n", gm.current_accuracy_cat, "%")
 		stats += 	str("\n", gm.current_luck_cat, "%")
@@ -765,38 +765,6 @@ func check_creature_stats() -> void:
 		if gm.inaccuracy_resistance_cat != 0.0:
 			abilities += str("- Сопротивление [color=#fd4d4f]ТОЧНОСТИ[/color] ", int(gm.inaccuracy_resistance_cat*100), "%\n")	
 		creature_check_dialog.find_child("AbilitiesLabel").text = abilities
-		
-		if giant.has_debuff_weakness:
-			creature_check_dialog.debuff_weakness.visible = true
-			creature_check_dialog.label_turns_weakness.text = str(giant.turns_debuff_weakness)
-		if giant.has_debuff_undefend:
-			creature_check_dialog.debuff_undefend.visible = true
-			creature_check_dialog.label_turns_undefend.text = str(giant.turns_debuff_undefend)
-		if giant.has_debuff_inaccuracy:
-			creature_check_dialog.debuff_inaccuracy.visible = true
-			creature_check_dialog.label_turns_inaccuracy.text = str(giant.turns_debuff_inaccuracy)
-		if giant.has_debuff_unluck:
-			creature_check_dialog.debuff_unluck.visible = true
-			creature_check_dialog.label_turns_unluck.text = str(giant.turns_debuff_unluck)
-		if giant.has_debuff_low_energy:
-			creature_check_dialog.debuff_low_energy.visible = true
-			creature_check_dialog.label_turns_low_energy.text = str(giant.turns_debuff_low_energy)
-			
-		if giant.has_buff_strength:
-			creature_check_dialog.buff_strength.visible = true
-			creature_check_dialog.label_turns_strength.text = str(giant.turns_buff_strength)
-		if giant.has_buff_defend:
-			creature_check_dialog.buff_defend.visible = true
-			creature_check_dialog.label_turns_defend.text = str(giant.turns_buff_defend)
-		if giant.has_buff_accuracy:
-			creature_check_dialog.buff_accuracy.visible = true
-			creature_check_dialog.label_turns_accuracy.text = str(giant.turns_buff_accuracy)
-		if giant.has_buff_luck:
-			creature_check_dialog.buff_luck.visible = true
-			creature_check_dialog.label_turns_luck.text = str(giant.turns_buff_luck)
-		if giant.has_buff_high_energy:
-			creature_check_dialog.buff_high_energy.visible = true	
-			creature_check_dialog.label_turns_high_energy.text = str(giant.turns_buff_high_energy)
 					
 		return
 	elif (gm.battle_x_human == cursor_grid_pos.x and gm.battle_y_human == cursor_grid_pos.y):
@@ -823,7 +791,7 @@ func check_creature_stats() -> void:
 		creature_check_dialog.find_child("NameLabel").text = "Соля"
 					
 		var stats =   str("", gm.hp_human, "/", gm.max_hp_human)
-		stats += 	str("\n", gm.current_damage_human)
+		stats += 	str("\n", human.current_damage)
 		stats += 	str("\n", gm.current_defence_human, "/", gm.max_defence_human)
 		stats += 	str("\n", gm.current_accuracy_human, "%")
 		stats += 	str("\n", gm.current_luck_human, "%")
@@ -849,37 +817,6 @@ func check_creature_stats() -> void:
 			abilities += str("- Сопротивление [color=#fd4d4f]НЕТОЧНОСТИ[/color] ", int(gm.inaccuracy_resistance_human*100), "%\n")	
 		creature_check_dialog.find_child("AbilitiesLabel").text = abilities	
 		
-		if human.has_debuff_weakness:
-			creature_check_dialog.debuff_weakness.visible = true
-			creature_check_dialog.label_turns_weakness.text = str(human.turns_debuff_weakness)
-		if human.has_debuff_undefend:
-			creature_check_dialog.debuff_undefend.visible = true
-			creature_check_dialog.label_turns_undefend.text = str(human.turns_debuff_undefend)
-		if human.has_debuff_inaccuracy:
-			creature_check_dialog.debuff_inaccuracy.visible = true
-			creature_check_dialog.label_turns_inaccuracy.text = str(human.turns_debuff_inaccuracy)
-		if human.has_debuff_unluck:
-			creature_check_dialog.debuff_unluck.visible = true
-			creature_check_dialog.label_turns_unluck.text = str(human.turns_debuff_unluck)
-		if human.has_debuff_low_energy:
-			creature_check_dialog.debuff_low_energy.visible = true
-			creature_check_dialog.label_turns_low_energy.text = str(human.turns_debuff_low_energy)
-			
-		if human.has_buff_strength:
-			creature_check_dialog.buff_strength.visible = true
-			creature_check_dialog.label_turns_strength.text = str(human.turns_buff_strength)
-		if human.has_buff_defend:
-			creature_check_dialog.buff_defend.visible = true
-			creature_check_dialog.label_turns_defend.text = str(human.turns_buff_defend)
-		if human.has_buff_accuracy:
-			creature_check_dialog.buff_accuracy.visible = true
-			creature_check_dialog.label_turns_accuracy.text = str(human.turns_buff_accuracy)
-		if human.has_buff_luck:
-			creature_check_dialog.buff_luck.visible = true
-			creature_check_dialog.label_turns_luck.text = str(human.turns_buff_luck)
-		if human.has_buff_high_energy:
-			creature_check_dialog.buff_high_energy.visible = true	
-			creature_check_dialog.label_turns_high_energy.text = str(human.turns_buff_high_energy)
 					
 		return	
 	else:
@@ -907,38 +844,6 @@ func check_creature_stats() -> void:
 						creature_check_dialog.visible = true
 							
 						creature_dialog_on_screen = true
-						
-						if target.has_debuff_weakness:
-							creature_check_dialog.debuff_weakness.visible = true
-							creature_check_dialog.label_turns_weakness.text = str(target.turns_debuff_weakness)
-						if target.has_debuff_undefend:
-							creature_check_dialog.debuff_undefend.visible = true
-							creature_check_dialog.label_turns_undefend.text = str(target.turns_debuff_undefend)
-						if target.has_debuff_inaccuracy:
-							creature_check_dialog.debuff_inaccuracy.visible = true
-							creature_check_dialog.label_turns_inaccuracy.text = str(target.turns_debuff_inaccuracy)
-						if target.has_debuff_unluck:
-							creature_check_dialog.debuff_unluck.visible = true
-							creature_check_dialog.label_turns_unluck.text = str(target.turns_debuff_unluck)
-						if target.has_debuff_low_energy:
-							creature_check_dialog.debuff_low_energy.visible = true
-							creature_check_dialog.label_turns_low_energy.text = str(target.turns_debuff_low_energy)
-							
-						if target.has_buff_strength:
-							creature_check_dialog.buff_strength.visible = true
-							creature_check_dialog.label_turns_strength.text = str(target.turns_buff_strength)
-						if target.has_buff_defend:
-							creature_check_dialog.buff_defend.visible = true
-							creature_check_dialog.label_turns_defend.text = str(target.turns_buff_defend)
-						if target.has_buff_accuracy:
-							creature_check_dialog.buff_accuracy.visible = true
-							creature_check_dialog.label_turns_accuracy.text = str(target.turns_buff_accuracy)
-						if target.has_buff_luck:
-							creature_check_dialog.buff_luck.visible = true
-							creature_check_dialog.label_turns_luck.text = str(target.turns_buff_luck)
-						if target.has_buff_high_energy:
-							creature_check_dialog.buff_high_energy.visible = true
-							creature_check_dialog.label_turns_high_energy.text = str(target.turns_buff_high_energy)
 							
 						creature_check_dialog.find_child("NameLabel").text = target.enemy_name_rus
 						

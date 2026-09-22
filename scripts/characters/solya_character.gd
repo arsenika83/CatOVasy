@@ -42,10 +42,50 @@ var character_name_display = "Соля"
 
 var enemy_name_rus = "Соля"
 
+var hp = 5
+var max_hp = hp
+
+var damage = 2
+var current_damage = damage
+var max_damage = damage
+
+var defence = 1
+var current_defence = 0
+var max_defence = 3
+
+var accuracy = 60
+var current_accuracy = accuracy
+
+var luck = 15
+var current_luck = luck
+
+var energy = 1
+var current_energy = energy
+var max_energy = 1
+
+var fire_resistance: float = 0
+var wind_resistance: float = 0
+var might_resistance: float = 0
+var death_resistance: float = 0
+var life_resistance: float = 0
+var luck_resistance: float = 0
+var unluck_resistance: float = 0
+var inaccuracy_resistance: float = 0
+
+var current_fire_resistance: float = 0
+var current_wind_resistance: float = 0
+var current_might_resistance: float = 0
+var current_death_resistance: float = 0
+var current_life_resistance: float = 0
+var current_luck_resistance: float = 0
+var current_unluck_resistance: float = 0
+var current_inaccuracy_resistance: float = 0
+
 var current_heal = 0
 var attack_count = 0
 var taken_damage = 0
 var last_damage_dealt = 0
+var defended = false
 var is_hit_lucky = false
 var is_hit_unlucky = false
 var just_missed = false
@@ -60,6 +100,46 @@ func _ready() -> void:
 	sprite.play("battle")
 	scale = Vector2(0, 0)
 	spawn()
+	
+	hp = gm.hp_human
+	max_hp = gm.max_hp_human
+
+	damage = gm.damage_human
+	current_damage = damage
+
+	defence = gm.defence_human
+	current_defence = 0
+	max_defence = gm.max_defence_human
+
+	accuracy = gm.accuracy_human
+	current_accuracy = accuracy
+
+	luck = gm.luck_human
+	current_luck = luck
+
+	energy = gm.energy_human
+	current_energy = energy
+	max_energy = gm.max_energy_human
+
+	fire_resistance = gm.fire_resistance_human
+	wind_resistance = gm.wind_resistance_human
+	might_resistance = gm.might_resistance_human
+	death_resistance = gm.death_resistance_human
+	life_resistance = gm.life_resistance_human
+	luck_resistance = gm.luck_resistance_human
+	unluck_resistance = gm.unluck_resistance_human
+	inaccuracy_resistance = gm.inaccuracy_resistance_human
+
+	current_fire_resistance = fire_resistance
+	current_wind_resistance = wind_resistance
+	current_might_resistance = might_resistance
+	current_death_resistance = death_resistance
+	current_life_resistance = life_resistance
+	current_luck_resistance = luck_resistance
+	current_unluck_resistance = unluck_resistance
+	current_inaccuracy_resistance = inaccuracy_resistance
+
+
 
 func _process(delta: float) -> void:
 	check_fall(delta)
@@ -291,11 +371,48 @@ func give_buff(targets : Array[CharacterBody2D], type : String, power : int, tur
 	status_fx.play("buff")
 	status_fx.visible = true
 	var tween = create_tween()
-	targets[0].status_fx.visible = true
-	tween.tween_property(targets[0].status_fx, "scale", Vector2(1, 1), 0.4)
-	tween.tween_property(targets[0].status_fx, "scale", Vector2(0, 0), 0.4)
-	
-	targets[0].status_fx.play("buff_" + type)
+	for target in targets:
+		target.status_fx.visible = true
+		tween.tween_property(target.status_fx, "scale", Vector2(1, 1), 0.4)
+		tween.tween_property(target.status_fx, "scale", Vector2(0, 0), 0.4)
+		
+		target.status_fx.play("buff_" + type)
+		
+		
+		var current_power = -1
+		if target.current_buffs.get(type) != null:
+			current_power = target.current_buffs.get(type).get(0)
+					
+			if current_power > power:
+				break
+			elif current_power == power:
+				var current_turns = target.current_buffs.get(type).get(1)
+				target.current_buffs.get(type).set(1, current_turns + turns)
+		
+		match type:
+			"strength":
+				if current_power < power and current_power > 0:
+					target.current_damage -= current_power
+					target.current_buffs.erase(type)
+						
+				target.current_damage += power
+			"accuracy":
+				if current_power < power and current_power > 0:
+					target.current_accuracy -= current_power
+					target.current_buffs.erase(type)
+						
+				target.current_accuracy += power
+			"luck":
+				if current_power < power and current_power > 0:
+					target.current_luck -= current_power
+					target.current_buffs.erase(type)
+						
+				target.current_luck += power
+				
+		if target.current_buffs.get(type) == null:
+			target.current_buffs.set(type, [power, turns])
+			
+			
 	gm.current_energy_human -= gm.current_card.energy_cost
 	
 	targets[0].sprite.play("battle_buffed")
@@ -312,81 +429,7 @@ func give_buff(targets : Array[CharacterBody2D], type : String, power : int, tur
 		
 		add_child(indicator)
 		indicator.display_damage("МУР", targets[0].position)
-	
-	match type:
-		"strength":
-			if targets.size() > 1:
-				targets[0].has_buff_strength = true
-				targets[0].turns_buff_strength += turns
-				gm.current_damage_human += power
-				gm.damage_human += power
-				
-				targets[1].has_buff_strength = true
-				targets[1].turns_buff_strength += turns
-				gm.current_damage_cat += power
-				gm.damage_cat += power
-			elif targets[0].character_name == "human":
-				targets[0].has_buff_strength = true
-				targets[0].turns_buff_strength += turns
-				gm.current_damage_human += power
-				gm.damage_human += power
-			elif targets[0].character_name == "cat":
-				targets[0].has_buff_strength = true
-				targets[0].turns_buff_strength += turns
-				gm.current_damage_cat += power
-				gm.damage_cat += power
-		"defend":
-			targets[0].has_buff_defend = true
-			targets[0].turns_buff_defend += turns
-			gm.current_defence_cat += power
-			if targets[0].current_defence <= 0:
-				targets[0].current_defence = 0
-		"accuracy":
-			if targets.size() > 1:
-				targets[0].has_buff_accuracy = true
-				targets[0].turns_buff_accuracy += turns
-				gm.current_accuracy_human += power
-				gm.accuracy_human += power
-				
-				targets[1].has_buff_accuracy = true
-				targets[1].turns_buff_accuracy += turns
-				gm.current_accuracy_cat += power
-				gm.accuracy_cat += power
-			elif targets[0].character_name == "human":
-				targets[0].has_buff_accuracy = true
-				targets[0].turns_buff_accuracy += turns
-				gm.current_accuracy_human += power
-				gm.accuracy_human += power
-			elif targets[0].character_name == "cat":
-				targets[0].has_buff_accuracy = true
-				targets[0].turns_buff_accuracy += turns
-				gm.current_accuracy_cat += power
-				gm.accuracy_cat += power
-		"luck":
-			if targets.size() > 1:
-				targets[0].has_buff_luck = true
-				targets[0].turns_buff_luck += turns
-				gm.current_luck_human += power
-				gm.luck_human += power
-				
-				targets[1].has_buff_luck = true
-				targets[1].turns_buff_luck += turns
-				gm.current_luck_cat += power
-				gm.luck_cat += power
-			elif targets[0].character_name == "human":
-				targets[0].has_buff_luck = true
-				targets[0].turns_buff_luck += turns
-				gm.current_luck_human += power
-				gm.luck_human += power
-			elif targets[0].character_name == "cat":
-				targets[0].has_buff_luck = true
-				targets[0].turns_buff_luck += turns
-				gm.current_luck_cat += power
-				gm.luck_cat += power
-		"high_energy":
-			targets[0].has_buff_high_energy = true
-			targets[0].turns_buff_high_energy += turns
-			targets[0].energy += power
+
 	idle_animation_timer.start(gm.buff_animation_time_human)
 
 func display_damage(dmg) -> void:
@@ -412,15 +455,50 @@ func turn_tick() -> void:
 		gm.current_luck_human = gm.luck_human
 	if current_buffs.get("accuracy") == null:
 		gm.current_luck_human = gm.luck_human
-	if current_buffs.get("accuracy") == null:
-		gm.current_luck_human = gm.luck_human		
+	if current_buffs.get("fire_resistance") == null:
+		gm.current_fire_resistance_human = gm.fire_resistance_human
+	if current_buffs.get("wind_resistance") == null:
+		gm.current_wind_resistance_human = gm.wind_resistance_human
+	if current_buffs.get("luck_resistance") == null:
+		gm.current_luck_resistance_human = gm.luck_resistance_human
+	if current_buffs.get("unluck_resistance") == null:
+		gm.current_unluck_resistance_human = gm.unluck_resistance_human
+	if current_buffs.get("inaccuracy_resistance") == null:
+		gm.current_inaccuracy_resistance_human = gm.inaccuracy_resistance_human
+	if current_buffs.get("death_resistance") == null:
+		gm.current_death_resistance_human = gm.death_resistance_human
+	if current_buffs.get("life_resistance") == null:
+		gm.current_life_resistance_human = gm.life_resistance_human
 			
 	for debuff in current_debuffs:
 		var turns = current_debuffs.get(debuff).get(1)
 		current_debuffs.get(debuff).set(1, turns-1)
 		
 		if current_debuffs.get(debuff).get(1) == 0:
-			current_debuffs.erase(debuff)		
+			current_debuffs.erase(debuff)
+	
+	if current_debuffs.get("weakness") == null:
+		gm.current_damage_human = gm.damage_human
+	if current_debuffs.get("unluck") == null:
+		gm.current_luck_human = gm.luck_human
+	if current_debuffs.get("inaccuracy") == null:
+		gm.current_luck_human = gm.luck_human
+	if current_debuffs.get("fire_mark") == null:
+		gm.current_fire_resistance_human = gm.fire_resistance_human
+	if current_debuffs.get("wind_mark") == null:
+		gm.current_wind_resistance_human = gm.wind_resistance_human
+	if current_debuffs.get("luck_mark") == null:
+		gm.current_luck_resistance_human = gm.luck_resistance_human
+	if current_debuffs.get("unluck_mark") == null:
+		gm.current_unluck_resistance_human = gm.unluck_resistance_human
+	if current_debuffs.get("inaccuracy_mark") == null:
+		gm.current_inaccuracy_resistance_human = gm.inaccuracy_resistance_human
+	if current_debuffs.get("death_mark") == null:
+		gm.current_death_resistance_human = gm.death_resistance_human
+	if current_debuffs.get("life_mark") == null:
+		gm.current_life_resistance_human = gm.life_resistance_human
+	if current_debuffs.get("laziness") == null:
+		gm.current_energy_human = gm.energy_human
 
 func create_fog() -> void:
 	get_parent().fog_fx.visible = true

@@ -146,12 +146,6 @@ var has_artifacts: Array[int]
 
 var current_enemies : Array
 
-var debuff_set : Array = [["weakness", 1, 1], ["undefend", 100, 1], ["inaccuracy", 10, 1],\
- ["unluck", 5, 1], ["low_energy", 1, 1]]
-
-var buff_set : Array = [["strength", 1, 1], ["defend", 100, 1], ["accuracy", 10, 1],\
- ["luck", 5, 1], ["high_energy", 1, 1]]
-
 var attack_animation_time_cat = 0.3
 var defend_animation_time_cat = 0.3
 var debuff_animation_time_cat = 0.6
