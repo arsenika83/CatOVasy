@@ -18,12 +18,15 @@ func _ready() -> void:
 	state_modifier = "_attack"
 	type = "attack"
 	energy_cost = 1
+	init_energy_cost = 1
 	$Energy/Label.text = str(energy_cost)
 	$Label.text = settings.card_text_cat.get("inferno_name")
 
 func _process(delta: float) -> void:
 	if gm.current_energy_cat < energy_cost:
-		$Energy/Label.add_theme_color_override("font_color", Color(0.98, 0.077, 0.078))
+		$Energy/Label.add_theme_color_override("font_color", colors.card_too_expensive)
+	elif energy_cost < init_energy_cost:
+		$Energy/Label.add_theme_color_override("font_color", colors.card_too_cheap)
 	else:
 		$Energy/Label.add_theme_color_override("font_color", Color.WHITE)
 

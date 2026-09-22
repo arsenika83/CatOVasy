@@ -23,12 +23,12 @@ catalog="*uid://djdfvj81ae716"
 settings="*uid://cp7sy664ksm6n"
 sm="*uid://bydsner101073"
 lm="*uid://canspxbydmupp"
+colors="*uid://ykjb1ye51sx"
 
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
-window/size/mode=3
 window/stretch/mode="canvas_items"
 mouse_cursor/custom_image="uid://1g0sqeatycqa"
 

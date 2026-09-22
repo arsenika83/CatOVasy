@@ -9,6 +9,7 @@ offset_bottom = 25.0
 bbcode_enabled = true
 text = "0"
 scroll_active = false
+autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("1_ni1fv")

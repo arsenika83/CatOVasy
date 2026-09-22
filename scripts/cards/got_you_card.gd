@@ -23,6 +23,8 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if gm.current_energy_cat < energy_cost:
-		$Energy/Label.add_theme_color_override("font_color", Color(0.98, 0.077, 0.078))
+		$Energy/Label.add_theme_color_override("font_color", colors.card_too_expensive)
+	elif energy_cost < init_energy_cost:
+		$Energy/Label.add_theme_color_override("font_color", colors.card_too_cheap)
 	else:
 		$Energy/Label.add_theme_color_override("font_color", Color.WHITE)

@@ -16,6 +16,7 @@ var everybody_attack = false
 
 var state_modifier = ""
 var enabled = true
+var init_energy_cost = 1
 var energy_cost = 1
 var type = ""
 var element = ""

@@ -446,7 +446,10 @@ func turn_tick() -> void:
 		var turns = current_buffs.get(buff).get(1)
 		current_buffs.get(buff).set(1, turns-1)
 		
+		print(str(buff, ": ", current_buffs.get(buff).get(1), " ходов"))
+		
 		if current_buffs.get(buff).get(1) == 0:
+			print(str(buff, ": кончился"))
 			current_buffs.erase(buff)
 	
 	if current_buffs.get("strength") == null:
@@ -609,6 +612,9 @@ func _on_walk_timer_timeout() -> void:
 
 func _on_take_damage_timer_timeout() -> void:
 	$HPParticles.restart()
+	gm.state_human = "taking_damage"
+	gm.hp_human -= taken_damage
+	
 	check_hp()
 	
 	display_damage(taken_damage)
@@ -619,8 +625,7 @@ func _on_take_damage_timer_timeout() -> void:
 		tween1.tween_property(sprite, "position:x", sprite.position.x, 0.1)
 		
 		#gm.prev_state_human = gm.state_human
-		gm.state_human = "taking_damage"
-		gm.hp_human -= taken_damage
+
 		sprite.play("taking_damage")
 		audio_meow.play()
 		idle_animation_timer.start(0.2)
@@ -630,7 +635,10 @@ func _on_take_damage_timer_timeout() -> void:
 	else:
 		if get_parent().name == "Battle":
 			get_parent().log_messages.append(str("- [color=#1ca8fd]", character_name_display, "[/color] [color=#fc4e52]МЕРТВА[/color]\n"))
-		
+			if get_parent().current_creature_turn == -2:
+				gm.current_energy_human = -1000
+				get_parent().end_turn()
+			
 		audio_fall.play()
 		sprite.play("dead")
 
@@ -852,8 +860,7 @@ func _on_heal_timer_timeout() -> void:
 	if gm.hp_human > gm.max_hp_human:
 		gm.hp_human = gm.max_hp_human
 	
-	if gm.prev_state == "playing_a_card":
-		gm.prev_state = "battle"
+	gm.prev_state = "battle"
 	gm.state_human = gm.prev_state_human
 	sprite.play(gm.state_human)
 	display_damage(-current_heal)
