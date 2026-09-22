@@ -111,6 +111,16 @@ offset_bottom = -16.0
 texture = SubResource("AtlasTexture_tf85v")
 flip_v = true
 
+[node name="FreeLabel" type="Label" parent="ChangeButton" unique_id=1961073785]
+layout_mode = 0
+offset_top = -24.0
+offset_right = 48.0
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 20
+text = "x4"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="UnplayedButton" type="TextureButton" parent="." unique_id=1196569886]
 layout_mode = 0
 offset_left = -8.0

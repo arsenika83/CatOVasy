@@ -697,18 +697,6 @@ func check_creature_stats() -> void:
 	var target_local_pos = map.map_to_local(cursor_grid_pos)
 	var has_target = false
 	
-	creature_check_dialog.debuff_weakness.visible = false
-	creature_check_dialog.debuff_undefend.visible = false
-	creature_check_dialog.debuff_inaccuracy.visible = false
-	creature_check_dialog.debuff_unluck.visible = false
-	creature_check_dialog.debuff_low_energy.visible = false
-	
-	creature_check_dialog.buff_strength.visible = false
-	creature_check_dialog.buff_defend.visible = false
-	creature_check_dialog.buff_accuracy.visible = false
-	creature_check_dialog.buff_luck.visible = false
-	creature_check_dialog.buff_high_energy.visible = false
-	
 	#if is_check_dialog_holding:
 		#current_creature_stats = null
 		#var tween = create_tween()
@@ -817,13 +805,13 @@ func check_creature_stats() -> void:
 			abilities += str("- Сопротивление [color=#fd4d4f]НЕТОЧНОСТИ[/color] ", int(gm.inaccuracy_resistance_human*100), "%\n")	
 		creature_check_dialog.find_child("AbilitiesLabel").text = abilities	
 		
-					
-		return	
+		
+		return
 	else:
 		for i in range(0, find_child("Enemies").get_child_count()):
 			var target = find_child("Enemies").get_child(i)
 			
-			for e_pos in target.positions:			
+			for e_pos in target.positions:
 				if (e_pos.x == cursor_grid_pos.x and e_pos.y == cursor_grid_pos.y):
 						if current_creature_stats == target:
 							current_creature_stats = null

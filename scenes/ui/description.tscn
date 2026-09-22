@@ -24,17 +24,19 @@ texture = SubResource("AtlasTexture_wpbht")
 expand_mode = 1
 script = ExtResource("2_wrf2s")
 
-[node name="Label" type="Label" parent="." unique_id=990227631]
+[node name="Label" type="Label" parent="." unique_id=1974498336]
 use_parent_material = true
 layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 120.0
 offset_bottom = 160.0
+mouse_filter = 1
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 16
 autowrap_mode = 2
+autowrap_trim_flags = 0
+justification_flags = 0
 
 [node name="Panel" type="Panel" parent="." unique_id=369331157]
 use_parent_material = true
@@ -50,6 +52,7 @@ layout_mode = 0
 offset_left = 30.0
 offset_right = 128.0
 offset_bottom = 32.0
+theme_override_colors/font_outline_color = Color(0.9607843, 0.9607843, 0.9607843, 1)
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "УДАЧА"

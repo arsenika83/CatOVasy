@@ -368,7 +368,7 @@ func give_debuff(targets : Array[CharacterBody2D], type : String, power : int, t
 func give_buff(targets : Array[CharacterBody2D], type : String, power : int, turns : int) -> void:
 	#current_target = target
 	status_fx.scale = Vector2(0, 0)
-	status_fx.play("buff")
+	status_fx.play("buff_" + type)
 	status_fx.visible = true
 	var tween = create_tween()
 	for target in targets:
@@ -670,7 +670,7 @@ func _on_deal_damage_timer_timeout() -> void:
 	if gm.has_dice:
 		shine_artifact("dice")
 		is_hit_lucky = true
-		is_self_damage = randi_range(0, 100) < 20
+		is_self_damage = randi_range(0, 100) < 15
 		
 	if is_hit_lucky:
 		if gm.has_rainbow_pot: #ГОРШОЧЕК РАДУГИ
@@ -852,8 +852,11 @@ func _on_heal_timer_timeout() -> void:
 	if gm.hp_human > gm.max_hp_human:
 		gm.hp_human = gm.max_hp_human
 	
+	if gm.prev_state == "playing_a_card":
+		gm.prev_state = "battle"
 	gm.state_human = gm.prev_state_human
 	sprite.play(gm.state_human)
+	display_damage(-current_heal)
 
 
 func _on_explode_timer_timeout() -> void:

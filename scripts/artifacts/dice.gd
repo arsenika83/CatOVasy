@@ -5,7 +5,7 @@ var rarity = "epic"
 var complect = ""
 var path = "dice"
 var artifact_name = "ИГРАЛЬНЫЕ КОСТИ"
-var artifact_description = "Каждый удар Соли будет удачным! Появляется 20% шанс, что ваш удар будет направлен против вас..."
+var artifact_description = "Каждый удар Соли будет удачным! Появляется 15% шанс, что ваш удар будет направлен против вас..."
 var artifact_commentary = "\"На все своя воля\""
 
 func _ready() -> void:

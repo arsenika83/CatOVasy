@@ -36,7 +36,7 @@
 "revenge_log" : "",
 
 "sharp_claw_name" : "Острый коготь",
-"sharp_claw_desc" : "Наносит 3 урона",
+"sharp_claw_desc" : "Наносит 3 урона. Не может промахнуться",
 "sharp_claw_log" : "",
 
 "eclipse_name" : "Затмение",

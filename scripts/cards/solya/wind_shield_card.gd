@@ -5,7 +5,7 @@ var card_path = "wind_shield_card.tscn"
 var icon_path = "wind_shield_card.png"
 var tool_tip_text = ""
 var card_name = "Щит ветра"
-var card_description = "Дает 2 защиты Соле"
+var card_description = "Дает Соле 2 защиты и 15% сопротивления ветру на 2 хода"
 var rarity = "common"
 
 func _ready() -> void:

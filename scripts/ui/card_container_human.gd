@@ -20,6 +20,8 @@ var hand_count = 0
 @onready var unplayed_label = $UnplayedButton/Label
 @onready var played_label = $PlayedButton/Label
 
+@onready var free_label = $ChangeButton/FreeLabel
+
 @onready var audio_no_energy = $AudioStreamPlayerNoEnergy
 @onready var audio_hover = $AudioStreamPlayerHover
 var no_energy_max_volume = 5
@@ -75,8 +77,14 @@ func _process(delta: float) -> void:
 		$ChangeButton/StatusFX.visible = true
 	else:	
 		$ChangeButton/StatusFX.visible = false
+	
+	if free_changes > 0:
+		free_label.text = str("x", free_changes)
+		free_label.visible = true
+	else:		
+		free_label.visible = false
 		
-	if gm.current_energy_human < card_change_energy_cost:
+	if gm.current_energy_human < card_change_energy_cost and free_changes == 0:
 		change_cost.add_theme_color_override("font_color", Color(0.98, 0.077, 0.078))
 	else:
 		change_cost.add_theme_color_override("font_color", Color.WHITE)	

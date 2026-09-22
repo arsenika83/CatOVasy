@@ -27,36 +27,36 @@ func get_element():
 	
 	match el:
 		"might":
-			element.text = "СИЛА"
+			element.text = "[color=#d13738]СИЛА[/color]"
 			icon.texture = might_icon
 		"fire":
-			element.text = "ОГОНЬ"
+			element.text = "[color=#ff9c61]ОГОНЬ[/color]"
 			icon.texture = fire_icon
 		"wind":
-			element.text = "ВЕТЕР"
+			element.text = "[color=#b1dcee]ВЕТЕР[/color]"
 			icon.texture = wind_icon
 		"death":
-			element.text = "СМЕРТЬ"
+			element.text = "[color=#7800ba]СМЕРТЬ[/color]"
 			icon.texture = death_icon
 		"life":
-			element.text = "ЖИЗНЬ"
+			element.text = "[color=#5dc3ff]ЖИЗНЬ[/color]"
 			icon.texture = life_icon
 		"luck":
-			element.text = "УДАЧА"
+			element.text = "[color=#a5da70]УДАЧА[/color]"
 			icon.texture = luck_icon
 		"accuracy":
-			element.text = "ТОЧНОСТЬ"
+			element.text = "[color=#f6b732]ТОЧНОСТЬ[/color]"
 			icon.texture = accuracy_icon
 		"unluck":
-			element.text = "НЕУДАЧА"
+			element.text = "[color=#ba037e]НЕУДАЧА[/color]"
 			icon.texture = unluck_icon
 		"inaccuracy":
-			element.text = "НЕТОЧНОСТЬ"
+			element.text = "[color=#32f69b]НЕТОЧНОСТЬ[/color]"
 			icon.texture = inaccuracy_icon	
 		"energy":
-			element.text = "ЭНЕРГИЯ"
+			element.text = "[color=#fd4d4f]ЭНЕРГИЯ[/color]"
 			icon.texture = energy_icon
 		"food":
-			element.text = "ЕДА"
+			element.text = "[color=#d45009]ЕДА[/color]"
 			icon.texture = food_icon
 			

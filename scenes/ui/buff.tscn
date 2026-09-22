@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://cxs8m45tidd03"]
+
+[ext_resource type="Texture2D" uid="uid://bgps0amyh5twl" path="res://assets/images/elements/unluck_element.png" id="1_6yos6"]
+
+[node name="Buff" type="Control" unique_id=263334792]
+use_parent_material = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 64.0
+offset_bottom = 64.0
+pivot_offset = Vector2(32, 32)
+tooltip_text = "-20% удачи на 3 хода"
+
+[node name="Icon" type="TextureRect" parent="." unique_id=1886311003]
+use_parent_material = true
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("1_6yos6")
+
+[node name="PowerLabel" type="Label" parent="." unique_id=1230881379]
+use_parent_material = true
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 24.0
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 18
+text = "-20%"
+vertical_alignment = 1
+
+[node name="TurnsLabel" type="Label" parent="." unique_id=57416033]
+use_parent_material = true
+layout_mode = 0
+offset_left = 32.0
+offset_top = 40.0
+offset_right = 64.0
+offset_bottom = 64.0
+pivot_offset = Vector2(0, -8)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 18
+text = "х3"
+horizontal_alignment = 2
+vertical_alignment = 1

@@ -4,7 +4,7 @@ extends RichTextLabel
 func display_damage(amount, start_position: Vector2) -> void:
 	
 	if int(amount) < 0: 
-		text = str("[color=#7edc41]", -amount, " [/color]")
+		text = str("[outline_size=4][outline_color=white][color=#4dbcfd]+ ", -amount, " [/color][/outline_color][/outline_size]")
 	elif int(amount) == 0: 
 		text = str(amount)
 	elif int(amount) > 0 and int(amount) <= 10:
