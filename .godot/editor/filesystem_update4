@@ -1,8 +1,4 @@
-res://scenes/fx/damage_indicator.tscn
+res://scenes/levels/battle_level.tscn
 res://shaders/card_glow.gdshader
 res://shaders/outline.gdshader
 res://shaders/underwater.gdshader
-res://scripts/damage_indicator.gd
-res://scripts/characters/solya_character.gd
-res://scripts/enemies/enemy.gd
-res://scripts/giant.gd

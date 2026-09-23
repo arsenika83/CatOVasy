@@ -239,6 +239,7 @@ rotation_smoothing_speed = 3.0
 [node name="Enemy" parent="Enemies" unique_id=772889915 instance=ExtResource("14_m6lg1")]
 position = Vector2(144, 80)
 is_leader = true
+speed = 90
 
 [node name="Enemy2" parent="Enemies" unique_id=2106804459 instance=ExtResource("14_m6lg1")]
 position = Vector2(80, 16)

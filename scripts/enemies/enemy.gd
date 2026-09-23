@@ -25,7 +25,7 @@ var current_accuracy = accuracy
 @export var luck = 15
 var current_luck = luck
 
-@export var speed = 90
+@export var speed = 30
 var current_speed = speed
 
 var energy = 1
@@ -462,6 +462,7 @@ func _on_idle_animation_timer_timeout() -> void:
 	sprite.play("idle")
 
 func _on_take_damage_timer_timeout() -> void:
+	
 	hp -= taken_damage
 	check_hp()
 	$HPParticles.restart()

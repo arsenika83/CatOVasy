@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dx03fuh67lecn" path="res://scenes/ui/settings_main_menu.tscn" id="8_8g5eo"]
 [ext_resource type="AudioStream" uid="uid://bq0ooer30jskk" path="res://assets/soundFX/xp_pick_up.wav" id="8_wb0q5"]
 [ext_resource type="PackedScene" uid="uid://cte1o5card0yr" path="res://scenes/ui/profiles.tscn" id="9_7suek"]
-[ext_resource type="AudioStream" uid="uid://cquij2lcd84si" path="res://assets/music/ZONE_3.ogg" id="11_7suek"]
+[ext_resource type="AudioStream" uid="uid://cguaj7gsskh0t" path="res://assets/music/MAIN_MENU_THEME.ogg" id="11_7suek"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fe2o3"]
 shader = ExtResource("1_sl1te")

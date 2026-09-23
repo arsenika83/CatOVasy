@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://bttrs3so2yvd8" path="res://scripts/ui/cursor.gd" id="1_ea65e"]
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="2_qi3ym"]
 [ext_resource type="Shader" uid="uid://c8kgj3ayylkt6" path="res://shaders/card_glow.gdshader" id="3_ea65e"]
+[ext_resource type="FontFile" uid="uid://d1la5rrlowvtn" path="res://assets/fonts/ShovelKnightFont2_0.ttf" id="5_ea65e"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s0nli"]
 atlas = ExtResource("1_1eco6")
@@ -60,8 +61,9 @@ z_index = 200
 z_as_relative = false
 material = SubResource("ShaderMaterial_ytdos")
 offset_left = -1.0
-offset_top = -8.0
+offset_top = -9.0
 offset_right = 6.0
+offset_bottom = -1.0
 pivot_offset = Vector2(-7, 4)
 texture = SubResource("AtlasTexture_gbfun")
 expand_mode = 1
@@ -71,8 +73,9 @@ visible = false
 z_index = 200
 material = SubResource("ShaderMaterial_ytdos")
 offset_left = -1.0
+offset_top = -1.0
 offset_right = 6.0
-offset_bottom = 8.0
+offset_bottom = 7.0
 pivot_offset = Vector2(-7, 4)
 texture = SubResource("AtlasTexture_ea65e")
 expand_mode = 1
@@ -87,11 +90,12 @@ offset_right = -2.0
 offset_bottom = 9.0
 pivot_offset = Vector2(48, 8)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/line_spacing = -3
+theme_override_constants/line_spacing = -1
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 0
 theme_override_constants/outline_size = 2
 theme_override_constants/shadow_outline_size = 1
+theme_override_fonts/font = ExtResource("5_ea65e")
 theme_override_font_sizes/font_size = 10
 text = "200
 100"

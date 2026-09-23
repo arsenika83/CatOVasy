@@ -7,7 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://bq0ooer30jskk" path="res://assets/soundFX/xp_pick_up.wav" id="6_snn0j"]
 [ext_resource type="AudioStream" uid="uid://dnyi4oi4yn2sl" path="res://assets/soundFX/cancel.wav" id="7_68a23"]
 [ext_resource type="AudioStream" uid="uid://cpj4ex8gfs0ie" path="res://assets/soundFX/coin-flip.wav" id="8_gcjjy"]
-[ext_resource type="AudioStream" uid="uid://bxhii1a001e1v" path="res://assets/music/BATTLE_WIN.mp3" id="8_snn0j"]
+[ext_resource type="AudioStream" uid="uid://bxhii1a001e1v" path="res://assets/music/found_artifact.mp3" id="8_snn0j"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_snn0j"]
 shader = ExtResource("1_68a23")

@@ -12,7 +12,7 @@ config_version=5
 
 config/name="GiantCrawl"
 run/main_scene="uid://cv287toqe0prk"
-config/features=PackedStringArray("4.7")
+config/features=PackedStringArray("4.6")
 config/icon="res://icon.png"
 
 [autoload]
@@ -29,6 +29,7 @@ colors="*uid://ykjb1ye51sx"
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/size/mode=3
 window/stretch/mode="canvas_items"
 mouse_cursor/custom_image="uid://1g0sqeatycqa"
 
@@ -53,7 +54,9 @@ folder_colors={
 
 [gui]
 
+fonts/dynamic_fonts/use_oversampling=false
 theme/default_font_antialiasing=0
+theme/default_font_subpixel_positioning=0
 theme/default_font_generate_mipmaps=true
 theme/custom="uid://6ydql0hb6ji7"
 theme/custom_font="uid://c01ismt76d301"

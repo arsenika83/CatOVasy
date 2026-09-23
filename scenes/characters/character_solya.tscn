@@ -15,6 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://dyc143w8u85ck" path="res://assets/soundFX/level_up.wav" id="8_bf2la"]
 [ext_resource type="AudioStream" uid="uid://bq0ooer30jskk" path="res://assets/soundFX/xp_pick_up.wav" id="9_7axqy"]
 [ext_resource type="Texture2D" uid="uid://boubbyapyimvw" path="res://assets/images/artifacts/lucky_coin.png" id="9_a0gv1"]
+[ext_resource type="FontFile" uid="uid://d1la5rrlowvtn" path="res://assets/fonts/ShovelKnightFont2_0.ttf" id="9_dqeso"]
 [ext_resource type="AudioStream" uid="uid://bv07t8ic6tpma" path="res://assets/soundFX/miss.wav" id="10_a0gv1"]
 [ext_resource type="Texture2D" uid="uid://s34pblv0ga2j" path="res://assets/images/fx.png" id="10_ijvqx"]
 [ext_resource type="AudioStream" uid="uid://bclkaxhxamdmf" path="res://assets/soundFX/defend.wav" id="11_piljf"]
@@ -886,13 +887,11 @@ visible = false
 position = Vector2(0, -64)
 
 [node name="DefenceSprite" type="Sprite2D" parent="." unique_id=1092316381]
-visible = false
 material = SubResource("ShaderMaterial_6tupa")
-position = Vector2(16, -8)
+position = Vector2(8, -8)
 texture = SubResource("AtlasTexture_jx0ba")
 
-[node name="DefenceLabel" type="RichTextLabel" parent="DefenceSprite" unique_id=1296448884]
-texture_filter = 1
+[node name="DefenceLabel" type="Label" parent="DefenceSprite" unique_id=580843460]
 material = SubResource("ShaderMaterial_icmx6")
 offset_left = -8.0
 offset_top = -8.0
@@ -900,11 +899,12 @@ offset_right = 8.0
 offset_bottom = 8.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 2
-theme_override_font_sizes/normal_font_size = 8
+theme_override_fonts/font = ExtResource("9_dqeso")
+theme_override_font_sizes/font_size = 10
 text = "12"
-scroll_active = false
-autowrap_mode = 0
 horizontal_alignment = 1
+autowrap_trim_flags = 0
+justification_flags = 0
 
 [node name="Cursor" parent="." unique_id=2051460958 instance=ExtResource("8_7axqy")]
 visible = false
@@ -1040,6 +1040,9 @@ one_shot = true
 [node name="ExplodeTimer" type="Timer" parent="." unique_id=1159274250]
 one_shot = true
 
+[node name="LuckyHitTimer" type="Timer" parent="." unique_id=1712139080]
+one_shot = true
+
 [node name="AudioExplode" type="AudioStreamPlayer" parent="." unique_id=1146465924]
 stream = ExtResource("6_105hs")
 pitch_scale = 0.3
@@ -1137,3 +1140,4 @@ bus = &"SoundFX"
 [connection signal="timeout" from="DebuffTimer" to="." method="_on_debuff_timer_timeout"]
 [connection signal="timeout" from="WalkingTimer" to="." method="_on_walking_timer_timeout"]
 [connection signal="timeout" from="ExplodeTimer" to="." method="_on_explode_timer_timeout"]
+[connection signal="timeout" from="LuckyHitTimer" to="." method="_on_lucky_hit_timer_timeout"]

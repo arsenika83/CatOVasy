@@ -16,6 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://bclkaxhxamdmf" path="res://assets/soundFX/defend.wav" id="9_qch6t"]
 [ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="11_maese"]
 [ext_resource type="AudioStream" uid="uid://ceun5aaxxb0o7" path="res://assets/soundFX/debuff.wav" id="11_tihwb"]
+[ext_resource type="FontFile" uid="uid://d1la5rrlowvtn" path="res://assets/fonts/ShovelKnightFont2_0.ttf" id="12_gc4hx"]
 [ext_resource type="AudioStream" uid="uid://vid6rjo3jggy" path="res://assets/soundFX/follow.wav" id="12_p7w77"]
 [ext_resource type="AudioStream" uid="uid://b281edhvbfgf6" path="res://assets/soundFX/luck.wav" id="13_maese"]
 [ext_resource type="AudioStream" uid="uid://kn3dv6vl4ov1" path="res://assets/soundFX/unluck.wav" id="14_4f0mh"]
@@ -373,7 +374,8 @@ offset_top = -8.0
 offset_right = 8.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 2
-theme_override_font_sizes/normal_font_size = 8
+theme_override_fonts/normal_font = ExtResource("12_gc4hx")
+theme_override_font_sizes/normal_font_size = 10
 text = "12"
 scroll_active = false
 autowrap_mode = 0

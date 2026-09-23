@@ -4,10 +4,11 @@
 [ext_resource type="Script" uid="uid://benua7ksjotoq" path="res://scripts/ui/artifact_dialog.gd" id="2_ef8m7"]
 [ext_resource type="Texture2D" uid="uid://de2c8pnqtrt77" path="res://assets/images/inventory_ui.png" id="3_ihc8u"]
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="4_k3s15"]
-[ext_resource type="AudioStream" uid="uid://bxhii1a001e1v" path="res://assets/music/BATTLE_WIN.mp3" id="5_ilp40"]
+[ext_resource type="AudioStream" uid="uid://bxhii1a001e1v" path="res://assets/music/found_artifact.mp3" id="5_ilp40"]
 [ext_resource type="AudioStream" uid="uid://bq0ooer30jskk" path="res://assets/soundFX/xp_pick_up.wav" id="6_n8lm6"]
 [ext_resource type="AudioStream" uid="uid://dnyi4oi4yn2sl" path="res://assets/soundFX/cancel.wav" id="7_g6pa0"]
 [ext_resource type="AudioStream" uid="uid://cpj4ex8gfs0ie" path="res://assets/soundFX/coin-flip.wav" id="8_kyo6c"]
+
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_snn0j"]
 shader = ExtResource("1_r3gce")

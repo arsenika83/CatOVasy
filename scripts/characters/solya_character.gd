@@ -641,6 +641,8 @@ func _on_take_damage_timer_timeout() -> void:
 				gm.current_energy_human = -1000
 				get_parent().progress_turn()
 				get_parent().end_turn()
+			else:
+				get_parent().end_turn()	
 			
 		audio_fall.play()
 		sprite.play("dead")
@@ -688,6 +690,8 @@ func _on_deal_damage_timer_timeout() -> void:
 		is_self_damage = randi_range(0, 100) < 15
 		
 	if is_hit_lucky:
+		#$LuckyHitTimer.start(gm.attack_animation_time_human)
+		
 		if gm.has_rainbow_pot: #ГОРШОЧЕК РАДУГИ
 			get_parent().human.rainbow_defend(2)
 		
@@ -884,3 +888,28 @@ func _on_explode_timer_timeout() -> void:
 	$AudioExplode.play()
 	get_parent().giant.sprite.visible = true
 	
+
+
+func _on_lucky_hit_timer_timeout() -> void:
+	if Engine.time_scale == 1.0:
+		Engine.time_scale = 0.5
+		$LuckyHitTimer.start(gm.attack_animation_time_human)
+		
+		gm.camera_prev_position = get_parent().player_camera.position
+		
+		var tween = create_tween()
+		tween.tween_property(get_parent().player_camera, "position", gm.current_targets[0].position - Vector2(32, 0), 0.05)
+		
+		var tween1 = create_tween()
+		tween1.tween_property(get_parent().player_camera, "zoom", Vector2(5, 5), 0.05)
+	else:
+		Engine.time_scale = 1.0
+		
+		var tween = create_tween()
+		tween.tween_property(Engine, "time_scale", 1.0, 0.2)
+		
+		var tween1 = create_tween()
+		tween1.tween_property(get_parent().player_camera, "position", gm.camera_prev_position, 0.2)
+		
+		var tween2 = create_tween()
+		tween2.tween_property(get_parent().player_camera, "zoom", Vector2(gm.camera_zoom, gm.camera_zoom), 0.2)

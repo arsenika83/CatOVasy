@@ -10,9 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://b8bfs4u1x4s8" path="res://scenes/objects/grass_low.tscn" id="8_5yn1g"]
 [ext_resource type="Shader" uid="uid://dm6djrn7pct8b" path="res://shaders/wobble.gdshader" id="8_ou0n0"]
 [ext_resource type="PackedScene" uid="uid://6hsq7ud5p275" path="res://scenes/fx/fire_fx.tscn" id="8_w756s"]
-[ext_resource type="AudioStream" uid="uid://ck8shm08honae" path="res://assets/music/BATTLE_THEME_2.ogg" id="8_ymw5c"]
 [ext_resource type="PackedScene" uid="uid://c85j0cjbsfflo" path="res://scenes/objects/tree_1.tscn" id="9_ek61p"]
-[ext_resource type="AudioStream" uid="uid://bxhii1a001e1v" path="res://assets/music/BATTLE_WIN.mp3" id="9_mrg47"]
 [ext_resource type="PackedScene" uid="uid://bq46oyngg435a" path="res://scenes/ui/card_container_cat.tscn" id="10_ou0n0"]
 [ext_resource type="PackedScene" uid="uid://f3jfsj1vndud" path="res://scenes/fx/giant_explosion.tscn" id="11_5yn1g"]
 [ext_resource type="PackedScene" uid="uid://btcx8q72tnkf5" path="res://scenes/fx/claw_fx.tscn" id="11_nueng"]
@@ -36,11 +34,15 @@
 [ext_resource type="PackedScene" uid="uid://cuybslgtoc70m" path="res://scenes/ui/energy_human.tscn" id="20_xxxag"]
 [ext_resource type="PackedScene" uid="uid://c7lkcfyxh5uff" path="res://scenes/ui/card_container_human.tscn" id="21_5qqwm"]
 [ext_resource type="Shader" uid="uid://dwaf44tsm3ri3" path="res://shaders/fog.gdshader" id="22_3tvrp"]
+[ext_resource type="AudioStream" uid="uid://54c2asty0phq" path="res://assets/music/BATTLE_WIN_MUSIC_SHORT.ogg" id="22_5qdpt"]
+[ext_resource type="AudioStream" uid="uid://d376xnspnkqbg" path="res://assets/music/BATTLE_THEME_1.ogg" id="22_k5gn2"]
+[ext_resource type="AudioStream" uid="uid://vtanq4agccud" path="res://assets/music/BATTLE_DEFEAT_MUSIC.ogg" id="23_5qdpt"]
 [ext_resource type="AudioStream" uid="uid://cpj4ex8gfs0ie" path="res://assets/soundFX/coin-flip.wav" id="24_ml750"]
 [ext_resource type="PackedScene" uid="uid://db6mch348j5ck" path="res://scenes/ui/log_book.tscn" id="31_6g64q"]
 [ext_resource type="PackedScene" uid="uid://c2y8aeinkk1su" path="res://scenes/ui/battle_artifacts.tscn" id="36_tkvfg"]
 [ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="38_n75sr"]
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="39_ml750"]
+[ext_resource type="Shader" uid="uid://dmo1l352iefcn" path="res://shaders/tree.gdshader" id="41_5qdpt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fj52k"]
 shader = ExtResource("2_y3fis")
@@ -143,6 +145,13 @@ shader_parameter/fog_color = Color(0.54102784, 0.642951, 0.74190533, 0.36100003)
 shader_parameter/speed = 0.05
 shader_parameter/density = 1.0
 shader_parameter/alpha = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_toi0i"]
+shader = ExtResource("41_5qdpt")
+shader_parameter/speed = 2.000000095
+shader_parameter/min_strength = 0.10000000475
+shader_parameter/max_strength = 0.10000000475
+shader_parameter/wind_decay = 0.800000038
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t4r8s"]
 shader = ExtResource("38_n75sr")
@@ -315,12 +324,17 @@ z_index = 100
 position = Vector2(176, -32)
 
 [node name="AudioStreamPlayerMusic" type="AudioStreamPlayer" parent="." unique_id=179520262]
-stream = ExtResource("8_ymw5c")
+stream = ExtResource("22_k5gn2")
 autoplay = true
 bus = &"Music"
 
 [node name="AudioStreamPlayerWin" type="AudioStreamPlayer" parent="." unique_id=446606509]
-stream = ExtResource("9_mrg47")
+stream = ExtResource("22_5qdpt")
+volume_db = -6.0
+bus = &"Music"
+
+[node name="AudioStreamPlayerDefeat" type="AudioStreamPlayer" parent="." unique_id=614767086]
+stream = ExtResource("23_5qdpt")
 volume_db = -6.0
 bus = &"Music"
 
@@ -422,6 +436,7 @@ grow_horizontal = 0
 grow_vertical = 0
 
 [node name="EnergyHuman" parent="UI" unique_id=1994060991 instance=ExtResource("20_xxxag")]
+visible = false
 offset_left = 1048.0
 offset_top = 560.0
 offset_right = 1304.0
@@ -467,6 +482,22 @@ text = "ХОД ПРОТИВНИКА"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="BattleStatusLabel" type="Label" parent="UI" unique_id=1822543914]
+material = SubResource("ShaderMaterial_toi0i")
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -160.0
+offset_top = 64.0
+offset_right = 160.0
+offset_bottom = 128.0
+grow_horizontal = 2
+pivot_offset = Vector2(160, 32)
+theme_override_font_sizes/font_size = 64
+text = "БИТВА НАЧАЛАСЬ!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="MoneyIcon" type="TextureRect" parent="UI" unique_id=1689466319]
 material = SubResource("ShaderMaterial_t4r8s")
 offset_left = 704.0
@@ -502,6 +533,10 @@ one_shot = true
 wait_time = 0.7
 one_shot = true
 
+[node name="DefeatTimer" type="Timer" parent="." unique_id=780920454]
+wait_time = 0.7
+one_shot = true
+
 [node name="EndTurnTimer" type="Timer" parent="." unique_id=2145207919]
 wait_time = 0.25
 one_shot = true
@@ -516,4 +551,5 @@ texture_scale = 5.49
 [connection signal="pressed" from="UI/EndBattleButton" to="." method="_on_end_battle_button_pressed"]
 [connection signal="timeout" from="CheckStatsDialogHoldTimer" to="." method="_on_check_stats_dialog_hold_timer_timeout"]
 [connection signal="timeout" from="WinTimer" to="." method="_on_win_timer_timeout"]
+[connection signal="timeout" from="DefeatTimer" to="." method="_on_defeat_timer_timeout"]
 [connection signal="timeout" from="EndTurnTimer" to="." method="_on_end_turn_timer_timeout"]

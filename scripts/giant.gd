@@ -563,8 +563,8 @@ func _on_take_damage_timer_timeout() -> void:
 		get_parent().end_turn()
 	else:
 		if get_parent().name == "Battle":
-				get_parent().log_messages.append(str("- [color=#1ca8fd]", character_name_display, "[/color] [color=#fc4e52]МЕРТВ[/color]\n"))
-		
+			get_parent().log_messages.append(str("- [color=#1ca8fd]", character_name_display, "[/color] [color=#fc4e52]МЕРТВ[/color]\n"))
+			get_parent().end_turn()
 		audio_fall.play()
 		sprite.play("dead")
 

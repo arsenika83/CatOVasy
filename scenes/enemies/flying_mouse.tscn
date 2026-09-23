@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://crsqvlld0supu" path="res://assets/images/enemy_sprite.png" id="8_73r8j"]
 [ext_resource type="PackedScene" uid="uid://tksv3htggrop" path="res://scenes/fx/xp_orb.tscn" id="9_by84h"]
 [ext_resource type="PackedScene" uid="uid://cr7p23s5f4urx" path="res://scenes/fx/status_fx.tscn" id="10_514us"]
+[ext_resource type="FontFile" uid="uid://d1la5rrlowvtn" path="res://assets/fonts/ShovelKnightFont2_0.ttf" id="11_74mnn"]
 [ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="11_dfnlk"]
 [ext_resource type="AudioStream" uid="uid://bwch538phpi87" path="res://assets/soundFX/hit.wav" id="12_5x064"]
 [ext_resource type="AudioStream" uid="uid://b281edhvbfgf6" path="res://assets/soundFX/luck.wav" id="13_ue8y1"]
@@ -374,6 +375,7 @@ offset_top = -8.0
 offset_right = 8.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 2
+theme_override_fonts/normal_font = ExtResource("11_74mnn")
 theme_override_font_sizes/normal_font_size = 8
 text = "12"
 scroll_active = false

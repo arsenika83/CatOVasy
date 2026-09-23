@@ -15,6 +15,7 @@ var state_human = "idle"
 var prev_state_human = "idle"
 
 var camera_zoom = 2
+var camera_prev_position: Vector2
 var start_pos = Vector2i(64+16, 32+16)
 var prev_pos = Vector2i(64+16, 32+16)
 

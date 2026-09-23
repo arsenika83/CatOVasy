@@ -77,11 +77,16 @@ func _ready() -> void:
 	player_camera.zoom.y = gm.camera_zoom
 	human.sprite.flip_h = false
 	init()
-	$EndTurnTimer.start(1)
+	
+	if current_creature_turn == human or current_creature_turn == giant:
+		$EndTurnTimer.start(0.5)
+	else:
+		$EndTurnTimer.start(3.5)
 	
 	log_book.text.text += log_messages[0]
 	
 	draw_turn_label("player")
+	draw_battle_status_label("БИТВА НАЧАЛАСЬ!")
 
 
 func _process(delta: float) -> void:
@@ -206,6 +211,9 @@ func init() -> void:
 	turn_speed_line.assign(creatures)
 	turn_speed_line.sort_custom(func(a, b) : return a.current_speed > b.current_speed)
 	current_creature_turn = turn_speed_line[0]
+	
+	for e in turn_speed_line:
+		print(str(e.name, " -> ", e.speed))
 
 func win() -> void:
 	pass
@@ -250,6 +258,15 @@ func draw_turn_label(type : String) -> void:
 	tween.tween_property($UI/TurnLabel, "scale", Vector2(1, 1), 0.5)
 	tween.tween_property($UI/TurnLabel, "scale", Vector2(1, 1), 1)
 	tween.tween_property($UI/TurnLabel, "scale", Vector2(1, 0), 0.5)
+
+func draw_battle_status_label(text : String) -> void:
+	$UI/BattleStatusLabel.scale = Vector2(0, 0)
+	$UI/BattleStatusLabel.text = str(text)
+	
+	var tween = create_tween()
+	tween.tween_property($UI/BattleStatusLabel, "scale", Vector2(1, 1), 0.5)
+	tween.tween_property($UI/BattleStatusLabel, "scale", Vector2(1, 1), 3)
+	tween.tween_property($UI/BattleStatusLabel, "scale", Vector2(1, 0), 0.5)	
 	
 
 func draw_cursor() -> void:
@@ -544,8 +561,8 @@ func enemy_turn() -> void:
 		
 		if target == giant and gm.state == "dead":
 			target = human
-		if target == human and gm.state_human == "dead":
-			target = giant	
+		elif target == human and gm.state_human == "dead":
+			target = giant
 			
 		var action_number = randi_range(0, source.move_set.size()-1)
 		var action = source.move_set.get(action_number)
@@ -583,6 +600,9 @@ func end_turn() -> void:
 		
 		if gm.state_human == "dead":
 			progress_turn()
+			gm.current_energy_human = 0
+			end_turn()
+			return
 		
 		giant.my_turn.visible = false
 		human.my_turn.visible = true
@@ -609,7 +629,9 @@ func end_turn() -> void:
 	elif current_creature_turn == giant: #КОТ
 		if gm.state == "dead":
 			progress_turn()
+			gm.current_energy_cat = 0
 			end_turn()
+			return
 			
 		var cam_tween = create_tween()
 		cam_tween.tween_property(player_camera, "position:x", 144, 0.2)
@@ -1201,10 +1223,18 @@ func check_battle_status() -> void:
 	
 	if won:
 		battle_ended = true
+		var tween = create_tween()
+		tween.tween_property($AudioStreamPlayerMusic, "volume_db", -25, 0.3)
+		$AudioStreamPlayerWin.play()
+				
 		$WinTimer.start()
 	elif defeated:
 		battle_ended = true
-		$WinTimer.start()	
+		var tween = create_tween()
+		tween.tween_property($AudioStreamPlayerMusic, "volume_db", -25, 0.3)
+		$AudioStreamPlayerDefeat.play()		
+		
+		$DefeatTimer.start()	
 		
 func _play_money_sounds(duration: float) -> void:
 	var timer = get_tree().create_timer(duration)
@@ -1238,12 +1268,8 @@ func _on_check_stats_dialog_hold_timer_timeout() -> void:
 
 
 func _on_win_timer_timeout() -> void:
-		var tween = create_tween()
-		tween.tween_property($AudioStreamPlayerMusic, "volume_db", -15, 0.3)
-		
 		money_icon.visible = true
 		
-		$AudioStreamPlayerWin.play()
 		end_battle_button.visible = true
 		end_battle_button.disabled = false
 		card_container_cat.visible = false
@@ -1252,10 +1278,10 @@ func _on_win_timer_timeout() -> void:
 		$UI/EnergyHuman.visible = false
 		
 		if gm.state == "dead":
-			gm.state = "idle"
+			gm.state = "battle"
 			gm.hp_cat += 1
 		elif gm.state_human == "dead":
-			gm.state_human = "idle"
+			gm.state_human = "battle"
 			gm.hp_human += 1	
 		
 		log_messages.append("[font_size=20][center]\nПОБЕДА![/center][/font_size]")
@@ -1273,6 +1299,16 @@ func _on_win_timer_timeout() -> void:
 		
 		_play_money_sounds(0.5)
 
+func _on_defeat_timer_timeout() -> void:
+	end_battle_button.visible = true
+	end_battle_button.disabled = false
+	card_container_cat.visible = false
+	card_container_human.visible = false
+	$UI/EnergyCat.visible = false
+	$UI/EnergyHuman.visible = false
+		
+		
+	log_messages.append("[font_size=20][center]\nПОРАЖЕНИЕ![/center][/font_size]")
 
 func _on_end_turn_timer_timeout() -> void:
 	end_turn()

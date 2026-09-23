@@ -25,8 +25,11 @@ func _ready() -> void:
 	accuracy = 65
 	current_accuracy = accuracy
 	
-	luck = 0
-	current_luck = 0
+	luck = -10
+	current_luck = luck
+	
+	speed = 80
+	current_speed = speed
 	
 	current_energy = 5
 	energy = 5
