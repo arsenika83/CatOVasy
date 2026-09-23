@@ -52,7 +52,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_yu8pw")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 1.0
 }]
@@ -84,12 +84,13 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_kugq1")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dlw7w"]
+resource_local_to_scene = true
 shader = ExtResource("11_dfnlk")
 shader_parameter/speed = 2.0
 shader_parameter/amplitude = 2.000000095
@@ -148,7 +149,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fcftc")
 }],
-"loop": false,
+"loop": 0,
 "name": &"dead",
 "speed": 1.0
 }, {
@@ -171,7 +172,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_twn6s")
 }],
-"loop": true,
+"loop": 1,
 "name": &"deal_damage",
 "speed": 10.0
 }, {
@@ -179,7 +180,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jt03m")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }, {
@@ -190,7 +191,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_74mnn")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 1.0
 }, {
@@ -198,7 +199,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_lu5c6")
 }],
-"loop": true,
+"loop": 1,
 "name": &"take_damage",
 "speed": 5.0
 }]

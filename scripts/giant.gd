@@ -11,6 +11,7 @@ var character_name_display = "Кот"
 @onready var artifact_sprite = $ArtifactSprite
 @onready var defence_sprite = $DefenceSprite
 @onready var defence_label = $DefenceSprite/DefenceLabel
+@onready var hp_bar = $HPBar
 
 @onready var respawn_timer = $RespawnTimer
 @onready var fall_timer = $FallTimer
@@ -103,6 +104,7 @@ var current_debuffs : Dictionary[String, Array]
 var state = "battle"
 
 func _ready() -> void:
+	hp_bar.max_value = gm.max_hp_cat
 	scale = Vector2(0, 0)
 	spawn()
 	
@@ -155,6 +157,12 @@ func _process(delta: float) -> void:
 		light_diff = -0.0001
 	elif light.energy >= 1.3:
 		light_diff = 0.0001
+	
+	hp_bar.value = gm.hp_cat
+	if int(hp_bar.value) < gm.max_hp_cat:
+		hp_bar.visible = true
+	else:	
+		hp_bar.visible = false	
 	
 	check_fall(delta)
 	check_hp()
@@ -381,7 +389,7 @@ func give_debuff(targets : Array[CharacterBody2D], type : String, power : int, t
 	debuff_timer.start(gm.debuff_animation_time)
 
 func turn_tick() -> void:
-	gm.current_defence_cat = 0
+	#gm.current_defence_cat = 0
 	
 	for buff in current_buffs:
 		var turns = current_buffs.get(buff).get(1)

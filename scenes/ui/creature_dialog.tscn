@@ -37,6 +37,10 @@ region = Rect2(0, 144, 16, 16)
 atlas = ExtResource("4_j5lms")
 region = Rect2(16, 144, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_jom26"]
+atlas = ExtResource("4_j5lms")
+region = Rect2(16, 208, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_loxxi"]
 atlas = ExtResource("4_j5lms")
 region = Rect2(32, 144, 16, 16)
@@ -110,29 +114,31 @@ layout_mode = 0
 offset_left = 36.0
 offset_top = 39.0
 offset_right = 128.0
-offset_bottom = 192.0
+offset_bottom = 218.0
 theme_override_font_sizes/font_size = 22
 text = "ОЗ: 
 УРОН: 
 ЗАЩИТА: 
 ТОЧНОСТЬ: 
 УДАЧА: 
+СКОРОСТЬ:
 ЭНЕРГИЯ: "
 
 [node name="StatsLabel" type="Label" parent="." unique_id=1704144968]
 use_parent_material = true
 layout_mode = 0
-offset_left = 128.0
+offset_left = 136.0
 offset_top = 40.0
-offset_right = 220.0
-offset_bottom = 193.0
+offset_right = 228.0
+offset_bottom = 219.0
 theme_override_font_sizes/font_size = 22
 text = "1
 2
 3
 4
 5
-6"
+6
+7"
 
 [node name="Stats" type="Control" parent="." unique_id=1702192420]
 use_parent_material = true
@@ -194,6 +200,15 @@ offset_left = 8.0
 offset_top = 127.0
 offset_right = 24.0
 offset_bottom = 143.0
+texture = SubResource("AtlasTexture_jom26")
+
+[node name="TextureStat7" type="TextureRect" parent="Stats" unique_id=156693670]
+use_parent_material = true
+layout_mode = 0
+offset_left = 8.0
+offset_top = 153.0
+offset_right = 24.0
+offset_bottom = 169.0
 texture = SubResource("AtlasTexture_loxxi")
 
 [node name="ScrollContainer1" type="ScrollContainer" parent="." unique_id=1397189154]
@@ -246,7 +261,7 @@ script = ExtResource("5_0tj0i")
 use_parent_material = true
 layout_mode = 0
 offset_left = 16.0
-offset_top = 200.0
+offset_top = 224.0
 offset_right = 232.0
 offset_bottom = 336.0
 theme_override_font_sizes/normal_font_size = 18

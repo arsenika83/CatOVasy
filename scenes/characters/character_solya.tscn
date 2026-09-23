@@ -49,7 +49,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vsv37")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 1.0
 }]
@@ -81,7 +81,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wd4ag")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }]
@@ -277,7 +277,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bf2la")
 }],
-"loop": true,
+"loop": 1,
 "name": &"battle",
 "speed": 2.0
 }, {
@@ -285,7 +285,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7axqy")
 }],
-"loop": true,
+"loop": 1,
 "name": &"battle_ability",
 "speed": 5.0
 }, {
@@ -293,7 +293,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7axqy")
 }],
-"loop": true,
+"loop": 1,
 "name": &"battle_attack",
 "speed": 5.0
 }, {
@@ -301,7 +301,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bbpbm")
 }],
-"loop": true,
+"loop": 1,
 "name": &"battle_boredom",
 "speed": 5.0
 }, {
@@ -312,7 +312,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_g1j1r")
 }],
-"loop": true,
+"loop": 1,
 "name": &"battle_buff_cat",
 "speed": 5.0
 }, {
@@ -320,7 +320,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7axqy")
 }],
-"loop": true,
+"loop": 1,
 "name": &"battle_defend",
 "speed": 5.0
 }, {
@@ -328,7 +328,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_usu7w")
 }],
-"loop": true,
+"loop": 1,
 "name": &"dead",
 "speed": 5.0
 }, {
@@ -336,7 +336,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_6tupa")
 }],
-"loop": true,
+"loop": 1,
 "name": &"deal_damage",
 "speed": 5.0
 }, {
@@ -344,7 +344,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_a0gv1")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }, {
@@ -355,7 +355,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_gubmq")
 }],
-"loop": true,
+"loop": 1,
 "name": &"fog",
 "speed": 5.0
 }, {
@@ -363,7 +363,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ijvqx")
 }],
-"loop": true,
+"loop": 1,
 "name": &"healing",
 "speed": 5.0
 }, {
@@ -446,7 +446,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3ae6u")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 1.0
 }, {
@@ -454,7 +454,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_piljf")
 }],
-"loop": true,
+"loop": 1,
 "name": &"taking_damage",
 "speed": 5.0
 }, {
@@ -465,7 +465,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ihqkh")
 }],
-"loop": true,
+"loop": 1,
 "name": &"walking",
 "speed": 10.0
 }, {
@@ -476,7 +476,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_klmc7")
 }],
-"loop": true,
+"loop": 1,
 "name": &"walking_side",
 "speed": 5.0
 }, {
@@ -499,7 +499,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_tacdl")
 }],
-"loop": false,
+"loop": 0,
 "name": &"wind",
 "speed": 12.0
 }]
@@ -606,7 +606,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xrxwe")
 }],
-"loop": false,
+"loop": 0,
 "name": &"boomerang",
 "speed": 10.0
 }, {
@@ -623,7 +623,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3xb3h")
 }],
-"loop": false,
+"loop": 0,
 "name": &"candy",
 "speed": 2.0
 }, {
@@ -631,7 +631,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_17dpp")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }, {
@@ -678,7 +678,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_mvbdv")
 }],
-"loop": false,
+"loop": 0,
 "name": &"spinner",
 "speed": 2.0
 }]
@@ -848,6 +848,16 @@ radial_velocity_min = 0.99997765
 radial_velocity_max = 0.99997765
 gravity = Vector3(0, 0, 0)
 scale_curve = SubResource("CurveTexture_dqeso")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dqeso"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_icmx6"]
+atlas = ExtResource("5_105hs")
+region = Rect2(4, 256, 24, 3)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_txvxk"]
+atlas = ExtResource("5_105hs")
+region = Rect2(4, 258, 24, 3)
 
 [node name="CharacterSolya" type="CharacterBody2D" unique_id=52898326]
 script = ExtResource("1_5tjqq")
@@ -1126,6 +1136,19 @@ bus = &"SoundFX"
 stream = ExtResource("27_g1j1r")
 volume_db = -3.0
 bus = &"SoundFX"
+
+[node name="HPBar" type="TextureProgressBar" parent="." unique_id=177272482]
+visible = false
+material = SubResource("ShaderMaterial_dqeso")
+offset_left = -12.0
+offset_top = -58.0
+offset_right = 12.0
+offset_bottom = -55.0
+max_value = 5.0
+value = 5.0
+rounded = true
+texture_under = SubResource("AtlasTexture_icmx6")
+texture_progress = SubResource("AtlasTexture_txvxk")
 
 [connection signal="timeout" from="IdleAnimationTimer" to="." method="_on_idle_animation_timer_timeout"]
 [connection signal="timeout" from="RespawnTimer" to="." method="_on_respawn_timer_timeout"]
