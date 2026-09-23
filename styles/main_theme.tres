@@ -1,9 +1,18 @@
 [gd_resource type="Theme" format=3 uid="uid://6ydql0hb6ji7"]
 
+[ext_resource type="StyleBox" uid="uid://dq4yf7io1t4ec" path="res://styles/scroll_h.tres" id="1_g6rto"]
 [ext_resource type="StyleBox" uid="uid://b8wibcbgivilm" path="res://styles/button_normal.tres" id="1_pjbn5"]
+[ext_resource type="StyleBox" uid="uid://c66nispyhk2t0" path="res://styles/button_hover.tres" id="2_t4jxl"]
+[ext_resource type="StyleBox" uid="uid://2iw7p3yvicvr" path="res://styles/button_pressed.tres" id="3_ss8yu"]
 
 [resource]
+HScrollBar/styles/grabber = ExtResource("1_g6rto")
+HScrollBar/styles/grabber_highlight = ExtResource("2_t4jxl")
+HScrollBar/styles/grabber_pressed = ExtResource("3_ss8yu")
 TooltipLabel/constants/line_spacing = -10
 TooltipLabel/font_sizes/font_size = 24
 TooltipPanel/colors/title_color = Color(0, 0, 0, 1)
 TooltipPanel/styles/panel = ExtResource("1_pjbn5")
+VScrollBar/styles/grabber = ExtResource("1_g6rto")
+VScrollBar/styles/grabber_highlight = ExtResource("2_t4jxl")
+VScrollBar/styles/grabber_pressed = ExtResource("3_ss8yu")

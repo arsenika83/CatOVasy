@@ -42,6 +42,7 @@
 [ext_resource type="PackedScene" uid="uid://c2y8aeinkk1su" path="res://scenes/ui/battle_artifacts.tscn" id="36_tkvfg"]
 [ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="38_n75sr"]
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="39_ml750"]
+[ext_resource type="PackedScene" uid="uid://vkf4yyfhaivo" path="res://scenes/ui/speed_line.tscn" id="40_toi0i"]
 [ext_resource type="Shader" uid="uid://dmo1l352iefcn" path="res://shaders/tree.gdshader" id="41_5qdpt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fj52k"]
@@ -396,6 +397,10 @@ grow_vertical = 0
 offset_top = 96.0
 offset_bottom = 96.0
 
+[node name="SpeedLine" parent="UI" unique_id=325966660 instance=ExtResource("40_toi0i")]
+offset_left = 96.0
+offset_right = 544.0
+
 [node name="CreatureDialog" parent="UI" unique_id=1641948652 instance=ExtResource("13_1o703")]
 offset_left = -64.0
 offset_top = -64.16
@@ -475,8 +480,11 @@ offset_bottom = -168.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(224, 32)
+theme_override_colors/font_shadow_color = Color(0.15686275, 0.58431375, 0.8352941, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 10
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
 theme_override_font_sizes/font_size = 40
 text = "ХОД ПРОТИВНИКА"
 horizontal_alignment = 1
@@ -487,12 +495,15 @@ material = SubResource("ShaderMaterial_toi0i")
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -160.0
+offset_left = -202.0
 offset_top = 64.0
-offset_right = 160.0
+offset_right = 202.0
 offset_bottom = 128.0
 grow_horizontal = 2
 pivot_offset = Vector2(160, 32)
+theme_override_colors/font_shadow_color = Color(0.9882353, 0.30980393, 0.32156864, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 3
 theme_override_font_sizes/font_size = 64
 text = "БИТВА НАЧАЛАСЬ!"
 horizontal_alignment = 1

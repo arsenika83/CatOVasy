@@ -4,10 +4,11 @@
 
 [node name="DamageIndicator" type="RichTextLabel" unique_id=947859593]
 z_index = 50
-offset_right = 24.0
+offset_right = 32.0
 offset_bottom = 25.0
+pivot_offset = Vector2(16, 8)
 bbcode_enabled = true
-text = "0"
+text = "100"
 scroll_active = false
 autowrap_mode = 0
 horizontal_alignment = 1

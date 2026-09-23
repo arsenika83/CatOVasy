@@ -55,7 +55,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vsv37")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 1.0
 }]
@@ -90,7 +90,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5lxgs")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }]
@@ -298,7 +298,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2xoio")
 }],
-"loop": true,
+"loop": 1,
 "name": &"battle",
 "speed": 5.0
 }, {
@@ -363,7 +363,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2xoio")
 }],
-"loop": true,
+"loop": 1,
 "name": &"battle_ability",
 "speed": 1.0
 }, {
@@ -380,7 +380,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_p1oqw")
 }],
-"loop": true,
+"loop": 1,
 "name": &"battle_attack",
 "speed": 5.0
 }, {
@@ -391,7 +391,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_i1883")
 }],
-"loop": true,
+"loop": 1,
 "name": &"battle_buffed",
 "speed": 5.0
 }, {
@@ -456,7 +456,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2xoio")
 }],
-"loop": true,
+"loop": 1,
 "name": &"battle_defend",
 "speed": 1.0
 }, {
@@ -464,7 +464,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bmrke")
 }],
-"loop": true,
+"loop": 1,
 "name": &"dead",
 "speed": 5.0
 }, {
@@ -481,7 +481,7 @@ animations = [{
 "duration": 4.0,
 "texture": SubResource("AtlasTexture_3ywdo")
 }],
-"loop": false,
+"loop": 0,
 "name": &"deal_damage",
 "speed": 10.0
 }, {
@@ -489,7 +489,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0vpcl")
 }],
-"loop": true,
+"loop": 1,
 "name": &"falling",
 "speed": 5.0
 }, {
@@ -539,7 +539,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ayw8s")
 }],
-"loop": false,
+"loop": 0,
 "name": &"healing",
 "speed": 10.0
 }, {
@@ -604,7 +604,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2xoio")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 5.0
 }, {
@@ -615,7 +615,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_dt8fj")
 }],
-"loop": true,
+"loop": 1,
 "name": &"resting",
 "speed": 1.0
 }, {
@@ -626,7 +626,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_glfi2")
 }],
-"loop": true,
+"loop": 1,
 "name": &"stop",
 "speed": 1.0
 }, {
@@ -634,7 +634,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ycwex")
 }],
-"loop": true,
+"loop": 1,
 "name": &"taking_damage",
 "speed": 5.0
 }, {
@@ -660,7 +660,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bmhpy")
 }],
-"loop": true,
+"loop": 1,
 "name": &"walk_around",
 "speed": 20.0
 }, {
@@ -671,7 +671,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_86ape")
 }],
-"loop": true,
+"loop": 1,
 "name": &"walking_side",
 "speed": 5.0
 }]
@@ -782,7 +782,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xrxwe")
 }],
-"loop": false,
+"loop": 0,
 "name": &"boomerang",
 "speed": 10.0
 }, {
@@ -799,7 +799,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3xb3h")
 }],
-"loop": false,
+"loop": 0,
 "name": &"candy",
 "speed": 2.0
 }, {
@@ -807,7 +807,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_17dpp")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }, {
@@ -854,7 +854,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_mvbdv")
 }],
-"loop": false,
+"loop": 0,
 "name": &"spinner",
 "speed": 2.0
 }]
@@ -993,6 +993,16 @@ scale_curve = SubResource("CurveTexture_u4m4i")
 anim_offset_max = 1.0
 anim_offset_curve = SubResource("CurveTexture_kn0ek")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6wucx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_423d8"]
+atlas = ExtResource("5_wbhg2")
+region = Rect2(4, 256, 24, 3)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nae2p"]
+atlas = ExtResource("5_wbhg2")
+region = Rect2(4, 258, 24, 3)
+
 [node name="Giant" type="CharacterBody2D" unique_id=578584297]
 collision_mask = 0
 motion_mode = 1
@@ -1027,9 +1037,8 @@ autoplay = "default"
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1540776930]
 position = Vector2(0, -6)
 sprite_frames = SubResource("2")
-animation = &"walk_around"
+animation = &"battle"
 autoplay = "idle"
-frame_progress = 0.37879518
 
 [node name="Bubble" type="Sprite2D" parent="." unique_id=1627104492]
 visible = false
@@ -1234,6 +1243,19 @@ bus = &"SoundFX"
 [node name="AudioExplode" type="AudioStreamPlayer" parent="." unique_id=1567162070]
 stream = ExtResource("4_ukwaf")
 pitch_scale = 0.3
+
+[node name="HPBar" type="TextureProgressBar" parent="." unique_id=281974220]
+visible = false
+material = SubResource("ShaderMaterial_6wucx")
+offset_left = -12.0
+offset_top = -20.0
+offset_right = 12.0
+offset_bottom = -17.0
+max_value = 5.0
+value = 5.0
+rounded = true
+texture_under = SubResource("AtlasTexture_423d8")
+texture_progress = SubResource("AtlasTexture_nae2p")
 
 [connection signal="area_shape_entered" from="Area2D" to="." method="_on_area_2d_area_shape_entered"]
 [connection signal="timeout" from="IdleAnimationTimer" to="." method="_on_idle_animation_timer_timeout"]

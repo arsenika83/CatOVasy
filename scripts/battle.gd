@@ -680,10 +680,12 @@ func end_turn() -> void:
 				var tween2 = create_tween()
 				tween2.tween_property($FX/Rocky, "scale", Vector2(0, 0), 2)
 				
-				if current_creature_turn != human:
-					$EndTurnTimer.start(1)
+				if current_creature_turn == human:
+					$EndTurnTimer.start(0.3)
 				else:	
-					$EndTurnTimer.start()
+					$EndTurnTimer.start(1)
+			else:
+				$EndTurnTimer.start(0.5)		
 			
 			var camera_tween = create_tween()
 			camera_tween.tween_property(player_camera, "position:x", 192, 0.2)
@@ -725,7 +727,7 @@ func progress_turn():
 		if gm.has_regen_ring: #КОЛЬЦО РЕГЕНЕРАЦИИ
 			giant.heal(2)
 				
-		for e in current_enemies:
+		for e in creatures:
 			e.turn_tick()
 			e.current_energy = e.energy
 			
@@ -773,6 +775,7 @@ func check_creature_stats() -> void:
 		stats += 	str("\n", gm.current_defence_cat, "/", gm.max_defence_cat)
 		stats += 	str("\n", gm.current_accuracy_cat, "%")
 		stats += 	str("\n", gm.current_luck_cat, "%")
+		stats += 	str("\n", gm.current_speed_cat)
 		stats += 	str("\n", gm.current_energy_cat, "/", gm.max_energy_cat)
 		creature_check_dialog.find_child("StatsLabel").text = stats
 		
@@ -824,6 +827,7 @@ func check_creature_stats() -> void:
 		stats += 	str("\n", gm.current_defence_human, "/", gm.max_defence_human)
 		stats += 	str("\n", gm.current_accuracy_human, "%")
 		stats += 	str("\n", gm.current_luck_human, "%")
+		stats += 	str("\n", gm.current_speed_human)
 		stats += 	str("\n", gm.current_energy_human, "/", gm.max_energy_human)
 		creature_check_dialog.find_child("StatsLabel").text = stats
 		
@@ -874,14 +878,15 @@ func check_creature_stats() -> void:
 							
 						creature_dialog_on_screen = true
 							
-						creature_check_dialog.find_child("NameLabel").text = target.enemy_name_rus
+						creature_check_dialog.find_child("NameLabel").text = current_creature_stats.enemy_name_rus
 						
-						var stats =   str(target.hp, "/", target.max_hp)
-						stats += 	str("\n", target.current_damage)
-						stats += 	str("\n", target.current_defence, "/", target.max_defence)
-						stats += 	str("\n", target.current_accuracy, "%")
-						stats += 	str("\n", target.current_luck, "%")
-						stats += 	str("\n", target.current_energy, "/", target.max_energy)
+						var stats =   str(current_creature_stats.hp, "/", current_creature_stats.max_hp)
+						stats += 	str("\n", current_creature_stats.current_damage)
+						stats += 	str("\n", current_creature_stats.current_defence, "/", current_creature_stats.max_defence)
+						stats += 	str("\n", current_creature_stats.current_accuracy, "%")
+						stats += 	str("\n", current_creature_stats.current_luck, "%")
+						stats += 	str("\n", current_creature_stats.current_speed)
+						stats += 	str("\n", current_creature_stats.current_energy, "/", current_creature_stats.max_energy)
 						creature_check_dialog.find_child("StatsLabel").text = stats
 						
 						var abilities = ""

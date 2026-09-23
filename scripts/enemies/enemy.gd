@@ -439,7 +439,8 @@ func display_damage(dmg) -> void:
 		indicator.display_damage(dmg, spawn_pos)
 	
 func turn_tick() -> void:
-	current_defence = 0
+	pass
+	#current_defence = 0
 
 func die() -> void:
 		audio_fall.play()

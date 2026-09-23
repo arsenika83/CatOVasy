@@ -273,7 +273,7 @@ func load_file():
 		
 	var file = FileAccess.open(SAVE_PATH, FileAccess.READ)
 	if file == null or file.get_as_text() == "{}":
-		push_error("Не удалось открыть файл сохранения: " + str(FileAccess.get_open_error()))
+		print("Не удалось открыть файл сохранения: " + str(FileAccess.get_open_error()))
 		return
 		
 	var json_string = file.get_as_text()

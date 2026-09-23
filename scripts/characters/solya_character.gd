@@ -11,6 +11,7 @@ var character_name_display = "Соля"
 @onready var artifact_sprite = $ArtifactSprite
 @onready var defence_sprite = $DefenceSprite
 @onready var defence_label = $DefenceSprite/DefenceLabel
+@onready var hp_bar = $HPBar
 
 @onready var respawn_timer = $RespawnTimer
 @onready var fall_timer = $FallTimer
@@ -100,6 +101,7 @@ var current_buffs : Dictionary[String, Array]
 var current_debuffs : Dictionary[String, Array]
 
 func _ready() -> void:
+	hp_bar.max_value = gm.max_hp_human
 	sprite.play("battle")
 	scale = Vector2(0, 0)
 	spawn()
@@ -144,6 +146,12 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	hp_bar.value = float(gm.hp_human)
+	if int(hp_bar.value) < gm.max_hp_human:
+		hp_bar.visible = true
+	else:	
+		hp_bar.visible = false	
+	
 	check_fall(delta)
 	check_hp()
 	#print(gm.prev_state_human)
@@ -443,7 +451,7 @@ func display_damage(dmg) -> void:
 		indicator.display_damage(dmg, spawn_pos)
 
 func turn_tick() -> void:
-	gm.current_defence_human = 0
+	#gm.current_defence_human = 0
 	for buff in current_buffs:
 		var turns = current_buffs.get(buff).get(1)
 		current_buffs.get(buff).set(1, turns-1)
@@ -648,7 +656,7 @@ func _on_take_damage_timer_timeout() -> void:
 		sprite.play("dead")
 
 func _on_idle_animation_timer_timeout() -> void:
-	if gm.prev_state_human == "playing_a_card" or gm.prev_state_human == "taking_damage":
+	if gm.prev_state_human == "playing_a_card" or gm.prev_state_human == "taking_damage" or gm.prev_state == "healing":
 		gm.prev_state_human = "battle"
 	
 	gm.state_human = gm.prev_state_human
