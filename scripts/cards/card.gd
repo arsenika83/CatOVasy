@@ -50,7 +50,7 @@ func update_energy() -> void:
 
 func _on_mouse_entered() -> void:
 	if enabled:
-		z_index += 10
+		z_index += 11
 		audio_hover.play()
 		animate_to(SCALE_HOVER, Color.WHITE)
 			
@@ -61,7 +61,7 @@ func _on_mouse_entered() -> void:
 # Мышь ушла с элемента
 func _on_mouse_exited() -> void:
 	if enabled:
-		z_index -= 10
+		z_index -= 11
 		animate_to(SCALE_NORMAL, Color.WHITE)
 		
 		#description_rect.scale = Vector2(1, 1)

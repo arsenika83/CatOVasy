@@ -1,6 +1,6 @@
 class_name HumanCharacter extends CharacterBody2D
 
-var character_name = "solya"
+var creature_name = "solya"
 var character_name_display = "Соля"
 @export var damage_indicator_scene: PackedScene
 @onready var area = $Area2D
@@ -42,6 +42,7 @@ var character_name_display = "Соля"
 @onready var neutrality_particles = $NeutralityParticles
 
 var enemy_name_rus = "Соля"
+var state = "battle"
 
 var hp = 5
 var max_hp = hp
@@ -650,7 +651,8 @@ func _on_take_damage_timer_timeout() -> void:
 				get_parent().progress_turn()
 				get_parent().end_turn()
 			else:
-				get_parent().end_turn()	
+				get_parent().on_creature_action()
+				get_parent().end_turn()
 			
 		audio_fall.play()
 		sprite.play("dead")
@@ -890,7 +892,7 @@ func _on_explode_timer_timeout() -> void:
 	if gm.state != "dead":
 		get_parent().giant_explosion_fx.play("hit")
 	else:
-		gm.current_card.element = "death"
+		#gm.current_card.element = "death"
 		get_parent().giant_explosion_fx.play("dead_hit")
 	get_parent().player_camera.apply_shake(3)
 	$AudioExplode.play()

@@ -2,3 +2,5 @@ res://scenes/levels/battle_level.tscn
 res://shaders/card_glow.gdshader
 res://shaders/outline.gdshader
 res://shaders/underwater.gdshader
+res://scenes/ui/inventory.tscn
+res://scripts/ui/inventory.gd

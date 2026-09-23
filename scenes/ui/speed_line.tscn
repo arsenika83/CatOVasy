@@ -2,7 +2,7 @@
 
 [ext_resource type="StyleBox" uid="uid://dreoye77u4c8f" path="res://styles/black_rect_alpha.tres" id="1_eayrd"]
 [ext_resource type="Script" uid="uid://ctl5rxpfth3f0" path="res://scripts/ui/speed_line.gd" id="1_ei673"]
-[ext_resource type="PackedScene" uid="uid://tp3183jcggau" path="res://scenes/ui/creature_icon.tscn" id="1_po6jl"]
+[ext_resource type="PackedScene" uid="uid://tp3183jcggau" path="res://scenes/ui/creature_icon.tscn" id="3_ei673"]
 
 [node name="SpeedLine" type="Control" unique_id=325966660]
 layout_mode = 3
@@ -12,17 +12,28 @@ offset_bottom = 96.0
 pivot_offset = Vector2(216, 64)
 script = ExtResource("1_ei673")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1897484450]
+[node name="Panel" type="Panel" parent="." unique_id=1157917996]
+visible = false
 layout_mode = 0
 offset_right = 448.0
 offset_bottom = 88.0
-theme_override_constants/scrollbar_h_separation = 10
-theme_override_constants/scrollbar_v_separation = 10
 theme_override_styles/panel = ExtResource("1_eayrd")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1897484450]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 440.0
+offset_bottom = 80.0
+pivot_offset = Vector2(216, 28)
+theme_override_constants/scrollbar_h_separation = 3
+theme_override_constants/scrollbar_v_separation = 3
 vertical_scroll_mode = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="ScrollContainer" unique_id=1067642919]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_constants/margin_left = 2
 theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 2
@@ -30,28 +41,20 @@ theme_override_constants/margin_bottom = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/MarginContainer" unique_id=1551921946]
 layout_mode = 2
-theme_override_constants/separation = 54
+theme_override_constants/separation = 4
+alignment = 1
 
-[node name="CreatureIcon" parent="ScrollContainer/MarginContainer/HBoxContainer" unique_id=916020762 instance=ExtResource("1_po6jl")]
+[node name="CreatureIcon" parent="ScrollContainer/MarginContainer/HBoxContainer" unique_id=466900556 instance=ExtResource("3_ei673")]
 layout_mode = 2
 
-[node name="CreatureIcon2" parent="ScrollContainer/MarginContainer/HBoxContainer" unique_id=1893695300 instance=ExtResource("1_po6jl")]
+[node name="CreatureIcon2" parent="ScrollContainer/MarginContainer/HBoxContainer" unique_id=203187833 instance=ExtResource("3_ei673")]
 layout_mode = 2
 
-[node name="CreatureIcon3" parent="ScrollContainer/MarginContainer/HBoxContainer" unique_id=776141915 instance=ExtResource("1_po6jl")]
+[node name="CreatureIcon3" parent="ScrollContainer/MarginContainer/HBoxContainer" unique_id=2088170738 instance=ExtResource("3_ei673")]
 layout_mode = 2
 
-[node name="CreatureIcon4" parent="ScrollContainer/MarginContainer/HBoxContainer" unique_id=1789975183 instance=ExtResource("1_po6jl")]
+[node name="CreatureIcon4" parent="ScrollContainer/MarginContainer/HBoxContainer" unique_id=907295282 instance=ExtResource("3_ei673")]
 layout_mode = 2
 
-[node name="CreatureIcon5" parent="ScrollContainer/MarginContainer/HBoxContainer" unique_id=466900556 instance=ExtResource("1_po6jl")]
-layout_mode = 2
-
-[node name="CreatureIcon6" parent="ScrollContainer/MarginContainer/HBoxContainer" unique_id=1065328934 instance=ExtResource("1_po6jl")]
-layout_mode = 2
-
-[node name="CreatureIcon7" parent="ScrollContainer/MarginContainer/HBoxContainer" unique_id=2113114432 instance=ExtResource("1_po6jl")]
-layout_mode = 2
-
-[node name="CreatureIcon8" parent="ScrollContainer/MarginContainer/HBoxContainer" unique_id=1525783694 instance=ExtResource("1_po6jl")]
-layout_mode = 2
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

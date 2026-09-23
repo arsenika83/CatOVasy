@@ -3,7 +3,7 @@ class_name FlyingMouse extends Enemy
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	enemy_scene_path = "flying_mouse.tscn"
-	enemy_name = "Flying Mouse"
+	creature_name = "flying_mouse"
 	enemy_name_rus = "Шариковая мышь"
 	defence_sprite.visible = false
 	

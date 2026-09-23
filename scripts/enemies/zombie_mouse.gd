@@ -2,7 +2,7 @@ class_name ZombieMouse extends Enemy
 
 func _ready() -> void:
 	enemy_scene_path = "zombie_mouse.tscn"
-	enemy_name = "Zombie mouse"
+	creature_name = "zombie_mouse"
 	enemy_name_rus = "Мышь-зомби"
 	defence_sprite.visible = false
 	

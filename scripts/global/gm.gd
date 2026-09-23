@@ -63,7 +63,7 @@ var max_energy_cat: int = 3
 var current_hand_size_cat: int = 5
 var hand_size_cat: int = 5
 
-var might_resistance_cat: float = 0.5
+var might_resistance_cat: float = 0.2
 var fire_resistance_cat: float = 0
 var wind_resistance_cat: float = 0.0
 var death_resistance_cat: float = 0
@@ -72,7 +72,7 @@ var luck_resistance_cat: float = 0.0
 var unluck_resistance_cat: float = 0.0
 var inaccuracy_resistance_cat: float = 0.0
 
-var current_might_resistance_cat: float = 0.5
+var current_might_resistance_cat: float = 0.2
 var current_fire_resistance_cat: float = 0
 var current_wind_resistance_cat: float = 0.0
 var current_death_resistance_cat: float = 0

@@ -3,7 +3,7 @@ class_name Fox extends Enemy
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	enemy_scene_path = "fox.tscn"
-	enemy_name = "Fox"
+	creature_name = "fox"
 	enemy_name_rus = "Лиса"
 	
 	attack_animation_time = 0.4

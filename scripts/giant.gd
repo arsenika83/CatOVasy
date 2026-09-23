@@ -1,6 +1,6 @@
 class_name Giant extends CharacterBody2D
 
-var character_name = "cat"
+var creature_name = "cat"
 var character_name_display = "Кот"
 @export var damage_indicator_scene: PackedScene
 @onready var area = $Area2D
@@ -572,6 +572,7 @@ func _on_take_damage_timer_timeout() -> void:
 	else:
 		if get_parent().name == "Battle":
 			get_parent().log_messages.append(str("- [color=#1ca8fd]", character_name_display, "[/color] [color=#fc4e52]МЕРТВ[/color]\n"))
+			get_parent().on_creature_action()
 			get_parent().end_turn()
 		audio_fall.play()
 		sprite.play("dead")

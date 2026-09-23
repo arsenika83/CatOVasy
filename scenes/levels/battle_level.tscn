@@ -38,6 +38,7 @@
 [ext_resource type="AudioStream" uid="uid://d376xnspnkqbg" path="res://assets/music/BATTLE_THEME_1.ogg" id="22_k5gn2"]
 [ext_resource type="AudioStream" uid="uid://vtanq4agccud" path="res://assets/music/BATTLE_DEFEAT_MUSIC.ogg" id="23_5qdpt"]
 [ext_resource type="AudioStream" uid="uid://cpj4ex8gfs0ie" path="res://assets/soundFX/coin-flip.wav" id="24_ml750"]
+[ext_resource type="AudioStream" uid="uid://x1dm5w57da6n" path="res://assets/soundFX/new_turn.wav" id="27_d1aak"]
 [ext_resource type="PackedScene" uid="uid://db6mch348j5ck" path="res://scenes/ui/log_book.tscn" id="31_6g64q"]
 [ext_resource type="PackedScene" uid="uid://c2y8aeinkk1su" path="res://scenes/ui/battle_artifacts.tscn" id="36_tkvfg"]
 [ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="38_n75sr"]
@@ -331,12 +332,12 @@ bus = &"Music"
 
 [node name="AudioStreamPlayerWin" type="AudioStreamPlayer" parent="." unique_id=446606509]
 stream = ExtResource("22_5qdpt")
-volume_db = -6.0
+volume_db = 5.0
 bus = &"Music"
 
 [node name="AudioStreamPlayerDefeat" type="AudioStreamPlayer" parent="." unique_id=614767086]
 stream = ExtResource("23_5qdpt")
-volume_db = -6.0
+volume_db = 5.0
 bus = &"Music"
 
 [node name="AudioStreamPlayerHit" type="AudioStreamPlayer" parent="." unique_id=559939619]
@@ -350,7 +351,12 @@ bus = &"SoundFX"
 
 [node name="AudioMoney" type="AudioStreamPlayer" parent="." unique_id=1251665220]
 stream = ExtResource("24_ml750")
-volume_db = -5.0
+volume_db = -15.0
+pitch_scale = 0.9
+bus = &"SoundFX"
+
+[node name="AudioNewTurn" type="AudioStreamPlayer" parent="." unique_id=1616999077]
+stream = ExtResource("27_d1aak")
 pitch_scale = 0.9
 bus = &"SoundFX"
 
@@ -398,8 +404,13 @@ offset_top = 96.0
 offset_bottom = 96.0
 
 [node name="SpeedLine" parent="UI" unique_id=325966660 instance=ExtResource("40_toi0i")]
-offset_left = 96.0
-offset_right = 544.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -224.0
+offset_right = 224.0
+grow_horizontal = 2
+pivot_offset = Vector2(224, 48)
 
 [node name="CreatureDialog" parent="UI" unique_id=1641948652 instance=ExtResource("13_1o703")]
 offset_left = -64.0

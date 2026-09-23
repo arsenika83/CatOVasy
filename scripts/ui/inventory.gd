@@ -27,7 +27,7 @@ artifact_slot_4, artifact_slot_5, artifact_slot_6, artifact_slot_7, artifact_slo
 
 @onready var money_label = $MoneyIcon/MoneyLabel
 
-var cat_button_already_pressed = false
+var cat_button_already_pressed = true
 var human_button_already_pressed = false
 
 var state = "cat"
@@ -176,7 +176,9 @@ func clear_slots() -> void:
 		artifact_slot.clear()	
 
 func _on_cat_button_pressed() -> void:
+	$ScrollContainer.scroll_vertical = 0
 	if cat_button_already_pressed:
+		cat_button.button_pressed = true
 		get_parent().get_parent().draw_inventory()
 		return
 	state = "cat"
@@ -190,7 +192,9 @@ func _on_cat_button_pressed() -> void:
 
 
 func _on_human_button_pressed() -> void:
+	$ScrollContainer.scroll_vertical = 0	
 	if human_button_already_pressed:
+		human_button.button_pressed = true
 		get_parent().get_parent().draw_inventory()
 		return
 		

@@ -13,6 +13,7 @@ var initial_money = 0
 var log_messages: Array[String] = ["[center][font_size=20]БОЙ НАЧАЛСЯ![/font_size][/center]\n[center]>>> ХОД 1 <<<[/center]\n"]
 var log_count = 1
 @onready var log_book = $UI/LogBook
+@onready var speed_line_ui = $UI/SpeedLine
 
 @onready var cursor = $Cursor
 @onready var map = $TileMapLayerBlack
@@ -105,10 +106,12 @@ func _process(delta: float) -> void:
 	cursor_map_pos = map.local_to_map(cursor_pos)
 	cursor.global_position = map.map_to_local(cursor_map_pos)
 	
-	draw_cursor()
+	
 	#update_creature_dialog()
 	
 	if state == "default":
+		draw_cursor()
+		
 		if Input.is_action_just_pressed("ui_scale_up") and gm.camera_zoom <= 3:
 			gm.camera_zoom += 1
 			smooth_camera_zoom(":zoom:x", gm.camera_zoom)
@@ -212,8 +215,8 @@ func init() -> void:
 	turn_speed_line.sort_custom(func(a, b) : return a.current_speed > b.current_speed)
 	current_creature_turn = turn_speed_line[0]
 	
-	for e in turn_speed_line:
-		print(str(e.name, " -> ", e.speed))
+	speed_line_ui.progress_turn()
+
 
 func win() -> void:
 	pass
@@ -248,6 +251,7 @@ func find_enemy_by_position(battle_x : int, battle_y : int) -> CharacterBody2D:
 
 func draw_turn_label(type : String) -> void:
 	$UI/TurnLabel.scale = Vector2(0, 0)
+	$AudioNewTurn.play()
 	
 	match type:
 		"player":
@@ -714,14 +718,13 @@ func end_turn() -> void:
 func progress_turn():
 	turn_speed_line.remove_at(0)
 	if turn_speed_line.size() == 0:
-		draw_turn_label("player")
-		
 		turn_speed_line.assign(creatures)
 		turn_speed_line.sort_custom(func(a, b) : return a.current_speed > b.current_speed)
 		
 		current_creature_turn = turn_speed_line[0]
 		
 		turn_count += 1
+		draw_turn_label("player")
 		log_messages.append(str("\n[center]>>> ХОД ", turn_count, " <<<[/center]\n"))
 				
 		if gm.has_regen_ring: #КОЛЬЦО РЕГЕНЕРАЦИИ
@@ -733,7 +736,9 @@ func progress_turn():
 			
 		$EndTurnTimer.start()
 	else:
-		current_creature_turn = turn_speed_line[0]	
+		current_creature_turn = turn_speed_line[0]
+	
+	speed_line_ui.progress_turn()
 
 func check_creature_stats() -> void:
 	var cursor_grid_pos = map.local_to_map(get_global_mouse_position())
@@ -1195,6 +1200,9 @@ func update_creature_dialog() -> void:
 							
 						return
 
+func on_creature_action():
+	speed_line_ui.progress_turn()
+
 func check_enemy_army() -> void:
 	var dead_count = 0
 	
@@ -1281,6 +1289,7 @@ func _on_win_timer_timeout() -> void:
 		card_container_human.visible = false
 		$UI/EnergyCat.visible = false
 		$UI/EnergyHuman.visible = false
+		speed_line_ui.visible = false
 		
 		if gm.state == "dead":
 			gm.state = "battle"
@@ -1311,7 +1320,7 @@ func _on_defeat_timer_timeout() -> void:
 	card_container_human.visible = false
 	$UI/EnergyCat.visible = false
 	$UI/EnergyHuman.visible = false
-		
+	speed_line_ui.visible = false	
 		
 	log_messages.append("[font_size=20][center]\nПОРАЖЕНИЕ![/center][/font_size]")
 

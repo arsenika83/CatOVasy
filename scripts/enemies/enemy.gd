@@ -44,7 +44,7 @@ var is_big = false
 var shake = 0.1
 
 var enemy_type = "enemy"
-var enemy_name = "enemy"
+var creature_name = "enemy"
 var enemy_scene_path = "enemy.tscn"
 var enemy_name_rus = "Враг"
 
@@ -318,7 +318,7 @@ func deal_damage(target : CharacterBody2D) -> void:
 	tween1.tween_property(sprite, "scale", Vector2(1, 1), 0.1)
 	
 	if success:
-		if target.character_name == "solya":
+		if target.creature_name == "solya":
 			dealt_damage_to_human = true
 		if is_hit_lucky:
 			status_fx.scale = Vector2(0, 0)
@@ -489,6 +489,7 @@ func _on_take_damage_timer_timeout() -> void:
 			current_luck -= 3
 			get_parent().get_parent().log_messages.append(str("- [color=#e9920a]Портрет неизвестной[/color]: удача существа [color=#1ca8fd]", enemy_name_rus, "[/color] падает на 3%\n"))
 	else:
+		get_parent().get_parent().on_creature_action()
 		die()
 
 func _on_miss_damage_timer_timeout() -> void:

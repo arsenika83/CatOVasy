@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://tp3183jcggau"]
 
-[ext_resource type="Texture2D" uid="uid://djggfi67w50cu" path="res://assets/images/card_icons/girl.png" id="1_7wda3"]
 [ext_resource type="Script" uid="uid://ctpa2smspdnn5" path="res://scripts/ui/creature_icon.gd" id="1_445ia"]
 [ext_resource type="Texture2D" uid="uid://gaihrpfdp6v3" path="res://assets/images/stat_upgrades/common.png" id="1_fi637"]
+[ext_resource type="Texture2D" uid="uid://d3en7e512gtsy" path="res://assets/images/creature_portraits/turn_portrait.png" id="3_nj1ep"]
 [ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="4_nj1ep"]
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="4_qwbrf"]
 
@@ -16,26 +16,37 @@ shader_parameter/time_offset = 0.0
 atlas = ExtResource("4_qwbrf")
 region = Rect2(256, 128, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_nj1ep"]
+atlas = ExtResource("4_qwbrf")
+region = Rect2(256, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5mt3k"]
+atlas = ExtResource("4_qwbrf")
+region = Rect2(32, 144, 16, 16)
+
 [node name="CreatureIcon" type="Control" unique_id=466900556]
+custom_minimum_size = Vector2(48, 64)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 48.0
-offset_bottom = 48.0
+offset_bottom = 64.0
 pivot_offset = Vector2(24, 24)
 script = ExtResource("1_445ia")
 
 [node name="BG" type="TextureRect" parent="." unique_id=125950886]
 layout_mode = 0
+offset_top = 16.0
 offset_right = 48.0
-offset_bottom = 48.0
+offset_bottom = 64.0
 texture = ExtResource("1_fi637")
 expand_mode = 1
 
 [node name="Icon" type="TextureRect" parent="." unique_id=302995087]
 layout_mode = 0
+offset_top = 16.0
 offset_right = 48.0
-offset_bottom = 48.0
-texture = ExtResource("1_7wda3")
+offset_bottom = 64.0
+texture = ExtResource("3_nj1ep")
 expand_mode = 1
 
 [node name="Arrow" type="TextureRect" parent="." unique_id=524313305]
@@ -49,5 +60,51 @@ offset_right = 40.0
 offset_bottom = 88.0
 texture = SubResource("AtlasTexture_f30dh")
 
+[node name="Label" type="Label" parent="." unique_id=70510899]
+layout_mode = 0
+offset_top = 16.0
+offset_right = 48.0
+offset_bottom = 64.0
+theme_override_colors/font_shadow_color = Color(0.7921569, 0.007843138, 0.019607844, 1)
+theme_override_constants/shadow_offset_x = -1
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_font_sizes/font_size = 14
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Dead" type="TextureRect" parent="." unique_id=1834236085]
+visible = false
+layout_mode = 0
+offset_right = 48.0
+offset_bottom = 48.0
+texture = SubResource("AtlasTexture_nj1ep")
+expand_mode = 1
+
+[node name="SpeedLabel" type="Label" parent="." unique_id=748867635]
+visible = false
+layout_mode = 0
+offset_left = 16.0
+offset_right = 48.0
+offset_bottom = 16.0
+theme_override_colors/font_shadow_color = Color(0.7921569, 0.007843138, 0.019607844, 1)
+theme_override_constants/shadow_offset_x = -1
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_font_sizes/font_size = 14
+text = "5/5"
+horizontal_alignment = 2
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Speed" type="TextureRect" parent="." unique_id=46237392]
+visible = false
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+texture = SubResource("AtlasTexture_5mt3k")
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

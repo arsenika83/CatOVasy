@@ -1,12 +1,12 @@
+TextureRect
+Panel
 Label
 Timer
 ScrollContainer
-TextureRect
 Control
 GridContainer
 RichTextLabel
 GPUParticles2D
-Panel
 Button
 VBoxContainer
 AudioStreamPlayer
