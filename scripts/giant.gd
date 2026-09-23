@@ -148,6 +148,7 @@ func _ready() -> void:
 	
 
 func _process(delta: float) -> void:
+	gm.current_energy_cat = current_energy
 	light.energy -= light_diff
 	
 	#print(gm.prev_state)
@@ -158,8 +159,8 @@ func _process(delta: float) -> void:
 	elif light.energy >= 1.3:
 		light_diff = 0.0001
 	
-	hp_bar.value = gm.hp_cat
-	if int(hp_bar.value) < gm.max_hp_cat:
+	hp_bar.value = hp
+	if int(hp_bar.value) < max_hp:
 		hp_bar.visible = true
 	else:	
 		hp_bar.visible = false	
@@ -168,9 +169,9 @@ func _process(delta: float) -> void:
 	check_hp()
 	check_xp()
 	
-	if gm.current_defence_cat > 0 and gm.state != "dead":
+	if current_defence > 0 and gm.state != "dead":
 		defence_sprite.visible = true
-		defence_label.text = str(gm.current_defence_cat)
+		defence_label.text = str(current_defence)
 	else:
 		defence_sprite.visible = false	
 
@@ -203,7 +204,6 @@ func _process(delta: float) -> void:
 		"battle_ability":
 			pass
 			#sprite.play("battle_ability")
-			
 
 func spawn() -> void:
 	match gm.state:
@@ -254,11 +254,6 @@ func deal_damage(targets : Array[CharacterBody2D]) -> void:
 	just_missed = false
 	poster_amount = 0
 	
-	var energy_cost = gm.current_card.energy_cost
-	if gm.current_energy_cat - energy_cost < 0:
-		return
-	gm.current_energy_cat -= energy_cost
-	
 	var tween2 = create_tween()
 	tween2.tween_property(sprite, "position:x", sprite.position.x + 4, 0.1)
 	
@@ -273,21 +268,21 @@ func deal_damage(targets : Array[CharacterBody2D]) -> void:
 	deal_damage_timer.start(gm.attack_animation_time_cat)
 
 func take_damage(dmg : int, time : float) -> void:
-	if gm.current_defence_cat - dmg >= 0:
-		gm.current_defence_cat -= dmg
+	if current_defence - dmg >= 0:
+		current_defence -= dmg
 		if dmg > 0:
-			gm.defended_cat = true
+			defended = true
 		dmg = 0
 	else:
-		dmg -= gm.current_defence_cat
-		gm.current_defence_cat = 0
+		dmg -= current_defence
+		current_defence = 0
 	
 	taken_damage = dmg
 	
 	if dmg > 0:
 		take_damage_timer.start(time)
 	else:
-		if gm.defended_cat:
+		if defended:
 			audio_defend.play()
 			status_fx.play("defended")
 			var tween1 = create_tween()
@@ -296,24 +291,19 @@ func take_damage(dmg : int, time : float) -> void:
 			var tween = create_tween()
 			tween.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
 		
-			gm.defended_cat = false
+			defended = false
 		else:
 			audio_miss.play()
 		
 		miss_damage_timer.start(time)
 
 func defend(time : float) -> void:
-	var energy_cost = gm.current_card.energy_cost
-	if gm.current_energy_cat - energy_cost < 0:
-		return
-	
-	gm.current_energy_cat -= energy_cost
-	gm.current_defence_cat += gm.current_card.defence
+	current_defence += gm.current_card.defence
 	var defend_diff = gm.current_card.defence
 	
-	if gm.current_defence_cat > gm.max_defence_cat:
+	if current_defence > max_defence:
 		#defend_diff = gm.current_defence_cat - gm.max_defence_cat
-		gm.current_defence_cat = gm.max_defence_cat
+		current_defence = max_defence
 		
 		get_parent().log_messages.append(str("- [color=#1ca8fd]Кот[/color]: +", defend_diff,
 			" защиты. Максимальная броня!\n"))
@@ -328,17 +318,12 @@ func defend(time : float) -> void:
 	var tween2 = create_tween()
 	tween2.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
 	
-	if gm.damage_cat > 0:
+	if damage > 0:
 		defend_timer.start(time)
 	else:
 		defend_timer.start(time)
 
 func give_debuff(targets : Array[CharacterBody2D], type : String, power : int, turns : int) -> void:
-	var energy_cost = gm.current_card.energy_cost
-	if gm.current_energy_cat - energy_cost < 0:
-		return
-	
-	gm.current_energy_cat -= energy_cost
 	
 	status_fx.scale = Vector2(0, 0)
 	status_fx.play("debuff")
@@ -350,38 +335,6 @@ func give_debuff(targets : Array[CharacterBody2D], type : String, power : int, t
 	
 	gm.current_targets[0].status_fx.play("debuff_" + type)
 	
-	match type:
-		"weakness":
-			gm.current_targets[0].has_debuff_weakness = true
-			gm.current_targets[0].turns_debuff_weakness += turns
-			gm.current_targets[0].current_damage -= power
-			if gm.current_targets[0].current_damage <= 0:
-				gm.current_targets[0].current_damage = 0
-		"undefend":
-			gm.current_targets[0].has_debuff_undefend = true
-			gm.current_targets[0].turns_debuff_undefend += turns
-			gm.current_targets[0].current_defence -= power
-			if gm.current_targets[0].current_defence <= 0:
-				gm.current_targets[0].current_defence = 0
-		"inaccuracy":
-			gm.current_targets[0].has_debuff_inaccuracy = true
-			gm.current_targets[0].turns_debuff_inaccuracy += turns
-			gm.current_targets[0].current_accuracy -= power
-			if gm.current_targets[0].current_accuracy  <= 10:
-				gm.current_targets[0].current_accuracy  = 10
-		"unluck":
-			gm.current_targets[0].has_debuff_unluck = true
-			gm.current_targets[0].turns_debuff_unluck += turns
-			gm.current_targets[0].current_luck -= power
-			if gm.current_targets[0].current_luck <= -100:
-				gm.current_targets[0].current_luck  = -100
-		"low_energy":
-			gm.current_targets[0].has_debuff_low_energy = true
-			gm.current_targets[0].turns_debuff_low_energy += turns
-			gm.current_targets[0].energy -= power
-			if gm.current_targets[0].energy <= 0:
-				gm.current_targets[0].energy = 0
-		
 	gm.current_targets[0].status_fx.visible = true
 	#get_parent().find_child("UI").find_child("CardContainer").replace_current_card("ability")
 	var tween3 = create_tween()
@@ -399,25 +352,25 @@ func turn_tick() -> void:
 			current_buffs.erase(buff)
 	
 	if current_buffs.get("strength") == null:
-		gm.current_damage_cat = gm.damage_cat
+		current_damage = damage
 	if current_buffs.get("luck") == null:
-		gm.current_luck_cat = gm.luck_cat
+		current_luck = luck
 	if current_buffs.get("accuracy") == null:
-		gm.current_luck_cat = gm.luck_cat
+		current_luck = luck
 	if current_buffs.get("fire_resistance") == null:
-		gm.current_fire_resistance_cat = gm.fire_resistance_cat
+		current_fire_resistance = fire_resistance
 	if current_buffs.get("wind_resistance") == null:
-		gm.current_wind_resistance_cat = gm.wind_resistance_cat
+		current_wind_resistance = wind_resistance
 	if current_buffs.get("luck_resistance") == null:
-		gm.current_luck_resistance_cat = gm.luck_resistance_cat
+		current_luck_resistance = luck_resistance
 	if current_buffs.get("unluck_resistance") == null:
-		gm.current_unluck_resistance_cat = gm.unluck_resistance_cat
+		current_unluck_resistance = unluck_resistance
 	if current_buffs.get("inaccuracy_resistance") == null:
-		gm.current_inaccuracy_resistance_cat = gm.inaccuracy_resistance_cat
+		current_inaccuracy_resistance = inaccuracy_resistance
 	if current_buffs.get("death_resistance") == null:
-		gm.current_death_resistance_cat = gm.death_resistance_cat
+		current_death_resistance = death_resistance
 	if current_buffs.get("life_resistance") == null:
-		gm.current_life_resistance_cat = gm.life_resistance_cat
+		current_life_resistance = life_resistance
 			
 	for debuff in current_debuffs:
 		var turns = current_debuffs.get(debuff).get(1)
@@ -427,27 +380,28 @@ func turn_tick() -> void:
 			current_debuffs.erase(debuff)
 	
 	if current_debuffs.get("weakness") == null:
-		gm.current_damage_cat = gm.damage_cat
+		current_damage = damage
 	if current_debuffs.get("unluck") == null:
-		gm.current_luck_cat = gm.luck_cat
+		current_luck = luck
 	if current_debuffs.get("inaccuracy") == null:
-		gm.current_luck_cat = gm.luck_cat
+		current_luck = luck
 	if current_debuffs.get("fire_mark") == null:
-		gm.current_fire_resistance_cat = gm.fire_resistance_cat
+		current_fire_resistance = fire_resistance
 	if current_debuffs.get("wind_mark") == null:
-		gm.current_wind_resistance_cat = gm.wind_resistance_cat
+		current_wind_resistance = wind_resistance
 	if current_debuffs.get("luck_mark") == null:
-		gm.current_luck_resistance_cat = gm.luck_resistance_cat
+		current_luck_resistance = luck_resistance
 	if current_debuffs.get("unluck_mark") == null:
-		gm.current_unluck_resistance_cat = gm.unluck_resistance_cat
+		current_unluck_resistance = unluck_resistance
 	if current_debuffs.get("inaccuracy_mark") == null:
-		gm.current_inaccuracy_resistance_cat = gm.inaccuracy_resistance_cat
+		current_inaccuracy_resistance = inaccuracy_resistance
 	if current_debuffs.get("death_mark") == null:
-		gm.current_death_resistance_cat = gm.death_resistance_cat
+		current_death_resistance = death_resistance
 	if current_debuffs.get("life_mark") == null:
-		gm.current_life_resistance_cat = gm.life_resistance_cat
+		current_life_resistance = life_resistance
 	if current_debuffs.get("laziness") == null:
-		gm.current_energy_cat = gm.energy_cat
+		current_energy = energy
+
 
 
 func check_fall(delta: float) -> void:
@@ -475,9 +429,9 @@ func check_fall(delta: float) -> void:
 
 func check_hp() -> void:
 	if not gm.state == "dead":
-		if gm.hp_cat <= 0:
-			gm.hp_cat = 0
-			gm.state = "dead"
+		if hp <= 0:
+			hp = 0
+			state = "dead"
 
 func check_xp() -> bool:
 	if gm.xp >= gm.xp_needed and (gm.state == "idle" or gm.state == "walking"):
@@ -522,10 +476,10 @@ func eclipse() -> void:
 
 func poster_defend(def : int) -> void:
 	for i in range(0, poster_amount):
-		gm.current_defence_cat += def
+		current_defence += def
 	
-	if gm.current_defence_cat > gm.max_defence_cat:
-		gm.current_defence_cat = gm.max_defence_cat
+	if current_defence > max_defence:
+		current_defence = max_defence
 		
 	get_parent().log_messages.append(str("- [color=#1ca8fd]Кот[/color]: +", def,
 			" защиты. Держись!\n"))
@@ -564,7 +518,7 @@ func _on_take_damage_timer_timeout() -> void:
 		
 		gm.prev_state = gm.state
 		gm.state = "taking_damage"
-		gm.hp_cat -= taken_damage
+		hp -= taken_damage
 		sprite.play("taking_damage")
 		audio_meow.play()
 		idle_animation_timer.start(0.2)
@@ -599,11 +553,11 @@ func _on_deal_damage_timer_timeout() -> void:
 	var tween = create_tween()
 	tween.tween_property(status_fx, "scale", Vector2(0, 0), 0.2)
 	
-	var success : bool = randf_range(0.0, 1.0) * 100 <= gm.current_accuracy_cat
-	if gm.current_luck_cat > 0:
-		is_hit_lucky = randf_range(0.0, 1.0) * 100 <= gm.current_luck_cat
-	elif gm.current_luck_cat < 0:
-		is_hit_unlucky = randf_range(0.0, 1.0) * 100 <= abs(gm.current_luck_cat)
+	var success : bool = randf_range(0.0, 1.0) * 100 <= current_accuracy
+	if current_luck > 0:
+		is_hit_lucky = randf_range(0.0, 1.0) * 100 <= current_luck
+	elif current_luck < 0:
+		is_hit_unlucky = randf_range(0.0, 1.0) * 100 <= abs(current_luck)
 	
 	if next_strike_lucky:
 		next_strike_lucky = false
@@ -650,24 +604,24 @@ func _on_deal_damage_timer_timeout() -> void:
 			success = true
 		
 		if success:
-			gm.current_damage_cat = gm.current_card.damage
+			current_damage = gm.current_card.damage
 			
 			if gm.current_card.has_method("revenge") and target.dealt_damage_to_human:
-				gm.current_damage_cat = gm.current_card.revenge()
+				current_damage = gm.current_card.revenge()
 		else:
 			just_missed = true
 			poster_amount += 1
-			gm.current_damage_cat = 0
+			current_damage = 0
 			
 		if is_hit_lucky:
-			gm.current_damage_cat *= 2
+			current_damage *= 2
 		elif is_hit_unlucky:
-			gm.current_damage_cat /= 2
+			current_damage /= 2
 			
 		if gm.has_toy_cat and attack_count <= 2:
-			gm.current_damage_cat *= 2
+			current_damage *= 2
 		
-		var damage_dealt = gm.current_damage_cat - target.current_defence
+		var damage_dealt = current_damage - target.current_defence
 		if damage_dealt < 0:
 			damage_dealt = 0
 		if damage_dealt > target.hp:
@@ -677,20 +631,20 @@ func _on_deal_damage_timer_timeout() -> void:
 		
 		if gm.current_card != null:
 			if gm.current_card.element == "might":
-				gm.current_damage_cat = int(gm.current_damage_cat * (1.0 - target.might_resistance))
+				current_damage = int(current_damage * (1.0 - target.current_might_resistance))
 			elif gm.current_card.element == "fire":
-				gm.current_damage_cat = int(gm.current_damage_cat * (1.0 - target.fire_resistance))
+				current_damage = int(current_damage * (1.0 - target.current_fire_resistance))
 			elif gm.current_card.element == "wind":
-				gm.current_damage_cat = int(gm.current_damage_cat * (1.0 - target.wind_resistance))
+				current_damage = int(current_damage * (1.0 - target.current_wind_resistance))
 			elif gm.current_card.element == "luck":
-				gm.current_damage_cat = int(gm.current_damage_cat * (1.0 - target.luck_resistance))
+				current_damage = int(current_damage * (1.0 - target.current_luck_resistance))
 			elif gm.current_card.element == "death":
-				gm.current_damage_cat = int(gm.current_damage_cat * (1.0 - target.death_resistance))
+				current_damage = int(current_damage * (1.0 - target.current_death_resistance))
 			elif gm.current_card.element == "life":
-				gm.current_damage_cat = int(gm.current_damage_cat * (1.0 - target.life_resistance))	
+				current_damage = int(current_damage * (1.0 - target.current_life_resistance))	
 		
 		
-		if gm.current_damage_cat == 0:
+		if current_damage == 0:
 			get_parent().log_messages.append(str("- [color=#1ca8fd]Кот[/color] атакует существо [color=#1ca8fd]", 
 			target.enemy_name_rus, "[/color]. Промах!\n"))
 			if gm.has_boomerang:
@@ -703,9 +657,9 @@ func _on_deal_damage_timer_timeout() -> void:
 				get_parent().log_messages.append(str("- [color=#1ca8fd]Кот[/color] наносит [color=#fc4e52]", gm.current_damage_cat, 
 				" урона[/color] существу [color=#1ca8fd]", target.enemy_name_rus, "[/color]\n"))
 		
-		target.take_damage(gm.current_damage_cat, gm.attack_animation_time_cat)
+		target.take_damage(current_damage, gm.attack_animation_time_cat)
 		
-	gm.current_damage_cat = gm.damage_cat
+	current_damage = damage
 	
 	#ВЗРЫВ
 	if gm.current_card.has_method("explode"):
@@ -774,9 +728,9 @@ func _on_debuff_timer_timeout() -> void:
 
 
 func _on_heal_timer_timeout() -> void:
-	gm.hp_cat += current_heal
-	if gm.hp_cat > gm.max_hp_cat:
-		gm.hp_cat = gm.max_hp_cat
+	hp += current_heal
+	if hp > max_hp:
+		hp = max_hp
 	
 	if gm.prev_state == "playing_a_card":
 		gm.prev_state = "battle"

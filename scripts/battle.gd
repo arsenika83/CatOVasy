@@ -396,11 +396,9 @@ func draw_cursor() -> void:
 		
 func choose_target(action : String) -> void:
 	var current_energy = 0
-	if current_creature_turn == human:
-		current_energy = gm.current_energy_human
+
+	current_energy = current_creature_turn.current_energy
 		
-	elif current_creature_turn == giant:
-		current_energy = gm.current_energy_cat
 	
 	if gm.current_card != null and gm.current_card.energy_cost <= current_energy:
 		var cursor_grid_pos = map.local_to_map(get_global_mouse_position())
@@ -604,7 +602,7 @@ func end_turn() -> void:
 		
 		if gm.state_human == "dead":
 			progress_turn()
-			gm.current_energy_human = 0
+			human.current_energy = 0
 			end_turn()
 			return
 		
@@ -618,8 +616,8 @@ func end_turn() -> void:
 		var camera_tween = create_tween()
 		camera_tween.tween_property(player_camera, "position:x", 128, 0.2)
 		
-		if gm.current_energy_human == -1000:
-			gm.current_energy_human = 0
+		if human.current_energy == -1000:
+			human.current_energy = 0
 			progress_turn()
 			
 			if current_creature_turn == giant:
@@ -627,13 +625,13 @@ func end_turn() -> void:
 			else:	
 				$EndTurnTimer.start(0.5)
 		
-		elif gm.current_energy_human <= 0:
-			gm.current_energy_human = gm.energy_human	
+		elif human.current_energy <= 0:
+			human.current_energy = human.energy
 			
 	elif current_creature_turn == giant: #КОТ
 		if gm.state == "dead":
 			progress_turn()
-			gm.current_energy_cat = 0
+			giant.current_energy = 0
 			end_turn()
 			return
 			
@@ -648,8 +646,8 @@ func end_turn() -> void:
 		$UI/EnergyHuman.visible = false
 		
 		
-		if gm.current_energy_cat == -1000:
-			gm.current_energy_cat = 0
+		if giant.current_energy == -1000:
+			giant.current_energy = 0
 			
 			progress_turn()
 			
@@ -700,8 +698,8 @@ func end_turn() -> void:
 			$UI/EnergyHuman.visible = false
 			giant.my_turn.visible = false
 			
-		elif gm.current_energy_cat <= 0:
-			gm.current_energy_cat = gm.energy_cat
+		elif giant.current_energy <= 0:
+			giant.current_energy = giant.energy
 	else:
 		for enemy in current_enemies:
 			enemy.my_turn.visible = false
@@ -775,32 +773,34 @@ func check_creature_stats() -> void:
 		creature_dialog_on_screen = true
 		creature_check_dialog.find_child("NameLabel").text = "Котик"
 					
-		var stats =   str("", gm.hp_cat, "/", gm.max_hp_cat)
+		var stats =   str("", giant.hp, "/", giant.max_hp)
 		stats += 	str("\n", giant.current_damage)
-		stats += 	str("\n", gm.current_defence_cat, "/", gm.max_defence_cat)
-		stats += 	str("\n", gm.current_accuracy_cat, "%")
-		stats += 	str("\n", gm.current_luck_cat, "%")
-		stats += 	str("\n", gm.current_speed_cat)
-		stats += 	str("\n", gm.current_energy_cat, "/", gm.max_energy_cat)
+		stats += 	str("\n", giant.current_defence, "/", giant.max_defence)
+		stats += 	str("\n", giant.current_accuracy, "%")
+		stats += 	str("\n", giant.current_luck, "%")
+		stats += 	str("\n", giant.current_speed)
+		stats += 	str("\n", giant.current_energy, "/", giant.max_energy)
+
 		creature_check_dialog.find_child("StatsLabel").text = stats
 		
 		var abilities = ""	
-		if gm.might_resistance_cat != 0.0:
-			abilities += str("- Сопротивление [color=#d13738]СИЛЕ[/color] ", int(gm.might_resistance_cat*100), "%\n")
-		if gm.fire_resistance_cat != 0.0:
-			abilities += str("- Сопротивление [color=#ff9c61]ОГНЮ[/color] ", int(gm.fire_resistance_cat*100), "%\n")
-		if gm.wind_resistance_cat != 0.0:
-			abilities += str("- Сопротивление [color=#b1dcee]ВЕТРУ[/color] ", int(gm.wind_resistance_cat*100), "%\n")
-		if gm.death_resistance_cat != 0.0:
-			abilities += str("- Сопротивление [color=#7800ba]СМЕРТИ[/color] ", int(gm.death_resistance_cat*100), "%\n")
-		if gm.life_resistance_cat != 0.0:
-			abilities += str("- Сопротивление [color=#5dc3ff]ЖИЗНИ[/color] ", int(gm.life_resistance_cat*100), "%\n")
-		if gm.luck_resistance_cat != 0.0:
-			abilities += str("- Сопротивление [color=#a5da70]УДАЧЕ[/color] ", int(gm.luck_resistance_cat*100), "%\n")
-		if gm.unluck_resistance_cat != 0.0:
-			abilities += str("- Сопротивление [color=#ba037e]НЕУДАЧЕ[/color] ", int(gm.unluck_resistance_cat*100), "%\n")
-		if gm.inaccuracy_resistance_cat != 0.0:
-			abilities += str("- Сопротивление [color=#fd4d4f]ТОЧНОСТИ[/color] ", int(gm.inaccuracy_resistance_cat*100), "%\n")	
+		if giant.current_might_resistance != 0.0:
+			abilities += str("- Сопротивление [color=#d13738]СИЛЕ[/color] ", int(giant.current_might_resistance*100), "%\n")
+		if giant.current_fire_resistance != 0.0:
+			abilities += str("- Сопротивление [color=#ff9c61]ОГНЮ[/color] ", int(giant.current_fire_resistance*100), "%\n")
+		if giant.current_wind_resistance != 0.0:
+			abilities += str("- Сопротивление [color=#b1dcee]ВЕТРУ[/color] ", int(giant.current_wind_resistance*100), "%\n")
+		if giant.current_death_resistance != 0.0:
+			abilities += str("- Сопротивление [color=#7800ba]СМЕРТИ[/color] ", int(giant.current_death_resistance*100), "%\n")
+		if giant.current_life_resistance != 0.0:
+			abilities += str("- Сопротивление [color=#5dc3ff]ЖИЗНИ[/color] ", int(giant.current_life_resistance*100), "%\n")
+		if giant.current_luck_resistance != 0.0:
+			abilities += str("- Сопротивление [color=#a5da70]УДАЧЕ[/color] ", int(giant.current_luck_resistance*100), "%\n")
+		if giant.current_unluck_resistance != 0.0:
+			abilities += str("- Сопротивление [color=#ba037e]НЕУДАЧЕ[/color] ", int(giant.current_unluck_resistance*100), "%\n")
+		if giant.current_inaccuracy_resistance != 0.0:
+			abilities += str("- Сопротивление [color=#fd4d4f]ТОЧНОСТИ[/color] ", int(giant.current_inaccuracy_resistance*100), "%\n")	
+
 		creature_check_dialog.find_child("AbilitiesLabel").text = abilities
 					
 		return
@@ -827,32 +827,34 @@ func check_creature_stats() -> void:
 		creature_dialog_on_screen = true
 		creature_check_dialog.find_child("NameLabel").text = "Соля"
 					
-		var stats =   str("", gm.hp_human, "/", gm.max_hp_human)
+		var stats =   str("", human.hp, "/", human.max_hp)
 		stats += 	str("\n", human.current_damage)
-		stats += 	str("\n", gm.current_defence_human, "/", gm.max_defence_human)
-		stats += 	str("\n", gm.current_accuracy_human, "%")
-		stats += 	str("\n", gm.current_luck_human, "%")
-		stats += 	str("\n", gm.current_speed_human)
-		stats += 	str("\n", gm.current_energy_human, "/", gm.max_energy_human)
+		stats += 	str("\n", human.current_defence, "/", human.max_defence)
+		stats += 	str("\n", human.current_accuracy, "%")
+		stats += 	str("\n", human.current_luck, "%")
+		stats += 	str("\n", human.current_speed)
+		stats += 	str("\n", human.current_energy, "/", human.max_energy)
+
 		creature_check_dialog.find_child("StatsLabel").text = stats
 		
 		var abilities = ""	
-		if gm.might_resistance_human != 0.0:
-			abilities += str("- Сопротивление [color=#d13738]СИЛЕ[/color] ", int(gm.might_resistance_human*100), "%\n")
-		if gm.fire_resistance_human != 0.0:
-			abilities += str("- Сопротивление [color=#ff9c61]ОГНЮ[/color] ", int(gm.fire_resistance_human*100), "%\n")
-		if gm.wind_resistance_human != 0.0:
-			abilities += str("- Сопротивление [color=#b1dcee]ВЕТРУ[/color] ", int(gm.wind_resistance_human*100), "%\n")
-		if gm.death_resistance_human != 0.0:
-			abilities += str("- Сопротивление [color=#7800ba]СМЕРТИ[/color] ", int(gm.death_resistance_human*100), "%\n")
-		if gm.life_resistance_human != 0.0:
-			abilities += str("- Сопротивление [color=#5dc3ff]ЖИЗНИ[/color] ", int(gm.life_resistance_human*100), "%\n")
-		if gm.luck_resistance_human != 0.0:
-			abilities += str("- Сопротивление [color=#a5da70]УДАЧЕ[/color] ", int(gm.luck_resistance_human*100), "%\n")
-		if gm.unluck_resistance_human != 0.0:
-			abilities += str("- Сопротивление [color=#ba037e]НЕУДАЧЕ[/color] ", int(gm.unluck_resistance_human*100), "%\n")
-		if gm.inaccuracy_resistance_human != 0.0:
-			abilities += str("- Сопротивление [color=#fd4d4f]НЕТОЧНОСТИ[/color] ", int(gm.inaccuracy_resistance_human*100), "%\n")	
+		if human.current_might_resistance != 0.0:
+			abilities += str("- Сопротивление [color=#d13738]СИЛЕ[/color] ", int(human.current_might_resistance*100), "%\n")
+		if human.current_fire_resistance != 0.0:
+			abilities += str("- Сопротивление [color=#ff9c61]ОГНЮ[/color] ", int(human.current_fire_resistance*100), "%\n")
+		if human.current_wind_resistance != 0.0:
+			abilities += str("- Сопротивление [color=#b1dcee]ВЕТРУ[/color] ", int(human.current_wind_resistance*100), "%\n")
+		if human.current_death_resistance != 0.0:
+			abilities += str("- Сопротивление [color=#7800ba]СМЕРТИ[/color] ", int(human.current_death_resistance*100), "%\n")
+		if human.current_life_resistance != 0.0:
+			abilities += str("- Сопротивление [color=#5dc3ff]ЖИЗНИ[/color] ", int(human.current_life_resistance*100), "%\n")
+		if human.current_luck_resistance != 0.0:
+			abilities += str("- Сопротивление [color=#a5da70]УДАЧЕ[/color] ", int(human.current_luck_resistance*100), "%\n")
+		if human.current_unluck_resistance != 0.0:
+			abilities += str("- Сопротивление [color=#ba037e]НЕУДАЧЕ[/color] ", int(human.current_unluck_resistance*100), "%\n")
+		if human.current_inaccuracy_resistance != 0.0:
+			abilities += str("- Сопротивление [color=#fd4d4f]НЕТОЧНОСТИ[/color] ", int(human.current_inaccuracy_resistance*100), "%\n")	
+
 		creature_check_dialog.find_child("AbilitiesLabel").text = abilities	
 		
 		

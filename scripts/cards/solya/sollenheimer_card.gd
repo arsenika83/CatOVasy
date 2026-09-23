@@ -30,11 +30,7 @@ func _process(delta: float) -> void:
 		$Energy/Label.add_theme_color_override("font_color", Color.WHITE)
 
 func on_play() -> void:
-	gm.hp_cat -= 5
-	
-	if gm.hp_cat <= 0:
-		gm.hp_cat = 0
-		gm.state = "dead"
+	get_parent().get_parent().get_parent().get_parent().giant.take_damage(5, 0.5)
 
 func explode() -> void:
 	pass

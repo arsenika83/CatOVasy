@@ -28,8 +28,6 @@ func _process(delta: float) -> void:
 		$Energy/Label.add_theme_color_override("font_color", Color.WHITE)
 
 func on_play() -> void:
-	gm.current_energy_human -= energy_cost
-	
 	get_parent().get_parent().get_parent().get_parent().log_messages.append(
 		str("- [color=#ff93c1]ТУМАН[/color]: все враги теряют 35% точности\n"))
 	

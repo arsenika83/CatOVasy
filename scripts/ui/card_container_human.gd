@@ -129,6 +129,8 @@ func _on_card_played(played_card: Control) -> void:
 	get_parent().get_parent().giant.cursor.visible = false
 	get_parent().get_parent().human.cursor.visible = false
 	
+	get_parent().get_parent().human.current_energy -= current_selected.energy_cost
+	
 	if played_card.has_method("on_play"):
 		played_card.on_play()
 		
@@ -176,7 +178,7 @@ func _on_change_button_pressed() -> void:
 	
 	if gm.current_energy_human - card_change_energy_cost >= 0:
 		audio.play()
-		gm.current_energy_human -= card_change_energy_cost
+		get_parent().get_parent().human.current_energy -= card_change_energy_cost
 		
 		if gm.current_energy_human == 0:
 			$EndButton/StatusFX.visible = true
@@ -216,7 +218,7 @@ func remind_no_energy_for_current_card() -> void:
 	audio_no_energy.play()
 
 func _on_end_button_pressed() -> void:
-	gm.current_energy_human = -1000
+	get_parent().get_parent().human.current_energy = -1000
 	get_parent().get_parent().end_turn()
 	$EndButton.disabled = true
 	$EndButton/StatusFX.visible = false

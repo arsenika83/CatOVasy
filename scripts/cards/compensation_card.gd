@@ -27,12 +27,11 @@ func _process(delta: float) -> void:
 		$Energy/Label.add_theme_color_override("font_color", Color.WHITE)
 
 func on_play() -> void:
-	gm.current_energy_cat -= energy_cost
 	
 	get_parent().get_parent().get_parent().get_parent().log_messages.append(settings.card_text_cat.get("compensation_log"))
 	
-	gm.current_luck_cat -= 40
-	gm.current_accuracy_cat += 20
+	get_parent().get_parent().get_parent().get_parent().giant.current_luck -= 40
+	get_parent().get_parent().get_parent().get_parent().giant.current_accuracy += 20
 	
 	get_parent().get_parent().get_parent().get_parent().giant.idle_animation_timer.start(0.6)
 

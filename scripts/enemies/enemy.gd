@@ -77,6 +77,15 @@ var dealt_damage_to_human = false
 @export var unluck_resistance: float = 0
 @export var inaccuracy_resistance: float = 0
 
+var current_fire_resistance: float = fire_resistance
+var current_wind_resistance: float = wind_resistance
+var current_might_resistance: float = might_resistance
+var current_death_resistance: float = death_resistance
+var current_life_resistance: float = life_resistance
+var current_luck_resistance: float = luck_resistance
+var current_unluck_resistance: float = unluck_resistance
+var current_inaccuracy_resistance: float = inaccuracy_resistance
+
 var element = "might"
 
 var follow_step_count = 0
@@ -546,32 +555,18 @@ func _on_deal_damage_timer_timeout() -> void:
 		current_damage = 0
 		just_missed = false
 	
-	if current_target == get_parent().get_parent().giant:
-		if element == "might":
-			current_damage = int(current_damage * (1.0 - gm.current_might_resistance_cat))
-		elif element == "fire":
-			current_damage = int(current_damage * (1.0 - gm.current_fire_resistance_cat))
-		elif element == "wind":
-			current_damage = int(current_damage * (1.0 - gm.current_wind_resistance_cat))
-		elif element == "luck":
-			current_damage = int(current_damage * (1.0 - gm.current_luck_resistance_cat))
-		elif element == "death":
-			current_damage = int(current_damage * (1.0 - gm.current_death_resistance_cat))
-		elif element == "life":
-			current_damage = int(current_damage * (1.0 - gm.current_life_resistance_cat))
-	elif current_target == get_parent().get_parent().human:
-		if element == "might":
-			current_damage = int(current_damage * (1.0 - gm.current_might_resistance_human))
-		elif element == "fire":
-			current_damage = int(current_damage * (1.0 - gm.current_fire_resistance_human))
-		elif element == "wind":
-			current_damage = int(current_damage * (1.0 - gm.current_wind_resistance_human))
-		elif element == "luck":
-			current_damage = int(current_damage * (1.0 - gm.current_luck_resistance_human))
-		elif element == "death":
-			current_damage = int(current_damage * (1.0 - gm.current_death_resistance_human))
-		elif element == "life":
-			current_damage = int(current_damage * (1.0 - gm.current_life_resistance_human))
+	if element == "might":
+		current_damage = int(current_damage * (1.0 - current_target.current_might_resistance))
+	elif element == "fire":
+		current_damage = int(current_damage * (1.0 - current_target.current_fire_resistance))
+	elif element == "wind":
+		current_damage = int(current_damage * (1.0 - current_target.current_wind_resistance))
+	elif element == "luck":
+		current_damage = int(current_damage * (1.0 - current_target.current_luck_resistance))
+	elif element == "death":
+		current_damage = int(current_damage * (1.0 - current_target.current_death_resistance))
+	elif element == "life":
+		current_damage = int(current_damage * (1.0 - current_target.current_life_resistance))
 	
 	if current_damage == 0:
 		get_parent().get_parent().log_messages.append(str("- [color=#1ca8fd]", enemy_name_rus, "[/color] атакует существо [color=#1ca8fd]", 

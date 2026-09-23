@@ -27,11 +27,9 @@ func _process(delta: float) -> void:
 		$Energy/Label.add_theme_color_override("font_color", Color.WHITE)
 
 func on_play() -> void:
-	gm.current_energy_cat -= energy_cost
-	
 	get_parent().get_parent().get_parent().get_parent().log_messages.append(settings.card_text_cat.get("lick_wounds_log"))
 	
 	get_parent().get_parent().get_parent().get_parent().swap_characters()
-	gm.current_defence_human += 3
+	get_parent().get_parent().get_parent().get_parent().human.current_defence += 3
 	
 	get_parent().get_parent().get_parent().get_parent().giant.heal(2)

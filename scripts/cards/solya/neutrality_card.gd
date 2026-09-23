@@ -28,8 +28,6 @@ func _process(delta: float) -> void:
 		$Energy/Label.add_theme_color_override("font_color", Color.WHITE)
 
 func on_play() -> void:
-	gm.current_energy_human -= energy_cost
-	
 	get_parent().get_parent().get_parent().get_parent().log_messages.append(
 		str("- [color=#fdd14d]Нейтралитет[/color]: удача ВСЕХ существ теперь равна нулю!\n"))
 	
@@ -44,8 +42,8 @@ func on_play() -> void:
 			enemy.unluck_particles.amount = 1
 			enemy.unluck_particles.restart()
 	
-	gm.current_luck_cat = 0
-	gm.current_luck_human = 0
+	get_parent().get_parent().get_parent().get_parent().human.current_luck = 0
+	get_parent().get_parent().get_parent().get_parent().giant.current_luck = 0
 	get_parent().get_parent().get_parent().get_parent().human.audio_neutrality.play()
 	get_parent().get_parent().get_parent().get_parent().human.neutrality_particles.emitting = true
 	get_parent().get_parent().get_parent().get_parent().human.luck_particles.amount = 1
