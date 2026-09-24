@@ -1,5 +1,6 @@
-Panel
 GPUParticles2D
+WorldEnvironment
+Panel
 CPUParticles2D
 TextureRect
 Label
@@ -11,4 +12,3 @@ RichTextLabel
 Button
 VBoxContainer
 AudioStreamPlayer
-Sprite2D

@@ -22,6 +22,7 @@
 [ext_resource type="AudioStream" uid="uid://bwch538phpi87" path="res://assets/soundFX/hit.wav" id="11_dku5q"]
 [ext_resource type="AudioStream" uid="uid://ceun5aaxxb0o7" path="res://assets/soundFX/debuff.wav" id="13_p1oqw"]
 [ext_resource type="Texture2D" uid="uid://bc6mgbwdqt8ia" path="res://assets/images/artifacts/cat_food.png" id="13_u4m4i"]
+[ext_resource type="Texture2D" uid="uid://s34pblv0ga2j" path="res://assets/images/fx.png" id="14_kn0ek"]
 [ext_resource type="AudioStream" uid="uid://b5kgcekrp1yv2" path="res://assets/soundFX/walk.wav" id="14_q8t3y"]
 [ext_resource type="AudioStream" uid="uid://b281edhvbfgf6" path="res://assets/soundFX/luck.wav" id="18_nwqqi"]
 [ext_resource type="AudioStream" uid="uid://kn3dv6vl4ov1" path="res://assets/soundFX/unluck.wav" id="19_47i74"]
@@ -1014,6 +1015,34 @@ scale_min = 0.19999999
 scale_max = 0.29999998
 scale_curve = SubResource("CurveTexture_i0wex")
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_i0wex"]
+blend_mode = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o5oqn"]
+atlas = ExtResource("14_kn0ek")
+region = Rect2(72, 72, 16, 16)
+
+[sub_resource type="Curve" id="Curve_whrbs"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.62237763, 0.8988764), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_klmc7"]
+curve = SubResource("Curve_whrbs")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0cxao"]
+particle_flag_disable_z = true
+angle_min = 1.0728835e-05
+angle_max = 30.000011
+direction = Vector3(0, -1, 0)
+spread = 100.0
+initial_velocity_min = 50.0
+initial_velocity_max = 300.0
+orbit_velocity_min = 9.49949e-08
+orbit_velocity_max = 1.0000001
+gravity = Vector3(0, 98, 0)
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_klmc7")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6wucx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_423d8"]
@@ -1168,6 +1197,18 @@ texture = ExtResource("13_u4m4i")
 lifetime = 2.0
 one_shot = true
 process_material = SubResource("ParticleProcessMaterial_ayw8s")
+
+[node name="HealParticles" type="GPUParticles2D" parent="." unique_id=1534078326]
+modulate = Color(0.82, 0.904, 1, 1)
+material = SubResource("CanvasItemMaterial_i0wex")
+position = Vector2(0, -24)
+emitting = false
+amount = 50
+texture = SubResource("AtlasTexture_o5oqn")
+lifetime = 1.5
+one_shot = true
+explosiveness = 0.38
+process_material = SubResource("ParticleProcessMaterial_0cxao")
 
 [node name="IdleAnimationTimer" type="Timer" parent="." unique_id=1031534056]
 one_shot = true

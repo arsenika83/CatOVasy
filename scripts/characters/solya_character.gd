@@ -40,6 +40,7 @@ var character_name_display = "Соля"
 @onready var unluck_particles = $UnluckParticles
 @onready var sand_particles = $SandParticles
 @onready var neutrality_particles = $NeutralityParticles
+@onready var fortune_wheel_particles = $FortuneWheelParticles
 
 var enemy_name_rus = "Соля"
 var state = "battle"
@@ -219,17 +220,19 @@ func walk() -> void:
 	gm.state_human = "walking"
 	walk_timer.start()
 
-func heal(hp : int) -> void:
+func heal(heal_hp : int) -> void:
 	gm.prev_state_human = gm.state_human
 	gm.state_human = "healing"
 	
 	if gm.has_heart_shaped_pillow:
-		hp += 1
-	
-	current_heal = hp
+		heal_hp += 1
+	$HealParticles.amount = heal_hp	
+	$HealParticles.restart()
+	current_heal = heal_hp
 	sprite.play("healing")
 	audio_resting.play()
 	$HealTimer.start()
+	
 
 func go_downstairs() -> void:
 	audio_fall.play()
@@ -437,11 +440,13 @@ func give_buff(targets : Array, type : String, power : int, turns : int) -> void
 			
 	#current_energy -= gm.current_card.energy_cost
 	
-	targets[0].sprite.play("battle_buffed")
-	targets[0].idle_animation_timer.start(gm.buff_animation_time_human)
-	if get_parent().team_positions[0] == "human":
-		sprite.flip_h = true
-	sprite.play("battle_buff_cat")
+	if targets[0] == get_parent().giant:
+		targets[0].sprite.play("battle_buffed")
+		targets[0].idle_animation_timer.start(gm.buff_animation_time_human)
+		if get_parent().team_positions[0] == "human":
+			sprite.flip_h = true
+		sprite.play("battle_buff_cat")
+		
 	z_index += 1
 	$AudioStreamPlayerBuff.play()
 	

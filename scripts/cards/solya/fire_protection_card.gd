@@ -35,8 +35,7 @@ func on_play() -> void:
 		str("- [color=#fdd14d]Защита от огня:[/color] [color=#1ca8fd]Соля[/color] получает 20% защиты от огня на 2 хода\n"))
 	 
 	get_parent().get_parent().get_parent().get_parent().human.give_buff([get_parent().get_parent().get_parent().get_parent().human], buff, power, turns)
-	get_parent().get_parent().get_parent().get_parent().human.give_buff([get_parent().get_parent().get_parent().get_parent().human], "death_resistance", power, turns)
-	get_parent().get_parent().get_parent().get_parent().human.give_buff([get_parent().get_parent().get_parent().get_parent().human], "wind_resistance", power, turns)
+	
 
 func use_up():
 	pass

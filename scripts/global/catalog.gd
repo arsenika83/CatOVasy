@@ -30,9 +30,9 @@ var all_card_names_unbelievable_cat : Array[String] = ["eclipse", "dinner"]
 
 var all_card_names_human : Array[String] = ["little_fire", "boredom", "give_strength", "sollenheimer",
 "wind_of_change", "fortune_wheel", "dont_hit", "fog", "big_fire", "burn_down", "sand_in_the_eyes",
-"lucky_spear", "neutrality", "wish_you_luck", "wind_shield", "armageddon"]
+"lucky_spear", "neutrality", "wish_you_luck", "wind_shield", "armageddon", "change_of_wind", "selfless"]
 var all_card_names_common_human : Array[String] = ["little_fire", "give_strength",
-"wind_of_change", "dont_hit","big_fire", "sand_in_the_eyes", "wind_shield"]
+"wind_of_change", "dont_hit","big_fire", "sand_in_the_eyes", "wind_shield", "change_of_wind", "selfless"]
 var all_card_names_rare_human : Array[String] = ["boredom", "fortune_wheel", "lucky_spear", "wish_you_luck"]
 var all_card_names_epic_human : Array[String] = ["sollenheimer", "neutrality"]
 var all_card_names_unbelievable_human : Array[String] = ["fog", "burn_down", "armageddon"]

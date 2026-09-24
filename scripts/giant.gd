@@ -231,17 +231,21 @@ func walk() -> void:
 	gm.state = "walking"
 	walk_timer.start()
 
-func heal(hp : int) -> void:
+func heal(heal_hp : int) -> void:
 	gm.prev_state = gm.state
 	gm.state = "healing"
 	
 	if gm.has_heart_shaped_pillow:
-		hp += 1
+		heal_hp += 1
 	
-	current_heal = hp
+	current_heal = heal_hp
 	sprite.play("healing")
 	audio_resting.play()
 	$HealTimer.start()
+	
+	$HealParticles.amount = heal_hp
+	$HealParticles.restart()
+	
 	
 
 func go_downstairs() -> void:
@@ -741,7 +745,7 @@ func _on_heal_timer_timeout() -> void:
 	if hp > max_hp:
 		hp = max_hp
 	
-	if gm.prev_state == "playing_a_card":
+	if gm.prev_state == "playing_a_card" or  gm.prev_state == "dead":
 		gm.prev_state = "battle"
 	gm.state = gm.prev_state
 	sprite.play(gm.state)

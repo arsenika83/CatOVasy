@@ -33,6 +33,7 @@ func _process(delta: float) -> void:
 
 func on_play() -> void:
 	var chance = randi_range(0, 100)
+	get_parent().get_parent().get_parent().get_parent().human.fortune_wheel_particles.restart()
 	
 	if chance < 15:
 		get_parent().get_parent().get_parent().get_parent().log_messages.append(
