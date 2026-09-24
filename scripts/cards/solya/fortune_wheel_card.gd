@@ -37,6 +37,7 @@ func on_play() -> void:
 	if chance < 15:
 		get_parent().get_parent().get_parent().get_parent().log_messages.append(
 			str("- [color=#fdd14d]Колесо фортуны[/color]: [color=#1ca8fd]Соля[/color] получает 5 урона\n"))
+		get_parent().get_parent().get_parent().get_parent().human.is_self_damage = true
 		get_parent().get_parent().get_parent().get_parent().human.take_damage(damage, 0.3)
 	elif chance < 50:
 		get_parent().get_parent().get_parent().get_parent().log_messages.append(

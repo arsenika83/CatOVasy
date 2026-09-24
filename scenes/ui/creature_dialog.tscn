@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="4_j5lms"]
 [ext_resource type="Script" uid="uid://dc16ko7ka7cxo" path="res://scripts/ui/camera_subview_port.gd" id="5_0tj0i"]
 [ext_resource type="Script" uid="uid://dyuhxmo8ve3q1" path="res://scripts/ui/sub_viewport.gd" id="5_epww1"]
+[ext_resource type="PackedScene" uid="uid://dl3vooegbnvp7" path="res://scenes/ui/buff_container.tscn" id="6_hgh0l"]
 [ext_resource type="StyleBox" uid="uid://b8wibcbgivilm" path="res://styles/button_normal.tres" id="8_0d5n0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qtlqx"]
@@ -62,7 +63,7 @@ script = ExtResource("2_f0otj")
 [node name="TextureRect2" type="Panel" parent="." unique_id=1369763668]
 use_parent_material = true
 layout_mode = 0
-offset_right = 400.0
+offset_right = 404.0
 offset_bottom = 352.0
 theme_override_styles/panel = ExtResource("8_0d5n0")
 
@@ -70,9 +71,9 @@ theme_override_styles/panel = ExtResource("8_0d5n0")
 use_parent_material = true
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 0
-offset_left = 240.0
+offset_left = 236.0
 offset_top = 12.0
-offset_right = 377.0
+offset_right = 396.0
 offset_bottom = 140.0
 texture = SubResource("AtlasTexture_hh0f6")
 expand_mode = 1
@@ -80,9 +81,9 @@ expand_mode = 1
 [node name="TextureRect3" type="TextureRect" parent="." unique_id=1256126971]
 use_parent_material = true
 layout_mode = 0
-offset_left = 240.0
-offset_top = 152.0
-offset_right = 376.0
+offset_left = 236.0
+offset_top = 148.0
+offset_right = 396.0
 offset_bottom = 240.0
 texture = SubResource("AtlasTexture_hh0f6")
 expand_mode = 1
@@ -90,9 +91,9 @@ expand_mode = 1
 [node name="TextureRect4" type="TextureRect" parent="." unique_id=266347589]
 use_parent_material = true
 layout_mode = 0
-offset_left = 240.0
-offset_top = 248.0
-offset_right = 376.0
+offset_left = 236.0
+offset_top = 244.0
+offset_right = 396.0
 offset_bottom = 336.0
 texture = SubResource("AtlasTexture_hh0f6")
 expand_mode = 1
@@ -211,44 +212,33 @@ offset_right = 24.0
 offset_bottom = 169.0
 texture = SubResource("AtlasTexture_loxxi")
 
-[node name="ScrollContainer1" type="ScrollContainer" parent="." unique_id=1397189154]
-use_parent_material = true
+[node name="DebuffContainer" parent="." unique_id=838992810 instance=ExtResource("6_hgh0l")]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 248.0
+offset_right = 400.0
+offset_bottom = 336.0
+
+[node name="BuffContainer" parent="." unique_id=1821633580 instance=ExtResource("6_hgh0l")]
 layout_mode = 0
 offset_left = 240.0
 offset_top = 152.0
-offset_right = 376.0
+offset_right = 400.0
 offset_bottom = 240.0
-horizontal_scroll_mode = 0
-scroll_hint_mode = 1
-
-[node name="Debuffs" type="GridContainer" parent="ScrollContainer1" unique_id=915201635]
-use_parent_material = true
-layout_mode = 2
-theme_override_constants/h_separation = 64
-theme_override_constants/v_separation = 64
-columns = 2
-
-[node name="Buffs" type="Control" parent="." unique_id=1008358145]
-use_parent_material = true
-anchors_preset = 0
-offset_left = 240.0
-offset_top = 248.0
-offset_right = 368.0
-offset_bottom = 336.0
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=417234164]
 use_parent_material = true
 layout_mode = 0
-offset_left = 241.0
+offset_left = 237.0
 offset_top = 13.0
-offset_right = 376.0
+offset_right = 395.0
 offset_bottom = 139.0
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=2121030345]
 disable_3d = true
 handle_input_locally = false
-size = Vector2i(135, 126)
+size = Vector2i(158, 126)
 render_target_update_mode = 4
 script = ExtResource("5_epww1")
 

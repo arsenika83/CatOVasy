@@ -1,43 +1,63 @@
 [gd_scene format=3 uid="uid://cxs8m45tidd03"]
 
+[ext_resource type="Script" uid="uid://bo1d2p7vj4mlr" path="res://scripts/ui/buff.gd" id="1_5ndi7"]
 [ext_resource type="Texture2D" uid="uid://bgps0amyh5twl" path="res://assets/images/elements/unluck_element.png" id="1_6yos6"]
+[ext_resource type="StyleBox" uid="uid://dreoye77u4c8f" path="res://styles/black_rect_alpha.tres" id="2_fet4w"]
 
 [node name="Buff" type="Control" unique_id=263334792]
 use_parent_material = true
+custom_minimum_size = Vector2(48, 64)
 layout_mode = 3
 anchors_preset = 0
-offset_right = 64.0
+offset_right = 48.0
 offset_bottom = 64.0
-pivot_offset = Vector2(32, 32)
+pivot_offset = Vector2(24, 32)
 tooltip_text = "-20% удачи на 3 хода"
+mouse_filter = 1
+script = ExtResource("1_5ndi7")
+
+[node name="Panel" type="Panel" parent="." unique_id=347412865]
+use_parent_material = true
+layout_mode = 0
+offset_right = 48.0
+offset_bottom = 64.0
+mouse_filter = 1
+theme_override_styles/panel = ExtResource("2_fet4w")
 
 [node name="Icon" type="TextureRect" parent="." unique_id=1886311003]
 use_parent_material = true
 layout_mode = 0
-offset_right = 64.0
-offset_bottom = 64.0
+offset_right = 48.0
+offset_bottom = 48.0
+pivot_offset = Vector2(24, 24)
 texture = ExtResource("1_6yos6")
 
 [node name="PowerLabel" type="Label" parent="." unique_id=1230881379]
 use_parent_material = true
 layout_mode = 0
-offset_right = 32.0
-offset_bottom = 24.0
+offset_top = 32.0
+offset_right = 48.0
+offset_bottom = 51.0
+mouse_filter = 1
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 18
-text = "-20%"
+text = "100"
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TurnsLabel" type="Label" parent="." unique_id=57416033]
 use_parent_material = true
 layout_mode = 0
-offset_left = 32.0
-offset_top = 40.0
-offset_right = 64.0
+offset_top = 45.0
+offset_right = 48.0
 offset_bottom = 64.0
-pivot_offset = Vector2(0, -8)
+pivot_offset = Vector2(24, 24)
+mouse_filter = 1
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 18
 text = "х3"
-horizontal_alignment = 2
+horizontal_alignment = 1
 vertical_alignment = 1
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

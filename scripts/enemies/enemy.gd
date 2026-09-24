@@ -86,6 +86,9 @@ var current_luck_resistance: float = luck_resistance
 var current_unluck_resistance: float = unluck_resistance
 var current_inaccuracy_resistance: float = inaccuracy_resistance
 
+var current_buffs : Dictionary[String, Array]
+var current_debuffs : Dictionary[String, Array]
+
 var element = "might"
 
 var follow_step_count = 0

@@ -26,7 +26,6 @@ func _on_mouse_entered() -> void:
 	
 	var tween = create_tween()
 	tween.tween_property(self, "scale", Vector2(1.1, 1.1), 0.1)
-	tween.tween_property(self, "position.x", icon.position.x - 48, 0.1)
 	
 	if creature != null:
 		for c in get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().creatures:

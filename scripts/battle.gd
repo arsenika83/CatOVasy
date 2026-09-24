@@ -760,6 +760,8 @@ func check_creature_stats() -> void:
 		
 		has_target = true
 		current_creature_stats = giant
+		creature_check_dialog.buffs.update_buffs()
+		creature_check_dialog.debuffs.update_debuffs()
 		
 		if not creature_dialog_on_screen:
 			creature_check_dialog.position.x = -500
@@ -799,7 +801,7 @@ func check_creature_stats() -> void:
 		if giant.current_unluck_resistance != 0.0:
 			abilities += str("- Сопротивление [color=#ba037e]НЕУДАЧЕ[/color] ", int(giant.current_unluck_resistance*100), "%\n")
 		if giant.current_inaccuracy_resistance != 0.0:
-			abilities += str("- Сопротивление [color=#fd4d4f]ТОЧНОСТИ[/color] ", int(giant.current_inaccuracy_resistance*100), "%\n")	
+			abilities += str("- Сопротивление [color=#fd4d4f]НЕТОЧНОСТИ[/color] ", int(giant.current_inaccuracy_resistance*100), "%\n")	
 
 		creature_check_dialog.find_child("AbilitiesLabel").text = abilities
 					
@@ -814,6 +816,8 @@ func check_creature_stats() -> void:
 		
 		has_target = true
 		current_creature_stats = human
+		creature_check_dialog.buffs.update_buffs()
+		creature_check_dialog.debuffs.update_debuffs()
 		
 		if not creature_dialog_on_screen:
 			creature_check_dialog.position.x = -500
@@ -874,6 +878,8 @@ func check_creature_stats() -> void:
 							
 						has_target = true
 						current_creature_stats = target
+						creature_check_dialog.buffs.update_buffs()
+						creature_check_dialog.debuffs.update_debuffs()
 						
 						if not creature_dialog_on_screen:
 							creature_check_dialog.position.x = -500

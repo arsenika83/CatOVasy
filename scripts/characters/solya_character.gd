@@ -346,7 +346,7 @@ func give_debuff(targets : Array[CharacterBody2D], type : String, power : int, t
 	tween3.tween_property(gm.current_targets[0].status_fx, "scale", Vector2(1, 1), 0.2)	
 	debuff_timer.start(gm.debuff_animation_time)
 
-func give_buff(targets : Array[CharacterBody2D], type : String, power : int, turns : int) -> void:
+func give_buff(targets : Array, type : String, power : int, turns : int) -> void:
 	#current_target = target
 	status_fx.scale = Vector2(0, 0)
 	status_fx.play("buff_" + type)
@@ -359,7 +359,7 @@ func give_buff(targets : Array[CharacterBody2D], type : String, power : int, tur
 		
 		target.status_fx.play("buff_" + type)
 		
-		var current_power = -1
+		var current_power = -1000
 		if target.current_buffs.get(type) != null:
 			current_power = target.current_buffs.get(type).get(0)
 					
@@ -388,6 +388,48 @@ func give_buff(targets : Array[CharacterBody2D], type : String, power : int, tur
 					target.current_buffs.erase(type)
 						
 				target.current_luck += power
+			"fire_resistance":
+				if current_power < power and current_power != -1000:
+					target.current_fire_resistance -= float(current_power) / 100
+					target.current_buffs.erase(type)
+				
+				target.current_fire_resistance += float(power) / 100
+			"wind_resistance":
+				if current_power < power and current_power != -1000:
+					target.current_wind_resistance -= float(current_power) / 100
+					target.current_buffs.erase(type)
+				
+				target.current_wind_resistance += float(power) / 100
+			"luck_resistance":
+				if current_power < power and current_power != -1000:
+					target.current_luck_resistance -= float(current_power) / 100
+					target.current_buffs.erase(type)
+				
+				target.current_luck_resistance += float(power) / 100
+			"unluck_resistance":
+				if current_power < power and current_power != -1000:
+					target.current_unluck_resistance -= float(current_power) / 100
+					target.current_buffs.erase(type)
+				
+				target.current_unluck_resistance += float(power) / 100
+			"inaccuracy_resistance":
+				if current_power < power and current_power != -1000:
+					target.current_inaccuracy_resistance -= float(current_power) / 100
+					target.current_buffs.erase(type)
+				
+				target.current_inaccuracy_resistance += float(power) / 100
+			"death_resistance":
+				if current_power < power and current_power != -1000:
+					target.current_death_resistance -= float(current_power) / 100
+					target.current_buffs.erase(type)
+				
+				target.current_death_resistance += float(power) / 100
+			"life_resistance":
+				if current_power < power and current_power != -1000:
+					target.current_life_resistance -= float(current_power) / 100
+					target.current_buffs.erase(type)
+				
+				target.current_life_resistance += float(power) / 100
 				
 		if target.current_buffs.get(type) == null:
 			target.current_buffs.set(type, [power, turns])
@@ -437,20 +479,20 @@ func turn_tick() -> void:
 	if current_buffs.get("luck") == null:
 		current_luck = luck
 	if current_buffs.get("accuracy") == null:
-		current_luck = luck
-	if current_buffs.get("fire_resistance") == null:
+		current_accuracy = accuracy
+	if current_buffs.get("fire_resistance") == null and current_debuffs.get("fire_mark") == null:
 		current_fire_resistance = fire_resistance
-	if current_buffs.get("wind_resistance") == null:
+	if current_buffs.get("wind_resistance") == null and current_debuffs.get("wind_mark") == null:
 		current_wind_resistance = wind_resistance
-	if current_buffs.get("luck_resistance") == null:
+	if current_buffs.get("luck_resistance") == null and current_debuffs.get("luck_mark") == null: 
 		current_luck_resistance = luck_resistance
-	if current_buffs.get("unluck_resistance") == null:
+	if current_buffs.get("unluck_resistance") == null and current_debuffs.get("unluck_mark") == null:
 		current_unluck_resistance = unluck_resistance
-	if current_buffs.get("inaccuracy_resistance") == null:
+	if current_buffs.get("inaccuracy_resistance") == null and current_debuffs.get("inaccuracy_mark") == null:
 		current_inaccuracy_resistance = inaccuracy_resistance
-	if current_buffs.get("death_resistance") == null:
+	if current_buffs.get("death_resistance") == null and current_debuffs.get("death_mark") == null:
 		current_death_resistance = death_resistance
-	if current_buffs.get("life_resistance") == null:
+	if current_buffs.get("life_resistance") == null and current_debuffs.get("life_mark") == null:
 		current_life_resistance = life_resistance
 			
 	for debuff in current_debuffs:
@@ -466,20 +508,6 @@ func turn_tick() -> void:
 		current_luck = luck
 	if current_debuffs.get("inaccuracy") == null:
 		current_luck = luck
-	if current_debuffs.get("fire_mark") == null:
-		current_fire_resistance = fire_resistance
-	if current_debuffs.get("wind_mark") == null:
-		current_wind_resistance = wind_resistance
-	if current_debuffs.get("luck_mark") == null:
-		current_luck_resistance = luck_resistance
-	if current_debuffs.get("unluck_mark") == null:
-		current_unluck_resistance = unluck_resistance
-	if current_debuffs.get("inaccuracy_mark") == null:
-		current_inaccuracy_resistance = inaccuracy_resistance
-	if current_debuffs.get("death_mark") == null:
-		current_death_resistance = death_resistance
-	if current_debuffs.get("life_mark") == null:
-		current_life_resistance = life_resistance
 	if current_debuffs.get("laziness") == null:
 		current_energy = energy
 

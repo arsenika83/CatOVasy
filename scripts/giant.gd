@@ -527,7 +527,9 @@ func _on_take_damage_timer_timeout() -> void:
 		sprite.play("taking_damage")
 		audio_meow.play()
 		idle_animation_timer.start(0.2)
-		get_parent().end_turn()
+		
+		if not is_self_damage:
+			get_parent().end_turn()
 	else:
 		if get_parent().name == "Battle":
 			get_parent().log_messages.append(str("- [color=#1ca8fd]", character_name_display, "[/color] [color=#fc4e52]МЕРТВ[/color]\n"))
@@ -535,6 +537,8 @@ func _on_take_damage_timer_timeout() -> void:
 			get_parent().end_turn()
 		audio_fall.play()
 		sprite.play("dead")
+		
+	is_self_damage = false	
 
 func _on_idle_animation_timer_timeout() -> void:
 	if gm.prev_state == "playing_a_card" or gm.prev_state == "taking_damage":

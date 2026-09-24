@@ -28,4 +28,5 @@ func _process(delta: float) -> void:
 		$Energy/Label.add_theme_color_override("font_color", Color.WHITE)
 		
 func on_play() -> void:
+	get_parent().get_parent().get_parent().get_parent().human.give_buff([get_parent().get_parent().get_parent().get_parent().human], "wind_resistance", 15, 2)	
 	get_parent().get_parent().get_parent().get_parent().human.defend(0.6)

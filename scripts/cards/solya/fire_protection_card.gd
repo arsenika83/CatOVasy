@@ -6,6 +6,9 @@ var tool_tip_text = ""
 var card_name = "Защита от огня"
 var card_description = "Дает 20% сопротивления огню на 3 хода. Расходуется"
 var rarity = "common"
+var buff = "fire_resistance"
+var turns = 3
+var power = 20
 
 func _ready() -> void:
 	element = "fire"
@@ -31,4 +34,9 @@ func on_play() -> void:
 	get_parent().get_parent().get_parent().get_parent().log_messages.append(
 		str("- [color=#fdd14d]Защита от огня:[/color] [color=#1ca8fd]Соля[/color] получает 20% защиты от огня на 2 хода\n"))
 	 
-	get_parent().get_parent().get_parent().get_parent().human.idle_animation_timer.start(0.6)
+	get_parent().get_parent().get_parent().get_parent().human.give_buff([get_parent().get_parent().get_parent().get_parent().human], buff, power, turns)
+	get_parent().get_parent().get_parent().get_parent().human.give_buff([get_parent().get_parent().get_parent().get_parent().human], "death_resistance", power, turns)
+	get_parent().get_parent().get_parent().get_parent().human.give_buff([get_parent().get_parent().get_parent().get_parent().human], "wind_resistance", power, turns)
+
+func use_up():
+	pass
