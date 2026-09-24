@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://706820fjkbm8" path="res://assets/images/artifacts/motivational_poster.png" id="11_3ywdo"]
 [ext_resource type="AudioStream" uid="uid://bwch538phpi87" path="res://assets/soundFX/hit.wav" id="11_dku5q"]
 [ext_resource type="AudioStream" uid="uid://ceun5aaxxb0o7" path="res://assets/soundFX/debuff.wav" id="13_p1oqw"]
+[ext_resource type="Texture2D" uid="uid://bc6mgbwdqt8ia" path="res://assets/images/artifacts/cat_food.png" id="13_u4m4i"]
 [ext_resource type="AudioStream" uid="uid://b5kgcekrp1yv2" path="res://assets/soundFX/walk.wav" id="14_q8t3y"]
 [ext_resource type="AudioStream" uid="uid://b281edhvbfgf6" path="res://assets/soundFX/luck.wav" id="18_nwqqi"]
 [ext_resource type="AudioStream" uid="uid://kn3dv6vl4ov1" path="res://assets/soundFX/unluck.wav" id="19_47i74"]
@@ -55,7 +56,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vsv37")
 }],
-"loop": 1,
+"loop": true,
 "name": &"default",
 "speed": 1.0
 }]
@@ -90,7 +91,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5lxgs")
 }],
-"loop": 1,
+"loop": true,
 "name": &"default",
 "speed": 5.0
 }]
@@ -298,7 +299,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2xoio")
 }],
-"loop": 1,
+"loop": true,
 "name": &"battle",
 "speed": 5.0
 }, {
@@ -363,7 +364,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2xoio")
 }],
-"loop": 1,
+"loop": true,
 "name": &"battle_ability",
 "speed": 1.0
 }, {
@@ -380,7 +381,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_p1oqw")
 }],
-"loop": 1,
+"loop": true,
 "name": &"battle_attack",
 "speed": 5.0
 }, {
@@ -391,7 +392,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_i1883")
 }],
-"loop": 1,
+"loop": true,
 "name": &"battle_buffed",
 "speed": 5.0
 }, {
@@ -456,7 +457,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2xoio")
 }],
-"loop": 1,
+"loop": true,
 "name": &"battle_defend",
 "speed": 1.0
 }, {
@@ -464,7 +465,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bmrke")
 }],
-"loop": 1,
+"loop": true,
 "name": &"dead",
 "speed": 5.0
 }, {
@@ -481,7 +482,7 @@ animations = [{
 "duration": 4.0,
 "texture": SubResource("AtlasTexture_3ywdo")
 }],
-"loop": 0,
+"loop": false,
 "name": &"deal_damage",
 "speed": 10.0
 }, {
@@ -489,7 +490,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0vpcl")
 }],
-"loop": 1,
+"loop": true,
 "name": &"falling",
 "speed": 5.0
 }, {
@@ -539,7 +540,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ayw8s")
 }],
-"loop": 0,
+"loop": false,
 "name": &"healing",
 "speed": 10.0
 }, {
@@ -604,7 +605,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2xoio")
 }],
-"loop": 1,
+"loop": true,
 "name": &"idle",
 "speed": 5.0
 }, {
@@ -615,7 +616,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_dt8fj")
 }],
-"loop": 1,
+"loop": true,
 "name": &"resting",
 "speed": 1.0
 }, {
@@ -626,7 +627,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_glfi2")
 }],
-"loop": 1,
+"loop": true,
 "name": &"stop",
 "speed": 1.0
 }, {
@@ -634,7 +635,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ycwex")
 }],
-"loop": 1,
+"loop": true,
 "name": &"taking_damage",
 "speed": 5.0
 }, {
@@ -660,7 +661,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bmhpy")
 }],
-"loop": 1,
+"loop": true,
 "name": &"walk_around",
 "speed": 20.0
 }, {
@@ -671,7 +672,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_86ape")
 }],
-"loop": 1,
+"loop": true,
 "name": &"walking_side",
 "speed": 5.0
 }]
@@ -782,7 +783,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xrxwe")
 }],
-"loop": 0,
+"loop": false,
 "name": &"boomerang",
 "speed": 10.0
 }, {
@@ -799,7 +800,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3xb3h")
 }],
-"loop": 0,
+"loop": false,
 "name": &"candy",
 "speed": 2.0
 }, {
@@ -807,7 +808,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_17dpp")
 }],
-"loop": 1,
+"loop": true,
 "name": &"default",
 "speed": 5.0
 }, {
@@ -854,7 +855,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_mvbdv")
 }],
-"loop": 0,
+"loop": false,
 "name": &"spinner",
 "speed": 2.0
 }]
@@ -992,6 +993,26 @@ scale_max = 1.1999999
 scale_curve = SubResource("CurveTexture_u4m4i")
 anim_offset_max = 1.0
 anim_offset_curve = SubResource("CurveTexture_kn0ek")
+
+[sub_resource type="Curve" id="Curve_kn0ek"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.20979021, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_i0wex"]
+curve = SubResource("Curve_kn0ek")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ayw8s"]
+particle_flag_disable_z = true
+angle_min = -9.9999895
+angle_max = 10.0000105
+direction = Vector3(0, -1, 0)
+spread = 10.0
+initial_velocity_min = 80.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 98, 0)
+scale_min = 0.19999999
+scale_max = 0.29999998
+scale_curve = SubResource("CurveTexture_i0wex")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6wucx"]
 
@@ -1138,6 +1159,15 @@ lifetime = 1.5
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_r342d")
+
+[node name="CatFoodParticles" type="GPUParticles2D" parent="." unique_id=1448895944]
+position = Vector2(0, -8)
+emitting = false
+amount = 1
+texture = ExtResource("13_u4m4i")
+lifetime = 2.0
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_ayw8s")
 
 [node name="IdleAnimationTimer" type="Timer" parent="." unique_id=1031534056]
 one_shot = true

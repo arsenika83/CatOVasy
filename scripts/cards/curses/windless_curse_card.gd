@@ -24,14 +24,14 @@ func _process(delta: float) -> void:
 		$Energy/Label.add_theme_color_override("font_color", Color.WHITE)
 
 func on_play():
-	if get_parent().get_parent().get_parent().get_parent().current_creature_turn == -2:
-		gm.current_energy_human -= energy_cost
+	if get_parent().get_parent().get_parent().get_parent().current_creature_turn == get_parent().get_parent().get_parent().get_parent().human:
+		#gm.current_energy_human -= energy_cost
 		get_parent().get_parent().get_parent().get_parent().human.idle_animation_timer.start()
-	elif get_parent().get_parent().get_parent().get_parent().current_creature_turn == -1:
-		gm.current_energy_cat -= energy_cost
+	elif get_parent().get_parent().get_parent().get_parent().current_creature_turn == get_parent().get_parent().get_parent().get_parent().giant:
+		#gm.current_energy_cat -= energy_cost
 		get_parent().get_parent().get_parent().get_parent().giant.idle_animation_timer.start()
 	
-	get_parent().get_parent().has_windless = false	
+	get_parent().get_parent().has_windless = false
 
 func on_hand() -> void:
 	var tween = create_tween()

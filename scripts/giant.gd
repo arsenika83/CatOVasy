@@ -37,6 +37,7 @@ var character_name_display = "Кот"
 @onready var unluck_particles = $UnluckParticles
 @onready var poster_particles = $PosterParticles
 @onready var money_particles = $MoneyParticles
+@onready var cat_food_particles = $CatFoodParticles
 
 var light_diff = 0.0001
 @onready var light = $PointLight2D
@@ -431,7 +432,7 @@ func check_hp() -> void:
 	if not gm.state == "dead":
 		if hp <= 0:
 			hp = 0
-			state = "dead"
+			gm.state = "dead"
 
 func check_xp() -> bool:
 	if gm.xp >= gm.xp_needed and (gm.state == "idle" or gm.state == "walking"):
@@ -449,6 +450,10 @@ func check_xp() -> bool:
 		return true
 		
 	return false
+		
+func update_gm() -> void:
+	gm.hp_cat = hp
+	gm.max_hp_cat = max_hp
 		
 func shine_artifact(art : String) -> void:
 	var i = 1

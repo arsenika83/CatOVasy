@@ -1,3 +1,4 @@
+res://assets/images/characters/
 res://scripts/global/
 res://scenes/ui/
 res://scripts/cards/curses/
@@ -7,7 +8,6 @@ res://scenes/fx/
 res://scripts/ui/
 res://shaders/
 res://scripts/artifacts/
-res://assets/images/characters/
 res://scripts/cards/
 res://scripts/enemies/
 res://assets/images/

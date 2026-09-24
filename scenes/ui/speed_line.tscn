@@ -2,7 +2,6 @@
 
 [ext_resource type="StyleBox" uid="uid://dreoye77u4c8f" path="res://styles/black_rect_alpha.tres" id="1_eayrd"]
 [ext_resource type="Script" uid="uid://ctl5rxpfth3f0" path="res://scripts/ui/speed_line.gd" id="1_ei673"]
-[ext_resource type="PackedScene" uid="uid://tp3183jcggau" path="res://scenes/ui/creature_icon.tscn" id="3_ei673"]
 
 [node name="SpeedLine" type="Control" unique_id=325966660]
 layout_mode = 3
@@ -43,18 +42,6 @@ theme_override_constants/margin_bottom = 2
 layout_mode = 2
 theme_override_constants/separation = 4
 alignment = 1
-
-[node name="CreatureIcon" parent="ScrollContainer/MarginContainer/HBoxContainer" unique_id=466900556 instance=ExtResource("3_ei673")]
-layout_mode = 2
-
-[node name="CreatureIcon2" parent="ScrollContainer/MarginContainer/HBoxContainer" unique_id=203187833 instance=ExtResource("3_ei673")]
-layout_mode = 2
-
-[node name="CreatureIcon3" parent="ScrollContainer/MarginContainer/HBoxContainer" unique_id=2088170738 instance=ExtResource("3_ei673")]
-layout_mode = 2
-
-[node name="CreatureIcon4" parent="ScrollContainer/MarginContainer/HBoxContainer" unique_id=907295282 instance=ExtResource("3_ei673")]
-layout_mode = 2
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

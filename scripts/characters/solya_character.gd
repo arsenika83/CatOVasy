@@ -550,22 +550,10 @@ func check_hp() -> void:
 			hp = 0
 			gm.state_human = "dead"
 
-func check_xp() -> bool:
-	$AudioStreamPlayerPickUpXP.pitch_scale = randf_range(0.8, 1.2)
-	$AudioStreamPlayerPickUpXP.play()
-	
-	if gm.xp >= gm.xp_needed:
-		gm.level += 1
-		gm.xp = gm.xp - gm.xp_needed
-		gm.xp_needed += 1
-		get_parent().draw_level_up()
+func update_gm() -> void:
+	gm.hp_human = hp
+	gm.max_hp_human = max_hp
 		
-		$AudioStreamPlayerLevelUp.play()
-		return true
-		
-	return false
-	
-	
 func shine_artifact(art : String) -> void:
 	var i = 1
 	for artifact in gm.current_artifacts_human.values():
@@ -613,6 +601,7 @@ func _on_take_damage_timer_timeout() -> void:
 		
 		if not is_self_damage:
 			get_parent().end_turn()
+			
 	else:
 		if get_parent().name == "Battle":
 			get_parent().log_messages.append(str("- [color=#1ca8fd]", character_name_display, "[/color] [color=#fc4e52]МЕРТВА[/color]\n"))
@@ -626,6 +615,8 @@ func _on_take_damage_timer_timeout() -> void:
 			
 		audio_fall.play()
 		sprite.play("dead")
+	
+	is_self_damage = false	
 
 func _on_idle_animation_timer_timeout() -> void:
 	#if gm.prev_state_human == "playing_a_card" or gm.prev_state_human == "taking_damage":
@@ -837,7 +828,7 @@ func _on_heal_timer_timeout() -> void:
 	if hp > max_hp:
 		hp = max_hp
 	
-	gm.prev_state = "battle"
+	gm.prev_state_human = "battle"
 	gm.state_human = gm.prev_state_human
 	sprite.play(gm.state_human)
 	display_damage(-current_heal)

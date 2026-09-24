@@ -1,3 +1,5 @@
+GPUParticles2D
+CPUParticles2D
 TextureRect
 Panel
 Label
@@ -6,9 +8,7 @@ ScrollContainer
 Control
 GridContainer
 RichTextLabel
-GPUParticles2D
 Button
 VBoxContainer
 AudioStreamPlayer
 Sprite2D
-ColorRect

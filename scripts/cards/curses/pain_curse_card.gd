@@ -24,11 +24,11 @@ func _process(delta: float) -> void:
 		$Energy/Label.add_theme_color_override("font_color", Color.WHITE)
 
 func on_play():
-	if get_parent().get_parent().get_parent().get_parent().current_creature_turn == -2:
-		gm.current_energy_human -= energy_cost
+	if get_parent().get_parent().get_parent().get_parent().current_creature_turn == get_parent().get_parent().get_parent().get_parent().human:
+		#gm.current_energy_human -= energy_cost
 		get_parent().get_parent().get_parent().get_parent().human.idle_animation_timer.start()
-	elif get_parent().get_parent().get_parent().get_parent().current_creature_turn == -1:
-		gm.current_energy_cat -= energy_cost
+	elif get_parent().get_parent().get_parent().get_parent().current_creature_turn == get_parent().get_parent().get_parent().get_parent().giant:
+		#gm.current_energy_cat -= energy_cost
 		get_parent().get_parent().get_parent().get_parent().giant.idle_animation_timer.start()
 
 func on_hand() -> void:
@@ -36,13 +36,15 @@ func on_hand() -> void:
 	tween.tween_property(self, "scale:y", 1.5, 0.2)
 	tween.tween_property(self, "scale:y", 1, 0.2)
 	
-	if get_parent().get_parent().get_parent().get_parent().current_creature_turn == -2:
-		var dmg = int(4 * (1 - gm.death_resistance_human))
+	if get_parent().get_parent().get_parent().get_parent().current_creature_turn == get_parent().get_parent().get_parent().get_parent().human:
+		var dmg = int(4 * (1 - get_parent().get_parent().get_parent().get_parent().human.current_death_resistance))
 		
+		get_parent().get_parent().get_parent().get_parent().human.is_self_damage = true
 		get_parent().get_parent().get_parent().get_parent().human.take_damage(dmg, 0.3)
-	elif get_parent().get_parent().get_parent().get_parent().current_creature_turn == -1:
-		var dmg = int(4 * (1 - gm.death_resistance_cat))
+	elif get_parent().get_parent().get_parent().get_parent().current_creature_turn == get_parent().get_parent().get_parent().get_parent().giant:
+		var dmg = int(4 * (1 - get_parent().get_parent().get_parent().get_parent().giant.current_death_resistance))
 		
+		get_parent().get_parent().get_parent().get_parent().giant.is_self_damage = true
 		get_parent().get_parent().get_parent().get_parent().giant.take_damage(4, 0.3)
 
 func use_up():

@@ -417,9 +417,6 @@ func end_battle() -> void:
 	player_camera.enabled = true
 	player_camera.zoom = Vector2(gm.camera_zoom, gm.camera_zoom)
 	giant.light.enabled = true
-	
-	if gm.has_cat_food:
-		giant.heal(2)
 
 func _on_battle_start_timer_timeout() -> void:
 	scene_transitioner.change_scene_back()

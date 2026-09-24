@@ -541,7 +541,7 @@ func choose_target(action : String) -> void:
 		card_container_cat.remind_no_energy_for_current_card()
 				
 func enemy_turn() -> void:
-	if current_creature_turn == giant or current_creature_turn == human:
+	if current_creature_turn == giant or current_creature_turn == human or battle_ended:
 		return
 		
 	var source = current_creature_turn
@@ -1258,6 +1258,9 @@ func _play_money_sounds(duration: float) -> void:
 		await get_tree().create_timer(0.06).timeout
 
 func _on_end_battle_button_pressed() -> void:
+	giant.update_gm()
+	human.update_gm()
+	
 	if won:
 		var added_money = 0
 
@@ -1295,10 +1298,10 @@ func _on_win_timer_timeout() -> void:
 		
 		if gm.state == "dead":
 			gm.state = "battle"
-			gm.hp_cat += 1
+			giant.heal(1)
 		elif gm.state_human == "dead":
 			gm.state_human = "battle"
-			gm.hp_human += 1	
+			human.heal(1)
 		
 		log_messages.append("[font_size=20][center]\nПОБЕДА![/center][/font_size]")
 		
@@ -1314,6 +1317,10 @@ func _on_win_timer_timeout() -> void:
 		tween_money.tween_property(self, "initial_money", added_money, 0.5)
 		
 		_play_money_sounds(0.5)
+		
+		if gm.has_cat_food:
+			giant.cat_food_particles.restart()
+			giant.heal(2)
 
 func _on_defeat_timer_timeout() -> void:
 	end_battle_button.visible = true
