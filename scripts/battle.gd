@@ -31,6 +31,7 @@ var log_count = 1
 @onready var fog_summon_fx = $FX/FogSummon
 @onready var sun_fx = $FX/Sun
 @onready var armageddon_fx = $FX/ArmageddonFX
+@onready var energy_steal_particles = $FX/EnergyStealParticles
 
 @onready var fog_fx = $Effects/Fog
 

@@ -20,10 +20,11 @@ var all_card_names_epic : Array[String]
 var all_card_names_unbelievable : Array[String]
 
 var all_card_names_cat : Array[String] = ["double_claw", "sharp_claw", "got_you",
-"shashlyck", "inferno", "revenge", "cattenheimer", "lick_wounds", "compensation", "eclipse", "dinner"]
+"shashlyck", "inferno", "revenge", "cattenheimer", "lick_wounds", "compensation", "eclipse", "dinner", "bite",
+"great_unluck"]
 var all_card_names_common_cat : Array[String] = ["sharp_claw", "shashlyck"]
 var all_card_names_rare_cat : Array[String] = ["double_claw", "lick_wounds", "compensation"]
-var all_card_names_epic_cat : Array[String] = ["inferno", "revenge", "cattenheimer"]
+var all_card_names_epic_cat : Array[String] = ["inferno", "revenge", "cattenheimer", "bite", "great_unluck"]
 var all_card_names_unbelievable_cat : Array[String] = ["eclipse", "dinner"]
 
 

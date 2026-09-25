@@ -77,6 +77,7 @@ var life_resistance: float = 0
 var luck_resistance: float = 0
 var unluck_resistance: float = 0
 var inaccuracy_resistance: float = 0
+var energy_resistance: float = 0
 
 var current_fire_resistance: float = 0
 var current_wind_resistance: float = 0
@@ -86,6 +87,7 @@ var current_life_resistance: float = 0
 var current_luck_resistance: float = 0
 var current_unluck_resistance: float = 0
 var current_inaccuracy_resistance: float = 0
+var current_energy_resistance: float = 0
 
 var current_heal = 0
 var attack_count = 0
@@ -136,6 +138,7 @@ func _ready() -> void:
 	luck_resistance = gm.luck_resistance_human
 	unluck_resistance = gm.unluck_resistance_human
 	inaccuracy_resistance = gm.inaccuracy_resistance_human
+	energy_resistance = gm.energy_resistance_human
 
 	current_fire_resistance = fire_resistance
 	current_wind_resistance = wind_resistance
@@ -145,6 +148,7 @@ func _ready() -> void:
 	current_luck_resistance = luck_resistance
 	current_unluck_resistance = unluck_resistance
 	current_inaccuracy_resistance = inaccuracy_resistance
+	current_energy_resistance = energy_resistance
 
 
 func _process(delta: float) -> void:
@@ -326,28 +330,88 @@ func defend(time : float) -> void:
 	else:
 		defend_timer.start(time)
 
-func give_debuff(targets : Array[CharacterBody2D], type : String, power : int, turns : int) -> void:
-	var energy_cost = gm.current_card.energy_cost
-	#if current_energy - energy_cost < 0:
-	#	return
-	
-	#current_energy -= energy_cost
-	
-	status_fx.scale = Vector2(0, 0)
-	status_fx.play("debuff")
+func give_debuff(targets : Array, type : String, power : int, turns : int) -> void:
 
+	status_fx.scale = Vector2(0, 0)
+	status_fx.play("debuff_" + type)
 	status_fx.visible = true
 	var tween = create_tween()
-	tween.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
-	#gm.current_targets = targets
-	
-	gm.current_targets[0].status_fx.play("debuff_" + type)
-	
-	gm.current_targets[0].status_fx.visible = true
-	#get_parent().find_child("UI").find_child("CardContainer").replace_current_card("ability")
-	var tween3 = create_tween()
-	tween3.tween_property(gm.current_targets[0].status_fx, "scale", Vector2(1, 1), 0.2)	
-	debuff_timer.start(gm.debuff_animation_time)
+	for target in targets:
+		target.status_fx.visible = true
+		tween.tween_property(target.status_fx, "scale", Vector2(1, 1), 0.4)
+		tween.tween_property(target.status_fx, "scale", Vector2(0, 0), 0.4)
+		
+		target.status_fx.play("debuff_" + type)
+		
+		var current_power = -1000
+		if target.current_debuffs.get(type) != null:
+			current_power = target.current_debuffs.get(type).get(0)
+					
+			if current_power > power:
+				break
+			elif current_power == power:
+				var current_turns = target.current_debuffs.get(type).get(1)
+				target.current_debuffs.get(type).set(1, current_turns + turns)
+		
+		match type:
+			"unluck":
+				if current_power < power and current_power > 0:
+					target.current_luck += current_power
+					target.current_debuffs.erase(type)
+						
+				target.current_luck -= power
+			"fire_resistance":
+				if current_power < power and current_power != -1000:
+					target.current_fire_resistance -= float(current_power) / 100
+					target.current_debuffs.erase(type)
+				
+				target.current_fire_resistance += float(power) / 100
+			"wind_resistance":
+				if current_power < power and current_power != -1000:
+					target.current_wind_resistance -= float(current_power) / 100
+					target.current_debuffs.erase(type)
+				
+				target.current_wind_resistance += float(power) / 100
+			"luck_resistance":
+				if current_power < power and current_power != -1000:
+					target.current_luck_resistance -= float(current_power) / 100
+					target.current_debuffs.erase(type)
+				
+				target.current_luck_resistance += float(power) / 100
+			"unluck_resistance":
+				if current_power < power and current_power != -1000:
+					target.current_unluck_resistance -= float(current_power) / 100
+					target.current_debuffs.erase(type)
+				
+				target.current_unluck_resistance += float(power) / 100
+			"inaccuracy_resistance":
+				if current_power < power and current_power != -1000:
+					target.current_inaccuracy_resistance -= float(current_power) / 100
+					target.current_debuffs.erase(type)
+				
+				target.current_inaccuracy_resistance += float(power) / 100
+			"death_resistance":
+				if current_power < power and current_power != -1000:
+					target.current_death_resistance -= float(current_power) / 100
+					target.current_debuffs.erase(type)
+				
+				target.current_death_resistance += float(power) / 100
+			"life_resistance":
+				if current_power < power and current_power != -1000:
+					target.current_life_resistance -= float(current_power) / 100
+					target.current_debuffs.erase(type)
+				
+				target.current_life_resistance += float(power) / 100
+				
+		if target.current_debuffs.get(type) == null:
+			target.current_debuffs.set(type, [power, turns])
+			
+			
+	#current_energy -= gm.current_card.energy_cost
+	z_index += 1
+	$AudioStreamPlayerDebuff.play()
+
+	idle_animation_timer.start(gm.buff_animation_time_human)	
 
 func give_buff(targets : Array, type : String, power : int, turns : int) -> void:
 	#current_target = target
@@ -666,7 +730,13 @@ func _on_miss_damage_timer_timeout() -> void:
 	
 	var tween = create_tween()
 	tween.tween_property(status_fx, "scale", Vector2(0, 0), 0.2)
-	get_parent().end_turn()
+	
+	idle_animation_timer.start(0.2)
+	
+	if not is_self_damage:
+		get_parent().end_turn()
+	
+	is_self_damage = false	
 
 func _on_deal_damage_timer_timeout() -> void:
 	last_damage_dealt = 0

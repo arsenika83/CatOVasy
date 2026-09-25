@@ -76,6 +76,7 @@ var dealt_damage_to_human = false
 @export var luck_resistance: float = 0
 @export var unluck_resistance: float = 0
 @export var inaccuracy_resistance: float = 0
+@export var energy_resistance: float = 0
 
 var current_fire_resistance: float = fire_resistance
 var current_wind_resistance: float = wind_resistance
@@ -85,6 +86,7 @@ var current_life_resistance: float = life_resistance
 var current_luck_resistance: float = luck_resistance
 var current_unluck_resistance: float = unluck_resistance
 var current_inaccuracy_resistance: float = inaccuracy_resistance
+var current_energy_resistance: float = energy_resistance
 
 var current_buffs : Dictionary[String, Array]
 var current_debuffs : Dictionary[String, Array]
@@ -451,8 +453,53 @@ func display_damage(dmg) -> void:
 		indicator.display_damage(dmg, spawn_pos)
 	
 func turn_tick() -> void:
-	pass
 	#current_defence = 0
+	for buff in current_buffs:
+		var turns = current_buffs.get(buff).get(1)
+		current_buffs.get(buff).set(1, turns-1)
+		
+		print(str(buff, ": ", current_buffs.get(buff).get(1), " ходов"))
+		
+		if current_buffs.get(buff).get(1) == 0:
+			print(str(buff, ": кончился"))
+			current_buffs.erase(buff)
+	
+	if current_buffs.get("strength") == null:
+		current_damage = damage
+	if current_buffs.get("luck") == null:
+		current_luck = luck
+	if current_buffs.get("accuracy") == null:
+		current_accuracy = accuracy
+	if current_buffs.get("fire_resistance") == null and current_debuffs.get("fire_mark") == null:
+		current_fire_resistance = fire_resistance
+	if current_buffs.get("wind_resistance") == null and current_debuffs.get("wind_mark") == null:
+		current_wind_resistance = wind_resistance
+	if current_buffs.get("luck_resistance") == null and current_debuffs.get("luck_mark") == null: 
+		current_luck_resistance = luck_resistance
+	if current_buffs.get("unluck_resistance") == null and current_debuffs.get("unluck_mark") == null:
+		current_unluck_resistance = unluck_resistance
+	if current_buffs.get("inaccuracy_resistance") == null and current_debuffs.get("inaccuracy_mark") == null:
+		current_inaccuracy_resistance = inaccuracy_resistance
+	if current_buffs.get("death_resistance") == null and current_debuffs.get("death_mark") == null:
+		current_death_resistance = death_resistance
+	if current_buffs.get("life_resistance") == null and current_debuffs.get("life_mark") == null:
+		current_life_resistance = life_resistance
+			
+	for debuff in current_debuffs:
+		var turns = current_debuffs.get(debuff).get(1)
+		current_debuffs.get(debuff).set(1, turns-1)
+		
+		if current_debuffs.get(debuff).get(1) == 0:
+			current_debuffs.erase(debuff)
+	
+	if current_debuffs.get("weakness") == null:
+		current_damage = damage
+	if current_debuffs.get("unluck") == null:
+		current_luck = luck
+	if current_debuffs.get("inaccuracy") == null:
+		current_luck = luck
+	if current_debuffs.get("laziness") == null:
+		current_energy = energy
 
 func die() -> void:
 		audio_fall.play()
