@@ -1,31 +1,31 @@
-[gd_scene format=4 uid="uid://by1742dw6mstq"]
+[gd_scene format=4 uid="uid://mxd268j4ypub"]
 
-[ext_resource type="Shader" uid="uid://dw8y0528dhqqe" path="res://shaders/vhs.gdshader" id="1_7s2gi"]
-[ext_resource type="Script" uid="uid://dws0dtqq3i1mi" path="res://scripts/game.gd" id="1_lnu2h"]
-[ext_resource type="PackedScene" uid="uid://d0d5e8ltlrwqg" path="res://scenes/giant.tscn" id="1_uwrxv"]
-[ext_resource type="Texture2D" uid="uid://4itbl0ejcd3o" path="res://assets/images/tilemap.png" id="1_yqjtg"]
-[ext_resource type="PackedScene" uid="uid://bp10kb8rxtuhx" path="res://scenes/objects/stairs.tscn" id="4_al08y"]
-[ext_resource type="PackedScene" uid="uid://ba7f54d4yq2hp" path="res://scenes/ui/cursor.tscn" id="4_lbhrr"]
-[ext_resource type="PackedScene" uid="uid://1by6pkucltci" path="res://scenes/objects/grass.tscn" id="6_p57ef"]
-[ext_resource type="PackedScene" uid="uid://b8bfs4u1x4s8" path="res://scenes/objects/grass_low.tscn" id="7_d3ub6"]
-[ext_resource type="PackedScene" uid="uid://c0fd45oqpmhla" path="res://scenes/objects/chest.tscn" id="7_po5je"]
-[ext_resource type="PackedScene" uid="uid://c7f16y8rwf2q" path="res://scenes/objects/edge_one.tscn" id="10_m6lg1"]
-[ext_resource type="Shader" uid="uid://dm6djrn7pct8b" path="res://shaders/wobble.gdshader" id="11_fj52k"]
-[ext_resource type="PackedScene" uid="uid://1bvjmpy2pf0k" path="res://scenes/enemies/enemy.tscn" id="14_m6lg1"]
-[ext_resource type="PackedScene" uid="uid://dmq76y6cfygk7" path="res://scenes/characters/character_solya.tscn" id="15_74bpm"]
-[ext_resource type="PackedScene" uid="uid://di4k2iivrnhup" path="res://scenes/ui/creature_adventure_dialog.tscn" id="15_m6lg1"]
-[ext_resource type="PackedScene" uid="uid://qgx2la7r3w7a" path="res://scenes/ui/inventory.tscn" id="16_3asx1"]
-[ext_resource type="PackedScene" uid="uid://dpydh1bnymoa8" path="res://scenes/ui/level_up_dialog.tscn" id="17_yxkm4"]
-[ext_resource type="PackedScene" uid="uid://dqyxtu1uebx5v" path="res://scenes/ui/upgrade_stats_dialog.tscn" id="18_3ebcg"]
-[ext_resource type="StyleBox" uid="uid://b8wibcbgivilm" path="res://styles/button_normal.tres" id="19_56goh"]
-[ext_resource type="PackedScene" uid="uid://djqdt7tiwad4" path="res://scenes/ui/artifact_dialog.tscn" id="19_db1u1"]
-[ext_resource type="AudioStream" uid="uid://k300apigjs30" path="res://assets/music/BATTLE_START.mp3" id="19_luu1i"]
-[ext_resource type="StyleBox" uid="uid://2iw7p3yvicvr" path="res://styles/button_pressed.tres" id="20_j4kqp"]
-[ext_resource type="PackedScene" uid="uid://cdll7yvc84q18" path="res://scenes/ui/menu.tscn" id="21_mtrs4"]
-[ext_resource type="StyleBox" uid="uid://c66nispyhk2t0" path="res://styles/button_hover.tres" id="21_wcmim"]
-[ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="22_d7a8j"]
-[ext_resource type="Texture2D" uid="uid://djggfi67w50cu" path="res://assets/images/card_icons/girl.png" id="27_e1tke"]
-[ext_resource type="AudioStream" uid="uid://danwjx5w4kls1" path="res://assets/music/ZONE_1.ogg" id="30_d7a8j"]
+[ext_resource type="Script" uid="uid://dws0dtqq3i1mi" path="res://scripts/game.gd" id="1_xidjn"]
+[ext_resource type="Shader" uid="uid://dw8y0528dhqqe" path="res://shaders/vhs.gdshader" id="2_45jfw"]
+[ext_resource type="Texture2D" uid="uid://4itbl0ejcd3o" path="res://assets/images/tilemap.png" id="3_8kpy5"]
+[ext_resource type="PackedScene" uid="uid://bp10kb8rxtuhx" path="res://scenes/objects/stairs.tscn" id="4_ycs18"]
+[ext_resource type="PackedScene" uid="uid://b8bfs4u1x4s8" path="res://scenes/objects/grass_low.tscn" id="5_ydw67"]
+[ext_resource type="PackedScene" uid="uid://1by6pkucltci" path="res://scenes/objects/grass.tscn" id="6_iin1y"]
+[ext_resource type="PackedScene" uid="uid://c0fd45oqpmhla" path="res://scenes/objects/chest.tscn" id="7_6igki"]
+[ext_resource type="PackedScene" uid="uid://dmq76y6cfygk7" path="res://scenes/characters/character_solya.tscn" id="8_hlvfl"]
+[ext_resource type="PackedScene" uid="uid://d0d5e8ltlrwqg" path="res://scenes/giant.tscn" id="9_7r2ys"]
+[ext_resource type="PackedScene" uid="uid://1bvjmpy2pf0k" path="res://scenes/enemies/enemy.tscn" id="10_h3qar"]
+[ext_resource type="PackedScene" uid="uid://c7f16y8rwf2q" path="res://scenes/objects/edge_one.tscn" id="11_r00g1"]
+[ext_resource type="PackedScene" uid="uid://ba7f54d4yq2hp" path="res://scenes/ui/cursor.tscn" id="12_liaw4"]
+[ext_resource type="Shader" uid="uid://dm6djrn7pct8b" path="res://shaders/wobble.gdshader" id="13_m0i7f"]
+[ext_resource type="PackedScene" uid="uid://cdll7yvc84q18" path="res://scenes/ui/menu.tscn" id="14_grqcv"]
+[ext_resource type="PackedScene" uid="uid://di4k2iivrnhup" path="res://scenes/ui/creature_adventure_dialog.tscn" id="15_jvp1d"]
+[ext_resource type="PackedScene" uid="uid://qgx2la7r3w7a" path="res://scenes/ui/inventory.tscn" id="16_kpmf5"]
+[ext_resource type="StyleBox" uid="uid://b8wibcbgivilm" path="res://styles/button_normal.tres" id="17_k6387"]
+[ext_resource type="StyleBox" uid="uid://2iw7p3yvicvr" path="res://styles/button_pressed.tres" id="18_ev32s"]
+[ext_resource type="StyleBox" uid="uid://c66nispyhk2t0" path="res://styles/button_hover.tres" id="19_7jvlv"]
+[ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="20_77got"]
+[ext_resource type="Texture2D" uid="uid://djggfi67w50cu" path="res://assets/images/card_icons/girl.png" id="21_51ehb"]
+[ext_resource type="PackedScene" uid="uid://dpydh1bnymoa8" path="res://scenes/ui/level_up_dialog.tscn" id="22_fhdct"]
+[ext_resource type="PackedScene" uid="uid://dqyxtu1uebx5v" path="res://scenes/ui/upgrade_stats_dialog.tscn" id="23_uaxjl"]
+[ext_resource type="PackedScene" uid="uid://djqdt7tiwad4" path="res://scenes/ui/artifact_dialog.tscn" id="24_4rsgv"]
+[ext_resource type="AudioStream" uid="uid://k300apigjs30" path="res://assets/music/BATTLE_START.mp3" id="25_7ppig"]
+[ext_resource type="AudioStream" uid="uid://danwjx5w4kls1" path="res://assets/music/ZONE_1.ogg" id="26_ehvql"]
 
 [sub_resource type="Environment" id="Environment_xremi"]
 glow_enabled = true
@@ -39,7 +39,7 @@ fog_height = 21.79
 fog_height_density = 0.6809
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fj52k"]
-shader = ExtResource("1_7s2gi")
+shader = ExtResource("2_45jfw")
 shader_parameter/horizontalMovement = 2.9802400103307036e-08
 shader_parameter/verticalMovement = 2.9802400103307036e-08
 shader_parameter/frequencyStar = 0.0
@@ -56,11 +56,11 @@ shader_parameter/transparencyBackground = 0.0
 shader_parameter/seed = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1t5oo"]
-atlas = ExtResource("1_yqjtg")
+atlas = ExtResource("3_8kpy5")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p57ef"]
-texture = ExtResource("1_yqjtg")
+texture = ExtResource("3_8kpy5")
 texture_region_size = Vector2i(32, 32)
 1:0/0 = 0
 3:4/0 = 0
@@ -92,7 +92,7 @@ tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_p57ef")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbhrr"]
-texture = ExtResource("1_yqjtg")
+texture = ExtResource("3_8kpy5")
 texture_region_size = Vector2i(32, 32)
 1:0/0 = 0
 2:0/0 = 0
@@ -112,7 +112,7 @@ tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_lbhrr")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d7a8j"]
-shader = ExtResource("11_fj52k")
+shader = ExtResource("13_m0i7f")
 shader_parameter/color_levels = 62.9230028938425
 shader_parameter/chromatic_aberration = 0.0010000000475
 shader_parameter/blur_amount = 3.2530001545175
@@ -123,11 +123,11 @@ shader_parameter/black_offset_multiplier = 0.0
 shader_parameter/color_offset = 3.259879990946679e-09
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nqtv8"]
-atlas = ExtResource("22_d7a8j")
+atlas = ExtResource("20_77got")
 region = Rect2(288, 32, 32, 32)
 
 [node name="Game" type="Node2D" unique_id=2132287685]
-script = ExtResource("1_lnu2h")
+script = ExtResource("1_xidjn")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1307664170]
 environment = SubResource("Environment_xremi")
@@ -161,32 +161,34 @@ tile_set = SubResource("TileSet_a7tdr")
 
 [node name="Exits" type="Node2D" parent="." unique_id=1303112674]
 
-[node name="Stairs" parent="Exits" unique_id=175082881 instance=ExtResource("4_al08y")]
+[node name="Stairs" parent="Exits" unique_id=175082881 instance=ExtResource("4_ycs18")]
 position = Vector2(208, 112)
 rotation = 4.712389
+room_number = 3
 
 [node name="Plants" type="Node2D" parent="." unique_id=1507805972]
 
-[node name="GrassLow" parent="Plants" unique_id=1576059805 instance=ExtResource("7_d3ub6")]
+[node name="GrassLow" parent="Plants" unique_id=1576059805 instance=ExtResource("5_ydw67")]
 position = Vector2(176, 144)
 
-[node name="Grass" parent="Plants" unique_id=1301032520 instance=ExtResource("6_p57ef")]
+[node name="Grass" parent="Plants" unique_id=1301032520 instance=ExtResource("6_iin1y")]
 position = Vector2(80, 48)
 
-[node name="Grass2" parent="Plants" unique_id=963626142 instance=ExtResource("6_p57ef")]
+[node name="Grass2" parent="Plants" unique_id=963626142 instance=ExtResource("6_iin1y")]
 position = Vector2(48, 144)
 
 [node name="Objects" type="Node2D" parent="." unique_id=1714322502]
 position = Vector2(208, 80)
 
-[node name="Chest" parent="Objects" unique_id=977096426 instance=ExtResource("7_po5je")]
+[node name="Chest" parent="Objects" unique_id=977096426 instance=ExtResource("7_6igki")]
 position = Vector2(-96, 32)
+rarity = "all"
 
-[node name="CharacterSolya" parent="." unique_id=52898326 instance=ExtResource("15_74bpm")]
+[node name="CharacterSolya" parent="." unique_id=52898326 instance=ExtResource("8_hlvfl")]
 visible = false
 position = Vector2(-112, 112)
 
-[node name="Giant" parent="." unique_id=2060885226 instance=ExtResource("1_uwrxv")]
+[node name="Giant" parent="." unique_id=2060885226 instance=ExtResource("9_7r2ys")]
 position = Vector2(16, 112)
 
 [node name="Camera2D" type="Camera2D" parent="Giant" unique_id=1303825275]
@@ -197,98 +199,126 @@ rotation_smoothing_speed = 3.0
 
 [node name="Enemies" type="Node2D" parent="." unique_id=946491156]
 
-[node name="Enemy" parent="Enemies" unique_id=685663284 instance=ExtResource("14_m6lg1")]
+[node name="Enemy" parent="Enemies" unique_id=685663284 instance=ExtResource("10_h3qar")]
+position = Vector2(144, 112)
+is_leader = true
+
+[node name="Enemy2" parent="Enemies" unique_id=590635651 instance=ExtResource("10_h3qar")]
+position = Vector2(144, 112)
+
+[node name="Enemy3" parent="Enemies" unique_id=1803497542 instance=ExtResource("10_h3qar")]
+position = Vector2(144, 112)
+
+[node name="Enemy4" parent="Enemies" unique_id=5365037 instance=ExtResource("10_h3qar")]
+position = Vector2(144, 112)
+
+[node name="Enemy5" parent="Enemies" unique_id=1412701572 instance=ExtResource("10_h3qar")]
+position = Vector2(144, 112)
+
+[node name="Enemy6" parent="Enemies" unique_id=1534380869 instance=ExtResource("10_h3qar")]
+position = Vector2(144, 112)
+
+[node name="Enemy7" parent="Enemies" unique_id=863898005 instance=ExtResource("10_h3qar")]
+position = Vector2(144, 112)
+
+[node name="Enemy8" parent="Enemies" unique_id=1576477305 instance=ExtResource("10_h3qar")]
+position = Vector2(144, 112)
+
+[node name="Enemy9" parent="Enemies" unique_id=317706621 instance=ExtResource("10_h3qar")]
+position = Vector2(144, 112)
+
+[node name="Enemy10" parent="Enemies" unique_id=899899309 instance=ExtResource("10_h3qar")]
 position = Vector2(144, 112)
 
 [node name="Characters" type="Node2D" parent="." unique_id=248065707]
 
 [node name="Edges" type="Node2D" parent="." unique_id=1566389989]
 
-[node name="EdgeOne" parent="Edges" unique_id=433375762 instance=ExtResource("10_m6lg1")]
+[node name="EdgeOne" parent="Edges" unique_id=433375762 instance=ExtResource("11_r00g1")]
 position = Vector2(16, 16)
 
-[node name="EdgeOne2" parent="Edges" unique_id=1977848576 instance=ExtResource("10_m6lg1")]
+[node name="EdgeOne2" parent="Edges" unique_id=1977848576 instance=ExtResource("11_r00g1")]
 position = Vector2(48, 16)
 
-[node name="EdgeOne3" parent="Edges" unique_id=782745194 instance=ExtResource("10_m6lg1")]
+[node name="EdgeOne3" parent="Edges" unique_id=782745194 instance=ExtResource("11_r00g1")]
 position = Vector2(80, 16)
 
-[node name="EdgeOne4" parent="Edges" unique_id=53087507 instance=ExtResource("10_m6lg1")]
+[node name="EdgeOne4" parent="Edges" unique_id=53087507 instance=ExtResource("11_r00g1")]
 position = Vector2(112, 16)
 
-[node name="EdgeOne5" parent="Edges" unique_id=1647359838 instance=ExtResource("10_m6lg1")]
+[node name="EdgeOne5" parent="Edges" unique_id=1647359838 instance=ExtResource("11_r00g1")]
 position = Vector2(144, 16)
 
-[node name="EdgeOne6" parent="Edges" unique_id=605857520 instance=ExtResource("10_m6lg1")]
+[node name="EdgeOne6" parent="Edges" unique_id=605857520 instance=ExtResource("11_r00g1")]
 position = Vector2(176, 16)
 
-[node name="EdgeOne7" parent="Edges" unique_id=567792664 instance=ExtResource("10_m6lg1")]
+[node name="EdgeOne7" parent="Edges" unique_id=567792664 instance=ExtResource("11_r00g1")]
 position = Vector2(208, 16)
 
-[node name="EdgeOne8" parent="Edges" unique_id=887812659 instance=ExtResource("10_m6lg1")]
+[node name="EdgeOne8" parent="Edges" unique_id=887812659 instance=ExtResource("11_r00g1")]
 position = Vector2(16, 208)
 
-[node name="EdgeOne9" parent="Edges" unique_id=1967370264 instance=ExtResource("10_m6lg1")]
+[node name="EdgeOne9" parent="Edges" unique_id=1967370264 instance=ExtResource("11_r00g1")]
 position = Vector2(48, 208)
 
-[node name="EdgeOne10" parent="Edges" unique_id=1431938881 instance=ExtResource("10_m6lg1")]
+[node name="EdgeOne10" parent="Edges" unique_id=1431938881 instance=ExtResource("11_r00g1")]
 position = Vector2(80, 208)
 
-[node name="EdgeOne11" parent="Edges" unique_id=1923765690 instance=ExtResource("10_m6lg1")]
+[node name="EdgeOne11" parent="Edges" unique_id=1923765690 instance=ExtResource("11_r00g1")]
 position = Vector2(112, 208)
 
-[node name="EdgeOne12" parent="Edges" unique_id=691287606 instance=ExtResource("10_m6lg1")]
+[node name="EdgeOne12" parent="Edges" unique_id=691287606 instance=ExtResource("11_r00g1")]
 position = Vector2(144, 208)
 
-[node name="EdgeOne13" parent="Edges" unique_id=980180090 instance=ExtResource("10_m6lg1")]
+[node name="EdgeOne13" parent="Edges" unique_id=980180090 instance=ExtResource("11_r00g1")]
 position = Vector2(176, 208)
 
-[node name="EdgeOne14" parent="Edges" unique_id=1045637581 instance=ExtResource("10_m6lg1")]
+[node name="EdgeOne14" parent="Edges" unique_id=1045637581 instance=ExtResource("11_r00g1")]
 position = Vector2(208, 208)
 
-[node name="EdgeOne15" parent="Edges" unique_id=1870947313 instance=ExtResource("10_m6lg1")]
+[node name="EdgeOne15" parent="Edges" unique_id=1870947313 instance=ExtResource("11_r00g1")]
 position = Vector2(240, 208)
 
-[node name="EdgeOne16" parent="Edges" unique_id=513964937 instance=ExtResource("10_m6lg1")]
+[node name="EdgeOne16" parent="Edges" unique_id=513964937 instance=ExtResource("11_r00g1")]
 position = Vector2(240, 176)
 
-[node name="EdgeOne17" parent="Edges" unique_id=753500392 instance=ExtResource("10_m6lg1")]
+[node name="EdgeOne17" parent="Edges" unique_id=753500392 instance=ExtResource("11_r00g1")]
 position = Vector2(240, 144)
 
-[node name="EdgeOne18" parent="Edges" unique_id=185789740 instance=ExtResource("10_m6lg1")]
+[node name="EdgeOne18" parent="Edges" unique_id=185789740 instance=ExtResource("11_r00g1")]
 position = Vector2(240, 112)
 
-[node name="EdgeOne19" parent="Edges" unique_id=530763279 instance=ExtResource("10_m6lg1")]
+[node name="EdgeOne19" parent="Edges" unique_id=530763279 instance=ExtResource("11_r00g1")]
 position = Vector2(240, 80)
 
-[node name="EdgeOne20" parent="Edges" unique_id=2018562050 instance=ExtResource("10_m6lg1")]
+[node name="EdgeOne20" parent="Edges" unique_id=2018562050 instance=ExtResource("11_r00g1")]
 position = Vector2(240, 48)
 
-[node name="EdgeOne21" parent="Edges" unique_id=947602916 instance=ExtResource("10_m6lg1")]
+[node name="EdgeOne21" parent="Edges" unique_id=947602916 instance=ExtResource("11_r00g1")]
 position = Vector2(240, 16)
 
-[node name="EdgeOne22" parent="Edges" unique_id=1608657042 instance=ExtResource("10_m6lg1")]
+[node name="EdgeOne22" parent="Edges" unique_id=1608657042 instance=ExtResource("11_r00g1")]
 position = Vector2(-16, 208)
 
-[node name="EdgeOne23" parent="Edges" unique_id=1880317049 instance=ExtResource("10_m6lg1")]
+[node name="EdgeOne23" parent="Edges" unique_id=1880317049 instance=ExtResource("11_r00g1")]
 position = Vector2(-16, 176)
 
-[node name="EdgeOne24" parent="Edges" unique_id=610110692 instance=ExtResource("10_m6lg1")]
+[node name="EdgeOne24" parent="Edges" unique_id=610110692 instance=ExtResource("11_r00g1")]
 position = Vector2(-16, 144)
 
-[node name="EdgeOne25" parent="Edges" unique_id=1791519315 instance=ExtResource("10_m6lg1")]
+[node name="EdgeOne25" parent="Edges" unique_id=1791519315 instance=ExtResource("11_r00g1")]
 position = Vector2(-16, 112)
 
-[node name="EdgeOne26" parent="Edges" unique_id=391324439 instance=ExtResource("10_m6lg1")]
+[node name="EdgeOne26" parent="Edges" unique_id=391324439 instance=ExtResource("11_r00g1")]
 position = Vector2(-16, 80)
 
-[node name="EdgeOne27" parent="Edges" unique_id=140855768 instance=ExtResource("10_m6lg1")]
+[node name="EdgeOne27" parent="Edges" unique_id=140855768 instance=ExtResource("11_r00g1")]
 position = Vector2(-16, 48)
 
-[node name="EdgeOne28" parent="Edges" unique_id=609965316 instance=ExtResource("10_m6lg1")]
+[node name="EdgeOne28" parent="Edges" unique_id=609965316 instance=ExtResource("11_r00g1")]
 position = Vector2(-16, 16)
 
-[node name="Cursor" parent="." unique_id=2051460958 instance=ExtResource("4_lbhrr")]
+[node name="Cursor" parent="." unique_id=2051460958 instance=ExtResource("12_liaw4")]
 position = Vector2(608, -16)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1236012575]
@@ -323,15 +353,15 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0.675)
 
-[node name="Menu" parent="UI" unique_id=1052398381 instance=ExtResource("21_mtrs4")]
+[node name="Menu" parent="UI" unique_id=1052398381 instance=ExtResource("14_grqcv")]
 z_as_relative = false
 metadata/_edit_use_anchors_ = true
 
-[node name="CreatureAdventureDialog" parent="UI" unique_id=1641948652 instance=ExtResource("15_m6lg1")]
+[node name="CreatureAdventureDialog" parent="UI" unique_id=1641948652 instance=ExtResource("15_jvp1d")]
 visible = false
 z_index = 10
 
-[node name="Inventory" parent="UI" unique_id=579277200 instance=ExtResource("16_3asx1")]
+[node name="Inventory" parent="UI" unique_id=579277200 instance=ExtResource("16_kpmf5")]
 visible = false
 anchors_preset = -1
 
@@ -343,9 +373,9 @@ anchor_bottom = 1.0
 offset_top = -80.0
 offset_right = 80.0
 grow_vertical = 0
-theme_override_styles/normal = ExtResource("19_56goh")
-theme_override_styles/pressed = ExtResource("20_j4kqp")
-theme_override_styles/hover = ExtResource("21_wcmim")
+theme_override_styles/normal = ExtResource("17_k6387")
+theme_override_styles/pressed = ExtResource("18_ev32s")
+theme_override_styles/hover = ExtResource("19_7jvlv")
 icon = SubResource("AtlasTexture_nqtv8")
 icon_alignment = 1
 expand_icon = true
@@ -359,14 +389,14 @@ offset_left = 96.0
 offset_top = -80.0
 offset_right = 176.0
 grow_vertical = 0
-theme_override_styles/normal = ExtResource("19_56goh")
-theme_override_styles/pressed = ExtResource("20_j4kqp")
-theme_override_styles/hover = ExtResource("21_wcmim")
-icon = ExtResource("27_e1tke")
+theme_override_styles/normal = ExtResource("17_k6387")
+theme_override_styles/pressed = ExtResource("18_ev32s")
+theme_override_styles/hover = ExtResource("19_7jvlv")
+icon = ExtResource("21_51ehb")
 icon_alignment = 1
 expand_icon = true
 
-[node name="LevelUpDialog" parent="UI" unique_id=76690541 instance=ExtResource("17_yxkm4")]
+[node name="LevelUpDialog" parent="UI" unique_id=76690541 instance=ExtResource("22_fhdct")]
 visible = false
 z_index = 150
 z_as_relative = false
@@ -374,14 +404,14 @@ anchors_preset = -1
 offset_top = 192.0
 offset_bottom = -144.0
 
-[node name="UpgradeStatsDialog" parent="UI" unique_id=1192782911 instance=ExtResource("18_3ebcg")]
+[node name="UpgradeStatsDialog" parent="UI" unique_id=1192782911 instance=ExtResource("23_uaxjl")]
 visible = false
 offset_left = 336.0
 offset_top = 160.0
 offset_right = -344.0
 offset_bottom = -226.0
 
-[node name="ArtifactDialog" parent="UI" unique_id=947846839 instance=ExtResource("19_db1u1")]
+[node name="ArtifactDialog" parent="UI" unique_id=947846839 instance=ExtResource("24_4rsgv")]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -408,12 +438,12 @@ mouse_filter = 2
 one_shot = true
 
 [node name="AudioStreamPlayerBattleStart" type="AudioStreamPlayer" parent="." unique_id=1295234369]
-stream = ExtResource("19_luu1i")
+stream = ExtResource("25_7ppig")
 volume_db = -6.0
 bus = &"SoundFX"
 
 [node name="AudioStreamPlayerMusic" type="AudioStreamPlayer" parent="." unique_id=179520262]
-stream = ExtResource("30_d7a8j")
+stream = ExtResource("26_ehvql")
 bus = &"Music"
 
 [node name="EnemyMoveTimer" type="Timer" parent="." unique_id=919189686]

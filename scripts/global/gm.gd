@@ -122,6 +122,12 @@ var max_energy_human: int = 2
 var current_hand_size_human: int = 4
 var hand_size_human: int = 4
 
+var xp_needed_array: Array[int] = [1, 5, 8, 9, 10, 10, 12, 12, 12, 13,
+13, 14, 14, 14, 15, 15, 15, 17, 18, 18,
+20, 20, 20, 22, 25, 30, 33, 35, 38, 40,
+45, 50, 55, 60, 65, 70, 75, 80, 90, 100,
+110, 120, 130, 140, 150, 160, 170, 180, 190, 200,
+10000, 999999999999]
 var xp: int = 0
 var xp_needed: int = 1
 var level: int = 1

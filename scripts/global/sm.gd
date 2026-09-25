@@ -24,7 +24,7 @@ var default_save_data = {
 	"current_level_name": "level0",
 	"camera_zoom": 2,
 	
-	"match_amount": 5,
+	"match_amount": 3,
 	"money": 100,
 	
 	"hp_cat": 30,
@@ -92,19 +92,17 @@ var default_save_data = {
 	"current_cards_cat": {
 		1: "attack_card.tscn",
 		2: "attack_card.tscn",
-		3: "attack_card.tscn",
+		3: "sharp_claw_card.tscn",
 		4: "defend_card.tscn",
 		5: "defend_card.tscn",
-		6: "defend_card.tscn"
 	},
 	
 	"current_cards_human": {
 		1: "little_fire_card.tscn",
 		2: "little_fire_card.tscn",
-		3: "little_fire_card.tscn",
-		4: "wind_shield_card.tscn",
-		5: "dont_hit_card.tscn",
-		6: "give_strength_card.tscn"
+		3: "wind_shield_card.tscn",
+		4: "dont_hit_card.tscn",
+		5: "give_strength_card.tscn"
 	},
 	
 	"current_artifacts_cat": {

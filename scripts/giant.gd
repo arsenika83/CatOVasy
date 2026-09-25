@@ -635,7 +635,7 @@ func check_xp() -> bool:
 		
 		gm.level += 1
 		gm.xp = gm.xp - gm.xp_needed
-		gm.xp_needed += 1
+		gm.xp_needed = gm.xp_needed_array[gm.level-1]
 		get_parent().draw_level_up()
 		
 		#$AudioStreamPlayerLevelUp.play()

@@ -7,6 +7,7 @@ func _ready() -> void:
 	enemy_name_rus = "Шариковая мышь"
 	defence_sprite.visible = false
 	
+	element = "wind"
 	is_flying = true
 	is_big = true
 	attack_animation_time = 0.4
@@ -19,8 +20,8 @@ func _ready() -> void:
 	
 	xp_gives = 2
 	
-	damage = 2
-	current_damage = 2
+	damage = 3
+	current_damage = damage
 	
 	accuracy = 70
 	current_accuracy = accuracy

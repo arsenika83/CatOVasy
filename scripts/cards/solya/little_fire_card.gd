@@ -5,7 +5,7 @@ var card_path = "little_fire_card.tscn"
 var icon_path = "little_fire_card.png"
 var tool_tip_text = ""
 var card_name = "Огонёк"
-var card_description = "Наносит урон, равный\n2 + базовый урон Соли. Не может промахнуться"
+var card_description = "Наносит урон, равный\n2 + базовый урон Соли"
 var rarity = "common"
 
 # Called when the node enters the scene tree for the first time.
@@ -28,6 +28,3 @@ func _process(delta: float) -> void:
 		$Energy/Label.add_theme_color_override("font_color", colors.card_too_cheap)
 	else:
 		$Energy/Label.add_theme_color_override("font_color", Color.WHITE)
-		
-func cant_miss():
-	pass		

@@ -83,9 +83,11 @@ func _on_button_pressed() -> void:
 		print("Создание профиля")
 
 func _on_timer_timeout() -> void:
-	lm.change_scene_with_loading(str("res://scenes/levels/level", room_number, ".tscn"))
-	
 	sm.load_game()
+	
+	lm.change_scene_with_loading(str("res://scenes/levels/", gm.current_level_name, ".tscn"))
+	
+	
 
 func _on_create_button_pressed() -> void:
 	save_to_file(test_text)
