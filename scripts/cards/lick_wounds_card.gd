@@ -33,3 +33,6 @@ func on_play() -> void:
 	get_parent().get_parent().get_parent().get_parent().human.current_defence += 3
 	
 	get_parent().get_parent().get_parent().get_parent().giant.heal(2)
+
+func use_up():
+	pass	

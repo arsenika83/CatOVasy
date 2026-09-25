@@ -35,6 +35,8 @@ var inventory_on_screen = false
 const BATTLE_SCENE = preload("res://scenes/levels/battle_level.tscn")
 
 func _ready() -> void:
+	$UI.visible = true
+	
 	gm.current_enemies = []
 	gm.state = "idle"
 	gm.prev_state = "idle"

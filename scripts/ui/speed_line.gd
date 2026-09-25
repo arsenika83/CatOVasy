@@ -19,7 +19,7 @@ func progress_turn() -> void:
 		child.queue_free()
 	
 	for c in get_parent().get_parent().turn_speed_line:
-		if not c.state == "dead":
+		if not c.state == "dead" or (c == get_parent().get_parent().giant and gm.state == "dead") or (c == get_parent().get_parent().human and gm.state_human == "dead"):
 			var creature_icon = creature_scene.instantiate()
 			creature_container.add_child(creature_icon)
 		

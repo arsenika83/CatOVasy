@@ -590,7 +590,8 @@ func enemy_turn() -> void:
 				var power = source.buff_set.get(type_number).get(1)
 				var turns = source.buff_set.get(type_number).get(2)
 				source.give_buff([target], type, power, turns)
-		current_creature_turn.current_energy -= 1		
+				
+		current_creature_turn.current_energy -= 1
 		return
 	else:
 		progress_turn()

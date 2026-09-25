@@ -28,7 +28,7 @@
 "inferno_log" : "",
 
 "lick_wounds_name" : "Зализать раны",
-"lick_wounds_desc" : "Восстанавливает 2 ОЗ. Соля получает 3 защиты. Соля и кот меняются местами",
+"lick_wounds_desc" : "Восстанавливает 2 ОЗ. Человек получает 3 защиты. Человек и кот меняются местами. Расходуется",
 "lick_wounds_log" : "- [color=#1ca8fd]Соля[/color] и [color=#1ca8fd]Кот[/color] меняются местами. [color=#1ca8fd]Соля[/color]: +3 к броне. [color=#1ca8fd]Кот[/color]: +2 к ОЗ\n",
 
 "revenge_name" : "Месть",

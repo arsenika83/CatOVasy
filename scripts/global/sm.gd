@@ -104,7 +104,7 @@ var default_save_data = {
 		3: "little_fire_card.tscn",
 		4: "wind_shield_card.tscn",
 		5: "dont_hit_card.tscn",
-		6: "sollenheimer_card.tscn"
+		6: "give_strength_card.tscn"
 	},
 	
 	"current_artifacts_cat": {

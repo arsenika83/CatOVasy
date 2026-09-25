@@ -1,14 +1,14 @@
+TextureRect
+ColorRect
 Label
 Panel
 RichTextLabel
 GPUParticles2D
 WorldEnvironment
 CPUParticles2D
-TextureRect
 Timer
 ScrollContainer
 Control
 GridContainer
 Button
 VBoxContainer
-AudioStreamPlayer

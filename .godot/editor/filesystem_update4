@@ -23,3 +23,11 @@ res://saves/profiles/profile_1.json
 res://saves/save_2.json
 res://saves/save_3.json
 res://saves/saved_settings.txt
+res://scenes/ui/main_menu.tscn
+res://scripts/cards/lick_wounds_card.gd
+res://scripts/cards/solya/dont_hit_card.gd
+res://scripts/ui/speed_line.gd
+res://scenes/levels/level-1000.tscn
+res://scenes/levels/level0.tscn
+res://scripts/game.gd
+res://scenes/enemies/enemy.tscn

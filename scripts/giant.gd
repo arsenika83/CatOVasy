@@ -333,6 +333,117 @@ func defend(time : float) -> void:
 	else:
 		defend_timer.start(time)
 
+func give_buff(targets : Array, type : String, power : int, turns : int) -> void:
+	#current_target = target
+	status_fx.scale = Vector2(0, 0)
+	status_fx.play("buff_" + type)
+	status_fx.visible = true
+	var tween = create_tween()
+	for target in targets:
+		target.status_fx.visible = true
+		tween.tween_property(target.status_fx, "scale", Vector2(1, 1), 0.4)
+		tween.tween_property(target.status_fx, "scale", Vector2(0, 0), 0.4)
+		
+		target.status_fx.play("buff_" + type)
+		
+		var current_power = -1000
+		if target.current_buffs.get(type) != null:
+			current_power = target.current_buffs.get(type).get(0)
+					
+			if current_power > power:
+				break
+			elif current_power == power:
+				var current_turns = target.current_buffs.get(type).get(1)
+				target.current_buffs.get(type).set(1, current_turns + turns)
+		
+		match type:
+			"strength":
+				if current_power <= power and current_power > 0:
+					target.current_damage -= current_power
+					
+					if current_power != power:
+						target.current_buffs.erase(type)
+						
+				target.current_damage += power
+			"accuracy":
+				if current_power <= power and current_power > 0:
+					target.current_accuracy -= current_power
+					if current_power != power:
+						target.current_buffs.erase(type)
+						
+				target.current_accuracy += power
+			"luck":
+				if current_power <= power and current_power > 0:
+					target.current_luck -= current_power
+					if current_power != power:
+						target.current_buffs.erase(type)
+						
+				target.current_luck += power
+			"fire_resistance":
+				if current_power <= power and current_power != -1000:
+					target.current_fire_resistance -= float(current_power) / 100
+					if current_power != power:
+						target.current_buffs.erase(type)
+				
+				target.current_fire_resistance += float(power) / 100
+			"wind_resistance":
+				if current_power <= power and current_power != -1000:
+					target.current_wind_resistance -= float(current_power) / 100
+					if current_power != power:
+						target.current_buffs.erase(type)
+				
+				target.current_wind_resistance += float(power) / 100
+			"luck_resistance":
+				if current_power <= power and current_power != -1000:
+					target.current_luck_resistance -= float(current_power) / 100
+					if current_power != power:
+						target.current_buffs.erase(type)
+				
+				target.current_luck_resistance += float(power) / 100
+			"unluck_resistance":
+				if current_power <= power and current_power != -1000:
+					target.current_unluck_resistance -= float(current_power) / 100
+					if current_power != power:
+						target.current_buffs.erase(type)
+				
+				target.current_unluck_resistance += float(power) / 100
+			"inaccuracy_resistance":
+				if current_power <= power and current_power != -1000:
+					target.current_inaccuracy_resistance -= float(current_power) / 100
+					if current_power != power:
+						target.current_buffs.erase(type)
+				
+				target.current_inaccuracy_resistance += float(power) / 100
+			"death_resistance":
+				if current_power <= power and current_power != -1000:
+					target.current_death_resistance -= float(current_power) / 100
+					if current_power != power:
+						target.current_buffs.erase(type)
+				
+				target.current_death_resistance += float(power) / 100
+			"life_resistance":
+				if current_power <= power and current_power != -1000:
+					target.current_life_resistance -= float(current_power) / 100
+					if current_power != power:
+						target.current_buffs.erase(type)
+				
+				target.current_life_resistance += float(power) / 100
+				
+		if target.current_buffs.get(type) == null:
+			target.current_buffs.set(type, [power, turns])
+			
+			
+	$AudioStreamPlayerBuff.play()
+	
+	if damage_indicator_scene:
+		var indicator = damage_indicator_scene.instantiate()
+		var spawn_pos = global_position + Vector2(0, -2)
+		
+		add_child(indicator)
+		indicator.display_damage("МУР", targets[0].position)
+
+	idle_animation_timer.start(gm.buff_animation_time_human)
+
 func give_debuff(targets : Array, type : String, power : int, turns : int) -> void:
 
 	status_fx.scale = Vector2(0, 0)

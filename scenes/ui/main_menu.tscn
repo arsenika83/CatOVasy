@@ -5,6 +5,7 @@
 [ext_resource type="StyleBox" uid="uid://b8wibcbgivilm" path="res://styles/button_normal.tres" id="2_m1kxf"]
 [ext_resource type="Shader" uid="uid://5sw5k8x7mkgs" path="res://shaders/updown.gdshader" id="2_uhagc"]
 [ext_resource type="StyleBox" uid="uid://2iw7p3yvicvr" path="res://styles/button_pressed.tres" id="3_x2yvf"]
+[ext_resource type="Texture2D" uid="uid://cbiurqnf1ckxy" path="res://assets/images/title_screen.png" id="4_n4uci"]
 [ext_resource type="StyleBox" uid="uid://c66nispyhk2t0" path="res://styles/button_hover.tres" id="4_uhagc"]
 [ext_resource type="Texture2D" uid="uid://b4gofn7n6itrx" path="res://assets/images/icons.png" id="5_x2yvf"]
 [ext_resource type="PackedScene" uid="uid://dx03fuh67lecn" path="res://scenes/ui/settings_main_menu.tscn" id="8_8g5eo"]
@@ -29,23 +30,42 @@ shader_parameter/colorBackground = Color(0, 0, 0, 1)
 shader_parameter/transparencyBackground = 0.0
 shader_parameter/seed = 0.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_877pj"]
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_8g5eo"]
 atlas = ExtResource("5_x2yvf")
 region = Rect2(128, 224, 32, 32)
+
+[sub_resource type="Gradient" id="Gradient_otr3d"]
+offsets = PackedFloat32Array(0, 0.6350711, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.038461506, 0.038461506, 0.038461506, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8ekit"]
+gradient = SubResource("Gradient_otr3d")
+
+[sub_resource type="Curve" id="Curve_otr3d"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1e-05, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_8ekit"]
+curve = SubResource("Curve_otr3d")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7suek"]
 particle_flag_disable_z = true
 angle_min = 1.0728835e-05
 angle_max = 40.00001
-direction = Vector3(1, 1, 0)
-spread = 80.0
-initial_velocity_max = 100.0
-angular_velocity_min = 29.999983
+direction = Vector3(0, -1, 0)
+spread = 10.0
+flatness = 1.0
+initial_velocity_min = 200.0
+initial_velocity_max = 400.0
+angular_velocity_min = -70.000015
 angular_velocity_max = 69.999985
-radial_velocity_min = -2.2351742e-05
-radial_velocity_max = -2.2351742e-05
-gravity = Vector3(40, 30, 0)
+gravity = Vector3(0, 100, 0)
+scale_min = 2.0
 scale_max = 4.0
+scale_curve = SubResource("CurveTexture_8ekit")
+color_ramp = SubResource("GradientTexture1D_8ekit")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_btxxm"]
 shader = ExtResource("2_uhagc")
@@ -76,6 +96,7 @@ grow_vertical = 2
 script = ExtResource("1_btxxm")
 
 [node name="BG" type="ColorRect" parent="." unique_id=1474486571]
+visible = false
 material = SubResource("ShaderMaterial_fe2o3")
 layout_mode = 1
 anchors_preset = 15
@@ -84,11 +105,33 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1201713399]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TitleScreen" type="TextureRect" parent="ColorRect" unique_id=1560640286]
+modulate = Color(1, 1, 1, 0.30980393)
+material = SubResource("ShaderMaterial_877pj")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_n4uci")
+expand_mode = 1
+
 [node name="CatParticles" type="GPUParticles2D" parent="." unique_id=249882301]
-position = Vector2(-96, -96)
-amount = 10
+position = Vector2(640, 768)
+amount = 20
 texture = SubResource("AtlasTexture_8g5eo")
 lifetime = 10.0
+explosiveness = 0.9
 process_material = SubResource("ParticleProcessMaterial_7suek")
 
 [node name="Buttons" type="VBoxContainer" parent="." unique_id=404292440]
@@ -105,7 +148,7 @@ offset_right = -16.0
 offset_bottom = 336.0
 grow_horizontal = 0
 grow_vertical = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 12
 
 [node name="GameButton" type="Button" parent="Buttons" unique_id=1244850671]
 use_parent_material = true

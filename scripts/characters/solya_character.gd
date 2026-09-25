@@ -356,57 +356,66 @@ func give_debuff(targets : Array, type : String, power : int, turns : int) -> vo
 		
 		match type:
 			"unluck":
-				if current_power < power and current_power > 0:
+				if current_power <= power and current_power > 0:
 					target.current_luck += current_power
-					target.current_debuffs.erase(type)
+					if current_power != power:
+						target.current_buffs.erase(type)
 						
 				target.current_luck -= power
 			"slowness":
-				if current_power < power and current_power > 0:
+				if current_power <= power and current_power > 0:
 					target.current_speed += current_power
-					target.current_debuffs.erase(type)
+					if current_power != power:
+						target.current_buffs.erase(type)
 						
 				target.current_speed -= power
 			"fire_resistance":
-				if current_power < power and current_power != -1000:
+				if current_power <= power and current_power != -1000:
 					target.current_fire_resistance -= float(current_power) / 100
-					target.current_debuffs.erase(type)
+					if current_power != power:
+						target.current_buffs.erase(type)
 				
 				target.current_fire_resistance += float(power) / 100
 			"wind_resistance":
-				if current_power < power and current_power != -1000:
+				if current_power <= power and current_power != -1000:
 					target.current_wind_resistance -= float(current_power) / 100
-					target.current_debuffs.erase(type)
+					if current_power != power:
+						target.current_buffs.erase(type)
 				
 				target.current_wind_resistance += float(power) / 100
 			"luck_resistance":
-				if current_power < power and current_power != -1000:
+				if current_power <= power and current_power != -1000:
 					target.current_luck_resistance -= float(current_power) / 100
-					target.current_debuffs.erase(type)
+					if current_power != power:
+						target.current_buffs.erase(type)
 				
 				target.current_luck_resistance += float(power) / 100
 			"unluck_resistance":
-				if current_power < power and current_power != -1000:
+				if current_power <= power and current_power != -1000:
 					target.current_unluck_resistance -= float(current_power) / 100
-					target.current_debuffs.erase(type)
+					if current_power != power:
+						target.current_buffs.erase(type)
 				
 				target.current_unluck_resistance += float(power) / 100
 			"inaccuracy_resistance":
-				if current_power < power and current_power != -1000:
+				if current_power <= power and current_power != -1000:
 					target.current_inaccuracy_resistance -= float(current_power) / 100
-					target.current_debuffs.erase(type)
+					if current_power != power:
+						target.current_buffs.erase(type)
 				
 				target.current_inaccuracy_resistance += float(power) / 100
 			"death_resistance":
-				if current_power < power and current_power != -1000:
+				if current_power <= power and current_power != -1000:
 					target.current_death_resistance -= float(current_power) / 100
-					target.current_debuffs.erase(type)
+					if current_power != power:
+						target.current_buffs.erase(type)
 				
 				target.current_death_resistance += float(power) / 100
 			"life_resistance":
-				if current_power < power and current_power != -1000:
+				if current_power <= power and current_power != -1000:
 					target.current_life_resistance -= float(current_power) / 100
-					target.current_debuffs.erase(type)
+					if current_power != power:
+						target.current_buffs.erase(type)
 				
 				target.current_life_resistance += float(power) / 100
 				
@@ -445,63 +454,74 @@ func give_buff(targets : Array, type : String, power : int, turns : int) -> void
 		
 		match type:
 			"strength":
-				if current_power < power and current_power > 0:
+				if current_power <= power and current_power > 0:
 					target.current_damage -= current_power
-					target.current_buffs.erase(type)
+					
+					if current_power != power:
+						target.current_buffs.erase(type)
 						
 				target.current_damage += power
 			"accuracy":
-				if current_power < power and current_power > 0:
+				if current_power <= power and current_power > 0:
 					target.current_accuracy -= current_power
-					target.current_buffs.erase(type)
+					if current_power != power:
+						target.current_buffs.erase(type)
 						
 				target.current_accuracy += power
 			"luck":
-				if current_power < power and current_power > 0:
+				if current_power <= power and current_power > 0:
 					target.current_luck -= current_power
-					target.current_buffs.erase(type)
+					if current_power != power:
+						target.current_buffs.erase(type)
 						
 				target.current_luck += power
 			"fire_resistance":
-				if current_power < power and current_power != -1000:
+				if current_power <= power and current_power != -1000:
 					target.current_fire_resistance -= float(current_power) / 100
-					target.current_buffs.erase(type)
+					if current_power != power:
+						target.current_buffs.erase(type)
 				
 				target.current_fire_resistance += float(power) / 100
 			"wind_resistance":
-				if current_power < power and current_power != -1000:
+				if current_power <= power and current_power != -1000:
 					target.current_wind_resistance -= float(current_power) / 100
-					target.current_buffs.erase(type)
+					if current_power != power:
+						target.current_buffs.erase(type)
 				
 				target.current_wind_resistance += float(power) / 100
 			"luck_resistance":
-				if current_power < power and current_power != -1000:
+				if current_power <= power and current_power != -1000:
 					target.current_luck_resistance -= float(current_power) / 100
-					target.current_buffs.erase(type)
+					if current_power != power:
+						target.current_buffs.erase(type)
 				
 				target.current_luck_resistance += float(power) / 100
 			"unluck_resistance":
-				if current_power < power and current_power != -1000:
+				if current_power <= power and current_power != -1000:
 					target.current_unluck_resistance -= float(current_power) / 100
-					target.current_buffs.erase(type)
+					if current_power != power:
+						target.current_buffs.erase(type)
 				
 				target.current_unluck_resistance += float(power) / 100
 			"inaccuracy_resistance":
-				if current_power < power and current_power != -1000:
+				if current_power <= power and current_power != -1000:
 					target.current_inaccuracy_resistance -= float(current_power) / 100
-					target.current_buffs.erase(type)
+					if current_power != power:
+						target.current_buffs.erase(type)
 				
 				target.current_inaccuracy_resistance += float(power) / 100
 			"death_resistance":
-				if current_power < power and current_power != -1000:
+				if current_power <= power and current_power != -1000:
 					target.current_death_resistance -= float(current_power) / 100
-					target.current_buffs.erase(type)
+					if current_power != power:
+						target.current_buffs.erase(type)
 				
 				target.current_death_resistance += float(power) / 100
 			"life_resistance":
-				if current_power < power and current_power != -1000:
+				if current_power <= power and current_power != -1000:
 					target.current_life_resistance -= float(current_power) / 100
-					target.current_buffs.erase(type)
+					if current_power != power:
+						target.current_buffs.erase(type)
 				
 				target.current_life_resistance += float(power) / 100
 				

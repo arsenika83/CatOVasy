@@ -103,8 +103,8 @@ var battle_y = 0
 var current_target : CharacterBody2D
 var attack_animation_time = 0.3
 var defend_animation_time = 0.3
-var debuff_animation_time = 0.3
-var buff_animation_time =   0.3
+var debuff_animation_time = 0.7
+var buff_animation_time =   0.7
 
 @onready var my_turn = $MyTurn
 @onready var sprite = $AnimatedSprite2D
@@ -455,75 +455,81 @@ func give_buff(targets : Array, type : String, power : int, turns : int) -> void
 		
 		match type:
 			"strength":
-				if current_power < power and current_power > 0:
+				if current_power <= power and current_power > 0:
 					target.current_damage -= current_power
-					target.current_buffs.erase(type)
+					
+					if current_power != power:
+						target.current_buffs.erase(type)
 						
 				target.current_damage += power
 			"accuracy":
-				if current_power < power and current_power > 0:
+				if current_power <= power and current_power > 0:
 					target.current_accuracy -= current_power
-					target.current_buffs.erase(type)
+					if current_power != power:
+						target.current_buffs.erase(type)
 						
 				target.current_accuracy += power
 			"luck":
-				if current_power < power and current_power > 0:
+				if current_power <= power and current_power > 0:
 					target.current_luck -= current_power
-					target.current_buffs.erase(type)
+					if current_power != power:
+						target.current_buffs.erase(type)
 						
 				target.current_luck += power
 			"fire_resistance":
-				if current_power < power and current_power != -1000:
+				if current_power <= power and current_power != -1000:
 					target.current_fire_resistance -= float(current_power) / 100
-					target.current_buffs.erase(type)
+					if current_power != power:
+						target.current_buffs.erase(type)
 				
 				target.current_fire_resistance += float(power) / 100
 			"wind_resistance":
-				if current_power < power and current_power != -1000:
+				if current_power <= power and current_power != -1000:
 					target.current_wind_resistance -= float(current_power) / 100
-					target.current_buffs.erase(type)
+					if current_power != power:
+						target.current_buffs.erase(type)
 				
 				target.current_wind_resistance += float(power) / 100
 			"luck_resistance":
-				if current_power < power and current_power != -1000:
+				if current_power <= power and current_power != -1000:
 					target.current_luck_resistance -= float(current_power) / 100
-					target.current_buffs.erase(type)
+					if current_power != power:
+						target.current_buffs.erase(type)
 				
 				target.current_luck_resistance += float(power) / 100
 			"unluck_resistance":
-				if current_power < power and current_power != -1000:
+				if current_power <= power and current_power != -1000:
 					target.current_unluck_resistance -= float(current_power) / 100
-					target.current_buffs.erase(type)
+					if current_power != power:
+						target.current_buffs.erase(type)
 				
 				target.current_unluck_resistance += float(power) / 100
 			"inaccuracy_resistance":
-				if current_power < power and current_power != -1000:
+				if current_power <= power and current_power != -1000:
 					target.current_inaccuracy_resistance -= float(current_power) / 100
-					target.current_buffs.erase(type)
+					if current_power != power:
+						target.current_buffs.erase(type)
 				
 				target.current_inaccuracy_resistance += float(power) / 100
 			"death_resistance":
-				if current_power < power and current_power != -1000:
+				if current_power <= power and current_power != -1000:
 					target.current_death_resistance -= float(current_power) / 100
-					target.current_buffs.erase(type)
+					if current_power != power:
+						target.current_buffs.erase(type)
 				
 				target.current_death_resistance += float(power) / 100
 			"life_resistance":
-				if current_power < power and current_power != -1000:
+				if current_power <= power and current_power != -1000:
 					target.current_life_resistance -= float(current_power) / 100
-					target.current_buffs.erase(type)
+					if current_power != power:
+						target.current_buffs.erase(type)
 				
 				target.current_life_resistance += float(power) / 100
 				
 		if target.current_buffs.get(type) == null:
 			target.current_buffs.set(type, [power, turns])
-			
-			
-	#current_energy -= gm.current_card.energy_cost
-	
-	z_index += 1
-	get_parent().get_parent().end_turn()
-	idle_animation_timer.start(buff_animation_time)
+	debuff_timer.start(buff_animation_time)
+	#idle_animation_timer.start(gm.buff_animation_time_human)
 	
 func display_damage(dmg) -> void:
 	if damage_indicator_scene:
@@ -710,7 +716,5 @@ func _on_deal_damage_timer_timeout() -> void:
 func _on_debuff_timer_timeout() -> void:
 	var tween = create_tween()
 	tween.tween_property(status_fx, "scale", Vector2(0, 0), 0.2)
-	var tween1 = create_tween()
-	tween1.tween_property(current_target.status_fx, "scale", Vector2(0, 0), 0.2)
 	
 	get_parent().get_parent().end_turn()
