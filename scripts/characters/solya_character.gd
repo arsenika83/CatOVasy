@@ -92,6 +92,7 @@ var current_energy_resistance: float = 0
 var current_heal = 0
 var attack_count = 0
 var taken_damage = 0
+var taken_damage_count = 0
 var last_damage_dealt = 0
 var defended = false
 var is_hit_lucky = false
@@ -360,6 +361,12 @@ func give_debuff(targets : Array, type : String, power : int, turns : int) -> vo
 					target.current_debuffs.erase(type)
 						
 				target.current_luck -= power
+			"slowness":
+				if current_power < power and current_power > 0:
+					target.current_speed += current_power
+					target.current_debuffs.erase(type)
+						
+				target.current_speed -= power
 			"fire_resistance":
 				if current_power < power and current_power != -1000:
 					target.current_fire_resistance -= float(current_power) / 100
@@ -543,11 +550,11 @@ func turn_tick() -> void:
 			print(str(buff, ": кончился"))
 			current_buffs.erase(buff)
 	
-	if current_buffs.get("strength") == null:
+	if current_buffs.get("strength") == null and current_debuffs.get("weakness") == null:
 		current_damage = damage
-	if current_buffs.get("luck") == null:
+	if current_buffs.get("luck") == null and current_debuffs.get("unluck") == null:
 		current_luck = luck
-	if current_buffs.get("accuracy") == null:
+	if current_buffs.get("accuracy") == null and current_debuffs.get("inaccuracy") == null:
 		current_accuracy = accuracy
 	if current_buffs.get("fire_resistance") == null and current_debuffs.get("fire_mark") == null:
 		current_fire_resistance = fire_resistance
@@ -680,6 +687,8 @@ func _on_take_damage_timer_timeout() -> void:
 	$HPParticles.restart()
 	gm.state_human = "taking_damage"
 	hp -= taken_damage
+	
+	taken_damage_count += 1
 	
 	check_hp()
 	
@@ -863,6 +872,7 @@ func _on_deal_damage_timer_timeout() -> void:
 				get_parent().log_messages.append(str("- [color=#1ca8fd]Соля[/color] наносит [color=#fc4e52]", gm.current_damage_human, 
 				" урона[/color] существу [color=#1ca8fd]", target.enemy_name_rus, "[/color]\n"))
 		
+		gm.total_damage_human += damage_dealt
 		target.take_damage(current_damage, gm.attack_animation_time_human)
 		
 	current_damage = damage

@@ -11,10 +11,11 @@ func _process(delta: float) -> void:
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	print("ENTER ", room_number)
-	gm.save_game()
-	
 	gm.level_number += 1
 	gm.current_level_name = str("level", room_number)
+	
+	
+	gm.save_game()
 	
 	if gm.has_cat_food:
 		gm.hp_cat += 2

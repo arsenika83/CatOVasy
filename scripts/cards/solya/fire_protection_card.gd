@@ -4,7 +4,7 @@ var card_path = "fire_protection_card.tscn"
 var icon_path = "fire_protection_card.png"
 var tool_tip_text = ""
 var card_name = "Защита от огня"
-var card_description = "Дает 20% сопротивления огню на 3 хода. Расходуется"
+var card_description = "Дает 20% сопротивления огню на 3 хода"
 var rarity = "common"
 var buff = "fire_resistance"
 var turns = 3
@@ -36,6 +36,3 @@ func on_play() -> void:
 	 
 	get_parent().get_parent().get_parent().get_parent().human.give_buff([get_parent().get_parent().get_parent().get_parent().human], buff, power, turns)
 	
-
-func use_up():
-	pass

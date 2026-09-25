@@ -1,14 +1,14 @@
+Label
+Panel
+RichTextLabel
 GPUParticles2D
 WorldEnvironment
-Panel
 CPUParticles2D
 TextureRect
-Label
 Timer
 ScrollContainer
 Control
 GridContainer
-RichTextLabel
 Button
 VBoxContainer
 AudioStreamPlayer

@@ -37,8 +37,6 @@ func update_profile_button() -> void:
 		is_empty = false
 		button_text = ""
 		button_text += str("ПРОФИЛЬ ", id, "\n\n")
-		button_text += str(json.get("name"), "\n")
-		button_text += str(json.get("game_time"), "\n")	
 		$Button.text = button_text
 	
 func save_to_file(text : String) -> void:
@@ -77,6 +75,8 @@ func load_json(path: String) -> Dictionary:
 
 func _on_button_pressed() -> void:
 	if not is_empty:
+		sm.SAVE_PATH = str("res://saves/save_", id, ".json")
+		
 		$Timer.start()
 		scene_transitioner.change_scene_to()
 	else:
@@ -84,6 +84,7 @@ func _on_button_pressed() -> void:
 
 func _on_timer_timeout() -> void:
 	lm.change_scene_with_loading(str("res://scenes/levels/level", room_number, ".tscn"))
+	
 	sm.load_game()
 
 func _on_create_button_pressed() -> void:
@@ -92,4 +93,6 @@ func _on_create_button_pressed() -> void:
 
 func _on_delete_button_pressed() -> void:
 	save_to_file("{}")
+	sm.SAVE_PATH = str("res://saves/save_", id, ".json")
+	sm.clear_save()
 	update_profile_button()

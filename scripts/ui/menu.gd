@@ -2,6 +2,8 @@ extends Control
 
 @onready var settings_menu = $MenuRect/Settings
 @onready var audio_click = $AudioStreamPlayerClick
+@onready var run_stats_panel = $RunStatPanel
+@onready var run_stats_label = $RunStatPanel/RunStats
 var settings_on_screen = false
 var menu_on_screen = false
 
@@ -10,6 +12,7 @@ func _ready() -> void:
 	settings_menu.scale.x = 0
 	$ColorRect.visible = false
 	$MenuRect.visible = false
+	run_stats_panel.visible = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -30,6 +33,8 @@ func swap_nodes(n1: Node, n2: Node):
 func show_menu() -> void:
 	$ColorRect.visible = true
 	$MenuRect.visible = true
+	run_stats_panel.visible = true
+	update_run_stats()
 	menu_on_screen = true
 	
 	gm.prev_state = gm.state
@@ -40,6 +45,7 @@ func show_menu() -> void:
 func hide_menu() -> void:
 	$ColorRect.visible = false
 	$MenuRect.visible = false
+	run_stats_panel.visible = false
 	menu_on_screen = false
 	
 	settings.save_settings_to_file()
@@ -92,7 +98,7 @@ func _on_save_quit_button_pressed() -> void:
 func _on_give_up_button_pressed() -> void:
 	audio_click.play()
 	sm.clear_save()
-	sm.load_game()
+	#sm.load_game()
 	
 	scene_transitioner.change_scene_to()
 	lm.change_scene_with_loading(str("res://scenes/ui/main_menu.tscn"))
@@ -112,3 +118,14 @@ func _on_menu_rect_mouse_entered() -> void:
 func _on_main_menu_button_pressed() -> void:
 	scene_transitioner.change_scene_to()
 	lm.change_scene_with_loading(str("res://scenes/ui/main_menu.tscn"))
+	
+func update_run_stats() -> void:
+	var stats = ""
+	stats += str(gm.level_number, "\n")
+	stats += str("\n")
+	stats += str(gm.creatures_killed, "\n")
+	stats += str("\n")
+	stats += str(gm.total_damage_cat, "\n")
+	stats += str(gm.total_damage_human, "\n")
+	
+	run_stats_label.text = stats

@@ -1,6 +1,6 @@
 extends Node
 
-const SAVE_PATH = "res:///saves/save_1.json"
+var SAVE_PATH = "res://saves/save_1.json"
 
 var current_cards_cat: Dictionary[int, Card]
 var current_cards_human: Dictionary[int, Card]
@@ -14,12 +14,17 @@ var has_artifacts: Array[int]
 
 var current_enemies : Array
 
-var save_data = {
-	"level_number": gm.level_number,
-	"current_level_name": gm.current_level_name,
-	"camera_zoom": gm.camera_zoom,
+var save_data = {}
+
+var default_save_data = {
+	"level_number": 1,
+	"creatures_killed":0,
+	"total_damage_cat": 0,
+	"total_damage_human": 0,	
+	"current_level_name": "level0",
+	"camera_zoom": 2,
 	
-	"match_amount": gm.match_amount,
+	"match_amount": 5,
 	"money": 100,
 	
 	"hp_cat": 30,
@@ -164,6 +169,9 @@ func save_game():
 	
 	save_data = {
 		"level_number": gm.level_number,
+		"creatures_killed": gm.creatures_killed,
+		"total_damage_cat": gm.total_damage_cat,
+		"total_damage_human": gm.total_damage_human,
 		"current_level_name": gm.current_level_name,
 		"camera_zoom": gm.camera_zoom,
 		
@@ -267,13 +275,16 @@ func save_game():
 
 # Функция загрузки данных с диска
 func load_file():
+	print("LOAD TEST")	
 	if not FileAccess.file_exists(SAVE_PATH):
 		print("Файл сохранения не найден. Используются значения по умолчанию.")
+		save_data = default_save_data
 		return # Файла нет, играем со старта
 		
 	var file = FileAccess.open(SAVE_PATH, FileAccess.READ)
-	if file == null or file.get_as_text() == "{}":
+	if file == null or file.get_as_text() == "{}" or file.get_as_text() == "null" or file.get_as_text() == null:
 		print("Не удалось открыть файл сохранения: " + str(FileAccess.get_open_error()))
+		save_data = default_save_data
 		return
 		
 	var json_string = file.get_as_text()
@@ -284,21 +295,29 @@ func load_file():
 	var error = json.parse(json_string)
 	
 	if error == OK:
-		if save_data.get("level") == null:
+		if json.data == null:
+			print("NOT LOAD TEST")
+			save_data = default_save_data
 			return
-		# Обновляем наш рабочий словарь данными из файла
-		if typeof(json.data) == TYPE_DICTIONARY:
-			save_data = json.data
-			print("Игра успешно загружена!")
-		else:
-			push_error("Неверный формат данных в файле.")
+		
+		if json.data.get("level_number") == null:
+			print("NOT LOAD TEST LVL NMB")
+			save_data = default_save_data
+			return
+
+		save_data = json.data
+		print("Игра успешно загружена!")
 	else:
 		print("Ошибка парсинга JSON: ", json.get_error_message())
+	
 
 func load_game():
 	load_file()
 	
 	gm.level_number = save_data.get("level_number")
+	gm.creatures_killed = save_data.get("creatures_killed")
+	gm.total_damage_cat = save_data.get("total_damage_cat")
+	gm.total_damage_human = save_data.get("total_damage_human")
 	gm.current_level_name = save_data.get("current_level_name")
 
 	gm.camera_zoom = save_data.get("camera_zoom")
@@ -432,6 +451,6 @@ func clear_save():
 		push_error("Не удалось создать файл сохранения: " + str(FileAccess.get_open_error()))
 		return
 	
-	file.store_string("")
+	file.store_string("{}")
 	file.close()
 	

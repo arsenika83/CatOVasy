@@ -28,7 +28,7 @@ func _ready() -> void:
 	luck = -10
 	current_luck = luck
 	
-	speed = 40
+	speed = 70
 	current_speed = speed
 	
 	current_energy = 5

@@ -8,6 +8,10 @@ var player_pos: Vector2
 var level_number: int = 1
 var current_level_name = "level0"
 
+var creatures_killed: int = 0
+var total_damage_cat: int = 0
+var total_damage_human: int = 0
+
 var state = "idle"
 var prev_state = "idle"
 

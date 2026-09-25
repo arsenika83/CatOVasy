@@ -67,6 +67,7 @@ var player_just_missed = false
 var is_hit_lucky = false
 var is_hit_unlucky = false
 var dealt_damage_to_human = false
+var taken_damage_count = 0
 
 @export var fire_resistance: float = 0
 @export var wind_resistance: float = 0
@@ -429,20 +430,100 @@ func give_debuff(target : CharacterBody2D, type : String, power : int, turns : i
 	debuff_timer.start(debuff_animation_time)
 	
 	
-func give_buff(target : CharacterBody2D, type : String, power : int, turns : int) -> void:
-	current_target = target
+func give_buff(targets : Array, type : String, power : int, turns : int) -> void:
+	#current_target = target
 	status_fx.scale = Vector2(0, 0)
-	status_fx.play("buff")
+	status_fx.play("buff_" + type)
 	status_fx.visible = true
 	var tween = create_tween()
-	tween.tween_property(status_fx, "scale", Vector2(1, 1), 0.2)
-	current_target.status_fx.play("buff_" + type)
+	for target in targets:
+		target.status_fx.visible = true
+		tween.tween_property(target.status_fx, "scale", Vector2(1, 1), 0.4)
+		tween.tween_property(target.status_fx, "scale", Vector2(0, 0), 0.4)
+		
+		target.status_fx.play("buff_" + type)
+		
+		var current_power = -1000
+		if target.current_buffs.get(type) != null:
+			current_power = target.current_buffs.get(type).get(0)
+					
+			if current_power > power:
+				break
+			elif current_power == power:
+				var current_turns = target.current_buffs.get(type).get(1)
+				target.current_buffs.get(type).set(1, current_turns + turns)
+		
+		match type:
+			"strength":
+				if current_power < power and current_power > 0:
+					target.current_damage -= current_power
+					target.current_buffs.erase(type)
+						
+				target.current_damage += power
+			"accuracy":
+				if current_power < power and current_power > 0:
+					target.current_accuracy -= current_power
+					target.current_buffs.erase(type)
+						
+				target.current_accuracy += power
+			"luck":
+				if current_power < power and current_power > 0:
+					target.current_luck -= current_power
+					target.current_buffs.erase(type)
+						
+				target.current_luck += power
+			"fire_resistance":
+				if current_power < power and current_power != -1000:
+					target.current_fire_resistance -= float(current_power) / 100
+					target.current_buffs.erase(type)
+				
+				target.current_fire_resistance += float(power) / 100
+			"wind_resistance":
+				if current_power < power and current_power != -1000:
+					target.current_wind_resistance -= float(current_power) / 100
+					target.current_buffs.erase(type)
+				
+				target.current_wind_resistance += float(power) / 100
+			"luck_resistance":
+				if current_power < power and current_power != -1000:
+					target.current_luck_resistance -= float(current_power) / 100
+					target.current_buffs.erase(type)
+				
+				target.current_luck_resistance += float(power) / 100
+			"unluck_resistance":
+				if current_power < power and current_power != -1000:
+					target.current_unluck_resistance -= float(current_power) / 100
+					target.current_buffs.erase(type)
+				
+				target.current_unluck_resistance += float(power) / 100
+			"inaccuracy_resistance":
+				if current_power < power and current_power != -1000:
+					target.current_inaccuracy_resistance -= float(current_power) / 100
+					target.current_buffs.erase(type)
+				
+				target.current_inaccuracy_resistance += float(power) / 100
+			"death_resistance":
+				if current_power < power and current_power != -1000:
+					target.current_death_resistance -= float(current_power) / 100
+					target.current_buffs.erase(type)
+				
+				target.current_death_resistance += float(power) / 100
+			"life_resistance":
+				if current_power < power and current_power != -1000:
+					target.current_life_resistance -= float(current_power) / 100
+					target.current_buffs.erase(type)
+				
+				target.current_life_resistance += float(power) / 100
+				
+		if target.current_buffs.get(type) == null:
+			target.current_buffs.set(type, [power, turns])
+			
+			
+	#current_energy -= gm.current_card.energy_cost
 	
-	status_fx.visible = true
-	var tween3 = create_tween()
-	tween3.tween_property(current_target.status_fx, "scale", Vector2(1, 1), 0.2)
-	
-	debuff_timer.start(debuff_animation_time)
+	z_index += 1
+	get_parent().get_parent().end_turn()
+	idle_animation_timer.start(buff_animation_time)
 	
 func display_damage(dmg) -> void:
 	if damage_indicator_scene:
@@ -464,11 +545,11 @@ func turn_tick() -> void:
 			print(str(buff, ": кончился"))
 			current_buffs.erase(buff)
 	
-	if current_buffs.get("strength") == null:
+	if current_buffs.get("strength") == null and current_debuffs.get("weakness") == null:
 		current_damage = damage
-	if current_buffs.get("luck") == null:
+	if current_buffs.get("luck") == null and current_debuffs.get("unluck") == null:
 		current_luck = luck
-	if current_buffs.get("accuracy") == null:
+	if current_buffs.get("accuracy") == null and current_debuffs.get("inaccuracy") == null:
 		current_accuracy = accuracy
 	if current_buffs.get("fire_resistance") == null and current_debuffs.get("fire_mark") == null:
 		current_fire_resistance = fire_resistance
@@ -491,23 +572,15 @@ func turn_tick() -> void:
 		
 		if current_debuffs.get(debuff).get(1) == 0:
 			current_debuffs.erase(debuff)
-	
-	if current_debuffs.get("weakness") == null:
-		current_damage = damage
-	if current_debuffs.get("unluck") == null:
-		current_luck = luck
-	if current_debuffs.get("inaccuracy") == null:
-		current_luck = luck
-	if current_debuffs.get("laziness") == null:
-		current_energy = energy
 
 func die() -> void:
-		audio_fall.play()
-		sprite.play("dead")
-		hp_bar.visible = false
+	audio_fall.play()
+	sprite.play("dead")
+	hp_bar.visible = false
+	gm.creatures_killed += 1
 		
-		if get_parent().get_parent().name == "Battle":
-			get_parent().get_parent().log_messages.append(str("- [color=#1ca8fd]", enemy_name_rus, "[/color] [color=#fc4e52]МЕРТВ[/color]\n"))
+	if get_parent().get_parent().name == "Battle":
+		get_parent().get_parent().log_messages.append(str("- [color=#1ca8fd]", enemy_name_rus, "[/color] [color=#fc4e52]МЕРТВ[/color]\n"))
 		
 
 func after_battle_update() -> void:
@@ -522,7 +595,7 @@ func _on_idle_animation_timer_timeout() -> void:
 	sprite.play("idle")
 
 func _on_take_damage_timer_timeout() -> void:
-	
+	taken_damage_count += 1
 	hp -= taken_damage
 	check_hp()
 	$HPParticles.restart()

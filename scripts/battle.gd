@@ -580,7 +580,7 @@ func enemy_turn() -> void:
 				var type = source.debuff_set.get(type_number).get(0)
 				var power = source.debuff_set.get(type_number).get(1)
 				var turns = source.debuff_set.get(type_number).get(2)
-				source.give_debuff(giant, type, power, turns)
+				source.give_debuff([giant], type, power, turns)
 			"buff":
 				var target_number = randi_range(0, find_child("Enemies").get_child_count() - 1)
 				target = find_child("Enemies").get_child(target_number)
@@ -589,7 +589,7 @@ func enemy_turn() -> void:
 				var type = source.buff_set.get(type_number).get(0)
 				var power = source.buff_set.get(type_number).get(1)
 				var turns = source.buff_set.get(type_number).get(2)
-				source.give_buff(target, type, power, turns)
+				source.give_buff([target], type, power, turns)
 		current_creature_turn.current_energy -= 1		
 		return
 	else:
@@ -620,6 +620,10 @@ func end_turn() -> void:
 		if human.current_energy == -1000:
 			human.current_energy = 0
 			progress_turn()
+			
+			card_container_human.visible = false
+			$UI/EnergyHuman.visible = false
+			human.my_turn.visible = false
 			
 			if current_creature_turn == giant:
 				$EndTurnTimer.start(0.1)
@@ -1294,6 +1298,9 @@ func _on_check_stats_dialog_hold_timer_timeout() -> void:
 
 func _on_win_timer_timeout() -> void:
 		money_icon.visible = true
+		
+		var camera_tween = create_tween()
+		camera_tween.tween_property(player_camera, "position:x", 120, 0.2)
 		
 		end_battle_button.visible = true
 		end_battle_button.disabled = false
