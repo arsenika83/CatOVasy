@@ -5,7 +5,7 @@ var card_path = "change_of_wind_card.tscn"
 var icon_path = "change_of_wind_card.png"
 var tool_tip_text = ""
 var card_name = "Перемена ветра"
-var card_description = "Соля и кот меняются местами. Расходуется"
+var card_description = "Соля и кот меняются местами"
 var rarity = "common"
 
 func _ready() -> void:
@@ -30,6 +30,3 @@ func _process(delta: float) -> void:
 func on_play() -> void:
 	get_parent().get_parent().get_parent().get_parent().swap_characters()
 	get_parent().get_parent().get_parent().get_parent().human.idle_animation_timer.start(0.6)
-
-func use_up():
-	pass	

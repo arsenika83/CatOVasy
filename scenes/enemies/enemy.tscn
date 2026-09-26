@@ -322,6 +322,7 @@ shape = SubResource("CircleShape2D_38ino")
 debug_color = Color(0.24974304, 0.61780167, 0.4339693, 0.41960785)
 
 [node name="Shadow" type="AnimatedSprite2D" parent="." unique_id=705114831]
+y_sort_enabled = true
 material = SubResource("ShaderMaterial_smbsv")
 position = Vector2(0, 6)
 scale = Vector2(1, 0.59375)

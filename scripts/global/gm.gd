@@ -12,6 +12,8 @@ var creatures_killed: int = 0
 var total_damage_cat: int = 0
 var total_damage_human: int = 0
 
+var gold_mine_count: int = 0
+
 var state = "idle"
 var prev_state = "idle"
 

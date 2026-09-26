@@ -52,7 +52,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_yu8pw")
 }],
-"loop": 1,
+"loop": true,
 "name": &"default",
 "speed": 1.0
 }]
@@ -84,7 +84,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_kugq1")
 }],
-"loop": 1,
+"loop": true,
 "name": &"default",
 "speed": 5.0
 }]
@@ -149,7 +149,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fcftc")
 }],
-"loop": 0,
+"loop": false,
 "name": &"dead",
 "speed": 1.0
 }, {
@@ -172,7 +172,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_twn6s")
 }],
-"loop": 1,
+"loop": true,
 "name": &"deal_damage",
 "speed": 10.0
 }, {
@@ -180,7 +180,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jt03m")
 }],
-"loop": 1,
+"loop": true,
 "name": &"default",
 "speed": 5.0
 }, {
@@ -191,7 +191,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_74mnn")
 }],
-"loop": 1,
+"loop": true,
 "name": &"idle",
 "speed": 1.0
 }, {
@@ -199,7 +199,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_lu5c6")
 }],
-"loop": 1,
+"loop": true,
 "name": &"take_damage",
 "speed": 5.0
 }]
@@ -325,6 +325,7 @@ shape = SubResource("CircleShape2D_38ino")
 debug_color = Color(0.24974304, 0.61780167, 0.4339693, 0.41960785)
 
 [node name="Shadow" type="AnimatedSprite2D" parent="." unique_id=705114831]
+y_sort_enabled = true
 material = SubResource("ShaderMaterial_smbsv")
 position = Vector2(-4, 6)
 scale = Vector2(0.75, 0.59375)

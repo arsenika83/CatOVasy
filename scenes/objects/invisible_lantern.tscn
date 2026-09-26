@@ -1,9 +1,9 @@
-[gd_scene format=3 uid="uid://csdjjxljsbgt"]
+[gd_scene format=3 uid="uid://ddmg08p10c54p"]
 
-[ext_resource type="Texture2D" uid="uid://xyqt3v2gvqv5" path="res://assets/images/objects.png" id="1_443ya"]
+[ext_resource type="Texture2D" uid="uid://xyqt3v2gvqv5" path="res://assets/images/objects.png" id="1_sm58q"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_443ya"]
-atlas = ExtResource("1_443ya")
+atlas = ExtResource("1_sm58q")
 region = Rect2(480, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gnu5k"]
@@ -18,7 +18,7 @@ animations = [{
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bhjn2"]
-atlas = ExtResource("1_443ya")
+atlas = ExtResource("1_sm58q")
 region = Rect2(480, 32, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_eua1y"]
@@ -41,14 +41,16 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.9017094, 0.22222222)
 
-[node name="Lantern" type="Node2D" unique_id=1437025129]
+[node name="InvisibleLantern" type="Node2D" unique_id=1437025129]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1617815979]
+visible = false
 z_index = 10
 position = Vector2(0, -40)
 sprite_frames = SubResource("SpriteFrames_gnu5k")
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="." unique_id=173596035]
+visible = false
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_eua1y")
 

@@ -7,8 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://b8bfs4u1x4s8" path="res://scenes/objects/grass_low.tscn" id="5_ydw67"]
 [ext_resource type="PackedScene" uid="uid://1by6pkucltci" path="res://scenes/objects/grass.tscn" id="6_iin1y"]
 [ext_resource type="PackedScene" uid="uid://c0fd45oqpmhla" path="res://scenes/objects/chest.tscn" id="7_6igki"]
+[ext_resource type="PackedScene" uid="uid://c85j0cjbsfflo" path="res://scenes/objects/tree_1.tscn" id="7_8kpy5"]
 [ext_resource type="PackedScene" uid="uid://dmq76y6cfygk7" path="res://scenes/characters/character_solya.tscn" id="8_hlvfl"]
 [ext_resource type="PackedScene" uid="uid://d0d5e8ltlrwqg" path="res://scenes/giant.tscn" id="9_7r2ys"]
+[ext_resource type="PackedScene" uid="uid://csdjjxljsbgt" path="res://scenes/objects/lantern.tscn" id="9_ycs18"]
 [ext_resource type="PackedScene" uid="uid://1bvjmpy2pf0k" path="res://scenes/enemies/enemy.tscn" id="10_h3qar"]
 [ext_resource type="PackedScene" uid="uid://c7f16y8rwf2q" path="res://scenes/objects/edge_one.tscn" id="11_r00g1"]
 [ext_resource type="PackedScene" uid="uid://ba7f54d4yq2hp" path="res://scenes/ui/cursor.tscn" id="12_liaw4"]
@@ -169,13 +171,16 @@ room_number = 3
 [node name="Plants" type="Node2D" parent="." unique_id=1507805972]
 
 [node name="GrassLow" parent="Plants" unique_id=1576059805 instance=ExtResource("5_ydw67")]
-position = Vector2(176, 144)
+position = Vector2(208, 80)
 
 [node name="Grass" parent="Plants" unique_id=1301032520 instance=ExtResource("6_iin1y")]
-position = Vector2(80, 48)
+position = Vector2(112, 48)
 
 [node name="Grass2" parent="Plants" unique_id=963626142 instance=ExtResource("6_iin1y")]
-position = Vector2(48, 144)
+position = Vector2(48, 80)
+
+[node name="Tree(1)" parent="Plants" unique_id=1707294043 instance=ExtResource("7_8kpy5")]
+position = Vector2(176, 144)
 
 [node name="Objects" type="Node2D" parent="." unique_id=1714322502]
 position = Vector2(208, 80)
@@ -183,6 +188,9 @@ position = Vector2(208, 80)
 [node name="Chest" parent="Objects" unique_id=977096426 instance=ExtResource("7_6igki")]
 position = Vector2(-96, 32)
 rarity = "all"
+
+[node name="Lantern" parent="Objects" unique_id=1437025129 instance=ExtResource("9_ycs18")]
+position = Vector2(-128, 0)
 
 [node name="CharacterSolya" parent="." unique_id=52898326 instance=ExtResource("8_hlvfl")]
 visible = false

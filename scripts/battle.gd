@@ -70,6 +70,8 @@ var turn_speed_line : Array[CharacterBody2D]
 var team_positions : Array[String] = ["cat", "human"]
 
 func _ready() -> void:
+	$UI.visible = true
+	
 	money_icon.visible = false
 	
 	creature_check_dialog.visible = false
@@ -159,6 +161,8 @@ func smooth_camera_zoom(value1, value2) -> void:
 
 func init() -> void:
 	giant.light.enabled = false
+	giant.area.monitoring = false
+	giant.area.monitorable = false
 	gm.battle_x_cat = map.local_to_map(giant.position).x
 	gm.battle_y_cat = map.local_to_map(giant.position).y
 	

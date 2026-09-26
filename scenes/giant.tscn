@@ -1075,6 +1075,7 @@ texture = SubResource("GradientTexture2D_2xoio")
 height = 29.0
 
 [node name="Shadow" type="AnimatedSprite2D" parent="." unique_id=768534742]
+y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_vsv37")
 autoplay = "default"
 frame_progress = 0.5296162
@@ -1085,6 +1086,7 @@ sprite_frames = SubResource("SpriteFrames_wd4ag")
 autoplay = "default"
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1540776930]
+y_sort_enabled = true
 position = Vector2(0, -6)
 sprite_frames = SubResource("2")
 animation = &"battle"

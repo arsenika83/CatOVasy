@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://bgyl3ddm5njdb"]
+
+[ext_resource type="Script" uid="uid://1sqhyi2l6jyg" path="res://scripts/objects/gold_pile.gd" id="1_ty376"]
+[ext_resource type="Texture2D" uid="uid://4itbl0ejcd3o" path="res://assets/images/tilemap.png" id="2_whp88"]
+[ext_resource type="Texture2D" uid="uid://xyqt3v2gvqv5" path="res://assets/images/objects.png" id="3_2uy6x"]
+[ext_resource type="AudioStream" uid="uid://cpj4ex8gfs0ie" path="res://assets/soundFX/coin-flip.wav" id="4_whp88"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vkvj7"]
+atlas = ExtResource("2_whp88")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vsv37"]
+atlas = ExtResource("2_whp88")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sdqf4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vkvj7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vsv37")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_whp88"]
+atlas = ExtResource("3_2uy6x")
+region = Rect2(0, 160, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2uy6x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_whp88")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mfye4"]
+radius = 3.0
+
+[node name="GoldPile" type="Node2D" unique_id=519795103]
+script = ExtResource("1_ty376")
+
+[node name="Shadow" type="AnimatedSprite2D" parent="." unique_id=634223420]
+y_sort_enabled = true
+position = Vector2(0, -5)
+scale = Vector2(1.125, 1)
+sprite_frames = SubResource("SpriteFrames_sdqf4")
+autoplay = "default"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1102741939]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_2uy6x")
+autoplay = "default"
+
+[node name="Area2D" type="Area2D" parent="." unique_id=393411497]
+collision_layer = 4096
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=54438554]
+shape = SubResource("CircleShape2D_mfye4")
+debug_color = Color(0.53327435, 0.41175237, 1, 0.41960785)
+
+[node name="AudioMoney" type="AudioStreamPlayer2D" parent="." unique_id=249739796]
+stream = ExtResource("4_whp88")
+volume_db = -3.0
+pitch_scale = 0.7
+bus = &"SoundFX"
+
+[node name="Timer" type="Timer" parent="." unique_id=968534375]
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

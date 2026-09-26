@@ -11,6 +11,7 @@
 [ext_resource type="Shader" uid="uid://dm6djrn7pct8b" path="res://shaders/wobble.gdshader" id="8_ou0n0"]
 [ext_resource type="PackedScene" uid="uid://6hsq7ud5p275" path="res://scenes/fx/fire_fx.tscn" id="8_w756s"]
 [ext_resource type="PackedScene" uid="uid://c85j0cjbsfflo" path="res://scenes/objects/tree_1.tscn" id="9_ek61p"]
+[ext_resource type="PackedScene" uid="uid://ddmg08p10c54p" path="res://scenes/objects/invisible_lantern.tscn" id="10_nabyt"]
 [ext_resource type="PackedScene" uid="uid://bq46oyngg435a" path="res://scenes/ui/card_container_cat.tscn" id="10_ou0n0"]
 [ext_resource type="PackedScene" uid="uid://f3jfsj1vndud" path="res://scenes/fx/giant_explosion.tscn" id="11_5yn1g"]
 [ext_resource type="PackedScene" uid="uid://btcx8q72tnkf5" path="res://scenes/fx/claw_fx.tscn" id="11_nueng"]
@@ -35,8 +36,8 @@
 [ext_resource type="PackedScene" uid="uid://c7lkcfyxh5uff" path="res://scenes/ui/card_container_human.tscn" id="21_5qqwm"]
 [ext_resource type="Shader" uid="uid://dwaf44tsm3ri3" path="res://shaders/fog.gdshader" id="22_3tvrp"]
 [ext_resource type="AudioStream" uid="uid://54c2asty0phq" path="res://assets/music/BATTLE_WIN_MUSIC_SHORT.ogg" id="22_5qdpt"]
-[ext_resource type="AudioStream" uid="uid://d376xnspnkqbg" path="res://assets/music/BATTLE_THEME_1.ogg" id="22_k5gn2"]
 [ext_resource type="AudioStream" uid="uid://vtanq4agccud" path="res://assets/music/BATTLE_DEFEAT_MUSIC.ogg" id="23_5qdpt"]
+[ext_resource type="AudioStream" uid="uid://ck8shm08honae" path="res://assets/music/BATTLE_THEME_2.ogg" id="23_nabyt"]
 [ext_resource type="AudioStream" uid="uid://cpj4ex8gfs0ie" path="res://assets/soundFX/coin-flip.wav" id="24_ml750"]
 [ext_resource type="AudioStream" uid="uid://x1dm5w57da6n" path="res://assets/soundFX/new_turn.wav" id="27_d1aak"]
 [ext_resource type="PackedScene" uid="uid://db6mch348j5ck" path="res://scenes/ui/log_book.tscn" id="31_6g64q"]
@@ -306,6 +307,16 @@ position = Vector2(304, 112)
 [node name="Tree(1)3" parent="Plants" unique_id=1516154020 instance=ExtResource("9_ek61p")]
 position = Vector2(16, 176)
 
+[node name="Objects" type="Node2D" parent="." unique_id=565585560]
+
+[node name="InvisibleLantern" parent="Objects" unique_id=1437025129 instance=ExtResource("10_nabyt")]
+z_index = 35
+position = Vector2(16, 208)
+
+[node name="InvisibleLantern2" parent="Objects" unique_id=1423913284 instance=ExtResource("10_nabyt")]
+z_index = 35
+position = Vector2(304, 208)
+
 [node name="Cursor" parent="." unique_id=2051460958 instance=ExtResource("12_7ld2t")]
 visible = false
 z_index = 35
@@ -323,6 +334,7 @@ frame_progress = 0.0
 position = Vector2(-16, -16)
 
 [node name="FireFX" parent="FX" unique_id=997164931 instance=ExtResource("8_w756s")]
+position = Vector2(-176, -16)
 
 [node name="CatFX" parent="FX" unique_id=1852378800 instance=ExtResource("14_ek61p")]
 position = Vector2(-16, -48)
@@ -366,7 +378,7 @@ explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_ct5bi")
 
 [node name="AudioStreamPlayerMusic" type="AudioStreamPlayer" parent="." unique_id=179520262]
-stream = ExtResource("22_k5gn2")
+stream = ExtResource("23_nabyt")
 autoplay = true
 bus = &"Music"
 
@@ -426,6 +438,7 @@ color = Color(0.29954746, 0.29954746, 0.29954743, 1)
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=589757551]
 layer = 3
+visible = false
 
 [node name="Menu" parent="UI" unique_id=1052398381 instance=ExtResource("11_y3fis")]
 

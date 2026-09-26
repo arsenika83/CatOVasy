@@ -36,6 +36,7 @@ const BATTLE_SCENE = preload("res://scenes/levels/battle_level.tscn")
 
 func _ready() -> void:
 	$UI.visible = true
+	$BG.visible = true
 	
 	gm.current_enemies = []
 	gm.state = "idle"
@@ -87,8 +88,8 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	if gm.state == "battle" or gm.state == "playing_a_card":
-		pass
+	if $BattleNode.get_child_count() > 0:
+		return
 	
 	cursor_pos = get_global_mouse_position()
 	cursor_map_pos = map.local_to_map(cursor_pos)
@@ -110,6 +111,7 @@ func _process(delta: float) -> void:
 			draw_cursor()
 			if Input.is_action_just_pressed("ui_lmb"):
 				move_to_map_pos()
+				gm.money += 2 * gm.gold_mine_count
 				giant.walk()
 				#human.walk()
 				
